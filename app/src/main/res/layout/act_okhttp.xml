@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_center_vertical">
+
+    <Button
+        android:id="@+id/bt_get"
+        android:text="Get请求"
+        android:onClick="onClick"
+        style="@style/match_parent_wrap_content" />
+
+    <Button
+        android:id="@+id/bt_post"
+        android:text="Post请求"
+        android:onClick="onClick"
+        style="@style/match_parent_wrap_content" />
+</LinearLayout>

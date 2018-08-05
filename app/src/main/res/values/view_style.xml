@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="wrap_content">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="match_parent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="wrap_content_match_parent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="match_parent_wrap_content">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="w_30_h_30">
+        <item name="android:layout_width">@dimen/dp_30</item>
+        <item name="android:layout_height">@dimen/dp_30</item>
+    </style>
+
+    <style name="w_40_h_40">
+        <item name="android:layout_width">@dimen/dp_40</item>
+        <item name="android:layout_height">@dimen/dp_40</item>
+    </style>
+
+    <style name="w_50_h_50">
+        <item name="android:layout_width">@dimen/dp_50</item>
+        <item name="android:layout_height">@dimen/dp_50</item>
+    </style>
+
+    <style name="w_60_h_60">
+        <item name="android:layout_width">@dimen/dp_50</item>
+        <item name="android:layout_height">@dimen/dp_50</item>
+    </style>
+
+    <style name="ll_vertical" parent="match_parent_wrap_content">
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="ll_horizontal" parent="match_parent_wrap_content">
+        <item name="android:orientation">horizontal</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="tv_base" parent="wrap_content">
+        <item name="android:ellipsize">middle</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:text">我是好人</item>
+        <item name="android:textColor">@color/cl_black</item>
+        <item name="android:textSize">@dimen/sp_14</item>
+    </style>
+
+    <style name="v_mid">
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">1px</item>
+    </style>
+
+    <style name="v_ver_divider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">@color/cl_gray_5</item>
+    </style>
+
+    <style name="v_hor_divider">
+        <item name="android:background">@color/cl_gray_5</item>
+        <item name="android:layout_width">1px</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="ll_center_vertical" parent="ll_vertical">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ll_center_horizontal" parent="ll_horizontal">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="rv_base">
+        <item name="android:overScrollMode">never</item>
+        <item name="android:scrollbars">none</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+</resources>
