@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_vertical"
+    android:layout_height="match_parent">
+
+    <Button
+        android:onClick="onClick"
+        android:text="Add Fragment"
+        style="@style/match_parent_wrap_content"
+        android:id="@+id/bt_add_frag"/>
+    <Button
+        android:onClick="onClick"
+        android:text="Show Fragment"
+        style="@style/match_parent_wrap_content"
+        android:id="@+id/bt_show_frag"/>
+
+    <Button
+        android:onClick="onClick"
+        android:text="Show Fragment"
+        style="@style/match_parent_wrap_content"
+        android:id="@+id/bt_replace_frag"/>
+
+    <LinearLayout
+        android:id="@+id/ll_frag_container"
+        style="@style/ll_vertical"/>
+</LinearLayout>
