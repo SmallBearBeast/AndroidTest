@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.frag.visibility;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,12 +17,13 @@ import com.example.administrator.androidtest.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentVp extends Fragment {
+public class FragmentOneVp extends BaseVisiableFrag {
 
 
     private View contentView;
     private ViewPager vpContainer;
     private MyAdapter myAdapter;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,23 +56,21 @@ public class FragmentVp extends Fragment {
         super.onPause();
     }
 
+
     @Override
     public void onStop() {
         super.onStop();
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-    }
 
     static class MyAdapter extends FragmentPagerAdapter {
 
         private List<Fragment> fragmentList = new ArrayList<>();
+
         public MyAdapter(FragmentManager fm) {
             super(fm);
-            fragmentList.add(new FragmentThree());
-            fragmentList.add(new FragmentThree());
+            fragmentList.add(new FragmentOne());
+            fragmentList.add(new FragmentTwo());
             fragmentList.add(new FragmentThree());
         }
 
