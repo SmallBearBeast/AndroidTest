@@ -4,6 +4,7 @@ package com.example.administrator.androidtest.frag.visibility;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.administrator.androidtest.BaseAct;
@@ -29,7 +30,7 @@ public class VpFragVisibilityAct extends BaseAct {
         return R.layout.act_vp_frag_visibility;
     }
 
-    static class MyAdapter extends FragmentPagerAdapter{
+    static class MyAdapter extends FragmentStatePagerAdapter{
 
         private List<Fragment> fragmentList = new ArrayList<>();
         public MyAdapter(FragmentManager fm) {
