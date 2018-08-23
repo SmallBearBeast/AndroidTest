@@ -4,8 +4,8 @@
 
     <TextView
         android:gravity="center"
-        android:text="I am a fragment two"
         android:textSize="@dimen/sp_20"
         android:textColor="@color/cl_black"
+        android:text="I am a fragment four"
         style="@style/match_parent"/>
 </LinearLayout>

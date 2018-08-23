@@ -3,19 +3,18 @@ package com.example.administrator.androidtest.frag.visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.androidtest.R;
 
-public class FragmentTwo extends BaseVisiableFrag {
+public class FragmentSeven extends BaseVisiableFrag {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_text_2, container, false);
+        return inflater.inflate(R.layout.frag_text_7, container, false);
     }
 
 
@@ -38,4 +37,5 @@ public class FragmentTwo extends BaseVisiableFrag {
     public void onStop() {
         super.onStop();
     }
+
 }

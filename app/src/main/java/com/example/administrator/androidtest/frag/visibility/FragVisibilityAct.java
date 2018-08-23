@@ -5,6 +5,7 @@ import android.view.View;
 import com.example.administrator.androidtest.BaseAct;
 import com.example.administrator.androidtest.R;
 
+
 public class FragVisibilityAct extends BaseAct {
 
     private FragmentOne fragmentOne;

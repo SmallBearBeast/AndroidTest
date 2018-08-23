@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.administrator.androidtest.R;
 
-public class FragmentThree extends Fragment {
+public class FragmentThree extends BaseVisiableFrag {
 
     @Nullable
     @Override
@@ -39,8 +39,4 @@ public class FragmentThree extends Fragment {
         super.onStop();
     }
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-    }
 }
