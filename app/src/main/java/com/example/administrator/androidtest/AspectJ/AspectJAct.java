@@ -31,6 +31,10 @@ public class AspectJAct extends BaseAct {
             case R.id.bt_aspectj_3:
                 onClickAspectJ_3();
                 break;
+
+            case R.id.bt_aspectj_4:
+                onClickAspectJ_4();
+                break;
         }
     }
 
@@ -44,5 +48,10 @@ public class AspectJAct extends BaseAct {
 
     private void onClickAspectJ_3() {
         Log.e(TAG, "onClick: " + "bt_aspectj_3");
+    }
+
+    @DebugTool
+    private void onClickAspectJ_4() {
+        Log.e(TAG, "onClick: " + "bt_aspectj_4");
     }
 }

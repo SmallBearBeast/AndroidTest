@@ -19,4 +19,10 @@
         style="@style/match_parent_wrap_content"
         android:onClick="onClick"
         android:text="Bt_AspectJ_3" />
+
+    <Button
+        android:id="@+id/bt_aspectj_4"
+        style="@style/match_parent_wrap_content"
+        android:onClick="onClick"
+        android:text="Bt_AspectJ_4" />
 </LinearLayout>

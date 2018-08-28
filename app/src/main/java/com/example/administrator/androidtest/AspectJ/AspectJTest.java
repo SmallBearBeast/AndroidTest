@@ -8,6 +8,7 @@ import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.annotation.Pointcut;
 
 /**
  * Created by Administrator on 2018/8/23.
@@ -40,4 +41,15 @@ public class AspectJTest {
             throwable.printStackTrace();
         }
     }
+
+    @Pointcut("execution(@com.example.administrator.androidtest.AspectJ.AspectJAct.DebugTool * *(..))")
+    public void DebugToolMethod() {
+    }
+
+    @Before("DebugToolMethod()")
+    public void onDebugToolMethodBefore(JoinPoint joinPoint) throws Throwable {
+        String key = joinPoint.getSignature().toString();
+        Log.d(TAG, "onDebugToolMethodBefore: " + key);
+    }
+
 }
