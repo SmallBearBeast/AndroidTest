@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,7 +64,7 @@ public class FragmentOneVp extends BaseVisiableFrag {
     }
 
 
-    static class MyAdapter extends FragmentPagerAdapter {
+    static class MyAdapter extends FragmentStatePagerAdapter {
 
         private List<Fragment> fragmentList = new ArrayList<>();
 
