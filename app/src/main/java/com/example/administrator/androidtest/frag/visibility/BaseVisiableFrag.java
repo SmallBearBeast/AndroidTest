@@ -5,11 +5,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.example.administrator.androidtest.App;
+import com.example.administrator.androidtest.BaseFrag;
 
 import java.util.List;
 import java.util.Map;
 
-public class BaseVisiableFrag extends Fragment {
+public class BaseVisiableFrag extends BaseFrag {
 
     private boolean waitingShowToUser;
 

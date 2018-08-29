@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_vertical">
+
+    <Button
+        android:text="Start AlcOneAct"
+        android:id="@+id/bt_1"
+        android:onClick="onClick"
+        style="@style/match_parent_wrap_content"/>
+
+    <Button
+        android:text="Start AlcTwoAct"
+        android:id="@+id/bt_2"
+        android:onClick="onClick"
+        style="@style/match_parent_wrap_content"/>
+</LinearLayout>
