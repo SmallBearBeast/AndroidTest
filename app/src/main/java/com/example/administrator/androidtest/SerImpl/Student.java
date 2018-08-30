@@ -5,6 +5,7 @@ import java.nio.ByteBuffer;
 public class Student implements SerInterface {
     private String name;
     private int age;
+
     @Override
     public int size() {
         return 4 + SerHelper.calSerSize(name);
@@ -12,13 +13,15 @@ public class Student implements SerInterface {
 
     @Override
     public ByteBuffer serOut() {
-        Short[] shorts = new Short[10];
-        SerHelper.calSerSize(shorts);
-        return null;
+        ByteBuffer buf = ByteBuffer.allocate(size());
+        SerHelper.serOut(buf, name, String.class);
+        buf.putInt(age);
+        return buf;
     }
 
     @Override
     public void serIn(ByteBuffer in) {
 
     }
+
 }

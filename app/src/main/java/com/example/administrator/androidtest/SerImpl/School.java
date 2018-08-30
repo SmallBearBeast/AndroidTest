@@ -11,7 +11,9 @@ public class School implements SerInterface {
 
     @Override
     public ByteBuffer serOut() {
-        return null;
+        ByteBuffer buf = ByteBuffer.allocate(size());
+        SerHelper.serOut(buf, name, String.class);
+        return buf;
     }
 
     @Override

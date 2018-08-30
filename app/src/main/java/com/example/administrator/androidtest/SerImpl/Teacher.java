@@ -23,6 +23,12 @@ public class Teacher implements SerInterface {
 
     @Override
     public ByteBuffer serOut() {
+        ByteBuffer buf = ByteBuffer.allocate(size());
+        SerHelper.serOut(buf, name, String.class);
+        buf.putInt(age);
+        SerHelper.serOut(buf, students, SerInterface.class);
+        SerHelper.serOut(buf, school, SerInterface.class);
+        SerHelper.serOut(buf, otherMap, String.class, String.class);
         return null;
     }
 
