@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.administrator.androidtest.App;
 import com.example.administrator.androidtest.BaseAct;
+import com.example.administrator.androidtest.BaseFrag;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ import java.util.Map;
 /*
     Viewpager + Fragment在不嵌套的情况下切换setUserVisibleHint()逻辑是没有问题的
  */
-public class VpFragVisibilityAct extends BaseAct implements BaseVisiableFrag.FragVisiableListener {
+public class VpFragVisibilityAct extends BaseAct implements BaseFrag.FragVisiableListener {
 
     private ViewPager vpContainer;
     private MyAdapter myAdapter;

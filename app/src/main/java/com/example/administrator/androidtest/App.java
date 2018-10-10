@@ -17,7 +17,7 @@ public class App extends Application {
     private static final String TAG = "App";
     public static Map<String, Boolean> FragVisibiableMap = new HashMap<>();
 
-    public static BaseVisiableFrag.FragVisiableListener fragVisiableListener = null;
+    public static BaseFrag.FragVisiableListener fragVisiableListener = null;
 
     @Override
     public void onCreate() {

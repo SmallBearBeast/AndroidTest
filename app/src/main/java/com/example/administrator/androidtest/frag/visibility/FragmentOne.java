@@ -8,9 +8,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.androidtest.BaseFrag;
 import com.example.administrator.androidtest.R;
 
-public class FragmentOne extends BaseVisiableFrag {
+public class FragmentOne extends BaseFrag {
 
 
 

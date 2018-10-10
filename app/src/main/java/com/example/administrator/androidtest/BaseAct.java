@@ -1,9 +1,11 @@
 package com.example.administrator.androidtest;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
@@ -14,19 +16,11 @@ import java.util.List;
 
 public class BaseAct extends AppCompatActivity {
 
-    private static String TAG = "BaseAct";
-    private boolean foreground;
-    private static int visiableCount = 0;
-    public static int runningCount = 0;
-    private static int aliveCount = 0;
+    private static final String TAG = "BaseAct";
+    private static final int Permission_Request_Code = 1;
+    private static int runningCount = 0;
 
-    @Override
-    public void onAttachFragment(Fragment fragment) {
-        super.onAttachFragment(fragment);
-        if (runningCount > 0) {
-            ((BaseFrag) fragment).notifyForeground(true);
-        }
-    }
+    private boolean foreground;
 
     @Override
     protected void onStart() {
@@ -49,32 +43,18 @@ public class BaseAct extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        aliveCount++;
         if (layoutId() != -1) {
             setContentView(layoutId());
             init();
+            init(savedInstanceState);
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        aliveCount--;
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        visiableCount++;
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        visiableCount--;
-    }
-
     protected void init() {
+
+    }
+
+    protected void init(Bundle savedInstanceState) {
 
     }
 
@@ -82,9 +62,20 @@ public class BaseAct extends AppCompatActivity {
         return -1;
     }
 
+    protected void onNotifyForeground(boolean fore) {
+        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
+    }
+
+    @Override
+    public void onAttachFragment(Fragment fragment) {
+        if(fragment instanceof BaseFrag){
+            ((BaseFrag)fragment).notifyForeground(foreground);
+        }
+    }
+
     protected void notifyForeground(boolean fore) {
-        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "notifyForeground: fore = " + fore);
         foreground = fore;
+        onNotifyForeground(fore);
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         if (fragments != null && fragments.size() > 0) {
             for (Fragment frag : fragments) {
@@ -95,5 +86,15 @@ public class BaseAct extends AppCompatActivity {
 
     public boolean isForeground() {
         return foreground;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void askPermissions(String[] permissions){
+        requestPermissions(permissions, Permission_Request_Code);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }

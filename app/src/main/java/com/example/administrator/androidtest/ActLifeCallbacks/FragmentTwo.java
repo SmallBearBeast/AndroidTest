@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.frag.visibility;
+package com.example.administrator.androidtest.ActLifeCallbacks;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,14 +10,13 @@ import android.view.ViewGroup;
 import com.example.administrator.androidtest.BaseFrag;
 import com.example.administrator.androidtest.R;
 
-public class FragmentSix extends BaseFrag {
+public class FragmentTwo extends BaseFrag {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_text_6, container, false);
+        return inflater.inflate(R.layout.frag_text_2, container, false);
     }
-
 
     @Override
     public void onStart() {
@@ -38,5 +37,4 @@ public class FragmentSix extends BaseFrag {
     public void onStop() {
         super.onStop();
     }
-
 }

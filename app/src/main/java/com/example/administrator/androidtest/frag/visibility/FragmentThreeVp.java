@@ -11,12 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.administrator.androidtest.BaseFrag;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentThreeVp extends BaseVisiableFrag {
+public class FragmentThreeVp extends BaseFrag {
 
 
     private View contentView;
