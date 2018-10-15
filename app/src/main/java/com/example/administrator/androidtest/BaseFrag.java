@@ -65,12 +65,6 @@ public class BaseFrag extends Fragment {
         }
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
-
     protected void onNotifyForeground(boolean fore) {
         Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
     }
@@ -107,5 +101,18 @@ public class BaseFrag extends Fragment {
 
     public interface FragVisiableListener {
         void onVisibilityChanged();
+    }
+
+    public Bundle buildArguments(){
+        Bundle bundle = new Bundle();
+        return bundle;
+    }
+
+    protected void initView(){
+
+    }
+
+    protected int layoutId(){
+        return -1;
     }
 }

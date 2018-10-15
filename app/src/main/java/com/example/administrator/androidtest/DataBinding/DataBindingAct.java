@@ -9,6 +9,11 @@ import com.example.administrator.androidtest.BaseAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActDatabindingBinding;
 
+/*
+    ViewStub需要再inflate回调这边重新绑定databinding
+    对于adapter，可以在ViewHolder持有databinding
+    当binding设置变量需要马上刷新时候应该调用executePendingBindings
+ */
 public class DataBindingAct extends BaseAct {
     private ActDatabindingBinding binding;
 
