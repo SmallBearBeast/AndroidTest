@@ -108,11 +108,21 @@ public class BaseFrag extends Fragment {
         return bundle;
     }
 
+
+    protected void restoreInstanceState(Bundle savedInstanceState){
+
+    }
+
     protected void initView(){
 
     }
 
     protected int layoutId(){
         return -1;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
