@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="PullLoadLayout">
-        <attr name="pdl_type" format="enum">
-            <enum name="TYPE_ONE" value="1"/>
-            <enum name="TYPE_TWO" value="2"/>
-            <enum name="TYPE_THREE" value="3"/>
-            <enum name="TYPE_FOUR" value="4"/>
-            <enum name="TYPE_FIVE" value="5"/>
-            <enum name="TYPE_SIX" value="6"/>
+        <attr name="pdl_head_type" format="enum">
+            <enum name="TYPE_OUT_MOVE" value="1"/>
+            <enum name="TYPE_IN_MOVE" value="2"/>
+            <enum name="TYPE_COVER_MOVE" value="3"/>
+        </attr>
+        <attr name="pdl_foot_type" format="enum">
+            <enum name="TYPE_OUT_MOVE" value="1"/>
+            <enum name="TYPE_IN_MOVE" value="2"/>
+            <enum name="TYPE_COVER_MOVE" value="3"/>
         </attr>
         <attr name="pdl_head_enable" format="boolean"/>
         <attr name="pdl_foot_enable" format="boolean"/>

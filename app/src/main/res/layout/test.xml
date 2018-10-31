@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:layout_marginTop="-100dp"
+        android:layout_marginBottom="100dp"
+        android:text="Hello World Hello World Hello World Hello World Hello World Hello World"
+        android:textSize="65sp"
+        android:textColor="@color/cl_white"
+        android:background="@color/cl_green_9"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_gravity="bottom"
+        android:text="今天是个好日子，星期五晴晴要来广州啦，洗哦哥好开心，所以"
+        android:textSize="65sp"
+        android:background="@color/cl_oriange"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+</FrameLayout>

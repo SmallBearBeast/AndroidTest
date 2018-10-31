@@ -1,11 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<com.example.administrator.androidtest.RecyclerView.PullLoadLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:pdl="http://schemas.android.com/apk/res-auto"
+    pdl:pdl_head_enable="true"
+    pdl:pdl_head_type="TYPE_COVER_MOVE"
+    pdl:pdl_foot_enable="true"
+    pdl:pdl_foot_type="TYPE_COVER_MOVE"
     style="@style/match_parent">
 
-    <TextView
-        android:layout_marginTop="-50dp"
-        android:background="@color/cl_black"
+    <com.example.administrator.androidtest.RecyclerView.DefaultHeadView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_100" />
-</FrameLayout>
+        android:layout_height="@dimen/dp_100"/>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:textColor="@color/cl_white"
+            android:gravity="center_horizontal"
+            android:text="123456789123456789123456789123456789123456789123456789123456789123456789"
+            android:textSize="70sp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cl_blue" />
+    </LinearLayout>
+
+    <com.example.administrator.androidtest.RecyclerView.DefaultFootView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_100"/>
+</com.example.administrator.androidtest.RecyclerView.PullLoadLayout>

@@ -7,16 +7,16 @@ import android.util.AttributeSet;
 
 import com.example.administrator.androidtest.R;
 
-public class DefaultHeadView extends IView {
-    public DefaultHeadView(@NonNull Context context) {
+public class DefaultFootView extends IView {
+    public DefaultFootView(@NonNull Context context) {
         super(context);
     }
 
-    public DefaultHeadView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public DefaultFootView(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public DefaultHeadView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public DefaultFootView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
@@ -28,7 +28,7 @@ public class DefaultHeadView extends IView {
     @Override
     public void change(float progress) {
         super.change(progress);
-        mPullLoadLayout.move(progress, IView.VIEW_HEAD);
+        mPullLoadLayout.move(progress, IView.VIEW_FOOT);
     }
 
     @Override
