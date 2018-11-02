@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
-public class IView extends FrameLayout {
+public abstract class IView extends FrameLayout {
     private static final String TAG = "IView";
     public static final int VIEW_HEAD = 1;
     public static final int VIEW_FOOT = 2;
@@ -19,7 +19,7 @@ public class IView extends FrameLayout {
     public static final int STATE_DOING = 4;
     public static final int STATE_FINISH = 5;
     protected PullLoadLayout mPullLoadLayout;
-    private View mContentView;
+    protected View mContentView;
     private Context mContext;
     protected int mState = STATE_START;
     protected float mProgress;
@@ -49,46 +49,38 @@ public class IView extends FrameLayout {
         Log.e(TAG, "change: " + progress);
         mProgress = progress;
         if(mState == STATE_START){
-            mState = STATE_CHANGE;
+            setState(STATE_CHANGE);
         }
         if(mState == STATE_CHANGE){
             if(canDoing()){
-                mState = STATE_CAN_DOING;
+                setState(STATE_CAN_DOING);
             }
         }
         if(mState == STATE_CAN_DOING){
             if(!canDoing()){
-                mState = STATE_CHANGE;
+                setState(STATE_CHANGE);
             }
         }
     }
 
     protected boolean canDoing(){
-        return mProgress > 0.9f;
+        return mProgress == 1f;
     }
 
     public void doing(){
 
     }
 
-    public void finish(){
+    public abstract int height();
 
-    }
-
-    public int height(){
-        return -1;
-    }
-
-    public int layoutId(){
-        return -1;
-    }
+    public abstract int layoutId();
 
     protected int dp2px(int dpVal){
         float scale = mContext.getResources().getDisplayMetrics().density;
         return (int) (dpVal * scale + 0.5f);
     }
 
-    protected void attachParrent(PullLoadLayout pullLoadLayout){
+    public void attachParrent(PullLoadLayout pullLoadLayout){
         mPullLoadLayout = pullLoadLayout;
     }
 

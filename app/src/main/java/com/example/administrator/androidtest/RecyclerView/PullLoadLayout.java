@@ -7,6 +7,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
@@ -26,6 +28,8 @@ public class PullLoadLayout extends FrameLayout{
     private static final int TYPE_COVER_MOVE = 3;
     private int mHeadMoveType = TYPE_OUT_MOVE;
     private int mFootMoveType = TYPE_OUT_MOVE;
+    private int mHeadFinishTime = 1000;
+    private int mFootFinishTime = 1000;
     private IView mHeadView;
     private IView mFootView;
     private View mCenterView;
@@ -43,6 +47,7 @@ public class PullLoadLayout extends FrameLayout{
     private boolean isIntecepted = false;
     private boolean isHeadShow = false;
     private boolean isFootShow = false;
+
     private PullLoadListener mPullLoadListener;
     private float mStartY = 0;
     private float mEndY = 0;
@@ -170,7 +175,7 @@ public class PullLoadLayout extends FrameLayout{
 
     private void adjustFootScroll(){
         if(-mScrollFootHeight > mInitFootHeight){
-            mScrollFootHeight = -mInitHeadHeight;
+            mScrollFootHeight = -mInitFootHeight;
         }else if(-mScrollFootHeight < 0){
             mScrollFootHeight = 0;
             isHeadShow = true;
@@ -230,6 +235,8 @@ public class PullLoadLayout extends FrameLayout{
         mFootEnable = typedArray.getBoolean(R.styleable.PullLoadLayout_pdl_foot_enable, true);
         mHeadMoveType = typedArray.getInteger(R.styleable.PullLoadLayout_pdl_head_type, TYPE_OUT_MOVE);
         mFootMoveType = typedArray.getInteger(R.styleable.PullLoadLayout_pdl_foot_type, TYPE_OUT_MOVE);
+        mHeadFinishTime = typedArray.getInteger(R.styleable.PullLoadLayout_pdl_head_time, 1000);
+        mFootFinishTime = typedArray.getInteger(R.styleable.PullLoadLayout_pdl_foot_time, 1000);
         typedArray.recycle();
     }
 
@@ -265,21 +272,41 @@ public class PullLoadLayout extends FrameLayout{
 
     }
 
+    private float mInterceptStartY;
+    private float mInterceptEndY;
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        super.onInterceptTouchEvent(ev);
-        // TODO: 2018/10/31 判断是否拦截
-        if(isIntecepted){
-            return onTouchEvent(ev);
+        isIntecepted = false;
+        if(ev.getAction() == MotionEvent.ACTION_DOWN){
+            mStartY = ev.getY();
+        }else if(ev.getAction() == MotionEvent.ACTION_MOVE){
+            mEndY = ev.getY();
+            float diff = mEndY - mStartY;
+            mStartY = mEndY;
+            isIntecepted = false;
+            if(mCenterView instanceof ScrollView){
+                isIntecepted = PullLoadUtil.isScrollViewIntercept(mCenterView, diff);
+            }else if(mCenterView instanceof RecyclerView){
+                isIntecepted = PullLoadUtil.isRecyclerViewIntercept(mCenterView, diff);
+            }else {
+                isIntecepted = false;
+            }
+        }else if(ev.getAction() == MotionEvent.ACTION_UP){
+            isIntecepted = false;
         }
-        if(mCenterView instanceof TextView){
-
-        }
-        return true;
+        return isIntecepted;
     }
 
     private boolean isHeadEnable(){
         return mHeadView != null && mHeadEnable;
+    }
+
+    private boolean isHeadScrollEnable(float diff){
+        return mScrollHeadHeight > 0 || (mScrollHeadHeight < 0 && mScrollHeadHeight - diff > 0);
+    }
+
+    private boolean isFootScrollEnable(float diff){
+        return mScrollFootHeight < 0 || (mScrollFootHeight > 0 && mScrollFootHeight - diff < 0);
     }
 
     private boolean isFootEnable(){
@@ -289,29 +316,50 @@ public class PullLoadLayout extends FrameLayout{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         // TODO: 2018/10/31 计算拖拽高度变化 有正负
+        if(isHeadEnable() && mHeadView.mState == IView.STATE_FINISH){
+            mStartY = event.getY();
+            return true;
+        }
+        if(isFootEnable() && mFootView.mState == IView.STATE_FINISH){
+            mStartY = event.getY();
+            return true;
+        }
         int action = event.getAction();
         if(action == MotionEvent.ACTION_DOWN){
             mStartY = event.getY();
         }else if(action == MotionEvent.ACTION_MOVE){
             mEndY = event.getY();
-            int diff = (int) (mEndY - mStartY);
+            int diff = (int) getSlowDiff(mEndY - mStartY);
+            mStartY = mEndY;
             mScrollFootHeight = mScrollFootHeight + diff;
             mScrollHeadHeight = mScrollHeadHeight + diff;
-            if(!isFootShow && isHeadEnable() && (mScrollHeadHeight > 0 || (mScrollHeadHeight < 0 && mScrollHeadHeight - diff > 0))) {
+            Log.e(TAG, "mScrollHeadHeight + 1: " + mScrollHeadHeight);
+            if(!isFootShow && isHeadEnable() && isHeadScrollEnable(diff) && !PullLoadUtil.isCanRecyclerViewDown(mCenterView, diff)) {
                 adjustHeadByType(diff);
                 mHeadView.change(calHeadProgress());
                 isHeadShow = true;
                 isFootShow = false;
             }
-            if(!isHeadShow && isFootEnable() && (mScrollFootHeight < 0 || (mScrollFootHeight > 0 && mScrollFootHeight - diff < 0))){
+            if(!isHeadShow && isFootEnable() && isFootScrollEnable(diff) && !PullLoadUtil.isCanRecyclerViewUp(mCenterView, diff)){
                 adjustFootByType(diff);
                 mFootView.change(calFootProgress());
                 isHeadShow = false;
                 isFootShow = true;
             }
+            Log.e(TAG, "mScrollHeadHeight + 2: " + mScrollHeadHeight);
             adjustHeadScroll();
             adjustFootScroll();
-            mStartY = mEndY;
+            Log.e(TAG, "mScrollHeadHeight + 3: " + mScrollHeadHeight);
+            if(mCenterView instanceof RecyclerView) {
+                if(PullLoadUtil.isCanRecyclerView(mCenterView, diff)){
+                    Log.e(TAG, "onTouchEvent: " + true);
+                    ((RecyclerView) mCenterView).requestDisallowInterceptTouchEvent(true);
+                }
+            } else if(mCenterView instanceof ScrollView) {
+                if(PullLoadUtil.isCanScrollView(mCenterView, diff)){
+                    ((ScrollView) mCenterView).requestDisallowInterceptTouchEvent(true);
+                }
+            }
         }else if(action == MotionEvent.ACTION_UP){
             if(isHeadEnable() && !isFootShow){
                 if(mHeadView.mState == IView.STATE_CAN_DOING){
@@ -348,7 +396,6 @@ public class PullLoadLayout extends FrameLayout{
                 }
             }
         }
-        super.onTouchEvent(event);
         return true;
     }
 
@@ -376,9 +423,15 @@ public class PullLoadLayout extends FrameLayout{
         return progress;
     }
 
-
+    private void resetFoot(){
+        Log.e(TAG, "Foot: " + "finish" );
+        mFootView.setState(IView.STATE_START);
+        mScrollFootHeight = 0;
+        isFootShow = false;
+    }
 
     private void restoreFoot() {
+        mFootView.setState(IView.STATE_FINISH);
         if(mFootMoveType == TYPE_OUT_MOVE){
             restoreFootOutMove();
         }else if(mFootMoveType == TYPE_IN_MOVE){
@@ -389,9 +442,8 @@ public class PullLoadLayout extends FrameLayout{
     }
 
     private void restoreFootCoverMove() {
-        mFootView.setState(IView.STATE_FINISH);
         ValueAnimator animator = ValueAnimator.ofInt(mFootMargin, -mInitFootHeight);
-        animator.setDuration((long) (mFootView.mProgress * 1000));
+        animator.setDuration((long) (mFootView.mProgress * mFootFinishTime));
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -399,10 +451,7 @@ public class PullLoadLayout extends FrameLayout{
                 mFootLayoutParams.bottomMargin = mFootMargin;
                 mFootView.setLayoutParams(mFootLayoutParams);
                 if(-mFootMargin == mInitFootHeight && mFootView.getState() == IView.STATE_FINISH){
-                    Log.e(TAG, "Foot: " + "finish" );
-                    mFootView.setState(IView.STATE_START);
-                    mScrollFootHeight = 0;
-                    isFootShow = false;
+                    resetFoot();
                 }
             }
         });
@@ -410,19 +459,15 @@ public class PullLoadLayout extends FrameLayout{
     }
 
     private void restoreFootInMove() {
-        mFootView.setState(IView.STATE_FINISH);
         ValueAnimator animator = ValueAnimator.ofInt(mCenterLayoutParams.bottomMargin, 0);
-        animator.setDuration((long) (mFootView.mProgress * 1000));
+        animator.setDuration((long) (mFootView.mProgress * mFootFinishTime));
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mCenterLayoutParams.bottomMargin = (int) animation.getAnimatedValue();
                 mCenterView.setLayoutParams(mCenterLayoutParams);
                 if(-mFootMargin == mInitFootHeight && mFootView.getState() == IView.STATE_FINISH){
-                    Log.e(TAG, "Foot: " + "finish" );
-                    mFootView.setState(IView.STATE_START);
-                    mScrollFootHeight = 0;
-                    isFootShow = false;
+                    resetFoot();
                 }
             }
         });
@@ -430,9 +475,8 @@ public class PullLoadLayout extends FrameLayout{
     }
 
     private void restoreFootOutMove() {
-        mFootView.setState(IView.STATE_FINISH);
         ValueAnimator animator = ValueAnimator.ofInt(mFootMargin, -mInitFootHeight);
-        animator.setDuration((long) (mFootView.mProgress * 1000));
+        animator.setDuration((long) (mFootView.mProgress * mFootFinishTime));
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -443,10 +487,7 @@ public class PullLoadLayout extends FrameLayout{
                 mCenterLayoutParams.topMargin = -mInitFootHeight - mFootMargin;
                 mCenterView.setLayoutParams(mCenterLayoutParams);
                 if(-mFootMargin == mInitFootHeight && mFootView.getState() == IView.STATE_FINISH){
-                    Log.e(TAG, "Foot: " + "finish" );
-                    mFootView.setState(IView.STATE_START);
-                    mScrollFootHeight = 0;
-                    isFootShow = false;
+                    resetFoot();
                 }
             }
         });
@@ -454,6 +495,7 @@ public class PullLoadLayout extends FrameLayout{
     }
 
     private void restoreHead(){
+        mHeadView.setState(IView.STATE_FINISH);
         if(mHeadMoveType == TYPE_OUT_MOVE){
             restoreHeadOutMove();
         }else if(mHeadMoveType == TYPE_IN_MOVE){
@@ -463,10 +505,16 @@ public class PullLoadLayout extends FrameLayout{
         }
     }
 
+    private void resetHead(){
+        Log.e(TAG, "Head: " + "finish" );
+        mHeadView.setState(IView.STATE_START);
+        mScrollHeadHeight = 0;
+        isHeadShow = false;
+    }
+
     private void restoreHeadCoverMove() {
-        mHeadView.setState(IView.STATE_FINISH);
         ValueAnimator animator = ValueAnimator.ofInt(mHeadMargin, -mInitHeadHeight);
-        animator.setDuration((long) (mHeadView.mProgress * 1000));
+        animator.setDuration((long) (mHeadView.mProgress * mHeadFinishTime));
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -474,10 +522,7 @@ public class PullLoadLayout extends FrameLayout{
                 mHeadLayoutParams.topMargin = mHeadMargin;
                 mHeadView.setLayoutParams(mHeadLayoutParams);
                 if(-mHeadMargin == mInitHeadHeight && mHeadView.getState() == IView.STATE_FINISH){
-                    Log.e(TAG, "Head: " + "finish" );
-                    mHeadView.setState(IView.STATE_START);
-                    mScrollHeadHeight = 0;
-                    isHeadShow = false;
+                    resetHead();
                 }
             }
         });
@@ -485,19 +530,15 @@ public class PullLoadLayout extends FrameLayout{
     }
 
     private void restoreHeadInMove(){
-        mHeadView.setState(IView.STATE_FINISH);
         ValueAnimator animator = ValueAnimator.ofInt(mCenterLayoutParams.topMargin, 0);
-        animator.setDuration((long) (mHeadView.mProgress * 1000));
+        animator.setDuration((long) (mHeadView.mProgress * mHeadFinishTime));
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 mCenterLayoutParams.topMargin = (int) animation.getAnimatedValue();
                 mCenterView.setLayoutParams(mCenterLayoutParams);
                 if(mCenterLayoutParams.topMargin == 0 && mHeadView.getState() == IView.STATE_FINISH){
-                    Log.e(TAG, "HeadInMove: " + "finish" );
-                    mHeadView.setState(IView.STATE_START);
-                    mScrollHeadHeight = 0;
-                    isHeadShow = false;
+                    resetHead();
                 }
             }
         });
@@ -507,7 +548,7 @@ public class PullLoadLayout extends FrameLayout{
     private void restoreHeadOutMove() {
         mHeadView.setState(IView.STATE_FINISH);
         ValueAnimator animator = ValueAnimator.ofInt(mHeadMargin, -mInitHeadHeight);
-        animator.setDuration((long) (mHeadView.mProgress * 1000));
+        animator.setDuration((long) (mHeadView.mProgress * mHeadFinishTime));
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
@@ -517,10 +558,7 @@ public class PullLoadLayout extends FrameLayout{
                 mCenterLayoutParams.topMargin = mInitHeadHeight + mHeadMargin;
                 mCenterView.setLayoutParams(mCenterLayoutParams);
                 if(-mHeadMargin == mInitHeadHeight && mHeadView.getState() == IView.STATE_FINISH){
-                    Log.e(TAG, "Head: " + "finish" );
-                    mHeadView.setState(IView.STATE_START);
-                    mScrollHeadHeight = 0;
-                    isHeadShow = false;
+                    resetHead();
                 }
             }
         });
@@ -536,5 +574,9 @@ public class PullLoadLayout extends FrameLayout{
         void onPull();
 
         void onLoad();
+    }
+
+    private float getSlowDiff(float diff){
+        return diff / 2;
     }
 }

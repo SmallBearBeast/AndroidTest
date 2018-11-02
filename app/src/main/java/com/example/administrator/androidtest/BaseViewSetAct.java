@@ -12,8 +12,10 @@ public class BaseViewSetAct<T extends ViewSet> extends BaseAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View contentView = LayoutInflater.from(this).inflate(layoutId(), null);
-        setContentView(contentView);
-        viewSet.initView(contentView);
+        if(layoutId() != -1){
+            View contentView = LayoutInflater.from(this).inflate(layoutId(), null);
+            setContentView(contentView);
+            viewSet.initView(contentView);
+        }
     }
 }

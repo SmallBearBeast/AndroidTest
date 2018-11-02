@@ -4,10 +4,12 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.widget.ImageView;
 
 import com.example.administrator.androidtest.R;
 
 public class DefaultHeadView extends IView {
+    private ImageView ivRotate;
     public DefaultHeadView(@NonNull Context context) {
         super(context);
     }
@@ -18,7 +20,9 @@ public class DefaultHeadView extends IView {
 
     public DefaultHeadView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        ivRotate = mContentView.findViewById(R.id.iv_rotate);
     }
+
 
     @Override
     public int height() {
@@ -28,6 +32,7 @@ public class DefaultHeadView extends IView {
     @Override
     public void change(float progress) {
         super.change(progress);
+        ivRotate.setRotation(progress * 360 * 2);
         mPullLoadLayout.move(progress, IView.VIEW_HEAD);
     }
 

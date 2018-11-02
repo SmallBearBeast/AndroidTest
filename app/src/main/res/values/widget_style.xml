@@ -13,5 +13,7 @@
         </attr>
         <attr name="pdl_head_enable" format="boolean"/>
         <attr name="pdl_foot_enable" format="boolean"/>
+        <attr name="pdl_head_time" format="integer"/>
+        <attr name="pdl_foot_time" format="integer"/>
     </declare-styleable>
 </resources>
