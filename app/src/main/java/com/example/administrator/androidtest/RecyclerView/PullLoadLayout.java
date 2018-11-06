@@ -450,6 +450,7 @@ public class PullLoadLayout extends FrameLayout{
                 mFootMargin = (int) animation.getAnimatedValue();
                 mFootLayoutParams.bottomMargin = mFootMargin;
                 mFootView.setLayoutParams(mFootLayoutParams);
+                mFootView.change(calFootProgress());
                 if(-mFootMargin == mInitFootHeight && mFootView.getState() == IView.STATE_FINISH){
                     resetFoot();
                 }
@@ -466,6 +467,7 @@ public class PullLoadLayout extends FrameLayout{
             public void onAnimationUpdate(ValueAnimator animation) {
                 mCenterLayoutParams.bottomMargin = (int) animation.getAnimatedValue();
                 mCenterView.setLayoutParams(mCenterLayoutParams);
+                mFootView.change(calFootProgress());
                 if(-mFootMargin == mInitFootHeight && mFootView.getState() == IView.STATE_FINISH){
                     resetFoot();
                 }
@@ -486,6 +488,7 @@ public class PullLoadLayout extends FrameLayout{
                 mCenterLayoutParams.bottomMargin = mInitFootHeight + mFootMargin;
                 mCenterLayoutParams.topMargin = -mInitFootHeight - mFootMargin;
                 mCenterView.setLayoutParams(mCenterLayoutParams);
+                mFootView.change(calFootProgress());
                 if(-mFootMargin == mInitFootHeight && mFootView.getState() == IView.STATE_FINISH){
                     resetFoot();
                 }
@@ -521,6 +524,7 @@ public class PullLoadLayout extends FrameLayout{
                 mHeadMargin = (int) animation.getAnimatedValue();
                 mHeadLayoutParams.topMargin = mHeadMargin;
                 mHeadView.setLayoutParams(mHeadLayoutParams);
+                mHeadView.change(calHeadProgress());
                 if(-mHeadMargin == mInitHeadHeight && mHeadView.getState() == IView.STATE_FINISH){
                     resetHead();
                 }
@@ -537,6 +541,7 @@ public class PullLoadLayout extends FrameLayout{
             public void onAnimationUpdate(ValueAnimator animation) {
                 mCenterLayoutParams.topMargin = (int) animation.getAnimatedValue();
                 mCenterView.setLayoutParams(mCenterLayoutParams);
+                mHeadView.change(calHeadProgress());
                 if(mCenterLayoutParams.topMargin == 0 && mHeadView.getState() == IView.STATE_FINISH){
                     resetHead();
                 }
@@ -557,6 +562,7 @@ public class PullLoadLayout extends FrameLayout{
                 mHeadView.setLayoutParams(mHeadLayoutParams);
                 mCenterLayoutParams.topMargin = mInitHeadHeight + mHeadMargin;
                 mCenterView.setLayoutParams(mCenterLayoutParams);
+                mHeadView.change(calHeadProgress());
                 if(-mHeadMargin == mInitHeadHeight && mHeadView.getState() == IView.STATE_FINISH){
                     resetHead();
                 }

@@ -41,16 +41,6 @@ public class BaseAct extends AppCompatActivity {
     }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (layoutId() != -1) {
-            setContentView(layoutId());
-            init();
-            init(savedInstanceState);
-        }
-    }
-
-    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
     }

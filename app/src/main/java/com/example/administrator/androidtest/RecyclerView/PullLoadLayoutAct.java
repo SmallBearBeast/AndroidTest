@@ -6,9 +6,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.administrator.androidtest.BaseAct;
+import com.example.administrator.androidtest.BaseViewSetAct;
 import com.example.administrator.androidtest.R;
 
-public class PullLoadLayoutAct extends BaseAct {
+public class PullLoadLayoutAct extends BaseViewSetAct {
     private RecyclerView rvUser;
     @Override
     protected void init(Bundle savedInstanceState) {
