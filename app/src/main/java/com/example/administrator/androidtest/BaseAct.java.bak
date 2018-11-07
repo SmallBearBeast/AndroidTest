@@ -1,23 +1,20 @@
 package com.example.administrator.androidtest;
 
-import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public abstract class BaseAct extends AppCompatActivity {
+public class BaseAct extends AppCompatActivity {
 
     private static final String TAG = "BaseAct";
     private static final int Permission_Request_Code = 1;
@@ -43,11 +40,22 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    protected void init() {
+
+    }
+
     protected void init(Bundle savedInstanceState) {
 
     }
 
-    protected abstract int layoutId();
+    protected int layoutId() {
+        return -1;
+    }
 
     protected void onNotifyForeground(boolean fore) {
         Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
@@ -75,27 +83,13 @@ public abstract class BaseAct extends AppCompatActivity {
         return foreground;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void askPermissions(String[] permissions){
+        requestPermissions(permissions, Permission_Request_Code);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == Permission_Request_Code){
-            List<String> permissionSuccessArray = new ArrayList<>();
-            List<String> permissionFailArray = new ArrayList<>();
-            for (int i = 0; i < permissions.length; i++) {
-                if(grantResults[i] == PackageManager.PERMISSION_GRANTED){
-                    permissionSuccessArray.add(permissions[i]);
-                }else {
-                    permissionFailArray.add(permissions[i]);
-                }
-            }
-            if(!permissionFailArray.isEmpty()){
-                // TODO: 2018/11/7 对话框
-            }
-            onPermissionRequest(permissionSuccessArray, permissionFailArray);
-        }
-    }
-
-    protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){
-
     }
 }

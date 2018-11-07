@@ -29,4 +29,9 @@ public class DataBindingAct extends BaseAct {
         binding.setObservableUser(observableUser);
         binding.setObservableFieldUser(new ObservableFieldUser("LiYao", "18860819656"));
     }
+
+    @Override
+    protected int layoutId() {
+        return 0;
+    }
 }

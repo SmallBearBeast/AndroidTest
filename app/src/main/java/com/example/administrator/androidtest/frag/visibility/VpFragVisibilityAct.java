@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.frag.visibility;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -27,7 +28,7 @@ public class VpFragVisibilityAct extends BaseAct implements BaseFrag.FragVisiabl
     private TextView tvFragVisibility;
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         App.fragVisiableListener = this;
         vpContainer = findViewById(R.id.vp_container);
         tvFragVisibility = findViewById(R.id.tv_frag_visibility);

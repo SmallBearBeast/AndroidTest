@@ -1,11 +1,13 @@
 package com.example.administrator.androidtest.Lifecycle;
 
+import android.os.Bundle;
+
 import com.example.administrator.androidtest.BaseAct;
 import com.example.administrator.androidtest.R;
 
 public class LifecycleAct extends BaseAct {
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         getLifecycle().addObserver(new LifecycleObj());
     }
 

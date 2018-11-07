@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.frag.visibility;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.example.administrator.androidtest.BaseAct;
@@ -19,7 +20,7 @@ public class FragVisibilityAct extends BaseAct {
     }
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         fragmentOne = new FragmentOne();
         fragmentTwo = new FragmentTwo();
         fragmentThree = new FragmentThree();

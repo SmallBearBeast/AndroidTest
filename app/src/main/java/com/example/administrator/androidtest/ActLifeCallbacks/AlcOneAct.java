@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.ActLifeCallbacks;
 
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -17,7 +18,7 @@ public class AlcOneAct extends BaseAct {
     private MyAdapter myAdapter;
 
     @Override
-    protected void init() {
+    protected void init(Bundle savedInstanceState) {
         vpContainer = findViewById(R.id.vp_container);
         myAdapter = new MyAdapter(getSupportFragmentManager());
         vpContainer.setAdapter(myAdapter);

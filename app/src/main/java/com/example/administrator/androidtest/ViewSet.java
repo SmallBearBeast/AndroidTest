@@ -1,16 +1,21 @@
 package com.example.administrator.androidtest;
 
+import android.content.Context;
+import android.util.SparseArray;
 import android.view.View;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class ViewSet {
-    private View contentView;
-    private Map<Integer, Runnable> viewIdWithClickMap = new HashMap<>();
+    protected Context mContext;
+    private View mContentView;
+    private SparseArray<View> mIdWithViewArray;
 
-    public ViewSet(View contentView) {
-        this.contentView = contentView;
+    public ViewSet(View contentView, Context context) {
+        mContext = context;
+        mIdWithViewArray = new SparseArray<>(16);
+        mContentView = contentView;
         initView(contentView);
     }
 
@@ -18,20 +23,17 @@ public class ViewSet {
         //findViewById()操作
     }
 
-    public void setViewClickListener(View view, Runnable click){
-        if(view.getId() != View.NO_ID){
-            viewIdWithClickMap.put(view.getId(), click);
-            view.setOnClickListener(onClickListener);
-        }
+    protected View findViewById(int viewId){
+        View view = mContentView.findViewById(viewId);
+        mIdWithViewArray.put(viewId, view);
+        return view;
     }
 
-    private View.OnClickListener onClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Runnable click = viewIdWithClickMap.get(v.getId());
-            if(click != null){
-                click.run();
+    public void setOnClickListener(View.OnClickListener listener, int... viewIds){
+        for (int i = 0; i < viewIds.length; i++) {
+            if(mIdWithViewArray.get(viewIds[i]) != null){
+                mIdWithViewArray.get(viewIds[i]).setOnClickListener(listener);
             }
         }
-    };
+    }
 }

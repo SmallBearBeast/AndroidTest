@@ -3,6 +3,8 @@
     package="com.example.administrator.androidtest">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
 
     <application
         android:name=".App"
@@ -12,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RecyclerView.PullLoadLayoutAct">
+        <activity android:name=".Permission.PermissionAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

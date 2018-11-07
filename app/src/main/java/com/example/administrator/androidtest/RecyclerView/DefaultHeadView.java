@@ -10,6 +10,7 @@ import com.example.administrator.androidtest.R;
 
 public class DefaultHeadView extends IView {
     private ImageView ivRotate;
+
     public DefaultHeadView(@NonNull Context context) {
         this(context, null);
     }
