@@ -20,6 +20,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="w_0_h_0">
+        <item name="android:layout_width">@dimen/dp_0</item>
+        <item name="android:layout_height">@dimen/dp_0</item>
+    </style>
+
     <style name="w_30_h_30">
         <item name="android:layout_width">@dimen/dp_30</item>
         <item name="android:layout_height">@dimen/dp_30</item>
@@ -50,6 +55,14 @@
         <item name="android:gravity">center_vertical</item>
     </style>
 
+    <style name="ll_center_vertical" parent="ll_vertical">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="ll_center_horizontal" parent="ll_horizontal">
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="tv_base" parent="wrap_content">
         <item name="android:ellipsize">middle</item>
         <item name="android:maxLines">1</item>
@@ -73,14 +86,6 @@
         <item name="android:background">@color/cl_gray_5</item>
         <item name="android:layout_width">1px</item>
         <item name="android:layout_height">match_parent</item>
-    </style>
-
-    <style name="ll_center_vertical" parent="ll_vertical">
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="ll_center_horizontal" parent="ll_horizontal">
-        <item name="android:gravity">center</item>
     </style>
 
     <style name="rv_base">

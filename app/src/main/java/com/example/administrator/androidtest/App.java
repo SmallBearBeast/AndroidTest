@@ -14,6 +14,8 @@ import java.util.Map;
 
 public class App extends Application {
 
+    public static int Screen_Width;
+    public static int Screen_Height;
     private static final String TAG = "App";
     public static Map<String, Boolean> FragVisibiableMap = new HashMap<>();
 
