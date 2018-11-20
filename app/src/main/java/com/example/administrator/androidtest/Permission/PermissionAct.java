@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.BaseViewSetAct;
+import com.example.administrator.androidtest.Common.Util.FullScreenUtils;
 import com.example.administrator.androidtest.PermissionDialog;
 import com.example.administrator.androidtest.R;
 
@@ -27,13 +28,15 @@ public class PermissionAct extends BaseViewSetAct{
         super.init(savedInstanceState);
         btAskPermission = findViewById(R.id.bt_ask_permission);
         tvText = findViewById(R.id.tv_text);
-        dialog = new PermissionDialog();
+        dialog = new PermissionDialog(this);
         btAskPermission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show(getSupportFragmentManager(), "wuyisong");
+                dialog.show();
             }
         });
+        FullScreenUtils.hideNavigationBar(this);
+        FullScreenUtils.hideStatusBar(this);
     }
 
     @Override
