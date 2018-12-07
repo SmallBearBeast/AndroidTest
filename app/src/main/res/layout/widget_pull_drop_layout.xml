@@ -2,10 +2,11 @@
 <com.example.administrator.androidtest.RecyclerView.PullLoadLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pdl="http://schemas.android.com/apk/res-auto"
+    android:background="@color/cl_white"
     pdl:pdl_head_enable="true"
-    pdl:pdl_head_type="TYPE_OUT_MOVE"
+    pdl:pdl_head_type="TYPE_COVER_MOVE"
     pdl:pdl_foot_enable="true"
-    pdl:pdl_foot_type="TYPE_OUT_MOVE"
+    pdl:pdl_foot_type="TYPE_COVER_MOVE"
     pdl:pdl_head_time="1000"
     pdl:pdl_foot_time="1000"
     style="@style/match_parent">
@@ -14,10 +15,12 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"/>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_user"
+    <TextView
+        android:textColor="@color/cl_green_9"
+        android:textSize="30sp"
+        android:text="123456789012345678901234567890"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 
     <com.example.administrator.androidtest.RecyclerView.DefaultFootView
         android:layout_width="match_parent"

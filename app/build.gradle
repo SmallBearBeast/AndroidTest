@@ -37,4 +37,9 @@ dependencies {
         这个插件会和databinding冲突导致bindng生成失败
      */
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+
+    implementation([
+            'com.snapchat.kit.sdk:creative:1.1.4',
+            'com.snapchat.kit.sdk:core:1.1.4'
+    ])
 }

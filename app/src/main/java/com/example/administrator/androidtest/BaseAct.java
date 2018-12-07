@@ -1,8 +1,10 @@
 package com.example.administrator.androidtest;
 
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -17,6 +19,15 @@ public abstract class BaseAct extends AppCompatActivity {
     private static int runningCount = 0;
 
     private boolean foreground;
+    protected BaseAct mActivity;
+    protected Context mContext;
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mActivity = this;
+        mContext = this;
+    }
 
     @Override
     protected void onStart() {
@@ -85,6 +96,8 @@ public abstract class BaseAct extends AppCompatActivity {
             }
             if(!permissionFailArray.isEmpty()){
                 // TODO: 2018/11/7 对话框
+                PermissionDialog dialog = new PermissionDialog(this);
+                dialog.show();
             }
             onPermissionRequest(permissionSuccessArray, permissionFailArray);
         }

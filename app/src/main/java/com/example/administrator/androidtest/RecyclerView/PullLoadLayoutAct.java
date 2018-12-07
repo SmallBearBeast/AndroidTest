@@ -14,10 +14,10 @@ public class PullLoadLayoutAct extends BaseViewSetAct {
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        rvUser = findViewById(R.id.rv_user);
-        rvUser.setLayoutManager(new LinearLayoutManager(this));
-        rvUser.setItemAnimator(new DefaultItemAnimator());
-        rvUser.setAdapter(new UserAdapter());
+//        rvUser = findViewById(R.id.rv_user);
+//        rvUser.setLayoutManager(new LinearLayoutManager(this));
+//        rvUser.setItemAnimator(new DefaultItemAnimator());
+//        rvUser.setAdapter(new UserAdapter());
     }
 
     @Override

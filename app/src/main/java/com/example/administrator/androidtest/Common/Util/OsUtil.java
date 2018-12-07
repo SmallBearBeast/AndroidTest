@@ -17,7 +17,6 @@ import android.util.TypedValue;
 import android.view.Display;
 import android.view.OrientationEventListener;
 import android.view.Surface;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 

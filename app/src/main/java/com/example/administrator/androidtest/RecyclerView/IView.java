@@ -92,4 +92,11 @@ public abstract class IView extends FrameLayout {
     public int getState(){
         return mState;
     }
+
+    /**
+     * Finish状态和Doing状态不处理事件
+     */
+    public boolean isIntercept(){
+        return mState == IView.STATE_FINISH || mState == IView.STATE_DOING;
+    }
 }
