@@ -4,8 +4,8 @@ import android.net.Uri;
 
 public class IntentShare {
     public static final String TYPE_IMAGE = "image/*";
-    public static final String TYPE_VIDEO = "video/mp4";
-    public static final String TYPE_TEXT = "text/plain";
+    public static final String TYPE_VIDEO = "video/*";
+    public static final String TYPE_TEXT = "text/*";
 
     public static final String PACKAGE_FB = "com.facebook.katana";
     public static final String PACKAGE_TWITTER = "com.twitter.android";
@@ -40,6 +40,9 @@ public class IntentShare {
     private Uri mImageUri;
     private Uri mVideoUri;
 
+    public IntentShare(){
+
+    }
     public IntentShare(String text, Uri imageUri, Uri videoUri) {
         mText = text;
         mImageUri = imageUri;
