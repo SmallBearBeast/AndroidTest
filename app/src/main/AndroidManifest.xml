@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data android:name="com.snapchat.kit.sdk.clientId" android:value="a57f3d06-4517-45f8-a8c8-c0fc5b7e403a" />
+        <meta-data android:name="com.snapchat.kit.sdk.clientId" android:value="09bc70fd-aa0e-4550-bf9f-029ea0b1e1d6" />
         <provider
             android:authorities="${applicationId}.fileprovider"
             android:name="android.support.v4.content.FileProvider"
@@ -28,7 +28,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".Share.SnapChatAct">
+        <activity android:name=".Share.SystemShareAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

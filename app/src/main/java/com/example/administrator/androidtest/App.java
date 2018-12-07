@@ -2,6 +2,7 @@ package com.example.administrator.androidtest;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -17,6 +18,7 @@ public class App extends Application {
     public static int Screen_Width;
     public static int Screen_Height;
     private static final String TAG = "App";
+    private static Context mContext;
     public static Map<String, Boolean> FragVisibiableMap = new HashMap<>();
 
     public static BaseFrag.FragVisiableListener fragVisiableListener = null;
@@ -24,9 +26,14 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        mContext = this;
         registerActivityLifecycleCallbacks(new Callback());
     }
 
+
+    public static Context getContext() {
+        return mContext;
+    }
 
     static class Callback implements ActivityLifecycleCallbacks {
         @Override
