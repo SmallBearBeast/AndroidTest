@@ -25,6 +25,8 @@ import java.util.List;
 public class SystemShareAct extends BaseViewSetAct {
     private static final int REQUEST_IMAGE = 1001;
     private static final int REQUEST_VIDEO = 1002;
+    private static final int REQUEST_IMAGE_OTHER = 1003;
+    private static final int REQUEST_VIDEO_OTHER = 1004;
     private String mSharePackageName;
 
     RecyclerView mRvSystemShare;
@@ -42,40 +44,65 @@ public class SystemShareAct extends BaseViewSetAct {
     }
 
 
-    private void choosePhoto(){
+    private void choosePhoto(int requestCode){
         Intent it = new Intent(Intent.ACTION_PICK, null);
         // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
         it.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        startActivityForResult(it, REQUEST_IMAGE);
+        startActivityForResult(it, requestCode);
     }
 
-    private void chooseVideo(){
+    private void chooseVideo(int requestCode){
         Intent it = new Intent(Intent.ACTION_PICK, null);
         it.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "video/*");
-        startActivityForResult(it, REQUEST_VIDEO);
+        startActivityForResult(it, requestCode);
     }
 
 
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.tv_1:
+                IntentShare intentShare = new IntentShare();
+                intentShare.setText("Hello World");
+                ShareUtil.shareTextToOther(this, intentShare);
+                break;
+            case R.id.tv_2:
+                choosePhoto(REQUEST_IMAGE_OTHER);
+                break;
+            case R.id.tv_3:
+                chooseVideo(REQUEST_VIDEO_OTHER);
+                break;
+        }
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode){
+            case REQUEST_IMAGE_OTHER:
             case REQUEST_IMAGE:
                 if(data != null){
                     Uri imageUri = data.getData();
                     if(imageUri != null){
                         IntentShare intentShare = new IntentShare("Hello World", imageUri, null);
-                        ShareUtil.shareImageTextToApp(mActivity, intentShare, mSharePackageName, null);
+                        if(requestCode == REQUEST_IMAGE){
+                            ShareUtil.shareImageTextToApp(mActivity, intentShare, mSharePackageName, null);
+                        }else {
+                            ShareUtil.shareImageTextToOther(mActivity, intentShare);
+                        }
                     }
                 }
                 break;
 
+            case REQUEST_VIDEO_OTHER:
             case REQUEST_VIDEO:
                 if(data != null){
                     Uri videoUri = data.getData();
                     if(videoUri != null){
                         IntentShare intentShare = new IntentShare("Hello World", null, videoUri);
-                        ShareUtil.shareVideoTextToApp(mActivity, intentShare, mSharePackageName, null);
+                        if(requestCode == REQUEST_VIDEO){
+                            ShareUtil.shareVideoTextToApp(mActivity, intentShare, mSharePackageName, null);
+                        }else {
+                            ShareUtil.shareVideoTextToOther(mActivity, intentShare);
+                        }
                     }
                 }
                 break;
@@ -148,7 +175,7 @@ public class SystemShareAct extends BaseViewSetAct {
                     break;
 
                 case R.id.tv_2:
-                    choosePhoto();
+                    choosePhoto(REQUEST_IMAGE);
                     break;
 
                 case R.id.tv_3:
