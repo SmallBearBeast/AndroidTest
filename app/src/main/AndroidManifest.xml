@@ -28,7 +28,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".Share.SystemShareAct">
+        <activity android:name=".View.Spinner.SpinnerAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
