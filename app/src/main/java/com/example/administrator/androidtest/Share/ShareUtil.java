@@ -11,6 +11,7 @@ import android.net.Uri;
 
 import com.example.administrator.androidtest.Common.Util.ToastUtils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -92,7 +93,7 @@ public class ShareUtil {
      */
     public static void shareImageTextToApp(Activity activity, IntentShare intentShare, String packageName, String activityName){
         Intent it = checkShareToApp(activity.getApplicationContext(), IntentShare.TYPE_IMAGE, packageName, activityName);
-        if (it != null) {
+        if (it != null && checkShareSize(IntentShare.TYPE_IMAGE, intentShare.getImageUri(), packageName)) {
             it.putExtra(Intent.EXTRA_TEXT, intentShare.getText());
             it.putExtra(Intent.EXTRA_STREAM, intentShare.getImageUri());
             activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
@@ -159,7 +160,8 @@ public class ShareUtil {
         CheckItem item = new CheckItem(type, packageName);
         if(sSizeCheckMap.containsKey(item)){
             long maxSize = sSizeCheckMap.get(item);
-            long uriSize = 0;
+            File file = new File(uri.toString());
+            long uriSize = file.length();
             return uriSize < maxSize;
         }
         return false;
