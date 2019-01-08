@@ -9,20 +9,18 @@ import android.content.SharedPreferences;
 public class SPUtil {
     public static final String SETTING = "SETTING";
 
-    /**
-     * 将数据保存到 IM 文件中
-     *
-     * @param context
-     * @param key
-     * @param value
-     */
-    public static void saveToIM(Context context, String key, Object value) {
-        SharedPreferences preferences = context.getSharedPreferences(SETTING, Context.MODE_PRIVATE);
-        putData(preferences, key, value);
+
+    public static void toSetting(Context context, String key, Object value) {
+        putData(SETTING, context, key, value);
     }
 
-    private static void putData(SharedPreferences preferences,  String key, Object value){
-        SharedPreferences.Editor editor = preferences.edit();
+    public static Object fromSetting(Context context, String key, Object defaultValue){
+        return getData(SETTING, context, key, defaultValue);
+    }
+
+    // TODO: 2018/12/20 支持多个key-value对添加 
+    private static void putData(String spName, Context context, String key, Object value){
+        SharedPreferences.Editor editor = context.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         if(value instanceof Boolean){
             editor.putBoolean(key, (Boolean) value);
         }else if(value instanceof Integer){
@@ -34,19 +32,12 @@ public class SPUtil {
         }else if(value instanceof Long){
             editor.putLong(key, (Long) value);
         }
-        editor.commit();
+        editor.apply();
     }
-    /**
-     * 从 IM 文件中 取出数据
-     *
-     * @param context
-     * @param key
-     * @param defaultValue
-     * @return
-     */
-    public static Object getFromIM(Context context, String key, Object defaultValue) {
+
+    public static Object getData(String spName, Context context, String key, Object defaultValue) {
+        SharedPreferences preferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
         String type = defaultValue.getClass().getSimpleName();
-        SharedPreferences preferences = context.getSharedPreferences(SETTING, Context.MODE_PRIVATE);
         Object result = null;
         switch (type) {
             case "Boolean":

@@ -22,9 +22,9 @@ public class SnapchatShare {
         try {
             File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + File.separator + "computer.jpg");
             if(file.exists()) {
-                String s = null;
                 SnapPhotoFile snapPhotoFile = snapMediaFactory.getSnapPhotoFromFile(file);
                 SnapPhotoContent snapPhotoContent = new SnapPhotoContent(snapPhotoFile);
+                snapPhotoContent.setAttachmentUrl("https://www.huya.com/");
                 api.send(snapPhotoContent);
             }
         } catch (Exception e) {
@@ -43,7 +43,7 @@ public class SnapchatShare {
         SnapCreativeKitApi api = SnapCreative.getApi(context);
         SnapMediaFactory snapMediaFactory = SnapCreative.getMediaFactory(context);
         try {
-            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + File.separator + "my.mp4");
+            File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + File.separator + "mymymymy.mp4");
             if(file.exists()){
                 SnapVideoFile snapVideoFile = snapMediaFactory.getSnapVideoFromFile(file);
                 SnapVideoContent snapVideoContent = new SnapVideoContent(snapVideoFile);
