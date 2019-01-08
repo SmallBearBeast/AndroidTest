@@ -440,7 +440,23 @@ public class OsUtil {
 //		window.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, dialogHeight == 0 ? ViewGroup.LayoutParams.MATCH_PARENT : dialogHeight);
 //	}*/
 
-	public static boolean isLevelLessThan18() {
-		return Build.VERSION.SDK_INT < 18;
+	public static boolean isAbove19(){
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+	}
+
+	public static boolean isAbove21(){
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP;
+	}
+
+	public static boolean isAbove23(){
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.M;
+	}
+
+	public static boolean isAbove24(){
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.N;
+	}
+
+	public static boolean isAbove26(){
+		return Build.VERSION.SDK_INT >= Build.VERSION_CODES.O;
 	}
 }

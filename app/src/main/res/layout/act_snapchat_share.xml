@@ -4,6 +4,15 @@
 
 
     <Button
-        android:id="@+id/bt_snapchat_share"
-       style="@style/match_parent_wrap_content"/>
+        android:gravity="center"
+        android:text="Share Video"
+        android:id="@+id/bt_video_share"
+        style="@style/match_parent_wrap_content"/>
+
+    <Button
+        android:gravity="center"
+        android:text="Share Image"
+        android:id="@+id/bt_image_share"
+        style="@style/match_parent_wrap_content"/>
+
 </LinearLayout>

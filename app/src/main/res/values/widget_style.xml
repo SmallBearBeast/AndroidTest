@@ -16,4 +16,20 @@
         <attr name="pdl_head_time" format="integer"/>
         <attr name="pdl_foot_time" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="DropTextView">
+        <attr name="dtv_layout_id" format="reference"/>
+        <attr name="dtv_window_height" format="dimension"/>
+    </declare-styleable>
+
+    <declare-styleable name="CompoundDrawableTextView">
+        <attr name="cdtv_click_left_drawableId" format="reference"/>
+        <attr name="cdtv_click_right_drawableId" format="reference"/>
+        <attr name="cdtv_click_top_drawableId" format="reference"/>
+        <attr name="cdtv_click_bottom_drawableId" format="reference"/>
+        <attr name="cdtv_press_left_drawableId" format="reference"/>
+        <attr name="cdtv_press_right_drawableId" format="reference"/>
+        <attr name="cdtv_press_top_drawableId" format="reference"/>
+        <attr name="cdtv_press_bottom_drawableId" format="reference"/>
+    </declare-styleable>
 </resources>

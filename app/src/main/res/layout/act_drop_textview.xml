@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/match_parent">
+
+    <com.example.administrator.androidtest.Widget.DropTextView.DropTextView
+        android:background="@color/cl_oriange"
+        android:id="@+id/dtv_text"
+        app:dtv_layout_id="@layout/item_tv"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_0"
+        android:background="@color/cl_red_t_6"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dtv_text"/>
+
+
+
+</android.support.constraint.ConstraintLayout>
