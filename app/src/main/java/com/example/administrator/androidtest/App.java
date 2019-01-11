@@ -6,6 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.administrator.androidtest.Common.Util.AppInitUtil;
 import com.example.administrator.androidtest.frag.visibility.BaseVisiableFrag;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public class App extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
+        AppInitUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
     }
 

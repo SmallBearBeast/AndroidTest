@@ -10,29 +10,28 @@ import android.support.v4.content.FileProvider;
 import java.io.File;
 import java.util.List;
 
-public class FileProviderUtil {
-    public static Uri getUriForFile(Context context, File file) {
+public class FileProviderUtil extends AppInitUtil{
+    public static Uri getUriForFile(File file) {
         Uri fileUri = null;
         if (Build.VERSION.SDK_INT >= 24) {
-            fileUri = getUriForFile24(context, file);
+            fileUri = getUriForFile24(file);
         } else {
             fileUri = Uri.fromFile(file);
         }
         return fileUri;
     }
 
-    private static Uri getUriForFile24(Context context, File file) {
-        Uri fileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
+    private static Uri getUriForFile24(File file) {
+        Uri fileUri = FileProvider.getUriForFile(sContext, sContext.getPackageName() + ".fileprovider", file);
         return fileUri;
     }
 
-    public static void setIntentDataAndType(Context context,
-                                            Intent intent,
+    public static void setIntentDataAndType(Intent intent,
                                             String type,
                                             File file,
                                             boolean writeAble) {
         if (Build.VERSION.SDK_INT >= 24) {
-            intent.setDataAndType(getUriForFile(context, file), type);
+            intent.setDataAndType(getUriForFile(file), type);
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             if (writeAble) {
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -42,12 +41,11 @@ public class FileProviderUtil {
         }
     }
 
-    public static void setIntentData(Context context,
-                                     Intent intent,
+    public static void setIntentData(Intent intent,
                                      File file,
                                      boolean writeAble) {
         if (Build.VERSION.SDK_INT >= 24) {
-            intent.setData(getUriForFile(context, file));
+            intent.setData(getUriForFile(file));
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
             if (writeAble) {
                 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
@@ -57,18 +55,18 @@ public class FileProviderUtil {
         }
     }
 
-    public static void grantPermissions(Context context, Intent intent, Uri uri, boolean writeAble) {
+    public static void grantPermissions(Intent intent, Uri uri, boolean writeAble) {
 
         int flag = Intent.FLAG_GRANT_READ_URI_PERMISSION;
         if (writeAble) {
             flag |= Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
         }
         intent.addFlags(flag);
-        List<ResolveInfo> resInfoList = context.getPackageManager()
+        List<ResolveInfo> resInfoList = sContext.getPackageManager()
                 .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         for (ResolveInfo resolveInfo : resInfoList) {
             String packageName = resolveInfo.activityInfo.packageName;
-            context.grantUriPermission(packageName, uri, flag);
+            sContext.grantUriPermission(packageName, uri, flag);
         }
     }
 }

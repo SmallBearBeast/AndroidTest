@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Share;
+package com.example.administrator.androidtest.Share.Activity;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +17,8 @@ import com.example.administrator.androidtest.BaseHolder;
 import com.example.administrator.androidtest.BaseViewSetAct;
 import com.example.administrator.androidtest.Common.Util.FileProviderUtil;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Share.IntentShare;
+import com.example.administrator.androidtest.Share.ShareUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -180,7 +182,7 @@ public class SystemShareAct extends BaseViewSetAct {
 
                 case R.id.tv_3:
                     File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + File.separator + "mymymymy.mp4");
-                    intentShare.setVideoUri(FileProviderUtil.getUriForFile(mContext, file));
+                    intentShare.setVideoUri(FileProviderUtil.getUriForFile(file));
                     ShareUtil.shareVideoTextToApp(mActivity, intentShare, mData, null);
                     break;
             }

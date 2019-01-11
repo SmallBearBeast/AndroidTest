@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/ll_vertical">
+
+    <TextView
+        android:background="@drawable/selector_corner"
+        android:clickable="true"
+        android:enabled="true"
+        android:id="@+id/tv_1"
+        android:text="样式一"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_50" />
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:text="样式二"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_50" />
+
+    <TextView
+        android:id="@+id/tv_3"
+        android:text="样式三"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_50" />
+
+    <TextView
+        android:id="@+id/tv_4"
+        android:text="样式四"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_50" />
+
+    <ToggleButton
+        android:id="@+id/tb_5"
+        android:textOff="样式五"
+        android:textOn="样式五"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_150"
+        android:layout_height="@dimen/dp_50" />
+
+
+    <ToggleButton
+        android:id="@+id/tb_6"
+        android:textOff="样式五"
+        android:textOn="样式五"
+        android:gravity="center"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_50"
+        android:layout_height="@dimen/dp_50" />
+</LinearLayout>

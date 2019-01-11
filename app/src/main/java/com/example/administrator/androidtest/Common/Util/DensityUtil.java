@@ -13,8 +13,7 @@ import com.example.administrator.androidtest.App;
  * 尺寸工具类
  *
  */
-public class DensityUtil {	
-	
+public class DensityUtil extends AppInitUtil{
 	 /** 
      * 根据手机的分辨率从 dp 的单位 转成为 px(像素) 
      */  
@@ -26,32 +25,24 @@ public class DensityUtil {
     /** 
      * 根据手机的分辨率从 px(像素) 的单位 转成为 dp 
      */  
-    public static int px2Dip(Context context, float pxValue) {
-        final float scale = context.getResources().getDisplayMetrics().density;  
+    public static int px2Dip(float pxValue) {
+        final float scale = sContext.getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);  
     }
     
     /**
      * 将sp值转换为px值，保证文字大小不变
-     * 
-     * @param spValue
-     * @param spValue
-     *            （DisplayMetrics类中属性scaledDensity）
-     * @return
      */ 
-    public static int sp2px(Context context, float spValue) {
-        final float fontScale = context.getResources().getDisplayMetrics().scaledDensity; 
+    public static int sp2px(float spValue) {
+        final float fontScale = sContext.getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f); 
     } 
     
     /**
-     * 根据手机的分辨率从 px(像素) 的单位 转成为 sp 
-     * @param context
-     * @param pxValue
-     * @return
+     * 根据手机的分辨率从 px(像素) 的单位 转成为 sp
      */
-    public static int px2Sp(Context context, float pxValue) {
-    	final float fontScale = context.getResources().getDisplayMetrics().scaledDensity; 
+    public static int px2Sp(float pxValue) {
+    	final float fontScale = sContext.getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
     
@@ -67,42 +58,32 @@ public class DensityUtil {
     
     /**
      * 获取屏幕宽度
-     * @param context
-     * @return
      */
-    public static int getScreenWidth(Context context){
-    	DisplayMetrics dm=dueDisplayMetrics(context);
+    public static int getScreenWidth(){
+    	DisplayMetrics dm=dueDisplayMetrics(sContext);
     	return dm.widthPixels;
     }
     
     /**
      * 获取屏幕高度
-     * @param context
-     * @return
      */
-    public static int getScreenHeight(Context context){
-    	DisplayMetrics dm=dueDisplayMetrics(context);
+    public static int getScreenHeight(){
+    	DisplayMetrics dm=dueDisplayMetrics(sContext);
     	return dm.heightPixels;
     }
 
     /**
      * 按比值获取高度
-     * @param context
-     * @param persent
-     * @return
      */
-    public static int getScreenHeightByPersent(Context context, float persent){
-        return (int) (getScreenHeight(context) * persent);
+    public static int getScreenHeightByPersent(float persent){
+        return (int) (getScreenHeight() * persent);
     }
 
 
     /**
      * 按照比值获取宽度
-     * @param context
-     * @param persent
-     * @return
      */
-    public static int getScreenWidthByPersent(Context context, float persent){
-        return (int) (getScreenWidth(context) * persent);
+    public static int getScreenWidthByPersent(float persent){
+        return (int) (getScreenWidth() * persent);
     }
 }

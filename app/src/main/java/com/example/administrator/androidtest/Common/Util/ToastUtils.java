@@ -10,7 +10,7 @@ import com.example.administrator.androidtest.App;
  * @author lianzhan
  */
 
-public final class ToastUtils {
+public final class ToastUtils extends AppInitUtil{
     public static final void showToast(final CharSequence text) {
         showToast(text, Toast.LENGTH_SHORT);
     }
@@ -19,7 +19,7 @@ public final class ToastUtils {
         UiHandlerUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(App.getContext(), text, duration).show();
+                Toast.makeText(sContext, text, duration).show();
             }
         });
     }
@@ -28,7 +28,7 @@ public final class ToastUtils {
         UiHandlerUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(App.getContext(), resId, duration).show();
+                Toast.makeText(sContext, resId, duration).show();
             }
         });
     }
@@ -37,7 +37,7 @@ public final class ToastUtils {
         UiHandlerUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast toast = Toast.makeText(App.getContext(), resId, duration);
+                Toast toast = Toast.makeText(sContext, resId, duration);
                 toast.setGravity(gravity, xOffset, yOffset);
                 toast.show();
             }
@@ -48,7 +48,7 @@ public final class ToastUtils {
         UiHandlerUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast toast = Toast.makeText(App.getContext(), str, duration);
+                Toast toast = Toast.makeText(sContext, str, duration);
                 toast.setGravity(gravity, xOffset, yOffset);
                 toast.show();
             }

@@ -1,33 +1,32 @@
 package com.example.administrator.androidtest.Common.Util;
 
-import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewCompat;
 import android.view.View;
 
-public class XmlDrawableUtil {
+
+/**
+ * 1.设置selectorDrawable时候，normal属性必须放在最后，因为是按照添加顺序进行过滤
+ * 2.设置selectorDrawable时候，要设置view.setClickable(true)属性
+ * 3.一些需要上下文context的工具类可以继承AppInitUtil，统一初始化上下文Context
+ *
+ * 常用形状Drawable和selectorDrawable的封装
+ * 用法:XmlDrawableUtil.selector(R.drawable.xxx_1, R.drawable.xxx_2).setView(mTv_2);
+ */
+public class XmlDrawableUtil extends AppInitUtil{
 
     public static int DRAWABLE_NONE = -1;
+    public static int COLOR_NONE = -1;
 
-    private static Context sContext;
-
-    public static void init(Context context){
-        sContext = context;
-    }
-
-    public static Drawable selector(int normalId, int pressedId){
+    public static DrawableWapper selector(int normalId, int pressedId){
         return selector(normalId, pressedId, DRAWABLE_NONE);
     }
 
-    public static Drawable selector(int normalId, int pressedId, int checkedId){
+    public static DrawableWapper selector(int normalId, int pressedId, int checkedId){
         StateListDrawable drawable = new StateListDrawable();
-        if(checkDrawableID(normalId)){
-            drawable.addState(new int[]{
-                    android.R.attr.state_enabled, android.R.attr.state_active
-            }, getDrawable(normalId));
-        }
 
         if(checkDrawableID(pressedId)){
             drawable.addState(new int[]{
@@ -37,23 +36,24 @@ public class XmlDrawableUtil {
 
         if(checkDrawableID(checkedId)){
             drawable.addState(new int[]{
-                    android.R.attr.state_checked, android.R.attr.state_selected
+                    android.R.attr.state_checked
             }, getDrawable(checkedId));
         }
-        return drawable;
+
+
+        if(checkDrawableID(normalId)){
+            drawable.addState(new int[]{}, getDrawable(normalId));
+        }
+
+        return new DrawableWapper(drawable);
     }
 
-    public static Drawable selector(Drawable normalDrawable, Drawable pressedDrawable){
+    public static DrawableWapper selector(Drawable normalDrawable, Drawable pressedDrawable){
         return selector(normalDrawable, pressedDrawable, null);
     }
 
-    public static Drawable selector(Drawable normalDrawable, Drawable pressedDrawable, Drawable checkedDrawable){
+    public static DrawableWapper selector(Drawable normalDrawable, Drawable pressedDrawable, Drawable checkedDrawable){
         StateListDrawable drawable = new StateListDrawable();
-        if(checkDrawable(normalDrawable)){
-            drawable.addState(new int[]{
-                    android.R.attr.state_enabled, android.R.attr.state_active
-            }, normalDrawable);
-        }
 
         if(checkDrawable(pressedDrawable)){
             drawable.addState(new int[]{
@@ -63,15 +63,30 @@ public class XmlDrawableUtil {
 
         if(checkDrawable(checkedDrawable)){
             drawable.addState(new int[]{
-                    android.R.attr.state_checked, android.R.attr.state_selected
+                    android.R.attr.state_checked
             }, checkedDrawable);
         }
-        return drawable;
+
+        if(checkDrawable(normalDrawable)){
+            drawable.addState(new int[]{}, normalDrawable);
+        }
+
+
+        return new DrawableWapper(drawable);
     }
 
 
     private static Drawable getDrawable(int drawableId){
         return ContextCompat.getDrawable(sContext, drawableId);
+    }
+
+    private static int getColor(int colorId){
+        return ContextCompat.getColor(sContext, colorId);
+    }
+
+    private static int getDp2Px(int dp){
+        float scale = sContext.getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
     }
 
     private static boolean checkDrawableID(int drawableId){
@@ -82,48 +97,79 @@ public class XmlDrawableUtil {
         return obj instanceof Drawable;
     }
 
-    public static Drawable shapeCornerRect(int color, int radius){
+    private static boolean checkColorId(int colorId){
+        return colorId != COLOR_NONE;
+    }
+
+    public static DrawableWapper shapeCornerRect(int colorId, int radius){
         GradientDrawable drawable = new GradientDrawable();
-        drawable.setColor(color);
+        if(checkColorId(colorId)) {
+            drawable.setColor(getColor(colorId));
+        }
         drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadius(radius);
-        return drawable;
+        drawable.setCornerRadius(getDp2Px(radius));
+        return new DrawableWapper(drawable);
     }
 
-    public static Drawable shapeStrokeRect(int color, int radius, int strokeColor, int strokeWidth){
-        GradientDrawable drawable = (GradientDrawable) shapeCornerRect(color, radius);
-        drawable.setStroke(strokeWidth, strokeColor);
-        return drawable;
+    public static DrawableWapper shapeStrokeRect(int colorId, int radius, int strokeColorId, int strokeWidth){
+        GradientDrawable drawable = (GradientDrawable) shapeCornerRect(colorId, radius).mDrawable;
+        if(checkDrawableID(strokeColorId)) {
+            drawable.setStroke(getDp2Px(strokeWidth), getColor(strokeColorId));
+        }
+        return new DrawableWapper(drawable);
     }
 
-    public static Drawable shapeCircle(View view, int color){
+    public static DrawableWapper shapeCircle(int colorId){
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.OVAL);
-        drawable.setSize(view.getWidth(), view.getHeight());
-        drawable.setColor(color);
-        return drawable;
+        if(checkColorId(colorId)) {
+            drawable.setColor(getColor(colorId));
+        }
+        return new DrawableWapper(drawable);
     }
 
-    public static Drawable shapeStrokeCircle(View view, int color, int strokeColor, int strokeWidth){
-        GradientDrawable drawable = (GradientDrawable) shapeCircle(view, color);
-        drawable.setStroke(strokeWidth, strokeColor);
-        return drawable;
+    public static DrawableWapper shapeStrokeCircle(int colorId, int strokeColorId, int strokeWidth){
+        GradientDrawable drawable = (GradientDrawable) shapeCircle(colorId).mDrawable;
+        if(checkDrawableID(strokeColorId)) {
+            drawable.setStroke(getDp2Px(strokeWidth), getColor(strokeColorId));
+        }
+        return new DrawableWapper(drawable);
     }
 
-    /**
-     * 1.基本形状(圆形，圆角，边框)
-     * 2.可以组合(基本形状之间的组合，以及和selector之间的组合)
-     */
-
-    public static Drawable selectorCornerRect(int normalColor, int pressedColor, int radius){
-        Drawable normalDrawable = shapeCornerRect(normalColor, radius);
-        Drawable pressedDrawable = shapeCornerRect(pressedColor, radius);
+    public static DrawableWapper selectorCornerRect(int normalColorId, int pressedColorId, int radius){
+        Drawable normalDrawable = shapeCornerRect(normalColorId, radius).mDrawable;
+        Drawable pressedDrawable = shapeCornerRect(pressedColorId, radius).mDrawable;
         return selector(normalDrawable, pressedDrawable);
     }
 
-    public static Drawable selectorCircle(int normalColor, int pressedColor, View view){
-        Drawable normalDrawable = shapeCircle(view, normalColor);
-        Drawable pressedDrawable = shapeCircle(view, pressedColor);
-        return selector(normalDrawable, pressedDrawable);
+    public static DrawableWapper selectorCircle(int normalColorId, int pressedColorId){
+        return selectorCircle(normalColorId, pressedColorId, COLOR_NONE);
+    }
+
+    public static DrawableWapper selectorCircle(int normalColorId, int pressedColorId, int checkedColorId){
+        Drawable normalDrawable = shapeCircle(normalColorId).mDrawable;
+        Drawable pressedDrawable = shapeCircle(pressedColorId).mDrawable;
+        Drawable checkedDrawable = shapeCircle(checkedColorId).mDrawable;
+        return selector(normalDrawable, pressedDrawable, checkedDrawable);
+    }
+
+
+    public static class DrawableWapper{
+        Drawable mDrawable;
+
+        public DrawableWapper(Drawable mDrawable) {
+            this.mDrawable = mDrawable;
+        }
+
+        public void setView(View view){
+            //最好使能下可点击属性
+            view.setClickable(true);
+            view.setFocusable(true);
+            ViewCompat.setBackground(view, mDrawable);
+        }
+
+        public Drawable getDrawable(){
+            return mDrawable;
+        }
     }
 }
