@@ -7,9 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.BaseViewSetAct;
-import com.example.administrator.androidtest.Common.Util.FullScreenUtils;
 import com.example.administrator.androidtest.Common.Util.PermissionUtil;
-import com.example.administrator.androidtest.PermissionDialog;
 import com.example.administrator.androidtest.R;
 
 import java.util.Arrays;

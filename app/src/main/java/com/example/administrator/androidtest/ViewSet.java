@@ -24,8 +24,11 @@ public class ViewSet {
     }
 
     protected View findViewById(int viewId){
-        View view = mContentView.findViewById(viewId);
-        mIdWithViewArray.put(viewId, view);
+        View view = mIdWithViewArray.get(viewId);
+        if(view == null){
+            view = mContentView.findViewById(viewId);
+            mIdWithViewArray.put(viewId, view);
+        }
         return view;
     }
 

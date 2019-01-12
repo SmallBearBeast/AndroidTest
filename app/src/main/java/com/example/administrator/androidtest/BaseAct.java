@@ -1,10 +1,13 @@
 package com.example.administrator.androidtest;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -47,12 +50,6 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
-    protected void init(Bundle savedInstanceState) {
-
-    }
-
-    protected abstract int layoutId();
-
     protected void onNotifyForeground(boolean fore) {
         Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
     }
@@ -77,10 +74,6 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
-    public boolean isForeground() {
-        return foreground;
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -103,7 +96,23 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
+    protected abstract int layoutId();
+
+    protected void init(Bundle savedInstanceState) {
+
+    }
+
     protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){
 
     }
+
+    public boolean isForeground() {
+        return foreground;
+    }
+
+    public void startAct(Class clz, Bundle bundle){
+        Intent intent = new Intent(this, clz);
+        ActivityCompat.startActivity(this, intent, bundle);
+    }
+
 }
