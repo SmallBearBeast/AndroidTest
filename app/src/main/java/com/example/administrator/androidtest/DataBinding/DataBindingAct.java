@@ -3,9 +3,8 @@ package com.example.administrator.androidtest.DataBinding;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.View;
 
-import com.example.administrator.androidtest.BaseAct;
+import com.example.administrator.androidtest.Base.BaseAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActDatabindingBinding;
 

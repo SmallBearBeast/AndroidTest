@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 /*
     相同类型fragment复用时候需要一个fragmentId来区分
  */
-public class BaseMulFrag extends BaseFrag {
+public abstract class BaseMulFrag extends BaseFrag {
     public static final String KEY_ID = "key_id";
     protected int fragmentId;
 

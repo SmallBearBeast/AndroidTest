@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
 import android.content.Context;
 import android.util.SparseArray;
@@ -7,13 +7,11 @@ import android.view.View;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ViewSet {
-    protected Context mContext;
+public abstract class ViewSet {
     private View mContentView;
     private SparseArray<View> mIdWithViewArray;
 
-    public ViewSet(View contentView, Context context) {
-        mContext = context;
+    public ViewSet(View contentView) {
         mIdWithViewArray = new SparseArray<>(16);
         mContentView = contentView;
         initView(contentView);
@@ -38,5 +36,11 @@ public class ViewSet {
                 mIdWithViewArray.get(viewIds[i]).setOnClickListener(listener);
             }
         }
+    }
+
+    public void clear(){
+        mContentView = null;
+        mIdWithViewArray.clear();
+        mIdWithViewArray = null;
     }
 }

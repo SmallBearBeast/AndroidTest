@@ -20,7 +20,7 @@ import java.lang.reflect.Method;
  *
  * @author zhangzexian
  */
-public class NotchScreenUtil {
+public class NotchScreenUtil extends AppInitUtil{
 
     private static String TAG = "NotchScreenUtils";
 

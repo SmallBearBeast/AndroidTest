@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.administrator.androidtest.Common.Util.FullScreenUtils;
+import com.example.administrator.androidtest.Common.Util.ScreenUtil;
 
 public abstract class BaseDialog extends Dialog {
     protected Context mContext;
@@ -48,8 +48,6 @@ public abstract class BaseDialog extends Dialog {
             if(isFullScreen()){
                 lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
-                FullScreenUtils.hideStatusBar(mWindow);
-                FullScreenUtils.hideNavigationBar(mWindow);
             }
             else if(getWidthAndHeight() != null){
                 lp.width = getWidthAndHeight()[0];

@@ -5,12 +5,13 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.example.administrator.androidtest.App;
-import com.example.administrator.androidtest.BaseFrag;
+import com.example.administrator.androidtest.Base.BaseFrag;
+import com.example.administrator.androidtest.Base.ComponentFrag;
 
 import java.util.List;
 import java.util.Map;
 
-public class BaseVisiableFrag extends BaseFrag {
+public abstract class BaseVisiableFrag extends ComponentFrag {
 
     private boolean waitingShowToUser;
 

@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/match_parent">
 
-    <Button
-        android:id="@+id/bt_ask_permission"
-        style="@style/match_parent"
-        android:layout_height="50dp"
-        android:text="Ask Permission"/>
-    <TextView
-        android:id="@+id/tv_text"
-        style="@style/tv_base"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_height="match_parent"
+        style="@style/ll_vertical">
+        <TextView
+            android:background="@color/cl_green_9"
+            android:id="@+id/tv_text"
+            style="@style/tv_base"
+            android:gravity="center"
+            android:layout_height="@dimen/dp_50"
+            android:layout_width="match_parent"/>
+
+        <Button
+            android:text="权限申请"
+            android:id="@+id/bt_ask_permission"
+            android:background="@color/cl_blue_5"
+            style="@style/match_parent_wrap_content"/>
+        <TextView
+            android:background="@color/cl_red_t_6"
+            android:textSize="40sp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="1234567890123456789012345678901234567890"
+            style="@style/tv_base"/>
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

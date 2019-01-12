@@ -1,7 +1,11 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
+
+import com.example.administrator.androidtest.Common.Util.ScreenUtil;
+import com.example.administrator.androidtest.R;
 
 
 public class PermissionDialog extends BaseDialog {
@@ -31,6 +35,17 @@ public class PermissionDialog extends BaseDialog {
 
     @Override
     protected boolean isFullScreen() {
-        return true;
+        return false;
+    }
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
+        super.init(savedInstanceState);
+//        ScreenUtil.immersiveFullScreen(getWindow());
+    }
+
+    @Override
+    protected float getDim() {
+        return 0.0f;
     }
 }

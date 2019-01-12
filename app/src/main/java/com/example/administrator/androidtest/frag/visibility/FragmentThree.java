@@ -3,41 +3,24 @@ package com.example.administrator.androidtest.frag.visibility;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.administrator.androidtest.BaseFrag;
+import com.example.administrator.androidtest.Base.BaseFrag;
+import com.example.administrator.androidtest.Base.ComponentFrag;
 import com.example.administrator.androidtest.R;
 
-public class FragmentThree extends BaseFrag {
-
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_text_3, container, false);
-    }
+public class FragmentThree extends ComponentFrag {
 
 
     @Override
-    public void onStart() {
-        super.onStart();
+    public int layoutId() {
+        return R.layout.frag_text_3;
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-    }
+    public void init(Bundle savedInstanceState) {
 
-    @Override
-    public void onPause() {
-        super.onPause();
     }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
 }

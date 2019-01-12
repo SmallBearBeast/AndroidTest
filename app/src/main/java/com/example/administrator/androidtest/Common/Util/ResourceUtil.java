@@ -43,7 +43,7 @@ public class ResourceUtil extends AppInitUtil {
     /**
      * 长度资源id转px(dp -> px)返回整数
      */
-    public static float getDimensionPixelSize(int id) {
+    public static int getDimensionPixelSize(int id) {
         return getResources().getDimensionPixelSize(id);
     }
 

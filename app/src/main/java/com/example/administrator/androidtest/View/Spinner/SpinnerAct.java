@@ -11,14 +11,13 @@ import android.widget.EditText;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.BaseAct;
-import com.example.administrator.androidtest.BaseViewSetAct;
+import com.example.administrator.androidtest.Base.ComponentAct;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SpinnerAct extends BaseViewSetAct {
+public class SpinnerAct extends ComponentAct {
     private static final String TAG = "SpinnerAct_TAG";
     AppCompatSpinner spinner;
     @Override

@@ -4,14 +4,13 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.App;
-import com.example.administrator.androidtest.BaseAct;
-import com.example.administrator.androidtest.BaseFrag;
+import com.example.administrator.androidtest.Base.BaseAct;
+import com.example.administrator.androidtest.Base.BaseFrag;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;

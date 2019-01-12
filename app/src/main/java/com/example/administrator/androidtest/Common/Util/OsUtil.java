@@ -408,22 +408,6 @@ public class OsUtil {
         return raw;
     }
 
-	/**
-	 * 显示顶部StatusBar,设置背景为透明，Window所属Context布局全屏，StatusBar盖在Activity布局上面
-	 * @param window
-	 */
-	public static void setWindowTranslucentStatus(Window window) {
-		if (window == null) {
-			return;
-		}
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-			//因为4.4以上才可以透明状态栏，所以在4.4及以上才设置绘制到状态栏区域
-			FullScreenUtils.exitSimpleFullScreen(window);
-			FullScreenUtils.enableDrawToSysUi(window, true, false);
-			FullScreenUtils.enableTransparentStatusBar(window, false);
-		}
-	}
-
 
 //	/**
 //	 * 解决BottomSheetDialog闪动问题，同时解决Dialog标题栏黑色的问题,使用这个方法就不需要再对刘海屏手机的Dialog进行其他flag的设置

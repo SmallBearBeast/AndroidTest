@@ -1,6 +1,6 @@
 package com.example.administrator.androidtest.ActLifeCallbacks;
 
-import com.example.administrator.androidtest.BaseAct;
+import com.example.administrator.androidtest.Base.BaseAct;
 import com.example.administrator.androidtest.R;
 
 public class AlcTwoAct extends BaseAct {

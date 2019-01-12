@@ -6,14 +6,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.BaseViewSetAct;
+import com.example.administrator.androidtest.Base.ComponentAct;
 import com.example.administrator.androidtest.Common.Util.PermissionUtil;
+import com.example.administrator.androidtest.Common.Util.ScreenUtil;
 import com.example.administrator.androidtest.R;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class PermissionAct extends BaseViewSetAct{
+public class PermissionAct extends ComponentAct {
     private Button btAskPermission;
     private TextView tvText;
     @Override
@@ -31,10 +32,19 @@ public class PermissionAct extends BaseViewSetAct{
             public void onClick(View v) {
                 PermissionUtil.requestPermissions(new String[]{
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.READ_CONTACTS,
                 }, PermissionAct.this);
             }
         });
+
+        ScreenUtil.normalScreen(this, R.color.cl_transparent, true, tvText);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        ScreenUtil.normalScreen(this, R.color.cl_transparent);
     }
 
     @Override

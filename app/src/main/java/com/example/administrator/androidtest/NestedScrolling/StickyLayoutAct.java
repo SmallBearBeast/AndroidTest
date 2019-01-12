@@ -1,9 +1,9 @@
 package com.example.administrator.androidtest.NestedScrolling;
 
-import com.example.administrator.androidtest.BaseViewSetAct;
+import com.example.administrator.androidtest.Base.ComponentAct;
 import com.example.administrator.androidtest.R;
 
-public class StickyLayoutAct extends BaseViewSetAct {
+public class StickyLayoutAct extends ComponentAct {
     @Override
     protected int layoutId() {
         return R.layout.layout_sticky;

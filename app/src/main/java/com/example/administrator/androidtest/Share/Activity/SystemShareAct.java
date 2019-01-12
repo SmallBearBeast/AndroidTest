@@ -13,8 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.BaseHolder;
-import com.example.administrator.androidtest.BaseViewSetAct;
+import com.example.administrator.androidtest.Base.ViewHolder;
+import com.example.administrator.androidtest.Base.ComponentAct;
 import com.example.administrator.androidtest.Common.Util.FileProviderUtil;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Share.IntentShare;
@@ -24,7 +24,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SystemShareAct extends BaseViewSetAct {
+public class SystemShareAct extends ComponentAct {
     private static final int REQUEST_IMAGE = 1001;
     private static final int REQUEST_VIDEO = 1002;
     private static final int REQUEST_IMAGE_OTHER = 1003;
@@ -145,7 +145,7 @@ public class SystemShareAct extends BaseViewSetAct {
     }
 
 
-    class ShareHolder extends BaseHolder<String> implements View.OnClickListener{
+    class ShareHolder extends ViewHolder<String> implements View.OnClickListener{
         private TextView mTvShareText;
         private TextView mTvShareImage;
         private TextView mTvShareVideo;

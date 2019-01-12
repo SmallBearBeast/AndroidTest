@@ -1,15 +1,12 @@
 package com.example.administrator.androidtest.RecyclerView;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.administrator.androidtest.BaseAct;
-import com.example.administrator.androidtest.BaseViewSetAct;
+import com.example.administrator.androidtest.Base.ComponentAct;
 import com.example.administrator.androidtest.R;
 
-public class PullLoadLayoutAct extends BaseViewSetAct {
+public class PullLoadLayoutAct extends ComponentAct {
     private RecyclerView rvUser;
     @Override
     protected void init(Bundle savedInstanceState) {

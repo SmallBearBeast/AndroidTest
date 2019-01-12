@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.example.administrator.androidtest.BaseViewSetAct;
+import com.example.administrator.androidtest.Base.ComponentAct;
+import com.example.administrator.androidtest.Common.Util.ScreenUtil;
 import com.example.administrator.androidtest.Common.Util.XmlDrawableUtil;
 import com.example.administrator.androidtest.R;
 
-public class XmlDrawableAct extends BaseViewSetAct {
+public class XmlDrawableAct extends ComponentAct {
     private TextView mTv_1;
     private TextView mTv_2;
     private TextView mTv_3;
@@ -25,7 +26,6 @@ public class XmlDrawableAct extends BaseViewSetAct {
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-
         mTv_1 = findViewById(R.id.tv_1);
         mTv_2 = findViewById(R.id.tv_2);
         mTv_3 = findViewById(R.id.tv_3);

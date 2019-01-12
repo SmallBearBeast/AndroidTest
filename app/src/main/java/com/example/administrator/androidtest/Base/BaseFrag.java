@@ -1,14 +1,16 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
+import com.example.administrator.androidtest.App;
+
 import java.util.List;
 import java.util.Map;
 
-public class BaseFrag extends Fragment {
+public abstract class BaseFrag extends Fragment {
     private static String TAG = "BaseFrag";
     private boolean foreground = false;
     //保留子fragment页面位置
@@ -115,9 +117,9 @@ public class BaseFrag extends Fragment {
 
     }
 
-    protected int layoutId(){
-        return -1;
-    }
+    public abstract int layoutId();
+
+    public abstract void init(Bundle savedInstanceState);
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -1,12 +1,12 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
-public class BaseHolder<T> extends RecyclerView.ViewHolder {
+public class ViewHolder<T> extends RecyclerView.ViewHolder {
     protected T mData;
     protected int mPos;
-    public BaseHolder(View itemView) {
+    public ViewHolder(View itemView) {
         super(itemView);
     }
 

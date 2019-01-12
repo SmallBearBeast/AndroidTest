@@ -6,12 +6,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.administrator.androidtest.Base.BaseFrag;
 import com.example.administrator.androidtest.Common.Util.AppInitUtil;
-import com.example.administrator.androidtest.frag.visibility.BaseVisiableFrag;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class App extends Application {

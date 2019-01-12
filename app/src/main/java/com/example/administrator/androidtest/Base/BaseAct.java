@@ -1,16 +1,22 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
+import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ServiceCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+
+import com.example.administrator.androidtest.Common.Util.ScreenUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +34,10 @@ public abstract class BaseAct extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
+        if(intent != null){
+            handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
+        }
         mActivity = this;
         mContext = this;
     }
@@ -50,15 +60,18 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
-    protected void onNotifyForeground(boolean fore) {
-        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
-    }
-
     @Override
     public void onAttachFragment(Fragment fragment) {
         if(fragment instanceof BaseFrag){
             ((BaseFrag)fragment).notifyForeground(foreground);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: 2019/1/17 改为在监听器重新设置
+//        setUpScreen(mFitStatusView, mScreenType);
     }
 
     protected void notifyForeground(boolean fore) {
@@ -96,23 +109,39 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
-    protected abstract int layoutId();
-
-    protected void init(Bundle savedInstanceState) {
-
+    public static Intent startActivity(Context context, Class clz, Bundle bundle){
+        boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
+        Intent intent = new Intent(context, clz);
+        intent.putExtra(IContext.BUNDLE, bundle);
+        if(isStart){
+            ContextCompat.startActivity(context, intent, null);
+        }
+        return intent;
     }
 
-    protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){
+    public static Intent startActivityForResult(Activity activity, Class clz, int requestCode, Bundle bundle){
+        boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
+        Intent intent = new Intent(activity, clz);
+        intent.putExtra(IContext.BUNDLE, bundle);
+        if(isStart) {
+            ActivityCompat.startActivityForResult(activity, intent, requestCode, null);
+        }
+        return intent;
+    }
 
+    protected void onNotifyForeground(boolean fore) {
+        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
     }
 
     public boolean isForeground() {
         return foreground;
     }
 
-    public void startAct(Class clz, Bundle bundle){
-        Intent intent = new Intent(this, clz);
-        ActivityCompat.startActivity(this, intent, bundle);
-    }
+    protected void handleIntent(Intent intent, Bundle bundle){}
 
+    protected abstract int layoutId();
+
+    protected void init(Bundle savedInstanceState) {}
+
+    protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){}
 }

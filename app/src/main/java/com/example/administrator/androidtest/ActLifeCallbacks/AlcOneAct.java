@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-import com.example.administrator.androidtest.BaseAct;
+import com.example.administrator.androidtest.Base.BaseAct;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;

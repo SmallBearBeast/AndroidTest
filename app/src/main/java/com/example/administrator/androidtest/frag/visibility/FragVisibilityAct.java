@@ -3,8 +3,7 @@ package com.example.administrator.androidtest.frag.visibility;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.administrator.androidtest.BaseAct;
-import com.example.administrator.androidtest.BaseFrag;
+import com.example.administrator.androidtest.Base.BaseAct;
 import com.example.administrator.androidtest.R;
 
 

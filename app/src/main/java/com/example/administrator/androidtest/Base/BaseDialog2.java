@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest;
+package com.example.administrator.androidtest.Base;
 
 import android.app.Activity;
 import android.app.Dialog;
