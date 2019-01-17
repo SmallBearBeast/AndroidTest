@@ -9,8 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.App;
-import com.example.administrator.androidtest.Base.BaseAct;
-import com.example.administrator.androidtest.Base.BaseFrag;
+import com.example.administrator.androidtest.Base.ActAndFrag.BaseAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;

@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.Widget.CompoundDrawableTextView;
 
 import android.os.Bundle;
 
-import com.example.administrator.androidtest.Base.ComponentAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Common.Util.ToastUtils;
 import com.example.administrator.androidtest.R;
 

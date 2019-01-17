@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.ActLifeCallbacks;
 import android.content.Intent;
 import android.view.View;
 
-import com.example.administrator.androidtest.Base.BaseAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.BaseAct;
 import com.example.administrator.androidtest.R;
 
 public class AlcAct extends BaseAct{

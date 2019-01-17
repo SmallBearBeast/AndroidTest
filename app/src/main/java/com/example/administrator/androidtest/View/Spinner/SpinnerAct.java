@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Base.ComponentAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;

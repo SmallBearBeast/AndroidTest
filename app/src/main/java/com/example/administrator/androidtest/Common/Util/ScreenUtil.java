@@ -2,21 +2,14 @@ package com.example.administrator.androidtest.Common.Util;
 
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.ColorRes;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
 
-import com.example.administrator.androidtest.Base.IContext;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Base.ActAndFrag.IContext;
 
 public class ScreenUtil {
     /**
@@ -116,7 +109,18 @@ public class ScreenUtil {
         return statusBarHeight;
     }
 
-    private static void fitStatusBar(View view){
-        view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + getStatusBarHeight(), view.getPaddingRight(), view.getPaddingBottom());
+    private static void fitStatusBar(final View view){
+        if(view != null) {
+            view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+                @Override
+                public void onGlobalLayout() {
+                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                    ViewGroup.LayoutParams lp = view.getLayoutParams();
+                    lp.height = view.getMeasuredHeight() + ScreenUtil.getStatusBarHeight();
+                    view.setLayoutParams(lp);
+                    view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + ScreenUtil.getStatusBarHeight(), view.getPaddingRight(), view.getPaddingBottom());
+                }
+            });
+        }
     }
 }

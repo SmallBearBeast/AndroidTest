@@ -5,8 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 
 import com.example.administrator.androidtest.App;
-import com.example.administrator.androidtest.Base.BaseFrag;
-import com.example.administrator.androidtest.Base.ComponentFrag;
+import com.example.administrator.androidtest.Base.ActAndFrag.ComponentFrag;
 
 import java.util.List;
 import java.util.Map;

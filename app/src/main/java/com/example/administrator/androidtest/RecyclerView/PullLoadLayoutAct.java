@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.RecyclerView;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.administrator.androidtest.Base.ComponentAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
 
 public class PullLoadLayoutAct extends ComponentAct {

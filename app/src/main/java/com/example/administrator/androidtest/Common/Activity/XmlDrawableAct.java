@@ -6,8 +6,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.example.administrator.androidtest.Base.ComponentAct;
-import com.example.administrator.androidtest.Common.Util.ScreenUtil;
+import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Common.Util.XmlDrawableUtil;
 import com.example.administrator.androidtest.R;
 

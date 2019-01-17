@@ -1,11 +1,7 @@
-package com.example.administrator.androidtest.Base;
+package com.example.administrator.androidtest.Base.ActAndFrag;
 
-import android.content.Context;
 import android.util.SparseArray;
 import android.view.View;
-
-import java.util.HashMap;
-import java.util.Map;
 
 public abstract class ViewSet {
     private View mContentView;

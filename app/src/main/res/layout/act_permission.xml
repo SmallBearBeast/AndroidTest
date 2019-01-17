@@ -3,13 +3,25 @@
     style="@style/match_parent">
 
     <LinearLayout
-        android:layout_height="match_parent"
-        style="@style/ll_vertical">
+        style="@style/ll_vertical"
+        android:layout_height="match_parent">
+        <!--<com.example.administrator.androidtest.Base.FitStatusBarLayout-->
+            <!--android:orientation="vertical"-->
+            <!--style="@style/ll_vertical">-->
+            <!--<TextView-->
+                <!--android:background="@color/cl_green_9"-->
+                <!--android:id="@+id/tv_text"-->
+                <!--style="@style/tv_base"-->
+                <!--android:gravity="center_horizontal"-->
+                <!--android:layout_height="@dimen/dp_50"-->
+                <!--android:layout_width="match_parent"/>-->
+        <!--</com.example.administrator.androidtest.Base.FitStatusBarLayout>-->
+
         <TextView
             android:background="@color/cl_green_9"
             android:id="@+id/tv_text"
             style="@style/tv_base"
-            android:gravity="center"
+            android:gravity="center_horizontal"
             android:layout_height="@dimen/dp_50"
             android:layout_width="match_parent"/>
 
@@ -26,4 +38,5 @@
             android:text="1234567890123456789012345678901234567890"
             style="@style/tv_base"/>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

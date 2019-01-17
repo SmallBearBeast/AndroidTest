@@ -4,7 +4,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.administrator.androidtest.Base.BaseAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.BaseAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActDatabindingBinding;
 

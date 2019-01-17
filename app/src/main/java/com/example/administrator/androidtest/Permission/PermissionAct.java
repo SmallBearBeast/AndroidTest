@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Base.ComponentAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Common.Util.PermissionUtil;
 import com.example.administrator.androidtest.Common.Util.ScreenUtil;
 import com.example.administrator.androidtest.R;
@@ -37,14 +37,13 @@ public class PermissionAct extends ComponentAct {
                 }, PermissionAct.this);
             }
         });
-
         ScreenUtil.normalScreen(this, R.color.cl_transparent, true, tvText);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        ScreenUtil.normalScreen(this, R.color.cl_transparent);
+        ScreenUtil.normalScreen(this, R.color.cl_transparent, true, null);
     }
 
     @Override

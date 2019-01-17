@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Base;
+package com.example.administrator.androidtest.Base.ActAndFrag;
 
 public interface IContext {
     int NONE = -1;
@@ -24,4 +24,17 @@ public interface IContext {
 
 
     /**Activity传递参数key值**/
+
+
+
+    /**Fragment相关参数**/
+
+    String ARGUMENT = "argument";
+
+    String FRAGMENT_ID = "fragment_id";
+
+    int FRAGMENT_ID_NONE = -1;
+
+
+    /**Fragment相关参数**/
 }

@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.Lifecycle;
 
 import android.os.Bundle;
 
-import com.example.administrator.androidtest.Base.BaseAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.BaseAct;
 import com.example.administrator.androidtest.R;
 
 public class LifecycleAct extends BaseAct {

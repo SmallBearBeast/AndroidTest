@@ -1,10 +1,10 @@
-package com.example.administrator.androidtest.Base;
+package com.example.administrator.androidtest.Base.Dialog;
 
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
-import com.example.administrator.androidtest.Common.Util.ScreenUtil;
+import com.example.administrator.androidtest.Base.Dialog.BaseDialog;
 import com.example.administrator.androidtest.R;
 
 
@@ -41,11 +41,18 @@ public class PermissionDialog extends BaseDialog {
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-//        ScreenUtil.immersiveFullScreen(getWindow());
+//        ScreenUtil.normalScreen(getWindow(), R.color.cl_transparent, IContext.COLOR_ID_NONE, false, true, null);
     }
 
     @Override
     protected float getDim() {
         return 0.0f;
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+
 }

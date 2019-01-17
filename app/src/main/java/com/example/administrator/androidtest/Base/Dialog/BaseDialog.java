@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Base;
+package com.example.administrator.androidtest.Base.Dialog;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -48,8 +48,7 @@ public abstract class BaseDialog extends Dialog {
             if(isFullScreen()){
                 lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 lp.height = ViewGroup.LayoutParams.MATCH_PARENT;
-            }
-            else if(getWidthAndHeight() != null){
+            } else if(getWidthAndHeight() != null){
                 lp.width = getWidthAndHeight()[0];
                 lp.height = getWidthAndHeight()[1];
             }
@@ -57,8 +56,6 @@ public abstract class BaseDialog extends Dialog {
             mWindow.setAttributes(lp);
         }
     }
-
-    protected abstract int layoutId();
 
     /**
      * 重写这个方法重新设置对话框的宽高，返回一个int[2]数组
@@ -80,17 +77,18 @@ public abstract class BaseDialog extends Dialog {
     }
 
     /**
-     * UI初始化和其他变量初始化和恢复数据
-     */
-    protected void init(Bundle savedInstanceState){
-        
-    }
-
-    /**
      * 设置是否全屏对话框
      */
     protected boolean isFullScreen(){
         return false;
     }
+
+    /**
+     * UI初始化和其他变量初始化和恢复数据
+     */
+    protected void init(Bundle savedInstanceState){}
+
+
+    protected abstract int layoutId();
 
 }

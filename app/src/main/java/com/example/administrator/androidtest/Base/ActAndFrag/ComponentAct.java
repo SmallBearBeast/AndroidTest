@@ -1,58 +1,49 @@
-package com.example.administrator.androidtest.Base;
+package com.example.administrator.androidtest.Base.ActAndFrag;
 
-import android.content.Context;
+import android.Manifest;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 
+import com.example.administrator.androidtest.Common.Util.PermissionUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
-public abstract class ComponentFrag <K extends Component, T extends ViewSet> extends BaseFrag {
+public abstract class ComponentAct<K extends Component, T extends ViewSet> extends BaseAct {
     public K mainComponent;
     public T viewSet;
     public View contentView;
-    protected ComponentAct mActivity;
-    protected Map<Class, Component> componentMap;
+    protected Map<Class, Component> componentMap = new HashMap<>(8);
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof ComponentAct){
-            mActivity = (ComponentAct) context;
-            componentMap = mActivity.componentMap;
-        }
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        contentView = LayoutInflater.from(this).inflate(layoutId(), null);
+        setContentView(contentView);
+        init(savedInstanceState);
+        initMainComponent();
+        PermissionUtil.requestPermissions(new String[]{
+                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
+        }, mActivity);
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if(contentView == null){
-            contentView = inflater.inflate(layoutId(), container, false);
-            init(savedInstanceState);
-            initMainComponent();
-        }
-        return contentView;
-    }
-
-    private void initMainComponent(){
+    protected void initMainComponent(){
         if(mainComponent != null && viewSet != null){
             mainComponent.attachViewSet(viewSet);
             registerComponent(mainComponent);
         }
     }
 
-    public  <C extends Component> void registerComponent(C component){
+    protected <C extends Component> void registerComponent(C component){
         if(component != null){
-            component.attachContext(mActivity);
+            component.attachContext(this);
             componentMap.put(component.getClass(), component);
         }
     }
 
-    public <C extends Component> C getcomponent(Class<C> clz){
+    protected <C extends Component> C getcomponent(Class<C> clz){
         if(componentMap.containsKey(clz)){
             return (C) componentMap.get(clz);
         }
@@ -60,7 +51,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     }
 
     @Override
-    public void onStart() {
+    protected void onStart() {
         super.onStart();
         for (Component component : componentMap.values()) {
             component.onStart();
@@ -68,7 +59,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     }
 
     @Override
-    public void onStop() {
+    protected void onStop() {
         super.onStop();
         for (Component component : componentMap.values()) {
             component.onStop();
@@ -76,7 +67,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     }
 
     @Override
-    public void onPause() {
+    protected void onPause() {
         super.onPause();
         for (Component component : componentMap.values()) {
             component.onPause();
@@ -84,7 +75,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     }
 
     @Override
-    public void onDestroy() {
+    protected void onDestroy() {
         super.onDestroy();
         for (Component component : componentMap.values()) {
             component.onDestory();
@@ -93,7 +84,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     }
 
     @Override
-    public void onResume() {
+    protected void onResume() {
         super.onResume();
         for (Component component : componentMap.values()) {
             component.onResume();

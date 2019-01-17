@@ -3,9 +3,9 @@ package com.example.administrator.androidtest.Component;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.administrator.androidtest.Base.Component;
-import com.example.administrator.androidtest.Base.ComponentAct;
-import com.example.administrator.androidtest.Base.ViewSet;
+import com.example.administrator.androidtest.Base.ActAndFrag.Component;
+import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
+import com.example.administrator.androidtest.Base.ActAndFrag.ViewSet;
 
 public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainComponent, ComponentTestAct.MainViewSet> {
 

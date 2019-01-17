@@ -1,51 +1,58 @@
-package com.example.administrator.androidtest.Base;
+package com.example.administrator.androidtest.Base.ActAndFrag;
 
-import android.Manifest;
+import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.CallSuper;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
-import com.example.administrator.androidtest.Common.Util.PermissionUtil;
-import com.example.administrator.androidtest.Common.Util.ScreenUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 
-public abstract class ComponentAct<K extends Component, T extends ViewSet> extends BaseAct {
+public abstract class ComponentFrag <K extends Component, T extends ViewSet> extends BaseFrag {
     public K mainComponent;
     public T viewSet;
     public View contentView;
-    protected Map<Class, Component> componentMap = new HashMap<>(8);
+    protected ComponentAct mComActivity;
+    protected Map<Class, Component> componentMap;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        contentView = LayoutInflater.from(this).inflate(layoutId(), null);
-        setContentView(contentView);
-        init(savedInstanceState);
-        initMainComponent();
-        PermissionUtil.requestPermissions(new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-        }, mActivity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if(context instanceof ComponentAct){
+            mComActivity = (ComponentAct) context;
+            componentMap = mComActivity.componentMap;
+        }
     }
 
-    protected void initMainComponent(){
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if(contentView == null){
+            contentView = inflater.inflate(layoutId(), container, false);
+            init(savedInstanceState);
+            initMainComponent();
+        }
+        return contentView;
+    }
+
+    private void initMainComponent(){
         if(mainComponent != null && viewSet != null){
             mainComponent.attachViewSet(viewSet);
             registerComponent(mainComponent);
         }
     }
 
-    protected <C extends Component> void registerComponent(C component){
+    public  <C extends Component> void registerComponent(C component){
         if(component != null){
-            component.attachContext(this);
+            component.attachContext(mComActivity);
             componentMap.put(component.getClass(), component);
         }
     }
 
-    protected <C extends Component> C getcomponent(Class<C> clz){
+    public <C extends Component> C getcomponent(Class<C> clz){
         if(componentMap.containsKey(clz)){
             return (C) componentMap.get(clz);
         }
@@ -53,7 +60,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     }
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         for (Component component : componentMap.values()) {
             component.onStart();
@@ -61,7 +68,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     }
 
     @Override
-    protected void onStop() {
+    public void onStop() {
         super.onStop();
         for (Component component : componentMap.values()) {
             component.onStop();
@@ -69,7 +76,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         for (Component component : componentMap.values()) {
             component.onPause();
@@ -77,7 +84,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     }
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         for (Component component : componentMap.values()) {
             component.onDestory();
@@ -86,7 +93,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         for (Component component : componentMap.values()) {
             component.onResume();

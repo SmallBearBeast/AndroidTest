@@ -1,22 +1,19 @@
-package com.example.administrator.androidtest.Base;
+package com.example.administrator.androidtest.Base.ActAndFrag;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.ColorRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ServiceCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 
-import com.example.administrator.androidtest.Common.Util.ScreenUtil;
+import com.example.administrator.androidtest.Base.Dialog.PermissionDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,13 +64,6 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        // TODO: 2019/1/17 改为在监听器重新设置
-//        setUpScreen(mFitStatusView, mScreenType);
-    }
-
     protected void notifyForeground(boolean fore) {
         foreground = fore;
         onNotifyForeground(fore);
@@ -109,6 +99,9 @@ public abstract class BaseAct extends AppCompatActivity {
         }
     }
 
+    /**
+     * 跳转activity
+     */
     public static Intent startActivity(Context context, Class clz, Bundle bundle){
         boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
         Intent intent = new Intent(context, clz);
@@ -128,6 +121,7 @@ public abstract class BaseAct extends AppCompatActivity {
         }
         return intent;
     }
+    /****/
 
     protected void onNotifyForeground(boolean fore) {
         Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);

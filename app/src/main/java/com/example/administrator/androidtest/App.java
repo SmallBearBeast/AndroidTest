@@ -6,7 +6,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.administrator.androidtest.Base.BaseFrag;
+import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
 import com.example.administrator.androidtest.Common.Util.AppInitUtil;
 
 import java.util.HashMap;
