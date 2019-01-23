@@ -344,11 +344,11 @@ public class CompoundDrawableTextView extends android.support.v7.widget.AppCompa
 
 
     public static class ClickWrapper{
-        void onLeftClick(){};
-        void onRightClick(){};
-        void onTopClick(){};
-        void onBottomClick(){};
-        void onClick(){};
+        protected void onLeftClick(){};
+        protected void onRightClick(){};
+        protected void onTopClick(){};
+        protected void onBottomClick(){};
+        protected void onClick(){};
     }
 
 

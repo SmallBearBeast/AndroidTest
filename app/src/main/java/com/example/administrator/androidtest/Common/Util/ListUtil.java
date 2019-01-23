@@ -14,8 +14,7 @@ import java.util.Set;
 
 
 /**
- * Created by lianzhan on 16/10/8.
- * 集合相关处理Utils
+ *
  */
 
 public final class ListUtil {

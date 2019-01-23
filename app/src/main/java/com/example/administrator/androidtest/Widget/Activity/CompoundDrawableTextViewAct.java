@@ -1,10 +1,11 @@
-package com.example.administrator.androidtest.Widget.CompoundDrawableTextView;
+package com.example.administrator.androidtest.Widget.Activity;
 
 import android.os.Bundle;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Common.Util.ToastUtils;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Widget.CompoundDrawableTextView.CompoundDrawableTextView;
 
 public class CompoundDrawableTextViewAct extends ComponentAct {
     private CompoundDrawableTextView cdtvText;
@@ -20,9 +21,10 @@ public class CompoundDrawableTextViewAct extends ComponentAct {
         cdtvText.setClickWrapper(new CompoundDrawableTextView.ClickWrapper(){
 
             @Override
-            void onClick() {
+            protected void onClick() {
                 ToastUtils.showToast("onClick");
             }
+
         });
     }
 }

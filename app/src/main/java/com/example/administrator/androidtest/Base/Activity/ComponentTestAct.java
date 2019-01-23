@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Component;
+package com.example.administrator.androidtest.Base.Activity;
 
 import android.os.Bundle;
 import android.view.View;

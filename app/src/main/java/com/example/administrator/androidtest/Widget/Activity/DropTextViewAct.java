@@ -1,11 +1,11 @@
-package com.example.administrator.androidtest.NestedScrolling;
+package com.example.administrator.androidtest.Widget.Activity;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
 
-public class StickyLayoutAct extends ComponentAct {
+public class DropTextViewAct extends ComponentAct {
     @Override
     protected int layoutId() {
-        return R.layout.layout_sticky;
+        return R.layout.act_drop_textview;
     }
 }

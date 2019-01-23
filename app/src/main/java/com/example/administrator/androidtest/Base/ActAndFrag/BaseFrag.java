@@ -10,19 +10,27 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.example.administrator.androidtest.App;
+import com.example.administrator.androidtest.Common.Page.IPage;
+import com.example.administrator.androidtest.Common.Page.Page;
+import com.example.administrator.androidtest.Common.Page.PageProvider;
 
 import java.util.List;
 import java.util.Map;
 
-public abstract class BaseFrag extends Fragment {
+public abstract class BaseFrag extends Fragment implements IPage {
     private static String TAG = "BaseFrag";
     private boolean foreground = false;
     //保留子fragment页面位置
     private int lastChildFragment = 0;
-    private boolean isAttachFragment = false;
+    private boolean mIsReal;
 
     protected int fragmentId = IContext.FRAGMENT_ID_NONE; /**相同类型fragment复用时候需要一个fragmentId来区分**/
-    protected Activity mActivity;
+    protected BaseAct mBaseAct;
+
+    public void setUserVisibleHint(boolean isVisibleToUser, boolean isReal){
+        setUserVisibleHint(isVisibleToUser);
+        mIsReal = isReal;
+    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -51,23 +59,21 @@ public abstract class BaseFrag extends Fragment {
      */
     @Override
     public void onAttachFragment(Fragment childFragment) {
-        isAttachFragment = true;
         if (childFragment instanceof BaseFrag) {
             ((BaseFrag) childFragment).notifyForeground(foreground);
-            ((BaseFrag) childFragment).isAttachFragment = isAttachFragment;
         }
         boolean isVisibleToUser = getUserVisibleHint();
         if (!isVisibleToUser) {
             if (childFragment.getUserVisibleHint()) {
-                isAttachFragment = false;
                 childFragment.setUserVisibleHint(false);
-                isAttachFragment = true;
-            }
-        }else {
-            if(childFragment.getUserVisibleHint()){
-                childFragment.setUserVisibleHint(true);
             }
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        PageProvider.getInstance().addPage(mBaseAct, this);
     }
 
     public void notifyForeground(boolean fore) {
@@ -87,8 +93,8 @@ public abstract class BaseFrag extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         if(context instanceof Activity){
-            mActivity = (Activity) context;
-            Intent intent = mActivity.getIntent();
+            mBaseAct = (BaseAct) context;
+            Intent intent = mBaseAct.getIntent();
             if(intent != null){
                 handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
             }
@@ -144,6 +150,10 @@ public abstract class BaseFrag extends Fragment {
 
     public abstract void init(Bundle savedInstanceState);
 
+    @Override
+    public Page page() {
+        return null;
+    }
 
     /**
      * 测试fragment可见性方法

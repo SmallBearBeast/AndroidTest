@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.NestedScrolling;
+package com.example.administrator.androidtest.View.NestedScrolling;
 
 import android.content.Context;
 import android.support.annotation.Nullable;

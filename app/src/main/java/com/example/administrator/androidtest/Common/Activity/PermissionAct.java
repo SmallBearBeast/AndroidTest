@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Permission;
+package com.example.administrator.androidtest.Common.Activity;
 
 import android.Manifest;
 import android.os.Bundle;
@@ -34,7 +34,12 @@ public class PermissionAct extends ComponentAct {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.READ_CONTACTS,
-                }, PermissionAct.this);
+                }, PermissionAct.this, new PermissionListener() {
+                    @Override
+                    public void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray) {
+
+                    }
+                });
             }
         });
         ScreenUtil.normalScreen(this, R.color.cl_transparent, true, tvText);

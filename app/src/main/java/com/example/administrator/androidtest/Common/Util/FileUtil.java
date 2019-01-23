@@ -2,7 +2,14 @@ package com.example.administrator.androidtest.Common.Util;
 
 import java.io.File;
 
+/**
+ * 文件操作工具类
+ */
 public class FileUtil {
+
+    /**
+     * 文件夹是否包含文件
+     */
     public static boolean isDirContainFile(String dirPath, String fileName) {
         if (!checkPath(dirPath))
             return false;
@@ -23,7 +30,11 @@ public class FileUtil {
         }
         return false;
     }
+    /***文件夹是否包含文件**/
 
+    /**
+     * 创建文件夹
+     */
     public static boolean createDir(String dirPath) {
         if (!checkPath(dirPath))
             return false;
@@ -38,7 +49,11 @@ public class FileUtil {
             return false;
         return true;
     }
+    /**创建文件夹**/
 
+    /**
+     * 创建文件
+     */
     public static boolean createFile(String filePath) {
         if (!checkPath(filePath))
             return false;
@@ -68,19 +83,24 @@ public class FileUtil {
         }
         return false;
     }
+    /**创建文件**/
 
+    /**
+     * 文件是否存在
+     */
     public static boolean isFileExist(File file) {
         return file != null && file.exists();
     }
 
     public static boolean isFileExist(String path) {
-        return isFileExist(getFileByPath(path));
+        return isFileExist(new File(path));
     }
+    /**文件是否存在**/
 
-    public static File getFileByPath(String path) {
-        return checkPath(path) ? new File(path) : null;
-    }
 
+    /**
+     * 移动文件夹1的文件到文件夹2
+     */
     public static boolean moveD1ChildToD2(String srcPath, String dstPath) {
         if (isFileExist(dstPath) && isFileExist(srcPath)) {
             File dstFile = new File(dstPath);
@@ -103,7 +123,6 @@ public class FileUtil {
         }
         return true;
     }
-
 
     public static boolean moveD1ToD2(String srcPath, String dstPath) {
         if (isFileExist(dstPath) && isFileExist(srcPath)) {
@@ -139,14 +158,22 @@ public class FileUtil {
         }
         return false;
     }
+    /**移动文件夹1的文件到文件夹2**/
 
+    /**
+     * 检查文件路径
+     */
     private static boolean checkPath(String path) {
         if (path == null || path.trim().equals("")) {
             return false;
         }
         return true;
     }
+    /**检查文件路径**/
 
+    /**
+     * 删除文件||删除文件夹里面的文件
+     */
     public static boolean deleteChildFile(String filePath) {
         File file = new File(filePath);
         if (file.exists()) {
@@ -181,6 +208,7 @@ public class FileUtil {
         return false;
     }
 
+
     public static boolean deleteFile(File file) {
         if (file == null) {
             return false;
@@ -198,6 +226,22 @@ public class FileUtil {
         }
         return file.delete();
     }
+    /**删除文件||删除文件夹里面的文件**/
+
+    /**
+     * 获取后缀
+     */
+    public static String getSuffix(String path){
+        if(checkPath(path)){
+            return null;
+        }
+        int indexOfPoint = path.lastIndexOf(".");
+        if(indexOfPoint != -1){
+            return path.substring(indexOfPoint + 1);
+        }
+        return null;
+    }
+    /**获取后缀**/
 
 
 }

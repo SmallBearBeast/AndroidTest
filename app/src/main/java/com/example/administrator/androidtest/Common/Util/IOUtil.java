@@ -8,29 +8,30 @@ import java.io.Reader;
 import java.io.Writer;
 import java.net.Socket;
 
-/***
- * Description:
- * Creator: wangwei7@yy.com
- * Date:2017-10-26 07:15:48 PM
- ***/
+/**
+ * IO工具类
+ */
 public class IOUtil {
-    public static void closeQuietly(final Reader input) {
-        closeQuietly((Closeable) input);
+    /**
+     * 安全关闭流，内部捕获异常
+     */
+    public static void close(final Reader input) {
+        close((Closeable) input);
     }
 
-    public static void closeQuietly(final Writer output) {
-        closeQuietly((Closeable) output);
+    public static void close(final Writer output) {
+        close((Closeable) output);
     }
 
-    public static void closeQuietly(final InputStream input) {
-        closeQuietly((Closeable) input);
+    public static void close(final InputStream input) {
+        close((Closeable) input);
     }
 
-    public static void closeQuietly(final OutputStream output) {
-        closeQuietly((Closeable) output);
+    public static void close(final OutputStream output) {
+        close((Closeable) output);
     }
 
-    public static void closeQuietly(final Closeable closeable) {
+    public static void close(final Closeable closeable) {
         try {
             if (closeable != null) {
                 closeable.close();
@@ -40,16 +41,20 @@ public class IOUtil {
         }
     }
 
-    public static void closeQuietly(final Closeable... closeables) {
+    public static void close(final Closeable... closeables) {
         if (closeables == null) {
             return;
         }
         for (final Closeable closeable : closeables) {
-            closeQuietly(closeable);
+            close(closeable);
         }
     }
+    /**安全关闭流，内部捕获异常**/
 
-    public static void closeQuietly(final Socket sock) {
+    /**
+     * 安全socket，内部捕获异常
+     */
+    public static void close(final Socket sock) {
         if (sock != null) {
             try {
                 sock.close();
@@ -58,4 +63,5 @@ public class IOUtil {
             }
         }
     }
+    /**安全socket，内部捕获异常**/
 }

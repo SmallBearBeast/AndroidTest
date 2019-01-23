@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.RecyclerView;
+package com.example.administrator.androidtest.View.RecyclerView;
 
 public class User {
     private String name;

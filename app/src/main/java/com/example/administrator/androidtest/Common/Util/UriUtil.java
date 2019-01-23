@@ -50,4 +50,12 @@ public class UriUtil {
         }
         return size;
     }
+
+    public static void getImageUriType(){
+
+    }
+
+    public static void getVideoUriType(){
+
+    }
 }

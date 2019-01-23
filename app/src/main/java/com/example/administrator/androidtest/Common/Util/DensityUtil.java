@@ -55,6 +55,7 @@ public class DensityUtil extends AppInitUtil {
     public static int getScreenHeightByPersent(float persent) {
         return (int) (getScreenHeight() * persent);
     }
+    /**按比值获取高度**/
 
 
     /**
@@ -63,4 +64,5 @@ public class DensityUtil extends AppInitUtil {
     public static int getScreenWidthByPersent(float persent){
         return (int) (getScreenWidth() * persent);
     }
+    /**按照比值获取宽度**/
 }

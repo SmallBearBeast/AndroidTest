@@ -9,6 +9,7 @@ import android.view.View;
 import com.example.administrator.androidtest.Common.Util.PermissionUtil;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class ComponentAct<K extends Component, T extends ViewSet> extends BaseAct {
@@ -26,7 +27,12 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
         initMainComponent();
         PermissionUtil.requestPermissions(new String[]{
                 Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-        }, mActivity);
+        }, mActivity, new PermissionListener() {
+            @Override
+            public void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray) {
+
+            }
+        });
     }
 
     protected void initMainComponent(){

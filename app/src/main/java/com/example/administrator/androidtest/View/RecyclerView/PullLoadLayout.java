@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.RecyclerView;
+package com.example.administrator.androidtest.View.RecyclerView;
 
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -17,7 +17,6 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
-import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
 

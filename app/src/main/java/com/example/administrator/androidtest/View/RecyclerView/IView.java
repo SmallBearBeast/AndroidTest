@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.RecyclerView;
+package com.example.administrator.androidtest.View.RecyclerView;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

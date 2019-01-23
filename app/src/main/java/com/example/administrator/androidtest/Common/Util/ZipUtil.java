@@ -276,9 +276,9 @@ public class ZipUtil {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            IOUtil.closeQuietly(outputStream);
-            IOUtil.closeQuietly(fileOutputStream);
-            IOUtil.closeQuietly(inputStream);
+            IOUtil.close(outputStream);
+            IOUtil.close(fileOutputStream);
+            IOUtil.close(inputStream);
         }
     }
 }

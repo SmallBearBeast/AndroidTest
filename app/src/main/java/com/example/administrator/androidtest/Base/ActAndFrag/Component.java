@@ -12,6 +12,7 @@ public abstract class Component<T extends ViewSet>{
     public Component(T viewSet){
         mViewSet = viewSet;
     }
+
     public void attachViewSet(T viewSet){
         mViewSet = viewSet;
     }
@@ -34,7 +35,9 @@ public abstract class Component<T extends ViewSet>{
     public void onDestory(){
         mActivity = null;
         mContext = null;
-        mViewSet.clear();
-        mViewSet = null;
+        if(mViewSet != null){
+            mViewSet.clear();
+            mViewSet = null;
+        }
     }
 }

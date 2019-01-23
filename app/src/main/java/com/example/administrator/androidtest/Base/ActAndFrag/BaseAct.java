@@ -1,6 +1,5 @@
 package com.example.administrator.androidtest.Base.ActAndFrag;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,11 +13,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.administrator.androidtest.Base.Dialog.PermissionDialog;
+import com.example.administrator.androidtest.Common.Page.IPage;
+import com.example.administrator.androidtest.Common.Page.Page;
+import com.example.administrator.androidtest.Common.Page.PageProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseAct extends AppCompatActivity {
+public abstract class BaseAct extends AppCompatActivity implements IPage {
 
     private static final String TAG = "BaseAct";
     private static final int Permission_Request_Code = 1;
@@ -27,6 +29,8 @@ public abstract class BaseAct extends AppCompatActivity {
     private boolean foreground;
     protected BaseAct mActivity;
     protected Context mContext;
+    private PermissionListener mPermissionListener;
+    private ActivityResultListener mActivityResultListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,6 +46,7 @@ public abstract class BaseAct extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        PageProvider.getInstance().addPage(this);
         runningCount++;
         if (runningCount == 1) {
             notifyForeground(true);
@@ -95,6 +100,9 @@ public abstract class BaseAct extends AppCompatActivity {
                 PermissionDialog dialog = new PermissionDialog(this);
                 dialog.show();
             }
+            if(mPermissionListener != null){
+                mPermissionListener.onPermissionRequest(permissionSuccessArray, permissionFailArray);
+            }
             onPermissionRequest(permissionSuccessArray, permissionFailArray);
         }
     }
@@ -102,26 +110,27 @@ public abstract class BaseAct extends AppCompatActivity {
     /**
      * 跳转activity
      */
-    public static Intent startActivity(Context context, Class clz, Bundle bundle){
+    public Intent startActivity(Class clz, Bundle bundle){
         boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
-        Intent intent = new Intent(context, clz);
+        Intent intent = new Intent(this, clz);
         intent.putExtra(IContext.BUNDLE, bundle);
         if(isStart){
-            ContextCompat.startActivity(context, intent, null);
+            ContextCompat.startActivity(this, intent, null);
         }
         return intent;
     }
 
-    public static Intent startActivityForResult(Activity activity, Class clz, int requestCode, Bundle bundle){
+    public Intent startActivityForResult(Class clz, int requestCode, Bundle bundle, ActivityResultListener listener){
+        mActivityResultListener = listener;
         boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
-        Intent intent = new Intent(activity, clz);
+        Intent intent = new Intent(this, clz);
         intent.putExtra(IContext.BUNDLE, bundle);
         if(isStart) {
-            ActivityCompat.startActivityForResult(activity, intent, requestCode, null);
+            ActivityCompat.startActivityForResult(this, intent, requestCode, null);
         }
         return intent;
     }
-    /****/
+    /**跳转activity**/
 
     protected void onNotifyForeground(boolean fore) {
         Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
@@ -138,4 +147,33 @@ public abstract class BaseAct extends AppCompatActivity {
     protected void init(Bundle savedInstanceState) {}
 
     protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){}
+
+    public interface PermissionListener{
+        void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray);
+    }
+
+    public void setPermissonListerner(PermissionListener listerner){
+        mPermissionListener = listerner;
+    }
+
+    public interface ActivityResultListener{
+        void onActivityResult(int requestCode, int resultCode, Intent data);
+    }
+
+    public void setActivityResultListener(ActivityResultListener listerner){
+        mActivityResultListener = listerner;
+    }
+
+    @Override
+    public Page page() {
+        return null;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(mActivityResultListener != null){
+            mActivityResultListener.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }

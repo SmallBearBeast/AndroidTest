@@ -1,7 +1,6 @@
-package com.example.administrator.androidtest.RecyclerView;
+package com.example.administrator.androidtest.View.RecyclerView;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ScrollView;
 

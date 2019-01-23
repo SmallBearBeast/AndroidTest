@@ -1,12 +1,13 @@
 package com.example.administrator.androidtest.Common.Util;
 
-/*
-    IP类型转换工具类
+/**
+ * IP类型转换工具类
  */
 public class IPUtil {
 
-    /*
-        整形的IPv4地址转为字符串形式
+
+    /**
+     * 十进制ip和点分十进制字符串ip转换
      */
     public static String ipIntToString(int ip) {
         StringBuilder sb = new StringBuilder();
@@ -20,9 +21,6 @@ public class IPUtil {
         return sb.toString();
     }
 
-    /*
-        字符串形式的IPv4地址转为整形
-     */
     public static int ipStringToInt(String ip) {
         if(!checkIp(ip)){
             return -1;
@@ -36,9 +34,10 @@ public class IPUtil {
         }
         return result;
     }
+    /**十进制ip和点分十进制字符串ip转换**/
 
-    /*
-        检查IPv4地址是否合法
+    /**
+     * 检查IPv4地址是否合法
      */
     public static boolean checkIp(String ip){
         if(ip == null || ip.length() == 0)
@@ -46,9 +45,10 @@ public class IPUtil {
         String regex = "[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}";
         return ip.matches(regex);
     }
+    /**检查IPv4地址是否合法**/
 
-    /*
-        整形IPv4地址转化为字节数组
+    /**
+     * 十进制整型ip和为字节数组转换
      */
     public static byte[] ipIntToArray(int ip) {
         byte[] ipArray = new byte[4];
@@ -59,17 +59,17 @@ public class IPUtil {
         return  ipArray;
     }
 
-    /*
-        字节数组IPv4地址转化为整形
-     */
     public static int ipArrayToInt(byte[] ip){
         if(ip == null || ip.length != 4)
             return -1;
         int result = (ip[3] & 0xff) + (ip[2] & 0xff) * 256 + (ip[1] & 0xff) * 256 * 256 + (ip[0] & 0xff) * 256 * 256 * 256;
         return result;
     }
-    /*
-        字符串型IPv4地址转化为字节数组
+    /**十进制整型ip和为字节数组转换**/
+
+
+    /**
+     * 十进制字符串ip和为字节数组转换
      */
     public static byte[] ipStringToArray(String ip) {
         if(!checkIp(ip))
@@ -85,12 +85,10 @@ public class IPUtil {
         return ipArray;
     }
 
-    /*
-        字节数组型IPv4地址转化为字符串
-     */
     public static String ipArrayToString(byte[] ip) {
         if(ip == null || ip.length != 4)
             return null;
         return (ip[0] & 0xff) + "." + (ip[1] & 0xff) + "." + (ip[2] & 0xff) + "." + (ip[3] & 0xff);
     }
+    /**十进制字符串ip和为字节数组转换**/
 }
