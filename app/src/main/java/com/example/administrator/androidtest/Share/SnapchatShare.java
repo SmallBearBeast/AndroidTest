@@ -2,9 +2,7 @@ package com.example.administrator.androidtest.Share;
 
 import android.content.Context;
 import android.os.Environment;
-import android.support.v4.content.FileProvider;
 
-import com.example.administrator.androidtest.Common.Util.FileProviderUtil;
 import com.snapchat.kit.sdk.SnapCreative;
 import com.snapchat.kit.sdk.creative.api.SnapCreativeKitApi;
 import com.snapchat.kit.sdk.creative.media.SnapMediaFactory;

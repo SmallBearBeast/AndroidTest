@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.example.administrator.androidtest.Common.Util.ScreenUtil;
-
 public abstract class BaseDialog extends Dialog {
     protected Context mContext;
     protected Window mWindow;

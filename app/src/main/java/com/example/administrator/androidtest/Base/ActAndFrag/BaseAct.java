@@ -24,9 +24,9 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
 
     private static final String TAG = "BaseAct";
     private static final int Permission_Request_Code = 1;
-    private static int runningCount = 0;
-
+    private static int sVisibleCount = 0;
     private boolean foreground;
+    private Page mPage;
     protected BaseAct mActivity;
     protected Context mContext;
     private PermissionListener mPermissionListener;
@@ -45,10 +45,10 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
 
     @Override
     protected void onStart() {
+        PageProvider.getInstance().addPage(createPage());
         super.onStart();
-        PageProvider.getInstance().addPage(this);
-        runningCount++;
-        if (runningCount == 1) {
+        sVisibleCount++;
+        if (sVisibleCount == 1) {
             notifyForeground(true);
         }
     }
@@ -56,10 +56,16 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     @Override
     protected void onStop() {
         super.onStop();
-        runningCount--;
-        if (runningCount <= 0) {
+        sVisibleCount--;
+        if (sVisibleCount <= 0) {
             notifyForeground(false);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mPage = null;
     }
 
     @Override
@@ -71,6 +77,9 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
 
     protected void notifyForeground(boolean fore) {
         foreground = fore;
+        if(!fore){
+            PageProvider.getInstance().addPage(new Page(IPage.Background));
+        }
         onNotifyForeground(fore);
         List<Fragment> fragments = getSupportFragmentManager().getFragments();
         if (fragments != null && fragments.size() > 0) {
@@ -107,6 +116,14 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         }
     }
 
+    private Page createPage(){
+        mPage = new Page(pageId());
+        return mPage;
+    }
+
+    public Page getPage(){
+        return mPage;
+    }
 
     /**
      * 跳转activity
@@ -165,10 +182,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         mActivityResultListener = listerner;
     }
 
-    @Override
-    public Page page() {
-        return null;
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -176,5 +189,10 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         if(mActivityResultListener != null){
             mActivityResultListener.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    @Override
+    public int pageId() {
+        return IPage.VpFragVisibilityAct;
     }
 }

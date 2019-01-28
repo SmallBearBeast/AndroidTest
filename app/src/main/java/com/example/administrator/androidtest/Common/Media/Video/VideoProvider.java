@@ -6,12 +6,11 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.example.administrator.androidtest.Common.Media.Provider;
-import com.example.administrator.androidtest.Common.Util.FileUtil;
-import com.example.administrator.androidtest.Common.Util.ThreadUtil;
-import com.example.administrator.androidtest.Common.Util.UiHandlerUtil;
+import com.example.administrator.androidtest.Common.Util.File.FileUtil;
+import com.example.administrator.androidtest.Common.Util.Core.ThreadUtil;
+import com.example.administrator.androidtest.Common.Util.Core.UiHandlerUtil;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class VideoProvider extends Provider {
 

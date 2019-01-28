@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 
-import com.example.administrator.androidtest.Common.Util.PermissionUtil;
+import com.example.administrator.androidtest.Common.Util.Core.PermissionUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +44,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
 
     protected <C extends Component> void registerComponent(C component){
         if(component != null){
-            component.attachContext(this);
+            component.attachActivity(this);
             componentMap.put(component.getClass(), component);
         }
     }

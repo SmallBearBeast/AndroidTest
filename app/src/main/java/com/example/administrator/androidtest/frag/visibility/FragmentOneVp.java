@@ -7,6 +7,8 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentFrag;
+import com.example.administrator.androidtest.Common.Page.IPage;
+import com.example.administrator.androidtest.Common.Page.Page;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
@@ -28,6 +30,12 @@ public class FragmentOneVp extends ComponentFrag {
         myAdapter = new MyAdapter(getChildFragmentManager());
         vpContainer.setAdapter(myAdapter);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
+        vpContainer.setCurrentItem(2);
+    }
+
+    @Override
+    public int pageId() {
+        return IPage.FragmentOneVp;
     }
 
 

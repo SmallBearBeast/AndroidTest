@@ -3,12 +3,14 @@ package com.example.administrator.androidtest.frag.visibility;
 import android.os.Bundle;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentFrag;
+import com.example.administrator.androidtest.Common.Page.IPage;
+import com.example.administrator.androidtest.Common.Page.Page;
 import com.example.administrator.androidtest.R;
 
 public class FragmentOne extends ComponentFrag {
 
 
-    /*
+    /**
         这个方法只有调用FragmentTransaction->hide()和show()方法时候才会回调
         hide()时候hidden值为true
         show()时候hidden值为false
@@ -32,5 +34,10 @@ public class FragmentOne extends ComponentFrag {
     @Override
     public void init(Bundle savedInstanceState) {
 
+    }
+
+    @Override
+    public int pageId() {
+        return IPage.FragmentOne;
     }
 }

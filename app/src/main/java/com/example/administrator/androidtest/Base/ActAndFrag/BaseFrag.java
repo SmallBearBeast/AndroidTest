@@ -1,7 +1,5 @@
 package com.example.administrator.androidtest.Base.ActAndFrag;
 
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -20,32 +18,36 @@ import java.util.Map;
 public abstract class BaseFrag extends Fragment implements IPage {
     private static String TAG = "BaseFrag";
     private boolean foreground = false;
-    //保留子fragment页面位置
-    private int lastChildFragment = 0;
-    private boolean mIsReal;
-
+    //保留上一次可见的子fragment页面位置
+    private int mLastVisibleFragPos = 0;
+    private boolean mIsDoneSetUserVisibleHint;
+    private boolean mIsVisibleToUser;
+    private boolean mIsDoneStart;
     protected int fragmentId = IContext.FRAGMENT_ID_NONE; /**相同类型fragment复用时候需要一个fragmentId来区分**/
+    private Page mPage;
     protected BaseAct mBaseAct;
+    protected BaseFrag mBaseFrag;
 
-    public void setUserVisibleHint(boolean isVisibleToUser, boolean isReal){
-        setUserVisibleHint(isVisibleToUser);
-        mIsReal = isReal;
-    }
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         setToMap(isVisibleToUser);
+        mIsDoneSetUserVisibleHint = true;
+        mIsVisibleToUser = isVisibleToUser;
         if (getActivity() != null) {
-            onNotifyVisiable(isVisibleToUser);
+            if(mIsDoneStart && mIsVisibleToUser){
+                addPage(null);
+                onNotifyVisiable();
+            }
             List<Fragment> childs = getChildFragmentManager().getFragments();
             boolean hasChild = (childs != null && childs.size() > 0);
             if (hasChild) {
                 for (int i = 0; i < childs.size(); i++) {
                     Fragment f = childs.get(i);
                     if (f.getUserVisibleHint())
-                        lastChildFragment = i;
-                    if (lastChildFragment == i)
+                        mLastVisibleFragPos = i;
+                    if (mLastVisibleFragPos == i)
                         f.setUserVisibleHint(isVisibleToUser);
                 }
             }
@@ -73,7 +75,15 @@ public abstract class BaseFrag extends Fragment implements IPage {
     @Override
     public void onStart() {
         super.onStart();
-        PageProvider.getInstance().addPage(mBaseAct, this);
+        mIsDoneStart = true;
+        if(mIsDoneSetUserVisibleHint){
+            if(mIsVisibleToUser) {
+                addPage(null);
+                onNotifyVisiable();
+            }
+        }else{
+            addPage(null);
+        }
     }
 
     public void notifyForeground(boolean fore) {
@@ -89,26 +99,31 @@ public abstract class BaseFrag extends Fragment implements IPage {
         }
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if(context instanceof Activity){
-            mBaseAct = (BaseAct) context;
-            Intent intent = mBaseAct.getIntent();
-            if(intent != null){
-                handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
-            }
-        }
-    }
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if(getContext() instanceof BaseAct){
+            mBaseAct = (BaseAct) getContext();
+        }
+        if(getParentFragment() instanceof BaseFrag){
+            mBaseFrag = (BaseFrag) getParentFragment();
+        }
+        Intent intent = mBaseAct.getIntent();
+        if(intent != null){
+            handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
+        }
         Bundle bundle = getArguments();
         if(bundle != null){
             handleArgument(bundle);
             fragmentId = bundle.getInt(IContext.FRAGMENT_ID, IContext.FRAGMENT_ID_NONE);
+        }
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden){
+            PageProvider.getInstance().addPage(mBaseAct.getPage(), createPage());
         }
     }
 
@@ -118,14 +133,14 @@ public abstract class BaseFrag extends Fragment implements IPage {
     }
 
     protected void onNotifyForeground(boolean fore) {
-        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
+        Log.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
     }
 
     /**
-     * fragment可见性会多次调用，但是会保证最后一次调用是正确的
+     * fragment可见性时候调用
      */
-    protected void onNotifyVisiable(boolean visiable) {
-        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyVisiable: fore = " + visiable);
+    protected void onNotifyVisiable() {
+        Log.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyVisiable");
     }
 
     public boolean isForeground() {
@@ -138,6 +153,29 @@ public abstract class BaseFrag extends Fragment implements IPage {
         return bundle;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPage = null;
+    }
+
+    private Page createPage(){
+        mPage = new Page(pageId());
+        return mPage;
+    }
+
+    public Page getPage(){
+        return mPage;
+    }
+
+    private void addPage(Page backPage){
+        if(mBaseFrag != null){
+            PageProvider.getInstance().addPage(mBaseFrag.getPage(), backPage != null ? backPage : createPage());
+        }else {
+            PageProvider.getInstance().addPage(mBaseAct.getPage(), backPage != null ? backPage : createPage());
+        }
+    }
+
     protected static Bundle buildArguments(){
         return new Bundle();
     }
@@ -146,14 +184,9 @@ public abstract class BaseFrag extends Fragment implements IPage {
 
     protected void handleArgument(Bundle bundle){};
 
-    public abstract int layoutId();
+    protected abstract int layoutId();
 
-    public abstract void init(Bundle savedInstanceState);
-
-    @Override
-    public Page page() {
-        return null;
-    }
+    protected abstract void init(Bundle savedInstanceState);
 
     /**
      * 测试fragment可见性方法
@@ -169,6 +202,10 @@ public abstract class BaseFrag extends Fragment implements IPage {
     public interface FragVisiableListener {
         void onVisibilityChanged();
     }
+    /**测试fragment可见性方法**/
 
-    /****/
+    @Override
+    public int pageId() {
+        return IPage.VpFragVisibilityAct;
+    }
 }
