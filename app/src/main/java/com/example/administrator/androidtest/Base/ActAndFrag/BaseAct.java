@@ -107,6 +107,7 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         }
     }
 
+
     /**
      * 跳转activity
      */

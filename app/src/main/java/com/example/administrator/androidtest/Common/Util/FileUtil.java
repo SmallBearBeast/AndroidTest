@@ -244,4 +244,37 @@ public class FileUtil {
     /**获取后缀**/
 
 
+    /**获取文件目录路径**/
+    public static String getParent(String path){
+        if(isFileExist(path)){
+            File file = new File(path);
+            return file.getParentFile().getAbsolutePath();
+        }
+        return null;
+    }
+
+    public static String getParent(File file){
+        if(isFileExist(file)){
+            return file.getParentFile().getAbsolutePath();
+        }
+        return null;
+    }
+    /**获取文件目录路径**/
+
+    /**获取文件名字**/
+    public static String getName(String path){
+        if(isFileExist(path)){
+            return new File(path).getName();
+        }
+        return null;
+    }
+
+    public static String getName(File file){
+        if(isFileExist(file)){
+            return file.getName();
+        }
+        return null;
+    }
+    /**获取文件名字**/
+
 }

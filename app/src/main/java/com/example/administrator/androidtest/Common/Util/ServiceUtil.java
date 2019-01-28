@@ -97,7 +97,7 @@ public final class ServiceUtil extends AppInitUtil{
             return false;
         }
         List<ActivityManager.RunningServiceInfo> infos = manager.getRunningServices(Integer.MAX_VALUE);
-        if (ListUtil.isEmpty(infos)) {
+        if (CollectionUtil.isEmpty(infos)) {
             return false;
         }
 //        int uid = ProcessUtil.getUid();
