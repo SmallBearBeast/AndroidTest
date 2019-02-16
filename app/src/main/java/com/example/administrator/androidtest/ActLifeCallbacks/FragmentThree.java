@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.ActLifeCallbacks;
 import android.os.Bundle;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
+import com.example.administrator.androidtest.Common.Page.Page;
 import com.example.administrator.androidtest.R;
 
 public class FragmentThree extends BaseFrag {
@@ -16,4 +17,5 @@ public class FragmentThree extends BaseFrag {
     public void init(Bundle savedInstanceState) {
 
     }
+
 }

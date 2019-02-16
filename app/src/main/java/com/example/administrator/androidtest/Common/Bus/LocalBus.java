@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Common.Bus;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.administrator.androidtest.Common.Util.UiHandlerUtil;
+import com.example.administrator.androidtest.Common.Util.Core.UiHandlerUtil;
 
 import java.util.HashSet;
 import java.util.Map;

@@ -32,4 +32,85 @@
         <attr name="cdtv_press_top_drawableId" format="reference"/>
         <attr name="cdtv_press_bottom_drawableId" format="reference"/>
     </declare-styleable>
+
+
+    <declare-styleable name="IconYYAvatar">
+        <attr name="placeHolderImage" format="reference"/>
+        <attr name="failureImage" format="reference"/>
+        <attr name="resImage" format="reference"/>
+        <attr name="iconImage" format="reference"/>
+        <attr name="roundAsCircle" format="boolean"/>
+        <attr name="roundingBorderWidth" format="dimension"/>
+        <attr name="roundingBorderColor" format="color"/>
+        <attr name="iconSize" format="dimension"/>
+        <attr name="avatarSize" format="dimension"/>
+        <attr name="isAddIcon" format="boolean"/>
+        <attr name="iconPosType" format="enum">
+            <enum name="circle_left_top" value="1"/>
+            <enum name="circle_left_bottom" value="2"/>
+            <enum name="circle_right_top" value="3"/>
+            <enum name="circle_right_bottom" value="4"/>
+            <enum name="circle_left" value="5"/>
+            <enum name="circle_top" value="6"/>
+            <enum name="circle_right" value="7"/>
+            <enum name="circle_bottom" value="8"/>
+            <enum name="square_left_top" value="9"/>
+            <enum name="square_left_bottom" value="10"/>
+            <enum name="square_right_top" value="11"/>
+            <enum name="square_right_bottom" value="12"/>
+        </attr>
+        <attr name="gravity" format="enum">
+            <enum name="center" value="1"/>
+            <enum name="center_horizontal" value="2"/>
+            <enum name="center_vertical" value="3"/>
+        </attr>
+    </declare-styleable>
+
+
+    <!--气泡布局-->
+    <declare-styleable name="BubbleLayout">
+        <attr name="bl_arrowWidth" format="dimension|reference" />
+        <attr name="bl_cornersRadius" format="dimension|reference" />
+        <attr name="bl_arrowHeight" format="dimension|reference" />
+        <attr name="bl_arrowPosition" format="dimension|reference" />
+        <attr name="bl_bubbleColor" format="color|reference" />
+        <attr name="bl_strokeWidth" format="dimension|reference" />
+        <attr name="bl_strokeColor" format="color|reference" />
+
+        <attr name="bl_arrowDirection" format="enum">
+            <enum name="left" value="0" />
+            <enum name="right" value="1" />
+            <enum name="top" value="2" />
+            <enum name="bottom" value="3" />
+            <enum name="left_center" value="4"/>
+            <enum name="right_center" value="5"/>
+            <enum name="top_center" value="6"/>
+            <enum name="bottom_center" value="7"/>
+        </attr>
+    </declare-styleable>
+    <!--气泡布局-->
+
+    <!--文字计数控件-->
+    <declare-styleable name="TextCountView">
+        <attr name="tcv_limit_count" format="integer"/>
+    </declare-styleable>
+    <!--文字计数控件-->
+
+    <!--富文本控件-->
+    <declare-styleable name="FullTextView">
+        <attr name="ftv_bg_color" format="color"/>
+        <attr name="ftv_fg_color" format="color"/>
+        <attr name="ftv_start" format="integer"/>
+        <attr name="ftv_end" format="integer"/>
+        <attr name="ftv_style" format="enum">
+            <enum name="normal" value="0"/>
+            <enum name="bold" value="1"/>
+            <enum name="italic" value="2"/>
+            <enum name="bold_italic" value="3"/>
+        </attr>
+        <attr name="ftv_url" format="string"/>
+        <attr name="ftv_size" format="dimension"/>
+    </declare-styleable>
+    <!--富文本控件-->
+
 </resources>

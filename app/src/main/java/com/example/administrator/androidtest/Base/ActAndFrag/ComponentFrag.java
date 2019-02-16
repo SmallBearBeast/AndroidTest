@@ -47,7 +47,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
 
     public  <C extends Component> void registerComponent(C component){
         if(component != null){
-            component.attachContext(mComActivity);
+            component.attachActivity(mComActivity);
             componentMap.put(component.getClass(), component);
         }
     }

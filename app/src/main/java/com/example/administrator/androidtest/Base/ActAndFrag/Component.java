@@ -1,10 +1,7 @@
 package com.example.administrator.androidtest.Base.ActAndFrag;
 
-import android.app.Activity;
-
 public abstract class Component<T extends ViewSet>{
-    public ComponentAct mActivity;
-    public Activity mContext;
+    public ComponentAct mComActivity;
     public T mViewSet;
 
     public Component(){}
@@ -17,9 +14,8 @@ public abstract class Component<T extends ViewSet>{
         mViewSet = viewSet;
     }
 
-    public void attachContext(ComponentAct activity){
-        mActivity = activity;
-        mContext = activity;
+    public void attachActivity(ComponentAct activity){
+        mComActivity = activity;
     }
 
     public void onCreate(){}
@@ -33,8 +29,7 @@ public abstract class Component<T extends ViewSet>{
     public void onStop(){}
 
     public void onDestory(){
-        mActivity = null;
-        mContext = null;
+        mComActivity = null;
         if(mViewSet != null){
             mViewSet.clear();
             mViewSet = null;

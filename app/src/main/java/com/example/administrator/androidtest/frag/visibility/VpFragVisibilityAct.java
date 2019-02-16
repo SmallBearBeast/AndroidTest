@@ -9,31 +9,35 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.App;
-import com.example.administrator.androidtest.Base.ActAndFrag.BaseAct;
 import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
+import com.example.administrator.androidtest.Common.Page.IPage;
+import com.example.administrator.androidtest.Common.Page.Page;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/*
-    Viewpager + Fragment在不嵌套的情况下切换setUserVisibleHint()逻辑是没有问题的
+/**
+ * Viewpager + Fragment在不嵌套的情况下切换setUserVisibleHint()逻辑是没有问题的
  */
 public class VpFragVisibilityAct extends ComponentAct implements BaseFrag.FragVisiableListener {
 
     private ViewPager vpContainer;
     private MyAdapter myAdapter;
     private TextView tvFragVisibility;
+    private TextView mTvPage;
 
     @Override
     protected void init(Bundle savedInstanceState) {
         App.fragVisiableListener = this;
         vpContainer = findViewById(R.id.vp_container);
         tvFragVisibility = findViewById(R.id.tv_frag_visibility);
+        mTvPage = findViewById(R.id.tv_page);
         myAdapter = new MyAdapter(getSupportFragmentManager());
         vpContainer.setAdapter(myAdapter);
+        vpContainer.setCurrentItem(1);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
     }
 
@@ -87,6 +91,12 @@ public class VpFragVisibilityAct extends ComponentAct implements BaseFrag.FragVi
 
         tvFragVisibility.setText(builder.toString());
     }
+
+    @Override
+    public int pageId() {
+        return IPage.VpFragVisibilityAct;
+    }
+
 
     static class MyAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragmentList = new ArrayList<>();
