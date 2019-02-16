@@ -67,8 +67,7 @@ public class ScreenUtil {
             }
         }
     }
-
-    /**************************************************/
+    /**正常布局：显示导航栏显示状态栏，状态栏覆盖在布局上面**/
 
 
     /**
@@ -95,7 +94,7 @@ public class ScreenUtil {
         }
     }
 
-    /**************************************************/
+    /**沉浸式全屏，下拉出现状态栏和导航栏，过一段时间消失**/
 
 
     /**
@@ -109,7 +108,12 @@ public class ScreenUtil {
         }
         return statusBarHeight;
     }
+    /**获取状态栏高度**/
 
+
+    /**
+     * 填充状态栏高度
+     */
     private static void fitStatusBar(final View view){
         if(view != null) {
             view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -124,4 +128,5 @@ public class ScreenUtil {
             });
         }
     }
+    /**填充状态栏高度**/
 }

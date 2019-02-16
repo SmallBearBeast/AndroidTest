@@ -42,9 +42,7 @@ public class PermissionUtil {
     }
     /**权限申请**/
 
-    /**
-     *
-     */
+
     public static boolean isIgnorePermisson(String permission, Activity activity){
         return ActivityCompat.shouldShowRequestPermissionRationale(activity, permission);
     }

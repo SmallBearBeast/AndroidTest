@@ -9,29 +9,29 @@ import android.os.Looper;
  * Creator: wangwei7@bigo.sg
  * Date:2017-10-26 02:46:08 PM
  ***/
-public class UiHandlerUtil {
-    public static void runOnUiThread(Runnable r) {
+public class MainThreadUtil {
+    public static void run(Runnable r) {
         if (isMainThread()) {
             r.run();
         } else {
-            LazyHolder.sUiThreadHandler.post(r);
+            LazyHolder.sHandler.post(r);
         }
     }
 
-    public static void runOnUiThreadAtFront(Runnable r) {
+    public static void runFirst(Runnable r) {
         if (isMainThread()) {
             r.run();
         } else {
-            LazyHolder.sUiThreadHandler.postAtFrontOfQueue(r);
+            LazyHolder.sHandler.postAtFrontOfQueue(r);
         }
     }
 
-    public static void runOnUiThread(Runnable r, long delay) {
-        LazyHolder.sUiThreadHandler.postDelayed(r, delay);
+    public static void run(Runnable r, long delay) {
+        LazyHolder.sHandler.postDelayed(r, delay);
     }
 
     public static void removeCallbacks(Runnable r) {
-        LazyHolder.sUiThreadHandler.removeCallbacks(r);
+        LazyHolder.sHandler.removeCallbacks(r);
     }
 
     public static boolean isMainThread() {
@@ -39,6 +39,6 @@ public class UiHandlerUtil {
     }
 
     private static class LazyHolder {
-        private static Handler sUiThreadHandler = new Handler(Looper.getMainLooper());
+        private static Handler sHandler = new Handler(Looper.getMainLooper());
     }
 }

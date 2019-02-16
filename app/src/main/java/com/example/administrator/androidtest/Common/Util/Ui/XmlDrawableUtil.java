@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Util;
+package com.example.administrator.androidtest.Common.Util.Ui;
 
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -6,6 +6,8 @@ import android.graphics.drawable.StateListDrawable;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
+
+import com.example.administrator.androidtest.Common.Util.AppInitUtil;
 
 
 /**
@@ -16,7 +18,7 @@ import android.view.View;
  * 常用形状Drawable和selectorDrawable的封装
  * 用法:XmlDrawableUtil.selector(R.drawable.xxx_1, R.drawable.xxx_2).setView(mTv_2);
  */
-public class XmlDrawableUtil extends AppInitUtil{
+public class XmlDrawableUtil extends AppInitUtil {
 
     public static int DRAWABLE_NONE = -1;
     public static int COLOR_NONE = -1;

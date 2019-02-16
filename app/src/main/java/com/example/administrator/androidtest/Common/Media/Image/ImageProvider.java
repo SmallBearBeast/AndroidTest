@@ -8,7 +8,7 @@ import android.provider.MediaStore;
 import com.example.administrator.androidtest.Common.Media.Provider;
 import com.example.administrator.androidtest.Common.Util.File.FileUtil;
 import com.example.administrator.androidtest.Common.Util.Core.ThreadUtil;
-import com.example.administrator.androidtest.Common.Util.Core.UiHandlerUtil;
+import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
 
 import java.util.ArrayList;
 
@@ -125,7 +125,7 @@ public class ImageProvider extends Provider {
         }
 
         if(mDataCallback != null){
-            UiHandlerUtil.runOnUiThread(new Runnable() {
+            MainThreadUtil.run(new Runnable() {
                 @Override
                 public void run() {
                     mDataCallback.onData(mHandleList);

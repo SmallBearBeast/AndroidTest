@@ -16,7 +16,7 @@ import java.util.Set;
 
 
 /**
- *
+ * 集合与数组相关工具类
  */
 
 public final class CollectionUtil {
@@ -119,8 +119,4 @@ public final class CollectionUtil {
         return newList;
     }
     /**过滤list中重复数据**/
-
-
-    // TODO: 2019/1/27 排序
-
 }

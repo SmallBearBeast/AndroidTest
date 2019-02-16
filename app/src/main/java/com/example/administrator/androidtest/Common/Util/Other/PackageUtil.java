@@ -12,13 +12,13 @@ import com.example.administrator.androidtest.Common.Util.AppInitUtil;
 import java.io.File;
 import java.io.FilenameFilter;
 
-/***
- * Description:Package Info Helper
- * Creator: wangwei7@bigo.sg
- * Date:2017-10-26 02:29:04 PM
- ***/
+/**
+ *
+ */
 public class PackageUtil extends AppInitUtil {
     private static volatile String sVersionName = "";
+    private static volatile int sVersionCode = 0;
+    private static volatile String sChannel = "";
 
     public static String getVersionName() {
         if (TextUtils.isEmpty(sVersionName)) {
@@ -26,26 +26,19 @@ public class PackageUtil extends AppInitUtil {
             try {
                 pi = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_CONFIGURATIONS);
                 sVersionName = pi.versionName;
-            } catch (PackageManager.NameNotFoundException e) {
-            }
+            } catch (Exception e) {}
 
         }
-
         return sVersionName;
     }
-
-    private static volatile int sVersionCode = 0;
 
     public static int getVersionCode() {
         if (sVersionCode == 0) {
             try {
                 PackageInfo pi = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_CONFIGURATIONS);
                 sVersionCode = pi.versionCode;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            } catch (Exception e) {}
         }
-
         return sVersionCode;
     }
 
@@ -59,25 +52,17 @@ public class PackageUtil extends AppInitUtil {
 
     /**
      * 是否首次安装
-     *
-     * @param context
-     * @return
      */
-    public static boolean isFirstInstall(Context context) {
-        if (context == null) {
-            return false;
-        }
+    public static boolean isFirstInstall() {
         try {
-            PackageManager mg = context.getPackageManager();
-            PackageInfo info = mg.getPackageInfo(context.getPackageName(), 0);
+            PackageManager mg = getPackageManager();
+            PackageInfo info = mg.getPackageInfo(sContext.getPackageName(), 0);
             return info.firstInstallTime == info.lastUpdateTime;
         } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-
-    private static volatile String sChannel = "";
 
     public static String getChannel() {
         if (TextUtils.isEmpty(sChannel)) {

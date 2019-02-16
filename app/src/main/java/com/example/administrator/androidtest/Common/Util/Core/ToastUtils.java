@@ -16,7 +16,7 @@ public final class ToastUtils extends AppInitUtil {
     }
 
     public static final void showToast(final CharSequence text, final int duration) {
-        UiHandlerUtil.runOnUiThread(new Runnable() {
+        MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(sContext, text, duration).show();
@@ -25,7 +25,7 @@ public final class ToastUtils extends AppInitUtil {
     }
 
     public static final void showToast(final int resId, final int duration) {
-        UiHandlerUtil.runOnUiThread(new Runnable() {
+        MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
                 Toast.makeText(sContext, resId, duration).show();
@@ -34,7 +34,7 @@ public final class ToastUtils extends AppInitUtil {
     }
 
     public static final void showToast(final int resId, final int duration, final int gravity, final int xOffset, final int yOffset) {
-        UiHandlerUtil.runOnUiThread(new Runnable() {
+        MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
                 Toast toast = Toast.makeText(sContext, resId, duration);
@@ -45,7 +45,7 @@ public final class ToastUtils extends AppInitUtil {
     }
 
     public static final void showToast(final CharSequence str, final int duration, final int gravity, final int xOffset, final int yOffset) {
-        UiHandlerUtil.runOnUiThread(new Runnable() {
+        MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
                 Toast toast = Toast.makeText(sContext, str, duration);

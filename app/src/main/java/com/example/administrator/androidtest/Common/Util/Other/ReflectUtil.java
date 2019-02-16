@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Util;
+package com.example.administrator.androidtest.Common.Util.Other;
 
 
 import java.lang.reflect.Field;
@@ -7,65 +7,42 @@ import java.util.Arrays;
 
 /***
  * Description:反射帮助类
- * Creator: wangwei7@bigo.sg
- * Date:2017-10-25 11:37:41 AM
  ***/
 public class ReflectUtil {
     /**
-     * Locates a given field anywhere in the class inheritance hierarchy.
-     *
-     * @param clazz an  classto search the field into.
-     * @param name  field name
-     * @return a field object
-     * @throws NoSuchFieldException if the field cannot be located
+     * 获取类中私有变量
      */
     public static Field findField(Class<?> clazz, String name) throws NoSuchFieldException {
         for (; clazz != null; clazz = clazz.getSuperclass()) {
             try {
                 Field field = clazz.getDeclaredField(name);
-
-
                 if (!field.isAccessible()) {
                     field.setAccessible(true);
                 }
-
                 return field;
-            } catch (NoSuchFieldException e) {
-                // ignore and search next
-            }
+            } catch (NoSuchFieldException e) {}
         }
-
         throw new NoSuchFieldException("Field " + name + " not found in " + clazz);
     }
+    /**获取类中私有变量**/
 
     /**
-     * Locates a given method anywhere in the class inheritance hierarchy.
-     *
-     * @param clazz          a class to search the method into.
-     * @param name           method name
-     * @param parameterTypes method parameter types
-     * @return a method object
-     * @throws NoSuchMethodException if the method cannot be located
+     * 获取类中私有方法
      */
     public static Method findMethod(Class<?> clazz, String name, Class<?>... parameterTypes)
             throws NoSuchMethodException {
         for (; clazz != null; clazz = clazz.getSuperclass()) {
             try {
                 Method method = clazz.getDeclaredMethod(name, parameterTypes);
-
-
                 if (!method.isAccessible()) {
                     method.setAccessible(true);
                 }
-
                 return method;
-            } catch (NoSuchMethodException e) {
-                // ignore and search next
-            }
+            } catch (NoSuchMethodException e) {}
         }
-
         throw new NoSuchMethodException("Method " + name + " with parameters " +
                 Arrays.asList(parameterTypes) + " not found in " + clazz.getCanonicalName());
     }
+    /**获取类中私有方法**/
 
 }

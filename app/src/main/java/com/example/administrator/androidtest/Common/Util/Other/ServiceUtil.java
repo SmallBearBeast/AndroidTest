@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Util;
+package com.example.administrator.androidtest.Common.Util.Other;
 
 
 import android.app.Activity;
@@ -12,6 +12,9 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.administrator.androidtest.Common.Util.AppInitUtil;
+import com.example.administrator.androidtest.Common.Util.CollectionUtil;
+
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -21,7 +24,7 @@ import java.util.List;
  * Creator: wangwei7@bigo.sg
  * Date:2018-02-27 05:34:31 PM
  ***/
-public final class ServiceUtil extends AppInitUtil{
+public final class ServiceUtil extends AppInitUtil {
     private static final String TAG = "ComponentUtils";
 
     /***

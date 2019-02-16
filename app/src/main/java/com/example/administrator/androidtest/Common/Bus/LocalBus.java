@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Common.Bus;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.example.administrator.androidtest.Common.Util.Core.UiHandlerUtil;
+import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -20,7 +20,7 @@ public class LocalBus implements IBus {
 
     @Override
     public void send(final String event, @Nullable final Bundle extras) {
-        UiHandlerUtil.runOnUiThread(new Runnable() {
+        MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
                 sendSync(event, extras);

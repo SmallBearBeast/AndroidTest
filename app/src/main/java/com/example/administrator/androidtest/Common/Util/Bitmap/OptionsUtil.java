@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Util.Image;
+package com.example.administrator.androidtest.Common.Util.Bitmap;
 
 import android.graphics.BitmapFactory;
 import android.text.TextUtils;

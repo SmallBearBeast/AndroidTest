@@ -7,7 +7,8 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Common.Util.XmlDrawableUtil;
+
+import com.example.administrator.androidtest.Common.Util.Ui.XmlDrawableUtil;
 import com.example.administrator.androidtest.R;
 
 public class XmlDrawableAct extends ComponentAct {

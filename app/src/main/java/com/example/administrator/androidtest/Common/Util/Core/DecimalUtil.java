@@ -6,6 +6,9 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 
+/**
+ * 数字格式转换工具类
+ */
 public class DecimalUtil {
 
     /**
@@ -78,6 +81,9 @@ public class DecimalUtil {
     }
     /**格式化文件大小long类型转字符串**/
 
+    /**
+     * 音视频时长格式化
+     */
     public static String videoDurFormat(long ms){
         StringBuilder builder = new StringBuilder();
         int temp = (int) (ms / 1000);

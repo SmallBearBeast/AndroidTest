@@ -1,10 +1,8 @@
-package com.example.administrator.androidtest.Common.Util;
+package com.example.administrator.androidtest.Common.Util.Other;
 
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.example.administrator.androidtest.Common.Util.Other.IOUtil;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,75 +30,37 @@ public class ZipUtil {
 
     /**
      * 压缩文件
-     *
-     * @param entryName 入口名字
-     * @param srcFile   源文件路径
-     * @param desFile   目标文件路径
-     * @return
      */
     public static boolean compress(@NonNull String entryName, @NonNull String srcFile, @NonNull String desFile) {
         BufferedOutputStream bos = null;
         ZipOutputStream zos = null;
         BufferedInputStream bis = null;
-
         try {
             bos = new BufferedOutputStream(new FileOutputStream(desFile));
             zos = new ZipOutputStream(bos);
-
             ZipEntry entry = new ZipEntry(entryName);
             zos.putNextEntry(entry);
 
             bis = new BufferedInputStream(new FileInputStream(srcFile));
-
             byte[] b = new byte[2048];
             int bytesRead;
-
             while ((bytesRead = bis.read(b)) != -1) {
                 zos.write(b, 0, bytesRead);
             }
-
             zos.closeEntry();
             zos.flush();
-
             return true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            try {
-                if (bis != null) {
-                    bis.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                if (zos != null) {
-                    zos.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            try {
-                if (bos != null) {
-                    bos.close();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            IOUtil.close(bis, zos, bos);
         }
-
         return false;
     }
 
 
     /**
      * 压缩文件
-     *
-     * @param srcPathName 源文件路径
-     * @param zipFile     压缩后文件路径
-     * @param suffix      文件后缀
-     * @param fileFilter  文件过滤器
-     * @param fileMatch   文件名的正则串
      */
     public static void compress(@NonNull String srcPathName, @NonNull String zipFile, @NonNull String suffix,
                                 FileFilter fileFilter, String fileMatch) {
@@ -121,13 +81,6 @@ public class ZipUtil {
 
     /**
      * 压缩文件或文件夹
-     *
-     * @param file       文件
-     * @param out        压缩后的流
-     * @param basedir    路径
-     * @param suffix     文件名后缀
-     * @param fileFilter 文件过滤器
-     * @param fileMatch  文件名的正则匹配
      */
     public static void compress(@NonNull File file, @NonNull ZipOutputStream out,
                                 @NonNull String basedir, @NonNull String suffix,
@@ -143,13 +96,6 @@ public class ZipUtil {
 
     /**
      * 压缩文件夹
-     *
-     * @param dir        文件夹
-     * @param out        压缩的流
-     * @param basedir    文件路径
-     * @param suffix     文件后缀
-     * @param fileFilter 文件过滤器
-     * @param fileMatch  文件名的正则匹配
      */
     public static void compressDirectory(@NonNull File dir, @NonNull ZipOutputStream out, @NonNull String basedir,
                                          @NonNull final String suffix, final FileFilter fileFilter, final String fileMatch) {
@@ -211,9 +157,7 @@ public class ZipUtil {
             Log.e(TAG, "unzip fail file=" + file + "; destFolder=" + destFolder);
             return false;
         }
-
 //        FileUtil.createDirByDeleteOldDir(destFolder);
-
         boolean result = false;
         ZipFile zipFile = null;
         try {
@@ -278,9 +222,7 @@ public class ZipUtil {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            IOUtil.close(outputStream);
-            IOUtil.close(fileOutputStream);
-            IOUtil.close(inputStream);
+            IOUtil.close(outputStream, fileOutputStream, inputStream);
         }
     }
 }
