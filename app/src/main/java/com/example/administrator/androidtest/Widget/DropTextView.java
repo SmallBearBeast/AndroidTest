@@ -18,7 +18,7 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Common.Mmf.MmfUtil;
+import com.example.administrator.androidtest.Mmf.MmfUtil;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;

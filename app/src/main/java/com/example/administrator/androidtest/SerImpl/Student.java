@@ -1,7 +1,7 @@
-package com.example.administrator.androidtest.Common.SerImpl;
+package com.example.administrator.androidtest.SerImpl;
 
 
-import com.example.administrator.androidtest.Common.Mmf.WrapUtil;
+import com.example.administrator.androidtest.Mmf.WrapUtil;
 
 import java.nio.ByteBuffer;
 

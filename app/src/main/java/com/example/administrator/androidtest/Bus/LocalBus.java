@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Bus;
+package com.example.administrator.androidtest.Bus;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

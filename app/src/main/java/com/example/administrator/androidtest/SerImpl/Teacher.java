@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.SerImpl;
+package com.example.administrator.androidtest.SerImpl;
 
 
 import java.nio.ByteBuffer;

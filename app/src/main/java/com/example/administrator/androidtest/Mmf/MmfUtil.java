@@ -1,8 +1,8 @@
-package com.example.administrator.androidtest.Common.Mmf;
+package com.example.administrator.androidtest.Mmf;
 
 
 import com.example.administrator.androidtest.Common.Util.File.FileUtil;
-import com.example.administrator.androidtest.Common.SerImpl.SerInterface;
+import com.example.administrator.androidtest.SerImpl.SerInterface;
 
 import java.io.File;
 import java.io.RandomAccessFile;

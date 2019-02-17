@@ -28,21 +28,21 @@ public class OkHelper {
         builder.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TIME_OUT, TimeUnit.SECONDS);
-        initInterceptor();
-        initNetworkInterceptor();
-        initSSLSocket();
-        return null;
+        initInterceptor(builder);
+        initNetworkInterceptor(builder);
+        initSSLSocket(builder);
+        return builder.build();
     }
 
-    private static void initSSLSocket() {
-
-    }
-
-    private static void initNetworkInterceptor() {
+    private static void initSSLSocket(OkHttpClient.Builder builder) {
 
     }
 
-    private static void initInterceptor() {
+    private static void initNetworkInterceptor(OkHttpClient.Builder builder) {
+
+    }
+
+    private static void initInterceptor(OkHttpClient.Builder builder) {
 
     }
 

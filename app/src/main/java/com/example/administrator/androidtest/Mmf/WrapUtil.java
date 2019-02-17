@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Mmf;
+package com.example.administrator.androidtest.Mmf;
 
 
 import java.lang.reflect.Array;
