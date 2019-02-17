@@ -1,5 +1,7 @@
 package com.example.administrator.androidtest.Base.ActAndFrag;
 
+import android.content.Intent;
+
 public abstract class Component<T extends ViewSet>{
     public ComponentAct mComActivity;
     public T mViewSet;
@@ -27,6 +29,8 @@ public abstract class Component<T extends ViewSet>{
     public void onPause(){}
 
     public void onStop(){}
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data){}
 
     public void onDestory(){
         mComActivity = null;

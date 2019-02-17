@@ -1,6 +1,7 @@
 package com.example.administrator.androidtest.Base.ActAndFrag;
 
 import android.Manifest;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -95,5 +96,18 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
         for (Component component : componentMap.values()) {
             component.onResume();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (Component component : componentMap.values()) {
+            component.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    protected void init(Bundle savedInstanceState) {
+
     }
 }

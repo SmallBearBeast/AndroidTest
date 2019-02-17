@@ -43,7 +43,8 @@ public class OkHelper {
     }
 
     private static void initInterceptor(OkHttpClient.Builder builder) {
-
+        builder.addInterceptor(new OkLogInterceptor());
+        builder.addInterceptor(new OkRetryInterceptor());
     }
 
     public static OkHelper getInstance() {
