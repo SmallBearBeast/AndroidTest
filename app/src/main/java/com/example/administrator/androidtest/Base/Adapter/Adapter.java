@@ -11,11 +11,13 @@ public abstract class Adapter<T extends RecyclerView.ViewHolder> extends Recycle
     private DataProvider mDataProvider = new DataProvider();
 
     /**
-     * 局部刷新
+     * 局部刷新，调用这个方法一定要手动调用onBindViewHolder()方法
      */
     @Override
     public void onBindViewHolder(@NonNull T holder, int position, @NonNull List<Object> payloads) {
-        super.onBindViewHolder(holder, position, payloads);
+        if(payloads.isEmpty()){
+            onBindViewHolder(holder, position, payloads);
+        }
     }
 
     @Override

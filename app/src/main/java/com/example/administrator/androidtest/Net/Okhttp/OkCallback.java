@@ -18,7 +18,6 @@ public class OkCallback<T> implements okhttp3.Callback {
 
     @Override
     public void onFailure(Call call, IOException e) {
-        cancelCall(call);
         onFail();
         e.printStackTrace();
     }
@@ -27,7 +26,6 @@ public class OkCallback<T> implements okhttp3.Callback {
     public void onResponse(Call call, final Response response) throws IOException {
         if(!response.isSuccessful()){
             handleErrCode(response.code());
-            cancelCall(call);
             return;
         }
         final T data = GsonUtil.toObj(response.body().toString(), mDataClz);
@@ -45,10 +43,4 @@ public class OkCallback<T> implements okhttp3.Callback {
     protected void onSuccess(T data){}
 
     protected void onFail(){}
-
-    public void cancelCall(Call call){
-        if(!call.isCanceled()){
-            call.cancel();
-        }
-    }
 }

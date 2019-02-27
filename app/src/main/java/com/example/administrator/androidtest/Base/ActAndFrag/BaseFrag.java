@@ -30,6 +30,26 @@ public abstract class BaseFrag extends Fragment implements IPage {
 
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if(getContext() instanceof BaseAct){
+            mBaseAct = (BaseAct) getContext();
+        }
+        if(getParentFragment() instanceof BaseFrag){
+            mBaseFrag = (BaseFrag) getParentFragment();
+        }
+        Intent intent = mBaseAct.getIntent();
+        if(intent != null){
+            handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
+        }
+        Bundle bundle = getArguments();
+        if(bundle != null){
+            handleArgument(bundle);
+            fragmentId = bundle.getInt(IContext.FRAGMENT_ID, IContext.FRAGMENT_ID_NONE);
+        }
+    }
+
+    @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         setToMap(isVisibleToUser);
@@ -86,6 +106,23 @@ public abstract class BaseFrag extends Fragment implements IPage {
         }
     }
 
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        if(!hidden){
+            PageProvider.getInstance().addPage(mBaseAct.getPage(), createPage());
+        }
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mPage = null;
+    }
+
+    /**
+     * 通知应用是否在前后台，获取应用前后台状态
+     */
     public void notifyForeground(boolean fore) {
         foreground = fore;
         onNotifyForeground(fore);
@@ -99,66 +136,18 @@ public abstract class BaseFrag extends Fragment implements IPage {
         }
     }
 
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if(getContext() instanceof BaseAct){
-            mBaseAct = (BaseAct) getContext();
-        }
-        if(getParentFragment() instanceof BaseFrag){
-            mBaseFrag = (BaseFrag) getParentFragment();
-        }
-        Intent intent = mBaseAct.getIntent();
-        if(intent != null){
-            handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
-        }
-        Bundle bundle = getArguments();
-        if(bundle != null){
-            handleArgument(bundle);
-            fragmentId = bundle.getInt(IContext.FRAGMENT_ID, IContext.FRAGMENT_ID_NONE);
-        }
-    }
-
-    @Override
-    public void onHiddenChanged(boolean hidden) {
-        if(!hidden){
-            PageProvider.getInstance().addPage(mBaseAct.getPage(), createPage());
-        }
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+    public boolean isForeground() {
+        return foreground;
     }
 
     protected void onNotifyForeground(boolean fore) {
         Log.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
     }
+    /**通知应用是否在前后台，获取应用前后台状态**/
 
     /**
-     * fragment可见性时候调用
+     * 页面处理相关方法
      */
-    protected void onNotifyVisiable() {
-        Log.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyVisiable");
-    }
-
-    public boolean isForeground() {
-        return foreground;
-    }
-
-    protected static Bundle buildArguments(int id){
-        Bundle bundle = buildArguments();
-        bundle.putInt(IContext.ARGUMENT, id);
-        return bundle;
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mPage = null;
-    }
-
     private Page createPage(){
         mPage = new Page(pageId());
         return mPage;
@@ -175,18 +164,37 @@ public abstract class BaseFrag extends Fragment implements IPage {
             PageProvider.getInstance().addPage(mBaseAct.getPage(), backPage != null ? backPage : createPage());
         }
     }
+    /**页面处理相关方法**/
 
-    protected static Bundle buildArguments(){
-        return new Bundle();
+    /**
+     * Bundle传递相关方法
+     */
+    protected static Bundle buildArguments(int id){
+        Bundle bundle = new Bundle();;
+        bundle.putInt(IContext.ARGUMENT, id);
+        return bundle;
     }
 
-    protected void handleIntent(Intent intent, Bundle bundle){}
+    protected void handleIntent(@NonNull Intent intent, @Nullable Bundle bundle){}
 
-    protected void handleArgument(Bundle bundle){};
+    protected void handleArgument(@NonNull Bundle bundle){};
+    /**Bundle传递相关方法**/
 
+    /**
+     * Fragment需要实现的方法
+     */
     protected abstract int layoutId();
 
     protected abstract void init(Bundle savedInstanceState);
+    /**Fragment需要实现的方法**/
+
+
+    /**
+     * fragment可见性时候调用
+     */
+    protected void onNotifyVisiable() {
+        Log.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyVisiable");
+    }
 
     /**
      * 测试fragment可见性方法
@@ -203,9 +211,4 @@ public abstract class BaseFrag extends Fragment implements IPage {
         void onVisibilityChanged();
     }
     /**测试fragment可见性方法**/
-
-    @Override
-    public int pageId() {
-        return IPage.VpFragVisibilityAct;
-    }
 }
