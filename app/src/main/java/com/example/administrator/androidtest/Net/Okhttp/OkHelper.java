@@ -27,15 +27,6 @@ public class OkHelper {
     private static volatile OkHttpClient sOkClient;
     private static volatile OkRequsetProvider sOkRequestProvider;
 
-    /**
-     * 请在Application初始化
-     */
-    public static void init() {
-        sOkHelper = new OkHelper();
-        sOkRequestProvider = new OkRequsetProvider();
-        sOkClient = initOkHttpClient();
-    }
-
     private static OkHttpClient initOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -53,7 +44,17 @@ public class OkHelper {
     }
 
     public static OkHelper getInstance() {
-        return sOkHelper;
+        return SingleTon.sInstance;
+    }
+
+    private OkHelper(){
+        sOkHelper = new OkHelper();
+        sOkRequestProvider = new OkRequsetProvider();
+        sOkClient = initOkHttpClient();
+    }
+
+    private static class SingleTon{
+        static OkHelper sInstance = new OkHelper();
     }
 
     public void downloadFile(String url, final String SAVE_PATH, final OkDownloadCallback DOWNLOAD_CALLBACK) {

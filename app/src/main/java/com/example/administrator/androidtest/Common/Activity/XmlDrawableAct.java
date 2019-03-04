@@ -2,6 +2,7 @@ package com.example.administrator.androidtest.Common.Activity;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.ToggleButton;
@@ -34,11 +35,12 @@ public class XmlDrawableAct extends ComponentAct {
         mTb_6 = findViewById(R.id.tb_6);
 
 
-//        XmlDrawableUtil.shapeCornerRect(R.color.cl_blue_5, 10).setView(mTv_1);
+        XmlDrawableUtil.slAlpha(1f, 0.5f, R.color.cl_green_9).setView(mTv_1);
+//        XmlDrawableUtil.selectorGradient(new int[]{R.color.cl_blue_5, R.color.cl_red_t_6}, new int[]{R.color.cl_black_t_5, R.color.cl_red_t_6}, GradientDrawable.Orientation.BOTTOM_TOP).setView(mTv_1);
         XmlDrawableUtil.selector(R.drawable.ic_launcher_background, R.drawable.shape_corner_10).setView(mTv_2);
-        XmlDrawableUtil.shapeCircle(R.color.cl_red_t_6).setView(mTv_3);
-        XmlDrawableUtil.shapeStrokeRect(R.color.cl_blue_5, 10, R.color.cl_red_t_6, 1).setView(mTv_4);
+        XmlDrawableUtil.circle(R.color.cl_red_t_6).setView(mTv_3);
+        XmlDrawableUtil.strokeRect(R.color.cl_blue_5, 10, R.color.cl_red_t_6, 1).setView(mTv_4);
         XmlDrawableUtil.selector(new ColorDrawable(Color.YELLOW), new ColorDrawable(Color.BLACK), new ColorDrawable(Color.BLUE)).setView(mTb_5);
-        XmlDrawableUtil.selectorCircle(R.color.cl_blue_5, R.color.cl_oriange, R.color.cl_red).setView(mTb_6);
+        XmlDrawableUtil.slCircle(R.color.cl_blue_5, R.color.cl_oriange, R.color.cl_red).setView(mTb_6);
     }
 }
