@@ -13,7 +13,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.administrator.androidtest.Common.Util.AppInitUtil;
-import com.example.administrator.androidtest.Common.Util.CollectionUtil;
+import com.example.administrator.androidtest.Common.Util.Core.CollectionUtil;
 
 import java.lang.reflect.Method;
 import java.util.List;

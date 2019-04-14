@@ -2,6 +2,13 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ll_vertical">
 
+    <ImageView
+        android:background="@drawable/selector_corner"
+        android:id="@+id/iv"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80" />
+
     <TextView
         android:background="@color/cl_red_t_6"
         android:id="@+id/tv_1"

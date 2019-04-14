@@ -232,7 +232,7 @@ public class FileUtil {
      * 获取后缀
      */
     public static String getSuffix(String path){
-        if(checkPath(path)){
+        if(!checkPath(path)){
             return null;
         }
         int indexOfPoint = path.lastIndexOf(".");
@@ -277,4 +277,14 @@ public class FileUtil {
     }
     /**获取文件名字**/
 
+    public static boolean rename(String srcPath, String dstPath){
+        if(isFileExist(srcPath)){
+            File srcFile = new File(srcPath);
+            if(createFile(dstPath)){
+                File dstFile = new File(dstPath);
+                return srcFile.renameTo(dstFile);
+            }
+        }
+        return false;
+    }
 }

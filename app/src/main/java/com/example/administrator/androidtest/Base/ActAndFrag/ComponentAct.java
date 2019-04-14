@@ -7,17 +7,20 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import com.example.administrator.androidtest.Base.Component.IComponent;
+import com.example.administrator.androidtest.Base.Component.ActComponent;
+import com.example.administrator.androidtest.Base.Component.ViewSet;
 import com.example.administrator.androidtest.Common.Util.Core.PermissionUtil;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class ComponentAct<K extends Component, T extends ViewSet> extends BaseAct {
+public abstract class ComponentAct<K extends ActComponent, T extends ViewSet> extends BaseAct {
     public K mainComponent;
     public T viewSet;
     public View contentView;
-    protected Map<Class, Component> componentMap = new HashMap<>(8);
+    protected Map<Class, IComponent> componentMap = new HashMap<>(8);
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,6 +37,10 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
 
             }
         });
+
+        for (IComponent component : componentMap.values()) {
+            component.onCreate();
+        }
     }
 
     protected void initMainComponent(){
@@ -43,14 +50,16 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
         }
     }
 
-    protected <C extends Component> void registerComponent(C component){
+    protected <C extends IComponent> void registerComponent(C component){
+        if(component instanceof ActComponent){
+            ((ActComponent)component).attachActivity(this);
+        }
         if(component != null){
-            component.attachActivity(this);
             componentMap.put(component.getClass(), component);
         }
     }
 
-    protected <C extends Component> C getcomponent(Class<C> clz){
+    protected <C extends IComponent> C getcomponent(Class<C> clz){
         if(componentMap.containsKey(clz)){
             return (C) componentMap.get(clz);
         }
@@ -60,7 +69,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     @Override
     protected void onStart() {
         super.onStart();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : componentMap.values()) {
             component.onStart();
         }
     }
@@ -68,7 +77,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     @Override
     protected void onStop() {
         super.onStop();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : componentMap.values()) {
             component.onStop();
         }
     }
@@ -76,7 +85,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     @Override
     protected void onPause() {
         super.onPause();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : componentMap.values()) {
             component.onPause();
         }
     }
@@ -84,7 +93,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : componentMap.values()) {
             component.onDestory();
             componentMap.remove(component.getClass());
         }
@@ -93,7 +102,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     @Override
     protected void onResume() {
         super.onResume();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : componentMap.values()) {
             component.onResume();
         }
     }
@@ -101,7 +110,7 @@ public abstract class ComponentAct<K extends Component, T extends ViewSet> exten
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        for (Component component : componentMap.values()) {
+        for (IComponent component : componentMap.values()) {
             component.onActivityResult(requestCode, resultCode, data);
         }
     }

@@ -1,5 +1,8 @@
 package com.example.administrator.androidtest.Net.Okhttp;
 
+import android.support.annotation.NonNull;
+import android.util.Log;
+
 import com.example.administrator.androidtest.Common.Util.Core.GsonUtil;
 import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
 
@@ -7,9 +10,9 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Response;
+import okhttp3.ResponseBody;
 
 public class OkCallback<T> implements okhttp3.Callback {
-
     private Class<T> mDataClz;
 
     public OkCallback(Class<T> dataClz){
@@ -23,22 +26,29 @@ public class OkCallback<T> implements okhttp3.Callback {
     }
 
     @Override
-    public void onResponse(Call call, final Response response) throws IOException {
+    public void onResponse(@NonNull Call call, @NonNull final Response response) throws IOException {
         if(!response.isSuccessful()){
             handleErrCode(response.code());
             return;
         }
-        final T data = GsonUtil.toObj(response.body().toString(), mDataClz);
-        MainThreadUtil.run(new Runnable() {
-            @Override
-            public void run() {
-                onSuccess(data);
+        ResponseBody body = response.body();
+        if(body != null){
+            try {
+                String content = body.string();
+                final T DATA = GsonUtil.toObj(content, mDataClz);
+                MainThreadUtil.run(new Runnable() {
+                    @Override
+                    public void run() {
+                        onSuccess(DATA);
+                    }
+                });
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        });
+        }
     }
 
     protected void handleErrCode(int errCode) {}
-
 
     protected void onSuccess(T data){}
 

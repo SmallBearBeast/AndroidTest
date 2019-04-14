@@ -2,7 +2,6 @@ package com.example.administrator.androidtest.Bus;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
 import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
 
 import java.util.HashSet;
@@ -51,4 +50,6 @@ public class LocalBus implements IBus {
     public void unregister(OnBusEventListener listener) {
         mObservers.remove(listener);
     }
+
+
 }

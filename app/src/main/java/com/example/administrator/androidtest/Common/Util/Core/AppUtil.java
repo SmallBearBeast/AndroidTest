@@ -16,6 +16,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
@@ -27,8 +28,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AppUtil {
+
+    public static final int ENV_DEBUG = 1;
+    public static final int ENV_RELEASE = 2;
+    public static final int ENV_ALPHA = 3;
+
+    @IntDef(value = {ENV_DEBUG, ENV_RELEASE, ENV_ALPHA})
+    public @interface Env{}
+
     private static Application sApplication;
 
+    private static int sAppEnv = ENV_DEBUG;
 
     public static void init(Application application){
         sApplication = application;
@@ -36,6 +46,14 @@ public class AppUtil {
 
     public static Application getApp(){
         return sApplication;
+    }
+
+    public static boolean isAppEnv(@Env int appEnv){
+        return sAppEnv == appEnv;
+    }
+
+    public static void setAppEnv(@Env int appEnv){
+        sAppEnv = appEnv;
     }
 
     /**

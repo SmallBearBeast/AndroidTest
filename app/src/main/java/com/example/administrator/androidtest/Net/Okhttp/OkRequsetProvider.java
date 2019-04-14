@@ -1,15 +1,13 @@
 package com.example.administrator.androidtest.Net.Okhttp;
 
 
-import com.example.administrator.androidtest.Common.Util.CollectionUtil;
+import com.example.administrator.androidtest.Common.Util.Core.CollectionUtil;
 import com.example.administrator.androidtest.Common.Util.Core.GsonUtil;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import okhttp3.Callback;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
@@ -83,7 +81,6 @@ public class OkRequsetProvider {
     }
     /**带有json对象或者json字符串的post**/
 
-    // TODO: 2019/2/23  
     /**
      * multipart的post
      */

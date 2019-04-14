@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.Net.Okhttp;
 
+import android.util.Log;
 import com.example.administrator.androidtest.Common.Util.Core.SPUtil;
 import com.example.administrator.androidtest.Common.Util.File.FileUtil;
 import com.example.administrator.androidtest.Common.Util.Other.IOUtil;
@@ -22,11 +23,13 @@ import okhttp3.ResponseBody;
 
 public class OkHelper {
 
+    private static final String TAG = "OkHelper";
     private static final int TIME_OUT = 10;
-    private static volatile OkHelper sOkHelper;
-    private static volatile OkHttpClient sOkClient;
-    private static volatile OkRequsetProvider sOkRequestProvider;
+    private static final int DOWNLOAD_BUFFER_COUNT = 1024 / 2;
+    private OkHttpClient sOkClient;
+    private OkRequsetProvider sOkRequestProvider;
 
+    // TODO: 2019/4/14 超时参数理解
     private static OkHttpClient initOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -47,25 +50,34 @@ public class OkHelper {
         return SingleTon.sInstance;
     }
 
-    private OkHelper(){
-        sOkHelper = new OkHelper();
+    private OkHelper() {
         sOkRequestProvider = new OkRequsetProvider();
         sOkClient = initOkHttpClient();
     }
 
-    private static class SingleTon{
+    private static class SingleTon {
         static OkHelper sInstance = new OkHelper();
     }
 
+
+    // TODO: 2019/4/14 取消接口主要是下载
+    /**
+     * 取消接口主要是下载
+     */
+    public void cancel(){
+
+    }
+
     public void downloadFile(String url, final String SAVE_PATH, final OkDownloadCallback DOWNLOAD_CALLBACK) {
-        final int CONTENT_LENGTH = (int) SPUtil.getDataFromOther(SAVE_PATH, 0);
         final String TOTAL_LENGTH_KEY = SAVE_PATH + "_total_length_key";
-        final String DOWNLOAD_LENGTH_KEY = SAVE_PATH + "_download_length_key";
-        if(CONTENT_LENGTH == 0){
+        final int CONTENT_LENGTH = (int) SPUtil.getDataFromOther(TOTAL_LENGTH_KEY, 0);
+        if (CONTENT_LENGTH == 0) {
             getMethod(url, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    if(DOWNLOAD_CALLBACK != null){
+                    Log.d(TAG, "onFailure: with full request");
+                    e.printStackTrace();
+                    if (DOWNLOAD_CALLBACK != null) {
                         DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_IO);
                     }
                 }
@@ -73,6 +85,7 @@ public class OkHelper {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.isSuccessful()) {
+                        Log.d(TAG, "onResponse: successful with full request");
                         ResponseBody body = response.body();
                         if (body != null) {
                             if (FileUtil.createFile(SAVE_PATH)) {
@@ -83,31 +96,33 @@ public class OkHelper {
                                     raf = new RandomAccessFile(SAVE_PATH, "rw");
                                     int length = (int) body.contentLength();
                                     SPUtil.putDataToOther(TOTAL_LENGTH_KEY, length);
-                                    if(!StorageUtil.hasSpace(length)){
-                                        if(DOWNLOAD_CALLBACK != null){
+                                    if (!StorageUtil.hasSpace(length)) {
+                                        if (DOWNLOAD_CALLBACK != null) {
                                             DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_STORAGE);
                                         }
                                         return;
                                     }
                                     int read = 0;
                                     int downloadingLength = 0;
-                                    byte[] buffer = new byte[1024];
-                                    while ((read = ins.read(buffer, 0, length - downloadingLength)) != -1) {
+                                    byte[] buffer = new byte[DOWNLOAD_BUFFER_COUNT];
+                                    int readLength = length - downloadingLength < DOWNLOAD_BUFFER_COUNT ? length - downloadingLength : DOWNLOAD_BUFFER_COUNT;
+                                    while ((read = ins.read(buffer, 0, readLength)) != -1) {
                                         raf.write(buffer, 0, read);
                                         downloadingLength = downloadingLength + read;
-                                        if(DOWNLOAD_CALLBACK != null) {
-                                            DOWNLOAD_CALLBACK.onProgress(downloadingLength / length * 100);
+                                        readLength = length - downloadingLength < DOWNLOAD_BUFFER_COUNT ? length - downloadingLength : DOWNLOAD_BUFFER_COUNT;
+                                        if (DOWNLOAD_CALLBACK != null) {
+                                            DOWNLOAD_CALLBACK.onProgress((int) (downloadingLength * 1f / length * 100));
                                         }
-                                        SPUtil.putDataToOther(DOWNLOAD_LENGTH_KEY, downloadingLength);
+                                        Log.d(TAG, "onResponse: full request downloadingLength = " + downloadingLength);
                                     }
                                     SPUtil.remove(SPUtil.OTHER, TOTAL_LENGTH_KEY);
-                                    SPUtil.remove(SPUtil.OTHER, DOWNLOAD_LENGTH_KEY);
-                                    if(DOWNLOAD_CALLBACK != null) {
+                                    if (DOWNLOAD_CALLBACK != null) {
                                         DOWNLOAD_CALLBACK.onSuccess();
                                     }
                                 } catch (Exception e) {
+                                    Log.d(TAG, "onFailure: with full request");
                                     e.printStackTrace();
-                                    if(DOWNLOAD_CALLBACK != null) {
+                                    if (DOWNLOAD_CALLBACK != null) {
                                         DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_FILE);
                                     }
                                 } finally {
@@ -115,13 +130,18 @@ public class OkHelper {
                                 }
                             }
                         }
+                    }else {
+                        Log.d(TAG, "onFailure: with full request");
+                        if (DOWNLOAD_CALLBACK != null) {
+                            DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_IO);
+                        }
                     }
                 }
             });
-        }else {
-            final int DOWNLOAD_LENGTH = (int) SPUtil.getDataFromOther(DOWNLOAD_LENGTH_KEY, 0);
-            if(!StorageUtil.hasSpace(CONTENT_LENGTH - DOWNLOAD_LENGTH)){
-                if(DOWNLOAD_CALLBACK != null){
+        } else {
+            final long DOWNLOAD_LENGTH = new File(SAVE_PATH).length();
+            if (!StorageUtil.hasSpace(CONTENT_LENGTH - DOWNLOAD_LENGTH)) {
+                if (DOWNLOAD_CALLBACK != null) {
                     DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_STORAGE);
                 }
                 return;
@@ -130,7 +150,8 @@ public class OkHelper {
             getMethod(url, headers, new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
-                    if(DOWNLOAD_CALLBACK != null) {
+                    Log.d(TAG, "onFailure: with part request");
+                    if (DOWNLOAD_CALLBACK != null) {
                         DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_IO);
                     }
                 }
@@ -138,6 +159,7 @@ public class OkHelper {
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.isSuccessful()) {
+                        Log.d(TAG, "onResponse: successful with part request");
                         ResponseBody body = response.body();
                         if (body != null) {
                             if (FileUtil.createFile(SAVE_PATH)) {
@@ -148,24 +170,26 @@ public class OkHelper {
                                     raf = new RandomAccessFile(SAVE_PATH, "rw");
                                     raf.seek(DOWNLOAD_LENGTH);
                                     int read = 0;
-                                    int downloadingLength = DOWNLOAD_LENGTH;
-                                    byte[] buffer = new byte[1024];
-                                    while ((read = ins.read(buffer, 0, CONTENT_LENGTH - DOWNLOAD_LENGTH - downloadingLength)) != -1) {
+                                    long downloadingLength = 0;
+                                    byte[] buffer = new byte[DOWNLOAD_BUFFER_COUNT];
+                                    int readLength = CONTENT_LENGTH - DOWNLOAD_LENGTH - downloadingLength < DOWNLOAD_BUFFER_COUNT ? (int) (CONTENT_LENGTH - DOWNLOAD_LENGTH - downloadingLength) : DOWNLOAD_BUFFER_COUNT;
+                                    while ((read = ins.read(buffer, 0, readLength)) != -1) {
                                         raf.write(buffer, 0, read);
                                         downloadingLength = downloadingLength + read;
-                                        if(DOWNLOAD_CALLBACK != null) {
-                                            DOWNLOAD_CALLBACK.onProgress(downloadingLength / CONTENT_LENGTH * 100);
+                                        readLength = CONTENT_LENGTH - DOWNLOAD_LENGTH - downloadingLength < DOWNLOAD_BUFFER_COUNT ? (int) (CONTENT_LENGTH - DOWNLOAD_LENGTH - downloadingLength) : DOWNLOAD_BUFFER_COUNT;
+                                        if (DOWNLOAD_CALLBACK != null) {
+                                            DOWNLOAD_CALLBACK.onProgress((int) ((downloadingLength + DOWNLOAD_LENGTH) * 1f / CONTENT_LENGTH * 100));
                                         }
-                                        SPUtil.putDataToOther(DOWNLOAD_LENGTH_KEY, downloadingLength);
+                                        Log.d(TAG, "onResponse: with part request downloadingLength = " + downloadingLength);
                                     }
                                     SPUtil.remove(SPUtil.OTHER, TOTAL_LENGTH_KEY);
-                                    SPUtil.remove(SPUtil.OTHER, DOWNLOAD_LENGTH_KEY);
-                                    if(DOWNLOAD_CALLBACK != null) {
+                                    if (DOWNLOAD_CALLBACK != null) {
                                         DOWNLOAD_CALLBACK.onSuccess();
                                     }
                                 } catch (Exception e) {
+                                    Log.d(TAG, "onFailure: with part request");
                                     e.printStackTrace();
-                                    if(DOWNLOAD_CALLBACK != null) {
+                                    if (DOWNLOAD_CALLBACK != null) {
                                         DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_FILE);
                                     }
                                 } finally {
@@ -173,18 +197,23 @@ public class OkHelper {
                                 }
                             }
                         }
+                    }else {
+                        Log.d(TAG, "onFailure: with part request");
+                        if (DOWNLOAD_CALLBACK != null) {
+                            DOWNLOAD_CALLBACK.onFailure(OkDownloadCallback.ERROR_IO);
+                        }
                     }
                 }
             });
         }
     }
 
-    public void uploadFile(String url, final OkUploadCallback UPLOAD_CALLBACK, File... files){
+    public void uploadFile(String url, final OkUploadCallback UPLOAD_CALLBACK, File... files) {
         final boolean[] IS_FAILED = new boolean[]{false};
         newCall(sOkRequestProvider.requestMultipartPost(url, null, null, new OkUploadCallback() {
             @Override
             public void onProgress(int progress) {
-                if(UPLOAD_CALLBACK  != null) {
+                if (UPLOAD_CALLBACK != null) {
                     UPLOAD_CALLBACK.onProgress(progress);
                 }
             }
@@ -197,22 +226,22 @@ public class OkHelper {
         }, files)).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                if(UPLOAD_CALLBACK != null){
+                if (UPLOAD_CALLBACK != null) {
                     UPLOAD_CALLBACK.onFailure(OkUploadCallback.ERROR_IO);
                 }
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                if(response.isSuccessful()){
-                    if(UPLOAD_CALLBACK != null) {
-                        if(IS_FAILED[0]){
+                if (response.isSuccessful()) {
+                    if (UPLOAD_CALLBACK != null) {
+                        if (IS_FAILED[0]) {
                             UPLOAD_CALLBACK.onFailure(OkUploadCallback.ERROR_PART_FAIL);
-                        }else {
+                        } else {
                             UPLOAD_CALLBACK.onSuccess();
                         }
                     }
-                }else {
+                } else {
                     UPLOAD_CALLBACK.onFailure(OkUploadCallback.ERROR_IO);
                 }
             }

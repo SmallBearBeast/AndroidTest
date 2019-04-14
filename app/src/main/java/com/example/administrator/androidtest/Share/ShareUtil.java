@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
+import android.net.wifi.p2p.WifiP2pManager;
 
 import com.example.administrator.androidtest.Common.Util.Core.ToastUtils;
 
@@ -120,6 +121,36 @@ public class ShareUtil {
         }
     }
 
+    public static void shareFileTextToApp(Activity activity, IntentShare intentShare, String packageName){
+        shareFileTextToApp(activity, intentShare, packageName, null);
+    }
+
+    public static void shareFileTextToApp(Activity activity, IntentShare intentShare, String packageName, String activityName){
+        Intent it = checkShareToApp(activity.getApplicationContext(), IntentShare.TYPE_ALL, packageName, activityName);
+        if (it != null && checkShareSize(IntentShare.TYPE_ALL, intentShare.getVideoUri(), packageName)) {
+            it.putExtra(Intent.EXTRA_TEXT, intentShare.getText());
+            it.putExtra(Intent.EXTRA_STREAM, intentShare.getFileUri());
+            activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
+        } else {
+            ToastUtils.showToast("分享视频失败");
+        }
+    }
+
+    public static void shareMulFileTextToApp(Activity activity, IntentShare intentShare, String packageName){
+        shareMulFileTextToApp(activity, intentShare, packageName, null);
+    }
+
+    public static void shareMulFileTextToApp(Activity activity, IntentShare intentShare, String packageName, String activityName){
+        Intent it = checkShareToApp(activity.getApplicationContext(), IntentShare.TYPE_ALL, packageName, activityName);
+        if (it != null && checkShareSize(IntentShare.TYPE_ALL, intentShare.getVideoUri(), packageName)) {
+            it.putExtra(Intent.EXTRA_TEXT, intentShare.getText());
+            it.putParcelableArrayListExtra(Intent.EXTRA_STREAM, intentShare.getFileUriList());
+            activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
+        } else {
+            ToastUtils.showToast("分享视频失败");
+        }
+    }
+
     public static Intent checkShareToApp(Context context, String type, String packageName) {
         return checkShareToApp(context, type, packageName, null);
     }
@@ -130,7 +161,7 @@ public class ShareUtil {
      * 可以截取页面名字的某一部分作为特征判断，一般为null。
      */
     public static Intent checkShareToApp(Context context, String type, String packageName, String activityName) {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
         shareIntent.setType(type);
         shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         List<ResolveInfo> resInfo = context.getPackageManager().queryIntentActivities(shareIntent, PackageManager.MATCH_DEFAULT_ONLY);
@@ -164,7 +195,7 @@ public class ShareUtil {
             long uriSize = file.length();
             return uriSize < maxSize;
         }
-        return false;
+        return true;
     }
 
     //
