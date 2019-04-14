@@ -1,15 +1,13 @@
-package com.example.administrator.androidtest.Common.Util;
+package com.example.administrator.androidtest.Common.Util.Core;
 
-import android.support.annotation.Nullable;
 import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -21,6 +19,12 @@ import java.util.Set;
 
 public final class CollectionUtil {
 
+    private static Object[] objToArray(Object obj){
+        if(obj instanceof Object[]){
+            return (Object[]) obj;
+        }
+        return null;
+    }
     /**
      * 判空方法
      */
@@ -28,8 +32,16 @@ public final class CollectionUtil {
         return collection == null || collection.isEmpty();
     }
 
-    public static <T> boolean isEmpty(T[] list) {
-        return list == null || list.length == 0;
+    public static boolean isEmpty(Object[] array) {
+        return array == null || array.length == 0;
+    }
+
+    /**
+     * 主要用于基本类型数组
+     */
+    public static boolean isEmpty(Object obj){
+        Object[] array = objToArray(obj);
+        return array == null || array.length == 0;
     }
 
     public static <K, V> boolean isEmpty(Map<K, V> map) {
@@ -45,6 +57,26 @@ public final class CollectionUtil {
      * 添加元素到list，有两种：是否允许伟null
      * 不能使用Arrays.asList() 范型类型会是数组类型
      */
+    public static <T> void addToListNull(List<T> list, Object obj){
+        Object[] array = objToArray(obj);
+        if(isEmpty(array))
+            return;
+        for (int i = 0, len = array.length; i < len; i++) {
+            list.add((T) array[i]);
+        }
+    }
+
+    public static <T> void addToListNotNull(List<T> list, Object obj){
+        Object[] array = objToArray(obj);
+        if(isEmpty(array))
+            return;
+        for (int i = 0, len = array.length; i < len; i++) {
+            if(array[i] != null){
+                list.add((T) array[i]);
+            }
+        }
+    }
+
     public static <T> void addToListNull(List<T> list, T... datas){
         for (int i = 0; i < datas.length; i++) {
             list.add(datas[i]);
@@ -63,19 +95,43 @@ public final class CollectionUtil {
     /**
      * 数组类型转list
      */
-    public static <T> List<T> arrayToListNull(T... datas){
+    public static <T> List<T> asListNull(Object obj){
+        Object[] array = objToArray(obj);
+        if(array == null)
+            return null;
         List<T> list = new ArrayList<>();
-        for (int i = 0; i < datas.length; i++) {
-            list.add(datas[i]);
+        for (int i = 0, len = array.length; i < len; i++) {
+            list.add((T) array[i]);
         }
         return list;
     }
 
-    public static <T> List<T> arrayToListNotNull(T... datas){
+    public static <T> List<T> asListNotNull(Object obj){
+        Object[] array = objToArray(obj);
+        if(array == null)
+            return null;
         List<T> list = new ArrayList<>();
-        for (int i = 0; i < datas.length; i++) {
-            if(datas[i] != null) {
-                list.add(datas[i]);
+        for (int i = 0, len = array.length; i < len; i++) {
+            if(array[i] != null) {
+                list.add((T) array[i]);
+            }
+        }
+        return list;
+    }
+
+    public static <T> List<T> asListNull(T... array){
+        List<T> list = new ArrayList<>();
+        for (int i = 0, len = array.length; i < len; i++) {
+            list.add(array[i]);
+        }
+        return list;
+    }
+
+    public static <T> List<T> asListNotNull(T... array){
+        List<T> list = new ArrayList<>();
+        for (int i = 0, len = array.length; i < len; i++) {
+            if(array[i] != null) {
+                list.add(array[i]);
             }
         }
         return list;
@@ -83,20 +139,49 @@ public final class CollectionUtil {
     /**数组类型转list**/
 
     /**
+     * 获取数组第一个元素
+     */
+    public static <T> T getFirst(Object obj){
+        Object[] array = objToArray(obj);
+        if(isEmpty(array))
+            return null;
+        return (T) array[0];
+    }
+
+    public static <T> T getFirst(Collection<T> collection){
+        Iterator<T> it = collection.iterator();
+        if(it.hasNext()){
+            return it.next();
+        }
+        return null;
+    }
+    /**获取数组第一个元素**/
+
+    /**
      * 通过keys和vals数组生成map
      */
-    public static <K, V> Map<K, V> asMap(K[] keys, V[] vals){
-        return asMap(Arrays.asList(keys), Arrays.asList(vals));
+    public static <K, V> Map<K, V> asMap(Object keys, Object vals){
+        Object[] keyArrays = objToArray(keys);
+        Object[] valArrays = objToArray(vals);
+        if(keyArrays != null && valArrays != null && keyArrays.length == valArrays.length){
+            Map<K, V> map = new HashMap<>();
+            for (int i = 0, len = keyArrays.length; i < len; i++) {
+                map.put((K)keyArrays[i], (V)valArrays[i]);
+            }
+            return map;
+        }
+        return null;
     }
 
     public static <K, V> Map<K, V> asMap(List<K> keys, List<V> vals){
-        Map<K, V> map = new HashMap<>();
         if(keys != null && vals != null && keys.size() == vals.size()){
+            Map<K, V> map = new HashMap<>();
             for (int i = 0; i < keys.size(); i++) {
                 map.put(keys.get(i), vals.get(i));
             }
+            return map;
         }
-        return map;
+        return null;
     }
     /**通过keys和vals数组生成map**/
 

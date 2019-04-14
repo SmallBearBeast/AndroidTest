@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.administrator.androidtest.Test.ViewDragHelper.ViewDragHelperLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_1"
+        android:textColor="@color/cl_white"
+        android:textSize="@dimen/sp_18"
+        android:background="@color/cl_oriange"
+        android:gravity="center"
+        android:text="Text1"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_50" />
+
+
+    <TextView
+        android:id="@+id/tv_2"
+        android:textColor="@color/cl_white"
+        android:textSize="@dimen/sp_18"
+        android:background="@color/cl_blue_5"
+        android:gravity="center"
+        android:text="Text2"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_50" />
+
+
+    <TextView
+        android:id="@+id/tv_3"
+        android:textColor="@color/cl_white"
+        android:textSize="@dimen/sp_18"
+        android:background="@color/cl_red_t_6"
+        android:gravity="center"
+        android:text="Text3"
+        android:layout_width="@dimen/dp_100"
+        android:layout_height="@dimen/dp_50" />
+
+</com.example.administrator.androidtest.Test.ViewDragHelper.ViewDragHelperLayout>

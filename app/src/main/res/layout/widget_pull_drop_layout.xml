@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.administrator.androidtest.View.RecyclerView.PullLoadLayout
+<com.example.administrator.androidtest.Test.RecyclerView.PullLoadLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:pdl="http://schemas.android.com/apk/res-auto"
     android:background="@color/cl_white"
@@ -11,7 +11,7 @@
     pdl:pdl_foot_time="1000"
     style="@style/match_parent">
 
-    <com.example.administrator.androidtest.View.RecyclerView.DefaultHeadView
+    <com.example.administrator.androidtest.Test.RecyclerView.DefaultHeadView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"/>
 
@@ -22,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <com.example.administrator.androidtest.View.RecyclerView.DefaultFootView
+    <com.example.administrator.androidtest.Test.RecyclerView.DefaultFootView
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_100"/>
-</com.example.administrator.androidtest.View.RecyclerView.PullLoadLayout>
+</com.example.administrator.androidtest.Test.RecyclerView.PullLoadLayout>

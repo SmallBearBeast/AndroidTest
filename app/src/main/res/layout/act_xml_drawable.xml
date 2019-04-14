@@ -2,12 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/ll_vertical">
 
-    <TextView
+    <ImageView
         android:background="@drawable/selector_corner"
-        android:clickable="true"
-        android:enabled="true"
+        android:id="@+id/iv"
+        android:layout_margin="30dp"
+        android:layout_width="@dimen/dp_80"
+        android:layout_height="@dimen/dp_80" />
+
+    <TextView
+        android:background="@color/cl_red_t_6"
         android:id="@+id/tv_1"
         android:text="样式一"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:gravity="center"
         android:layout_margin="30dp"
         android:layout_width="@dimen/dp_150"

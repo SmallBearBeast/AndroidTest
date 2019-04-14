@@ -2,10 +2,14 @@ package com.example.administrator.androidtest.Share;
 
 import android.net.Uri;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class IntentShare {
     public static final String TYPE_IMAGE = "image/*";
     public static final String TYPE_VIDEO = "video/*";
     public static final String TYPE_TEXT = "text/*";
+    public static final String TYPE_ALL = "*/*";
 
     public static final String PACKAGE_FB = "com.facebook.katana";
     public static final String PACKAGE_TWITTER = "com.twitter.android";
@@ -35,10 +39,15 @@ public class IntentShare {
     public static final String PACKAGE_TELEGRAM = "org.telegram.messenger";
     public static final String PACKAGE_SNAPCHAT = "com.snapchat.android";
 
+    public static final String PACKAGE_XENDER = "cn.xender";
+    public static final String PACKAGE_ANYSHARE= "com.lenovo.anyshare.gps";
+
 
     private String mText;
     private Uri mImageUri;
     private Uri mVideoUri;
+    private Uri mFileUri;
+    private ArrayList<Uri> mFileUriList;
 
     public IntentShare(){
 
@@ -64,6 +73,20 @@ public class IntentShare {
         return this;
     }
 
+    public IntentShare setFileUri(Uri fileUri) {
+        mFileUri = fileUri;
+        return this;
+    }
+
+    public IntentShare setFileUriList(ArrayList<Uri> fileUriList){
+        mFileUriList = fileUriList;
+        return this;
+    }
+
+    public ArrayList<Uri> getFileUriList(){
+        return mFileUriList;
+    }
+
     public String getText() {
         return mText == null ? "" : mText;
     }
@@ -74,5 +97,9 @@ public class IntentShare {
 
     public Uri getVideoUri() {
         return mVideoUri;
+    }
+
+    public Uri getFileUri() {
+        return mFileUri;
     }
 }

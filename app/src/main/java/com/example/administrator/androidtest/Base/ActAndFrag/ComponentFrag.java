@@ -1,29 +1,36 @@
 package com.example.administrator.androidtest.Base.ActAndFrag;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.example.administrator.androidtest.Base.Component.FragComponent;
+import com.example.administrator.androidtest.Base.Component.IComponent;
+import com.example.administrator.androidtest.Base.Component.ActComponent;
+import com.example.administrator.androidtest.Base.Component.ViewSet;
 
 
+import java.util.HashMap;
 import java.util.Map;
 
-public abstract class ComponentFrag <K extends Component, T extends ViewSet> extends BaseFrag {
+public abstract class ComponentFrag <K extends FragComponent, T extends ViewSet> extends BaseFrag {
     public K mainComponent;
     public T viewSet;
     public View contentView;
     protected ComponentAct mComActivity;
-    protected Map<Class, Component> componentMap;
+    protected Map<Class, IComponent> mActComponentMap;
+    protected Map<Class, IComponent> mFragComponentMap  = new HashMap<>(8);;
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if(context instanceof ComponentAct){
             mComActivity = (ComponentAct) context;
-            componentMap = mComActivity.componentMap;
+            mActComponentMap = mComActivity.componentMap;
         }
     }
 
@@ -45,24 +52,44 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
         }
     }
 
-    public  <C extends Component> void registerComponent(C component){
+    public  <C extends IComponent> void registerComponent(C component){
+        if(component instanceof FragComponent){
+            ((FragComponent)component).attachActivity(mComActivity);
+            ((FragComponent)component).attachFragment(this);
+        }
         if(component != null){
-            component.attachActivity(mComActivity);
-            componentMap.put(component.getClass(), component);
+            mFragComponentMap.put(component.getClass(), component);
         }
     }
 
-    public <C extends Component> C getcomponent(Class<C> clz){
-        if(componentMap.containsKey(clz)){
-            return (C) componentMap.get(clz);
+    public <C extends IComponent> C getFragComponent(Class<C> clz){
+        if(mFragComponentMap.containsKey(clz)){
+            return (C) mFragComponentMap.get(clz);
+        }
+        return null;
+    }
+
+    public <C extends IComponent> C getActComponent(Class<C> clz){
+        if(mActComponentMap != null) {
+            if (mActComponentMap.containsKey(clz)) {
+                return (C) mActComponentMap.get(clz);
+            }
         }
         return null;
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        for (IComponent component : mFragComponentMap.values()) {
+            component.onCreate();
+        }
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : mFragComponentMap.values()) {
             component.onStart();
         }
     }
@@ -70,7 +97,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     @Override
     public void onStop() {
         super.onStop();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : mFragComponentMap.values()) {
             component.onStop();
         }
     }
@@ -78,7 +105,7 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     @Override
     public void onPause() {
         super.onPause();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : mFragComponentMap.values()) {
             component.onPause();
         }
     }
@@ -86,17 +113,25 @@ public abstract class ComponentFrag <K extends Component, T extends ViewSet> ext
     @Override
     public void onDestroy() {
         super.onDestroy();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : mFragComponentMap.values()) {
             component.onDestory();
-            componentMap.remove(component.getClass());
+            mFragComponentMap.remove(component.getClass());
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        for (Component component : componentMap.values()) {
+        for (IComponent component : mFragComponentMap.values()) {
             component.onResume();
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (IComponent component : mFragComponentMap.values()) {
+            component.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

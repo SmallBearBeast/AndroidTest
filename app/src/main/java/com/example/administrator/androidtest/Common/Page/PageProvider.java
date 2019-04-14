@@ -9,7 +9,7 @@ public class PageProvider{
     private final LinkedList<Integer> sPageNodeList = new LinkedList<>(); //记录页面路由
     private final LinkedList<Page> sPageList = new LinkedList<>();
 
-    public static class SingleTon{
+    private static class SingleTon{
         static PageProvider sPageProvider = new PageProvider();
     }
 

@@ -3,11 +3,13 @@ package com.example.administrator.androidtest.Common.Util.Ui;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+import android.support.annotation.DrawableRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 
 import com.example.administrator.androidtest.Common.Util.AppInitUtil;
+import com.example.administrator.androidtest.R;
 
 
 /**
@@ -23,30 +25,25 @@ public class XmlDrawableUtil extends AppInitUtil {
     public static int DRAWABLE_NONE = -1;
     public static int COLOR_NONE = -1;
 
-    public static DrawableWapper selector(int normalId, int pressedId){
-        return selector(normalId, pressedId, DRAWABLE_NONE);
+    public static DrawableWapper selector(int normalResId, int pressedResId){
+        return selector(normalResId, pressedResId, DRAWABLE_NONE);
     }
 
-    public static DrawableWapper selector(int normalId, int pressedId, int checkedId){
+    public static DrawableWapper selector(int normalResId, int pressedResId, int checkedResId){
         StateListDrawable drawable = new StateListDrawable();
-
-        if(checkDrawableID(pressedId)){
+        if(checkDrawableID(pressedResId)){
             drawable.addState(new int[]{
                     android.R.attr.state_pressed
-            }, getDrawable(pressedId));
+            }, getDrawable(pressedResId));
         }
-
-        if(checkDrawableID(checkedId)){
+        if(checkDrawableID(checkedResId)){
             drawable.addState(new int[]{
                     android.R.attr.state_checked
-            }, getDrawable(checkedId));
+            }, getDrawable(checkedResId));
         }
-
-
-        if(checkDrawableID(normalId)){
-            drawable.addState(new int[]{}, getDrawable(normalId));
+        if(checkDrawableID(normalResId)){
+            drawable.addState(new int[]{}, getDrawable(normalResId));
         }
-
         return new DrawableWapper(drawable);
     }
 
@@ -56,24 +53,19 @@ public class XmlDrawableUtil extends AppInitUtil {
 
     public static DrawableWapper selector(Drawable normalDrawable, Drawable pressedDrawable, Drawable checkedDrawable){
         StateListDrawable drawable = new StateListDrawable();
-
         if(checkDrawable(pressedDrawable)){
             drawable.addState(new int[]{
                     android.R.attr.state_pressed
             }, pressedDrawable);
         }
-
         if(checkDrawable(checkedDrawable)){
             drawable.addState(new int[]{
                     android.R.attr.state_checked
             }, checkedDrawable);
         }
-
         if(checkDrawable(normalDrawable)){
             drawable.addState(new int[]{}, normalDrawable);
         }
-
-
         return new DrawableWapper(drawable);
     }
 
@@ -103,7 +95,7 @@ public class XmlDrawableUtil extends AppInitUtil {
         return colorId != COLOR_NONE;
     }
 
-    public static DrawableWapper shapeCornerRect(int colorId, int radius){
+    public static DrawableWapper cornerRect(int colorId, int radius){
         GradientDrawable drawable = new GradientDrawable();
         if(checkColorId(colorId)) {
             drawable.setColor(getColor(colorId));
@@ -113,15 +105,15 @@ public class XmlDrawableUtil extends AppInitUtil {
         return new DrawableWapper(drawable);
     }
 
-    public static DrawableWapper shapeStrokeRect(int colorId, int radius, int strokeColorId, int strokeWidth){
-        GradientDrawable drawable = (GradientDrawable) shapeCornerRect(colorId, radius).mDrawable;
+    public static DrawableWapper strokeRect(int colorId, int radius, int strokeColorId, int strokeWidth){
+        GradientDrawable drawable = (GradientDrawable) cornerRect(colorId, radius).mDrawable;
         if(checkDrawableID(strokeColorId)) {
             drawable.setStroke(getDp2Px(strokeWidth), getColor(strokeColorId));
         }
         return new DrawableWapper(drawable);
     }
 
-    public static DrawableWapper shapeCircle(int colorId){
+    public static DrawableWapper circle(int colorId){
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.OVAL);
         if(checkColorId(colorId)) {
@@ -130,31 +122,69 @@ public class XmlDrawableUtil extends AppInitUtil {
         return new DrawableWapper(drawable);
     }
 
-    public static DrawableWapper shapeStrokeCircle(int colorId, int strokeColorId, int strokeWidth){
-        GradientDrawable drawable = (GradientDrawable) shapeCircle(colorId).mDrawable;
+    public static DrawableWapper strokeCircle(int colorId, int strokeColorId, int strokeWidth){
+        GradientDrawable drawable = (GradientDrawable) circle(colorId).mDrawable;
         if(checkDrawableID(strokeColorId)) {
             drawable.setStroke(getDp2Px(strokeWidth), getColor(strokeColorId));
         }
         return new DrawableWapper(drawable);
     }
 
-    public static DrawableWapper selectorCornerRect(int normalColorId, int pressedColorId, int radius){
-        Drawable normalDrawable = shapeCornerRect(normalColorId, radius).mDrawable;
-        Drawable pressedDrawable = shapeCornerRect(pressedColorId, radius).mDrawable;
+    public static DrawableWapper gradient(int[] colorIds, GradientDrawable.Orientation orientation){
+        GradientDrawable drawable = new GradientDrawable();
+        if(colorIds.length > 1) {
+            int[] colors = new int[colorIds.length];
+            for (int i = 0; i < colorIds.length; i++) {
+                if(checkColorId(colorIds[i])) {
+                    colors[i] = getColor(colorIds[i]);
+                }
+            }
+            drawable.setColors(colors);
+            drawable.setOrientation(orientation);
+        }
+        return new DrawableWapper(drawable);
+    }
+
+    public static DrawableWapper alpha(float alpha, int colorId){
+        GradientDrawable drawable = new GradientDrawable();
+        if(alpha >= 0 && alpha <= 1.0f){
+            drawable.setAlpha((int) (alpha * 0xff));
+            if(checkColorId(colorId)) {
+                drawable.setColor(getColor(colorId));
+            }
+        }
+        return new DrawableWapper(drawable);
+    }
+
+
+    public static DrawableWapper slcornerRect(int normalColorId, int pressedColorId, int radius){
+        Drawable normalDrawable = cornerRect(normalColorId, radius).mDrawable;
+        Drawable pressedDrawable = cornerRect(pressedColorId, radius).mDrawable;
         return selector(normalDrawable, pressedDrawable);
     }
 
-    public static DrawableWapper selectorCircle(int normalColorId, int pressedColorId){
-        return selectorCircle(normalColorId, pressedColorId, COLOR_NONE);
+    public static DrawableWapper slCircle(int normalColorId, int pressedColorId){
+        return slCircle(normalColorId, pressedColorId, COLOR_NONE);
     }
 
-    public static DrawableWapper selectorCircle(int normalColorId, int pressedColorId, int checkedColorId){
-        Drawable normalDrawable = shapeCircle(normalColorId).mDrawable;
-        Drawable pressedDrawable = shapeCircle(pressedColorId).mDrawable;
-        Drawable checkedDrawable = shapeCircle(checkedColorId).mDrawable;
+    public static DrawableWapper slCircle(int normalColorId, int pressedColorId, int checkedColorId){
+        Drawable normalDrawable = circle(normalColorId).mDrawable;
+        Drawable pressedDrawable = circle(pressedColorId).mDrawable;
+        Drawable checkedDrawable = circle(checkedColorId).mDrawable;
         return selector(normalDrawable, pressedDrawable, checkedDrawable);
     }
 
+    public static DrawableWapper slGradient(int[] normalColorIds, int[] pressedColorIds, GradientDrawable.Orientation orientation){
+        Drawable normalDrawable = gradient(normalColorIds, orientation).mDrawable;
+        Drawable pressedDrawable = gradient(pressedColorIds, orientation).mDrawable;
+        return selector(normalDrawable, pressedDrawable);
+    }
+
+    public static DrawableWapper slAlpha(float normalAlpha, float pressAlpha, int colorId){
+        Drawable normalDrawable = alpha(normalAlpha, colorId).mDrawable;
+        Drawable pressedDrawable = alpha(pressAlpha, colorId).mDrawable;
+        return selector(normalDrawable, pressedDrawable);
+    }
 
     public static class DrawableWapper{
         Drawable mDrawable;

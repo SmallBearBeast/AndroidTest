@@ -30,7 +30,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     protected BaseAct mActivity;
     protected Context mContext;
     private PermissionListener mPermissionListener;
-    private ActivityResultListener mActivityResultListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -75,22 +74,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         }
     }
 
-    protected void notifyForeground(boolean fore) {
-        foreground = fore;
-        if(!fore){
-            PageProvider.getInstance().addPage(new Page(IPage.Background));
-        }
-        onNotifyForeground(fore);
-        List<Fragment> fragments = getSupportFragmentManager().getFragments();
-        if (fragments != null && fragments.size() > 0) {
-            for (Fragment frag : fragments) {
-                if(frag instanceof BaseFrag){
-                    ((BaseFrag) frag).notifyForeground(fore);
-                }
-            }
-        }
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -116,14 +99,33 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         }
     }
 
-    private Page createPage(){
-        mPage = new Page(pageId());
-        return mPage;
+    /**
+     * 通知应用是否在前后台，获取应用前后台状态
+     */
+    private void notifyForeground(boolean fore) {
+        foreground = fore;
+        if(!fore){
+            PageProvider.getInstance().addPage(new Page(IPage.Background));
+        }
+        onNotifyForeground(fore);
+        List<Fragment> fragments = getSupportFragmentManager().getFragments();
+        if (fragments != null && fragments.size() > 0) {
+            for (Fragment frag : fragments) {
+                if(frag instanceof BaseFrag){
+                    ((BaseFrag) frag).notifyForeground(fore);
+                }
+            }
+        }
     }
 
-    public Page getPage(){
-        return mPage;
+    protected void onNotifyForeground(boolean fore) {
+        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
     }
+
+    public boolean isForeground() {
+        return foreground;
+    }
+    /**通知应用是否在前后台，获取应用前后台状态**/
 
     /**
      * 跳转activity
@@ -138,8 +140,7 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         return intent;
     }
 
-    public Intent startActivityForResult(Class clz, int requestCode, Bundle bundle, ActivityResultListener listener){
-        mActivityResultListener = listener;
+    public Intent startActivityForResult(Class clz, int requestCode, Bundle bundle){
         boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
         Intent intent = new Intent(this, clz);
         intent.putExtra(IContext.BUNDLE, bundle);
@@ -150,22 +151,9 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     }
     /**跳转activity**/
 
-    protected void onNotifyForeground(boolean fore) {
-        Log.e(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
-    }
-
-    public boolean isForeground() {
-        return foreground;
-    }
-
-    protected void handleIntent(Intent intent, Bundle bundle){}
-
-    protected abstract int layoutId();
-
-    protected void init(Bundle savedInstanceState) {}
-
-    protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){}
-
+    /**
+     * 权限监听回调
+     */
     public interface PermissionListener{
         void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray);
     }
@@ -174,25 +162,38 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         mPermissionListener = listerner;
     }
 
-    public interface ActivityResultListener{
-        void onActivityResult(int requestCode, int resultCode, Intent data);
+    protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){
+
+    }
+    /**权限监听回调**/
+
+    /**
+     * 页面处理相关方法
+     */
+    private Page createPage(){
+        mPage = new Page(pageId());
+        return mPage;
     }
 
-    public void setActivityResultListener(ActivityResultListener listerner){
-        mActivityResultListener = listerner;
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(mActivityResultListener != null){
-            mActivityResultListener.onActivityResult(requestCode, resultCode, data);
-        }
+    public Page getPage(){
+        return mPage;
     }
 
     @Override
     public int pageId() {
         return IPage.VpFragVisibilityAct;
+    }
+    /**页面处理相关方法**/
+
+    /**
+     * Activity需要实现的方法
+     */
+    protected abstract int layoutId();
+
+    protected abstract void init(Bundle savedInstanceState);
+    /**Activity需要实现的方法**/
+
+    protected void handleIntent(Intent intent, Bundle bundle){
+
     }
 }

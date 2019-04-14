@@ -2,25 +2,20 @@ package com.example.administrator.androidtest.Common.Util.Core;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import com.example.administrator.androidtest.Common.Util.AppInitUtil;
+
 /**
  * Created by Administrator on 2017/7/10.
  */
 
-public class SPUtil {
-    public static final String SETTING = "SETTING";
-
-
-    public static void toSetting(Context context, String key, Object value) {
-        putData(SETTING, context, key, value);
-    }
-
-    public static Object fromSetting(Context context, String key, Object defaultValue){
-        return getData(SETTING, context, key, defaultValue);
-    }
+public class SPUtil extends AppInitUtil {
+    public static final String SETTING = "SETTING"; //设置
+    public static final String OTHER = "OTHER"; //其他
 
     // TODO: 2018/12/20 支持多个key-value对添加 
-    private static void putData(String spName, Context context, String key, Object value){
-        SharedPreferences.Editor editor = context.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+    private static void putData(String spName, String key, Object value){
+        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         if(value instanceof Boolean){
             editor.putBoolean(key, (Boolean) value);
         }else if(value instanceof Integer){
@@ -35,8 +30,8 @@ public class SPUtil {
         editor.apply();
     }
 
-    public static Object getData(String spName, Context context, String key, Object defaultValue) {
-        SharedPreferences preferences = context.getSharedPreferences(spName, Context.MODE_PRIVATE);
+    public static Object getData(String spName, String key, Object defaultValue) {
+        SharedPreferences preferences = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         String type = defaultValue.getClass().getSimpleName();
         Object result = null;
         switch (type) {
@@ -53,6 +48,26 @@ public class SPUtil {
                 break;
         }
         return result;
+    }
+
+    public static void remove(String spName, String key){
+        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+        editor.remove(key);
+        editor.apply();
+    }
+
+    public static void clear(String spName){
+        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+        editor.clear();
+        editor.apply();
+    }
+
+    public static Object getDataFromOther(String key, Object defaultValue){
+        return getData(OTHER, key, defaultValue);
+    }
+
+    public static void putDataToOther(String key, Object value){
+        putData(OTHER, key, value);
     }
 }
 
