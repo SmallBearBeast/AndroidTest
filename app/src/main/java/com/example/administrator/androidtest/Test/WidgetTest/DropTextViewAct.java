@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Widget.Activity;
+package com.example.administrator.androidtest.Test.WidgetTest;
 
 import com.example.administrator.androidtest.R;
 import com.example.libframework.ActAndFrag.ComponentAct;
