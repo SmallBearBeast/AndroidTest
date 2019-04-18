@@ -42,4 +42,7 @@ dependencies {
             'com.snapchat.kit.sdk:creative:1.1.4',
             'com.snapchat.kit.sdk:core:1.1.4'
     ])
+
+    //fresco
+    implementation 'com.facebook.fresco:fresco:1.13.0'
 }
