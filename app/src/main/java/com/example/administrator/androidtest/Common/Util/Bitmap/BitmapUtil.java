@@ -20,21 +20,23 @@ public class BitmapUtil {
         return BitmapFactory.decodeFile(path, op);
     }
 
-    public static void save(String path, int maxWidth, int maxHeight, String savePath){
-        save(getBitmap(path, maxWidth, maxHeight), savePath);
+    public static void save(String path, int maxWidth, int maxHeight, String savePath, boolean recycle){
+        save(getBitmap(path, maxWidth, maxHeight), savePath, recycle);
     }
 
-    public static void save(String path, int inSampleSize, String savePath){
-        save(getBitmap(path, inSampleSize), savePath);
+    public static void save(String path, int inSampleSize, String savePath, boolean recycle){
+        save(getBitmap(path, inSampleSize), savePath, recycle);
     }
 
-    public static void save(Bitmap bitmap, String savePath){
+    public static void save(Bitmap bitmap, String savePath, boolean recycle){
         if(FileUtil.createFile(savePath)){
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(savePath);
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
-                bitmap.recycle();
+                if(recycle) {
+                    bitmap.recycle();
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
