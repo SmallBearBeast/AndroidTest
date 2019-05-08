@@ -17,6 +17,7 @@ import java.util.Set;
  * 集合与数组相关工具类
  */
 
+@SuppressWarnings("unchecked")
 public final class CollectionUtil {
 
     private static Object[] objToArray(Object obj){
@@ -57,6 +58,7 @@ public final class CollectionUtil {
      * 添加元素到list，有两种：是否允许伟null
      * 不能使用Arrays.asList() 范型类型会是数组类型
      */
+    @SuppressWarnings("unchecked")
     public static <T> void addToListNull(List<T> list, Object obj){
         Object[] array = objToArray(obj);
         if(isEmpty(array))
@@ -106,6 +108,7 @@ public final class CollectionUtil {
         return list;
     }
 
+
     public static <T> List<T> asListNotNull(Object obj){
         Object[] array = objToArray(obj);
         if(array == null)
@@ -141,6 +144,7 @@ public final class CollectionUtil {
     /**
      * 获取数组第一个元素
      */
+
     public static <T> T getFirst(Object obj){
         Object[] array = objToArray(obj);
         if(isEmpty(array))
@@ -160,6 +164,7 @@ public final class CollectionUtil {
     /**
      * 通过keys和vals数组生成map
      */
+
     public static <K, V> Map<K, V> asMap(Object keys, Object vals){
         Object[] keyArrays = objToArray(keys);
         Object[] valArrays = objToArray(vals);

@@ -27,7 +27,6 @@ public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActCompo
     }
 
     static class MainViewSet extends ViewSet{
-
         public MainViewSet(View contentView) {
             super(contentView);
         }
