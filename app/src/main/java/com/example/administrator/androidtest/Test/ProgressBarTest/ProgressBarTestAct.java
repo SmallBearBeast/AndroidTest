@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.ProgressBar;
-import com.android.internal.graphics.drawable.AnimationScaleListDrawable;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
 

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<bitmap  xmlns:android="http://schemas.android.com/apk/res/android"
-         android:tileMode="mirror"
-         android:tint="@color/cl_blue_5"
-         android:src="@drawable/delete">
-
+<bitmap
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:tint="@color/cl_blue_5"
+	android:autoMirrored="true"
+	android:antialias="true"
+	android:dither="true"
+	android:filter="true"
+	android:tileMode="clamp"
+	android:src="@drawable/delete">
 </bitmap>
