@@ -1,16 +1,9 @@
 package com.example.administrator.androidtest.Test.ProgressBarTest;
 
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.graphics.drawable.RotateDrawable;
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ProgressBar;
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class ProgressBarTestAct extends ComponentAct {
     private ProgressBar mProgressBar;

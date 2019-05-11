@@ -2,15 +2,13 @@ package com.example.administrator.androidtest.Test.DrawableTest;
 
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.XmlDrawableTest.TestDrawable;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class DrawableTestAct extends ComponentAct {
     private static final String TAG = "DrawableTestAct";

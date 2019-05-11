@@ -1,5 +1,6 @@
 package com.example.libframework.Rv;
 
+import android.annotation.SuppressLint;
 import android.arch.lifecycle.GenericLifecycleObserver;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
@@ -16,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@SuppressLint("RestrictedApi")
 public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements GenericLifecycleObserver {
     protected String TAG = getClass().getSimpleName();
     private LayoutInflater mInflater;
