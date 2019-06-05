@@ -9,6 +9,7 @@ import android.util.Log;
 import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
 import com.example.administrator.androidtest.Common.Util.AppInitUtil;
 import com.example.administrator.androidtest.Common.Util.Core.AppUtil;
+import com.example.administrator.androidtest.Fresco.FrescoUtil;
 import com.example.administrator.androidtest.Share.HomeKeyReceiver;
 
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class App extends Application {
         mContext = this;
         AppInitUtil.init(this);
         AppUtil.init(this);
+        FrescoUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
     }
 

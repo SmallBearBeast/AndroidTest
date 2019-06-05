@@ -1,23 +1,28 @@
 package com.example.administrator.androidtest.Log;
 
-public class SLog {
-    void i (){
+public class SLog implements ILog{
+    @Override
+    public void i() {
 
     }
 
-    void d (){
+    @Override
+    public void d() {
 
     }
 
-    void e (){
+    @Override
+    public void e() {
 
     }
 
-    void v (){
+    @Override
+    public void v() {
 
     }
 
-    void w (){
+    @Override
+    public void w() {
 
     }
 }

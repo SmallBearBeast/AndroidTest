@@ -1,5 +1,7 @@
 package com.example.administrator.androidtest.Common.Util.File;
 
+import android.net.Uri;
+
 import java.io.File;
 
 /**
@@ -8,24 +10,30 @@ import java.io.File;
 public class FileUtil {
 
     /**
-     * 文件夹是否包含文件
+     * 文件夹是否包含文件 包含返回true，不包含返回false
      */
     public static boolean isDirContainFile(String dirPath, String fileName) {
-        if (!checkPath(dirPath))
+        if(!isFileExist(dirPath) && checkPath(fileName)){
             return false;
+        }
         File dirFile = new File(dirPath);
         return isDirContainFile(dirFile, fileName);
     }
 
     public static boolean isDirContainFile(File dirFile, String fileName) {
-        if (dirFile.getName().equals(fileName))
+        if(!isFileExist(dirFile) && checkPath(fileName)){
+            return false;
+        }
+        if (dirFile.getName().equals(fileName)) {
             return true;
+        }
         File[] files = dirFile.listFiles();
         if (files != null) {
             for (int i = 0; i < files.length; i++) {
                 boolean isContain = isDirContainFile(files[i], fileName);
-                if (isContain)
+                if (isContain) {
                     return true;
+                }
             }
         }
         return false;
@@ -33,42 +41,48 @@ public class FileUtil {
     /***文件夹是否包含文件**/
 
     /**
-     * 创建文件夹
+     * 创建文件夹 成功返回true，失败返回false
      */
     public static boolean createDir(String dirPath) {
-        if (!checkPath(dirPath))
+        if (!checkPath(dirPath)) {
             return false;
+        }
         File dirFile = new File(dirPath);
         return createDir(dirFile);
     }
 
     public static boolean createDir(File dirFile) {
-        if (dirFile == null)
+        if (dirFile == null) {
             return false;
-        if (!dirFile.exists() && !dirFile.mkdirs())
+        }
+        if (!dirFile.exists() && !dirFile.mkdirs()) {
             return false;
+        }
         return true;
     }
     /**创建文件夹**/
 
     /**
-     * 创建文件
+     * 创建文件 成功返回true，失败返回false
      */
     public static boolean createFile(String filePath) {
-        if (!checkPath(filePath))
+        if (!checkPath(filePath)) {
             return false;
+        }
         return createFile(new File(filePath));
     }
 
     public static boolean createFile(File file) {
-        if (file == null)
+        if (file == null) {
             return false;
+        }
         return createFile(file.getParent(), file.getName());
     }
 
     public static boolean createFile(String dirPath, String fileName) {
-        if (!checkPath(dirPath) || !checkPath(fileName))
+        if (!checkPath(dirPath) || !checkPath(fileName)) {
             return false;
+        }
         if (createDir(dirPath)) {
             File file = new File(dirPath, fileName);
             if (!file.exists()) {
@@ -102,7 +116,7 @@ public class FileUtil {
      * 移动文件夹1的文件到文件夹2
      */
     public static boolean moveD1ChildToD2(String srcPath, String dstPath) {
-        if (isFileExist(dstPath) && isFileExist(srcPath)) {
+        if (isFileExist(srcPath) && checkPath(dstPath)) {
             File dstFile = new File(dstPath);
             File srcFile = new File(srcPath);
             return moveD1ChildToD2(srcFile, dstFile);
@@ -111,21 +125,23 @@ public class FileUtil {
     }
 
     public static boolean moveD1ChildToD2(File srcFile, File dstFile) {
-        if(srcFile == null || dstFile == null)
-            return false;
-        File[] files = srcFile.listFiles();
-        if(files != null){
-            for (int i = 0; i < files.length; i++) {
-                boolean result = moveD1ToD2(files[i], dstFile);
-                if (!result)
-                    return false;
+        if (isFileExist(srcFile) && checkPath(dstFile)) {
+            File[] files = srcFile.listFiles();
+            if(files != null){
+                for (int i = 0; i < files.length; i++) {
+                    boolean result = moveD1ToD2(files[i], dstFile);
+                    if (!result) {
+                        return false;
+                    }
+                }
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static boolean moveD1ToD2(String srcPath, String dstPath) {
-        if (isFileExist(dstPath) && isFileExist(srcPath)) {
+        if (isFileExist(srcPath) && checkPath(dstPath)) {
             File dstFile = new File(dstPath);
             File srcFile = new File(srcPath);
             return moveD1ToD2(srcFile, dstFile);
@@ -134,26 +150,27 @@ public class FileUtil {
     }
 
     public static boolean moveD1ToD2(File srcFile, File dstFile) {
-        if (srcFile == null || dstFile == null)
-            return false;
-        File newDst = new File(dstFile, srcFile.getName());
-        if (srcFile.isDirectory()) {
-            File[] files = srcFile.listFiles();
-            if (newDst.mkdirs()) {
-                for (int i = 0; i < files.length; i++) {
-                    boolean result = moveD1ToD2(files[i], newDst);
-                    if (!result)
-                        return false;
+        if (isFileExist(srcFile) && checkPath(dstFile)) {
+            File newDst = new File(dstFile, srcFile.getName());
+            if (srcFile.isDirectory()) {
+                File[] files = srcFile.listFiles();
+                if (newDst.mkdirs()) {
+                    for (int i = 0; i < files.length; i++) {
+                        boolean result = moveD1ToD2(files[i], newDst);
+                        if (!result) {
+                            return false;
+                        }
+                    }
+                    return srcFile.delete();
                 }
-                return srcFile.delete();
-            }
-        } else if (srcFile.isFile()) {
-            try {
-                if (srcFile.renameTo(newDst)) {
-                    return true;
+            } else if (srcFile.isFile()) {
+                try {
+                    if (srcFile.renameTo(newDst)) {
+                        return true;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
             }
         }
         return false;
@@ -169,62 +186,67 @@ public class FileUtil {
         }
         return true;
     }
+
+    private static boolean checkPath(File file) {
+        return file != null;
+    }
     /**检查文件路径**/
 
     /**
      * 删除文件||删除文件夹里面的文件
      */
     public static boolean deleteChildFile(String filePath) {
-        File file = new File(filePath);
-        if (file.exists()) {
+        if(isFileExist(filePath)){
+            File file = new File(filePath);
             return deleteChildFile(file);
         }
         return false;
     }
 
     public static boolean deleteChildFile(File file) {
-        if (file == null)
-            return false;
-        File[] files = file.listFiles();
-        if (files == null)
-            return false;
-        for (int i = 0; i < files.length; i++) {
-            boolean success = deleteFile(files[i]);
-            if (!success) {
+        if(isFileExist(file)){
+            File[] files = file.listFiles();
+            if (files == null) {
                 return false;
             }
+            for (int i = 0; i < files.length; i++) {
+                boolean success = deleteFile(files[i]);
+                if (!success) {
+                    return false;
+                }
+            }
+            return true;
         }
-        return true;
+        return false;
     }
 
     public static boolean deleteFile(String filePath) {
-        if (!checkPath(filePath)) {
-            return false;
-        }
-        File file = new File(filePath);
-        if (file.exists()) {
-            return deleteFile(file);
+        if(isFileExist(filePath)){
+            File file = new File(filePath);
+            if (file.exists()) {
+                return deleteFile(file);
+            }
         }
         return false;
     }
 
 
     public static boolean deleteFile(File file) {
-        if (file == null) {
-            return false;
-        }
-        if (file.isDirectory()) {
-            File[] child = file.listFiles();
-            if (child != null) {
-                for (int i = 0; i < child.length; i++) {
-                    boolean success = deleteFile(child[i]);
-                    if (!success) {
-                        return false;
+        if (isFileExist(file)) {
+            if (file.isDirectory()) {
+                File[] child = file.listFiles();
+                if (child != null) {
+                    for (int i = 0; i < child.length; i++) {
+                        boolean success = deleteFile(child[i]);
+                        if (!success) {
+                            return false;
+                        }
                     }
                 }
             }
+            return file.delete();
         }
-        return file.delete();
+        return false;
     }
     /**删除文件||删除文件夹里面的文件**/
 
@@ -246,15 +268,14 @@ public class FileUtil {
 
     /**获取文件目录路径**/
     public static String getParent(String path){
-        if(isFileExist(path)){
-            File file = new File(path);
-            return file.getParentFile().getAbsolutePath();
+        if(checkPath(path)){
+            return getParent(new File(path));
         }
         return null;
     }
 
     public static String getParent(File file){
-        if(isFileExist(file)){
+        if(checkPath(file)){
             return file.getParentFile().getAbsolutePath();
         }
         return null;
@@ -263,28 +284,58 @@ public class FileUtil {
 
     /**获取文件名字**/
     public static String getName(String path){
-        if(isFileExist(path)){
-            return new File(path).getName();
+        if(checkPath(path)){
+            return getName(new File(path));
         }
         return null;
     }
 
     public static String getName(File file){
-        if(isFileExist(file)){
+        if(checkPath(file)){
             return file.getName();
         }
         return null;
     }
     /**获取文件名字**/
 
+    /**
+     * 重新命名文件
+     */
     public static boolean rename(String srcPath, String dstPath){
-        if(isFileExist(srcPath)){
+        if(isFileExist(srcPath) && checkPath(dstPath)){
             File srcFile = new File(srcPath);
-            if(createFile(dstPath)){
-                File dstFile = new File(dstPath);
-                return srcFile.renameTo(dstFile);
-            }
+            File dstFile = new File(dstPath);
+            return srcFile.renameTo(dstFile);
         }
         return false;
     }
+    /**重新命名文件**/
+
+
+    /**
+     * 获取文件大小 不存在返回0
+     */
+    public static long getFileSize(String path){
+        if(isFileExist(path)){
+            return getFileSize(new File(path));
+        }
+        return 0;
+    }
+
+    public static long getFileSize(File file){
+        if(isFileExist(file)){
+            if(file.isFile()){
+                return file.length();
+            }else if(file.isDirectory()){
+                long fileSize = 0;
+                File[] files = file.listFiles();
+                for (int i = 0, len = files.length; i < len; i++) {
+                    fileSize = fileSize + getFileSize(files[i]);
+                }
+                return fileSize;
+            }
+        }
+        return 0;
+    }
+    /**获取文件大小**/
 }
