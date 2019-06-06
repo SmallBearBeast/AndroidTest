@@ -9,9 +9,20 @@ import com.example.administrator.androidtest.Common.Util.AppInitUtil;
  * Created by Administrator on 2017/7/10.
  */
 
+/**
+ * 适用于存储数据量小，不频繁存储的条件下。
+ */
 public class SPUtil extends AppInitUtil {
     public static final String SETTING = "SETTING"; //设置
     public static final String OTHER = "OTHER"; //其他
+
+    /**
+     * 提前加载sp配置文件
+     */
+    public void init(){
+        AppUtil.getApp().getSharedPreferences(SETTING, Context.MODE_PRIVATE);
+        AppUtil.getApp().getSharedPreferences(OTHER, Context.MODE_PRIVATE);
+    }
 
     // TODO: 2018/12/20 支持多个key-value对添加 
     private static void putData(String spName, String key, Object value){
@@ -68,6 +79,14 @@ public class SPUtil extends AppInitUtil {
 
     public static void putDataToOther(String key, Object value){
         putData(OTHER, key, value);
+    }
+
+    public static Object getDataFromSetting(String key, Object defaultValue){
+        return getData(SETTING, key, defaultValue);
+    }
+
+    public static void putDataToSetting(String key, Object value){
+        putData(SETTING, key, value);
     }
 }
 

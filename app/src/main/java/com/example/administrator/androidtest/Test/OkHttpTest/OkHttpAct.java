@@ -55,6 +55,10 @@ public class OkHttpAct extends ComponentAct {
                 testDownLoad_1("http://vfx.mtime.cn/Video/2017/03/31/mp4/170331093811717750.mp4");
                 break;
 
+            case R.id.bt_cancel_download:
+                OkHelper.getInstance().cancel("http://vfx.mtime.cn/Video/2017/03/31/mp4/170331093811717750.mp4");
+                break;
+
             case R.id.bt_upload:
                 break;
         }

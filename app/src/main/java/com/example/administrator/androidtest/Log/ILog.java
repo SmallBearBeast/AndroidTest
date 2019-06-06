@@ -1,13 +1,23 @@
 package com.example.administrator.androidtest.Log;
 
 public interface ILog {
-    void i ();
+    void i (String tag, String msg);
 
-    void d ();
+    void d (String tag, String msg);
 
-    void e ();
+    void e (String tag, String msg);
 
-    void v ();
+    void v (String tag, String msg);
 
-    void w ();
+    void w (String tag, String msg);
+
+    void i(String tag, String msg, Throwable tr);
+
+    void d(String tag, String msg, Throwable tr);
+
+    void e(String tag, String msg, Throwable tr);
+
+    void v(String tag, String msg, Throwable tr);
+
+    void w(String tag, String msg, Throwable tr);
 }
