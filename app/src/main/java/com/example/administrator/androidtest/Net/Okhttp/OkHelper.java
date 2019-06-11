@@ -102,7 +102,7 @@ public class OkHelper {
         }
     }
 
-    public void downloadFile(String url, final String SAVE_PATH, final OkDownloadCallback DOWNLOAD_CALLBACK) {
+    public void downloadFile(final String url, final String SAVE_PATH, final OkDownloadCallback DOWNLOAD_CALLBACK) {
         final String TOTAL_LENGTH_KEY = SAVE_PATH.hashCode() + "_total_length_key";
         final int CONTENT_LENGTH = (int) SPUtil.getDataFromOther(TOTAL_LENGTH_KEY, 0);
         if (CONTENT_LENGTH == 0) {
@@ -115,10 +115,6 @@ public class OkHelper {
 
                 @Override
                 public void onResponse(Call call, Response response) throws IOException {
-                    // TODO: 2019-06-11 是否支持范围请求 
-                    if(!"bytes".equals(response.header("Access-Ranges"))){
-                        return;
-                    }
                     if (response.isSuccessful()) {
                         SLog.d(TAG, "onResponse: successful with full request");
                         ResponseBody body = response.body();
@@ -180,6 +176,12 @@ public class OkHelper {
                 public void onResponse(Call call, Response response) throws IOException {
                     if (response.isSuccessful()) {
                         SLog.d(TAG, "onResponse: successful with part request");
+                        // TODO: 2019-06-11 是否支持范围请求
+                        if(!"bytes".equals(response.header("Access-Ranges"))){
+                            downloadFile(url, SAVE_PATH, DOWNLOAD_CALLBACK);
+                            SPUtil.remove(SPUtil.OTHER, TOTAL_LENGTH_KEY);
+                            return;
+                        }
                         ResponseBody body = response.body();
                         if (body != null) {
                             if (FileUtil.createFile(SAVE_PATH)) {

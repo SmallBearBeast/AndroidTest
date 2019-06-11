@@ -26,6 +26,45 @@ public final class CollectionUtil {
         }
         return null;
     }
+
+    /**
+     * 判断数组长度是否相等，null或者0长度返回false
+     */
+    public static boolean isSameLength(Object[] firstArray, Object[] secondArray){
+        if(isEmpty(firstArray) || isEmpty(secondArray)){
+            return false;
+        }
+        return firstArray.length == secondArray.length;
+    }
+
+    public static <T> boolean isSameLength(Collection<T> firstCollection, Collection<T> secondCollection){
+        if(isEmpty(firstCollection) || isEmpty(secondCollection)){
+            return false;
+        }
+        return firstCollection.size() == secondCollection.size();
+    }
+
+    public static boolean isSameLength(Object firstObj, Object secondObj){
+        Object[] firstArray = objToArray(firstObj);
+        Object[] secondArray = objToArray(secondObj);
+        return isSameLength(firstArray, secondArray);
+    }
+
+    public static <K, V> boolean isSameLength(Map<K, V> firstMap, Map<K, V> secondMap){
+        if(isEmpty(firstMap) || isEmpty(secondMap)){
+            return false;
+        }
+        return firstMap.size() == secondMap.size();
+    }
+
+    public static <T> boolean isSameLength(SparseArray<T> firstSparseArray, SparseArray<T> secondSparseArray) {
+        if(isEmpty(firstSparseArray) || isEmpty(secondSparseArray)){
+            return false;
+        }
+        return firstSparseArray.size() == secondSparseArray.size();
+    }
+    /**判断数组长度是否相等，null或者0长度返回false**/
+
     /**
      * 判空方法
      */
