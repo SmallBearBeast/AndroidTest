@@ -16,6 +16,8 @@ import com.example.administrator.androidtest.Base.Dialog.PermissionDialog;
 import com.example.administrator.androidtest.Common.Page.IPage;
 import com.example.administrator.androidtest.Common.Page.Page;
 import com.example.administrator.androidtest.Common.Page.PageProvider;
+import com.example.administrator.androidtest.Common.PageShareData.PageKey;
+import com.example.administrator.androidtest.Common.PageShareData.PageShareDataHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,44 +29,52 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     private static int sVisibleCount = 0;
     private boolean foreground;
     private Page mPage;
+    private PageKey mPageKey;
     protected BaseAct mActivity;
     protected Context mContext;
     private PermissionListener mPermissionListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+        if(isSupportPageShareData()){
+            mPageKey = PageShareDataHelper.createPageKey(getClass().getSimpleName());
+            PageShareDataHelper.getInstance().markNewPage(mPageKey);
+        }
         Intent intent = getIntent();
         if(intent != null){
             handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
         }
         mActivity = this;
         mContext = this;
+        super.onCreate(savedInstanceState);
     }
 
     @Override
     protected void onStart() {
         PageProvider.getInstance().addPage(createPage());
-        super.onStart();
         sVisibleCount++;
         if (sVisibleCount == 1) {
             notifyForeground(true);
         }
+        super.onStart();
     }
 
     @Override
     protected void onStop() {
-        super.onStop();
         sVisibleCount--;
         if (sVisibleCount <= 0) {
             notifyForeground(false);
         }
+        super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         mPage = null;
+        if(isSupportPageShareData()) {
+            PageShareDataHelper.getInstance().clear(mPageKey);
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -195,5 +205,9 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
 
     protected void handleIntent(Intent intent, Bundle bundle){
 
+    }
+
+    protected boolean isSupportPageShareData(){
+        return false;
     }
 }

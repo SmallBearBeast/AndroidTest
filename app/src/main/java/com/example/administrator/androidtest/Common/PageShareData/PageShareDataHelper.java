@@ -9,7 +9,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 // TODO: 2019-06-13 不保留活动有bug
-public class PageShareDataHepler {
+public class PageShareDataHelper {
     private static final String TAG = "PageShareDataHelper";
     private static AtomicInteger mIndex = new AtomicInteger();
     private Map<PageKey, Object> mShareDataMap = new HashMap<>();
