@@ -41,11 +41,11 @@ public class OkHttpAct extends ComponentAct {
             case R.id.bt_get:
 //                testGet_1("https://www.baidu.com/");
 //                testGet_2("https://www.mxnzp.com/api/holiday/single/20181121");
-                testGet_3("https://www.mxnzp.com/api/qrcode/create/single?content=你好&size=500&type=0");
+                testGet_3("https://www.mxnzp.com/api/qrcode/create/single?content=你好&size=500&mType=0");
                 break;
 
             case R.id.bt_post:
-                Map<String, String> params = CollectionUtil.asMap(new String[]{"content", "size", "type"}, new String[]{"你好", "500", "0"});
+                Map<String, String> params = CollectionUtil.asMap(new String[]{"content", "size", "mType"}, new String[]{"你好", "500", "0"});
 
                 testPost_1("https://www.mxnzp.com/api/qrcode/create/single", params);
                 break;

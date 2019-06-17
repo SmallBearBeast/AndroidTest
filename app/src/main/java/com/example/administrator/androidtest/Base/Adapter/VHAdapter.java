@@ -1,62 +1,135 @@
 package com.example.administrator.androidtest.Base.Adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import com.example.administrator.androidtest.Base.Component.IComponent;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public abstract class Adapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> implements IComponent {
-
-    private DataProvider mDataProvider = new DataProvider();
+public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements IComponent {
+    protected String TAG = getClass().getSimpleName();
+    private LayoutInflater mInflater;
     private RecyclerView mRecyclerView;
+    private DataManager mDataManager;
+    private Map<Class, Integer> mClzMap = new HashMap<>();
+    private SparseArray<VHBridge> mBridgeMap = new SparseArray<>();
+    private int mIncrease;
+    private Context mContext; //通过外部传入好还是onAttachedToRecyclerView拿去
+
+    public VHAdapter() {
+        mDataManager = new DataManager();
+        mDataManager.setAdapter(this);
+    }
+
+    @Override
+    public int getItemCount() {
+        return mDataManager.size();
+    }
+
+
+    @NonNull
+    @Override
+    public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        if(mInflater == null){
+            mInflater = LayoutInflater.from(parent.getContext());
+        }
+        VHBridge bridge = mBridgeMap.get(viewType);
+        if(bridge != null){
+            View view = bridge.itemView();
+            if(view != null){
+                parent.addView(view);
+                return (VH) bridge.onCreateViewHolder(view);
+            }
+            int layoutId = bridge.layoutId();
+            if(layoutId != -1){
+                return (VH) bridge.onCreateViewHolder(mInflater.inflate(layoutId, parent, false));
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull VH holder, int position) {
+        holder.bindFull(position, mDataManager.get(position));
+    }
 
     /**
      * 局部刷新，调用这个方法一定要手动调用onBindViewHolder()方法
      */
     @Override
-    public void onBindViewHolder(@NonNull T holder, int position, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull VH holder, int position, @NonNull List<Object> payloads) {
         if(payloads.isEmpty()){
-            onBindViewHolder(holder, position, payloads);
+            super.onBindViewHolder(holder, position, payloads);
+        }else {
+            for (Object payload : payloads) {
+                if(payload instanceof Notify){
+                    holder.bindPartial(mDataManager.get(position), (Notify) payload);
+                }else {
+                    super.onBindViewHolder(holder, position, payloads);
+                }
+            }
         }
     }
 
     @Override
-    public int getItemCount() {
-        return mDataProvider.size();
-    }
-
-    @Override
-    public long getItemId(int position) {
-        return super.getItemId(position);
-    }
-
-    @NonNull
-    @Override
-    public T onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull T holder, int position) {
-
-    }
-
-    @Override
     public int getItemViewType(int position) {
-        return mDataProvider.getItemViewType(position);
+        Object data = mDataManager.get(position);
+        if(mClzMap.containsKey(data.getClass())){
+            return mClzMap.get(data.getClass());
+        }
+        return super.getItemViewType(position);
     }
 
-    public void setDataProvider(@NonNull DataProvider provider){
-        mDataProvider = provider;
+    // TODO: 2019-06-22 要不要有unRegister
+    public void register(Class clz, VHBridge bridge){
+        if(mClzMap.containsKey(clz)){
+            return;
+        }
+        bridge.mAdapter = this;
+        bridge.mDataManager = mDataManager;
+        if(mContext != null){
+            bridge.mContext = mContext;
+        }
+        mIncrease++;
+        mBridgeMap.put(mIncrease, bridge);
+        mClzMap.put(clz, mIncrease);
     }
+
+
+    public boolean isRegister(Class clz){
+        return mClzMap.containsKey(clz);
+    }
+
+    public boolean isRegister(Object obj){
+        if(obj == null){
+            return false;
+        }
+        return mClzMap.containsKey(obj.getClass());
+    }
+
+    public DataManager getDataProvider(){
+        return mDataManager;
+    }
+
 
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         mRecyclerView = recyclerView;
+        mContext = recyclerView.getContext();
+        for (int i = 0, size = mBridgeMap.size(); i < size; i++) {
+            VHBridge bridge = mBridgeMap.valueAt(i);
+            bridge.mContext = mContext;
+        }
     }
+
 
     @Override
     public void onCreate() {

@@ -2,13 +2,8 @@ package com.example.administrator.androidtest.Common.Util.Core;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Pair;
 
-
-/***
- * Description:Thread Utils
- * Creator: wangwei7@bigo.sg
- * Date:2017-10-26 02:46:08 PM
- ***/
 public class MainThreadUtil {
     public static void run(Runnable r) {
         if (isMainThread()) {
@@ -18,7 +13,7 @@ public class MainThreadUtil {
         }
     }
 
-    public static void runFirst(Runnable r) {
+    public static void runFront(Runnable r) {
         if (isMainThread()) {
             r.run();
         } else {
@@ -30,8 +25,18 @@ public class MainThreadUtil {
         LazyHolder.sHandler.postDelayed(r, delay);
     }
 
-    public static void removeCallbacks(Runnable r) {
-        LazyHolder.sHandler.removeCallbacks(r);
+    public static void run(Pair<Runnable, Long>... pairs){
+        Pair<Runnable, Long> pair;
+        for (int i = 0, len = pairs.length; i < len; i++) {
+            pair = pairs[i];
+            LazyHolder.sHandler.postDelayed(pair.first, pair.second);
+        }
+    }
+
+    public static void removeCallbacks(Runnable... rs) {
+        for (int i = 0, len = rs.length; i < len; i++) {
+            LazyHolder.sHandler.removeCallbacks(rs[i]);
+        }
     }
 
     public static boolean isMainThread() {

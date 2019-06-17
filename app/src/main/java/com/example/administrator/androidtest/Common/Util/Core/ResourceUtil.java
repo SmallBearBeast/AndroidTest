@@ -5,6 +5,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.support.annotation.DrawableRes;
 import android.util.DisplayMetrics;
 
 import com.example.administrator.androidtest.Common.Util.AppInitUtil;
@@ -49,7 +50,7 @@ public class ResourceUtil extends AppInitUtil {
         return getResources().getDimensionPixelSize(id);
     }
 
-    public static Drawable getDrawable(int id) {
+    public static Drawable getDrawable(@DrawableRes int id) {
         return getResources().getDrawable(id);
     }
 

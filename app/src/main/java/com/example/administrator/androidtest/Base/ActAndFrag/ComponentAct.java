@@ -43,7 +43,7 @@ public abstract class ComponentAct<K extends ActComponent, T extends ViewSet> ex
         }
     }
 
-    protected void initMainComponent(){
+    private void initMainComponent(){
         if(mainComponent != null && viewSet != null){
             mainComponent.attachViewSet(viewSet);
             registerComponent(mainComponent);
