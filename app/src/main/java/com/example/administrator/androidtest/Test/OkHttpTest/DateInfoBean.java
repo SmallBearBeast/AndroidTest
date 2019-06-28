@@ -28,7 +28,7 @@ public class DateInfoBean {
                     "date='" + date + '\'' +
                     ", weekDay='" + weekDay + '\'' +
                     ", yearTips='" + yearTips + '\'' +
-                    ", type=" + type +
+                    ", mType=" + type +
                     ", typeDes='" + typeDes + '\'' +
                     ", chineseZodiac='" + chineseZodiac + '\'' +
                     ", solarTerms='" + solarTerms + '\'' +

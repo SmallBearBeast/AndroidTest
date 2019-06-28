@@ -16,7 +16,7 @@ public class QrCodeBean {
             return "DataBean{" +
                     "qrCodeUrl='" + qrCodeUrl + '\'' +
                     ", content='" + content + '\'' +
-                    ", type=" + type +
+                    ", mType=" + type +
                     ", qrCodeBase64='" + qrCodeBase64 + '\'' +
                     '}';
         }

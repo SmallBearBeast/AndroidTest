@@ -2,9 +2,10 @@ package com.example.administrator.androidtest.Common.Page;
 
 import java.util.LinkedList;
 
+// TODO: 2019-06-13 加上index
 public class PageProvider{
-    public static final byte FIRST = -1;
-    public static final byte LAST = -2;
+    private static final byte FIRST = -1;
+    private static final byte LAST = -2;
     private static final byte LIMIT_COUNT = 2; //每个节点最多只保存两个节点
     private final LinkedList<Integer> sPageNodeList = new LinkedList<>(); //记录页面路由
     private final LinkedList<Page> sPageList = new LinkedList<>();

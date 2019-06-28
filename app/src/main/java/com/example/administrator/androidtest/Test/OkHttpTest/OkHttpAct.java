@@ -41,11 +41,11 @@ public class OkHttpAct extends ComponentAct {
             case R.id.bt_get:
 //                testGet_1("https://www.baidu.com/");
 //                testGet_2("https://www.mxnzp.com/api/holiday/single/20181121");
-                testGet_3("https://www.mxnzp.com/api/qrcode/create/single?content=你好&size=500&type=0");
+                testGet_3("https://www.mxnzp.com/api/qrcode/create/single?content=你好&size=500&mType=0");
                 break;
 
             case R.id.bt_post:
-                Map<String, String> params = CollectionUtil.asMap(new String[]{"content", "size", "type"}, new String[]{"你好", "500", "0"});
+                Map<String, String> params = CollectionUtil.asMap(new String[]{"content", "size", "mType"}, new String[]{"你好", "500", "0"});
 
                 testPost_1("https://www.mxnzp.com/api/qrcode/create/single", params);
                 break;
@@ -53,6 +53,10 @@ public class OkHttpAct extends ComponentAct {
             case R.id.bt_download:
 //                testDownLoad_1("https://cdn.pixabay.com/photo/2015/03/26/09/41/chain-690088_960_720.jpg");
                 testDownLoad_1("http://vfx.mtime.cn/Video/2017/03/31/mp4/170331093811717750.mp4");
+                break;
+
+            case R.id.bt_cancel_download:
+                OkHelper.getInstance().cancel("http://vfx.mtime.cn/Video/2017/03/31/mp4/170331093811717750.mp4");
                 break;
 
             case R.id.bt_upload:

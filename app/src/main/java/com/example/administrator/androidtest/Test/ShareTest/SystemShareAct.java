@@ -140,7 +140,7 @@ public class SystemShareAct extends ComponentAct {
     }
 
     private ArrayList<Uri> mFileUriList = new ArrayList<>(4);
-//    class MyAdapter extends RecyclerView.Adapter<ShareHolder>{
+//    class MyAdapter extends RecyclerView.VHAdapter<ShareHolder>{
 //
 //        private List<String> mData = new ArrayList<String>(){{
 //            add(IntentShare.PACKAGE_FB); //不支持text，支持纯图，纯视频
@@ -174,7 +174,7 @@ public class SystemShareAct extends ComponentAct {
 //    }
 
 
-//    class ShareHolder extends ViewHolder<String> implements View.OnClickListener{
+//    class ShareHolder extends VHolder<String> implements View.OnClickListener{
 //        private TextView mTvShareText;
 //        private TextView mTvShareImage;
 //        private TextView mTvShareVideo;

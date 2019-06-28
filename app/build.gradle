@@ -16,6 +16,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+
+        debug{
+            buildConfigField("String", "HTTP_BASE", '"https://www.baidu.com/api/debug"')
+            buildConfigField("String","HAHA","\"haahahah\"")
+        }
     }
     dataBinding{
         enabled true
@@ -51,4 +56,9 @@ dependencies {
     // For WebP support, including animated WebP
     implementation 'com.facebook.fresco:animated-webp:1.13.0'
     implementation 'com.facebook.fresco:webpsupport:1.13.0'
+
+    //multitype
+    implementation ('me.drakeet.multitype:multitype:3.0.0', {
+        exclude group: 'com.android.support'
+    })
 }

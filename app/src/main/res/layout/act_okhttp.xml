@@ -19,6 +19,12 @@
         android:text="下载文件"
         android:onClick="onClick"
         style="@style/match_parent_wrap_content" />
+    
+    <Button
+            android:id="@+id/bt_cancel_download"
+            android:text="取消下载文件"
+            android:onClick="onClick"
+            style="@style/match_parent_wrap_content" />
 
     <Button
         android:id="@+id/bt_upload"

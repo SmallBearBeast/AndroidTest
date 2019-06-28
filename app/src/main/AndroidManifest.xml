@@ -29,7 +29,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".Test.FrescoTest.FrescoTestAct">
+        <activity android:name=".Test.RvActTest.RvAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

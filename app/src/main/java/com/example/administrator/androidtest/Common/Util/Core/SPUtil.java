@@ -3,18 +3,51 @@ package com.example.administrator.androidtest.Common.Util.Core;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import android.support.annotation.StringDef;
 import com.example.administrator.androidtest.Common.Util.AppInitUtil;
 
 /**
- * Created by Administrator on 2017/7/10.
+ * 适用于存储数据量小，不频繁存储的条件下。
  */
-
 public class SPUtil extends AppInitUtil {
+    @StringDef({SETTING, OTHER})
+    public @interface SpName{
+
+    }
     public static final String SETTING = "SETTING"; //设置
     public static final String OTHER = "OTHER"; //其他
 
-    // TODO: 2018/12/20 支持多个key-value对添加 
-    private static void putData(String spName, String key, Object value){
+    /**
+     * 提前加载sp配置文件
+     */
+    public static void init(@SpName String... spNames){
+        for (int i = 0; i < spNames.length; i++) {
+            AppUtil.getApp().getSharedPreferences(spNames[i], Context.MODE_PRIVATE);
+        }
+    }
+
+    private static void putData(@SpName String spName, String[] key, Object[] value){
+        if(!CollectionUtil.isSameLength(key, value)){
+            return;
+        }
+        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+        for (int i = 0, len = key.length; i < len; i++) {
+            if(value[i] instanceof Boolean){
+                editor.putBoolean(key[i], (Boolean) value[i]);
+            }else if(value[i] instanceof Integer){
+                editor.putInt(key[i], (Integer) value[i]);
+            }else if(value[i] instanceof String){
+                editor.putString(key[i], (String) value[i]);
+            }else if(value[i] instanceof Float){
+                editor.putFloat(key[i], (Float) value[i]);
+            }else if(value[i] instanceof Long){
+                editor.putLong(key[i], (Long) value[i]);
+            }
+        }
+        editor.apply();
+    }
+
+    private static void putData(@SpName String spName, String key, Object value){
         SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         if(value instanceof Boolean){
             editor.putBoolean(key, (Boolean) value);
@@ -30,7 +63,7 @@ public class SPUtil extends AppInitUtil {
         editor.apply();
     }
 
-    public static Object getData(String spName, String key, Object defaultValue) {
+    public static Object getData(@SpName String spName, String key, Object defaultValue) {
         SharedPreferences preferences = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
         String type = defaultValue.getClass().getSimpleName();
         Object result = null;
@@ -50,13 +83,13 @@ public class SPUtil extends AppInitUtil {
         return result;
     }
 
-    public static void remove(String spName, String key){
+    public static void remove(@SpName String spName, String key){
         SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         editor.remove(key);
         editor.apply();
     }
 
-    public static void clear(String spName){
+    public static void clear(@SpName String spName){
         SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.apply();
@@ -68,6 +101,14 @@ public class SPUtil extends AppInitUtil {
 
     public static void putDataToOther(String key, Object value){
         putData(OTHER, key, value);
+    }
+
+    public static Object getDataFromSetting(String key, Object defaultValue){
+        return getData(SETTING, key, defaultValue);
+    }
+
+    public static void putDataToSetting(String key, Object value){
+        putData(SETTING, key, value);
     }
 }
 

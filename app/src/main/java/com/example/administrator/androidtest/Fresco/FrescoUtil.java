@@ -321,11 +321,15 @@ public class FrescoUtil {
     public static PipelineDraweeControllerBuilder defaultControllerBuilder(ImageRequest request, ImageOriginListener imageOriginListener, ControllerListener controllerListener){
         DispatchImageOriginListener dispatchImageOriginListener = new DispatchImageOriginListener();
         dispatchImageOriginListener.addListener(new LogImageOriginListener(request.getSourceUri()));
-        dispatchImageOriginListener.addListener(imageOriginListener);
+        if (imageOriginListener != null) {
+            dispatchImageOriginListener.addListener(imageOriginListener);
+        }
 
         DispatchControllListener dispatchControllListener = new DispatchControllListener();
         dispatchControllListener.addListener(new LogControllListener(controllerListener, request.getSourceUri()));
-        dispatchControllListener.addListener(controllerListener);
+        if (controllerListener != null) {
+            dispatchControllListener.addListener(controllerListener);
+        }
         return Fresco.newDraweeControllerBuilder()
                 .setImageRequest(request)
                 .setImageOriginListener(dispatchImageOriginListener)
@@ -352,7 +356,9 @@ public class FrescoUtil {
     public static ImageRequestBuilder defaultRequestBuilder(Uri uri, int width, int height, RequestListener requestListener){
         DispatchRequestListener dispatchRequestListener = new DispatchRequestListener();
         dispatchRequestListener.addListener(new LogRequestListener());
-        dispatchRequestListener.addListener(requestListener);
+        if (requestListener != null) {
+            dispatchRequestListener.addListener(requestListener);
+        }
         ImageRequestBuilder builder = ImageRequestBuilder.newBuilderWithSource(uri).setRequestListener(dispatchRequestListener)
                 .setLocalThumbnailPreviewsEnabled(true);
         if(width > 0 && height > 0){

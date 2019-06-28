@@ -38,7 +38,7 @@ public class OkRetryInterceptor implements Interceptor {
         try{
             response = chain.proceed(request);
         }catch (IOException e){
-           tryAgain(chain, request, e);
+            tryAgain(chain, request, e);
         }
         return response;
     }
@@ -48,7 +48,7 @@ public class OkRetryInterceptor implements Interceptor {
             throw e;
         }
         Request newRequest = request.newBuilder().build();
-        Response response = null;
+        Response response;
         try {
             response = chain.proceed(newRequest);
         }catch (Exception ee){
