@@ -2,6 +2,7 @@ package com.example.administrator.androidtest;
 
 import android.app.Activity;
 import android.app.Application;
+import android.arch.lifecycle.LifecycleRegistry;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;

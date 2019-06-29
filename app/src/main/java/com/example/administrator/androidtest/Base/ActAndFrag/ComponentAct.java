@@ -1,6 +1,5 @@
 package com.example.administrator.androidtest.Base.ActAndFrag;
 
-import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,10 +9,7 @@ import android.view.View;
 import com.example.administrator.androidtest.Base.Component.IComponent;
 import com.example.administrator.androidtest.Base.Component.ActComponent;
 import com.example.administrator.androidtest.Base.Component.ViewSet;
-import com.example.administrator.androidtest.Common.Util.Core.PermissionUtil;
-
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public abstract class ComponentAct<K extends ActComponent, T extends ViewSet> extends BaseAct {
@@ -29,15 +25,6 @@ public abstract class ComponentAct<K extends ActComponent, T extends ViewSet> ex
         setContentView(contentView);
         init(savedInstanceState);
         initMainComponent();
-        PermissionUtil.requestPermissions(new String[]{
-                Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE
-        }, mActivity, new PermissionListener() {
-            @Override
-            public void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray) {
-
-            }
-        });
-
         for (IComponent component : componentMap.values()) {
             component.onCreate();
         }

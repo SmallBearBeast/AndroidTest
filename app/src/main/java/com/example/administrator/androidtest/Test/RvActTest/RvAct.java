@@ -1,8 +1,12 @@
 package com.example.administrator.androidtest.Test.RvActTest;
 
+import android.arch.lifecycle.GenericLifecycleObserver;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.*;
+import android.util.Log;
 import android.view.View;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Base.Adapter.VHAdapter;
@@ -54,6 +58,7 @@ public class RvAct extends ComponentAct {
 //        mAdapter.register(Info.class, new InfoVHBinder());
         mAdapter.register(Msg.class, new MsgVHBinder());
         mRvTest.setAdapter(mAdapter);
+        getLifecycle().addObserver(mAdapter);
         mRvTest.addOnItemTouchListener(new RvListener(this, mRvTest, new RvListener.OnItemClickListener() {
 
             int color = Color.BLACK;

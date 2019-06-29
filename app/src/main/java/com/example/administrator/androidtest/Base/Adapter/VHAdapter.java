@@ -1,20 +1,22 @@
 package com.example.administrator.androidtest.Base.Adapter;
 
+import android.arch.lifecycle.GenericLifecycleObserver;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.example.administrator.androidtest.Base.Component.IComponent;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements IComponent {
+public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements GenericLifecycleObserver {
     protected String TAG = getClass().getSimpleName();
     private LayoutInflater mInflater;
     private RecyclerView mRecyclerView;
@@ -130,81 +132,16 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
         }
     }
 
-
     @Override
-    public void onCreate() {
-        int count = mRecyclerView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-            if(viewHolder instanceof IComponent){
-                ((IComponent)viewHolder).onCreate();
-            }
-        }
-    }
-
-
-    @Override
-    public void onStart() {
-        int count = mRecyclerView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-            if(viewHolder instanceof IComponent){
-                ((IComponent)viewHolder).onStart();
-            }
-        }
-    }
-
-    @Override
-    public void onResume() {
-        int count = mRecyclerView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-            if(viewHolder instanceof IComponent){
-                ((IComponent)viewHolder).onResume();
-            }
-        }
-    }
-
-    @Override
-    public void onPause() {
-        int count = mRecyclerView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-            if(viewHolder instanceof IComponent){
-                ((IComponent)viewHolder).onPause();
-            }
-        }
-    }
-
-    @Override
-    public void onStop() {
-        int count = mRecyclerView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-            if(viewHolder instanceof IComponent){
-                ((IComponent)viewHolder).onStop();
-            }
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        int count = mRecyclerView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-            if(viewHolder instanceof IComponent){
-                ((IComponent)viewHolder).onActivityResult(requestCode, resultCode, data);
-            }
-        }
-    }
-
-    @Override
-    public void onDestory() {
-        int count = mRecyclerView.getChildCount();
-        for (int i = 0; i < count; i++) {
-            RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-            if(viewHolder instanceof IComponent){
-                ((IComponent)viewHolder).onDestory();
+    public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
+        if(mRecyclerView != null){
+            Log.d(TAG, "onStateChanged: event = " + event);
+            int count = mRecyclerView.getChildCount();
+            for (int i = 0; i < count; i++) {
+                RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
+                if(viewHolder instanceof GenericLifecycleObserver){
+                    ((GenericLifecycleObserver)viewHolder).onStateChanged(source, event);
+                }
             }
         }
     }

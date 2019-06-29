@@ -2,6 +2,7 @@ package com.example.administrator.androidtest.Test.RvActTest;
 
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import com.example.administrator.androidtest.Base.Adapter.VHBridge;
@@ -31,6 +32,11 @@ public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
             super.bindFull(pos, image);
             mTv_1.setText("NiuBi " + pos);
             mFv_1.setImageUri(Uri.parse("https://cdn.stocksnap.io/img-thumbs/280h/NOXXUWUBGJ.jpg"));
+        }
+
+        @Override
+        public void onStop() {
+            Log.d(TAG, "onStop: mPos = " + mPos);
         }
     }
 

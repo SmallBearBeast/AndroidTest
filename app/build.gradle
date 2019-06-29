@@ -22,9 +22,6 @@ android {
             buildConfigField("String","HAHA","\"haahahah\"")
         }
     }
-    dataBinding{
-        enabled true
-    }
 }
 
 dependencies {
