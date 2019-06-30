@@ -33,6 +33,7 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     protected BaseAct mActivity;
     protected Context mContext;
     private PermissionListener mPermissionListener;
+    private ActivityResultListener mActivityResultListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -104,6 +105,7 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
             }
             if(mPermissionListener != null){
                 mPermissionListener.onPermissionRequest(permissionSuccessArray, permissionFailArray);
+                mPermissionListener = null;
             }
             onPermissionRequest(permissionSuccessArray, permissionFailArray);
         }
@@ -209,5 +211,22 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
 
     protected boolean isSupportPageShareData(){
         return false;
+    }
+
+    public interface ActivityResultListener{
+        void onActivityResult(int requestCode, int resultCode, Intent data);
+    }
+
+    public void setActivityResultListener(ActivityResultListener listener){
+        mActivityResultListener = listener;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(mActivityResultListener != null){
+            mActivityResultListener.onActivityResult(requestCode, resultCode, data);
+            mActivityResultListener = null;
+        }
     }
 }

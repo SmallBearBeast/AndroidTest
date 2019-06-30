@@ -1,5 +1,7 @@
 package com.example.administrator.androidtest.Base.Receiver;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,42 +25,15 @@ public class NetworkReceiver extends BroadcastReceiver implements IComponent {
         }
     }
 
-
     @Override
-    public void onCreate() {
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-        AppUtil.getApp().registerReceiver(this, filter);
-    }
-
-    @Override
-    public void onStart() {
-
-    }
-
-    @Override
-    public void onResume() {
-
-    }
-
-    @Override
-    public void onPause() {
-
-    }
-
-    @Override
-    public void onStop() {
-
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    }
-
-    @Override
-    public void onDestory(){
-        AppUtil.getApp().unregisterReceiver(this);
+    public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
+        if(event == Lifecycle.Event.ON_DESTROY){
+            AppUtil.getApp().unregisterReceiver(this);
+        }else if(event == Lifecycle.Event.ON_CREATE){
+            IntentFilter filter = new IntentFilter();
+            filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+            AppUtil.getApp().registerReceiver(this, filter);
+        }
     }
 
     public interface NetworkChangeListener{

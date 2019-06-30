@@ -9,7 +9,15 @@ public abstract class ViewSet {
     private View mContentView;
     private SparseArray<View> mViewIdArray;
 
+    public ViewSet() {
+
+    }
+
     public ViewSet(View contentView) {
+        attachView(contentView);
+    }
+
+    public void attachView(View contentView){
         mViewIdArray = new SparseArray<>(INIT_COUNT);
         mContentView = contentView;
         initView(contentView);

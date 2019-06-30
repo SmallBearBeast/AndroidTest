@@ -25,7 +25,7 @@ public class FragmentOneVp extends ComponentFrag {
 
     @Override
     public void init(Bundle savedInstanceState) {
-        vpContainer = contentView.findViewById(R.id.vp_container);
+        vpContainer = mContentView.findViewById(R.id.vp_container);
         myAdapter = new MyAdapter(getChildFragmentManager());
         vpContainer.setAdapter(myAdapter);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());

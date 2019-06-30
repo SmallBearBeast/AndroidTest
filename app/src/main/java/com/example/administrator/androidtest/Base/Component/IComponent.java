@@ -1,19 +1,7 @@
 package com.example.administrator.androidtest.Base.Component;
 
-import android.content.Intent;
+import android.arch.lifecycle.GenericLifecycleObserver;
 
-public interface IComponent {
-    void onCreate();
+public interface IComponent extends GenericLifecycleObserver {
 
-    void onStart();
-
-    void onResume();
-
-    void onPause();
-
-    void onStop();
-
-    void onActivityResult(int requestCode, int resultCode, Intent data);
-
-    void onDestory();
 }

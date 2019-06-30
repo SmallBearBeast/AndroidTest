@@ -17,9 +17,6 @@ public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActCompo
     @Override
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
-        mainComponent = new MainActComponent();
-        viewSet = new MainViewSet(null);
-        mainComponent.attachViewSet(viewSet);
     }
 
     static class MainActComponent extends ActComponent<MainViewSet> {
@@ -27,8 +24,16 @@ public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActCompo
     }
 
     static class MainViewSet extends ViewSet{
-        public MainViewSet(View contentView) {
-            super(contentView);
-        }
+
+    }
+
+    @Override
+    protected MainActComponent createComponent() {
+        return new MainActComponent();
+    }
+
+    @Override
+    protected MainViewSet createViewSet() {
+        return new MainViewSet();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.administrator.androidtest.Base.Component;
 
-import android.content.Intent;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.CallSuper;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentFrag;
@@ -28,43 +29,51 @@ public abstract class FragComponent<T extends ViewSet> implements IComponent {
         mComponentFrag = fragment;
     }
 
-    @Override
+
     public void onCreate() {
 
     }
 
-    @Override
+
     public void onStart() {
 
     }
 
-    @Override
     public void onResume() {
 
     }
 
-    @Override
     public void onPause() {
 
     }
 
-    @Override
     public void onStop() {
 
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    }
-
     @CallSuper
-    @Override
     public void onDestory() {
         mComActivity = null;
         if(mViewSet != null){
             mViewSet.clear();
             mViewSet = null;
+        }
+    }
+
+    @Override
+    public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
+        if(event == Lifecycle.Event.ON_CREATE){
+            onCreate();
+        }else if(event == Lifecycle.Event.ON_START) {
+            onStart();
+        }else if(event == Lifecycle.Event.ON_RESUME) {
+            onResume();
+        }else if(event == Lifecycle.Event.ON_PAUSE) {
+            onPause();
+        }else if(event == Lifecycle.Event.ON_STOP) {
+            onStop();
+        }else if(event == Lifecycle.Event.ON_DESTROY){
+            onDestory();
         }
     }
 }
