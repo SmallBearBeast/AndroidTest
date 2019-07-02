@@ -1,18 +1,37 @@
 package com.example.administrator.androidtest.Bus;
 
+import android.arch.lifecycle.GenericLifecycleObserver;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-public interface IBus {
-    void send(String event, @Nullable Bundle extras);
+import java.util.List;
 
-    void sendSync(String event, @Nullable Bundle extras);
+public interface IBus extends GenericLifecycleObserver {
+    void send(Event event);
 
-    void register(OnBusEventListener listener, String... events);
+    void sendSync(Event event);
 
-    void unregister(OnBusEventListener listener);
+    void sendStick(Event event);
 
-    interface OnBusEventListener {
-        void onBusEvent(String event, @Nullable Bundle extras);
+    void register(OnBusEvent listener);
+
+    void unregister(OnBusEvent listener);
+
+    abstract class OnBusEvent {
+        protected abstract void onBusEvent(String event, @Nullable Bundle extras);
+
+        protected void onStickEvent(String event, @Nullable Bundle extras){}
+
+        protected int stickId(){
+            return -1;
+        }
+
+        protected List<String> events(){
+            return null;
+        }
+
+        protected List<String> stickEvents(){
+            return null;
+        }
     }
 }

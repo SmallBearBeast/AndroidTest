@@ -145,6 +145,22 @@ public class DataManager {
         }
     }
 
+    public void move(int fromPos, int toPos){
+        if(!checkIndex(fromPos)){
+            SLog.d(TAG, "move: fromPos is out of range fromPos = " + fromPos);
+            return;
+        }
+        if(!checkIndex(toPos)){
+            SLog.d(TAG, "move: toPos is out of range toPos = " + toPos);
+            return;
+        }
+        Object fromData = mProviderDatas.get(fromPos);
+        Object toData = mProviderDatas.get(toPos);
+        mProviderDatas.set(toPos, fromData);
+        mProviderDatas.set(fromPos, toData);
+        mAdapter.notifyItemMoved(fromPos, toPos);
+    }
+
     private <D> int findIndexInArray(D data) {
         for (int i = 0, len = mProviderDatas.size(); i < len; i++) {
             if(mProviderDatas.get(i).equals(data)){

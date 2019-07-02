@@ -24,7 +24,7 @@ import java.util.List;
 
 public abstract class BaseAct extends AppCompatActivity implements IPage {
 
-    private static final String TAG = "BaseAct";
+    protected final String TAG = getClass().getSimpleName();
     private static final int Permission_Request_Code = 1;
     private static int sVisibleCount = 0;
     private boolean foreground;
