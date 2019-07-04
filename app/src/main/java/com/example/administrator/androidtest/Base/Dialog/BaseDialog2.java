@@ -113,4 +113,6 @@ public abstract class BaseDialog2 extends DialogFragment {
         
     }
 
+
+
 }

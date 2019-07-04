@@ -54,6 +54,10 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
             if(layoutId != -1){
                 return (VH) bridge.onCreateViewHolder(mInflater.inflate(layoutId, parent, false));
             }
+            VHolder vh = bridge.onCreateViewHolder(parent, viewType);
+            if(vh != null){
+                return (VH) vh;
+            }
         }
         return null;
     }
@@ -63,9 +67,6 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
         holder.bindFull(position, mDataManager.get(position));
     }
 
-    /**
-     * 局部刷新，调用这个方法一定要手动调用onBindViewHolder()方法
-     */
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position, @NonNull List<Object> payloads) {
         if(payloads.isEmpty()){
@@ -101,6 +102,7 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
             bridge.mContext = mContext;
         }
         mIncrease++;
+        bridge.mType = mIncrease;
         mBridgeMap.put(mIncrease, bridge);
         mClzMap.put(clz, mIncrease);
     }
@@ -126,6 +128,10 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         mRecyclerView = recyclerView;
         mContext = recyclerView.getContext();
+        if(mContext instanceof LifecycleOwner){
+            LifecycleOwner owner = (LifecycleOwner) mContext;
+            owner.getLifecycle().addObserver(this);
+        }
         for (int i = 0, size = mBridgeMap.size(); i < size; i++) {
             VHBridge bridge = mBridgeMap.valueAt(i);
             bridge.mContext = mContext;

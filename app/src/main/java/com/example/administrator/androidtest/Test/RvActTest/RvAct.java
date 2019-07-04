@@ -44,10 +44,11 @@ public class RvAct extends ComponentAct {
 //
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         mRvTest.setLayoutManager(linearLayoutManager);
+        mRvTest.setHasFixedSize(true);
 
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
 //        mRvTest.setLayoutManager(gridLayoutManager);
-        mRvTest.setItemAnimator(null);
+//        mRvTest.setItemAnimator(null);
 
 //        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
 //        mRvTest.setLayoutManager(staggeredGridLayoutManager);
@@ -110,7 +111,7 @@ public class RvAct extends ComponentAct {
     private List<Image> initImage() {
         List<Image> images = new ArrayList<>();
         for (int i = 0; i < 30; i++) {
-            images.add(new Image());
+            images.add(new Image(i));
         }
         return images;
     }
@@ -130,32 +131,32 @@ public class RvAct extends ComponentAct {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_add_first:
-//                mDataManager.addFirst(new Image());
-                if(mAdapter.isRegister(Msg.class)){
-                    mDataManager.addFirst(new Msg());
-                }else {
-                    mAdapter.register(Msg.class, new MsgVHBinder());
-                    mDataManager.addFirst(new Msg());
-                }
-                RvUtil.scrollToTop(mRvTest, 3, 500);
+                mDataManager.add(1, new Image(-1));
+//                if(mAdapter.isRegister(Msg.class)){
+//                    mDataManager.addFirst(new Msg());
+//                }else {
+//                    mAdapter.register(Msg.class, new MsgVHBinder());
+//                    mDataManager.addFirst(new Msg());
+//                }
+//                RvUtil.scrollToTop(mRvTest, 3, 500);
                 break;
 
             case R.id.bt_remove_first:
-//                mDataManager.removeFirst(1);
-                RvUtil.scrollToBottom(mRvTest,  4, 0);
+                mDataManager.removeFirst(1);
+//                RvUtil.scrollToBottom(mRvTest,  4, 0);
                 break;
 
             case R.id.bt_add_last:
-                mDataManager.addLast(new Msg());
+                mDataManager.addLast(new Image(-1));
                 break;
 
             case R.id.bt_remove_last:
-                RvUtil.test(mRvTest, mRvTest.getLayoutManager());
-//                mDataManager.removeLast(1);
+//                RvUtil.test(mRvTest, mRvTest.getLayoutManager());
+                mDataManager.removeLast(1);
                 break;
 
             case R.id.bt_add_two:
-                mDataManager.add(1, Arrays.asList(new Image(), new Image()));
+                mDataManager.add(1, Arrays.asList(new Image(-1), new Image(-1)));
                 break;
 
             case R.id.bt_remove_two:
@@ -163,11 +164,9 @@ public class RvAct extends ComponentAct {
                 break;
 
             case R.id.bt_update:
-                Info info = new Info(2);
-                info.mText_1 = "Update_1";
-                info.mText_2 = "Update_2";
-                info.mText_3 = "Update_3";
-                mDataManager.update(info);
+                Image image = new Image(2);
+                image.mUrl_1 = "http://www.badcookie.com/ku-xlarge.gif";
+                mDataManager.update(image);
                 break;
 
             case R.id.bt_partial_update:

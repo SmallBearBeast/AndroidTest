@@ -31,7 +31,7 @@ public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
         public void bindFull(int pos, Image image) {
             super.bindFull(pos, image);
             mTv_1.setText("NiuBi " + pos);
-            mFv_1.setImageUri(Uri.parse("https://cdn.stocksnap.io/img-thumbs/280h/NOXXUWUBGJ.jpg"));
+            mFv_1.setImageUri(Uri.parse(image.mUrl_1));
         }
 
         @Override

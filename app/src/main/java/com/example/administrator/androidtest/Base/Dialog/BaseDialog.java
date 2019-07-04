@@ -89,4 +89,12 @@ public abstract class BaseDialog extends Dialog {
 
     protected abstract int layoutId();
 
+    @Override
+    public void show() {
+        try {
+            super.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

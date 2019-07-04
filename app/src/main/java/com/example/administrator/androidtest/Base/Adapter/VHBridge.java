@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.view.View;
+import android.view.ViewGroup;
 
 public abstract class VHBridge<VH extends VHolder> {
     //VHAdapter和DataManager是在register赋值。
@@ -11,6 +12,7 @@ public abstract class VHBridge<VH extends VHolder> {
     protected DataManager mDataManager;
     //Context在onAttachedToRecyclerView有值。
     protected Context mContext;
+    protected int mType;
 
     @NonNull
     protected abstract VH onCreateViewHolder(@NonNull View itemView);
@@ -21,8 +23,15 @@ public abstract class VHBridge<VH extends VHolder> {
         return null;
     }
 
+    protected VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+        return null;
+    }
 
     protected final int getPosition(@NonNull final VHolder holder) {
         return holder.getAdapterPosition();
+    }
+
+    public int getType(){
+        return mType;
     }
 }
