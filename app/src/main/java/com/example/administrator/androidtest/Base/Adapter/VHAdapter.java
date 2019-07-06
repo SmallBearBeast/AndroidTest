@@ -150,5 +150,8 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
                 }
             }
         }
+        if(event == Lifecycle.Event.ON_DESTROY){
+            source.getLifecycle().removeObserver(this);
+        }
     }
 }

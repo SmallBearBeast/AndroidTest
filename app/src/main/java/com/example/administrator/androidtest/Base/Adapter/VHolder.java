@@ -4,6 +4,7 @@ import android.arch.lifecycle.GenericLifecycleObserver;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.support.annotation.CallSuper;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -16,6 +17,13 @@ public abstract class VHolder<DATA> extends RecyclerView.ViewHolder implements I
 
     public VHolder(View itemView) {
         super(itemView);
+    }
+
+    public final <T extends View> T findViewById(@IdRes int id) {
+        if(itemView != null){
+            return itemView.findViewById(id);
+        }
+        return null;
     }
 
     @CallSuper

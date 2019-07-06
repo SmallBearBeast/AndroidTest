@@ -30,6 +30,8 @@ public class RvAct extends ComponentAct {
     private DataManager mDataManager;
     private VHAdapter mAdapter;
 
+    private MsgVHBinder msgVHBinder = new MsgVHBinder();
+
     @Override
     protected int layoutId() {
         return R.layout.act_rv_test;
@@ -41,24 +43,31 @@ public class RvAct extends ComponentAct {
         mRvTest = findViewById(R.id.rv_test);
         //解决notifychange刷新问题
         ((SimpleItemAnimator) mRvTest.getItemAnimator()).setSupportsChangeAnimations(false);
-//
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        mRvTest.setLayoutManager(linearLayoutManager);
-        mRvTest.setHasFixedSize(true);
 
-//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-//        mRvTest.setLayoutManager(gridLayoutManager);
-//        mRvTest.setItemAnimator(null);
-
-//        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
-//        mRvTest.setLayoutManager(staggeredGridLayoutManager);
+//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+//        mRvTest.setLayoutManager(linearLayoutManager);
+//        mRvTest.setHasFixedSize(true);
 
 //        mRvTest.addItemDecoration(new RvDivider(gridLayoutManager, 20, Color.RED));
         mAdapter = new VHAdapter();
         mAdapter.register(Image.class, new ImageVHBinder());
-//        mAdapter.register(Info.class, new InfoVHBinder());
-        mAdapter.register(Msg.class, new MsgVHBinder());
+        mAdapter.register(Info.class, new InfoVHBinder());
+        mAdapter.register(Msg.class, msgVHBinder);
         mRvTest.setAdapter(mAdapter);
+
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
+//        mRvTest.setLayoutManager(gridLayoutManager);
+//        mRvTest.setItemAnimator(null);
+        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return mAdapter.getItemViewType(position) ==  msgVHBinder.getType() ? 3 : 1;
+            }
+        });
+
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
+        mRvTest.setLayoutManager(staggeredGridLayoutManager);
+
         getLifecycle().addObserver(mAdapter);
         mRvTest.addOnItemTouchListener(new RvListener(this, mRvTest, new RvListener.OnItemClickListener() {
 
@@ -110,7 +119,7 @@ public class RvAct extends ComponentAct {
 
     private List<Image> initImage() {
         List<Image> images = new ArrayList<>();
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 28; i++) {
             images.add(new Image(i));
         }
         return images;
@@ -147,7 +156,7 @@ public class RvAct extends ComponentAct {
                 break;
 
             case R.id.bt_add_last:
-                mDataManager.addLast(new Image(-1));
+                mDataManager.addLast(new Msg());
                 break;
 
             case R.id.bt_remove_last:
