@@ -24,6 +24,11 @@ android {
             buildConfigField("String","HAHA","\"haahahah\"")
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {

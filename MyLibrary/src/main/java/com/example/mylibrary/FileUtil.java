@@ -1,6 +1,4 @@
-package com.example.administrator.androidtest.Common.Util.File;
-
-import android.net.Uri;
+package com.example.mylibrary;
 
 import java.io.File;
 
