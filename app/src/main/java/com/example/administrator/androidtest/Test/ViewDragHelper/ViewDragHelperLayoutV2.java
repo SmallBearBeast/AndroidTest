@@ -9,10 +9,9 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtils;
+import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 import com.example.administrator.androidtest.R;
 
 public class ViewDragHelperLayoutV2 extends FrameLayout implements View.OnClickListener {
@@ -153,15 +152,15 @@ public class ViewDragHelperLayoutV2 extends FrameLayout implements View.OnClickL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.tv_1:
-                ToastUtils.showToast("I am tv_1");
+                ToastUtil.showToast("I am tv_1");
                 break;
 
             case R.id.tv_2:
-                ToastUtils.showToast("I am tv_2");
+                ToastUtil.showToast("I am tv_2");
                 break;
 
             case R.id.tv_3:
-                ToastUtils.showToast("I am tv_3");
+                ToastUtil.showToast("I am tv_3");
                 break;
         }
     }

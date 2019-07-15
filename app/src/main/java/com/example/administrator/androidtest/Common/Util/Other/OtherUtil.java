@@ -1,53 +1,34 @@
 package com.example.administrator.androidtest.Common.Util.Other;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import com.android.internal.util.Preconditions;
+import com.example.administrator.androidtest.Common.Util.Core.AppUtil;
+import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
 
 import java.util.List;
 
 @SuppressWarnings("unchecked")
 public class OtherUtil {
-    public static <T extends Comparable> T maxList(List<T> array){
-        Preconditions.checkArgument(array.size() > 0);
-        T max = array.get(0);
-        for (int i = 1, size = array.size(); i < size; i++) {
-            if(array.get(i).compareTo(max) > 0){
-                max = array.get(i);
-            }
-        }
-        return max;
+    public static void copyToClipboard(String text) {
+        copyToClipboard("text", text);
     }
 
+    public static void copyToClipboard(final String label, final String text) {
+        MainThreadUtil.run(new Runnable() {
+            @Override
+            public void run() {
+                ClipboardManager manager = (ClipboardManager) AppUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData data = ClipData.newPlainText(label, text);
+                if(manager != null) {
+                    try {
+                        manager.setPrimaryClip(data);
+                    }catch (Exception e){
 
-    public static <T extends Comparable> T minList(List<T> array){
-        Preconditions.checkArgument(array.size() > 0);
-        T min = array.get(0);
-        for (int i = 1, size = array.size(); i < size; i++) {
-            if(array.get(i).compareTo(min) < 0){
-                min = array.get(i);
+                    }
+                }
             }
-        }
-        return min;
-    }
-
-    public static int maxArray(int ... array) {
-        Preconditions.checkArgument(array.length > 0);
-        int max = array[0];
-        for(int i = 1; i < array.length; ++i) {
-            if (array[i] > max) {
-                max = array[i];
-            }
-        }
-        return max;
-    }
-
-    public static int minArray(int ... array) {
-        Preconditions.checkArgument(array.length > 0);
-        int min = array[0];
-        for(int i = 1; i < array.length; ++i) {
-            if (array[i] < min) {
-                min = array[i];
-            }
-        }
-        return min;
+        });
     }
 }

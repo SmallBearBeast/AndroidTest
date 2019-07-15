@@ -8,9 +8,8 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import android.net.wifi.p2p.WifiP2pManager;
 
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtils;
+import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -29,7 +28,7 @@ public class ShareUtil {
             it.putExtra(Intent.EXTRA_TEXT, intentShare.getText());
             activity.startActivityForResult(Intent.createChooser(it, "分享到其他"), REQUEST_CODE);
         }else {
-            ToastUtils.showToast("分享文本失败");
+            ToastUtil.showToast("分享文本失败");
         }
     }
 
@@ -40,7 +39,7 @@ public class ShareUtil {
             it.putExtra(Intent.EXTRA_STREAM, intentShare.getImageUri());
             activity.startActivityForResult(Intent.createChooser(it, "分享到其他"), REQUEST_CODE);
         }else {
-            ToastUtils.showToast("分享图片失败");
+            ToastUtil.showToast("分享图片失败");
         }
     }
 
@@ -51,7 +50,7 @@ public class ShareUtil {
             it.putExtra(Intent.EXTRA_STREAM, intentShare.getVideoUri());
             activity.startActivityForResult(Intent.createChooser(it, "分享到其他"), REQUEST_CODE);
         }else {
-            ToastUtils.showToast("分享视频失败");
+            ToastUtil.showToast("分享视频失败");
         }
     }
 
@@ -76,7 +75,7 @@ public class ShareUtil {
             it.putExtra(Intent.EXTRA_TEXT, intentShare.getText());
             activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
         } else {
-            ToastUtils.showToast("分享文本失败");
+            ToastUtil.showToast("分享文本失败");
         }
     }
 
@@ -99,7 +98,7 @@ public class ShareUtil {
             it.putExtra(Intent.EXTRA_STREAM, intentShare.getImageUri());
             activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
         } else {
-            ToastUtils.showToast("分享图片失败");
+            ToastUtil.showToast("分享图片失败");
         }
     }
 
@@ -117,7 +116,7 @@ public class ShareUtil {
             it.putExtra(Intent.EXTRA_STREAM, intentShare.getVideoUri());
             activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
         } else {
-            ToastUtils.showToast("分享视频失败");
+            ToastUtil.showToast("分享视频失败");
         }
     }
 
@@ -132,7 +131,7 @@ public class ShareUtil {
             it.putExtra(Intent.EXTRA_STREAM, intentShare.getFileUri());
             activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
         } else {
-            ToastUtils.showToast("分享视频失败");
+            ToastUtil.showToast("分享视频失败");
         }
     }
 
@@ -147,7 +146,7 @@ public class ShareUtil {
             it.putParcelableArrayListExtra(Intent.EXTRA_STREAM, intentShare.getFileUriList());
             activity.startActivityForResult(Intent.createChooser(it, "Sharing.."), REQUEST_CODE);
         } else {
-            ToastUtils.showToast("分享视频失败");
+            ToastUtil.showToast("分享视频失败");
         }
     }
 

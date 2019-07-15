@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.Base.Adapter;
 import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -12,6 +13,7 @@ public abstract class VHBridge<VH extends VHolder> {
     protected DataManager mDataManager;
     //Context在onAttachedToRecyclerView有值。
     protected Context mContext;
+    protected RecyclerView mRecyclerView;
     protected int mType;
 
     @NonNull

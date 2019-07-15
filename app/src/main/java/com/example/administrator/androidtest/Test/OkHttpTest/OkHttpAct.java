@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Common.Util.Core.CollectionUtil;
 import com.example.administrator.androidtest.Common.Util.Core.NetWorkUtil;
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtils;
+import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 import com.example.administrator.androidtest.Common.Util.File.FileUtil;
 import com.example.administrator.androidtest.Net.Okhttp.OkCallback;
 import com.example.administrator.androidtest.Net.Okhttp.OkDownloadCallback;
@@ -84,7 +84,7 @@ public class OkHttpAct extends ComponentAct {
                 }
             });
         }else {
-            ToastUtils.showToast("网络不好，请检查网络");
+            ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
@@ -108,7 +108,7 @@ public class OkHttpAct extends ComponentAct {
                 }
             });
         }else {
-            ToastUtils.showToast("网络不好，请检查网络");
+            ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
@@ -134,7 +134,7 @@ public class OkHttpAct extends ComponentAct {
                 }
             });
         }else {
-            ToastUtils.showToast("网络不好，请检查网络");
+            ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
@@ -159,7 +159,7 @@ public class OkHttpAct extends ComponentAct {
                 }
             });
         }else {
-            ToastUtils.showToast("网络不好，请检查网络");
+            ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
@@ -189,7 +189,7 @@ public class OkHttpAct extends ComponentAct {
                 }
             });
         }else {
-            ToastUtils.showToast("网络不好，请检查网络");
+            ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 

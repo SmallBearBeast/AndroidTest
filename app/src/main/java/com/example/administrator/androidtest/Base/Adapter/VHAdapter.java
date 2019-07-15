@@ -135,6 +135,7 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
         for (int i = 0, size = mBridgeMap.size(); i < size; i++) {
             VHBridge bridge = mBridgeMap.valueAt(i);
             bridge.mContext = mContext;
+            bridge.mRecyclerView = mRecyclerView;
         }
     }
 

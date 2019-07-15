@@ -1,28 +1,20 @@
 package com.example.administrator.androidtest.Test.RvActTest;
 
-import android.arch.lifecycle.GenericLifecycleObserver;
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.*;
-import android.util.Log;
 import android.view.View;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Base.Adapter.VHAdapter;
 import com.example.administrator.androidtest.Base.Adapter.DataManager;
 import com.example.administrator.androidtest.Base.Adapter.Notify;
-import com.example.administrator.androidtest.Common.Rv.RvDivider;
 import com.example.administrator.androidtest.Common.Rv.RvListener;
-import com.example.administrator.androidtest.Common.Rv.RvUtil;
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtils;
 import com.example.administrator.androidtest.Log.SLog;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 public class RvAct extends ComponentAct {
     private static final String TAG = "RvAct";
@@ -75,7 +67,7 @@ public class RvAct extends ComponentAct {
             @Override
             public boolean onItemClick(View view, int position) {
                 SLog.d(TAG, "onItemClick: view = " + view + " position = " + position);
-//                ToastUtils.showToast("onItemClick position = " + position);
+//                ToastUtil.showToast("onItemClick position = " + position);
                 switch (view.getId()){
                     case R.id.tv_1:
                         if(color == Color.BLACK){
@@ -97,7 +89,7 @@ public class RvAct extends ComponentAct {
             @Override
             public boolean onItemLongClick(View view, int position) {
                 SLog.d(TAG, "onItemLongClick: view = " + view + " position = " + position);
-//                ToastUtils.showToast("onItemClick position = " + position);
+//                ToastUtil.showToast("onItemClick position = " + position);
                 switch (view.getId()){
                     case R.id.tv_1:
                         SLog.d(TAG, "onItemLongClick: textview = " + view + " position = " + position);

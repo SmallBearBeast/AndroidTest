@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Widget.Activity;
 import android.os.Bundle;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtils;
+import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.CompoundDrawableTextView;
 
@@ -22,7 +22,7 @@ public class CompoundDrawableTextViewAct extends ComponentAct {
 
             @Override
             protected void onClick() {
-                ToastUtils.showToast("onClick");
+                ToastUtil.showToast("onClick");
             }
 
         });
