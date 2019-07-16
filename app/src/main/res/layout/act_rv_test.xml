@@ -14,7 +14,7 @@
 			android:id="@+id/rv_test"
 			app:layout_constraintVertical_weight="1"
 			android:layout_width="match_parent"
-			android:layout_height="match_parent"/>
+			android:layout_height="0dp"/>
 	
 	<LinearLayout
 			android:id="@+id/ll_1"
@@ -87,6 +87,14 @@
 				android:onClick="onClick"
 				android:text="PARTIAL_UPDATE"
 				android:id="@+id/bt_partial_update"
+				android:layout_weight="1"
+				android:layout_width="0dp"
+				android:layout_height="match_parent"/>
+		
+		<Button
+				android:onClick="onClick"
+				android:text="MOVE"
+				android:id="@+id/bt_move"
 				android:layout_weight="1"
 				android:layout_width="0dp"
 				android:layout_height="match_parent"/>

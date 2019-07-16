@@ -30,7 +30,7 @@ public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
         @Override
         public void bindFull(int pos, Image image) {
             super.bindFull(pos, image);
-            mTv_1.setText("NiuBi " + pos);
+            mTv_1.setText("NiuBi " + image.mId);
             mFv_1.setImageUri(Uri.parse(image.mUrl_1));
         }
 

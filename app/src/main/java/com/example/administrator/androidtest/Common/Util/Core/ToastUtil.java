@@ -1,6 +1,6 @@
 package com.example.administrator.androidtest.Common.Util.Core;
 
-import android.view.Gravity;
+import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.Toast;
 
@@ -8,39 +8,15 @@ import com.example.administrator.androidtest.Common.Util.AppInitUtil;
 
 public final class ToastUtil extends AppInitUtil {
     private static Toast sToast;
-    public static final void showToast(CharSequence text) {
-        showToast(text, Toast.LENGTH_SHORT);
+    public static void showToast(String text) {
+        showToast(new ToastConfig(text));
     }
 
-    public static final void showToast(int resId) {
-        showToast(resId, Toast.LENGTH_SHORT);
+    public static void showToast(@StringRes int resId) {
+        showToast(new ToastConfig(resId));
     }
 
-    public static final void showToast(final CharSequence text, final int duration) {
-        MainThreadUtil.run(new Runnable() {
-            @Override
-            public void run() {
-                checkToast();
-                sToast.setText(text);
-                sToast.setDuration(duration);
-                sToast.show();
-            }
-        });
-    }
-
-    public static final void showToast(final int resId, final int duration) {
-        MainThreadUtil.run(new Runnable() {
-            @Override
-            public void run() {
-                checkToast();
-                sToast.setText(resId);
-                sToast.setDuration(duration);
-                sToast.show();
-            }
-        });
-    }
-
-    public static final void showToast(final ToastConfig config){
+    public static void showToast(final ToastConfig config){
         MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
@@ -50,7 +26,19 @@ public final class ToastUtil extends AppInitUtil {
                 }
                 sToast.setText(config.mText);
                 sToast.setDuration(config.mDuration);
+                if(config.mGravity == 0){
+                    config.mGravity = sToast.getGravity();
+                }
+                if(config.mXOffset == 0){
+                    config.mXOffset = sToast.getXOffset();
+                }
+                if(config.mYOffset == 0){
+                    config.mYOffset = sToast.getYOffset();
+                }
                 sToast.setGravity(config.mGravity, config.mXOffset, config.mYOffset);
+                if(config.mView == null){
+                    config.mView = sToast.getView();
+                }
                 sToast.setView(config.mView);
                 sToast.show();
             }
@@ -67,9 +55,17 @@ public final class ToastUtil extends AppInitUtil {
         public String mText;
         public int mStringResId;
         public int mDuration = Toast.LENGTH_SHORT;
-        public int mGravity = Gravity.CENTER;
+        public int mGravity;
         public int mXOffset;
         public int mYOffset;
         public View mView;
+
+        public ToastConfig(String text) {
+            mText = text;
+        }
+
+        public ToastConfig(int stringResId) {
+            mStringResId = stringResId;
+        }
     }
 }

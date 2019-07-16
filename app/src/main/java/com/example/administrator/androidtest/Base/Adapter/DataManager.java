@@ -145,6 +145,7 @@ public class DataManager {
         }
     }
 
+    // TODO: 2019-07-16 move notifyItemMoved有问题，先使用notifyItemRangeChanged
     public void move(int fromPos, int toPos){
         if(!checkIndex(fromPos)){
             SLog.d(TAG, "move: fromPos is out of range fromPos = " + fromPos);
@@ -158,7 +159,10 @@ public class DataManager {
         Object toData = mProviderDatas.get(toPos);
         mProviderDatas.set(toPos, fromData);
         mProviderDatas.set(fromPos, toData);
-        mAdapter.notifyItemMoved(fromPos, toPos);
+//        mAdapter.notifyItemMoved(fromPos, toPos);
+//        //由于move机制需要刷新move范围内的item。
+//        mAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
+        mAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
     }
 
     private <D> int findIndexInArray(D data) {

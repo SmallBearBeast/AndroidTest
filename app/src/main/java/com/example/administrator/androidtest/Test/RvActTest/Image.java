@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.RvActTest;
 
 public class Image {
-    private int mId;
+    public int mId;
 
     public Image(int mId) {
         this.mId = mId;

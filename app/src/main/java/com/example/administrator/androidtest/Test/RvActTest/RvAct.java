@@ -9,6 +9,7 @@ import com.example.administrator.androidtest.Base.Adapter.VHAdapter;
 import com.example.administrator.androidtest.Base.Adapter.DataManager;
 import com.example.administrator.androidtest.Base.Adapter.Notify;
 import com.example.administrator.androidtest.Common.Rv.RvListener;
+import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 import com.example.administrator.androidtest.Log.SLog;
 import com.example.administrator.androidtest.R;
 
@@ -34,7 +35,8 @@ public class RvAct extends ComponentAct {
         super.init(savedInstanceState);
         mRvTest = findViewById(R.id.rv_test);
         //解决notifychange刷新问题
-        ((SimpleItemAnimator) mRvTest.getItemAnimator()).setSupportsChangeAnimations(false);
+//        ((SimpleItemAnimator) mRvTest.getItemAnimator()).setSupportsChangeAnimations(false);
+        mRvTest.setItemAnimator(null);
 
 //        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
 //        mRvTest.setLayoutManager(linearLayoutManager);
@@ -49,7 +51,6 @@ public class RvAct extends ComponentAct {
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
 //        mRvTest.setLayoutManager(gridLayoutManager);
-//        mRvTest.setItemAnimator(null);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -143,11 +144,13 @@ public class RvAct extends ComponentAct {
                 break;
 
             case R.id.bt_remove_first:
+                ToastUtil.showToast("I am zhangqing");
                 mDataManager.removeFirst(1);
 //                RvUtil.scrollToBottom(mRvTest,  4, 0);
                 break;
 
             case R.id.bt_add_last:
+                ToastUtil.showToast("I am wuyisong");
                 mDataManager.addLast(new Msg());
                 break;
 
@@ -176,6 +179,10 @@ public class RvAct extends ComponentAct {
                 partInfo.mUrl_2 = "http://www.badcookie.com/ku-xlarge.gif";
                 partInfo.mUrl_3 = "http://www.badcookie.com/ku-xlarge.gif";
                 mDataManager.update(partInfo, new Notify(111));
+                break;
+
+            case R.id.bt_move:
+                mDataManager.move(1, mDataManager.size() - 2);
                 break;
 
         }
