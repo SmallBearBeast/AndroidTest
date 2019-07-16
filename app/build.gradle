@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-//apply plugin: 'android-aspectjx'
+apply from: 'aspectj.gradle'
 
 android {
     compileSdkVersion 27
@@ -28,7 +28,6 @@ android {
     lintOptions {
         abortOnError false
     }
-
 }
 
 dependencies {
@@ -41,11 +40,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //okhttp网络请求框架
     implementation 'com.squareup.okhttp3:okhttp:3.11.0'
-    /*
-        implementation 'org.aspectj:aspectjrt:1.8.9'
-        这
-        个插件会和databinding冲突导致bindng生成失败
-     */
     implementation 'com.android.support:recyclerview-v7:27.1.1'
 
     implementation([
@@ -66,7 +60,4 @@ dependencies {
         exclude group: 'com.android.support'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-}
-repositories {
-    mavenCentral()
 }
