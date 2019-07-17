@@ -60,4 +60,5 @@ dependencies {
         exclude group: 'com.android.support'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(":MyTest")
 }
