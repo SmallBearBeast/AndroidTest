@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.util.AttributeSet;
-import com.example.administrator.androidtest.Common.Util.File.FileUtil;
+import com.example.libbase.Util.FileUtil;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 import com.facebook.drawee.controller.BaseControllerListener;

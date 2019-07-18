@@ -7,9 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Common.Util.Core.PermissionUtil;
-import com.example.administrator.androidtest.Common.Util.Adapter.ScreenUtil;
+import com.example.administrator.androidtest.Base.ActAndFrag.PermissionUtil;
 import com.example.administrator.androidtest.R;
+import com.example.libbase.Util.ScreenUtil;
 
 import java.util.Arrays;
 import java.util.List;

@@ -1,13 +1,13 @@
 package com.example.administrator.androidtest.Net.Okhttp;
 
 
-import com.example.administrator.androidtest.Common.Util.Core.CollectionUtil;
-import com.example.administrator.androidtest.Common.Util.Core.GsonUtil;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import com.example.libbase.Util.CollectionUtil;
+import com.example.libbase.Util.GsonUtil;
 import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;

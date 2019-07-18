@@ -7,8 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import com.example.administrator.androidtest.Base.Component.IComponent;
-import com.example.administrator.androidtest.Common.Util.Core.AppUtil;
-import com.example.administrator.androidtest.Common.Util.Core.NetWorkUtil;
+import com.example.libbase.Util.AppUtil;
+import com.example.libbase.Util.NetWorkUtil;
 
 public class NetworkReceiver extends BroadcastReceiver implements IComponent {
 

@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 import com.example.administrator.androidtest.R;
+import com.example.libbase.Util.ToastUtil;
 
 public class ViewDragHelperLayoutV2 extends FrameLayout implements View.OnClickListener {
     private static final String TAG = "ViewDragHelperLayout";

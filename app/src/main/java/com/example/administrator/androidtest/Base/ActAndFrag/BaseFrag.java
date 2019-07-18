@@ -8,9 +8,9 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 
 import com.example.administrator.androidtest.App;
-import com.example.administrator.androidtest.Common.Page.IPage;
-import com.example.administrator.androidtest.Common.Page.Page;
-import com.example.administrator.androidtest.Common.Page.PageProvider;
+import com.example.administrator.androidtest.Base.Page.IPage;
+import com.example.administrator.androidtest.Base.Page.Page;
+import com.example.administrator.androidtest.Base.Page.PageProvider;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Base.Adapter;
 
-import com.example.administrator.androidtest.Common.Util.Core.CollectionUtil;
 import com.example.administrator.androidtest.Log.SLog;
+import com.example.libbase.Util.CollectionUtil;
 
 import java.util.ArrayList;
 import java.util.List;

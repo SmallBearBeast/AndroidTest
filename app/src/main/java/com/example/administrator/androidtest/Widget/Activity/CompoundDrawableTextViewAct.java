@@ -3,9 +3,9 @@ package com.example.administrator.androidtest.Widget.Activity;
 import android.os.Bundle;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.CompoundDrawableTextView;
+import com.example.libbase.Util.ToastUtil;
 
 public class CompoundDrawableTextViewAct extends ComponentAct {
     private CompoundDrawableTextView cdtvText;

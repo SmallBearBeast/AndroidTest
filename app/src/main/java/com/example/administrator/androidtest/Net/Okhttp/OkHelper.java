@@ -1,10 +1,5 @@
 package com.example.administrator.androidtest.Net.Okhttp;
 
-import com.example.administrator.androidtest.Common.Util.Core.SPUtil;
-import com.example.administrator.androidtest.Common.Util.File.FileUtil;
-import com.example.administrator.androidtest.Common.Util.Other.IOUtil;
-import com.example.administrator.androidtest.Common.Util.Other.StorageUtil;
-
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +11,10 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.example.administrator.androidtest.Log.SLog;
+import com.example.libbase.Util.FileUtil;
+import com.example.libbase.Util.IOUtil;
+import com.example.libbase.Util.SPUtil;
+import com.example.libbase.Util.StorageUtil;
 import okhttp3.*;
 
 public class OkHelper {

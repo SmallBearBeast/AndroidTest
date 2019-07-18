@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.View;
-import com.example.administrator.androidtest.Common.Util.Other.NumberUtil;
+import com.example.libbase.Util.NumberUtil;
 
 //1.RecyclerView.getChildCount()与LayoutManager.getChildCount()输出相同表示ViewGroup里面的View数目，也就是attachView数目，一般不改写getExtraLayoutSpace也就是可见数目。
 //2.LayoutManager.getItemCount()表示所有item数目。

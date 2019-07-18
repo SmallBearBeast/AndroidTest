@@ -6,9 +6,9 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.example.administrator.androidtest.Common.Media.Provider;
-import com.example.administrator.androidtest.Common.Util.File.FileUtil;
-import com.example.administrator.androidtest.Common.Util.Core.ThreadUtil;
-import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
+import com.example.libbase.Util.FileUtil;
+import com.example.libbase.Util.MainThreadUtil;
+import com.example.libbase.Util.ThreadUtil;
 
 import java.util.ArrayList;
 

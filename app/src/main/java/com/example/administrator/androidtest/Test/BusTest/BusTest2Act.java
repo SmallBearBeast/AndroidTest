@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Bus.BusProvider;
 import com.example.administrator.androidtest.Bus.Event;
-import com.example.administrator.androidtest.Common.Util.Core.CollectionUtil;
 import com.example.administrator.androidtest.R;
 
 public class BusTest2Act extends ComponentAct {

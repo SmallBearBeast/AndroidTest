@@ -11,10 +11,10 @@ import android.view.View;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Test.Activity.XmlDrawableAct;
-import com.example.administrator.androidtest.Common.Util.Core.CollectionUtil;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Share.IntentShare;
 import com.example.administrator.androidtest.Share.ShareUtil;
+import com.example.libbase.Util.CollectionUtil;
 
 import java.util.ArrayList;
 

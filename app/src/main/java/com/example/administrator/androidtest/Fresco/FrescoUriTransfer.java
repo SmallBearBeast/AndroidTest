@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Fresco;
 
 import android.net.Uri;
-import com.example.administrator.androidtest.Common.Util.File.FileUtil;
+import com.example.libbase.Util.FileUtil;
 
 import java.io.File;
 

@@ -9,8 +9,8 @@ import android.widget.ToggleButton;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 
-import com.example.administrator.androidtest.Common.Util.Ui.XmlDrawableUtil;
 import com.example.administrator.androidtest.R;
+import com.example.libbase.Util.XmlDrawableUtil;
 
 public class XmlDrawableAct extends ComponentAct {
     private ImageView mIv;

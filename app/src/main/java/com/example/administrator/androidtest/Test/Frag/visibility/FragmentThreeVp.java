@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentFrag;
-import com.example.administrator.androidtest.Common.Page.IPage;
+import com.example.administrator.androidtest.Base.Page.IPage;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;

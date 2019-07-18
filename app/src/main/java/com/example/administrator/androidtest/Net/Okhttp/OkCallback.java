@@ -1,13 +1,11 @@
 package com.example.administrator.androidtest.Net.Okhttp;
 
 import android.support.annotation.NonNull;
-import android.util.Log;
-
-import com.example.administrator.androidtest.Common.Util.Core.GsonUtil;
-import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
 
 import java.io.IOException;
 
+import com.example.libbase.Util.GsonUtil;
+import com.example.libbase.Util.MainThreadUtil;
 import okhttp3.Call;
 import okhttp3.Response;
 import okhttp3.ResponseBody;

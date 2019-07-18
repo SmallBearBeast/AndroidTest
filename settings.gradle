@@ -1,1 +1,1 @@
-include ':app', ':MyTest', ':MyLibrary', ':libkt', ':libaspectj', ':libfresco', ':libokhttp', ':libjavautil', ':libandroidutil', ':libmmf'
+include ':app', ':MyTest', ':MyLibrary', ':libkt', ':libaspectj', ':libfresco', ':libokhttp', ':libbase', ':libmmf'

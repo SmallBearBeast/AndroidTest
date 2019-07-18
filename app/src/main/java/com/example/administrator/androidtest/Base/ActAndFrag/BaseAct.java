@@ -13,11 +13,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import com.example.administrator.androidtest.Base.Dialog.PermissionDialog;
-import com.example.administrator.androidtest.Common.Page.IPage;
-import com.example.administrator.androidtest.Common.Page.Page;
-import com.example.administrator.androidtest.Common.Page.PageProvider;
-import com.example.administrator.androidtest.Common.PageShareData.PageKey;
-import com.example.administrator.androidtest.Common.PageShareData.PageShareDataHelper;
+import com.example.administrator.androidtest.Base.Page.IPage;
+import com.example.administrator.androidtest.Base.Page.Page;
+import com.example.administrator.androidtest.Base.Page.PageProvider;
+import com.example.administrator.androidtest.Base.PageShareData.PageKey;
+import com.example.administrator.androidtest.Base.PageShareData.PageShareDataHelper;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -11,8 +11,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Common.Util.Core.ToastUtil;
 import com.example.administrator.androidtest.R;
+import com.example.libbase.Util.ToastUtil;
 
 public class ViewDragHelperLayout extends LinearLayout implements View.OnClickListener {
     private static final String TAG = "ViewDragHelperLayout";

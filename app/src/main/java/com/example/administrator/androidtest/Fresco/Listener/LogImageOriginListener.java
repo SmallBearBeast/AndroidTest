@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.Fresco.Listener;
 
 import android.net.Uri;
 import android.util.Log;
-import com.example.administrator.androidtest.Common.Util.Core.AppUtil;
+import com.example.libbase.Util.AppUtil;
 import com.facebook.drawee.backends.pipeline.info.ImageOrigin;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 

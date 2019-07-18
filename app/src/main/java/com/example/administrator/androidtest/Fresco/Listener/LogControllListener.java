@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Fresco.Listener;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.util.Log;
-import com.example.administrator.androidtest.Common.Util.Core.AppUtil;
+import com.example.libbase.Util.AppUtil;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.imagepipeline.image.CloseableStaticBitmap;

@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.example.administrator.androidtest.App;
 import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Common.Page.IPage;
+import com.example.administrator.androidtest.Base.Page.IPage;
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;

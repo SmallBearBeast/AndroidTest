@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Bus;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.util.SparseArray;
-import com.example.administrator.androidtest.Common.Util.Core.MainThreadUtil;
+import com.example.libbase.Util.MainThreadUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
