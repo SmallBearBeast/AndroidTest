@@ -56,4 +56,5 @@ dependencies {
     implementation 'com.facebook.fresco:webpsupport:1.13.0'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation project(":libbase")
+    implementation project(":libfresco")
 }

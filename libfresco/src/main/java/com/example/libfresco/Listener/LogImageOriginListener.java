@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Fresco.Listener;
+package com.example.libfresco.Listener;
 
 import android.net.Uri;
 import android.util.Log;

@@ -7,9 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
-import com.example.administrator.androidtest.Fresco.FrescoUtil;
 import com.example.libbase.Util.AppInitUtil;
-import com.example.libbase.Util.AppUtil;
+import com.example.libfresco.FrescoUtil;
 
 import java.util.HashMap;
 import java.util.Map;

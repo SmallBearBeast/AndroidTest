@@ -1,13 +1,13 @@
-package com.example.administrator.androidtest.Fresco;
+package com.example.libfresco;
 
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import com.example.administrator.androidtest.Fresco.Listener.*;
 import com.example.libbase.Util.BitmapUtil;
 import com.example.libbase.Util.FileUtil;
 import com.example.libbase.Util.MainThreadUtil;
 import com.example.libbase.Util.ThreadUtil;
+import com.example.libfresco.Listener.*;
 import com.facebook.cache.common.CacheErrorLogger;
 import com.facebook.cache.disk.DiskCacheConfig;
 import com.facebook.common.executors.CallerThreadExecutor;
@@ -28,7 +28,8 @@ import com.facebook.imagepipeline.cache.CountingMemoryCache;
 import com.facebook.imagepipeline.cache.MemoryCacheParams;
 import com.facebook.imagepipeline.common.Priority;
 import com.facebook.imagepipeline.common.ResizeOptions;
-import com.facebook.imagepipeline.core.*;
+import com.facebook.imagepipeline.core.ImagePipeline;
+import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.datasource.BaseBitmapDataSubscriber;
 import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.listener.RequestListener;

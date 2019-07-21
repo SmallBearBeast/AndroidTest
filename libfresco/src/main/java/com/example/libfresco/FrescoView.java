@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Fresco;
+package com.example.libfresco;
 
 import android.content.Context;
 import android.graphics.drawable.Animatable;

@@ -1,7 +1,6 @@
-package com.example.administrator.androidtest.Fresco.Listener;
+package com.example.libfresco.Listener;
 
 import android.graphics.drawable.Animatable;
-import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 import com.facebook.drawee.controller.ControllerListener;
 
 import java.util.HashSet;

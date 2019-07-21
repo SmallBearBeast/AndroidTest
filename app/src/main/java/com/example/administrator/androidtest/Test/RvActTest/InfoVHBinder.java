@@ -7,9 +7,9 @@ import android.widget.TextView;
 import com.example.administrator.androidtest.Base.Adapter.Notify;
 import com.example.administrator.androidtest.Base.Adapter.VHBridge;
 import com.example.administrator.androidtest.Base.Adapter.VHolder;
-import com.example.administrator.androidtest.Fresco.FrescoView;
 import com.example.administrator.androidtest.Log.SLog;
 import com.example.administrator.androidtest.R;
+import com.example.libfresco.FrescoView;
 
 public class InfoVHBinder extends VHBridge<InfoVHBinder.InfoVHolder> {
     @NonNull

@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Fresco.Listener;
+package com.example.libfresco.Listener;
 
 import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 

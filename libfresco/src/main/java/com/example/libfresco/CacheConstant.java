@@ -10,7 +10,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.example.administrator.androidtest.Fresco;
+package com.example.libfresco;
 
 import com.facebook.common.util.ByteConstants;
 

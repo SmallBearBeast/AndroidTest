@@ -1,9 +1,8 @@
-package com.example.administrator.androidtest.Fresco.Listener;
+package com.example.libfresco.Listener;
 
 import android.net.Uri;
 import android.util.Log;
 import android.util.Pair;
-import com.example.administrator.androidtest.Log.ILog;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.producers.*;
 import com.facebook.imagepipeline.request.ImageRequest;
@@ -19,7 +18,6 @@ public class LogRequestListener implements RequestListener {
     private static final String SPACE = " ";
 
     private Uri mUri;
-    private ILog mLog;
     private List<Pair<String, StringBuilder>> mLogList = new ArrayList<>();
     private StringBuilder mLogBuilder = new StringBuilder();
 

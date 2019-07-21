@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Fresco.Listener;
+package com.example.libfresco.Listener;
 
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.request.ImageRequest;

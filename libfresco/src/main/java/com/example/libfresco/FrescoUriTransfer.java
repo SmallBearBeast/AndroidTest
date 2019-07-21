@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Fresco;
+package com.example.libfresco;
 
 import android.net.Uri;
 import com.example.libbase.Util.FileUtil;
