@@ -2,9 +2,9 @@ package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentFrag;
-import com.example.administrator.androidtest.Base.Page.IPage;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentFrag;
+import com.example.libframework.Page.IPage;
 
 public class FragmentThree extends ComponentFrag {
 

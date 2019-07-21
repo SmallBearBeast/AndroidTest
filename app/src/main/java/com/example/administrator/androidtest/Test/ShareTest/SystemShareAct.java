@@ -9,12 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Test.Activity.XmlDrawableAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Share.IntentShare;
 import com.example.administrator.androidtest.Share.ShareUtil;
 import com.example.libbase.Util.CollectionUtil;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 import java.util.ArrayList;
 

@@ -3,8 +3,8 @@ package com.example.administrator.androidtest.Test.RecyclerView;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class PullLoadLayoutAct extends ComponentAct {
     private RecyclerView rvUser;

@@ -6,10 +6,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Base.ActAndFrag.PermissionUtil;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ScreenUtil;
+import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.ActAndFrag.PermissionUtil;
 
 import java.util.Arrays;
 import java.util.List;

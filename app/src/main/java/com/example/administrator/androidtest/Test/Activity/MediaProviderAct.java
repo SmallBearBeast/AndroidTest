@@ -2,10 +2,10 @@ package com.example.administrator.androidtest.Test.Activity;
 
 import android.os.Bundle;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.Common.Media.Image.ImageProvider;
 import com.example.administrator.androidtest.Common.Media.Provider;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 import java.util.List;
 

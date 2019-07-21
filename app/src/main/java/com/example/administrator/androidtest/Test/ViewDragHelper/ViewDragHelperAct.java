@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.ViewDragHelper;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class ViewDragHelperAct extends ComponentAct {
     @Override

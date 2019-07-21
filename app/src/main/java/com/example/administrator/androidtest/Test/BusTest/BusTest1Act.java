@@ -5,10 +5,10 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Bus.BusProvider;
-import com.example.administrator.androidtest.Bus.IBus;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.Bus.BusProvider;
+import com.example.libframework.Bus.IBus;
 
 import java.util.ArrayList;
 import java.util.List;

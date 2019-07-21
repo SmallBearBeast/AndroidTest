@@ -20,8 +20,9 @@ import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.example.administrator.androidtest.Base.Wrapper.TextWatcherWrapper;
+
 import com.example.administrator.androidtest.R;
+import com.example.libframework.Wrapper.TextWatcherWrapper;
 
 public class FullTextView extends AppCompatTextView {
     private SpannableString mSpannableStr;

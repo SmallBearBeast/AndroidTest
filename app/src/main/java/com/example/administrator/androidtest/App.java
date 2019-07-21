@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.BaseFrag;
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
 
@@ -18,7 +17,6 @@ public class App extends Application {
     private static final String TAG = "App";
     private static Context mContext;
     public static Map<String, Boolean> FragVisibiableMap = new HashMap<>();
-    public static BaseFrag.FragVisiableListener fragVisiableListener = null;
 
     @Override
     public void onCreate() {

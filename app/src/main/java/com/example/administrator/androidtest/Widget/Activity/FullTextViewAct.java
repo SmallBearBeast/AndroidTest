@@ -4,10 +4,10 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class FullTextViewAct extends ComponentAct {
     private FullTextView mFtvText;

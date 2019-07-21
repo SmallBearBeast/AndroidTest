@@ -3,10 +3,10 @@ package com.example.administrator.androidtest.Test.BusTest;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Bus.BusProvider;
-import com.example.administrator.androidtest.Bus.Event;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.Bus.BusProvider;
+import com.example.libframework.Bus.Event;
 
 public class BusTest2Act extends ComponentAct {
     private TextView mTvTest;

@@ -2,10 +2,10 @@ package com.example.administrator.androidtest.Test.ComponentTest;
 
 import android.os.Bundle;
 import android.view.View;
+import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.Component.ActComponent;
+import com.example.libframework.Component.ViewSet;
 
-import com.example.administrator.androidtest.Base.Component.ActComponent;
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Base.Component.ViewSet;
 
 public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActComponent, ComponentTestAct.MainViewSet> {
 
@@ -23,7 +23,7 @@ public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActCompo
 
     }
 
-    static class MainViewSet extends ViewSet{
+    static class MainViewSet extends ViewSet {
 
     }
 

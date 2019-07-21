@@ -5,9 +5,9 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
-import com.example.administrator.androidtest.Base.Adapter.VHBridge;
-import com.example.administrator.androidtest.Base.Adapter.VHolder;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.Rv.VHBridge;
+import com.example.libframework.Rv.VHolder;
 import com.example.libfresco.FrescoView;
 
 public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
@@ -17,7 +17,7 @@ public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
         return new ImageVHolder(itemView);
     }
 
-    class ImageVHolder extends VHolder<Image>{
+    class ImageVHolder extends VHolder<Image> {
         private TextView mTv_1;
         private FrescoView mFv_1;
 

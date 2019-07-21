@@ -4,7 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
+import com.example.libframework.ActAndFrag.ComponentAct;
 import com.example.libfresco.FrescoUriTransfer;
 import com.example.libfresco.FrescoUtil;
 import com.example.libfresco.FrescoView;

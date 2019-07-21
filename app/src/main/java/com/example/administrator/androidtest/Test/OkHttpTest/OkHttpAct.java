@@ -6,12 +6,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.FileUtil;
 import com.example.libbase.Util.NetWorkUtil;
 import com.example.libbase.Util.ToastUtil;
+import com.example.libframework.ActAndFrag.ComponentAct;
 import com.example.libokhttp.OkCallback;
 import com.example.libokhttp.OkDownloadCallback;
 import com.example.libokhttp.OkHelper;

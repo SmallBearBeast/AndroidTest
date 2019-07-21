@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.NestedScrolling;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class StickyLayoutAct extends ComponentAct {
     @Override

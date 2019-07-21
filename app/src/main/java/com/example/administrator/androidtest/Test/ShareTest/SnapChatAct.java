@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Share.SnapchatShare;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class SnapChatAct extends ComponentAct {
     private Button mBtImageShare;

@@ -1,13 +1,12 @@
 package com.example.administrator.androidtest.Test.RvActTest;
 
 import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
-import com.example.administrator.androidtest.Base.Adapter.VHBridge;
-import com.example.administrator.androidtest.Base.Adapter.VHolder;
 import com.example.administrator.androidtest.R;
+import com.example.libframework.Rv.VHBridge;
+import com.example.libframework.Rv.VHolder;
 
 public class MsgVHBinder extends VHBridge<MsgVHBinder.MsgVHolder> {
     @NonNull
@@ -21,7 +20,7 @@ public class MsgVHBinder extends VHBridge<MsgVHBinder.MsgVHolder> {
         return R.layout.item_rv_msg;
     }
 
-    class MsgVHolder extends VHolder<Msg>{
+    class MsgVHolder extends VHolder<Msg> {
         private TextView mTvText;
         public MsgVHolder(View itemView) {
             super(itemView);

@@ -4,13 +4,13 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.*;
 import android.view.View;
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Base.Adapter.VHAdapter;
-import com.example.administrator.androidtest.Base.Adapter.DataManager;
-import com.example.administrator.androidtest.Base.Adapter.Notify;
-import com.example.administrator.androidtest.Common.Rv.RvListener;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
+import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.Rv.DataManager;
+import com.example.libframework.Rv.Notify;
+import com.example.libframework.Rv.RvListener;
+import com.example.libframework.Rv.VHAdapter;
 import com.example.liblog.SLog;
 
 import java.util.ArrayList;

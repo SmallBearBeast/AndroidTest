@@ -19,7 +19,7 @@
 				style="@style/tv_base"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"/>
-		<com.example.administrator.androidtest.Fresco.FrescoView
+		<com.example.libfresco.FrescoView
 				android:id="@+id/fv_1"
 				android:layout_width="@dimen/dp_100"
 				android:layout_height="@dimen/dp_100"/>
@@ -38,7 +38,7 @@
 			android:orientation="horizontal"
 			android:layout_width="match_parent"
 			android:layout_height="wrap_content">
-		<com.example.administrator.androidtest.Fresco.FrescoView
+		<com.example.libfresco.FrescoView
 				android:id="@+id/fv_2"
 				android:layout_width="@dimen/dp_100"
 				android:layout_height="@dimen/dp_100"/>
@@ -49,7 +49,7 @@
 				style="@style/tv_base"
 				android:layout_width="0dp"
 				android:layout_height="wrap_content"/>
-		<com.example.administrator.androidtest.Fresco.FrescoView
+		<com.example.libfresco.FrescoView
 				android:id="@+id/fv_3"
 				android:layout_width="@dimen/dp_100"
 				android:layout_height="@dimen/dp_100"/>

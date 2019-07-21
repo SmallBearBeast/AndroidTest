@@ -7,10 +7,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
 
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.XmlDrawableUtil;
+import com.example.libframework.ActAndFrag.ComponentAct;
 
 public class XmlDrawableAct extends ComponentAct {
     private ImageView mIv;
