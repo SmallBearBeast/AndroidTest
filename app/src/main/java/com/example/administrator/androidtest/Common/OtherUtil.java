@@ -5,11 +5,12 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import com.example.libbase.Util.AppInitUtil;
 import com.example.libbase.Util.AppUtil;
 import com.example.libbase.Util.MainThreadUtil;
 
 @SuppressWarnings("unchecked")
-public class OtherUtil {
+public class OtherUtil extends AppInitUtil {
     public static void copyToClipboard(String text) {
         copyToClipboard("text", text);
     }
@@ -18,7 +19,7 @@ public class OtherUtil {
         MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
-                ClipboardManager manager = (ClipboardManager) AppUtil.getApp().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipboardManager manager = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData data = ClipData.newPlainText(label, text);
                 if(manager != null) {
                     try {

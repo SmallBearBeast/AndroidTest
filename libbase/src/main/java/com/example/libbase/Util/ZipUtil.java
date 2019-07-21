@@ -42,7 +42,7 @@ public class ZipUtil {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            IOUtil.close(bis, zos, bos);
+            close(bis, zos, bos);
         }
         return false;
     }
@@ -211,7 +211,20 @@ public class ZipUtil {
         } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
-            IOUtil.close(outputStream, fileOutputStream, inputStream);
+            close(outputStream, fileOutputStream, inputStream);
+        }
+    }
+
+    private static void close(Closeable... closeables) {
+        if (closeables == null) {
+            return;
+        }
+        for (Closeable closeable : closeables) {
+            try {
+                if (closeable != null) {
+                    closeable.close();
+                }
+            } catch (IOException ioe) {}
         }
     }
 }

@@ -20,14 +20,14 @@ import java.util.List;
 import static android.Manifest.permission.*;
 import static android.content.Context.WIFI_SERVICE;
 
-public class NetWorkUtil {
+public class NetWorkUtil extends AppInitUtil{
 
     /**
      * 获取NetworkInfo信息
      */
     @RequiresPermission(ACCESS_NETWORK_STATE)
     private static NetworkInfo getActiveNetworkInfo(){
-        ConnectivityManager cm = (ConnectivityManager) AppUtil.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if(cm == null)
             return null;
         return cm.getActiveNetworkInfo();
@@ -48,7 +48,7 @@ public class NetWorkUtil {
      */
     public static boolean getMobileDataEnabled() {
         try {
-            TelephonyManager tm = (TelephonyManager) AppUtil.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
             if (tm == null)
                 return false;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -71,7 +71,7 @@ public class NetWorkUtil {
     @RequiresPermission(MODIFY_PHONE_STATE)
     public static boolean setMobileDataEnabled(final boolean ENABLED) {
         try {
-            TelephonyManager tm = (TelephonyManager) AppUtil.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+            TelephonyManager tm = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
             if (tm == null)
                 return false;
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -113,7 +113,7 @@ public class NetWorkUtil {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static boolean getWifiEnabled() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager manager = (WifiManager) AppUtil.getApp().getSystemService(WIFI_SERVICE);
+        WifiManager manager = (WifiManager) getContext().getSystemService(WIFI_SERVICE);
         if (manager == null)
             return false;
         return manager.isWifiEnabled();
@@ -125,7 +125,7 @@ public class NetWorkUtil {
     @RequiresPermission(CHANGE_WIFI_STATE)
     public static void setWifiEnabled(final boolean ENABLED) {
         @SuppressLint("WifiManagerLeak")
-        WifiManager manager = (WifiManager) AppUtil.getApp().getSystemService(WIFI_SERVICE);
+        WifiManager manager = (WifiManager) getContext().getSystemService(WIFI_SERVICE);
         if (manager == null || ENABLED == manager.isWifiEnabled())
             return;
         manager.setWifiEnabled(ENABLED);
@@ -136,7 +136,7 @@ public class NetWorkUtil {
      */
     @RequiresPermission(ACCESS_NETWORK_STATE)
     public static boolean isWifiConnected() {
-        ConnectivityManager cm = (ConnectivityManager) AppUtil.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null)
             return false;
         NetworkInfo ni = cm.getActiveNetworkInfo();
@@ -147,7 +147,7 @@ public class NetWorkUtil {
      * 获取网络运营商的名字
      */
     public static String getNetworkOperatorName() {
-        TelephonyManager tm = (TelephonyManager) AppUtil.getApp().getSystemService(Context.TELEPHONY_SERVICE);
+        TelephonyManager tm = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
         if (tm == null)
             return "";
         return tm.getNetworkOperatorName();
@@ -159,7 +159,7 @@ public class NetWorkUtil {
      */
     @RequiresPermission(ACCESS_NETWORK_STATE)
     private static boolean isEthernet() {
-        final ConnectivityManager cm = (ConnectivityManager) AppUtil.getApp().getSystemService(Context.CONNECTIVITY_SERVICE);
+        final ConnectivityManager cm = (ConnectivityManager) getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         if (cm == null)
             return false;
         NetworkInfo info = cm.getNetworkInfo(ConnectivityManager.TYPE_ETHERNET);
@@ -297,7 +297,7 @@ public class NetWorkUtil {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getIpAddressByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) AppUtil.getApp().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         if (wm == null)
             return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().ipAddress);
@@ -306,7 +306,7 @@ public class NetWorkUtil {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getGatewayByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) AppUtil.getApp().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         if (wm == null)
             return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().gateway);
@@ -315,7 +315,7 @@ public class NetWorkUtil {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getNetMaskByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) AppUtil.getApp().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         if (wm == null)
             return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().netmask);
@@ -324,7 +324,7 @@ public class NetWorkUtil {
     @RequiresPermission(ACCESS_WIFI_STATE)
     public static String getServerAddressByWifi() {
         @SuppressLint("WifiManagerLeak")
-        WifiManager wm = (WifiManager) AppUtil.getApp().getSystemService(Context.WIFI_SERVICE);
+        WifiManager wm = (WifiManager) getContext().getSystemService(Context.WIFI_SERVICE);
         if (wm == null)
             return "";
         return Formatter.formatIpAddress(wm.getDhcpInfo().serverAddress);

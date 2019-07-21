@@ -25,37 +25,12 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 // TODO: 2019-07-18 AppUtil整理
-// TODO: 2019-07-18 PackageUtil整理
-// TODO: 2019-07-18 Util之间轻度依赖
-public class AppUtil {
-
-    public static final int ENV_DEBUG = 1;
-    public static final int ENV_RELEASE = 2;
-    public static final int ENV_ALPHA = 3;
-
-    @IntDef(value = {ENV_DEBUG, ENV_RELEASE, ENV_ALPHA})
-    public @interface Env{}
-
-    private static Application sApplication;
-
-    private static int sAppEnv = ENV_DEBUG;
-
-    public static void init(Application application){
-        sApplication = application;
-    }
-
-    public static Application getApp(){
-        return sApplication;
-    }
-
-    public static boolean isAppEnv(@Env int appEnv){
-        return sAppEnv == appEnv;
-    }
-
-    public static void setAppEnv(@Env int appEnv){
-        sAppEnv = appEnv;
-    }
-
+// TODO: 2019-07-21 FileProviderUtil整理
+// TODO: 2019-07-21 NetWorkUtil整理
+// TODO: 2019-07-21 NotchScreenUtil整理
+// TODO: 2019-07-21 整理OsUtil
+// TODO: 2019-07-21 整理ServiceUtil
+public final class AppUtil extends AppInitUtil{
     /**
      * 安装app
      */
@@ -64,8 +39,8 @@ public class AppUtil {
     }
 
     public static void installApp(File file){
-        if(FileUtil.isFileExist(file)){
-            sApplication.startActivity(getInstallAppIntent(file, true));
+        if(isFileExist(file)){
+            getContext().startActivity(getInstallAppIntent(file, true));
         }
     }
 
@@ -74,7 +49,7 @@ public class AppUtil {
     }
 
     public static void installApp(final Activity ACTIVITY, final File FILE, final int REQUEST_CODE) {
-        if (FileUtil.isFileExist(FILE)){
+        if (isFileExist(FILE)){
             ACTIVITY.startActivityForResult(getInstallAppIntent(FILE, false), REQUEST_CODE);
         }
     }
@@ -86,11 +61,11 @@ public class AppUtil {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
             data = Uri.fromFile(FILE);
         } else {
-            String authority = sApplication.getPackageName() + ".utilcode.provider"; //换成自己应用的provider
-            data = FileProvider.getUriForFile(sApplication, authority, FILE);
+            String authority = getContext().getPackageName() + ".utilcode.provider"; //换成自己应用的provider
+            data = FileProvider.getUriForFile(getContext(), authority, FILE);
             intent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         }
-        sApplication.grantUriPermission(sApplication.getPackageName(), data, Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        getContext().grantUriPermission(getContext().getPackageName(), data, Intent.FLAG_GRANT_READ_URI_PERMISSION);
         intent.setDataAndType(data, type);
         return IS_NEW_TASK ? intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) : intent;
     }
@@ -100,13 +75,13 @@ public class AppUtil {
      * 卸载app
      */
     public static void uninstallApp(final String PACKAGE_NAME) {
-        if(StringUtil.isSpace(PACKAGE_NAME))
+        if(isSpace(PACKAGE_NAME))
             return;
-        sApplication.startActivity(getUninstallAppIntent(PACKAGE_NAME, true));
+        getContext().startActivity(getUninstallAppIntent(PACKAGE_NAME, true));
     }
 
     public static void uninstallApp(final Activity ACTIVITY, final String PACKAGE_NAME, final int REQUEST_CODE) {
-        if (StringUtil.isSpace(PACKAGE_NAME)) return;
+        if (isSpace(PACKAGE_NAME)) return;
         ACTIVITY.startActivityForResult(getUninstallAppIntent(PACKAGE_NAME, false), REQUEST_CODE);
     }
 
@@ -121,7 +96,7 @@ public class AppUtil {
      * 判断其他app是否安装
      */
     public static boolean isAppInstalled(@NonNull final String packageName) {
-        PackageManager packageManager = sApplication.getPackageManager();
+        PackageManager packageManager = getContext().getPackageManager();
         try {
             return packageManager.getApplicationInfo(packageName, 0) != null;
         } catch (PackageManager.NameNotFoundException e) {
@@ -134,14 +109,14 @@ public class AppUtil {
      * app是否是debug状态
      */
     public static boolean isAppDebug() {
-        return isAppDebug(sApplication.getPackageName());
+        return isAppDebug(getContext().getPackageName());
     }
 
     public static boolean isAppDebug(final String PACKAGE_NAME){
-        if (StringUtil.isSpace(PACKAGE_NAME))
+        if (isSpace(PACKAGE_NAME))
             return false;
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             ApplicationInfo ai = pm.getApplicationInfo(PACKAGE_NAME, 0);
             return ai != null && (ai.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         } catch (PackageManager.NameNotFoundException e) {
@@ -155,14 +130,14 @@ public class AppUtil {
      * app是否是系统app
      */
     public static boolean isAppSystem(){
-        return isAppSystem(sApplication.getPackageName());
+        return isAppSystem(getContext().getPackageName());
     }
 
     public static boolean isAppSystem(final String PACKAGE_NAME) {
-        if (StringUtil.isSpace(PACKAGE_NAME))
+        if (isSpace(PACKAGE_NAME))
             return false;
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             ApplicationInfo ai = pm.getApplicationInfo(PACKAGE_NAME, 0);
             return ai != null && (ai.flags & ApplicationInfo.FLAG_SYSTEM) != 0;
         } catch (PackageManager.NameNotFoundException e) {
@@ -177,13 +152,13 @@ public class AppUtil {
      * 启动app
      */
     public static void launchApp(final String PACKAGE_NAME) {
-        if (StringUtil.isSpace(PACKAGE_NAME))
+        if (isSpace(PACKAGE_NAME))
             return;
-        sApplication.startActivity(getLaunchAppIntent(PACKAGE_NAME, true));
+        getContext().startActivity(getLaunchAppIntent(PACKAGE_NAME, true));
     }
 
     public static void launchApp(final Activity ACTIVITY, final String PACKAGE_NAME, final int REQUEST_CODE) {
-        if (StringUtil.isSpace(PACKAGE_NAME))
+        if (isSpace(PACKAGE_NAME))
             return;
         ACTIVITY.startActivityForResult(getLaunchAppIntent(PACKAGE_NAME), REQUEST_CODE);
     }
@@ -193,7 +168,7 @@ public class AppUtil {
     }
 
     private static Intent getLaunchAppIntent(final String PACKAGE_NAME, final boolean IS_NEW_TASK) {
-        Intent intent = sApplication.getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
+        Intent intent = getContext().getPackageManager().getLaunchIntentForPackage(PACKAGE_NAME);
         if (intent == null)
             return null;
         return IS_NEW_TASK ? intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) : intent;
@@ -208,12 +183,12 @@ public class AppUtil {
     }
 
     public static void relaunchApp(final boolean IS_KILL_PROCESS) {
-        PackageManager packageManager = sApplication.getPackageManager();
-        Intent intent = packageManager.getLaunchIntentForPackage(sApplication.getPackageName());
+        PackageManager packageManager = getContext().getPackageManager();
+        Intent intent = packageManager.getLaunchIntentForPackage(getContext().getPackageName());
         if (intent == null)
             return;
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        sApplication.startActivity(intent);
+        getContext().startActivity(intent);
         if (!IS_KILL_PROCESS)
             return;
         android.os.Process.killProcess(android.os.Process.myPid());
@@ -226,7 +201,7 @@ public class AppUtil {
      * 判断app是否在前台
      */
     public static boolean isAppForeground() {
-        ActivityManager am = (ActivityManager) sApplication.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
         if (am == null)
             return false;
         List<ActivityManager.RunningAppProcessInfo> info = am.getRunningAppProcesses();
@@ -234,14 +209,14 @@ public class AppUtil {
             return false;
         for (ActivityManager.RunningAppProcessInfo aInfo : info) {
             if (aInfo.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                return aInfo.processName.equals(sApplication.getPackageName());
+                return aInfo.processName.equals(getContext().getPackageName());
             }
         }
         return false;
     }
 
     public static boolean isAppForeground(final String PACKAGE_NAME) {
-        return !StringUtil.isSpace(PACKAGE_NAME) && PACKAGE_NAME.equals(getForegroundProcessName());
+        return !isSpace(PACKAGE_NAME) && PACKAGE_NAME.equals(getForegroundProcessName());
     }
     /**判断app是否在前台**/
 
@@ -249,7 +224,7 @@ public class AppUtil {
      * 获取前台进程名字
      */
     private static String getForegroundProcessName() {
-        ActivityManager am = (ActivityManager) sApplication.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager am = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> pInfo = am.getRunningAppProcesses();
         if (pInfo != null && pInfo.size() > 0) {
             for (ActivityManager.RunningAppProcessInfo aInfo : pInfo) {
@@ -259,7 +234,7 @@ public class AppUtil {
             }
         }
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
             List<ResolveInfo> list = pm.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
             if (list.size() <= 0) {
@@ -267,17 +242,17 @@ public class AppUtil {
                 return "";
             }
             try {
-                ApplicationInfo info = pm.getApplicationInfo(sApplication.getPackageName(), 0);
-                AppOpsManager aom = (AppOpsManager) sApplication.getSystemService(Context.APP_OPS_SERVICE);
+                ApplicationInfo info = pm.getApplicationInfo(getContext().getPackageName(), 0);
+                AppOpsManager aom = (AppOpsManager) getContext().getSystemService(Context.APP_OPS_SERVICE);
                 if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    sApplication.startActivity(intent);
+                    getContext().startActivity(intent);
                 }
                 if (aom.checkOpNoThrow(AppOpsManager.OPSTR_GET_USAGE_STATS, info.uid, info.packageName) != AppOpsManager.MODE_ALLOWED) {
                     Log.i("AppUtil", "getForegroundProcessName: refuse to device usage stats.");
                     return "";
                 }
-                UsageStatsManager usageStatsManager = (UsageStatsManager) sApplication.getSystemService(Context.USAGE_STATS_SERVICE);
+                UsageStatsManager usageStatsManager = (UsageStatsManager) getContext().getSystemService(Context.USAGE_STATS_SERVICE);
                 List<UsageStats> usageStatsList = null;
                 if (usageStatsManager != null) {
                     long endTime = System.currentTimeMillis();
@@ -305,14 +280,14 @@ public class AppUtil {
      * 获取应用图标
      */
     public static Drawable getAppIcon() {
-        return getAppIcon(sApplication.getPackageName());
+        return getAppIcon(getContext().getPackageName());
     }
     
     public static Drawable getAppIcon(final String PACKAGE_NAME) {
-        if (StringUtil.isSpace(PACKAGE_NAME)) 
+        if (isSpace(PACKAGE_NAME))
             return null;
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(PACKAGE_NAME, 0);
             return pi == null ? null : pi.applicationInfo.loadIcon(pm);
         } catch (PackageManager.NameNotFoundException e) {
@@ -326,20 +301,20 @@ public class AppUtil {
      * 获取应用包名
      */
     public static String getAppPackageName() {
-        return sApplication.getPackageName();
+        return getContext().getPackageName();
     }
 
     /**
      * 获取应用名
      */
     public static String getAppName() {
-        return getAppName(sApplication.getPackageName());
+        return getAppName(getContext().getPackageName());
     }
 
     public static String getAppName(final String PACKAGE_NAME) {
-        if (StringUtil.isSpace(PACKAGE_NAME)) return "";
+        if (isSpace(PACKAGE_NAME)) return "";
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(PACKAGE_NAME, 0);
             return pi == null ? null : pi.applicationInfo.loadLabel(pm).toString();
         } catch (PackageManager.NameNotFoundException e) {
@@ -353,14 +328,14 @@ public class AppUtil {
      * 获取应用路径
      */
     public static String getAppPath() {
-        return getAppPath(sApplication.getPackageName());
+        return getAppPath(getContext().getPackageName());
     }
     
     public static String getAppPath(final String PACKAGE_NAME) {
-        if (StringUtil.isSpace(PACKAGE_NAME)) 
+        if (isSpace(PACKAGE_NAME))
             return "";
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(PACKAGE_NAME, 0);
             return pi == null ? null : pi.applicationInfo.sourceDir;
         } catch (PackageManager.NameNotFoundException e) {
@@ -374,14 +349,14 @@ public class AppUtil {
      * 获取应用版本名
      */
     public static String getAppVersionName() {
-        return getAppVersionName(sApplication.getPackageName());
+        return getAppVersionName(getContext().getPackageName());
     }
     
     public static String getAppVersionName(final String PACKAGE_NAME) {
-        if (StringUtil.isSpace(PACKAGE_NAME)) 
+        if (isSpace(PACKAGE_NAME))
             return "";
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(PACKAGE_NAME, 0);
             return pi == null ? null : pi.versionName;
         } catch (PackageManager.NameNotFoundException e) {
@@ -391,18 +366,36 @@ public class AppUtil {
     }
     /**获取应用版本名**/
 
+    public static PackageManager getPackageManager(){
+        return getContext().getPackageManager();
+    }
+
+    /**
+     * 是否首次安装
+     */
+    public static boolean isFirstInstall() {
+        try {
+            PackageManager mg = getPackageManager();
+            PackageInfo info = mg.getPackageInfo(getContext().getPackageName(), 0);
+            return info.firstInstallTime == info.lastUpdateTime;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * 获取应用版本号
      */
     public static int getAppVersionCode() {
-        return getAppVersionCode(sApplication.getPackageName());
+        return getAppVersionCode(getContext().getPackageName());
     }
     
     public static int getAppVersionCode(final String PACKAGE_NAME) {
-        if (StringUtil.isSpace(PACKAGE_NAME))
+        if (isSpace(PACKAGE_NAME))
             return -1;
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(PACKAGE_NAME, 0);
             return pi == null ? -1 : pi.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
@@ -416,12 +409,12 @@ public class AppUtil {
      * 获取AppInfo信息
      */
     public static AppInfo getAppInfo() {
-        return getAppInfo(sApplication.getPackageName());
+        return getAppInfo(getContext().getPackageName());
     }
 
     public static AppInfo getAppInfo(final String PACKAGE_NAME) {
         try {
-            PackageManager pm = sApplication.getPackageManager();
+            PackageManager pm = getContext().getPackageManager();
             PackageInfo pi = pm.getPackageInfo(PACKAGE_NAME, 0);
             return getBean(pm, pi);
         } catch (PackageManager.NameNotFoundException e) {
@@ -432,7 +425,7 @@ public class AppUtil {
 
     public static List<AppInfo> getAppsInfo() {
         List<AppInfo> list = new ArrayList<>();
-        PackageManager pm = sApplication.getPackageManager();
+        PackageManager pm = getContext().getPackageManager();
         List<PackageInfo> installedPackages = pm.getInstalledPackages(0);
         for (PackageInfo pi : installedPackages) {
             AppInfo ai = getBean(pm, pi);
@@ -449,9 +442,9 @@ public class AppUtil {
     }
 
     public static AppInfo getApkInfo(final String APK_FILE_PATH) {
-        if (StringUtil.isSpace(APK_FILE_PATH))
+        if (isSpace(APK_FILE_PATH))
             return null;
-        PackageManager pm = sApplication.getPackageManager();
+        PackageManager pm = getContext().getPackageManager();
         PackageInfo pi = pm.getPackageArchiveInfo(APK_FILE_PATH, 0);
         ApplicationInfo appInfo = pi.applicationInfo;
         appInfo.sourceDir = APK_FILE_PATH;
@@ -562,5 +555,20 @@ public class AppUtil {
                     "\n  is system: " + isSystem() +
                     "}";
         }
+    }
+
+    private static boolean isSpace(final String S) {
+        if (S == null)
+            return true;
+        for (int i = 0, len = S.length(); i < len; i++) {
+            if (!Character.isWhitespace(S.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static boolean isFileExist(File file) {
+        return file != null && file.exists();
     }
 }

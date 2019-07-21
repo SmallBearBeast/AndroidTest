@@ -11,15 +11,15 @@ import android.util.DisplayMetrics;
 public class ResourceUtil extends AppInitUtil {
 
     public static Resources getResources() {
-        return sContext.getResources();
+        return getContext().getResources();
     }
 
     public static AssetManager getAssets() {
-        return sContext.getAssets();
+        return getContext().getAssets();
     }
 
     public static String getString(int resId) {
-        return sContext.getString(resId);
+        return getContext().getString(resId);
     }
 
     public static DisplayMetrics getDisplayMetrics() {
@@ -27,7 +27,7 @@ public class ResourceUtil extends AppInitUtil {
     }
 
     public static ContentResolver getContentResolver() {
-        return sContext.getContentResolver();
+        return getContext().getContentResolver();
     }
 
     public static int getColor(int id) {

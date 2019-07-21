@@ -2,10 +2,11 @@ package com.example.libbase.Util;
 
 
 import android.app.Activity;
+import android.content.res.Resources;
 import android.os.Build;
 import android.view.*;
 
-public class ScreenUtil {
+public class ScreenUtil extends AppInitUtil{
 
     private static int COLOR_ID_NONE = -1;
     /**
@@ -54,10 +55,10 @@ public class ScreenUtil {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 if(statusColorId != COLOR_ID_NONE){
-                    window.setStatusBarColor(ResourceUtil.getColor(statusColorId));
+                    window.setStatusBarColor(getColor(statusColorId));
                 }
                 if(navColorId != COLOR_ID_NONE){
-                    window.setNavigationBarColor(ResourceUtil.getColor(navColorId));
+                    window.setNavigationBarColor(getColor(navColorId));
                 }
             }
         }
@@ -97,9 +98,9 @@ public class ScreenUtil {
      */
     private static int getStatusBarHeight(){
         int statusBarHeight = -1;
-        int resourceId = ResourceUtil.getResources().getIdentifier("status_bar_height","dimen", "android");
+        int resourceId = getResources().getIdentifier("status_bar_height","dimen", "android");
         if(resourceId > 0){
-            statusBarHeight = ResourceUtil.getDimensionPixelSize(resourceId);
+            statusBarHeight = getDimensionPixelSize(resourceId);
         }
         return statusBarHeight;
     }
@@ -124,4 +125,16 @@ public class ScreenUtil {
         }
     }
     /**填充状态栏高度**/
+
+    private static int getColor(int id) {
+        return getResources().getColor(id);
+    }
+
+    private static Resources getResources() {
+        return getContext().getResources();
+    }
+
+    private static int getDimensionPixelSize(int id) {
+        return getResources().getDimensionPixelSize(id);
+    }
 }

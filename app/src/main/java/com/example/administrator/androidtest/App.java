@@ -26,7 +26,6 @@ public class App extends Application {
         super.onCreate();
         mContext = this;
         AppInitUtil.init(this);
-        AppUtil.init(this);
         FrescoUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
     }

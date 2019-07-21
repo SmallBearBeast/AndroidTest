@@ -67,15 +67,15 @@ public class XmlDrawableUtil extends AppInitUtil {
 
 
     private static Drawable getDrawable(int drawableId){
-        return ContextCompat.getDrawable(sContext, drawableId);
+        return ContextCompat.getDrawable(getContext(), drawableId);
     }
 
     private static int getColor(int colorId){
-        return ContextCompat.getColor(sContext, colorId);
+        return ContextCompat.getColor(getContext(), colorId);
     }
 
     private static int getDp2Px(int dp){
-        float scale = sContext.getResources().getDisplayMetrics().density;
+        float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
 

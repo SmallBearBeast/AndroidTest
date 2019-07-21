@@ -10,26 +10,26 @@ import android.view.WindowManager;
  */
 public class DensityUtil extends AppInitUtil {
     public static int dp2Px(float dpValue) {
-        final float scale = sContext.getResources().getDisplayMetrics().density;
+        final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dpValue * scale + 0.5f);
     }
 
     public static int px2Dp(float pxValue) {
-        final float scale = sContext.getResources().getDisplayMetrics().density;
+        final float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (pxValue / scale + 0.5f);
     }
 
     public static int sp2px(float spValue) {
-        final float fontScale = sContext.getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = getContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (spValue * fontScale + 0.5f);
     }
 
     public static int px2Sp(float pxValue) {
-        final float fontScale = sContext.getResources().getDisplayMetrics().scaledDensity;
+        final float fontScale = getContext().getResources().getDisplayMetrics().scaledDensity;
         return (int) (pxValue / fontScale + 0.5f);
     }
 
-    private static DisplayMetrics getDisplayMetrics(Context context) {
+    public static DisplayMetrics getDisplayMetrics(Context context) {
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         DisplayMetrics dm = new DisplayMetrics();
         manager.getDefaultDisplay().getMetrics(dm);
@@ -37,12 +37,12 @@ public class DensityUtil extends AppInitUtil {
     }
 
     public static int getScreenWidth() {
-        DisplayMetrics dm = getDisplayMetrics(sContext);
+        DisplayMetrics dm = getDisplayMetrics(getContext());
         return dm.widthPixels;
     }
 
     public static int getScreenHeight() {
-        DisplayMetrics dm = getDisplayMetrics(sContext);
+        DisplayMetrics dm = getDisplayMetrics(getContext());
         return dm.heightPixels;
     }
 

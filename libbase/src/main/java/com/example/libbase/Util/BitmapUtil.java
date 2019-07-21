@@ -4,9 +4,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 
+import java.io.Closeable;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
-public class BitmapUtil {
+public final class BitmapUtil {
     public static Bitmap getBitmap(String path, int maxWidth, int maxHeight){
         BitmapFactory.Options op = OptionsUtil.optionsByWH(path, maxWidth, maxHeight);
         return BitmapFactory.decodeFile(path, op);
@@ -26,7 +29,7 @@ public class BitmapUtil {
     }
 
     public static void save(Bitmap bitmap, String savePath, boolean recycle){
-        if(FileUtil.createFile(savePath)){
+        if(createFile(savePath)){
             FileOutputStream fos = null;
             try {
                 fos = new FileOutputStream(savePath);
@@ -37,7 +40,7 @@ public class BitmapUtil {
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                IOUtil.close(fos);
+                close(fos);
             }
         }
     }
@@ -74,5 +77,41 @@ public class BitmapUtil {
         public Bitmap bitmap(){
             return Bitmap.createBitmap(mSrcBm, 0, 0, mSrcBm.getWidth(), mSrcBm.getHeight(), mMatrix, true);
         }
+    }
+
+    private static void close(Closeable... closeables) {
+        if (closeables == null) {
+            return;
+        }
+        for (Closeable closeable : closeables) {
+            try {
+                if (closeable != null) {
+                    closeable.close();
+                }
+            } catch (IOException ioe) {}
+        }
+    }
+
+    private static boolean createFile(String filePath){
+        File file = new File(filePath);
+        File parent = file.getParentFile();
+        if(file.exists()){
+            return true;
+        } else if(parent.exists()){
+            try {
+                return file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if(parent.mkdirs()){
+                try {
+                    return file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
     }
 }

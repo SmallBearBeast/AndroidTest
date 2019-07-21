@@ -20,33 +20,34 @@ public class SPUtil extends AppInitUtil {
      */
     public static void init(@SpName String... spNames){
         for (int i = 0; i < spNames.length; i++) {
-            AppUtil.getApp().getSharedPreferences(spNames[i], Context.MODE_PRIVATE);
+            getContext().getSharedPreferences(spNames[i], Context.MODE_PRIVATE);
         }
     }
 
-    private static void putData(@SpName String spName, String[] key, Object[] value){
-        if(!CollectionUtil.isSameLength(key, value)){
+    private static void putData(@SpName String spName, String[] keys, Object[] values){
+        boolean check = (keys != null && values != null && keys.length == values.length);
+        if(!check){
             return;
         }
-        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
-        for (int i = 0, len = key.length; i < len; i++) {
-            if(value[i] instanceof Boolean){
-                editor.putBoolean(key[i], (Boolean) value[i]);
-            }else if(value[i] instanceof Integer){
-                editor.putInt(key[i], (Integer) value[i]);
-            }else if(value[i] instanceof String){
-                editor.putString(key[i], (String) value[i]);
-            }else if(value[i] instanceof Float){
-                editor.putFloat(key[i], (Float) value[i]);
-            }else if(value[i] instanceof Long){
-                editor.putLong(key[i], (Long) value[i]);
+        SharedPreferences.Editor editor = getContext().getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+        for (int i = 0, len = keys.length; i < len; i++) {
+            if(values[i] instanceof Boolean){
+                editor.putBoolean(keys[i], (Boolean) values[i]);
+            }else if(values[i] instanceof Integer){
+                editor.putInt(keys[i], (Integer) values[i]);
+            }else if(values[i] instanceof String){
+                editor.putString(keys[i], (String) values[i]);
+            }else if(values[i] instanceof Float){
+                editor.putFloat(keys[i], (Float) values[i]);
+            }else if(values[i] instanceof Long){
+                editor.putLong(keys[i], (Long) values[i]);
             }
         }
         editor.apply();
     }
 
     private static void putData(@SpName String spName, String key, Object value){
-        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getContext().getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         if(value instanceof Boolean){
             editor.putBoolean(key, (Boolean) value);
         }else if(value instanceof Integer){
@@ -62,7 +63,7 @@ public class SPUtil extends AppInitUtil {
     }
 
     public static Object getData(@SpName String spName, String key, Object defaultValue) {
-        SharedPreferences preferences = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getContext().getSharedPreferences(spName, Context.MODE_PRIVATE);
         String type = defaultValue.getClass().getSimpleName();
         Object result = null;
         switch (type) {
@@ -82,13 +83,13 @@ public class SPUtil extends AppInitUtil {
     }
 
     public static void remove(@SpName String spName, String key){
-        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getContext().getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         editor.remove(key);
         editor.apply();
     }
 
     public static void clear(@SpName String spName){
-        SharedPreferences.Editor editor = sContext.getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
+        SharedPreferences.Editor editor = getContext().getSharedPreferences(spName, Context.MODE_PRIVATE).edit();
         editor.clear();
         editor.apply();
     }

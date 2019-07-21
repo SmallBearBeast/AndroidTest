@@ -4,7 +4,7 @@ import android.support.annotation.StringRes;
 import android.view.View;
 import android.widget.Toast;
 
-public final class ToastUtil {
+public final class ToastUtil extends AppInitUtil{
     private static Toast sToast;
     public static void showToast(String text) {
         showToast(new ToastConfig(text));
@@ -20,7 +20,7 @@ public final class ToastUtil {
             public void run() {
                 checkToast();
                 if(config.mText == null && config.mStringResId != -1){
-                    config.mText = ResourceUtil.getString(config.mStringResId);
+                    config.mText = getString(config.mStringResId);
                 }
                 sToast.setText(config.mText);
                 sToast.setDuration(config.mDuration);
@@ -45,7 +45,7 @@ public final class ToastUtil {
 
     private static void checkToast(){
         if(sToast == null){
-            sToast = Toast.makeText(AppUtil.getApp(), "", Toast.LENGTH_SHORT);
+            sToast = Toast.makeText(getApp(), "", Toast.LENGTH_SHORT);
         }
     }
 
@@ -65,5 +65,9 @@ public final class ToastUtil {
         public ToastConfig(int stringResId) {
             mStringResId = stringResId;
         }
+    }
+
+    private static String getString(int resId) {
+        return getContext().getString(resId);
     }
 }

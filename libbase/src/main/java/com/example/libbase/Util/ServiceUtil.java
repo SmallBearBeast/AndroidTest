@@ -14,14 +14,10 @@ import android.util.Log;
 
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
-
-/***
- * Description:
- * Creator: wangwei7@bigo.sg
- * Date:2018-02-27 05:34:31 PM
- ***/
 public final class ServiceUtil extends AppInitUtil {
     private static final String TAG = "ComponentUtils";
 
@@ -34,7 +30,7 @@ public final class ServiceUtil extends AppInitUtil {
      */
     public static void startService(Intent it) {
         try {
-            AppInitUtil.sContext.startService(it);
+            getContext().startService(it);
         } catch (Exception ex) {
             Log.e(TAG, "startServiceQuietly failed", ex);
         }
@@ -71,15 +67,12 @@ public final class ServiceUtil extends AppInitUtil {
      */
     public static void startForegroundService(Service service) {
         try {
-            Method method = ReflectUtil.findMethod(Service.class, "startForeground",
-                    int.class, Notification.class);
+            Method method = findMethod("startForeground", int.class, Notification.class);
             method.invoke(service, 1024, new Notification());
             return;
-        } catch (Throwable e) {
-        }
+        } catch (Throwable e) {}
         try {
-            Method method = ReflectUtil.findMethod(Service.class, "setForeground",
-                    new Class[]{boolean.class});
+            Method method = findMethod("setForeground", new Class[]{boolean.class});
             method.invoke(service, true);
         } catch (Throwable e) {
         }
@@ -93,12 +86,12 @@ public final class ServiceUtil extends AppInitUtil {
      * @return boolean
      */
     public static boolean isServiceRunning(@NonNull String name) {
-        ActivityManager manager = (ActivityManager) AppInitUtil.sContext.getSystemService(Context.ACTIVITY_SERVICE);
+        ActivityManager manager = (ActivityManager) getContext().getSystemService(Context.ACTIVITY_SERVICE);
         if (manager == null) {
             return false;
         }
         List<ActivityManager.RunningServiceInfo> infos = manager.getRunningServices(Integer.MAX_VALUE);
-        if (CollectionUtil.isEmpty(infos)) {
+        if (isEmpty(infos)) {
             return false;
         }
 //        int uid = ProcessUtil.getUid();
@@ -113,6 +106,26 @@ public final class ServiceUtil extends AppInitUtil {
             }
         }
         return false;
+    }
+
+    private static Method findMethod(String name, Class<?>... parameterTypes)
+            throws NoSuchMethodException {
+        Class clazz = Service.class;
+        for (; clazz != null; clazz = clazz.getSuperclass()) {
+            try {
+                Method method = clazz.getDeclaredMethod(name, parameterTypes);
+                if (!method.isAccessible()) {
+                    method.setAccessible(true);
+                }
+                return method;
+            } catch (NoSuchMethodException e) {}
+        }
+        throw new NoSuchMethodException("Method " + name + " with parameters " +
+                Arrays.asList(parameterTypes) + " not found in " + clazz.getCanonicalName());
+    }
+
+    private static <T> boolean isEmpty(Collection<T> collection) {
+        return collection == null || collection.isEmpty();
     }
 
 }

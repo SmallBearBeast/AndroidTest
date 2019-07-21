@@ -4,7 +4,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 
-public class UriUtil {
+public class UriUtil extends AppInitUtil{
     public static boolean isContentUri(Uri uri){
         if(uri != null){
             return uri.getPath().startsWith("content:");
@@ -37,7 +37,7 @@ public class UriUtil {
 
     public static MediaInfo uriToMediaInfo(Uri uri){
         MediaInfo mediaInfo = new MediaInfo();
-        Cursor cursor = AppUtil.getApp().getContentResolver().query(uri, null, null, null, null);
+        Cursor cursor = getContext().getContentResolver().query(uri, null, null, null, null);
         if(cursor != null){
             if (cursor.moveToFirst()) {
                 mediaInfo.mPath = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));

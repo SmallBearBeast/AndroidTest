@@ -11,7 +11,7 @@ public class IOUtil {
     /**
      * 安全关闭流，内部捕获异常
      */
-    public static void close(Closeable closeable) {
+    private static void close(Closeable closeable) {
         try {
             if (closeable != null) {
                 closeable.close();

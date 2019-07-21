@@ -12,13 +12,6 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-
-/**
- * Created on 2018/5/16
- * Description:  刘海屏适配工具类
- *
- * @author zhangzexian
- */
 public class NotchScreenUtil extends AppInitUtil {
 
     private static String TAG = "NotchScreenUtils";

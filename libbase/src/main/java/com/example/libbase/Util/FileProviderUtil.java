@@ -15,7 +15,7 @@ public class FileProviderUtil extends AppInitUtil {
      * 从file获取Uri(兼容N)
      */
     public static Uri getUriForFile(File file) {
-        if(FileUtil.isFileExist(file)){
+        if(isFileExist(file)){
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 return getUriForFile24(file);
             } else {
@@ -26,14 +26,14 @@ public class FileProviderUtil extends AppInitUtil {
     }
 
     public static Uri getUriForFile(String path){
-        if(FileUtil.isFileExist(path)){
+        if(isFileExist(path)){
             return getUriForFile(new File(path));
         }
         return null;
     }
 
     private static Uri getUriForFile24(File file) {
-        return FileProvider.getUriForFile(sContext, sContext.getPackageName() + ".fileprovider", file);
+        return FileProvider.getUriForFile(getContext(), getContext().getPackageName() + ".fileprovider", file);
     }
     /**从file获取Uri(兼容N)**/
 
@@ -59,11 +59,19 @@ public class FileProviderUtil extends AppInitUtil {
             flag |= Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
         }
         intent.addFlags(flag);
-        List<ResolveInfo> resInfoList = sContext.getPackageManager()
+        List<ResolveInfo> resInfoList = getContext().getPackageManager()
                 .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
         for (ResolveInfo resolveInfo : resInfoList) {
             String packageName = resolveInfo.activityInfo.packageName;
-            sContext.grantUriPermission(packageName, uri, flag);
+            getContext().grantUriPermission(packageName, uri, flag);
         }
+    }
+
+    private static boolean isFileExist(String path) {
+        return isFileExist(new File(path));
+    }
+
+    private static boolean isFileExist(File file) {
+        return file != null && file.exists();
     }
 }

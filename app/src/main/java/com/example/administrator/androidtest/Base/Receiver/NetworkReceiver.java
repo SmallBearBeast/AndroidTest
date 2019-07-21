@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import com.example.administrator.androidtest.Base.Component.IComponent;
 import com.example.libbase.Util.AppUtil;
+import com.example.libbase.Util.EnvUtil;
 import com.example.libbase.Util.NetWorkUtil;
 
 public class NetworkReceiver extends BroadcastReceiver implements IComponent {
@@ -28,11 +29,11 @@ public class NetworkReceiver extends BroadcastReceiver implements IComponent {
     @Override
     public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
         if(event == Lifecycle.Event.ON_DESTROY){
-            AppUtil.getApp().unregisterReceiver(this);
+            EnvUtil.getApp().unregisterReceiver(this);
         }else if(event == Lifecycle.Event.ON_CREATE){
             IntentFilter filter = new IntentFilter();
             filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
-            AppUtil.getApp().registerReceiver(this, filter);
+            EnvUtil.getApp().registerReceiver(this, filter);
         }
     }
 
