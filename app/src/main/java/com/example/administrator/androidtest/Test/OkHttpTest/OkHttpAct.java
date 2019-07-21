@@ -7,14 +7,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.Base.ActAndFrag.ComponentAct;
-import com.example.administrator.androidtest.Net.Okhttp.OkCallback;
-import com.example.administrator.androidtest.Net.Okhttp.OkDownloadCallback;
-import com.example.administrator.androidtest.Net.Okhttp.OkHelper;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.FileUtil;
 import com.example.libbase.Util.NetWorkUtil;
 import com.example.libbase.Util.ToastUtil;
+import com.example.libokhttp.OkCallback;
+import com.example.libokhttp.OkDownloadCallback;
+import com.example.libokhttp.OkHelper;
 import okhttp3.Headers;
 
 import java.io.File;

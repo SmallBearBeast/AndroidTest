@@ -1,1 +1,1 @@
-include ':app', ':MyTest', ':MyLibrary', ':libkt', ':libaspectj', ':libfresco', ':libokhttp', ':libbase', ':libmmf'
+include ':app', ':MyTest', ':MyLibrary', ':libkt', ':libaspectj', ':libfresco', ':libokhttp', ':libbase', ':libmmf', ':liblog'
