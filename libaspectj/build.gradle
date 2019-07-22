@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply from: 'aspectj.gradle'
 
 android {
     compileSdkVersion 28

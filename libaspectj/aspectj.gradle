@@ -13,11 +13,11 @@ buildscript {
 
 dependencies {
     //aspectJ
-    implementation 'org.aspectj:aspectjrt:1.8.6'
+    compileOnly 'org.aspectj:aspectjrt:1.8.6'
 }
 
 final def log = project.logger
-final def variants = project.android.applicationVariants
+final def variants = project.android.libraryVariants
 variants.all { variant ->
     if (!variant.buildType.isDebuggable()) {
         log.debug("Skipping non-debuggable build type '${variant.buildType.name}'.")
