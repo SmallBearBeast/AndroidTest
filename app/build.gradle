@@ -62,4 +62,5 @@ dependencies {
     implementation project(":libokhttp")
     implementation project(":liblog")
     implementation project(":libframework")
+    implementation project(":libmmf")
 }

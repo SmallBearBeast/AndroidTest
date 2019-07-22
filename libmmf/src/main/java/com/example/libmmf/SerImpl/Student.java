@@ -1,7 +1,8 @@
-package com.example.administrator.androidtest.SerImpl;
+package com.example.libmmf.SerImpl;
 
 
-import com.example.administrator.androidtest.Mmf.WrapUtil;
+
+import com.example.libmmf.Mmf.WrapUtil;
 
 import java.nio.ByteBuffer;
 
