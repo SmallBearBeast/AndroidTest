@@ -1,29 +1,22 @@
-package com.example.administrator.androidtest.Share;
+package com.example.libframework.Receiver;
 
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.text.TextUtils;
 
-import com.example.administrator.androidtest.App;
+import com.example.libbase.Util.EnvUtil;
+import com.example.libframework.Component.IComponent;
 
-public class HomeKeyReceiver extends BroadcastReceiver{
+public class HomeKeyReceiver extends BroadcastReceiver implements IComponent {
     private static final String REASON = "reason";
     private static final String HOME_KEY = "homekey";
     private HomeKeyListener mListener;
-    public HomeKeyReceiver() {}
-
-    public void onStart(HomeKeyListener listener){
+    public HomeKeyReceiver(HomeKeyListener listener) {
         mListener = listener;
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-        App.getContext().registerReceiver(this, filter);
-    }
-
-    public void onStop(){
-        App.getContext().unregisterReceiver(this);
-        mListener = null;
     }
 
     @Override
@@ -36,6 +29,18 @@ public class HomeKeyReceiver extends BroadcastReceiver{
                     mListener.onHomeClick();
                 }
             }
+        }
+    }
+
+    @Override
+    public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
+        if(event == Lifecycle.Event.ON_DESTROY){
+            EnvUtil.getApp().unregisterReceiver(this);
+            mListener = null;
+        }else if(event == Lifecycle.Event.ON_CREATE){
+            IntentFilter filter = new IntentFilter();
+            filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+            EnvUtil.getApp().registerReceiver(this, filter);
         }
     }
 
