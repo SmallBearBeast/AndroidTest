@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import hugo.weaving.DebugLog;
 
 public class MainActivity extends AppCompatActivity {
     private TextView mTvText_1;
@@ -27,7 +26,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    @DebugLog
     private void test(String name, int age){
 
     }

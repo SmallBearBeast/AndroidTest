@@ -4,8 +4,8 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.*;
 import android.view.View;
-import android.widget.Toast;
 import com.example.administrator.androidtest.R;
+import com.example.libaspectj.AsLog;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libframework.ActAndFrag.ComponentAct;
 import com.example.libframework.Rv.DataManager;
@@ -13,12 +13,12 @@ import com.example.libframework.Rv.Notify;
 import com.example.libframework.Rv.RvListener;
 import com.example.libframework.Rv.VHAdapter;
 import com.example.liblog.SLog;
-import hugo.weaving.DebugLog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+@AsLog
 public class RvAct extends ComponentAct implements View.OnClickListener{
     private static final String TAG = "RvAct";
     private RecyclerView mRvTest;
@@ -133,22 +133,10 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
         return infos;
     }
 
-    @DebugLog
-    public void test(String name, int age, String parent){
-
-    }
-
-    public void testUser(){
-        User user = new User();
-        user.age = 12;
-        user.name = "wuyisong";
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_add_first:
-                test("wuyisong", 123, "zhangqing");
                 mDataManager.addFirst(new Image(-1));
 //                if(mAdapter.isRegister(Msg.class)){
 //                    mDataManager.addFirst(new Msg());
@@ -160,7 +148,6 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
                 break;
 
             case R.id.bt_remove_first:
-                testUser();
                 ToastUtil.showToast("I am zhangqing");
                 mDataManager.removeFirst(1);
 //                RvUtil.scrollToBottom(mRvTest,  4, 0);
@@ -203,10 +190,5 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
                 break;
 
         }
-    }
-
-    class User{
-        String name;
-        int age;
     }
 }

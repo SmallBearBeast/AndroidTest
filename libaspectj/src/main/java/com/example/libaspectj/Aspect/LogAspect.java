@@ -17,10 +17,6 @@ public class LogAspect {
         Log.i(TAG, "onClickAspectAfter: point.getThis() = " + point.getThis());
     }
 
-    @After(PC.EXE_ONITEMCLICK)
-    public void onClickAfter(JoinPoint point){
-        Log.i(TAG, "onClickAspectAfter: point.getThis() = " + point.getThis());
-    }
 
     @After(PC.CALL_ONITEMCLICK)
     public void onItemClick(JoinPoint point){
@@ -28,10 +24,10 @@ public class LogAspect {
     }
 
     //call结合within或者withincode确定具体切入位置
-    @After("withincode(* * ..*.onItemClick(..))" + PC.AND + PC.CALL_SETBACKGROUNDCOLOR)
-    public void onClickAfterAndLog(JoinPoint point){
-        Log.i(TAG, "onClickAspectAfter: point.getThis() = " + point.getThis());
-    }
+//    @After("withincode(* * ..*.onItemClick(..))" + PC.AND + PC.CALL_SETBACKGROUNDCOLOR)
+//    public void onClickAfterAndLog(JoinPoint point){
+//        Log.i(TAG, "onClickAspectAfter: point.getThis() = " + point.getThis());
+//    }
 
     //使用within或者withincode打印所有pointcut
 //    @After("withincode(* * ..*.testUser(..))")
@@ -39,10 +35,10 @@ public class LogAspect {
 //        Log.i(TAG, "onTestUser: point.getSignature() = " + point.getSignature());
 //    }
 
-    @After("call(* * ..*.SLog.d(..))")
-    public void onLogD(JoinPoint point){
-        Log.i(TAG, "onLogD: point.getThis() = " + point.getThis());
-    }
+//    @After("call(* * ..*.SLog.d(..))")
+//    public void onLogD(JoinPoint point){
+//        Log.i(TAG, "onLogD: point.getThis() = " + point.getThis());
+//    }
 
     //*..AA 和..AA是一样表示任意包名任意后缀是AA的类，..*.AA表示任意包名下面AA的类，前者范围大于后者。
     @Before("set(* * ..RvAct.mDataManager)")

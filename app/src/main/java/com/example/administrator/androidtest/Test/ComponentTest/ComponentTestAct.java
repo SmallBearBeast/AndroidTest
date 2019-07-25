@@ -1,7 +1,6 @@
 package com.example.administrator.androidtest.Test.ComponentTest;
 
 import android.os.Bundle;
-import android.view.View;
 import com.example.libframework.ActAndFrag.ComponentAct;
 import com.example.libframework.Component.ActComponent;
 import com.example.libframework.Component.ViewSet;
