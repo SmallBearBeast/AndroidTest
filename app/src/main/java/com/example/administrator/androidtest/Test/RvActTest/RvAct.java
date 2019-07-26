@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.v7.widget.*;
 import android.view.View;
 import com.example.administrator.androidtest.R;
-import com.example.libaspectj.AsLog;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libframework.ActAndFrag.ComponentAct;
 import com.example.libframework.Rv.DataManager;
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@AsLog
 public class RvAct extends ComponentAct implements View.OnClickListener{
     private static final String TAG = "RvAct";
     private RecyclerView mRvTest;
