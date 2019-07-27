@@ -1,6 +1,6 @@
 package com.example.libbase.Util;
 
-import java.io.File;
+import java.io.*;
 
 /**
  * 文件操作工具类
@@ -126,8 +126,8 @@ public class FileUtil {
         if (isFileExist(srcFile) && checkPath(dstFile)) {
             File[] files = srcFile.listFiles();
             if(files != null){
-                for (int i = 0; i < files.length; i++) {
-                    boolean result = moveD1ToD2(files[i], dstFile);
+                for (File file : files) {
+                    boolean result = moveD1ToD2(file, dstFile);
                     if (!result) {
                         return false;
                     }
@@ -153,8 +153,8 @@ public class FileUtil {
             if (srcFile.isDirectory()) {
                 File[] files = srcFile.listFiles();
                 if (newDst.mkdirs()) {
-                    for (int i = 0; i < files.length; i++) {
-                        boolean result = moveD1ToD2(files[i], newDst);
+                    for (File file : files) {
+                        boolean result = moveD1ToD2(file, newDst);
                         if (!result) {
                             return false;
                         }
@@ -163,9 +163,7 @@ public class FileUtil {
                 }
             } else if (srcFile.isFile()) {
                 try {
-                    if (srcFile.renameTo(newDst)) {
-                        return true;
-                    }
+                    return srcFile.renameTo(newDst);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -174,6 +172,109 @@ public class FileUtil {
         return false;
     }
     /**移动文件夹1的文件到文件夹2**/
+
+    /**
+     * 复制文件夹1的文件到文件夹2
+     */
+    public static boolean copyD1ChildToD2(String srcPath, String dstPath) {
+        if (isFileExist(srcPath) && checkPath(dstPath)) {
+            File dstFile = new File(dstPath);
+            File srcFile = new File(srcPath);
+            return copyD1ChildToD2(srcFile, dstFile);
+        }
+        return false;
+    }
+
+    public static boolean copyD1ChildToD2(File srcFile, File dstFile) {
+        if (isFileExist(srcFile) && checkPath(dstFile)) {
+            File[] files = srcFile.listFiles();
+            if(files != null){
+                for (File file : files) {
+                    boolean result = copyD1ToD2(file, dstFile);
+                    if (!result) {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public static boolean copyD1ToD2(String srcPath, String dstPath) {
+        if (isFileExist(srcPath) && checkPath(dstPath)) {
+            File dstFile = new File(dstPath);
+            File srcFile = new File(srcPath);
+            return copyD1ToD2(srcFile, dstFile);
+        }
+        return false;
+    }
+
+    public static boolean copyD1ToD2(File srcFile, File dstFile) {
+        if (isFileExist(srcFile) && checkPath(dstFile)) {
+            File newDst = new File(dstFile, srcFile.getName());
+            if (srcFile.isDirectory()) {
+                File[] files = srcFile.listFiles();
+                if (newDst.mkdirs()) {
+                    for (File file : files) {
+                        boolean result = copyD1ToD2(file, newDst);
+                        if (!result) {
+                            return false;
+                        }
+                    }
+                    return true;
+                }
+            } else if (srcFile.isFile()) {
+                return copy(srcFile, newDst);
+            }
+        }
+        return false;
+    }
+
+    public static boolean copy(File srcFile, File dstFile){
+        FileInputStream fis = null;
+        FileOutputStream fos = null;
+        try {
+            fis = new FileInputStream(srcFile);
+            byte[] buffer = new byte[1024];
+            long fileLen = srcFile.length();
+            int hasRead = 0;
+            int read = 0;
+
+            fos = new FileOutputStream(dstFile);
+            while (read != -1 && hasRead < fileLen){
+                read = fis.read(buffer, hasRead, 1024);
+                hasRead = hasRead + read;
+                if(read == -1 && hasRead < fileLen){
+                    return false;
+                }
+                if(read > 0) {
+                    fos.write(buffer, 0, read);
+                }
+            }
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(fis != null){
+                try {
+                    fis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(fos != null){
+                try {
+                    fos.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return false;
+    }
+
+    /**复制文件夹1的文件到文件夹2**/
 
     /**
      * 检查文件路径
