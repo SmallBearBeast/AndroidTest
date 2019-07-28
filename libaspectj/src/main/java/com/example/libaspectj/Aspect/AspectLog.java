@@ -11,8 +11,8 @@ import org.aspectj.lang.annotation.Before;
 import java.util.Objects;
 
 @Aspect
-public class LogAspect {
-    private static final String TAG = "LogAspect";
+public class AspectLog {
+    private static final String TAG = "AspectLog";
 
     //args参数和执行方法的参数顺序和类型要一致，否则运行报错。
 //    @Before(PC.EXE_TEST + PC.AND + "args(name, age, parent)")

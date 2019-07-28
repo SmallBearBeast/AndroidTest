@@ -1,12 +1,13 @@
-package com.example.libaspectj.Annotation;
+package com.example.libaspectj.Annotation.Env;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import static java.lang.annotation.ElementType.*;
-import static java.lang.annotation.RetentionPolicy.CLASS;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @Target({METHOD})
-@Retention(CLASS)
+@Retention(RUNTIME)
 public @interface AsEnv {
+    int env();
 }
