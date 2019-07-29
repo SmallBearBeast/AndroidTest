@@ -1,9 +1,7 @@
 package com.example.libaspectj.Aspect;
 
-import android.support.v4.app.ActivityCompat;
 import com.example.libaspectj.Annotation.AsPer;
-import com.example.libbase.Util.AppInitUtil;
-import com.example.libbase.Util.EnvUtil;
+import com.example.libbase.Util.PermissionUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -21,10 +19,16 @@ public class AspectPer {
     }
 
     @Around("checkPer(ann)")
-    public void check(final ProceedingJoinPoint point, AsPer ann) {
+    public Object check(final ProceedingJoinPoint point, AsPer ann) throws Throwable {
         if(ann != null){
             String[] permissions = ann.permissions();
+            if(permissions.length > 0) {
+                if(PermissionUtil.requestPermissions(permissions)){
+                    return point.proceed();
+                }
+            }
         }
+        return null;
     }
 
 }

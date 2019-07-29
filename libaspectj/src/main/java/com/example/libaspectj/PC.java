@@ -14,12 +14,12 @@ public class PC {
 
     public static final String EXE_ASLOG = "execution(@com.example.libaspectj.Annotation.AsLog * * ..*(..))";
 
-    public static final String EXE_ONCREATE = "execution(* * ..*.onCreate(..))";
-    public static final String EXE_ONSTART = "execution(* * ..*.onStart(..))";
-    public static final String EXE_ONRESMUE = "execution(* * ..*.onResume(..))";
-    public static final String EXE_ONPAUSE = "execution(* * ..*.onPause(..))";
-    public static final String EXE_ONSTOP = "execution(* * ..*.onStop(..))";
-    public static final String EXE_ONDESTROY = "execution(* * ..*.onDestroy(..))";
+    public static final String EXE_ONCREATE = "execution(* * ..*.FragmentActivity.onCreate(..))";
+    public static final String EXE_ONSTART = "execution(* * ..*.FragmentActivity.onStart(..))";
+    public static final String EXE_ONRESMUE = "execution(* * ..*.FragmentActivity.onResume(..))";
+    public static final String EXE_ONPAUSE = "execution(* * ..*.FragmentActivity.onPause(..))";
+    public static final String EXE_ONSTOP = "execution(* * ..*.FragmentActivity.onStop(..))";
+    public static final String EXE_ONDESTROY = "execution(* * ..*.FragmentActivity.onDestroy(..))";
 
     // TODO: 2019-07-23 一些生命周期的PointCut
 

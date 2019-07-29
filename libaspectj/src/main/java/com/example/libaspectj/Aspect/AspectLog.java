@@ -68,4 +68,34 @@ public class AspectLog {
         }
     }
 
+
+    @After(PC.EXE_ONCREATE)
+    public void EXE_ONCREATE(JoinPoint point){
+        Log.i(TAG, "onCreate");
+    }
+
+    @After(PC.EXE_ONSTART)
+    public void EXE_ONSTART(JoinPoint point){
+        Log.i(TAG, "onStart");
+    }
+
+    @After(PC.EXE_ONRESMUE)
+    public void EXE_ONRESMUE(JoinPoint point){
+        Log.i(TAG, "onResume");
+    }
+
+    @After(PC.EXE_ONPAUSE)
+    public void EXE_ONPAUSE(JoinPoint point){
+        Log.i(TAG, "onPause");
+    }
+
+    @After(PC.EXE_ONSTOP)
+    public void EXE_ONSTOP(JoinPoint point){
+        Log.i(TAG, "onStop");
+    }
+
+    @After(PC.EXE_ONDESTROY)
+    public void EXE_ONDESTROY(JoinPoint point){
+        Log.i(TAG, "onDestroy");
+    }
 }

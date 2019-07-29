@@ -7,9 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
+import com.example.libbase.Util.PermissionUtil;
 import com.example.libbase.Util.ScreenUtil;
 import com.example.libframework.ActAndFrag.ComponentAct;
-import com.example.libframework.ActAndFrag.PermissionUtil;
 
 import java.util.Arrays;
 import java.util.List;
@@ -34,12 +34,13 @@ public class PermissionAct extends ComponentAct {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.READ_CONTACTS,
-                }, PermissionAct.this, new PermissionListener() {
-                    @Override
-                    public void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray) {
-
-                    }
                 });
+            }
+        });
+        setPermissonListerner(new PermissionListener() {
+            @Override
+            public void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray) {
+
             }
         });
         ScreenUtil.normalScreen(this, R.color.cl_transparent, true, tvText);
