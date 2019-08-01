@@ -113,4 +113,8 @@
     </declare-styleable>
     <!--富文本控件-->
 
+    <declare-styleable name="IconTouchView">
+        <attr name="itv_src_icon_color" format="color" />
+        <attr name="itv_dest_icon_color" format="color" />
+    </declare-styleable>
 </resources>
