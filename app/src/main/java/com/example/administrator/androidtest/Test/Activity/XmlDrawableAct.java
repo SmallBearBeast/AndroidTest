@@ -36,6 +36,7 @@ public class XmlDrawableAct extends ComponentAct {
         mTb_5 = findViewById(R.id.tb_5);
         mTb_6 = findViewById(R.id.tb_6);
 
+        mTv_1.setClickable(true);
         mIv.setClickable(false);
         mIv.setPressed(true);
 

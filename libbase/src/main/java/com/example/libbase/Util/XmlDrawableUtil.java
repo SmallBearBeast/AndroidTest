@@ -20,11 +20,11 @@ public class XmlDrawableUtil extends AppInitUtil {
     public static int DRAWABLE_NONE = -1;
     public static int COLOR_NONE = -1;
 
-    public static GDWrapper cornerRect(int colorId, int radius) {
+    public static GDWrapper cornerRect(int colorId, float radius) {
         return new GDWrapper().cornerRect(colorId, radius);
     }
 
-    public static GDWrapper strokeRect(int colorId, int radius, int strokeColorId, int strokeWidth) {
+    public static GDWrapper strokeRect(int colorId, float radius, int strokeColorId, float strokeWidth) {
         return new GDWrapper().strokeRect(colorId, radius, strokeColorId, strokeWidth);
     }
 
@@ -32,7 +32,7 @@ public class XmlDrawableUtil extends AppInitUtil {
         return new GDWrapper().circle(colorId);
     }
 
-    public static GDWrapper strokeCircle(int colorId, int strokeColorId, int strokeWidth) {
+    public static GDWrapper strokeCircle(int colorId, int strokeColorId, float strokeWidth) {
         return new GDWrapper().strokeCircle(colorId, strokeColorId, strokeWidth);
     }
 
@@ -60,7 +60,7 @@ public class XmlDrawableUtil extends AppInitUtil {
         return new SLWrapper().selector(normalDrawable, pressedDrawable, checkedDrawable);
     }
 
-    public static SLWrapper slCRect(int normalColorId, int pressedColorId, int radius) {
+    public static SLWrapper slCRect(int normalColorId, int pressedColorId, float radius) {
         Drawable normalDrawable = cornerRect(normalColorId, radius).mDrawable;
         Drawable pressedDrawable = cornerRect(pressedColorId, radius).mDrawable;
         return selector(normalDrawable, pressedDrawable);
@@ -89,7 +89,7 @@ public class XmlDrawableUtil extends AppInitUtil {
         return selector(normalDrawable, pressedDrawable);
     }
 
-    public static SLWrapper slAlphaCRect(float normalAlpha, float pressAlpha, int colorId, int radius) {
+    public static SLWrapper slAlphaCRect(float normalAlpha, float pressAlpha, int colorId, float radius) {
         Drawable normalDrawable = alpha(normalAlpha, colorId).cornerRect(colorId, radius).mDrawable;
         Drawable pressedDrawable = alpha(pressAlpha, colorId).cornerRect(colorId, radius).mDrawable;
         return selector(normalDrawable, pressedDrawable);
@@ -160,7 +160,7 @@ public class XmlDrawableUtil extends AppInitUtil {
             return this;
         }
 
-        private GDWrapper cornerRect(int colorId, int radius) {
+        private GDWrapper cornerRect(int colorId, float radius) {
             if (checkColorId(colorId)) {
                 mDrawable.setColor(getColor(colorId));
             }
@@ -193,18 +193,18 @@ public class XmlDrawableUtil extends AppInitUtil {
             return this;
         }
 
-        private GDWrapper stroke(int strokeColorId, int strokeWidth){
+        private GDWrapper stroke(int strokeColorId, float strokeWidth){
             if (checkDrawableID(strokeColorId)) {
                 mDrawable.setStroke(getDp2Px(strokeWidth), getColor(strokeColorId));
             }
             return this;
         }
 
-        private GDWrapper strokeRect(int colorId, int radius, int strokeColorId, int strokeWidth) {
+        private GDWrapper strokeRect(int colorId, float radius, int strokeColorId, float strokeWidth) {
             return cornerRect(colorId, radius).stroke(strokeColorId, strokeWidth);
         }
 
-        private GDWrapper strokeCircle(int colorId, int strokeColorId, int strokeWidth) {
+        private GDWrapper strokeCircle(int colorId, int strokeColorId, float strokeWidth) {
             return circle(colorId).stroke(strokeColorId, strokeWidth);
         }
     }
@@ -217,7 +217,7 @@ public class XmlDrawableUtil extends AppInitUtil {
         return ContextCompat.getColor(getContext(), colorId);
     }
 
-    private static int getDp2Px(int dp) {
+    private static int getDp2Px(float dp) {
         float scale = getContext().getResources().getDisplayMetrics().density;
         return (int) (dp * scale + 0.5f);
     }
