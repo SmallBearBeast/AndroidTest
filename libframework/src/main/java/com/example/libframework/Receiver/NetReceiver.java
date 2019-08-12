@@ -6,22 +6,25 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import com.example.libbase.Util.EnvUtil;
 import com.example.libbase.Util.NetWorkUtil;
 import com.example.libframework.Component.IComponent;
 
-public class NetworkReceiver extends BroadcastReceiver implements IComponent {
+public class NetReceiver extends BroadcastReceiver implements IComponent {
 
-    private NetworkChangeListener mNetworkChangeListener;
+    private NetChangeListener mNetChangeListener;
 
-    public NetworkReceiver(NetworkChangeListener networkChangeListener) {
-        mNetworkChangeListener = networkChangeListener;
+    public NetReceiver(NetChangeListener netChangeListener) {
+        mNetChangeListener = netChangeListener;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if(mNetworkChangeListener != null){
-            mNetworkChangeListener.isConnected(NetWorkUtil.isConnected());
+        if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {
+            if(mNetChangeListener != null){
+                mNetChangeListener.onConnected(NetWorkUtil.isConnected());
+            }
         }
     }
 
@@ -31,12 +34,12 @@ public class NetworkReceiver extends BroadcastReceiver implements IComponent {
             EnvUtil.getApp().unregisterReceiver(this);
         }else if(event == Lifecycle.Event.ON_CREATE){
             IntentFilter filter = new IntentFilter();
-            filter.addAction("android.net.conn.CONNECTIVITY_CHANGE");
+            filter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
             EnvUtil.getApp().registerReceiver(this, filter);
         }
     }
 
-    public interface NetworkChangeListener{
-        void isConnected(boolean connect);
+    public interface NetChangeListener {
+        void onConnected(boolean connect);
     }
 }
