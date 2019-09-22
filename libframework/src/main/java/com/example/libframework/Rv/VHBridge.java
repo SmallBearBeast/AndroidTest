@@ -11,7 +11,7 @@ public abstract class VHBridge<VH extends VHolder> {
     //VHAdapter和DataManager是在register赋值。
     protected VHAdapter mAdapter;
     protected DataManager mDataManager;
-    //Context在onAttachedToRecyclerView有值。
+    //Context和RecyclerView在onAttachedToRecyclerView有值。
     protected Context mContext;
     protected RecyclerView mRecyclerView;
     protected int mType;

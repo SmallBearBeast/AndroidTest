@@ -3,6 +3,7 @@ package com.example.libframework.Rv;
 import android.arch.lifecycle.GenericLifecycleObserver;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
+import android.database.Cursor;
 import android.support.annotation.CallSuper;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
@@ -30,6 +31,13 @@ public abstract class VHolder<DATA> extends RecyclerView.ViewHolder implements I
     public void bindFull(int pos, DATA data) {
         mData = data;
         mPos = pos;
+        if(data instanceof Cursor){
+            bindCursor(pos, (Cursor) data);
+        }
+    }
+
+    public void bindCursor(int pos, Cursor cursor){
+
     }
 
     public void bindPartial(DATA data, @NonNull Notify obj) {

@@ -17,7 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@SuppressLint("RestrictedApi")
+@SuppressLint({"RestrictedApi"})
+@SuppressWarnings("unchecked")
 public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements GenericLifecycleObserver {
     protected String TAG = getClass().getSimpleName();
     private LayoutInflater mInflater;
@@ -154,6 +155,7 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
             }
         }
         if(event == Lifecycle.Event.ON_DESTROY){
+            mDataManager.clear();
             source.getLifecycle().removeObserver(this);
         }
     }

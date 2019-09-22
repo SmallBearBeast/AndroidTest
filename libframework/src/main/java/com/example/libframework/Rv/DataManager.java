@@ -1,20 +1,25 @@
 package com.example.libframework.Rv;
 
+import android.database.Cursor;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.liblog.SLog;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 处理具体的add，remove，update操作。
  */
+@SuppressWarnings("unchecked")
 public class DataManager {
 
     private static final String TAG = "DataManager";
 
     // TODO: 2019-06-22 data数据保护
     private List mProviderDatas = new ArrayList();
+    private Map<Integer, Cursor> mIndexWithCursorMap = new HashMap<>();
     private VHAdapter mAdapter;
 
     public void setAdapter(VHAdapter adapter){
@@ -33,6 +38,34 @@ public class DataManager {
         mProviderDatas.clear();
         mProviderDatas.addAll(datas);
         mAdapter.notifyDataSetChanged();
+    }
+
+    public void addCursor(int index, Cursor cursor){
+        if(!mAdapter.isRegister(cursor)){
+            SLog.d(TAG, "addCursor: cursor is not registered");
+            return;
+        }
+        if(index == size()){
+            mProviderDatas.add(cursor);
+            mIndexWithCursorMap.put(index, cursor);
+            mAdapter.notifyItemRangeInserted(index, cursor.getCount());
+            return;
+        }
+        if(!checkIndex(index)){
+            SLog.d(TAG, "addCursor: index is out of range");
+            return;
+        }
+        mProviderDatas.add(index, cursor);
+        mIndexWithCursorMap.put(index, cursor);
+        mAdapter.notifyItemRangeInserted(index, cursor.getCount());
+    }
+
+    public void addCursorFirst(Cursor cursor){
+        add(0, cursor);
+    }
+
+    public void addCursorLast(Cursor cursor){
+        add(mProviderDatas.size(), cursor);
     }
 
     public <D> void addLast(D data){
@@ -112,6 +145,7 @@ public class DataManager {
             mProviderDatas.subList(index, num + index).clear();
             mAdapter.notifyItemRangeRemoved(index, num);
         }
+        resetIndexWithCursorMap();
     }
 
     public void removeFirst(int num){
@@ -175,10 +209,39 @@ public class DataManager {
     }
 
     public int size(){
-        return mProviderDatas.size();
+        int size = mProviderDatas.size();
+        if(!mIndexWithCursorMap.isEmpty()) {
+            for (HashMap.Entry<Integer, Cursor> entry : mIndexWithCursorMap.entrySet()) {
+                size = size + entry.getValue().getCount() - 1;
+            }
+        }
+        return size;
+    }
+
+    private void resetIndexWithCursorMap(){
+        if(mIndexWithCursorMap.isEmpty()){
+            return;
+        }
+        mIndexWithCursorMap.clear();
+        Object obj;
+        for (int i = 0, size = mProviderDatas.size(); i < size; i++) {
+            obj = mProviderDatas.get(i);
+            if(obj instanceof Cursor){
+                mIndexWithCursorMap.put(i, (Cursor) obj);
+            }
+        }
     }
 
     public Object get(int position){
+        if(!mIndexWithCursorMap.isEmpty()){
+            for (HashMap.Entry<Integer, Cursor> entry : mIndexWithCursorMap.entrySet()) {
+                Cursor cursor = entry.getValue();
+                if(position >= entry.getKey() && position < cursor.getCount() + entry.getKey()){
+                    cursor.moveToPosition(position - entry.getKey());
+                    return cursor;
+                }
+            }
+        }
         if(position >= 0 && position < size()){
             return mProviderDatas.get(position);
         }
@@ -191,5 +254,17 @@ public class DataManager {
 
     public List getData(){
         return mProviderDatas;
+    }
+
+    public void clear() {
+        mProviderDatas.clear();
+        mProviderDatas = null;
+        for (HashMap.Entry<Integer, Cursor> entry : mIndexWithCursorMap.entrySet()) {
+            if(!entry.getValue().isClosed()){
+                entry.getValue().close();
+            }
+        }
+        mIndexWithCursorMap.clear();
+        mIndexWithCursorMap = null;
     }
 }
