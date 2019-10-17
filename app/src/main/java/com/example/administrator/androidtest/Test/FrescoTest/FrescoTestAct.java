@@ -35,7 +35,7 @@ public class FrescoTestAct extends ComponentAct {
     @Override
     protected void init(Bundle savedInstanceState) {
         mFvImage = findViewById(R.id.fv_image);
-        ImageRequest request = FrescoUtil.defaultRequestBuilder(Uri.parse(TEST_URL_3), -1, -1, null).build();
+        ImageRequest request = FrescoUtil.requestBuilder(Uri.parse(TEST_URL_3), -1, -1, null).build();
         FrescoUtil.prefetchToDiskCache(request, Priority.HIGH);
         findViewById(R.id.bt_load).setOnClickListener(new View.OnClickListener() {
             @Override

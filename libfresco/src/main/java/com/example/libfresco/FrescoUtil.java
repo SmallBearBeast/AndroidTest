@@ -113,7 +113,7 @@ public class FrescoUtil {
      * 获取解码图片
      */
     public static void fetchDecodedImage(String url, final BitmapGetCallback CALLBACK){
-        final ImageRequest REQUEST = defaultRequestBuilder(Uri.parse(url), FRESCO_DEFAULT_WIDTH, FRESCO_DEFAULT_HEIGHT, null).build();
+        final ImageRequest REQUEST = requestBuilder(Uri.parse(url), FRESCO_DEFAULT_WIDTH, FRESCO_DEFAULT_HEIGHT, null).build();
         final ImagePipeline IMAGEPIPELINE = Fresco.getImagePipeline();
         final DataSource<CloseableReference<CloseableImage>> DATASOURCE = IMAGEPIPELINE.fetchDecodedImage(REQUEST, null);
         DATASOURCE.subscribe(new BaseBitmapDataSubscriber() {
@@ -149,7 +149,7 @@ public class FrescoUtil {
      * 获取未解码图片
      */
     public static void fetchEncodedImage(String url){
-        final ImageRequest REQUEST = defaultRequestBuilder(Uri.parse(url), FRESCO_DEFAULT_WIDTH, FRESCO_DEFAULT_HEIGHT, null).build();
+        final ImageRequest REQUEST = requestBuilder(Uri.parse(url), FRESCO_DEFAULT_WIDTH, FRESCO_DEFAULT_HEIGHT, null).build();
         final ImagePipeline IMAGEPIPELINE = Fresco.getImagePipeline();
         final DataSource<CloseableReference<PooledByteBuffer>>  DATASOURCE = IMAGEPIPELINE.fetchEncodedImage(REQUEST, null);
         DATASOURCE.subscribe(new BaseDataSubscriber<CloseableReference<PooledByteBuffer>>() {
@@ -185,7 +185,7 @@ public class FrescoUtil {
         final String TEMP_PATH = dir + File.separator + fileName + "_temp." + suffix;
         final String PATH = dir + File.separator + fileName + "." + suffix;
         if(!FileUtil.isFileExist(PATH)){
-            final ImageRequest REQUEST = defaultRequestBuilder(Uri.parse(url), FRESCO_DEFAULT_WIDTH, FRESCO_DEFAULT_HEIGHT, null).build();
+            final ImageRequest REQUEST = requestBuilder(Uri.parse(url), FRESCO_DEFAULT_WIDTH, FRESCO_DEFAULT_HEIGHT, null).build();
             final ImagePipeline IMAGEPIPELINE = Fresco.getImagePipeline();
             final DataSource<CloseableReference<CloseableImage>> DATASOURCE = IMAGEPIPELINE.fetchDecodedImage(REQUEST, null);
             DATASOURCE.subscribe(new BaseBitmapDataSubscriber() {
@@ -319,7 +319,7 @@ public class FrescoUtil {
     /**
      * 获取ControllerBuilder
      */
-    public static PipelineDraweeControllerBuilder defaultControllerBuilder(ImageRequest request, ImageOriginListener imageOriginListener, ControllerListener controllerListener){
+    public static PipelineDraweeControllerBuilder controllerBuilder(ImageRequest request, ImageOriginListener imageOriginListener, ControllerListener controllerListener){
         DispatchImageOriginListener dispatchImageOriginListener = new DispatchImageOriginListener();
         dispatchImageOriginListener.addListener(new LogImageOriginListener(request.getSourceUri()));
         if (imageOriginListener != null) {
@@ -341,12 +341,12 @@ public class FrescoUtil {
     }
 
     public static PipelineDraweeControllerBuilder lowControllerBuilder(ImageRequest request, ImageRequest lowRequest, ImageOriginListener imageOriginListener, ControllerListener controllerListener){
-        PipelineDraweeControllerBuilder builder = defaultControllerBuilder(request, imageOriginListener, controllerListener);
+        PipelineDraweeControllerBuilder builder = controllerBuilder(request, imageOriginListener, controllerListener);
         return builder.setLowResImageRequest(lowRequest);
     }
 
     public static PipelineDraweeControllerBuilder availableControllerBuilder(ImageRequest[] requests, ImageOriginListener imageOriginListener, ControllerListener controllerListener){
-        PipelineDraweeControllerBuilder builder = defaultControllerBuilder(null, imageOriginListener, controllerListener);
+        PipelineDraweeControllerBuilder builder = controllerBuilder(null, imageOriginListener, controllerListener);
         return builder.setFirstAvailableImageRequests(requests);
     }
     /**获取ControllerBuilder**/
@@ -354,7 +354,7 @@ public class FrescoUtil {
     /**
      * 获取RequestBuilder
      */
-    public static ImageRequestBuilder defaultRequestBuilder(Uri uri, int width, int height, RequestListener requestListener){
+    public static ImageRequestBuilder requestBuilder(Uri uri, int width, int height, RequestListener requestListener){
         DispatchRequestListener dispatchRequestListener = new DispatchRequestListener();
         dispatchRequestListener.addListener(new LogRequestListener());
         if (requestListener != null) {
@@ -369,7 +369,7 @@ public class FrescoUtil {
     }
 
     public static ImageRequestBuilder processorRequestBuilder(Uri uri, int width, int height, RequestListener requestListener, Postprocessor postprocessor){
-        ImageRequestBuilder builder = defaultRequestBuilder(uri, width, height, requestListener);
+        ImageRequestBuilder builder = requestBuilder(uri, width, height, requestListener);
         builder.setPostprocessor(postprocessor);
         return builder;
     }

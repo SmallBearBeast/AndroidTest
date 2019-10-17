@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.util.AttributeSet;
-import com.example.libbase.Util.FileUtil;
 import com.facebook.drawee.backends.pipeline.PipelineDraweeControllerBuilder;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 import com.facebook.drawee.controller.BaseControllerListener;
@@ -13,9 +12,8 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.facebook.fresco.animation.backend.AnimationBackendDelegate;
 import com.facebook.fresco.animation.drawable.AnimatedDrawable2;
 import com.facebook.imagepipeline.listener.RequestListener;
+import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
-
-import java.io.File;
 
 public class FrescoView extends SimpleDraweeView {
 
@@ -27,15 +25,16 @@ public class FrescoView extends SimpleDraweeView {
         super(context, attrs);
     }
 
-    public void setPath(String imagePath) {
-        if (FileUtil.isFileExist(imagePath)) {
-            Uri uri = Uri.fromFile(new File(imagePath));
-            setImageURI(uri);
-        }
+    public void setPath(String imagePath, int width, int height) {
+        setImageRequest(FrescoUtil.requestBuilder(FrescoUriTransfer.fileUri(imagePath), width, height, null).build());
+    }
+
+    public void setUrl(String url, int width, int height) {
+        setImageRequest(FrescoUtil.requestBuilder(FrescoUriTransfer.urlUri(url), width, height, null).build());
     }
 
     public void setImageUri(Uri uri) {
-        setImageUri(uri, null, null);
+        setImageUri(uri, null, null, null);
     }
 
     public void setImageUri(Uri uri, ImageOriginListener imageOriginListener) {
@@ -55,17 +54,21 @@ public class FrescoView extends SimpleDraweeView {
     }
 
     public void setImageUri(Uri uri, ImageOriginListener imageOriginListener, ControllerListener controllerListener, RequestListener requestListener) {
-        ImageRequestBuilder requestBuilder = FrescoUtil.defaultRequestBuilder(uri, -1, -1, requestListener);
-        PipelineDraweeControllerBuilder controllerBuilder = FrescoUtil.defaultControllerBuilder(requestBuilder.build(), imageOriginListener, controllerListener);
+        ImageRequestBuilder requestBuilder = FrescoUtil.requestBuilder(uri, -1, -1, requestListener);
+        PipelineDraweeControllerBuilder controllerBuilder = FrescoUtil.controllerBuilder(requestBuilder.build(), imageOriginListener, controllerListener);
         setController(controllerBuilder.build());
     }
 
+    public void setImageUri(ImageRequest imageRequest, ImageOriginListener imageOriginListener, ControllerListener controllerListener){
+        PipelineDraweeControllerBuilder controllerBuilder = FrescoUtil.controllerBuilder(imageRequest, imageOriginListener, controllerListener);
+        setController(controllerBuilder.build());
+    }
 
     public void setImageUri(Uri uri, Uri lowUri, ImageOriginListener imageOriginListener, ControllerListener controllerListener, RequestListener requestListener) {
-        ImageRequestBuilder builder = FrescoUtil.defaultRequestBuilder(uri, -1, -1, requestListener);
-        PipelineDraweeControllerBuilder controllerBuilder = FrescoUtil.defaultControllerBuilder(builder.build(), imageOriginListener, controllerListener);
+        ImageRequestBuilder builder = FrescoUtil.requestBuilder(uri, -1, -1, requestListener);
+        PipelineDraweeControllerBuilder controllerBuilder = FrescoUtil.controllerBuilder(builder.build(), imageOriginListener, controllerListener);
         if (lowUri != null) {
-            ImageRequestBuilder lowBuilder = FrescoUtil.defaultRequestBuilder(lowUri, -1, -1, null);
+            ImageRequestBuilder lowBuilder = FrescoUtil.requestBuilder(lowUri, -1, -1, null);
             controllerBuilder.setLowResImageRequest(lowBuilder.build());
         }
         setController(controllerBuilder.build());

@@ -29,11 +29,29 @@ public abstract class VHBridge<VH extends VHolder> {
         return null;
     }
 
+    protected int getSpanSize(RecyclerView rv) {
+        return 1;
+    }
+
+    protected boolean isFullSpan() {
+        return false;
+    }
+
     protected final int getPosition(@NonNull final VHolder holder) {
         return holder.getAdapterPosition();
     }
 
     public int getType(){
         return mType;
+    }
+
+    protected void onInitRvAndContext(RecyclerView rv, Context context) {
+        mRecyclerView = rv;
+        mContext = context;
+    }
+
+    protected void onInitAdapterAndManager(VHAdapter adapter, DataManager manager) {
+        mAdapter = adapter;
+        mDataManager = manager;
     }
 }

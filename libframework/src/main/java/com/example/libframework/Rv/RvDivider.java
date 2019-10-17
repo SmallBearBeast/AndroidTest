@@ -4,6 +4,7 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -22,7 +23,6 @@ public class RvDivider extends RecyclerView.ItemDecoration {
     private Drawable mDrawable;
     private Paint mPaint;
     private int mDividerWidth;
-    private int mDividerVer;
 
     public RvDivider(LinearLayoutManager layoutManager, int dividerWidth, int color){
         this((RecyclerView.LayoutManager)layoutManager, dividerWidth, color, null);
@@ -47,6 +47,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
         mDividerWidth = dividerWidth;
         mColor = color;
         mDrawable = drawable;
+        //Only the LinearLayoutManager uses color and dividerWidth.
         if(mLayoutManager instanceof LinearLayoutManager) {
             initPaint();
         }
@@ -59,7 +60,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
         mPaint.setColor(mColor);
     }
 
-    //注意GridLayoutManager是LinearLayoutManager的子类。
+    //Note that the GridLayoutManager is a subclass of LinearLayoutManager.
     private int getManagerOrientation(){
         if(mLayoutManager instanceof LinearLayoutManager){
             return ((LinearLayoutManager) mLayoutManager).getOrientation();
@@ -70,7 +71,7 @@ public class RvDivider extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
+    public void onDraw(@NonNull Canvas c, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         if(mLayoutManager instanceof LinearLayoutManager){
             if(mOrientation == RecyclerView.VERTICAL) {
                 for (int i = 1, count = parent.getChildCount(); i < count; i++) {
@@ -97,19 +98,23 @@ public class RvDivider extends RecyclerView.ItemDecoration {
     }
 
     @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+    public void getItemOffsets(@NonNull Rect outRect, @NonNull View view, @NonNull RecyclerView parent, @NonNull RecyclerView.State state) {
         if(mLayoutManager instanceof GridLayoutManager){
             GridLayoutManager manager = (GridLayoutManager) mLayoutManager;
             int pos = parent.getChildAdapterPosition(view);
             int spanCount = manager.getSpanCount();
+            int spanIndex = manager.getSpanSizeLookup().getSpanIndex(pos, spanCount);
+            int spanSize = manager.getSpanSizeLookup().getSpanSize(pos);
+            int dividerBase = mDividerWidth / spanCount;
+            int dividerReal = dividerBase * spanCount;
             if(mOrientation == RecyclerView.VERTICAL) {
-                outRect.left = (pos % spanCount == 0 ? 0 : mDividerWidth / 2);
-                outRect.top = (pos < spanCount ? 0 : mDividerWidth);
-                outRect.right = ((pos + 1) % spanCount == 0 ? 0 : mDividerWidth / 2);
+                outRect.left = dividerBase * spanIndex;
+                outRect.top = isTop(pos, manager) ? 0 : dividerReal;
+                outRect.right = (spanIndex + spanSize) == spanCount ? 0 : dividerBase * (spanCount - spanIndex - 1);
             }else if(mOrientation == RecyclerView.HORIZONTAL){
-                outRect.top = (pos % spanCount == 0 ? 0 : mDividerWidth / 2);
-                outRect.left = (pos < spanCount ? 0 : mDividerWidth);
-                outRect.bottom = ((pos + 1) % spanCount == 0 ? 0 : mDividerWidth / 2);
+                outRect.top = dividerBase * spanIndex;
+                outRect.left = isTop(pos, manager) ? 0 : dividerReal;
+                outRect.bottom = (spanIndex + spanSize) == spanCount ? 0 : spanIndex + dividerBase * (spanCount - spanIndex - 1);
             }
             Log.d(TAG, "getItemOffsets: outRect = " + outRect + " pos = " + pos);
         }else if(mLayoutManager instanceof LinearLayoutManager){
@@ -123,20 +128,38 @@ public class RvDivider extends RecyclerView.ItemDecoration {
             StaggeredGridLayoutManager manager = (StaggeredGridLayoutManager) mLayoutManager;
             int pos = parent.getChildAdapterPosition(view);
             int spanCount = manager.getSpanCount();
+            int dividerBase = mDividerWidth / spanCount;
+            int dividerReal = dividerBase * spanCount;
             ViewGroup.LayoutParams lp = view.getLayoutParams();
             if (lp instanceof StaggeredGridLayoutManager.LayoutParams) {
                 int spanIndex = ((StaggeredGridLayoutManager.LayoutParams) lp).getSpanIndex();
                 if(mOrientation == RecyclerView.VERTICAL){
-                    outRect.left = (spanIndex == 0 ? 0 : mDividerWidth / 2);
-                    outRect.top = (pos < spanCount ? 0 : mDividerWidth);
-                    outRect.right = ((spanIndex + 1) == spanCount ? 0 : mDividerWidth / 2);
+                    outRect.left = dividerBase * spanIndex;
+                    outRect.top = (pos < spanCount ? 0 : dividerReal);
+                    outRect.right = dividerBase * (spanCount - spanIndex - 1);
                 }else if(mOrientation == RecyclerView.HORIZONTAL){
-                    outRect.top = (spanIndex == 0 ? 0 : mDividerWidth / 2);
-                    outRect.left = (pos < spanCount ? 0 : mDividerWidth);
-                    outRect.bottom = ((spanIndex + 1) == spanCount ? 0 : mDividerWidth / 2);
+                    outRect.top = dividerBase * spanIndex;
+                    outRect.left = (pos < spanCount ? 0 : dividerReal);
+                    outRect.bottom = dividerBase * (spanCount - spanIndex - 1);
                 }
                 Log.d(TAG, "getItemOffsets: outRect = " + outRect + " pos = " + pos + " spanIndex = " + spanIndex);
             }
         }
+    }
+
+    private boolean isTop(int pos, GridLayoutManager manager) {
+        int spanCount = manager.getSpanCount();
+        if (pos >= spanCount) {
+            return false;
+        }
+        int spanSize;
+        for (int i = 0; i <= pos; i++) {
+            spanSize = manager.getSpanSizeLookup().getSpanSize(i);
+            spanCount = spanCount - spanSize;
+            if (spanCount < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

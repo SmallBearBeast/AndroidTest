@@ -5,8 +5,11 @@ import android.arch.lifecycle.GenericLifecycleObserver;
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
 import android.content.Context;
+import android.database.Cursor;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -24,9 +27,9 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
     private LayoutInflater mInflater;
     private RecyclerView mRecyclerView;
     private DataManager mDataManager;
-    private Map<Class, Integer> mClzMap = new HashMap<>();
+    private Map<Integer, Integer> mClzMap = new HashMap<>();
     private SparseArray<VHBridge> mBridgeMap = new SparseArray<>();
-    private int mIncrease;
+    private int mIncrease = 100;
     private Context mContext; //通过外部传入好还是onAttachedToRecyclerView拿去
 
     public VHAdapter() {
@@ -43,26 +46,40 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if(mInflater == null){
+        if (mInflater == null) {
             mInflater = LayoutInflater.from(parent.getContext());
         }
         VHBridge bridge = mBridgeMap.get(viewType);
-        if(bridge != null){
+        if (bridge != null) {
             View view = bridge.itemView();
-            if(view != null){
-                parent.addView(view);
+            if (view == null) {
+                int layoutId = bridge.layoutId();
+                if (layoutId != -1) {
+                    view = mInflater.inflate(layoutId, parent, false);
+                }
+            }
+            if (view != null) {
+                setUpStaggerFullSpan(view, bridge);
                 return (VH) bridge.onCreateViewHolder(view);
             }
-            int layoutId = bridge.layoutId();
-            if(layoutId != -1){
-                return (VH) bridge.onCreateViewHolder(mInflater.inflate(layoutId, parent, false));
-            }
             VHolder vh = bridge.onCreateViewHolder(parent, viewType);
-            if(vh != null){
+            if (vh != null) {
                 return (VH) vh;
             }
         }
         return null;
+    }
+
+    private void setUpStaggerFullSpan(View itemView, VHBridge bridge) {
+        if (!bridge.isFullSpan()) {
+            return;
+        }
+        RecyclerView.LayoutManager layoutManager = mRecyclerView.getLayoutManager();
+        if (layoutManager instanceof StaggeredGridLayoutManager) {
+            StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
+            lp.setFullSpan(true);
+            itemView.setLayoutParams(lp);
+        }
     }
 
     @Override
@@ -72,13 +89,13 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
 
     @Override
     public void onBindViewHolder(@NonNull VH holder, int position, @NonNull List<Object> payloads) {
-        if(payloads.isEmpty()){
+        if (payloads.isEmpty()) {
             super.onBindViewHolder(holder, position, payloads);
-        }else {
+        } else {
             for (Object payload : payloads) {
-                if(payload instanceof Notify){
+                if (payload instanceof Notify) {
                     holder.bindPartial(mDataManager.get(position), (Notify) payload);
-                }else {
+                } else {
                     super.onBindViewHolder(holder, position, payloads);
                 }
             }
@@ -88,41 +105,73 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
     @Override
     public int getItemViewType(int position) {
         Object data = mDataManager.get(position);
-        if(mClzMap.containsKey(data.getClass())){
-            return mClzMap.get(data.getClass());
+        if (mOnGetDataType != null) {
+            int type = mOnGetDataType.getType(data, position);
+            if (type != -1) {
+                return mClzMap.get(type);
+            }
+        }
+        if (data instanceof Cursor) {
+            return mClzMap.get(Cursor.class.hashCode());
+        }
+        if (mClzMap.containsKey(data.getClass().hashCode())) {
+            return mClzMap.get(data.getClass().hashCode());
         }
         return super.getItemViewType(position);
     }
 
-    // TODO: 2019-06-22 要不要有unRegister
-    public void register(Class clz, VHBridge bridge){
-        if(mClzMap.containsKey(clz)){
+    /**
+     * register bridge with many class
+     */
+    public void register(VHBridge bridge, Class... clzs) {
+        for (Class clz : clzs) {
+            register(bridge, clz);
+        }
+    }
+
+    public void register(VHBridge bridge, Class clz) {
+        if (clz == null) {
             return;
         }
-        bridge.mAdapter = this;
-        bridge.mDataManager = mDataManager;
-        if(mContext != null){
-            bridge.mContext = mContext;
+        int dataType = clz.hashCode();
+        register(bridge, dataType);
+    }
+
+    /**
+     * this method should be used with {@link OnGetDataType}
+     * dataType for user dinifining is <100
+     */
+    public void register(VHBridge bridge, int dataType) {
+        if (mClzMap.containsKey(dataType)) {
+            return;
+        }
+        bridge.onInitAdapterAndManager(this, mDataManager);
+        if (mRecyclerView != null && mContext != null) {
+            bridge.onInitRvAndContext(mRecyclerView, mContext);
         }
         mIncrease++;
         bridge.mType = mIncrease;
         mBridgeMap.put(mIncrease, bridge);
-        mClzMap.put(clz, mIncrease);
+        mClzMap.put(dataType, mIncrease);
     }
 
-
-    public boolean isRegister(Class clz){
-        return mClzMap.containsKey(clz);
-    }
-
-    public boolean isRegister(Object obj){
-        if(obj == null){
+    public boolean isRegister(Object obj) {
+        if (obj == null) {
             return false;
         }
-        return mClzMap.containsKey(obj.getClass());
+        if (mOnGetDataType != null) {
+            int type = mOnGetDataType.getType(obj, -1);
+            if (type != -1) {
+                return mClzMap.containsKey(type);
+            }
+        }
+        if (obj instanceof Cursor) {
+            return mClzMap.containsKey(Cursor.class.hashCode());
+        }
+        return mClzMap.containsKey(obj.getClass().hashCode());
     }
 
-    public DataManager getDataProvider(){
+    public DataManager getDataManager() {
         return mDataManager;
     }
 
@@ -131,32 +180,59 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         mRecyclerView = recyclerView;
         mContext = recyclerView.getContext();
-        if(mContext instanceof LifecycleOwner){
+        if (mContext instanceof LifecycleOwner) {
             LifecycleOwner owner = (LifecycleOwner) mContext;
             owner.getLifecycle().addObserver(this);
         }
         for (int i = 0, size = mBridgeMap.size(); i < size; i++) {
             VHBridge bridge = mBridgeMap.valueAt(i);
-            bridge.mContext = mContext;
-            bridge.mRecyclerView = mRecyclerView;
+            bridge.onInitRvAndContext(mRecyclerView, mContext);
+        }
+        setUpGridSpanSize();
+    }
+
+    private void setUpGridSpanSize() {
+        if (mRecyclerView.getLayoutManager() instanceof GridLayoutManager) {
+            final GridLayoutManager gridLayoutManager = (GridLayoutManager)mRecyclerView.getLayoutManager();
+            gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+                public int getSpanSize(int position) {
+                    int type = getItemViewType(position);
+                    for (int i = 0, size = mBridgeMap.size(); i < size; i++) {
+                        if (mBridgeMap.valueAt(i).mType == type) {
+                            return mBridgeMap.valueAt(i).getSpanSize(mRecyclerView);
+                        }
+                    }
+                    return 1;
+                }
+            });
         }
     }
 
     @Override
     public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
-        if(mRecyclerView != null){
+        if (mRecyclerView != null) {
             Log.d(TAG, "onStateChanged: event = " + event);
             int count = mRecyclerView.getChildCount();
             for (int i = 0; i < count; i++) {
                 RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-                if(viewHolder instanceof GenericLifecycleObserver){
-                    ((GenericLifecycleObserver)viewHolder).onStateChanged(source, event);
+                if (viewHolder instanceof GenericLifecycleObserver) {
+                    ((GenericLifecycleObserver) viewHolder).onStateChanged(source, event);
                 }
             }
         }
-        if(event == Lifecycle.Event.ON_DESTROY){
+        if (event == Lifecycle.Event.ON_DESTROY) {
             mDataManager.clear();
             source.getLifecycle().removeObserver(this);
         }
+    }
+
+    public interface OnGetDataType {
+        int getType(Object obj, int pos);
+    }
+
+    private OnGetDataType mOnGetDataType;
+
+    public void setOnGetDataType(OnGetDataType onGetDataType) {
+        mOnGetDataType = onGetDataType;
     }
 }

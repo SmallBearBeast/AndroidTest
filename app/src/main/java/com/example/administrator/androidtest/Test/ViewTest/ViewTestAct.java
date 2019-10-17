@@ -1,7 +1,13 @@
 package com.example.administrator.androidtest.Test.ViewTest;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.ActAndFrag.ComponentAct;
@@ -26,5 +32,15 @@ public class ViewTestAct extends ComponentAct {
                 tvTest_1.setVisibility(newVisibility);
             }
         });
+
+        ImageView ivImage = findViewById(R.id.iv_image);
+        ivImage.setImageBitmap(getTurnOverBitmap(R.drawable.girl));
+    }
+
+    public Bitmap getTurnOverBitmap(int drawableId) {
+        Bitmap bitmap = BitmapFactory.decodeResource(getResources(), drawableId);
+        Matrix matrix = new Matrix();
+        matrix.postScale(-1, 1, 0.5f, 0.5f);
+        return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
     }
 }

@@ -11,7 +11,7 @@ import java.util.*;
 @SuppressWarnings("unchecked")
 public final class CollectionUtil {
 
-    private static Object[] objToArray(Object obj){
+    private static Object[]     objToArray(Object obj){
         if(obj instanceof Object[]){
             return (Object[]) obj;
         }
@@ -174,7 +174,6 @@ public final class CollectionUtil {
     /**
      * 获取数组第一个元素
      */
-
     public static <T> T getFirst(Object obj){
         Object[] array = objToArray(obj);
         if(isEmpty(array))
@@ -190,6 +189,10 @@ public final class CollectionUtil {
         return null;
     }
     /**获取数组第一个元素**/
+
+    public static <T> Set<T> asSet(T... ts) {
+        return new HashSet<>(Arrays.asList(ts));
+    }
 
     /**
      * 通过keys和vals数组生成map
@@ -219,6 +222,12 @@ public final class CollectionUtil {
         return null;
     }
     /**通过keys和vals数组生成map**/
+
+    public static <T> void listFillArray(List<T> list, T[] array) {
+        for (int i = 0, size = list.size(); i < size; i++) {
+            array[i] = list.get(i);
+        }
+    }
 
     /**
      * 过滤list中重复数据

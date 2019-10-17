@@ -1,10 +1,7 @@
 package com.example.libframework.Rv;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v7.widget.*;
 import android.util.Log;
 import android.view.View;
 import com.example.libbase.Util.NumberUtil;

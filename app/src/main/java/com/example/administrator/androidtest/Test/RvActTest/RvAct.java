@@ -44,9 +44,9 @@ public class RvAct extends ComponentAct {
 
 //        mRvTest.addItemDecoration(new RvDivider(gridLayoutManager, 20, Color.RED));
         mAdapter = new VHAdapter();
-        mAdapter.register(Image.class, new ImageVHBinder());
-        mAdapter.register(Info.class, new InfoVHBinder());
-        mAdapter.register(Msg.class, msgVHBinder);
+        mAdapter.register(new ImageVHBinder(), Image.class);
+        mAdapter.register(new InfoVHBinder(), Info.class);
+        mAdapter.register(msgVHBinder, Msg.class);
         mRvTest.setAdapter(mAdapter);
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
@@ -104,7 +104,7 @@ public class RvAct extends ComponentAct {
             }
         }));
 
-        mDataManager = mAdapter.getDataProvider();
+        mDataManager = mAdapter.getDataManager();
         mDataManager.setData(initImage());
 //        mDataManager.addFirst(new Msg());
 //        mDataManager.addFirst(new Msg());

@@ -11,7 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import com.example.libframework.Component.IComponent;
 
-public abstract class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent, View.OnClickListener, GenericLifecycleObserver {
+public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent, View.OnClickListener, GenericLifecycleObserver {
     protected String TAG = getClass().getSimpleName();
     protected DATA mData;
     protected int mPos;
@@ -21,10 +21,7 @@ public abstract class VHolder<DATA> extends RecyclerView.ViewHolder implements I
     }
 
     public final <T extends View> T findViewById(@IdRes int id) {
-        if(itemView != null){
-            return itemView.findViewById(id);
-        }
-        return null;
+        return itemView.findViewById(id);
     }
 
     @CallSuper

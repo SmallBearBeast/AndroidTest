@@ -12,4 +12,9 @@
         android:background="@color/cl_black"
         android:layout_width="@dimen/dp_100"
         android:layout_height="@dimen/dp_100" />
+    
+    <!--<View -->
+            <!--android:background="@color/cl_green_9"-->
+            <!--android:layout_width="wrap_content" -->
+            <!--android:layout_height="wrap_content"/>-->
 </android.support.constraint.ConstraintLayout>
