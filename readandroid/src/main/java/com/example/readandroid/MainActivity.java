@@ -7,26 +7,35 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
-    private TextView mTvText_1;
-    private Button mBtClick;
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.act_main);
-//        mTvText_1 = findViewById(R.id.tv_text_1);
-//        mBtClick = findViewById(R.id.bt_click);
-
-        mBtClick.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                test("wuyisong", 123);
-            }
-        });
+    public static void main (String[] args) {
+        List<String> list = bindOther("1234");
+        String s = null;
     }
 
-    private void test(String name, int age){
-
+    public static List<String> bindOther(String s) {
+        List<String> list = new ArrayList<>();
+        char[] nums = s.toCharArray();
+        int temp;
+        int index;
+        char swap;
+        while (true) {
+            temp = nums.length - 1;
+            while (temp >= 0 && nums[nums.length - 1] <= nums[temp]) {
+                temp --;
+            }
+            if (temp < 0) {
+                return list;
+            }
+            swap = nums[nums.length - 1];
+            for (int i = nums.length - 1; i > temp; i--) {
+                nums[i] = nums[i - 1];
+            }
+            nums[temp] = swap;
+            list.add(new String(nums));
+        }
     }
 }
