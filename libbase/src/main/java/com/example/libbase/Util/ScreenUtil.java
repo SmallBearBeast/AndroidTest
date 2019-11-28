@@ -96,7 +96,7 @@ public class ScreenUtil extends AppInitUtil{
     /**
      * 获取状态栏高度
      */
-    private static int getStatusBarHeight(){
+    public static int getStatusBarHeight(){
         int statusBarHeight = -1;
         int resourceId = getResources().getIdentifier("status_bar_height","dimen", "android");
         if(resourceId > 0){
@@ -106,6 +106,19 @@ public class ScreenUtil extends AppInitUtil{
     }
     /**获取状态栏高度**/
 
+
+    /**
+     * 获取导航栏高度
+     */
+    public static int getNavigationBarHeight() {
+        int navigationBarHeight = -1;
+        int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
+        if(resourceId > 0){
+            navigationBarHeight = getDimensionPixelSize(resourceId);
+        }
+        return navigationBarHeight;
+    }
+    /**获取导航栏高度**/
 
     /**
      * 填充状态栏高度
