@@ -33,7 +33,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
     implementation project(":libbase")
-//    compileOnly 'org.aspectj:aspectjrt:1.8.6'
+    compileOnly 'org.aspectj:aspectjrt:1.8.6'
 }
 
 //import org.aspectj.bridge.IMessage
