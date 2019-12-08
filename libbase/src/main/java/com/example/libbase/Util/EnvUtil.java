@@ -5,14 +5,14 @@ import android.content.Context;
 import android.support.annotation.IntDef;
 
 public class EnvUtil extends AppInitUtil{
-    public static final int ENV_DEBUG = 1;
-    public static final int ENV_RELEASE = 2;
-    public static final int ENV_ALPHA = 3;
+    public static final int DEBUG = 1;
+    public static final int RELEASE = 2;
+    public static final int ALPHA = 3;
 
-    @IntDef(value = {ENV_DEBUG, ENV_RELEASE, ENV_ALPHA})
+    @IntDef(value = {DEBUG, RELEASE, ALPHA})
     public @interface Env{}
 
-    private static int sAppEnv = ENV_DEBUG;
+    private static int sAppEnv = DEBUG;
 
     public static boolean isAppEnv(@Env int appEnv){
         return sAppEnv == appEnv;

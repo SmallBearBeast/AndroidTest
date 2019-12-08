@@ -1,20 +1,27 @@
-package com.example.libframework.ActAndFrag;
+package com.example.libbase.Util;
 
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PermissionUtil {
+public class PermissionUtil extends AppInitUtil{
     private static final int Permission_Request_Code = 1;
 
     /**
      * 权限申请
      */
-    public static void requestPermissions(String[] permissions, BaseAct activity, BaseAct.PermissionListener listener){
+    public static boolean requestPermissions(String[] permissions){
+        Activity activity = null;
+        if(getContext() instanceof Activity){
+            activity = (Activity) getContext();
+        }
+        if(activity == null){
+            return false;
+        }
+
         List<String> needToAsk = new ArrayList<>();
         for (String s : permissions) {
             if(!isCheckPermission(s, activity)){
@@ -26,17 +33,10 @@ public class PermissionUtil {
             }
         }
         if(!needToAsk.isEmpty()){
-            activity.setPermissonListerner(listener);
             ActivityCompat.requestPermissions(activity, needToAsk.toArray(new String[needToAsk.size()]), Permission_Request_Code);
+            return false;
         }
-    }
-
-    public static void requestPermissions(String[] permissions, Fragment fragment, BaseAct.PermissionListener listener){
-        Activity activity = fragment.getActivity();
-        if(activity instanceof BaseAct){
-            BaseAct baseAct = (BaseAct) activity;
-            requestPermissions(permissions, baseAct, listener);
-        }
+        return true;
     }
     /**权限申请**/
 

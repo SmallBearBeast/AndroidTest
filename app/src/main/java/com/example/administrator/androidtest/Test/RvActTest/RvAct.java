@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class RvAct extends ComponentAct {
+public class RvAct extends ComponentAct implements View.OnClickListener{
     private static final String TAG = "RvAct";
     private RecyclerView mRvTest;
     private DataManager mDataManager;
@@ -68,6 +68,7 @@ public class RvAct extends ComponentAct {
             @Override
             public boolean onItemClick(View view, int position) {
                 SLog.d(TAG, "onItemClick: view = " + view + " position = " + position);
+                String name = new String("wuyisong");
 //                ToastUtil.showToast("onItemClick position = " + position);
                 switch (view.getId()){
                     case R.id.tv_1:
@@ -130,10 +131,11 @@ public class RvAct extends ComponentAct {
         return infos;
     }
 
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_add_first:
-                mDataManager.add(1, new Image(-1));
+                mDataManager.addFirst(new Image(-1));
 //                if(mAdapter.isRegister(Msg.class)){
 //                    mDataManager.addFirst(new Msg());
 //                }else {

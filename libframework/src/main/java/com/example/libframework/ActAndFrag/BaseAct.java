@@ -98,7 +98,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
             }
             if(mPermissionListener != null){
                 mPermissionListener.onPermissionRequest(permissionSuccessArray, permissionFailArray);
-                mPermissionListener = null;
             }
             onPermissionRequest(permissionSuccessArray, permissionFailArray);
         }
