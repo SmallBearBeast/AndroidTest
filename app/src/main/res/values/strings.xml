@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidTest</string>
+    <string name="new_enter_sms_code" priority="5">لقد أرسلنا إليك كود تحقق برسالة SMS إلى %s</string>
+    <string name="back_confirm" priority="1">نقوم بالتحقق من رقم هاتفك %s، هل تريد بالتأكيد تغييره؟</string>
 </resources>

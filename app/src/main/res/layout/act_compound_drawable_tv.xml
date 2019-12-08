@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.example.administrator.androidtest.Widget.CompoundDrawableTextView
+        android:paddingTop="@dimen/dp_50"
+        android:id="@+id/cdtv_text"
+        android:drawablePadding="20dp"
+        android:paddingLeft="@dimen/dp_50"
+        android:paddingRight="50dp"
+        android:text="123123123123123123123123123"
+        android:textSize="@dimen/sp_20"
+        android:drawableLeft="@drawable/delete"
+        android:drawableRight="@drawable/delete"
+        android:drawableTop="@drawable/delete"
+        android:drawableBottom="@drawable/delete"
+        android:background="@color/cl_blue_5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_150"
+        app:cdtv_press_right_drawableId="@drawable/search"
+        app:cdtv_click_bottom_drawableId="@drawable/search"/>
+
+</android.support.constraint.ConstraintLayout>
