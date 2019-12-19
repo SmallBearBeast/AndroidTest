@@ -2,7 +2,6 @@
 <android.support.constraint.ConstraintLayout
 		xmlns:android="http://schemas.android.com/apk/res/android"
 		xmlns:app="http://schemas.android.com/apk/res-auto"
-		android:padding="@dimen/dp_10"
 		android:background="@color/cl_black"
 		style="@style/match_parent">
 	<TextView
@@ -14,11 +13,12 @@
 			android:text="权限申请"
 			android:textColor="@color/cl_white"
 			app:layout_constraintDimensionRatio="8:1"
-			app:layout_constraintWidth_default="wrap"
+			app:layout_constraintWidth_default="spread"
 			app:layout_constraintHorizontal_bias="0.5"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"/>
 	<TextView
+			android:layout_marginLeft="@dimen/dp_40"
 			app:layout_constraintHorizontal_bias="0"
 			app:layout_constraintHorizontal_chainStyle="packed"
 			android:id="@+id/tv_1"
@@ -27,31 +27,37 @@
 			android:background="@color/cl_red_t_6"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toLeftOf="@+id/tv_2"
+			app:layout_constraintBottom_toTopOf="@+id/rv_test"
 			app:layout_constraintTop_toBottomOf="@+id/tv_permission_title"/>
 	<TextView
+			android:layout_marginLeft="@dimen/dp_10"
+			app:layout_goneMarginLeft="@dimen/dp_40"
 			android:id="@+id/tv_2"
 			android:layout_width="@dimen/dp_100"
 			android:layout_height="@dimen/dp_40"
 			android:background="@color/cl_blue_5"
 			app:layout_constraintLeft_toRightOf="@id/tv_1"
 			app:layout_constraintRight_toLeftOf="@id/tv_3"
+			app:layout_constraintBottom_toTopOf="@+id/rv_test"
 			app:layout_constraintTop_toBottomOf="@+id/tv_permission_title"/>
 	<TextView
+			android:layout_marginLeft="@dimen/dp_10"
+			app:layout_goneMarginLeft="@dimen/dp_40"
 			android:id="@+id/tv_3"
 			android:layout_width="@dimen/dp_100"
 			android:layout_height="@dimen/dp_40"
 			android:background="@color/cl_green_9"
 			app:layout_constraintLeft_toRightOf="@id/tv_2"
 			app:layout_constraintRight_toRightOf="parent"
+			app:layout_constraintBottom_toTopOf="@+id/rv_test"
 			app:layout_constraintTop_toBottomOf="@+id/tv_permission_title"/>
 	<!--app:layout_constraintVertical_weight="1"-->
 	<android.support.v7.widget.RecyclerView
+			android:id="@+id/rv_test"
 			style="@style/rv_base"
 			android:layout_height="0dp"
 			android:layout_width="0dp"
 			android:background="@color/cl_oriange"
-			app:layout_constraintVertical_weight="1"
-			app:layout_constraintHorizontal_weight="1"
 			app:layout_constraintLeft_toLeftOf="parent"
 			app:layout_constraintRight_toRightOf="parent"
 			app:layout_constraintBottom_toTopOf="@+id/tv_permission_title_bottom"

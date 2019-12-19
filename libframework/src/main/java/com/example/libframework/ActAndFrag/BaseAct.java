@@ -134,8 +134,7 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     /**
      * 跳转activity
      */
-    public Intent startActivity(Class clz, Bundle bundle){
-        boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
+    public Intent startActivity(Class clz, Bundle bundle, boolean isStart){
         Intent intent = new Intent(this, clz);
         intent.putExtra(IContext.BUNDLE, bundle);
         if(isStart){
@@ -144,8 +143,7 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         return intent;
     }
 
-    public Intent startActivityForResult(Class clz, int requestCode, Bundle bundle){
-        boolean isStart = bundle.getInt(IContext.START_ACTIVITY, 1) > 0;
+    public Intent startActivityForResult(Class clz, int requestCode, Bundle bundle, boolean isStart){
         Intent intent = new Intent(this, clz);
         intent.putExtra(IContext.BUNDLE, bundle);
         if(isStart) {
