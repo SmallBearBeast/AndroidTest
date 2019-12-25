@@ -38,7 +38,7 @@ public class BusTest1Act extends ComponentAct {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_1:
-                startActivity(BusTest2Act.class, new Bundle(), true);
+                goAct(BusTest2Act.class, new Bundle(), null);
                 break;
         }
     }

@@ -11,7 +11,7 @@ public class MemoryLeakTestAct extends ComponentAct {
     }
 
     public void onClick(View view) {
-        startActivity(FirstAct.class, null, true);
+        goAct(FirstAct.class, null, null);
     }
 
 }

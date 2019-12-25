@@ -11,6 +11,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import com.example.libbase.Util.AppInitUtil;
 import com.example.libframework.Page.IPage;
 import com.example.libframework.Page.Page;
 import com.example.libframework.Page.PageProvider;
@@ -22,6 +24,7 @@ import java.util.List;
 
 public abstract class BaseAct extends AppCompatActivity implements IPage {
 
+    public static BaseAct sAct = null;
     protected final String TAG = getClass().getSimpleName();
     private static final int Permission_Request_Code = 1;
     private static int sVisibleCount = 0;
@@ -31,10 +34,11 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     protected BaseAct mActivity;
     protected Context mContext;
     private PermissionListener mPermissionListener;
-    private ActivityResultListener mActivityResultListener;
+    private ActResultListener mActResultListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        sAct = this;
         if(isSupportPageShareData()){
             mPageKey = PageShareDataHelper.createPageKey(getClass().getSimpleName());
             PageShareDataHelper.getInstance().markNewPage(mPageKey);
@@ -46,6 +50,7 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         mActivity = this;
         mContext = this;
         super.onCreate(savedInstanceState);
+        AppInitUtil.init(this);
     }
 
     @Override
@@ -99,7 +104,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
             if(mPermissionListener != null){
                 mPermissionListener.onPermissionRequest(permissionSuccessArray, permissionFailArray);
             }
-            onPermissionRequest(permissionSuccessArray, permissionFailArray);
         }
     }
 
@@ -134,22 +138,25 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     /**
      * 跳转activity
      */
-    public Intent startActivity(Class clz, Bundle bundle, boolean isStart){
-        Intent intent = new Intent(this, clz);
-        intent.putExtra(IContext.BUNDLE, bundle);
-        if(isStart){
-            ContextCompat.startActivity(this, intent, null);
-        }
-        return intent;
+    public void goAct(Class clz, Bundle bundle) {
+        goAct(clz, bundle, null);
     }
 
-    public Intent startActivityForResult(Class clz, int requestCode, Bundle bundle, boolean isStart){
+    public void goAct(Class clz, Bundle bundle, Bundle options){
         Intent intent = new Intent(this, clz);
         intent.putExtra(IContext.BUNDLE, bundle);
-        if(isStart) {
-            ActivityCompat.startActivityForResult(this, intent, requestCode, null);
-        }
-        return intent;
+        ContextCompat.startActivity(this, intent, options);
+    }
+
+    public void goActForResult(Class clz, int requestCode, Bundle bundle, ActResultListener listener){
+        goActForResult(clz, requestCode, bundle, null, listener);
+    }
+
+    public void goActForResult(Class clz, int requestCode, Bundle bundle, Bundle options, ActResultListener listener){
+        mActResultListener = listener;
+        Intent intent = new Intent(this, clz);
+        intent.putExtra(IContext.BUNDLE, bundle);
+        ActivityCompat.startActivityForResult(this, intent, requestCode, options);
     }
     /**跳转activity**/
 
@@ -160,12 +167,31 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray);
     }
 
-    public void setPermissonListerner(PermissionListener listerner){
+    public boolean requestPermissions(String[] permissions, PermissionListener listerner){
         mPermissionListener = listerner;
+        List<String> needToAsk = new ArrayList<>();
+        for (String s : permissions) {
+            if(!isCheckPermission(s)){
+                needToAsk.add(s);
+            }else {
+                if(isIgnorePermisson(s)){
+                    needToAsk.add(s);
+                }
+            }
+        }
+        if(!needToAsk.isEmpty()){
+            ActivityCompat.requestPermissions(this, needToAsk.toArray(new String[needToAsk.size()]), Permission_Request_Code);
+            return false;
+        }
+        return true;
     }
 
-    protected void onPermissionRequest(List<String> permissionSuccessArray, List<String> permissionFailArray){
+    public boolean isIgnorePermisson(String permission){
+        return ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
+    }
 
+    public boolean isCheckPermission(String permission){
+        return ActivityCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
     }
     /**权限监听回调**/
 
@@ -203,20 +229,16 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         return false;
     }
 
-    public interface ActivityResultListener{
+    public interface ActResultListener {
         void onActivityResult(int requestCode, int resultCode, Intent data);
-    }
-
-    public void setActivityResultListener(ActivityResultListener listener){
-        mActivityResultListener = listener;
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(mActivityResultListener != null){
-            mActivityResultListener.onActivityResult(requestCode, resultCode, data);
-            mActivityResultListener = null;
+        if(mActResultListener != null){
+            mActResultListener.onActivityResult(requestCode, resultCode, data);
+            mActResultListener = null;
         }
     }
 }

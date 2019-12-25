@@ -168,7 +168,7 @@ public abstract class BaseFrag extends Fragment implements IPage {
      */
     protected static Bundle buildArguments(int id){
         Bundle bundle = new Bundle();;
-        bundle.putInt(IContext.ARGUMENT, id);
+        bundle.putInt(IContext.FRAGMENT_ID, id);
         return bundle;
     }
 

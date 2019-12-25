@@ -21,7 +21,6 @@ public abstract class ComponentFrag<C extends FragComponent, V extends ViewSet> 
     protected ComponentAct mComActivity;
     protected Map<Class, IComponent> mActComponentMap;
     protected Map<Class, IComponent> mFragComponentMap = new HashMap<>(8);
-    ;
 
     protected C createComponent() {
         return null;

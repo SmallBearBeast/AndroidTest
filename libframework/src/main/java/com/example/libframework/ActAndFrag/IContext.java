@@ -15,26 +15,18 @@ public interface IContext {
     /**RequestCode**/
 
 
-
     /**Activity传递参数key值**/
 
     String BUNDLE = "bundle";
 
-    String START_ACTIVITY = "start_activity";
-
-
     /**Activity传递参数key值**/
-
 
 
     /**Fragment相关参数**/
 
-    String ARGUMENT = "argument";
-
     String FRAGMENT_ID = "fragment_id";
 
     int FRAGMENT_ID_NONE = -1;
-
 
     /**Fragment相关参数**/
 }

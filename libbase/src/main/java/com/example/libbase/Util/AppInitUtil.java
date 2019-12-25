@@ -17,7 +17,7 @@ public abstract class AppInitUtil {
         sApplication = application;
     }
 
-    //单例不可持有
+    // 获取上下文信息，优先返回当前Context。
     protected static Context getContext(){
         return sContext != null ? sContext : sApplication;
     }
