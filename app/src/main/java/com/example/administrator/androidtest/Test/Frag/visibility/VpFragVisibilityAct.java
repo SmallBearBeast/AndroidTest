@@ -1,6 +1,7 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
+import com.example.libframework.ActAndFrag.BaseAct;
 import com.example.libframework.ActAndFrag.ComponentAct;
 import com.example.libframework.Page.IPage;
 
@@ -35,7 +37,6 @@ public class VpFragVisibilityAct extends ComponentAct {
         vpContainer.setCurrentItem(1);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
     }
-
 
     public void onClick(View view) {
         switch (view.getId()) {

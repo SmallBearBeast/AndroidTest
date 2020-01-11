@@ -38,7 +38,7 @@ public class SystemShareAct extends ComponentAct {
     protected void init(Bundle savedInstanceState) {
         super.init(savedInstanceState);
         mRvSystemShare = findViewById(R.id.rv_system_share);
-        mRvSystemShare.setLayoutManager(new LinearLayoutManager(mContext));
+        mRvSystemShare.setLayoutManager(new LinearLayoutManager(this));
 //        mRvSystemShare.setAdapter(new MyAdapter());
 
         Integer[] aaa = new Integer[]{1, 2, 3};
@@ -96,9 +96,9 @@ public class SystemShareAct extends ComponentAct {
                     if(imageUri != null){
                         IntentShare intentShare = new IntentShare("Hello World", imageUri, null);
                         if(requestCode == REQUEST_IMAGE){
-                            ShareUtil.shareImageTextToApp(mActivity, intentShare, mSharePackageName, null);
+                            ShareUtil.shareImageTextToApp(this, intentShare, mSharePackageName, null);
                         }else {
-                            ShareUtil.shareImageTextToOther(mActivity, intentShare);
+                            ShareUtil.shareImageTextToOther(this, intentShare);
                         }
                     }
                 }
@@ -111,9 +111,9 @@ public class SystemShareAct extends ComponentAct {
                     if(videoUri != null){
                         IntentShare intentShare = new IntentShare("Hello World", null, videoUri);
                         if(requestCode == REQUEST_VIDEO){
-                            ShareUtil.shareVideoTextToApp(mActivity, intentShare, mSharePackageName, null);
+                            ShareUtil.shareVideoTextToApp(this, intentShare, mSharePackageName, null);
                         }else {
-                            ShareUtil.shareVideoTextToOther(mActivity, intentShare);
+                            ShareUtil.shareVideoTextToOther(this, intentShare);
                         }
                     }
                 }
@@ -128,10 +128,10 @@ public class SystemShareAct extends ComponentAct {
                         if(requestCode == REQUEST_FILE){
                             if(mFileUriList.size() > 1) {
                                 IntentShare intentShare = new IntentShare("Hello World", null, fileUri).setFileUriList(mFileUriList);
-                                ShareUtil.shareMulFileTextToApp(mActivity, intentShare, mSharePackageName);
+                                ShareUtil.shareMulFileTextToApp(this, intentShare, mSharePackageName);
                             }
                         }else {
-//                            ShareUtil.shareVideoTextToOther(mActivity, intentShare);
+//                            ShareUtil.shareVideoTextToOther(this, intentShare);
                         }
                     }
                 }

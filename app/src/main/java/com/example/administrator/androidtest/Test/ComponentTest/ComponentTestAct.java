@@ -1,6 +1,8 @@
 package com.example.administrator.androidtest.Test.ComponentTest;
 
 import android.os.Bundle;
+import android.view.View;
+
 import com.example.libframework.ActAndFrag.ComponentAct;
 import com.example.libframework.Component.ActComponent;
 import com.example.libframework.Component.ViewSet;
@@ -24,6 +26,10 @@ public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActCompo
 
     static class MainViewSet extends ViewSet {
 
+        @Override
+        protected void initView(View contentView) {
+
+        }
     }
 
     @Override

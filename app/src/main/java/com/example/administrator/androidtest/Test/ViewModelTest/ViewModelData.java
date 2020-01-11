@@ -1,12 +1,10 @@
-package ViewModelTest;
+package com.example.administrator.androidtest.Test.ViewModelTest;
 
-import android.support.annotation.NonNull;
-
-public class User {
+public class ViewModelData {
     public String mName;
     public int mAge;
 
-    public User(String name, int age) {
+    public ViewModelData(String name, int age) {
         mName = name;
         mAge = age;
     }

@@ -1,50 +1,66 @@
 package com.example.libframework.ActAndFrag;
 
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import com.example.libframework.BuildConfig;
+import com.example.libframework.Component.FragLifeDebug;
 import com.example.libframework.Page.IPage;
 import com.example.libframework.Page.Page;
 import com.example.libframework.Page.PageProvider;
+import com.example.liblog.SLog;
 
 import java.util.List;
-import java.util.Map;
 
 public abstract class BaseFrag extends Fragment implements IPage {
     private static String TAG = "BaseFrag";
-    private boolean foreground = false;
-    //保留上一次可见的子fragment页面位置
+    //Preserve the position of the last visible sub fragment.
     private int mLastVisibleFragPos = 0;
     private boolean mIsDoneSetUserVisibleHint;
     private boolean mIsVisibleToUser;
     private boolean mIsDoneStart;
-    protected int fragmentId = IContext.FRAGMENT_ID_NONE; /**相同类型fragment复用时候需要一个fragmentId来区分**/
     private Page mPage;
     protected BaseAct mBaseAct;
     protected BaseFrag mBaseFrag;
-
+    protected View mContentView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if(getContext() instanceof BaseAct){
+        if (getContext() instanceof BaseAct) {
             mBaseAct = (BaseAct) getContext();
         }
-        if(getParentFragment() instanceof BaseFrag){
+        if (getParentFragment() instanceof BaseFrag) {
             mBaseFrag = (BaseFrag) getParentFragment();
         }
+//        if (BuildConfig.DEBUG) {
+//
+//        }
         Intent intent = mBaseAct.getIntent();
-        if(intent != null){
+        if (intent != null) {
             handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
         }
         Bundle bundle = getArguments();
-        if(bundle != null){
+        if (bundle != null) {
             handleArgument(bundle);
-            fragmentId = bundle.getInt(IContext.FRAGMENT_ID, IContext.FRAGMENT_ID_NONE);
         }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (mContentView == null) {
+            mContentView = inflater.inflate(layoutId(), container, false);
+            init(savedInstanceState);
+        }
+        return mContentView;
     }
 
     @Override
@@ -53,34 +69,33 @@ public abstract class BaseFrag extends Fragment implements IPage {
         mIsDoneSetUserVisibleHint = true;
         mIsVisibleToUser = isVisibleToUser;
         if (getActivity() != null) {
-            if(mIsDoneStart && mIsVisibleToUser){
+            if (mIsDoneStart && mIsVisibleToUser) {
                 addPage(null);
-                onNotifyVisiable();
+                onNotifyVisible();
             }
             List<Fragment> childs = getChildFragmentManager().getFragments();
             boolean hasChild = (childs != null && childs.size() > 0);
             if (hasChild) {
                 for (int i = 0; i < childs.size(); i++) {
                     Fragment f = childs.get(i);
-                    if (f.getUserVisibleHint())
+                    if (f.getUserVisibleHint()) {
                         mLastVisibleFragPos = i;
-                    if (mLastVisibleFragPos == i)
+                    }
+                    if (mLastVisibleFragPos == i) {
                         f.setUserVisibleHint(isVisibleToUser);
+                    }
                 }
             }
         }
     }
 
     /**
-     * 只有fragment里面有嵌套fragment才会调用改方法
-     * 解决初始化时候多个子fragment的visiable为true
-     * 依据是 只要父类fragment的visiable为false，那么子fragment肯定就是不显示，都设置为false
+     * The method will only be called if there are nested fragments in the fragment.
+     * Solve the problem which the visibility of multiple child fragments is true during initialization.
+     * The basis is that as long as the visibility of the parent fragment is false, the visibility of the child fragment is also false
      */
     @Override
     public void onAttachFragment(Fragment childFragment) {
-        if (childFragment instanceof BaseFrag) {
-            ((BaseFrag) childFragment).notifyForeground(foreground);
-        }
         boolean isVisibleToUser = getUserVisibleHint();
         if (!isVisibleToUser) {
             if (childFragment.getUserVisibleHint()) {
@@ -93,103 +108,88 @@ public abstract class BaseFrag extends Fragment implements IPage {
     public void onStart() {
         super.onStart();
         mIsDoneStart = true;
-        if(mIsDoneSetUserVisibleHint){
-            if(mIsVisibleToUser) {
+        if (mIsDoneSetUserVisibleHint) {
+            if (mIsVisibleToUser) {
                 addPage(null);
-                onNotifyVisiable();
+                onNotifyVisible();
             }
-        }else{
+        } else {
             addPage(null);
         }
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
-        if(!hidden){
+        if (!hidden) {
             PageProvider.getInstance().addPage(mBaseAct.getPage(), createPage());
         }
     }
-
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         mPage = null;
-    }
-
-    /**
-     * 通知应用是否在前后台，获取应用前后台状态
-     */
-    public void notifyForeground(boolean fore) {
-        foreground = fore;
-        onNotifyForeground(fore);
-        List<Fragment> fragments = getChildFragmentManager().getFragments();
-        if (fragments != null && fragments.size() > 0) {
-            for (Fragment frag : fragments) {
-                if(frag instanceof BaseFrag){
-                    ((BaseFrag) frag).notifyForeground(fore);
-                }
+        if (BuildConfig.DEBUG) {
+            if (mBaseAct != null) {
+//                mBaseAct.getSupportFragmentManager().registerFragmentLifecycleCallbacks();
             }
         }
     }
 
-    public boolean isForeground() {
-        return foreground;
-    }
-
-    protected void onNotifyForeground(boolean fore) {
-        Log.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyForeground: fore = " + fore);
-    }
-    /**通知应用是否在前后台，获取应用前后台状态**/
-
-    /**
-     * 页面处理相关方法
-     */
-    private Page createPage(){
+    private Page createPage() {
         mPage = new Page(pageId());
         return mPage;
     }
 
-    public Page getPage(){
+    public Page getPage() {
         return mPage;
     }
 
-    private void addPage(Page backPage){
-        if(mBaseFrag != null){
+    private void addPage(Page backPage) {
+        if (mBaseFrag != null) {
             PageProvider.getInstance().addPage(mBaseFrag.getPage(), backPage != null ? backPage : createPage());
-        }else {
+        } else {
             PageProvider.getInstance().addPage(mBaseAct.getPage(), backPage != null ? backPage : createPage());
         }
     }
-    /**页面处理相关方法**/
 
-    /**
-     * Bundle传递相关方法
-     */
-    protected static Bundle buildArguments(int id){
-        Bundle bundle = new Bundle();;
-        bundle.putInt(IContext.FRAGMENT_ID, id);
-        return bundle;
+    protected void handleIntent(@NonNull Intent intent, @Nullable Bundle bundle) {
+
     }
 
-    protected void handleIntent(@NonNull Intent intent, @Nullable Bundle bundle){}
+    protected void handleArgument(@NonNull Bundle bundle) {
 
-    protected void handleArgument(@NonNull Bundle bundle){};
-    /**Bundle传递相关方法**/
+    }
 
-    /**
-     * Fragment需要实现的方法
-     */
     protected abstract int layoutId();
 
     protected abstract void init(Bundle savedInstanceState);
-    /**Fragment需要实现的方法**/
-
 
     /**
-     * fragment可见性时候调用
+     * When the fragment is visible, the method is called.
+     * Order: setUserVisibleHint->onAttachFragment->onStart
      */
-    protected void onNotifyVisiable() {
-        Log.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyVisiable");
+    protected void onNotifyVisible() {
+        SLog.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyVisible");
+    }
+
+    /**
+     * Put shared data for easy access by other components.
+     *
+     * @param key   The name of shared data.
+     * @param value The value of shared data.
+     */
+    protected void put(String key, Object value) {
+        ViewModelProviders.of(mBaseAct).get(ShareDataVM.class).put(key, value);
+    }
+
+    /**
+     * Get the value corresponding to the key
+     *
+     * @param key The name of shared data.
+     * @return The value of shared data.
+     */
+    protected <V> V get(String key) {
+        return ViewModelProviders.of(mBaseAct).get(ShareDataVM.class).get(key);
     }
 }

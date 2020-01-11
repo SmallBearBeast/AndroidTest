@@ -14,14 +14,19 @@ public class PageProvider{
         static PageProvider sPageProvider = new PageProvider();
     }
 
+    private PageProvider() {
+
+    }
+
     public static PageProvider getInstance(){
         return SingleTon.sPageProvider;
     }
 
     public void addPage(Page page){
         if(page != null) {
-            if(sPageList.size() >= LIMIT_COUNT)
+            if(sPageList.size() >= LIMIT_COUNT) {
                 sPageList.removeFirst();
+            }
             sPageList.add(page);
             sPageNodeList.add(page.mPageId);
         }
@@ -29,8 +34,9 @@ public class PageProvider{
 
     public void addPage(Page parent, Page child){
         if(parent != null && child != null){
-            if(parent.mChildPageList.size() >= LIMIT_COUNT)
+            if(parent.mChildPageList.size() >= LIMIT_COUNT) {
                 parent.mChildPageList.removeFirst();
+            }
             parent.add(child);
             sPageNodeList.add(child.mPageId);
         }
@@ -46,8 +52,9 @@ public class PageProvider{
         }
         int count = getPageLevel(page);
         level = (level == FIRST ? 1 : (level == LAST ? count : level));
-        if(level < 1 || level > count)
+        if(level < 1 || level > count) {
             throw new RuntimeException("level is out from range");
+        }
         return pageByLevel(level, page);
     }
 
@@ -61,8 +68,9 @@ public class PageProvider{
         }
         int count = getPageLevel(page);
         level = (level == FIRST ? 1 : (level == LAST ? count : level));
-        if(level < 1 || level > count)
+        if(level < 1 || level > count) {
             throw new RuntimeException("level is out from range");
+        }
         return pageByLevel(level, page);
     }
 
@@ -104,8 +112,9 @@ public class PageProvider{
      * 递归搜索一个page树的上一个page
      */
     private Page lastPage(Page page){
-        if(page.isEmpty())
+        if(page.isEmpty()) {
             return null;
+        }
         Page parent = new Page(page.mPageId);
         Page result = null;
         //递归结束条件

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import com.example.administrator.androidtest.R;
 import com.example.libframework.ActAndFrag.ComponentFrag;
+import com.example.libframework.Component.FragLifeDebug;
 import com.example.libframework.Page.IPage;
 
 public class FragmentSeven extends ComponentFrag {
@@ -15,7 +16,7 @@ public class FragmentSeven extends ComponentFrag {
 
     @Override
     public void init(Bundle savedInstanceState) {
-
+        mBaseAct.getSupportFragmentManager().registerFragmentLifecycleCallbacks(new FragLifeDebug(getClass().getSimpleName()), false);
     }
 
     @Override

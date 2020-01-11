@@ -37,12 +37,12 @@
     <TextView
         android:id="@+id/tv_frag_visibility"
         style="@style/match_parent_wrap_content"/>
+
     <TextView
         android:id="@+id/tv_page"
         style="@style/match_parent_wrap_content"/>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/vp_container"
         style="@style/match_parent" />
-
-
 </LinearLayout>

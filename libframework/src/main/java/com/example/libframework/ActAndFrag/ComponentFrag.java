@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import com.example.libframework.Component.FragComponent;
 import com.example.libframework.Component.IComponent;
 import com.example.libframework.Component.ViewSet;
@@ -17,10 +18,9 @@ import java.util.Map;
 public abstract class ComponentFrag<C extends FragComponent, V extends ViewSet> extends BaseFrag {
     public C mMainComponent;
     public V mViewSet;
-    public View mContentView;
     protected ComponentAct mComActivity;
-    protected Map<Class, IComponent> mActComponentMap;
-    protected Map<Class, IComponent> mFragComponentMap = new HashMap<>(8);
+    protected Map<Class, IComponent> mComponentMap = new HashMap<>(8);
+    protected Map<Class, IComponent> mTempComponentMap = new HashMap<>(8);
 
     protected C createComponent() {
         return null;
@@ -35,19 +35,18 @@ public abstract class ComponentFrag<C extends FragComponent, V extends ViewSet> 
         super.onAttach(context);
         if (context instanceof ComponentAct) {
             mComActivity = (ComponentAct) context;
-            mActComponentMap = mComActivity.mComponentMap;
+            mComponentMap = mComActivity.mComponentMap;
         }
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (mContentView == null) {
-            mContentView = inflater.inflate(layoutId(), container, false);
-            init(savedInstanceState);
+        View contentView = super.onCreateView(inflater, container, savedInstanceState);
+        if (contentView != null) {
             initMainComponent();
         }
-        return mContentView;
+        return contentView;
     }
 
     private void initMainComponent() {
@@ -61,28 +60,20 @@ public abstract class ComponentFrag<C extends FragComponent, V extends ViewSet> 
 
     public <C extends IComponent> void registerComponent(C component) {
         if (component instanceof FragComponent) {
-            mMainComponent.attachViewSet(mViewSet);
+            ((FragComponent) component).attachViewSet(mViewSet);
             ((FragComponent) component).attachActivity(mComActivity);
-            ((FragComponent) component).attachFragment(this);
+            ((FragComponent) component).attachMain(this);
         }
         if (component != null) {
             getLifecycle().addObserver(component);
-            mFragComponentMap.put(component.getClass(), component);
+            mComponentMap.put(component.getClass(), component);
+            mTempComponentMap.put(component.getClass(), component);
         }
     }
 
-    public <C extends IComponent> C getFragComponent(Class<C> clz) {
-        if (mFragComponentMap.containsKey(clz)) {
-            return (C) mFragComponentMap.get(clz);
-        }
-        return null;
-    }
-
-    public <C extends IComponent> C getActComponent(Class<C> clz) {
-        if (mActComponentMap != null) {
-            if (mActComponentMap.containsKey(clz)) {
-                return (C) mActComponentMap.get(clz);
-            }
+    public <C extends IComponent> C getComponent(Class<C> clz) {
+        if (mComponentMap.containsKey(clz)) {
+            return (C) mComponentMap.get(clz);
         }
         return null;
     }
@@ -90,9 +81,11 @@ public abstract class ComponentFrag<C extends FragComponent, V extends ViewSet> 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        for (IComponent component : mFragComponentMap.values()) {
-            mFragComponentMap.remove(component.getClass());
+        for (IComponent component : mTempComponentMap.values()) {
+            mComponentMap.remove(component.getClass());
         }
+        mTempComponentMap.clear();
+        mTempComponentMap = null;
     }
 
 }

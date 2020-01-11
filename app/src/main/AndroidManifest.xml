@@ -29,7 +29,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".Test.MemoryLeakTest.MemoryLeakTestAct">
+        <activity android:name=".Test.Frag.visibility.VpFragVisibilityAct"
+            android:configChanges="orientation|keyboard|layoutDirection|screenSize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />

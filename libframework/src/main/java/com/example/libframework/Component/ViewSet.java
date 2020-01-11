@@ -4,8 +4,11 @@ import android.support.annotation.IdRes;
 import android.util.SparseArray;
 import android.view.View;
 
+/**
+ * The set of views.
+ */
 public abstract class ViewSet {
-    private static final byte INIT_COUNT = 8;
+    private static final byte INIT_COUNT = 16;
     private View mContentView;
     private SparseArray<View> mViewIdArray;
 
@@ -17,19 +20,17 @@ public abstract class ViewSet {
         attachView(contentView);
     }
 
-    public void attachView(View contentView){
+    public void attachView(View contentView) {
         mViewIdArray = new SparseArray<>(INIT_COUNT);
         mContentView = contentView;
         initView(contentView);
     }
 
-    protected void initView(View contentView) {
-        //findViewById()操作
-    }
+    protected abstract void initView(View contentView);
 
-    protected <T extends View> T findViewById(@IdRes int viewId){
+    protected <T extends View> T findViewById(@IdRes int viewId) {
         View view = mViewIdArray.get(viewId);
-        if(view == null){
+        if (view == null) {
             view = mContentView.findViewById(viewId);
             mViewIdArray.put(viewId, view);
         }
@@ -39,21 +40,21 @@ public abstract class ViewSet {
     /**
      * findViewById并设置点击事件
      */
-    protected View findViewAndSetListener(@IdRes int viewId, View.OnClickListener listener){
+    protected View findViewAndSetListener(@IdRes int viewId, View.OnClickListener listener) {
         View view = findViewById(viewId);
         setOnClickListener(listener, viewId);
         return view;
     }
 
-    private void setOnClickListener(View.OnClickListener listener, @IdRes int... viewIds){
+    private void setOnClickListener(View.OnClickListener listener, @IdRes int... viewIds) {
         for (int id : viewIds) {
-            if(mViewIdArray.get(id) != null){
+            if (mViewIdArray.get(id) != null) {
                 mViewIdArray.get(id).setOnClickListener(listener);
             }
         }
     }
 
-    void clear(){
+    void clear() {
         mContentView = null;
         mViewIdArray.clear();
         mViewIdArray = null;

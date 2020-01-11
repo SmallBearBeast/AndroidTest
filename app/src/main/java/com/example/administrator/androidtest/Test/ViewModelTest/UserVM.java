@@ -1,4 +1,4 @@
-package ViewModelTest;
+package com.example.administrator.androidtest.Test.ViewModelTest;
 
 import android.arch.lifecycle.LifecycleOwner;
 import android.arch.lifecycle.MutableLiveData;
@@ -11,42 +11,45 @@ import com.example.liblog.SLog;
 // postValue与setValue时候怎么确定调用具体哪个Observer，只能通过livedata命名。
 public class UserVM extends ViewModel {
     private static final String TAG = "UserVM";
-    private MutableLiveData<User> userData_1 = new MutableLiveData<>();
-    private MutableLiveData<User> userData_2 = new MutableLiveData<>();
-    private UserData userData_3 = new UserData();
+    public MutableLiveData<ViewModelData> userData_1 = new MutableLiveData<>();
+    public MutableLiveData<ViewModelData> userData_2 = new MutableLiveData<>();
+    public UserData userData_3 = new UserData();
 
     public void userData_1() {
         // do net work to get data
-        User user = new User("userData_1", 21);
+        ViewModelData user = new ViewModelData("userData_1", 21);
         userData_1.postValue(user);
     }
 
-    public void userData_1(LifecycleOwner owner, Observer<User> observer) {
+    public void userData_1(LifecycleOwner owner, Observer<ViewModelData> observer) {
         userData_1.observe(owner, observer);
     }
 
     public void userData_2() {
         // do net work to get data
-        User user = new User("userData_2", 22);
+        ViewModelData user = new ViewModelData("userData_2", 22);
         userData_2.postValue(user);
     }
 
-    public void userData_2(LifecycleOwner owner, Observer<User> observer) {
+    public void userData_2(LifecycleOwner owner, Observer<ViewModelData> observer) {
         userData_2.observe(owner, observer);
     }
 
     public void userData_3() {
         // do net work to get data
-        User user = new User("userData_3", 23);
+        ViewModelData user = new ViewModelData("userData_3", 23);
         userData_3.postValue(user);
     }
 
-    public void userData_3(LifecycleOwner owner, Observer<User> observer) {
+    public void userData_3(LifecycleOwner owner, Observer<ViewModelData> observer) {
         userData_3.observe(owner, observer);
     }
 
+    public void userData_3(Observer<ViewModelData> observer) {
+        userData_3.observeForever(observer);
+    }
 
-    public static class UserData extends MutableLiveData<User> {
+    public static class UserData extends MutableLiveData<ViewModelData> {
         @Override
         protected void onActive() {
             SLog.d(TAG, "onActive");
@@ -59,4 +62,5 @@ public class UserVM extends ViewModel {
             super.onInactive();
         }
     }
+
 }
