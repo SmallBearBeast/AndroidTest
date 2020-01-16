@@ -6,8 +6,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Environment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.Common.Media.Info.DirInfo;
 import com.example.administrator.androidtest.Common.Media.Provider.MediaConfig;

@@ -1,8 +1,8 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.example.administrator.androidtest.App;
 import com.example.libframework.ActAndFrag.ComponentFrag;

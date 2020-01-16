@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v4.widget.TextViewCompat;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.core.widget.TextViewCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -29,7 +29,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class DropTextView extends android.support.v7.widget.AppCompatEditText implements TextWatcher, View.OnClickListener {
+public class DropTextView extends androidx.appcompat.widget.AppCompatEditText implements TextWatcher, View.OnClickListener {
     private static final int RESULT_TEXT_WINDOW_HEIGHT = 500;
     private static final int HISTORY_SEARCH_MAX_COUNT = 10;
     private List<String> mOriArray = Arrays.asList("星期一", "星期一", "星期一", "星期一", "星期一", "星期一", "星期一", "星期一");

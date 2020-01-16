@@ -1,7 +1,7 @@
 package com.example.libframework.Bus;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import android.util.SparseArray;
 import com.example.libbase.Util.MainThreadUtil;
 

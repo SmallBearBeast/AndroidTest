@@ -1,9 +1,9 @@
 package com.example.administrator.androidtest.Common.CaseHelper;
 
 import android.content.Context;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.IntDef;
-import android.support.annotation.StringRes;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
+import androidx.annotation.StringRes;
 import android.util.SparseArray;
 import android.view.View;
 import android.view.ViewGroup;

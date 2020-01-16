@@ -1,6 +1,6 @@
 package com.example.libframework.ActAndFrag;
 
-import android.arch.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel;
 
 import java.util.HashMap;
 import java.util.Map;

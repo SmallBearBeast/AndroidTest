@@ -1,6 +1,6 @@
 package com.example.libokhttp;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import com.example.libbase.Util.GsonUtil;
 import com.example.libbase.Util.MainThreadUtil;
 import okhttp3.Call;

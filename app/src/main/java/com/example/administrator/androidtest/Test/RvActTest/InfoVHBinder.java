@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.RvActTest;
 
 import android.net.Uri;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.widget.TextView;
 import com.example.administrator.androidtest.R;

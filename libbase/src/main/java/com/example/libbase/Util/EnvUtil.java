@@ -2,7 +2,7 @@ package com.example.libbase.Util;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 public class EnvUtil extends AppInitUtil{
     public static final int DEBUG = 1;

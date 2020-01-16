@@ -2,10 +2,9 @@ package com.example.administrator.androidtest.Widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Editable;
-import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 

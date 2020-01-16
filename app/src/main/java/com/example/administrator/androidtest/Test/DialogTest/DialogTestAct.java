@@ -1,8 +1,7 @@
 package com.example.administrator.androidtest.Test.DialogTest;
 
-import android.app.DialogFragment;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import androidx.fragment.app.FragmentActivity;
 import android.view.View;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.ActAndFrag.ComponentAct;

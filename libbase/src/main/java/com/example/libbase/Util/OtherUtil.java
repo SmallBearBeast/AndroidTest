@@ -4,14 +4,10 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.RotateDrawable;
-import android.support.v4.text.TextUtilsCompat;
-import android.support.v4.view.ViewCompat;
-import android.widget.ImageView;
 
-import java.text.Bidi;
+import androidx.core.text.TextUtilsCompat;
+import androidx.core.view.ViewCompat;
+import android.widget.ImageView;
 
 public class OtherUtil extends AppInitUtil {
     public boolean isRtl() {

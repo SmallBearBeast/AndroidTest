@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.Test.Spinner;
 
 import android.database.DataSetObserver;
 import android.os.Bundle;
-import android.support.v7.widget.AppCompatSpinner;
+import androidx.appcompat.widget.AppCompatSpinner;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;

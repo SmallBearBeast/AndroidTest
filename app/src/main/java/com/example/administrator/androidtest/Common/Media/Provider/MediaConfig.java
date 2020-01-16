@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.Common.Media.Provider;
 
 import android.database.Cursor;
 import android.provider.MediaStore;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 import com.example.administrator.androidtest.Common.Media.Info.AudioInfo;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.Common.Media.Info.ImageInfo;

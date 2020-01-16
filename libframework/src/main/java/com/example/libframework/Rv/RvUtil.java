@@ -1,12 +1,18 @@
 package com.example.libframework.Rv;
 
 import android.content.Context;
-import android.support.v7.widget.*;
+import androidx.appcompat.widget.*;
 import android.util.Log;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.example.libbase.Util.NumberUtil;
 
-import static android.support.v7.widget.LinearSmoothScroller.SNAP_TO_START;
+import static androidx.recyclerview.widget.LinearSmoothScroller.SNAP_TO_START;
 
 //1.RecyclerView.getChildCount()与LayoutManager.getChildCount()输出相同表示ViewGroup里面的View数目，也就是attachView数目，一般不改写getExtraLayoutSpace也就是可见数目。
 //2.LayoutManager.getItemCount()表示所有item数目。

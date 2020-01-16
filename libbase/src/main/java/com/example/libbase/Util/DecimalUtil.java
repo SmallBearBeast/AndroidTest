@@ -1,6 +1,6 @@
 package com.example.libbase.Util;
 
-import android.support.annotation.StringDef;
+import androidx.annotation.StringDef;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

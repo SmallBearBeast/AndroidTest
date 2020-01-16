@@ -5,15 +5,15 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.Nullable;
-import android.support.v4.content.ContextCompat;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
 import com.example.administrator.androidtest.R;
 
 // TODO: 2018/12/21 textview 周围drawable点击控件 
-public class CompoundDrawableTextView extends android.support.v7.widget.AppCompatTextView {
+public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompatTextView {
     private static final int DRAWABLE_NONE = -1;
     private static final int DRAWABLE_COUNT = 4;
     public static final int DRAWABLE_LEFT = 1;

@@ -2,8 +2,13 @@ package com.example.administrator.androidtest.Test.RvActTest;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.widget.*;
+import androidx.appcompat.widget.*;
 import android.view.View;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libframework.ActAndFrag.ComponentAct;

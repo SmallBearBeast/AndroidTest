@@ -1,6 +1,6 @@
 package com.example.libframework.Component;
 
-import android.arch.lifecycle.GenericLifecycleObserver;
+import androidx.lifecycle.GenericLifecycleObserver;
 
 public interface IComponent extends GenericLifecycleObserver {
 

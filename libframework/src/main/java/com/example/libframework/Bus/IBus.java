@@ -1,8 +1,8 @@
 package com.example.libframework.Bus;
 
-import android.arch.lifecycle.GenericLifecycleObserver;
+import androidx.lifecycle.GenericLifecycleObserver;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.example.libframework.Receiver;
 
-import android.arch.lifecycle.Lifecycle;
-import android.arch.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;

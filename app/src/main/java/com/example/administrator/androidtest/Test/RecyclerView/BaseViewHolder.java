@@ -1,6 +1,6 @@
 package com.example.administrator.androidtest.Test.RecyclerView;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 
 public class BaseViewHolder<T> extends RecyclerView.ViewHolder{

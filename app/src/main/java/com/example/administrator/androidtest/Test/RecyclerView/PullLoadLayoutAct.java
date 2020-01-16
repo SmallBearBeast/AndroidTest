@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.RecyclerView;
 
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.administrator.androidtest.R;
 import com.example.libframework.ActAndFrag.ComponentAct;

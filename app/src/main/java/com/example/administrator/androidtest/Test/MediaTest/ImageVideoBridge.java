@@ -1,8 +1,8 @@
 package com.example.administrator.androidtest.Test.MediaTest;
 
 import android.database.Cursor;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.GridLayoutManager;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;

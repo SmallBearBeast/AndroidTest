@@ -1,9 +1,9 @@
 package com.example.administrator.androidtest.Test.NestedScrolling;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.view.ViewCompat;
-import android.support.v4.widget.NestedScrollView;
+import androidx.annotation.Nullable;
+import androidx.core.view.ViewCompat;
+import androidx.core.widget.NestedScrollView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;

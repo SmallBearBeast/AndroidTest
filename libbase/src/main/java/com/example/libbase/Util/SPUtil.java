@@ -2,7 +2,7 @@ package com.example.libbase.Util;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.annotation.StringDef;
+import androidx.annotation.StringDef;
 
 /**
  * 适用于存储数据量小，不频繁存储的条件下。

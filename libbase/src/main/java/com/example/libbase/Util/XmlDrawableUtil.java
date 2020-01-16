@@ -3,8 +3,8 @@ package com.example.libbase.Util;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.view.ViewCompat;
 import android.view.View;
 
 
