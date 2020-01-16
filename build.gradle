@@ -8,7 +8,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.1.3'
+        classpath 'com.android.tools.build:gradle:3.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.novoda:bintray-release:0.8.1'
         //使用沪江封装好的gradle插件，能自动倒入aspectj依赖，具有一定的编译检查错误能力，能处理好kt java混合开发情况。
