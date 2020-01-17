@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.libframework.BuildConfig;
+import com.example.libframework.Component.FragLifeDebug;
 import com.example.libframework.Page.IPage;
 import com.example.libframework.Page.Page;
 import com.example.libframework.Page.PageProvider;
@@ -19,7 +20,7 @@ import com.example.liblog.SLog;
 import java.util.List;
 
 public abstract class BaseFrag extends Fragment implements IPage {
-    private static String TAG = "BaseFrag";
+    protected String TAG = getClass().getSimpleName();
     //Preserve the position of the last visible sub fragment.
     private int mLastVisibleFragPos = 0;
     private boolean mIsDoneSetUserVisibleHint;
@@ -39,9 +40,9 @@ public abstract class BaseFrag extends Fragment implements IPage {
         if (getParentFragment() instanceof BaseFrag) {
             mBaseFrag = (BaseFrag) getParentFragment();
         }
-//        if (BuildConfig.DEBUG) {
-//
-//        }
+        if (BuildConfig.DEBUG) {
+            getLifecycle().addObserver(new FragLifeDebug(getClass().getSimpleName()));
+        }
         Intent intent = mBaseAct.getIntent();
         if (intent != null) {
             handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
