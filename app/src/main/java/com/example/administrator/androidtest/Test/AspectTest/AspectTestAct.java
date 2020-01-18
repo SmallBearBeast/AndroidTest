@@ -6,7 +6,7 @@ import com.example.libaspectj.Annotation.AsClick;
 import com.example.libaspectj.Annotation.Thread.AsThread;
 import com.example.libaspectj.Annotation.AsTime;
 import com.example.libaspectj.Annotation.Thread.ThreadMode;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class AspectTestAct extends ComponentAct {
     @Override

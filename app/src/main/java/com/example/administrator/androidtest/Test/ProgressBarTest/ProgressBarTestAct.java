@@ -2,8 +2,11 @@ package com.example.administrator.androidtest.Test.ProgressBarTest;
 
 import android.os.Bundle;
 import android.widget.ProgressBar;
+
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class ProgressBarTestAct extends ComponentAct {
     private ProgressBar mProgressBar;
@@ -16,8 +19,8 @@ public class ProgressBarTestAct extends ComponentAct {
     // TODO: 2019/4/23 progressbar 
     // TODO: 2019/4/23 pageradapter回调函数解析
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 //        mProgressBar = findViewById(R.id.progress_bar);
 //        View view = findViewById(R.id.v_rotate);
 //        Animation animation = view.getAnimation();

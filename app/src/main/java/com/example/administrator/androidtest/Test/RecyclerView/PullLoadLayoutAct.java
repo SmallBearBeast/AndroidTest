@@ -1,16 +1,19 @@
 package com.example.administrator.androidtest.Test.RecyclerView;
 
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class PullLoadLayoutAct extends ComponentAct {
     private RecyclerView rvUser;
+
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 //        rvUser = findViewById(R.id.rv_user);
 //        rvUser.setLayoutManager(new LinearLayoutManager(this));
 //        rvUser.setItemAnimator(new DefaultItemAnimator());

@@ -2,16 +2,16 @@ package com.example.administrator.androidtest.Test.RvActTest;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import androidx.appcompat.widget.*;
 import android.view.View;
 
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Rv.DataManager;
 import com.example.libframework.Rv.Notify;
 import com.example.libframework.Rv.RvListener;
@@ -36,8 +36,8 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mRvTest = findViewById(R.id.rv_test);
         //解决notifychange刷新问题
 //        ((SimpleItemAnimator) mRvTest.getItemAnimator()).setSupportsChangeAnimations(false);

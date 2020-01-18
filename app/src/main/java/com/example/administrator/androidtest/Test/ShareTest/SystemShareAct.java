@@ -4,8 +4,11 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.View;
 
@@ -14,7 +17,7 @@ import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Share.IntentShare;
 import com.example.administrator.androidtest.Share.ShareUtil;
 import com.example.libbase.Util.CollectionUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 import java.util.ArrayList;
 
@@ -29,14 +32,15 @@ public class SystemShareAct extends ComponentAct {
     private String mSharePackageName = IntentShare.PACKAGE_ANYSHARE;
 
     RecyclerView mRvSystemShare;
+
     @Override
     protected int layoutId() {
         return R.layout.act_system_share;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mRvSystemShare = findViewById(R.id.rv_system_share);
         mRvSystemShare.setLayoutManager(new LinearLayoutManager(this));
 //        mRvSystemShare.setAdapter(new MyAdapter());
@@ -46,28 +50,28 @@ public class SystemShareAct extends ComponentAct {
     }
 
 
-    private void choosePhoto(int requestCode){
+    private void choosePhoto(int requestCode) {
         Intent it = new Intent(Intent.ACTION_PICK, null);
         // 如果限制上传到服务器的图片类型时可以直接写如："image/jpeg 、 image/png等的类型" 所有类型则写 "image/*"
         it.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
         startActivityForResult(it, requestCode);
     }
 
-    private void chooseVideo(int requestCode){
+    private void chooseVideo(int requestCode) {
         Intent it = new Intent(Intent.ACTION_PICK, null);
         it.setDataAndType(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, "video/*");
         startActivityForResult(it, requestCode);
     }
 
-    private void chooseFile(int requestCode){
+    private void chooseFile(int requestCode) {
         Intent it = new Intent(Intent.ACTION_GET_CONTENT, null);
         it.setType("*/*");
         startActivityForResult(it, requestCode);
     }
 
 
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.tv_1:
                 IntentShare intentShare = new IntentShare().setText("Hello World");
                 ShareUtil.shareTextToOther(this, intentShare);
@@ -85,19 +89,20 @@ public class SystemShareAct extends ComponentAct {
                 break;
         }
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode){
+        switch (requestCode) {
             case REQUEST_IMAGE_OTHER:
             case REQUEST_IMAGE:
-                if(data != null){
+                if (data != null) {
                     Uri imageUri = data.getData();
-                    if(imageUri != null){
+                    if (imageUri != null) {
                         IntentShare intentShare = new IntentShare("Hello World", imageUri, null);
-                        if(requestCode == REQUEST_IMAGE){
+                        if (requestCode == REQUEST_IMAGE) {
                             ShareUtil.shareImageTextToApp(this, intentShare, mSharePackageName, null);
-                        }else {
+                        } else {
                             ShareUtil.shareImageTextToOther(this, intentShare);
                         }
                     }
@@ -106,13 +111,13 @@ public class SystemShareAct extends ComponentAct {
 
             case REQUEST_VIDEO_OTHER:
             case REQUEST_VIDEO:
-                if(data != null){
+                if (data != null) {
                     Uri videoUri = data.getData();
-                    if(videoUri != null){
+                    if (videoUri != null) {
                         IntentShare intentShare = new IntentShare("Hello World", null, videoUri);
-                        if(requestCode == REQUEST_VIDEO){
+                        if (requestCode == REQUEST_VIDEO) {
                             ShareUtil.shareVideoTextToApp(this, intentShare, mSharePackageName, null);
-                        }else {
+                        } else {
                             ShareUtil.shareVideoTextToOther(this, intentShare);
                         }
                     }
@@ -121,16 +126,16 @@ public class SystemShareAct extends ComponentAct {
 
             case REQUEST_FILE:
             case REQUEST_FILE_OTHER:
-                if(data != null){
+                if (data != null) {
                     Uri fileUri = data.getData();
-                    if(fileUri != null){
+                    if (fileUri != null) {
                         mFileUriList.add(fileUri);
-                        if(requestCode == REQUEST_FILE){
-                            if(mFileUriList.size() > 1) {
+                        if (requestCode == REQUEST_FILE) {
+                            if (mFileUriList.size() > 1) {
                                 IntentShare intentShare = new IntentShare("Hello World", null, fileUri).setFileUriList(mFileUriList);
                                 ShareUtil.shareMulFileTextToApp(this, intentShare, mSharePackageName);
                             }
-                        }else {
+                        } else {
 //                            ShareUtil.shareVideoTextToOther(this, intentShare);
                         }
                     }

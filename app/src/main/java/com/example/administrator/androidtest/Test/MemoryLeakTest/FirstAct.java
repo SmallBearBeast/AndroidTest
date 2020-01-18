@@ -4,7 +4,7 @@ import android.os.Handler;
 import android.view.View;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 
 public class FirstAct extends ComponentAct {

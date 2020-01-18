@@ -1,14 +1,13 @@
 package com.example.administrator.androidtest.Test.ComponentTest;
 
 import android.os.Bundle;
-import android.view.View;
 
-import com.example.libframework.ActAndFrag.ComponentAct;
-import com.example.libframework.Component.ActComponent;
-import com.example.libframework.Component.ViewSet;
+import androidx.annotation.Nullable;
+
+import com.example.libframework.CoreUI.ComponentAct;
 
 
-public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActComponent, ComponentTestAct.MainViewSet> {
+public class ComponentTestAct extends ComponentAct {
 
     @Override
     protected int layoutId() {
@@ -16,29 +15,7 @@ public class ComponentTestAct extends ComponentAct<ComponentTestAct.MainActCompo
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
-    }
-
-    static class MainActComponent extends ActComponent<MainViewSet> {
-
-    }
-
-    static class MainViewSet extends ViewSet {
-
-        @Override
-        protected void initView(View contentView) {
-
-        }
-    }
-
-    @Override
-    protected MainActComponent createComponent() {
-        return new MainActComponent();
-    }
-
-    @Override
-    protected MainViewSet createViewSet() {
-        return new MainViewSet();
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 }

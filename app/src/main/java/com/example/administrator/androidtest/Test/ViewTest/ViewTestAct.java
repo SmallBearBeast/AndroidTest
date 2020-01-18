@@ -2,15 +2,16 @@ package com.example.administrator.androidtest.Test.ViewTest;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class ViewTestAct extends ComponentAct {
     @Override
@@ -19,8 +20,8 @@ public class ViewTestAct extends ComponentAct {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final TextView tvTest_1 = findViewById(R.id.tv_test_1);
         tvTest_1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,3 +45,4 @@ public class ViewTestAct extends ComponentAct {
         return Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false);
     }
 }
+

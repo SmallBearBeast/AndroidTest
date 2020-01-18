@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.WidgetTest;
 
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class DropTextViewAct extends ComponentAct {
     @Override

@@ -4,10 +4,12 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class FullTextViewAct extends ComponentAct {
     private FullTextView mFtvText;
@@ -18,8 +20,8 @@ public class FullTextViewAct extends ComponentAct {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mFtvText = findViewById(R.id.ftv_text);
         TextOpt bgOpt = TextOpt.bgOpt(0, 5, Color.RED);
         TextOpt fgOpt = TextOpt.fgOpt(5, mFtvText.length(), Color.BLUE);

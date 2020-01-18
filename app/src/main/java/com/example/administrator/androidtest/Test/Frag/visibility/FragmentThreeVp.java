@@ -1,13 +1,19 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentFrag;
+import com.example.libframework.CoreUI.ComponentFrag;
 import com.example.libframework.Page.IPage;
 
 import java.util.ArrayList;
@@ -23,12 +29,15 @@ public class FragmentThreeVp extends ComponentFrag {
         return R.layout.frag_vp;
     }
 
+    @Nullable
     @Override
-    public void init(Bundle savedInstanceState) {
-        vpContainer = mContentView.findViewById(R.id.vp_container);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        vpContainer = findViewById(R.id.vp_container);
         myAdapter = new MyAdapter(getChildFragmentManager());
         vpContainer.setAdapter(myAdapter);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
+        return mContentView;
     }
 
     @Override

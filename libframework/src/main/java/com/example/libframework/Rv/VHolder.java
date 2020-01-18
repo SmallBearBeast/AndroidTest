@@ -9,7 +9,7 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
-import com.example.libframework.Component.IComponent;
+import com.example.libframework.CoreUI.IComponent;
 
 public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent, View.OnClickListener, GenericLifecycleObserver {
     protected String TAG = getClass().getSimpleName();

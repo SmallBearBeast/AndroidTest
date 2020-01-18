@@ -6,15 +6,18 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.FileUtil;
 import com.example.libbase.Util.NetWorkUtil;
 import com.example.libbase.Util.ToastUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libokhttp.OkCallback;
 import com.example.libokhttp.OkDownloadCallback;
 import com.example.libokhttp.OkHelper;
+
 import okhttp3.Headers;
 
 import java.io.File;
@@ -24,20 +27,21 @@ public class OkHttpAct extends ComponentAct {
 
     private static final String TAG = "OkHttpAct";
     private TextView mTvContent;
+
     @Override
     protected int layoutId() {
         return R.layout.act_okhttp;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mTvContent = findViewById(R.id.tv_content);
     }
 
 
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.bt_get:
 //                testGet_1("https://www.baidu.com/");
 //                testGet_2("https://www.mxnzp.com/api/holiday/single/20181121");
@@ -64,9 +68,9 @@ public class OkHttpAct extends ComponentAct {
         }
     }
 
-    private void testGet_3(String url){
-        if(NetWorkUtil.isConnected()){
-            OkHelper.getInstance().postMethod(url, new OkCallback<QrCodeBean>(QrCodeBean.class){
+    private void testGet_3(String url) {
+        if (NetWorkUtil.isConnected()) {
+            OkHelper.getInstance().postMethod(url, new OkCallback<QrCodeBean>(QrCodeBean.class) {
                 @Override
                 protected void handleErrCode(int errCode) {
                     super.handleErrCode(errCode);
@@ -83,14 +87,14 @@ public class OkHttpAct extends ComponentAct {
                     super.onFail();
                 }
             });
-        }else {
+        } else {
             ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
-    private void testGet_2(String url){
-        if(NetWorkUtil.isConnected()){
-            OkHelper.getInstance().postMethod(url, new OkCallback<DateInfoBean>(DateInfoBean.class){
+    private void testGet_2(String url) {
+        if (NetWorkUtil.isConnected()) {
+            OkHelper.getInstance().postMethod(url, new OkCallback<DateInfoBean>(DateInfoBean.class) {
                 @Override
                 protected void handleErrCode(int errCode) {
                     super.handleErrCode(errCode);
@@ -107,16 +111,15 @@ public class OkHttpAct extends ComponentAct {
                     super.onFail();
                 }
             });
-        }else {
+        } else {
             ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
 
-
-    private void testGet_1(String url){
-        if(NetWorkUtil.isConnected()){
-            OkHelper.getInstance().getMethod(url, new OkCallback<String>(String.class){
+    private void testGet_1(String url) {
+        if (NetWorkUtil.isConnected()) {
+            OkHelper.getInstance().getMethod(url, new OkCallback<String>(String.class) {
                 @Override
                 protected void handleErrCode(int errCode) {
                     super.handleErrCode(errCode);
@@ -133,13 +136,13 @@ public class OkHttpAct extends ComponentAct {
                     super.onFail();
                 }
             });
-        }else {
+        } else {
             ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
-    private void testPost_1(String url, Map<String, String> params){
-        if(NetWorkUtil.isConnected()){
+    private void testPost_1(String url, Map<String, String> params) {
+        if (NetWorkUtil.isConnected()) {
             Map<String, String> headerParams = CollectionUtil.asMap(new String[]{"hello", "world"}, new String[]{"123", "456"});
 
             OkHelper.getInstance().postMethod(url, params, Headers.of(headerParams), new OkCallback<QrCodeBean>(QrCodeBean.class) {
@@ -158,18 +161,18 @@ public class OkHttpAct extends ComponentAct {
                     super.onFail();
                 }
             });
-        }else {
+        } else {
             ToastUtil.showToast("网络不好，请检查网络");
         }
     }
 
-    private void testDownLoad_1(String url){
+    private void testDownLoad_1(String url) {
         final String path = Environment.getExternalStorageDirectory().getPath() + File.separator + "hello" + "." + FileUtil.getSuffix(url);
         final String tempPath = Environment.getExternalStorageDirectory().getPath() + File.separator + "hello_temp" + "." + FileUtil.getSuffix(url);
 //        if(FileUtil.deleteFile(path)){
 //            Log.d(TAG, "testDownLoad_1(): " + "delete file");
 //        }
-        if(NetWorkUtil.isConnected()){
+        if (NetWorkUtil.isConnected()) {
             OkHelper.getInstance().downloadFile(url, tempPath, new OkDownloadCallback() {
                 @Override
                 public void onSuccess() {
@@ -188,7 +191,7 @@ public class OkHttpAct extends ComponentAct {
                     Log.d(TAG, "testDownLoad_1(): progress = " + progress);
                 }
             });
-        }else {
+        } else {
             ToastUtil.showToast("网络不好，请检查网络");
         }
     }

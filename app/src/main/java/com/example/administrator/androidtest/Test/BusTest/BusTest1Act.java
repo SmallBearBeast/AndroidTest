@@ -1,13 +1,16 @@
 package com.example.administrator.androidtest.Test.BusTest;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
-import com.example.libframework.Bus.BusProvider;
+import com.example.libframework.CoreUI.ComponentAct;
+import com.example.libframework.Bus.Bus;
 import com.example.libframework.Bus.IBus;
 
 import java.util.ArrayList;
@@ -22,16 +25,16 @@ public class BusTest1Act extends ComponentAct {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mTvTest = findViewById(R.id.tv_test);
-        BusProvider.getLocal().register(mBusEvent);
+        Bus.get().register(mBusEvent);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        BusProvider.getLocal().unregister(mBusEvent);
+        Bus.get().unregister(mBusEvent);
 
     }
 
@@ -52,7 +55,7 @@ public class BusTest1Act extends ComponentAct {
         @Override
         protected void onStickEvent(String event, @Nullable Bundle extras) {
             Log.d(TAG, "onStickEvent: event = " + event + " extras = " + extras);
-            if(event.equals("Stick")){
+            if (event.equals("Stick")) {
                 mTvTest.setText("Stick");
             }
         }

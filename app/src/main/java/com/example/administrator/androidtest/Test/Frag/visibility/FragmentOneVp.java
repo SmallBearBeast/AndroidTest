@@ -1,13 +1,15 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentFrag;
+import com.example.libframework.CoreUI.ComponentFrag;
 import com.example.libframework.Page.IPage;
 
 import java.util.ArrayList;
@@ -24,7 +26,8 @@ public class FragmentOneVp extends ComponentFrag {
     }
 
     @Override
-    public void init(Bundle savedInstanceState) {
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         vpContainer = mContentView.findViewById(R.id.vp_container);
         myAdapter = new MyAdapter(getChildFragmentManager());
         vpContainer.setAdapter(myAdapter);

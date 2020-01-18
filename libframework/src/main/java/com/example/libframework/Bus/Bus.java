@@ -1,13 +1,11 @@
 package com.example.libframework.Bus;
 
-public class BusProvider {
-
-    private static IBus sBus;
+public class Bus {
     private static IBus sLocalBus;
 
-    public static IBus getLocal() {
+    public static IBus get() {
         if (sLocalBus == null) {
-            synchronized (BusProvider.class) {
+            synchronized (Bus.class) {
                 if (sLocalBus == null) {
                     sLocalBus = new LocalBus();
                 }

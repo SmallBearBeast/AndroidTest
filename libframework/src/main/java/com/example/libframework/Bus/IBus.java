@@ -1,12 +1,11 @@
 package com.example.libframework.Bus;
 
-import androidx.lifecycle.GenericLifecycleObserver;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import java.util.List;
 
-public interface IBus extends GenericLifecycleObserver {
+public interface IBus {
     void send(Event event);
 
     void sendSync(Event event);

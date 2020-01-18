@@ -9,7 +9,7 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import com.example.libbase.Util.EnvUtil;
 import com.example.libbase.Util.NetWorkUtil;
-import com.example.libframework.Component.IComponent;
+import com.example.libframework.CoreUI.IComponent;
 
 public class NetReceiver extends BroadcastReceiver implements IComponent {
 

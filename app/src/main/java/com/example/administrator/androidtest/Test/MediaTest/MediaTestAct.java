@@ -6,8 +6,11 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import android.os.Environment;
+
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.Common.Media.Info.DirInfo;
 import com.example.administrator.androidtest.Common.Media.Provider.MediaConfig;
@@ -15,7 +18,7 @@ import com.example.administrator.androidtest.Common.Media.Provider.MediaProvider
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
 import com.example.libbase.Util.TimeUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Rv.DataManager;
 import com.example.libframework.Rv.RvDivider;
 import com.example.libframework.Rv.VHAdapter;
@@ -29,14 +32,15 @@ public class MediaTestAct extends ComponentAct {
     private static final int CONFIG_1 = 1;
     private static final int CONFIG_2 = 2;
     private static final int CONFIG_3 = 300;
+
     @Override
     protected int layoutId() {
         return R.layout.act_media_provider;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         int divider = DensityUtil.dp2Px(3);
         RecyclerView rvMedia = findViewById(R.id.rv_media);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);

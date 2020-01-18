@@ -1,6 +1,7 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -10,7 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Page.IPage;
 
 import java.util.ArrayList;
@@ -27,7 +28,8 @@ public class VpFragVisibilityAct extends ComponentAct {
     private TextView mTvPage;
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         vpContainer = findViewById(R.id.vp_container);
         tvFragVisibility = findViewById(R.id.tv_frag_visibility);
         mTvPage = findViewById(R.id.tv_page);

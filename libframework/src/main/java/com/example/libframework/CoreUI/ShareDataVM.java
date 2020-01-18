@@ -1,4 +1,4 @@
-package com.example.libframework.ActAndFrag;
+package com.example.libframework.CoreUI;
 
 import androidx.lifecycle.ViewModel;
 

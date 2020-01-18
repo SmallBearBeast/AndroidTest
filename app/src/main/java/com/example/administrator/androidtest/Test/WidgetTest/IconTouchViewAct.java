@@ -5,11 +5,14 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libbase.Util.ViewUtil;
 import com.example.libbase.Util.XmlDrawableUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class IconTouchViewAct extends ComponentAct {
     private ImageView mIvTest_1;
@@ -18,14 +21,15 @@ public class IconTouchViewAct extends ComponentAct {
     private FrameLayout mFlTest_2;
     private TextView mTvTest_3;
     private FrameLayout mFlTest_3;
+
     @Override
     protected int layoutId() {
         return R.layout.act_icon_touch_view;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mIvTest_1 = findViewById(R.id.iv_test_1);
         mFlTest_1 = findViewById(R.id.fl_test_1);
         mIvTest_2 = findViewById(R.id.iv_test_2);

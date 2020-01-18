@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +16,7 @@ import android.widget.TextView;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Rv.VHAdapter;
 import com.example.libframework.Rv.VHBridge;
 import com.example.libframework.Rv.VHolder;
@@ -32,8 +33,8 @@ public class RvVpRvTestAct extends ComponentAct {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mRvTest = findViewById(R.id.rv_test);
         mRvTest.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new VHAdapter();

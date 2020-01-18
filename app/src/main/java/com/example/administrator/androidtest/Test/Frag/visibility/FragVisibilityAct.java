@@ -2,8 +2,11 @@ package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Page.IPage;
 
 
@@ -19,12 +22,12 @@ public class FragVisibilityAct extends ComponentAct {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         fragmentOne = new FragmentOne();
         fragmentTwo = new FragmentTwo();
         fragmentThree = new FragmentThree();
     }
-
 
     public void onClick(View view) {
         switch (view.getId()) {

@@ -1,4 +1,4 @@
-package com.example.libframework.ActAndFrag;
+package com.example.libframework.CoreUI;
 
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.libframework.BuildConfig;
-import com.example.libframework.Component.ActLifeDebug;
 import com.example.libframework.Page.IPage;
 import com.example.libframework.Page.Page;
 import com.example.libframework.Page.PageProvider;
@@ -40,7 +39,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
             getLifecycle().addObserver(new ActLifeDebug(TAG));
         }
         setContentView(layoutId());
-        init(savedInstanceState);
     }
 
     @Override
@@ -174,8 +172,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
      **/
 
     protected abstract int layoutId();
-
-    protected abstract void init(Bundle savedInstanceState);
 
     protected void handleIntent(Intent intent, Bundle bundle) {
 

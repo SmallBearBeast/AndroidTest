@@ -8,9 +8,11 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.XmlDrawableUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class XmlDrawableAct extends ComponentAct {
     private ImageView mIv;
@@ -20,14 +22,15 @@ public class XmlDrawableAct extends ComponentAct {
     private TextView mTv_4;
     private ToggleButton mTb_5;
     private ToggleButton mTb_6;
+
     @Override
     protected int layoutId() {
         return R.layout.act_xml_drawable;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mIv = findViewById(R.id.iv);
         mTv_1 = findViewById(R.id.tv_1);
         mTv_2 = findViewById(R.id.tv_2);

@@ -1,9 +1,8 @@
 package com.example.administrator.androidtest.Test.MotionActTest;
 
-import android.util.Log;
 import android.view.MotionEvent;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.liblog.SLog;
 
 // TODO: 2019-11-12 diff getActionIndex between getPointerId

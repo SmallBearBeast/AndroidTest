@@ -7,9 +7,12 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.webkit.*;
+
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.AppUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class WebViewTestAct extends ComponentAct {
     private static final String TAG = "WebViewTestAct";
@@ -21,8 +24,8 @@ public class WebViewTestAct extends ComponentAct {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mWebView = findViewById(R.id.wv_browser);
         initWebView();
         initJsCallback();

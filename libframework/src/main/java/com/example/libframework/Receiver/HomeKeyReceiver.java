@@ -9,7 +9,7 @@ import android.content.IntentFilter;
 import android.text.TextUtils;
 
 import com.example.libbase.Util.EnvUtil;
-import com.example.libframework.Component.IComponent;
+import com.example.libframework.CoreUI.IComponent;
 
 public class HomeKeyReceiver extends BroadcastReceiver implements IComponent {
     private static final String REASON = "reason";

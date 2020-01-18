@@ -1,4 +1,4 @@
-package com.example.libframework.Component;
+package com.example.libframework.CoreUI;
 
 import androidx.lifecycle.GenericLifecycleObserver;
 import androidx.lifecycle.Lifecycle;

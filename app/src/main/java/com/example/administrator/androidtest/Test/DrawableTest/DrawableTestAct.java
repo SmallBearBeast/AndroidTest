@@ -7,22 +7,26 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class DrawableTestAct extends ComponentAct {
     private static final String TAG = "DrawableTestAct";
     private View mVTest_1;
     private View mVTest_2;
     private View mVTest_4;
+
     @Override
     protected int layoutId() {
         return R.layout.act_drawable_test;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         new BitmapDrawable();
         mVTest_1 = findViewById(R.id.v_test_1);
         mVTest_2 = findViewById(R.id.v_test_2);

@@ -1,17 +1,16 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
-import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import androidx.lifecycle.GenericLifecycleObserver;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.ViewModelTest.LifeCycleTestObserver;
-import com.example.libframework.ActAndFrag.ComponentFrag;
-import com.example.libframework.Component.FragLifeDebug;
+import com.example.libframework.CoreUI.ComponentFrag;
+import com.example.libframework.CoreUI.FragComponent;
 import com.example.libframework.Page.IPage;
 import com.example.liblog.SLog;
 
@@ -23,12 +22,51 @@ public class FragmentSeven extends ComponentFrag {
     }
 
     @Override
-    public void init(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+        regComponent(new Component_1());
+        regComponent(new Component_2());
+    }
 
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
     public int pageId() {
         return IPage.FragmentSeven;
+    }
+
+    static class Component_1 extends FragComponent {
+        private static final String TAG = "Component_1";
+        @Override
+        public void onCreate() {
+            SLog.d(TAG, "onCreate: ");
+            super.onCreate();
+        }
+
+        @Override
+        public void onDestroy() {
+            SLog.d(TAG, "onDestroy: ");
+            super.onDestroy();
+        }
+    }
+
+    static class Component_2 extends FragComponent {
+        private static final String TAG = "Component_2";
+        @Override
+        public void onCreate() {
+            SLog.d(TAG, "onCreate: ");
+            super.onCreate();
+        }
+
+        @Override
+        public void onDestroy() {
+            SLog.d(TAG, "onDestroy: ");
+            super.onDestroy();
+        }
     }
 }

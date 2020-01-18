@@ -4,7 +4,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.View;
-import com.example.libframework.ActAndFrag.ComponentAct;
+
+import androidx.annotation.Nullable;
+
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libfresco.FrescoUriTransfer;
 import com.example.libfresco.FrescoUtil;
 import com.example.libfresco.FrescoView;
@@ -32,8 +35,10 @@ public class FrescoTestAct extends ComponentAct {
     }
 
     private long mStartTime = 0L;
+
     @Override
-    protected void init(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mFvImage = findViewById(R.id.fv_image);
         ImageRequest request = FrescoUtil.requestBuilder(Uri.parse(TEST_URL_3), -1, -1, null).build();
         FrescoUtil.prefetchToDiskCache(request, Priority.HIGH);

@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.Test.MemoryLeakTest;
 
 import android.view.View;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 public class MemoryLeakTestAct extends ComponentAct {
     @Override

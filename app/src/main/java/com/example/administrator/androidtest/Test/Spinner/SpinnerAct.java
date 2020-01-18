@@ -2,7 +2,10 @@ package com.example.administrator.androidtest.Test.Spinner;
 
 import android.database.DataSetObserver;
 import android.os.Bundle;
+
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +15,7 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,22 +23,29 @@ import java.util.List;
 public class SpinnerAct extends ComponentAct {
     private static final String TAG = "SpinnerAct_TAG";
     AppCompatSpinner spinner;
+
     @Override
     protected int layoutId() {
         return R.layout.act_spinner;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         spinner = findViewById(R.id.sp_text);
         spinner.setAdapter(new MyAdapter());
     }
 
     private class MyAdapter implements SpinnerAdapter {
 
-        private List<String> mList = new ArrayList<String>(){{
-           add("星期一"); add("星期二"); add("星期三"); add("星期四"); add("星期五"); add("星期六");add("星期日");
+        private List<String> mList = new ArrayList<String>() {{
+            add("星期一");
+            add("星期二");
+            add("星期三");
+            add("星期四");
+            add("星期五");
+            add("星期六");
+            add("星期日");
         }};
 
 
@@ -73,8 +83,8 @@ public class SpinnerAct extends ComponentAct {
         public View getView(int position, View convertView, ViewGroup parent) {
             Log.d(TAG, "getView() called with: position = [" + position + "], convertView = [" + convertView + "], parent = [" + parent + "]");
             EditText editText = null;
-            if(convertView == null){
-                convertView =  LayoutInflater.from(parent.getContext()).inflate(R.layout.item_spinner_edit, parent, false);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_spinner_edit, parent, false);
             }
             editText = (EditText) convertView;
             editText.setText(mList.get(position));
@@ -101,8 +111,8 @@ public class SpinnerAct extends ComponentAct {
             Log.d(TAG, "getDropDownView() called with: position = [" + position + "], convertView = [" + convertView + "], parent = [" + parent + "]");
             Log.d(TAG, "getView() called with: position = [" + position + "], convertView = [" + convertView + "], parent = [" + parent + "]");
             TextView textView = null;
-            if(convertView == null){
-                convertView =  LayoutInflater.from(parent.getContext()).inflate(R.layout.item_spinner_text, parent, false);
+            if (convertView == null) {
+                convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_spinner_text, parent, false);
             }
             textView = (TextView) convertView;
             textView.setText(mList.get(position));

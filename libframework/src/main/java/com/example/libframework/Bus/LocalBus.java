@@ -1,7 +1,5 @@
 package com.example.libframework.Bus;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
 import android.util.SparseArray;
 import com.example.libbase.Util.MainThreadUtil;
 
@@ -98,12 +96,5 @@ public class LocalBus implements IBus {
     @Override
     public void unregister(OnBusEvent listener) {
         mObservers.remove(listener);
-    }
-
-    @Override
-    public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
-        if (event == Lifecycle.Event.ON_DESTROY) {
-            source.getLifecycle().removeObserver(this);
-        }
     }
 }

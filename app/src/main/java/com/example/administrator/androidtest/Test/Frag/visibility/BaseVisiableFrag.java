@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.administrator.androidtest.App;
-import com.example.libframework.ActAndFrag.ComponentFrag;
+import com.example.libframework.CoreUI.ComponentFrag;
 
 import java.util.List;
 import java.util.Map;

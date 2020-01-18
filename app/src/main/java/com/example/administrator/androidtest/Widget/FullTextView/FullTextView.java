@@ -67,7 +67,7 @@ public class FullTextView extends AppCompatTextView {
                 }
             }
         }, opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-//        setMovementMethod(LinkMovementMethod.getInstance());
+//        setMovementMethod(LinkMovementMethod.get());
         return this;
     }
 

@@ -1,9 +1,7 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
-import android.os.Bundle;
-
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentFrag;
+import com.example.libframework.CoreUI.ComponentFrag;
 import com.example.libframework.Page.IPage;
 
 public class FragmentOne extends ComponentFrag {
@@ -30,10 +28,6 @@ public class FragmentOne extends ComponentFrag {
         return R.layout.frag_text_1;
     }
 
-    @Override
-    public void init(Bundle savedInstanceState) {
-
-    }
 
     @Override
     public int pageId() {

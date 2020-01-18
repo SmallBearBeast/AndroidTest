@@ -3,7 +3,9 @@ package com.example.administrator.androidtest.Test.RtlViewPagerTest;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -11,9 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Wrapper.OnPageChangeListenerWrapper;
 import com.example.liblog.SLog;
 
@@ -28,8 +31,8 @@ public class RtlViewPagerTestAct extends ComponentAct {
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         final ViewPager rtlViewPager = findViewById(R.id.rvp_viewpager);
         rtlViewPager.setAdapter(new MyPagerAdapter(this));
         rtlViewPager.addOnPageChangeListener(new OnPageChangeListenerWrapper() {
@@ -52,11 +55,11 @@ public class RtlViewPagerTestAct extends ComponentAct {
     class MyPagerAdapter extends PagerAdapter {
 
         private LayoutInflater mInflater;
-        private int[] colors = new int[] {
+        private int[] colors = new int[]{
                 Color.RED, Color.GREEN, Color.BLUE,
                 Color.RED, Color.GREEN, Color.BLUE,
         };
-        private String[] strings = new String[] {
+        private String[] strings = new String[]{
                 getString(R.string.new_enter_sms_code, "\u200e+86 130 0205 8534\u200e"),
                 getString(R.string.back_confirm, "+86 130 0205 8534"),
                 getString(R.string.back_confirm, "\u200e+86 130 0205 8534\u200e"),

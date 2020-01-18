@@ -5,26 +5,30 @@ import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+
 import android.os.Bundle;
+
 import androidx.annotation.Nullable;
+
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
-import com.example.libframework.ActAndFrag.ComponentAct;
+import com.example.libframework.CoreUI.ComponentAct;
 import com.example.liblog.SLog;
 
 public class ViewModelTestAct extends ComponentAct {
     private UserVM mUserVM;
     private TextView mTextView;
+
     @Override
     protected int layoutId() {
         return R.layout.act_view_model;
     }
 
     @Override
-    protected void init(Bundle savedInstanceState) {
-        super.init(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         mTextView = findViewById(R.id.tv_content);
         mUserVM = ViewModelProviders.of(this).get(UserVM.class);
 

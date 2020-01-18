@@ -1,6 +1,10 @@
-package com.example.libframework.ActAndFrag;
+package com.example.libframework.CoreUI;
 
+import androidx.annotation.CallSuper;
+import androidx.annotation.IdRes;
 import androidx.lifecycle.ViewModelProviders;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
@@ -11,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.libframework.BuildConfig;
-import com.example.libframework.Component.FragLifeDebug;
 import com.example.libframework.Page.IPage;
 import com.example.libframework.Page.Page;
 import com.example.libframework.Page.PageProvider;
@@ -32,14 +35,21 @@ public abstract class BaseFrag extends Fragment implements IPage {
     protected View mContentView;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @CallSuper
+    public void onAttach(Context context) {
+        super.onAttach(context);
         if (getContext() instanceof BaseAct) {
             mBaseAct = (BaseAct) getContext();
         }
         if (getParentFragment() instanceof BaseFrag) {
             mBaseFrag = (BaseFrag) getParentFragment();
         }
+    }
+
+    @Override
+    @CallSuper
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         if (BuildConfig.DEBUG) {
             getLifecycle().addObserver(new FragLifeDebug(getClass().getSimpleName()));
         }
@@ -55,15 +65,14 @@ public abstract class BaseFrag extends Fragment implements IPage {
 
     @Nullable
     @Override
+    @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (mContentView == null) {
-            mContentView = inflater.inflate(layoutId(), container, false);
-            init(savedInstanceState);
-        }
+        mContentView = inflater.inflate(layoutId(), container, false);
         return mContentView;
     }
 
     @Override
+    @CallSuper
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
         mIsDoneSetUserVisibleHint = true;
@@ -95,6 +104,7 @@ public abstract class BaseFrag extends Fragment implements IPage {
      * The basis is that as long as the visibility of the parent fragment is false, the visibility of the child fragment is also false
      */
     @Override
+    @CallSuper
     public void onAttachFragment(Fragment childFragment) {
         boolean isVisibleToUser = getUserVisibleHint();
         if (!isVisibleToUser) {
@@ -105,6 +115,7 @@ public abstract class BaseFrag extends Fragment implements IPage {
     }
 
     @Override
+    @CallSuper
     public void onStart() {
         super.onStart();
         mIsDoneStart = true;
@@ -119,6 +130,7 @@ public abstract class BaseFrag extends Fragment implements IPage {
     }
 
     @Override
+    @CallSuper
     public void onHiddenChanged(boolean hidden) {
         if (!hidden) {
             PageProvider.getInstance().addPage(mBaseAct.getPage(), createPage());
@@ -126,14 +138,25 @@ public abstract class BaseFrag extends Fragment implements IPage {
     }
 
     @Override
+    @CallSuper
+    public void onDestroyView() {
+        super.onDestroyView();
+        mContentView = null;
+    }
+
+    @Override
+    @CallSuper
     public void onDestroy() {
         super.onDestroy();
         mPage = null;
-        if (BuildConfig.DEBUG) {
-            if (mBaseAct != null) {
-//                mBaseAct.getSupportFragmentManager().registerFragmentLifecycleCallbacks();
-            }
-        }
+    }
+
+    @Override
+    @CallSuper
+    public void onDetach() {
+        super.onDetach();
+        mBaseAct = null;
+        mBaseFrag = null;
     }
 
     private Page createPage() {
@@ -163,8 +186,6 @@ public abstract class BaseFrag extends Fragment implements IPage {
 
     protected abstract int layoutId();
 
-    protected abstract void init(Bundle savedInstanceState);
-
     /**
      * When the fragment is visible, the method is called.
      * Order: setUserVisibleHint->onAttachFragment->onStart
@@ -191,5 +212,12 @@ public abstract class BaseFrag extends Fragment implements IPage {
      */
     protected <V> V get(String key) {
         return ViewModelProviders.of(mBaseAct).get(ShareDataVM.class).get(key);
+    }
+
+    protected <T extends View> T findViewById(@IdRes int viewId) {
+        if (mContentView != null) {
+            return mContentView.findViewById(viewId);
+        }
+        return null;
     }
 }

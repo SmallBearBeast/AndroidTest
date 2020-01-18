@@ -1,4 +1,6 @@
-package com.example.libframework.Component;
+package com.example.libframework.CoreUI;
+
+import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
@@ -10,47 +12,48 @@ public abstract class BaseComponent<M, T extends ViewSet> implements IComponent 
     protected M mMain;
 
     public BaseComponent() {
+        mViewSet = createViewSet();
     }
 
-    public BaseComponent(T viewSet) {
-        mViewSet = viewSet;
+    void attachView(View contentView) {
+        if (mViewSet != null && contentView != null) {
+            mViewSet.attachView(contentView);
+        }
     }
 
-    public void attachViewSet(T viewSet) {
-        mViewSet = viewSet;
-    }
-
-    public void attachMain(M main) {
+    void attachMain(M main) {
         mMain = main;
     }
 
+    protected void onCreate() {
 
-    public void onCreate() {
+    }
+
+    protected void onStart() {
 
     }
 
 
-    public void onStart() {
+    protected void onResume() {
 
     }
 
 
-    public void onResume() {
+    protected void onPause() {
 
     }
 
 
-    public void onPause() {
+    protected void onStop() {
 
     }
 
-
-    public void onStop() {
-
+    protected T createViewSet() {
+        return null;
     }
 
     @CallSuper
-    public void onDestory() {
+    protected void onDestroy() {
         mMain = null;
         if (mViewSet != null) {
             mViewSet.clear();
@@ -71,7 +74,7 @@ public abstract class BaseComponent<M, T extends ViewSet> implements IComponent 
         } else if (event == Lifecycle.Event.ON_STOP) {
             onStop();
         } else if (event == Lifecycle.Event.ON_DESTROY) {
-            onDestory();
+            onDestroy();
         }
     }
 }
