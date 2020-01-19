@@ -1,27 +1,14 @@
 package com.example.libframework.Bus;
 
-import android.os.Bundle;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 
 public class Event {
-    public List<Integer> mStickIdList;
-    public String mEventName;
-    public Bundle mBundle;
+    String eventKey;
+    Object data;
 
-    public Event(String eventName, Bundle bundle, int ... stickIds) {
-        mEventName = eventName;
-        mBundle = bundle;
-        mStickIdList = new ArrayList<>();
-        for (int stickId : stickIds) {
-            mStickIdList.add(stickId);
-        }
-    }
-
-    public Event(String eventName, Bundle bundle) {
-        mEventName = eventName;
-        mBundle = bundle;
+    public Event(String key, Object value) {
+        eventKey = key;
+        data = value;
     }
 
     @Override
@@ -29,11 +16,19 @@ public class Event {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Event event = (Event) o;
-        return mEventName != null ? mEventName.equals(event.mEventName) : event.mEventName == null;
+        return Objects.equals(eventKey, event.eventKey);
     }
 
     @Override
     public int hashCode() {
-        return mEventName != null ? mEventName.hashCode() : 0;
+        return eventKey != null ? eventKey.hashCode() : 0;
+    }
+
+    @Override
+    public String toString() {
+        return "Event{" +
+                "eventKey='" + eventKey + '\'' +
+                ", data=" + data +
+                '}';
     }
 }

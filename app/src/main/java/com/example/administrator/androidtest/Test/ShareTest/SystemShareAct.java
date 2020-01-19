@@ -147,7 +147,7 @@ public class SystemShareAct extends ComponentAct {
     private ArrayList<Uri> mFileUriList = new ArrayList<>(4);
 //    class MyAdapter extends RecyclerView.VHAdapter<ShareHolder>{
 //
-//        private List<String> mData = new ArrayList<String>(){{
+//        private List<String> data = new ArrayList<String>(){{
 //            add(IntentShare.PACKAGE_FB); //不支持text，支持纯图，纯视频
 //            add(IntentShare.PACKAGE_IMO); //支持纯text，支持纯图，纯视频
 //            add(IntentShare.PACKAGE_LINE);//支持纯text，支持纯图，纯视频
@@ -169,12 +169,12 @@ public class SystemShareAct extends ComponentAct {
 //
 //        @Override
 //        public void onBindViewHolder(@NonNull ShareHolder holder, int position) {
-//            holder.bind(position, mData.get(position));
+//            holder.bind(position, data.get(position));
 //        }
 //
 //        @Override
 //        public int getItemCount() {
-//            return mData.size();
+//            return data.size();
 //        }
 //    }
 
@@ -197,17 +197,17 @@ public class SystemShareAct extends ComponentAct {
 //
 //        public void bind(int pos, String data){
 //            super.bind(pos, data);
-//            mTvShareName.setText(mData);
+//            mTvShareName.setText(data);
 //        }
 //
 //        @Override
 //        public void onClick(View v) {
-//            mSharePackageName = mData;
+//            mSharePackageName = data;
 //            IntentShare intentShare = new IntentShare();
 //            intentShare.setText("Hello World");
 //            switch (v.getId()){
 //                case R.id.tv_1:
-//                    ShareUtil.shareTextToApp(mActivity, intentShare, mData, null);
+//                    ShareUtil.shareTextToApp(mActivity, intentShare, data, null);
 //                    break;
 //
 //                case R.id.tv_2:
@@ -217,7 +217,7 @@ public class SystemShareAct extends ComponentAct {
 //                case R.id.tv_3:
 //                    File file = new File(Environment.getExternalStorageDirectory().getAbsoluteFile() + File.separator + "mymymymy.mp4");
 //                    intentShare.setVideoUri(FileProviderUtil.getUriForFile(file));
-//                    ShareUtil.shareVideoTextToApp(mActivity, intentShare, mData, null);
+//                    ShareUtil.shareVideoTextToApp(mActivity, intentShare, data, null);
 //                    break;
 //            }
 //        }

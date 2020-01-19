@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class BaseAct extends AppCompatActivity implements IPage {
-    public static BaseAct sAct = null;
     protected final String TAG = getClass().getSimpleName();
     private static final int Permission_Request_Code = 1;
     private Page mPage;
@@ -30,7 +29,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sAct = this;
         Intent intent = getIntent();
         if (intent != null) {
             handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
