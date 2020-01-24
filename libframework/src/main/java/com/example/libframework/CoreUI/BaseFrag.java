@@ -32,7 +32,6 @@ public abstract class BaseFrag extends Fragment implements IPage {
     private Page mPage;
     protected BaseAct mBaseAct;
     protected BaseFrag mBaseFrag;
-    protected View mContentView;
 
     @Override
     @CallSuper
@@ -67,8 +66,7 @@ public abstract class BaseFrag extends Fragment implements IPage {
     @Override
     @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        mContentView = inflater.inflate(layoutId(), container, false);
-        return mContentView;
+        return inflater.inflate(layoutId(), container, false);
     }
 
     @Override
@@ -135,13 +133,6 @@ public abstract class BaseFrag extends Fragment implements IPage {
         if (!hidden) {
             PageProvider.getInstance().addPage(mBaseAct.getPage(), createPage());
         }
-    }
-
-    @Override
-    @CallSuper
-    public void onDestroyView() {
-        super.onDestroyView();
-        mContentView = null;
     }
 
     @Override
@@ -215,9 +206,14 @@ public abstract class BaseFrag extends Fragment implements IPage {
     }
 
     protected <T extends View> T findViewById(@IdRes int viewId) {
-        if (mContentView != null) {
-            return mContentView.findViewById(viewId);
+        if (getView() != null) {
+            return getView().findViewById(viewId);
         }
         return null;
+    }
+
+    @Override
+    public int pageId() {
+        return 0;
     }
 }

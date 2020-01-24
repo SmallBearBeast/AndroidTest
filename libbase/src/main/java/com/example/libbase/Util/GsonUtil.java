@@ -6,20 +6,16 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.List;
 
+@SuppressWarnings("unchecked")
 public class GsonUtil {
     public static String toJson(Object jsonObj){
         return new GsonBuilder().serializeNulls().create().toJson(jsonObj);
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T toObj(String json, Class<T> clz){
-        if(clz == String.class)
+    static <T> T toObj(String json, TypeToken<T> token){
+        if(token.getType() == String.class) {
             return (T) json;
-        Gson gson = new GsonBuilder().serializeNulls().create();
-        return gson.fromJson(json, clz);
-    }
-
-    public static <T> List<T> toList(String json, TypeToken<List<T>> token){
+        }
         Gson gson = new GsonBuilder().serializeNulls().create();
         return gson.fromJson(json, token.getType());
     }

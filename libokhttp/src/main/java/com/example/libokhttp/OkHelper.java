@@ -1,10 +1,10 @@
 package com.example.libokhttp;
 
-import com.example.libbase.Util.FileUtil;
-import com.example.libbase.Util.IOUtil;
-import com.example.libbase.Util.SPUtil;
-import com.example.libbase.Util.StorageUtil;
+import android.app.Application;
+import android.util.Log;
+
 import com.example.liblog.SLog;
+
 import okhttp3.*;
 
 import java.io.File;
@@ -12,23 +12,37 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.util.Collections;
-import java.util.HashMap;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentSkipListSet;
 import java.util.concurrent.TimeUnit;
 
 public class OkHelper {
 
-    private static final String TAG = "OkHelper";
+    private static final String TAG = OkConstant.OK_LOG_TAG;
     private static final int TIME_OUT = 3;
     private static final int DOWNLOAD_BUFFER_COUNT = 1024 / 2;
     private OkHttpClient mOkClient;
     private OkRequsetProvider mOkRequestProvider;
-    private Map<String, Call> mRunningMap;
+    private Map<String, Call> mRunningCallMap;
+    private Map<String, Set<OkCallback>> mRunningCallbackMap;
+
+    private interface OkHttpClientInitListener {
+        OkHttpClient init();
+    }
+
+    public void setOkHttpClientInitListener(OkHttpClientInitListener okHttpClientInitListener) {
+        if (okHttpClientInitListener != null && okHttpClientInitListener.init() != null) {
+            mOkClient = okHttpClientInitListener.init();
+        }
+    }
 
     // TODO: 2019/4/14 超时参数理解
-    private static OkHttpClient initOkHttpClient() {
+    private static OkHttpClient defaultOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
                 .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
@@ -59,14 +73,19 @@ public class OkHelper {
         return builder.build();
     }
 
+    public static void init(Application application) {
+        InternalUtil.init(application);
+    }
+
     public static OkHelper getInstance() {
         return SingleTon.sInstance;
     }
 
     private OkHelper() {
         mOkRequestProvider = new OkRequsetProvider();
-        mOkClient = initOkHttpClient();
-        mRunningMap = new HashMap<>();
+        mOkClient = defaultOkHttpClient();
+        mRunningCallMap = new ConcurrentHashMap<>();
+        mRunningCallbackMap = new ConcurrentHashMap<>();
     }
 
     private static class SingleTon {
@@ -76,37 +95,39 @@ public class OkHelper {
     /**
      * 取消接口
      */
-    public void cancel(String url){
-        if(mRunningMap.containsKey(url)){
+    public void cancel(String url) {
+        if (mRunningCallMap.containsKey(url)) {
             SLog.d(TAG, "cancel: url = " + url);
-            mRunningMap.get(url).cancel();
-            mRunningMap.remove(url);
+            mRunningCallMap.get(url).cancel();
+            mRunningCallMap.remove(url);
+            mRunningCallbackMap.remove(url);
         }
     }
 
-    private void onDownloadFailure(OkDownloadCallback downloadCallback, int err){
+    private void onDownloadFailure(OkDownloadCallback downloadCallback, int err) {
         if (downloadCallback != null) {
             downloadCallback.onFailure(err);
         }
     }
 
-    private void onDownloadSuccess(OkDownloadCallback downloadCallback){
-        if(downloadCallback != null){
+    private void onDownloadSuccess(OkDownloadCallback downloadCallback) {
+        if (downloadCallback != null) {
             downloadCallback.onSuccess();
         }
     }
 
-    private void onDownloadProgress(OkDownloadCallback downloadCallback, int progress){
-        if(downloadCallback != null){
+    private void onDownloadProgress(OkDownloadCallback downloadCallback, int progress) {
+        if (downloadCallback != null) {
             downloadCallback.onProgress(progress);
         }
     }
 
     public void downloadFile(final String url, final String SAVE_PATH, final OkDownloadCallback DOWNLOAD_CALLBACK) {
         final String TOTAL_LENGTH_KEY = SAVE_PATH.hashCode() + "_total_length_key";
-        final int CONTENT_LENGTH = (int) SPUtil.getDataFromOther(TOTAL_LENGTH_KEY, 0);
+        final int CONTENT_LENGTH = (int) InternalUtil.getData(TOTAL_LENGTH_KEY, 0);
         if (CONTENT_LENGTH == 0) {
-            getMethod(url, new Callback() {
+            Call call = newCall(mOkRequestProvider.requestGet(url, null, null));
+            call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     SLog.d(TAG, "onFailure: with full request", e);
@@ -119,15 +140,15 @@ public class OkHelper {
                         SLog.d(TAG, "onResponse: successful with full request");
                         ResponseBody body = response.body();
                         if (body != null) {
-                            if (FileUtil.createFile(SAVE_PATH)) {
+                            if (InternalUtil.createFile(SAVE_PATH)) {
                                 InputStream ins = null;
                                 RandomAccessFile raf = null;
                                 try {
                                     ins = body.byteStream();
                                     raf = new RandomAccessFile(SAVE_PATH, "rw");
                                     int length = (int) body.contentLength();
-                                    SPUtil.putDataToOther(TOTAL_LENGTH_KEY, length);
-                                    if (!StorageUtil.hasSpace(length)) {
+                                    InternalUtil.putData(TOTAL_LENGTH_KEY, length);
+                                    if (!InternalUtil.hasSpace(length)) {
                                         onDownloadFailure(DOWNLOAD_CALLBACK, OkDownloadCallback.ERROR_STORAGE);
                                         return;
                                     }
@@ -142,17 +163,17 @@ public class OkHelper {
                                         onDownloadProgress(DOWNLOAD_CALLBACK, (int) (downloadingLength * 1f / length * 100));
                                         SLog.d(TAG, "onResponse: full request downloadingLength = " + downloadingLength);
                                     }
-                                    SPUtil.remove(SPUtil.OTHER, TOTAL_LENGTH_KEY);
+                                    InternalUtil.remove(TOTAL_LENGTH_KEY);
                                     onDownloadSuccess(DOWNLOAD_CALLBACK);
                                 } catch (Exception e) {
                                     SLog.d(TAG, "onFailure: with full request", e);
                                     onDownloadFailure(DOWNLOAD_CALLBACK, OkDownloadCallback.ERROR_FILE);
                                 } finally {
-                                    IOUtil.close(ins, raf);
+                                    InternalUtil.close(ins, raf);
                                 }
                             }
                         }
-                    }else {
+                    } else {
                         SLog.d(TAG, "onFailure: with full request");
                         onDownloadFailure(DOWNLOAD_CALLBACK, OkDownloadCallback.ERROR_IO);
                     }
@@ -160,12 +181,13 @@ public class OkHelper {
             });
         } else {
             final long DOWNLOAD_LENGTH = new File(SAVE_PATH).length();
-            if (!StorageUtil.hasSpace(CONTENT_LENGTH - DOWNLOAD_LENGTH)) {
+            if (!InternalUtil.hasSpace(CONTENT_LENGTH - DOWNLOAD_LENGTH)) {
                 onDownloadFailure(DOWNLOAD_CALLBACK, OkDownloadCallback.ERROR_STORAGE);
                 return;
             }
             Headers headers = Headers.of("RANGE", "bytes=" + DOWNLOAD_LENGTH + "-" + CONTENT_LENGTH);
-            getMethod(url, headers, new Callback() {
+            Call call = newCall(mOkRequestProvider.requestGet(url, null, headers));
+            call.enqueue(new Callback() {
                 @Override
                 public void onFailure(Call call, IOException e) {
                     SLog.d(TAG, "onFailure: with part request", e);
@@ -177,14 +199,14 @@ public class OkHelper {
                     if (response.isSuccessful()) {
                         SLog.d(TAG, "onResponse: successful with part request");
                         // TODO: 2019-06-11 是否支持范围请求
-                        if(!"bytes".equals(response.header("Access-Ranges"))){
+                        if (!"bytes".equals(response.header("Access-Ranges"))) {
                             downloadFile(url, SAVE_PATH, DOWNLOAD_CALLBACK);
-                            SPUtil.remove(SPUtil.OTHER, TOTAL_LENGTH_KEY);
+                            InternalUtil.remove(TOTAL_LENGTH_KEY);
                             return;
                         }
                         ResponseBody body = response.body();
                         if (body != null) {
-                            if (FileUtil.createFile(SAVE_PATH)) {
+                            if (InternalUtil.createFile(SAVE_PATH)) {
                                 InputStream ins = null;
                                 RandomAccessFile raf = null;
                                 try {
@@ -202,17 +224,17 @@ public class OkHelper {
                                         onDownloadProgress(DOWNLOAD_CALLBACK, (int) ((downloadingLength + DOWNLOAD_LENGTH) * 1f / CONTENT_LENGTH * 100));
                                         SLog.d(TAG, "onResponse: with part request downloadingLength = " + downloadingLength);
                                     }
-                                    SPUtil.remove(SPUtil.OTHER, TOTAL_LENGTH_KEY);
+                                    InternalUtil.remove(TOTAL_LENGTH_KEY);
                                     onDownloadSuccess(DOWNLOAD_CALLBACK);
                                 } catch (Exception e) {
                                     SLog.d(TAG, "onFailure: with part request", e);
                                     onDownloadFailure(DOWNLOAD_CALLBACK, OkDownloadCallback.ERROR_FILE);
                                 } finally {
-                                    IOUtil.close(ins, raf);
+                                    InternalUtil.close(ins, raf);
                                 }
                             }
                         }
-                    }else {
+                    } else {
                         SLog.d(TAG, "onFailure: with part request");
                         onDownloadFailure(DOWNLOAD_CALLBACK, OkDownloadCallback.ERROR_IO);
                     }
@@ -262,129 +284,181 @@ public class OkHelper {
         });
     }
 
-    private void doCall(Call call, final String URL, final Callback CALLBACK){
-        if(call.isCanceled()){
-            mRunningMap.remove(URL);
-            SLog.d(TAG, "doCall: isCanceled url = " + URL);
+    private void doCall(Call call, final String url, final Set<OkCallback> callbackSet) {
+        if (call.isCanceled()) {
+            SLog.d(TAG, "doCall: isCanceled url = " + url);
+            mRunningCallMap.remove(url);
+            mRunningCallbackMap.remove(url);
             return;
         }
-        if(call.isExecuted()){
-            SLog.d(TAG, "doCall: isExecuted url = " + URL);
+        if (call.isExecuted()) {
+            SLog.d(TAG, "doCall: isExecuted url = " + url);
             return;
         }
-        mRunningMap.put(URL, call);
+        mRunningCallMap.put(url, call);
         call.enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                CALLBACK.onFailure(call, e);
-                mRunningMap.remove(URL);
+                Log.e(TAG, "onFailure: stackTrace = " + Log.getStackTraceString(e));
+                mRunningCallMap.remove(url);
+                mRunningCallbackMap.remove(url);
+                for (OkCallback callback : callbackSet) {
+                    callback.onFail();
+                }
             }
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                CALLBACK.onResponse(call, response);
-                mRunningMap.remove(URL);
+                mRunningCallMap.remove(url);
+                mRunningCallbackMap.remove(url);
+                if (!response.isSuccessful()) {
+                    Log.e(TAG, "onResponse: resCode = " + response.code());
+                    dispatchErrCode(callbackSet, response.code());
+                    return;
+                }
+                ResponseBody body = response.body();
+                if (body != null) {
+                    try {
+                        dispatchContent(callbackSet, body.string());
+                    } catch (Exception e) {
+                        Log.e(TAG, "onResponse: stackTrace = " + Log.getStackTraceString(e));
+                    }
+                }
+            }
+
+            private void dispatchContent(Set<OkCallback> callbackSet, String content) {
+                for (OkCallback callback : callbackSet) {
+                    callback.handleContent(content);
+                }
+            }
+
+            private void dispatchErrCode(Set<OkCallback> callbackSet, int code) {
+                for (OkCallback callback : callbackSet) {
+                    callback.handleErrCode(code);
+                }
             }
         });
     }
 
-    public void getMethod(final String url, final Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void getMethod(final String url, final OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestGet(url, null, null));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void getMethod(String url, Headers headers, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void getMethod(String url, Headers headers, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestGet(url, null, headers));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void getMethod(String url, Map<String, String> params, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void getMethod(String url, Map<String, String> params, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestGet(url, params, null));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void getMethod(String url, Map<String, String> params, Headers headers, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void getMethod(String url, Map<String, String> params, Headers headers, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestGet(url, params, headers));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void postMethod(String url, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestPost(url, null, null));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, Headers headers, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void postMethod(String url, Headers headers, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestPost(url, null, headers));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, Map<String, String> params, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void postMethod(String url, Map<String, String> params, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestPost(url, params, null));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, Map<String, String> params, Headers headers, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void postMethod(String url, Map<String, String> params, Headers headers, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestPost(url, params, headers));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, String json, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
+    public void postMethod(String url, String json, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
             call = newCall(mOkRequestProvider.requestJsonPost(url, json, null));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, String json, Headers headers, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
-            call =  newCall(mOkRequestProvider.requestJsonPost(url, json, headers));
+    public void postMethod(String url, String json, Headers headers, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
+            call = newCall(mOkRequestProvider.requestJsonPost(url, json, headers));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, Object jsonObj, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
-            call =  newCall(mOkRequestProvider.requestJsonPost(url, jsonObj, null));
+    public void postMethod(String url, Object jsonObj, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
+            call = newCall(mOkRequestProvider.requestJsonPost(url, jsonObj, null));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
-    public void postMethod(String url, Object jsonObj, Headers headers, Callback callback) {
-        Call call = mRunningMap.get(url);
-        if(call == null){
-            call =  newCall(mOkRequestProvider.requestJsonPost(url, jsonObj, headers));
+    public void postMethod(String url, Object jsonObj, Headers headers, OkCallback callback) {
+        Call call = mRunningCallMap.get(url);
+        if (call == null) {
+            call = newCall(mOkRequestProvider.requestJsonPost(url, jsonObj, headers));
         }
-        doCall(call, url, callback);
+        Set<OkCallback> set = addAndGetCallback(url, callback);
+        doCall(call, url, set);
     }
 
     private Call newCall(Request request) {
         return mOkClient.newCall(request);
+    }
+
+    private Set<OkCallback> addAndGetCallback(String url, OkCallback callback) {
+        Set<OkCallback> set = mRunningCallbackMap.get(url);
+        if (set == null) {
+            set = InternalUtil.createConcurrentSet();
+            mRunningCallbackMap.put(url, set);
+        }
+        set.add(callback);
+        return set;
     }
 }

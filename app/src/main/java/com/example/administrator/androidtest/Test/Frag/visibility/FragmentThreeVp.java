@@ -29,15 +29,13 @@ public class FragmentThreeVp extends ComponentFrag {
         return R.layout.frag_vp;
     }
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         vpContainer = findViewById(R.id.vp_container);
         myAdapter = new MyAdapter(getChildFragmentManager());
         vpContainer.setAdapter(myAdapter);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
-        return mContentView;
     }
 
     @Override

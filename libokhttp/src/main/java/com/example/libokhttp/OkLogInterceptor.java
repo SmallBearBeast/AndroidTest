@@ -5,7 +5,7 @@ import okhttp3.*;
 import java.io.IOException;
 
 public class OkLogInterceptor implements Interceptor {
-    private static final String TAG = "OkLogInterceptor";
+    private static final String TAG = OkConstant.OK_LOG_TAG;
     private static final String LOG_DIVIDER = ": ";
     private static final String TAB = "    ";
 

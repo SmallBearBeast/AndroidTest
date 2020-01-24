@@ -1,8 +1,6 @@
 package com.example.libokhttp;
 
 
-import com.example.libbase.Util.CollectionUtil;
-import com.example.libbase.Util.GsonUtil;
 import okhttp3.*;
 
 import java.io.File;
@@ -22,7 +20,7 @@ public class OkRequsetProvider {
      */
     public Request requestGet(String url, Map<String, String> params, Headers headers) {
         StringBuilder paramBuilder = null;
-        if(!CollectionUtil.isEmpty(params)){
+        if(!isEmpty(params)){
             paramBuilder = new StringBuilder(url).append("?");
             for (Map.Entry<String, String> entry : params.entrySet()){
                 paramBuilder.append(entry.getKey()).append("=").append(entry.getValue()).append("&");
@@ -42,7 +40,7 @@ public class OkRequsetProvider {
      */
     public Request requestPost(String url, Map<String, String> params, Headers headers){
         FormBody.Builder formBuilder = new FormBody.Builder();
-        if(params != null && params.size() != 0){
+        if(!isEmpty(params)){
             for (Map.Entry<String, String> entry : params.entrySet()){
                 formBuilder.add(entry.getKey(), entry.getValue());
             }
@@ -61,7 +59,7 @@ public class OkRequsetProvider {
      * 带有json对象或者json字符串的post
      */
     public Request requestJsonPost(String url, Object jsonObj, Headers headers){
-        return requestJsonPost(url, GsonUtil.toJson(jsonObj), headers);
+        return requestJsonPost(url, InternalUtil.toJson(jsonObj), headers);
     }
 
     public Request requestJsonPost(String url, String json, Headers headers){
@@ -138,4 +136,7 @@ public class OkRequsetProvider {
         return builder.build();
     }
 
+    private boolean isEmpty(Map map) {
+        return map == null || map.isEmpty();
+    }
 }

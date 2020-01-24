@@ -3,8 +3,8 @@ package com.example.libframework.Bus;
 import java.util.Objects;
 
 public class Event {
-    String eventKey;
-    Object data;
+    public String eventKey;
+    public Object data;
 
     public Event(String key, Object value) {
         eventKey = key;

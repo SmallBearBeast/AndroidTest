@@ -4,24 +4,33 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ComponentAct extends BaseAct {
-    protected Map<Class, IComponent> mComponentMap = new HashMap<>(8);
+    protected Map<ComponentKey, IComponent> mComponentMap = new HashMap<>(8);
 
-    protected <C extends IComponent> void regComponent(C component) {
-        if (component instanceof ActComponent) {
-            ((ActComponent) component).attachMain(this);
-            ((ActComponent) component).attachView(getDecorView());
-        }
+    protected <C extends IComponent> void regComponent(C component, Object tag) {
         if (component != null) {
+            if (component instanceof ActComponent) {
+                ((ActComponent) component).attachMain(this);
+                ((ActComponent) component).attachView(getDecorView());
+            }
+            mComponentMap.put(new ComponentKey(component.getClass(), tag), component);
             getLifecycle().addObserver(component);
-            mComponentMap.put(component.getClass(), component);
         }
     }
 
-    protected <C extends IComponent> C getComponent(Class<C> clz) {
-        if (mComponentMap.containsKey(clz)) {
-            return (C) mComponentMap.get(clz);
+    protected <C extends IComponent> void regComponent(C component) {
+        regComponent(component, null);
+    }
+
+    public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
+        ComponentKey componentKey = new ComponentKey(clz, tag);
+        if (mComponentMap.containsKey(componentKey)) {
+            return (C) mComponentMap.get(componentKey);
         }
         return null;
+    }
+
+    public <C extends IComponent> C getComponent(Class<C> clz) {
+        return getComponent(clz, null);
     }
 
     @Override

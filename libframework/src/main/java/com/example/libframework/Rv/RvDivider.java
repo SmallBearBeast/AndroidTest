@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 // 插入时候分割线不会移动，会有视觉问题，最好是分割线是透明区域，由background来决定颜色。
 // 插入删除由于每个itemview范围不一致，导致起始点动画突变，基本无解。建议不要有动画。
 public class RvDivider extends RecyclerView.ItemDecoration {
-    private static final String TAG = "RvDivider";
     private RecyclerView.LayoutManager mLayoutManager;
     private int mOrientation;
     private int mColor;
@@ -116,7 +115,6 @@ public class RvDivider extends RecyclerView.ItemDecoration {
                 outRect.left = isTop(pos, manager) ? 0 : dividerReal;
                 outRect.bottom = (spanIndex + spanSize) == spanCount ? 0 : spanIndex + dividerBase * (spanCount - spanIndex - 1);
             }
-            Log.d(TAG, "getItemOffsets: outRect = " + outRect + " pos = " + pos);
         }else if(mLayoutManager instanceof LinearLayoutManager){
             int pos = parent.getChildAdapterPosition(view);
             if(mOrientation == RecyclerView.VERTICAL){
@@ -142,7 +140,6 @@ public class RvDivider extends RecyclerView.ItemDecoration {
                     outRect.left = (pos < spanCount ? 0 : dividerReal);
                     outRect.bottom = dividerBase * (spanCount - spanIndex - 1);
                 }
-                Log.d(TAG, "getItemOffsets: outRect = " + outRect + " pos = " + pos + " spanIndex = " + spanIndex);
             }
         }
     }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public abstract class VHBridge<VH extends VHolder> {
+    protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
     //VHAdapter和DataManager是在register赋值。
     protected VHAdapter mAdapter;
     protected DataManager mDataManager;

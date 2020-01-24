@@ -15,6 +15,7 @@ import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Rv.DataManager;
 import com.example.libframework.Rv.Notify;
 import com.example.libframework.Rv.RvListener;
+import com.example.libframework.Rv.RvUtil;
 import com.example.libframework.Rv.VHAdapter;
 import com.example.liblog.SLog;
 
@@ -140,7 +141,7 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_add_first:
-                mDataManager.addFirst(new Image(-1));
+//                mDataManager.addFirst(new Image(-1));
 //                if(mAdapter.isRegister(Msg.class)){
 //                    mDataManager.addFirst(new Msg());
 //                }else {
@@ -148,6 +149,7 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
 //                    mDataManager.addFirst(new Msg());
 //                }
 //                RvUtil.scrollToTop(mRvTest, 3, 500);
+                RvUtil.scrollToTop(mRvTest, true);
                 break;
 
             case R.id.bt_remove_first:

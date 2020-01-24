@@ -2,9 +2,7 @@ package com.example.libframework.CoreUI;
 
 import android.view.View;
 
-import androidx.annotation.CallSuper;
-
-public abstract class FragComponent<T extends ViewSet> extends BaseComponent<ComponentFrag, T> {
+public abstract class FragComponent extends BaseComponent<ComponentFrag> {
     protected ComponentAct mComActivity;
 
     void attachActivity(ComponentAct activity) {
@@ -15,8 +13,7 @@ public abstract class FragComponent<T extends ViewSet> extends BaseComponent<Com
 
     }
 
-    @CallSuper
     protected void onDestroyView(View contentView) {
-        super.onDestroy();
+
     }
 }

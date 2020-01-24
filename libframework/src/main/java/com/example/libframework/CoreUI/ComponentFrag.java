@@ -15,9 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ComponentFrag extends BaseFrag {
-    protected ComponentAct mComActivity;
-    private Map<Class, IComponent> mComponentMap = new HashMap<>(8);
-    private Map<Class, IComponent> mTempComponentMap = new HashMap<>(8);
+    public ComponentAct mComActivity;
+    private Map<ComponentKey, IComponent> mComponentMap = new HashMap<>(8);
+    private Map<ComponentKey, IComponent> mTempComponentMap = new HashMap<>(8);
 
     @Override
     @CallSuper
@@ -31,30 +31,30 @@ public abstract class ComponentFrag extends BaseFrag {
         }
     }
 
-    @Override
-    @CallSuper
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        onComponentAttach();
-        for (IComponent component : mTempComponentMap.values()) {
-            getLifecycle().addObserver(component);
-        }
-    }
-
     @Nullable
     @Override
     @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View contentView = super.onCreateView(inflater, container, savedInstanceState);
-        onComponentCreateView();
+        onComponentCreateView(contentView);
         return contentView;
     }
 
-    public void regComponent(IComponent component) {
+    public void regComponent(IComponent component, Object tag) {
         if (component != null) {
-            mComponentMap.put(component.getClass(), component);
-            mTempComponentMap.put(component.getClass(), component);
+            if (component instanceof FragComponent) {
+                ((FragComponent)component).attachActivity(mComActivity);
+                ((FragComponent)component).attachMain(this);
+            }
+            ComponentKey componentKey = new ComponentKey(component.getClass(), tag);
+            mComponentMap.put(componentKey, component);
+            mTempComponentMap.put(componentKey, component);
+            getLifecycle().addObserver(component);
         }
+    }
+
+    public void regComponent(IComponent component) {
+        regComponent(component, null);
     }
 
     private void onComponentAttach() {
@@ -75,11 +75,11 @@ public abstract class ComponentFrag extends BaseFrag {
         }
     }
 
-    private void onComponentCreateView() {
+    private void onComponentCreateView(View contentView) {
         for (IComponent component : mTempComponentMap.values()) {
             if (component instanceof FragComponent) {
-                ((FragComponent)component).attachView(mContentView);
-                ((FragComponent)component).onCreateView(mContentView);
+                ((FragComponent)component).attachView(contentView);
+                ((FragComponent)component).onCreateView(contentView);
             }
         }
     }
@@ -88,16 +88,21 @@ public abstract class ComponentFrag extends BaseFrag {
         for (IComponent component : mTempComponentMap.values()) {
             if (component instanceof FragComponent) {
                 ((FragComponent)component).attachView(null);
-                ((FragComponent)component).onDestroyView(mContentView);
+                ((FragComponent)component).onDestroyView(getView());
             }
         }
     }
 
-    public <C extends IComponent> C getComponent(Class<C> clz) {
-        if (mComponentMap.containsKey(clz)) {
-            return (C) mComponentMap.get(clz);
+    public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
+        ComponentKey componentKey = new ComponentKey(clz, tag);
+        if (mComponentMap.containsKey(componentKey)) {
+            return (C) mComponentMap.get(componentKey);
         }
         return null;
+    }
+
+    public <C extends IComponent> C getComponent(Class<C> clz) {
+        return getComponent(clz, null);
     }
 
     @Override
@@ -111,8 +116,8 @@ public abstract class ComponentFrag extends BaseFrag {
     @CallSuper
     public void onDestroy() {
         super.onDestroy();
-        for (IComponent component : mTempComponentMap.values()) {
-            mComponentMap.remove(component.getClass());
+        for (ComponentKey componentKey : mTempComponentMap.keySet()) {
+            mComponentMap.remove(componentKey);
         }
         mTempComponentMap.clear();
     }

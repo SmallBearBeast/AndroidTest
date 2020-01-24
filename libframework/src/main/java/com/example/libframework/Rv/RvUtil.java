@@ -10,10 +10,6 @@ import androidx.recyclerview.widget.LinearSmoothScroller;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
-import com.example.libbase.Util.NumberUtil;
-
-import static androidx.recyclerview.widget.LinearSmoothScroller.SNAP_TO_START;
-
 //1.RecyclerView.getChildCount()与LayoutManager.getChildCount()输出相同表示ViewGroup里面的View数目，也就是attachView数目，一般不改写getExtraLayoutSpace也就是可见数目。
 //2.LayoutManager.getItemCount()表示所有item数目。
 //3.findLastVisibleItemPosition(layoutManager)表示最后一个可见item的index，可见范围包括Decoration。
@@ -122,7 +118,7 @@ public class RvUtil {
             if (info == null || info.length <= 0) {
                 return -1;
             }
-            return NumberUtil.min(info);
+            return min(info);
         }
         return -1;
     }
@@ -136,7 +132,7 @@ public class RvUtil {
             if (into == null || into.length <= 0) {
                 return -1;
             }
-            return NumberUtil.max(into);
+            return max(into);
         }
         return -1;
     }
@@ -148,7 +144,7 @@ public class RvUtil {
             if (info == null || info.length <= 0) {
                 return -1;
             }
-            return NumberUtil.min(info);
+            return min(info);
         } else if (manager instanceof LinearLayoutManager) {
             return ((LinearLayoutManager) manager).findFirstCompletelyVisibleItemPosition();
         }
@@ -162,7 +158,7 @@ public class RvUtil {
             if (info == null || info.length <= 0) {
                 return -1;
             }
-            return NumberUtil.max(info);
+            return max(info);
         } else if (manager instanceof LinearLayoutManager) {
             return ((LinearLayoutManager) manager).findLastCompletelyVisibleItemPosition();
         }
@@ -244,5 +240,25 @@ public class RvUtil {
                 });
             }
         }
+    }
+
+    private static int max(int ... array) {
+        int max = array[0];
+        for(int i = 1; i < array.length; ++i) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
+
+    private static int min(int ... array) {
+        int min = array[0];
+        for(int i = 1; i < array.length; ++i) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+        return min;
     }
 }

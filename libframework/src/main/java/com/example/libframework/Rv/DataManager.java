@@ -1,25 +1,23 @@
 package com.example.libframework.Rv;
 
 import android.database.Cursor;
-import com.example.libbase.Util.CollectionUtil;
 import com.example.liblog.SLog;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 /**
- * 处理具体的add，remove，update操作。
- * Cursor is only read
+ * This class is used to handle specific add, remove, and update operation.
+ * Note: Cursor is read-only.
  */
 @SuppressWarnings("unchecked")
 public class DataManager {
+    private static final String TAG = RvConstant.RV_LOG_TAG;
 
-    private static final String TAG = "DataManager";
-
-    // TODO: 2019-06-22 data数据保护
-    private List mProviderDatas = new ArrayList();
+    private List mProviderDataList = new ArrayList();
     private Map<Integer, Cursor> mIndexWithCursorMap = new HashMap<>();
     private VHAdapter mAdapter;
 
@@ -27,40 +25,38 @@ public class DataManager {
         mAdapter = adapter;
     }
 
-    public <D> void setData(List<D> datas) {
-        if (CollectionUtil.isEmpty(datas)) {
-            SLog.d(TAG, "setData: datas is empty");
+    public void setData(List dataList) {
+        if (dataList.isEmpty()) {
+            SLog.w(TAG, "setData: dataList is empty");
             return;
         }
-        if (!mAdapter.isRegister(datas.get(0))) {
-            SLog.d(TAG, "setData: datas is not registered");
-            return;
+        List regDataList = new ArrayList();
+        for (Object data : dataList) {
+            if (!mAdapter.isRegister(data)) {
+                SLog.w(TAG, "setData: " + data.getClass().getSimpleName() + " is not registered");
+            } else {
+                regDataList.add(data);
+            }
         }
-        mProviderDatas.clear();
-        mProviderDatas.addAll(datas);
+        mProviderDataList.clear();
+        mProviderDataList.addAll(regDataList);
         mAdapter.notifyDataSetChanged();
     }
 
     public void addCursor(int index, Cursor cursor) {
         if (cursor != null && cursor.getCount() == 0) {
-            SLog.d(TAG, "addCursor: cursor count is 0");
+            SLog.w(TAG, "addCursor: cursor count is 0");
             return;
         }
         if (!mAdapter.isRegister(cursor)) {
-            SLog.d(TAG, "addCursor: cursor is not registered");
-            return;
-        }
-        if (index == size()) {
-            mProviderDatas.add(cursor);
-            mIndexWithCursorMap.put(index, cursor);
-            mAdapter.notifyItemRangeInserted(index, cursor.getCount());
+            SLog.w(TAG, "addCursor: cursor is not registered");
             return;
         }
         if (!checkIndex(index)) {
-            SLog.d(TAG, "addCursor: index is out of range");
+            SLog.w(TAG, "addCursor: index is out of range");
             return;
         }
-        mProviderDatas.add(index, cursor);
+        mProviderDataList.add(index, cursor);
         mIndexWithCursorMap.put(index, cursor);
         mAdapter.notifyItemRangeInserted(index, cursor.getCount());
     }
@@ -73,85 +69,74 @@ public class DataManager {
         addCursor(size(), cursor);
     }
 
-    public <D> void addLast(D data) {
-        add(size(), data);
-    }
-
-    public <D> void add(int index, D data) {
-        if (!mAdapter.isRegister(data)) {
-            SLog.d(TAG, "add: data is not registered");
-            return;
-        }
-        if (index == size()) {
-            mProviderDatas.add(data);
-            mAdapter.notifyItemRangeInserted(index, 1);
-            return;
-        }
+    public void add(int index, List dataList) {
         if (!checkIndex(index)) {
-            SLog.d(TAG, "add: index is out of range");
+            SLog.w(TAG, "add: index is out of range");
             return;
         }
-        mProviderDatas.add(index, data);
-        mAdapter.notifyItemRangeInserted(index, 1);
+        List regDataList = new ArrayList();
+        for (Object data : dataList) {
+            if (!mAdapter.isRegister(data)) {
+                SLog.w(TAG, "add: " + data.getClass().getSimpleName() + " is not registered");
+            } else {
+                regDataList.add(data);
+            }
+        }
+        if (regDataList.isEmpty()) {
+            SLog.w(TAG, "add: regDataList is empty");
+            return;
+        }
+        mProviderDataList.addAll(index, regDataList);
+        mAdapter.notifyItemRangeInserted(index, regDataList.size());
     }
 
-    public <D> void addLast(List<D> datas) {
-        add(size(), datas);
+    public void add(int index, Object... datas) {
+        add(index, Arrays.asList(datas));
     }
 
-    public <D> void add(int index, List<D> datas) {
-        if (CollectionUtil.isEmpty(datas)) {
-            SLog.d(TAG, "add: datas is empty");
-            return;
-        }
-        if (!mAdapter.isRegister(datas.get(0))) {
-            SLog.d(TAG, "add: datas is not registered");
-            return;
-        }
-        if (index == size()) {
-            mProviderDatas.addAll(datas);
-            mAdapter.notifyItemRangeInserted(index, datas.size());
-            return;
-        }
-        if (!checkIndex(index)) {
-            SLog.d(TAG, "add: index is out of range");
-            return;
-        }
-        mProviderDatas.addAll(index, datas);
-        mAdapter.notifyItemRangeInserted(index, datas.size());
-    }
-
-    public <D> void addFirst(D data) {
+    public void addFirst(Object data) {
         add(0, data);
     }
 
-    public <D> void addFirst(List<D> datas) {
-        add(0, datas);
+    public void addLast(Object data) {
+        add(size(), data);
+    }
+
+    public void addFirst(List dataList) {
+        add(0, dataList);
+    }
+
+    public void addLast(List dataList) {
+        add(size(), dataList);
     }
 
     // TODO: 2019-10-20 need removeCursor and upadteCursor method
-    public <D> void remove(D... datas) {
+    public void remove(Object... datas) {
         if (datas.length > 0) {
-            for (D d : datas) {
-                remove(findIndexInArray(d), 1);
+            for (Object obj : datas) {
+                remove(findIndexInArray(obj), 1);
             }
         }
     }
 
-    public <D> void remove(List<D> datas) {
-        if (!CollectionUtil.isEmpty(datas)) {
-            for (D d : datas) {
-                remove(findIndexInArray(d), 1);
+    public void remove(List dataList) {
+        if (!dataList.isEmpty()) {
+            for (Object obj : dataList) {
+                remove(findIndexInArray(obj), 1);
             }
         }
     }
 
     public void remove(int index, int num) {
         if (num > 0 && index >= 0 && index + num <= size()) {
-            mProviderDatas.subList(index, num + index).clear();
+            mProviderDataList.subList(index, num + index).clear();
             mAdapter.notifyItemRangeRemoved(index, num);
         }
         resetIndexWithCursorMap();
+    }
+
+    public void remove(int index) {
+        remove(index, 1);
     }
 
     public void removeFirst(int num) {
@@ -159,55 +144,59 @@ public class DataManager {
     }
 
     public void removeLast(int num) {
-        remove(mProviderDatas.size() - num, num);
+        remove(mProviderDataList.size() - num, num);
     }
 
-    public <D> void update(D d) {
-        if (d != null) {
-            update(findIndexInArray(d), d, null);
-        }
-    }
-
-    public <D> void update(D d, Notify notify) {
-        if (d != null) {
-            update(findIndexInArray(d), d, notify);
-        }
-    }
-
-    public <D> void update(int index, D d, Notify notify) {
+    public void update(int index, Object obj, Notify notify) {
         if (!checkIndex(index)) {
-            SLog.d(TAG, "update: index is out of range");
+            SLog.w(TAG, "update: index is out of range");
             return;
         }
-        if (d != null) {
-            mProviderDatas.set(index, d);
+        if (obj != null) {
+            mProviderDataList.set(index, obj);
             mAdapter.notifyItemChanged(index, notify);
         }
+    }
+
+    public void update(Object obj) {
+        if (obj != null) {
+            update(findIndexInArray(obj), obj, null);
+        }
+    }
+
+    public void update(Object obj, Notify notify) {
+        if (obj != null) {
+            update(findIndexInArray(obj), obj, notify);
+        }
+    }
+
+    public void update(int index, Object obj) {
+        update(index, obj, null);
     }
 
     // TODO: 2019-07-16 move notifyItemMoved有问题，先使用notifyItemRangeChanged
     public void move(int fromPos, int toPos) {
         if (!checkIndex(fromPos)) {
-            SLog.d(TAG, "move: fromPos is out of range fromPos = " + fromPos);
+            SLog.w(TAG, "move: fromPos is out of range fromPos = " + fromPos);
             return;
         }
         if (!checkIndex(toPos)) {
-            SLog.d(TAG, "move: toPos is out of range toPos = " + toPos);
+            SLog.w(TAG, "move: toPos is out of range toPos = " + toPos);
             return;
         }
-        Object fromData = mProviderDatas.get(fromPos);
-        Object toData = mProviderDatas.get(toPos);
-        mProviderDatas.set(toPos, fromData);
-        mProviderDatas.set(fromPos, toData);
+        Object fromData = mProviderDataList.get(fromPos);
+        Object toData = mProviderDataList.get(toPos);
+        mProviderDataList.set(toPos, fromData);
+        mProviderDataList.set(fromPos, toData);
 //        mAdapter.notifyItemMoved(fromPos, toPos);
 //        //由于move机制需要刷新move范围内的item。
 //        mAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
         mAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
     }
 
-    private <D> int findIndexInArray(D data) {
-        for (int i = 0, len = mProviderDatas.size(); i < len; i++) {
-            if (mProviderDatas.get(i).equals(data)) {
+    private int findIndexInArray(Object obj) {
+        for (int i = 0, len = mProviderDataList.size(); i < len; i++) {
+            if (mProviderDataList.get(i).equals(obj)) {
                 return i;
             }
         }
@@ -215,7 +204,7 @@ public class DataManager {
     }
 
     public int size() {
-        int size = mProviderDatas.size();
+        int size = mProviderDataList.size();
         if (!mIndexWithCursorMap.isEmpty()) {
             for (HashMap.Entry<Integer, Cursor> entry : mIndexWithCursorMap.entrySet()) {
                 size = size + entry.getValue().getCount() - 1;
@@ -230,8 +219,8 @@ public class DataManager {
         }
         mIndexWithCursorMap.clear();
         Object obj;
-        for (int i = 0, size = mProviderDatas.size(); i < size; i++) {
-            obj = mProviderDatas.get(i);
+        for (int i = 0, size = mProviderDataList.size(); i < size; i++) {
+            obj = mProviderDataList.get(i);
             if (obj instanceof Cursor) {
                 mIndexWithCursorMap.put(i, (Cursor) obj);
             }
@@ -258,22 +247,22 @@ public class DataManager {
                     }
                 }
              }
-            return mProviderDatas.get(realPosition);
+            return mProviderDataList.get(realPosition);
         }
         return null;
     }
 
     private boolean checkIndex(int index) {
-        return index >= 0 && index < size();
+        return index >= 0 && index <= size();
     }
 
     public List getData() {
-        return mProviderDatas;
+        return mProviderDataList;
     }
 
     public void clear() {
-        mProviderDatas.clear();
-        mProviderDatas = null;
+        mProviderDataList.clear();
+        mProviderDataList = null;
         for (HashMap.Entry<Integer, Cursor> entry : mIndexWithCursorMap.entrySet()) {
             if (!entry.getValue().isClosed()) {
                 entry.getValue().close();

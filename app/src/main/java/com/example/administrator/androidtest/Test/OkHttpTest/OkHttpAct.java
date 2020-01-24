@@ -17,6 +17,7 @@ import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libokhttp.OkCallback;
 import com.example.libokhttp.OkDownloadCallback;
 import com.example.libokhttp.OkHelper;
+import com.google.gson.reflect.TypeToken;
 
 import okhttp3.Headers;
 
@@ -43,9 +44,9 @@ public class OkHttpAct extends ComponentAct {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_get:
-//                testGet_1("https://www.baidu.com/");
+                testGet_1("https://www.wanandroid.com/banner/json");
 //                testGet_2("https://www.mxnzp.com/api/holiday/single/20181121");
-                testGet_3("https://www.mxnzp.com/api/qrcode/create/single?content=你好&size=500&mType=0");
+//                testGet_3("https://www.mxnzp.com/api/qrcode/create/single?content=你好&size=500&mType=0");
                 break;
 
             case R.id.bt_post:
@@ -70,7 +71,7 @@ public class OkHttpAct extends ComponentAct {
 
     private void testGet_3(String url) {
         if (NetWorkUtil.isConnected()) {
-            OkHelper.getInstance().postMethod(url, new OkCallback<QrCodeBean>(QrCodeBean.class) {
+            OkHelper.getInstance().postMethod(url, new OkCallback<QrCodeBean>(new TypeToken<QrCodeBean>(){}) {
                 @Override
                 protected void handleErrCode(int errCode) {
                     super.handleErrCode(errCode);
@@ -94,7 +95,7 @@ public class OkHttpAct extends ComponentAct {
 
     private void testGet_2(String url) {
         if (NetWorkUtil.isConnected()) {
-            OkHelper.getInstance().postMethod(url, new OkCallback<DateInfoBean>(DateInfoBean.class) {
+            OkHelper.getInstance().postMethod(url, new OkCallback<DateInfoBean>(new TypeToken<DateInfoBean>(){}) {
                 @Override
                 protected void handleErrCode(int errCode) {
                     super.handleErrCode(errCode);
@@ -119,7 +120,7 @@ public class OkHttpAct extends ComponentAct {
 
     private void testGet_1(String url) {
         if (NetWorkUtil.isConnected()) {
-            OkHelper.getInstance().getMethod(url, new OkCallback<String>(String.class) {
+            OkHelper.getInstance().getMethod(url, new OkCallback<String>(new TypeToken<String>(){}) {
                 @Override
                 protected void handleErrCode(int errCode) {
                     super.handleErrCode(errCode);
@@ -145,7 +146,7 @@ public class OkHttpAct extends ComponentAct {
         if (NetWorkUtil.isConnected()) {
             Map<String, String> headerParams = CollectionUtil.asMap(new String[]{"hello", "world"}, new String[]{"123", "456"});
 
-            OkHelper.getInstance().postMethod(url, params, Headers.of(headerParams), new OkCallback<QrCodeBean>(QrCodeBean.class) {
+            OkHelper.getInstance().postMethod(url, params, Headers.of(headerParams), new OkCallback<QrCodeBean>(new TypeToken<QrCodeBean>(){}) {
                 @Override
                 protected void handleErrCode(int errCode) {
                     super.handleErrCode(errCode);

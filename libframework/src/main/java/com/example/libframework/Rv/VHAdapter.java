@@ -23,13 +23,14 @@ import java.util.Map;
 @SuppressLint({"RestrictedApi"})
 @SuppressWarnings("unchecked")
 public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements GenericLifecycleObserver {
-    protected String TAG = getClass().getSimpleName();
+    protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
+    private static final int DATA_TYPE_LIMIT = 100;
     private LayoutInflater mInflater;
     private RecyclerView mRecyclerView;
     private DataManager mDataManager;
     private Map<Integer, Integer> mClzMap = new HashMap<>();
     private SparseArray<VHBridge> mBridgeMap = new SparseArray<>();
-    private int mIncrease = 100;
+    private int mIncrease = DATA_TYPE_LIMIT;
     private Context mContext; //通过外部传入好还是onAttachedToRecyclerView拿去
 
     public VHAdapter() {
@@ -125,23 +126,28 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
      */
     public void register(VHBridge bridge, Class... clzs) {
         for (Class clz : clzs) {
-            register(bridge, clz);
+            if (clz == null) {
+                continue;
+            }
+            int dataType = clz.hashCode();
+            registerInternal(bridge, dataType, false);
         }
-    }
-
-    public void register(VHBridge bridge, Class clz) {
-        if (clz == null) {
-            return;
-        }
-        int dataType = clz.hashCode();
-        register(bridge, dataType);
     }
 
     /**
-     * this method should be used with {@link OnGetDataType}
-     * dataType for user dinifining is <100
+     * This method should be used in conjunction with the {@link OnGetDataType}
+     * @param bridge The VHBridge to be registered
+     * @param dataType DataType definition is less than 100
      */
     public void register(VHBridge bridge, int dataType) {
+        registerInternal(bridge, dataType, true);
+    }
+
+    private void registerInternal(VHBridge bridge, int dataType, boolean fromSetup) {
+        if (fromSetup && dataType > DATA_TYPE_LIMIT) {
+            Log.w(TAG, "registerInternal: dataType is out of range");
+            return;
+        }
         if (mClzMap.containsKey(dataType)) {
             return;
         }
@@ -211,7 +217,6 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
     @Override
     public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
         if (mRecyclerView != null) {
-            Log.d(TAG, "onStateChanged: event = " + event);
             int count = mRecyclerView.getChildCount();
             for (int i = 0; i < count; i++) {
                 RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
