@@ -18,7 +18,11 @@ public final class ToastUtil extends AppInitUtil{
         MainThreadUtil.run(new Runnable() {
             @Override
             public void run() {
-                checkToast();
+                if (sToast != null) {
+                    sToast.cancel();
+                    sToast = null;
+                }
+                sToast = Toast.makeText(getApp(), "", Toast.LENGTH_SHORT);
                 if(config.mText == null && config.mStringResId != -1){
                     config.mText = getString(config.mStringResId);
                 }
@@ -41,12 +45,6 @@ public final class ToastUtil extends AppInitUtil{
                 sToast.show();
             }
         });
-    }
-
-    private static void checkToast(){
-        if(sToast == null){
-            sToast = Toast.makeText(getApp(), "", Toast.LENGTH_SHORT);
-        }
     }
 
     public static class ToastConfig{

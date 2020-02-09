@@ -113,4 +113,8 @@
     </declare-styleable>
     <!--富文本控件-->
 
+    <declare-styleable name="FlowLayout">
+        <attr name="fl_vertical_space" format="dimension"/>
+        <attr name="fl_horizontal_space" format="dimension"/>
+    </declare-styleable>
 </resources>
