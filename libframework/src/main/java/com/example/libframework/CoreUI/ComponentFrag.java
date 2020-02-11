@@ -43,8 +43,8 @@ public abstract class ComponentFrag extends BaseFrag {
     public void regComponent(IComponent component, Object tag) {
         if (component != null) {
             if (component instanceof FragComponent) {
-                ((FragComponent)component).attachActivity(mComActivity);
-                ((FragComponent)component).attachMain(this);
+                ((FragComponent) component).attachActivity(mComActivity);
+                ((FragComponent) component).attachMain(this);
             }
             ComponentKey componentKey = new ComponentKey(component.getClass(), tag);
             mComponentMap.put(componentKey, component);
@@ -60,8 +60,8 @@ public abstract class ComponentFrag extends BaseFrag {
     private void onComponentAttach() {
         for (IComponent component : mTempComponentMap.values()) {
             if (component instanceof FragComponent) {
-                ((FragComponent)component).attachActivity(mComActivity);
-                ((FragComponent)component).attachMain(this);
+                ((FragComponent) component).attachActivity(mComActivity);
+                ((FragComponent) component).attachMain(this);
             }
         }
     }
@@ -69,8 +69,8 @@ public abstract class ComponentFrag extends BaseFrag {
     private void onComponentDetach() {
         for (IComponent component : mTempComponentMap.values()) {
             if (component instanceof FragComponent) {
-                ((FragComponent)component).attachActivity(null);
-                ((FragComponent)component).attachMain(null);
+                ((FragComponent) component).attachActivity(null);
+                ((FragComponent) component).attachMain(null);
             }
         }
     }
@@ -78,8 +78,8 @@ public abstract class ComponentFrag extends BaseFrag {
     private void onComponentCreateView(View contentView) {
         for (IComponent component : mTempComponentMap.values()) {
             if (component instanceof FragComponent) {
-                ((FragComponent)component).attachView(contentView);
-                ((FragComponent)component).onCreateView(contentView);
+                ((FragComponent) component).attachView(contentView);
+                ((FragComponent) component).onCreateView(contentView);
             }
         }
     }
@@ -87,8 +87,24 @@ public abstract class ComponentFrag extends BaseFrag {
     private void onComponentDestroyView() {
         for (IComponent component : mTempComponentMap.values()) {
             if (component instanceof FragComponent) {
-                ((FragComponent)component).attachView(null);
-                ((FragComponent)component).onDestroyView(getView());
+                ((FragComponent) component).attachView(null);
+                ((FragComponent) component).onDestroyView(getView());
+            }
+        }
+    }
+
+    protected void onComponentVisible() {
+        for (IComponent component : mTempComponentMap.values()) {
+            if (component instanceof FragComponent) {
+                ((FragComponent) component).onVisible();
+            }
+        }
+    }
+
+    protected void onComponentFirstVisible() {
+        for (IComponent component : mTempComponentMap.values()) {
+            if (component instanceof FragComponent) {
+                ((FragComponent) component).onFirstVisible();
             }
         }
     }
@@ -128,5 +144,17 @@ public abstract class ComponentFrag extends BaseFrag {
         super.onDetach();
         onComponentDetach();
         mComActivity = null;
+    }
+
+    @Override
+    protected void onVisible() {
+        super.onVisible();
+        onComponentVisible();
+    }
+
+    @Override
+    protected void onFirstVisible() {
+        super.onFirstVisible();
+        onComponentFirstVisible();
     }
 }

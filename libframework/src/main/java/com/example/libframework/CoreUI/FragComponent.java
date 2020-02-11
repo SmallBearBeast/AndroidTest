@@ -16,4 +16,12 @@ public abstract class FragComponent extends BaseComponent<ComponentFrag> {
     protected void onDestroyView(View contentView) {
 
     }
+
+    protected void onVisible() {
+
+    }
+
+    protected void onFirstVisible() {
+
+    }
 }

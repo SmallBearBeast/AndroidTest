@@ -18,7 +18,6 @@ import com.example.libframework.BuildConfig;
 import com.example.libframework.Page.IPage;
 import com.example.libframework.Page.Page;
 import com.example.libframework.Page.PageProvider;
-import com.example.liblog.SLog;
 
 import java.util.List;
 
@@ -29,6 +28,7 @@ public abstract class BaseFrag extends Fragment implements IPage {
     private boolean mIsDoneSetUserVisibleHint;
     private boolean mIsVisibleToUser;
     private boolean mIsDoneStart;
+    private boolean mIsFirstVisible = true;
     private Page mPage;
     protected BaseAct mBaseAct;
     protected BaseFrag mBaseFrag;
@@ -78,7 +78,8 @@ public abstract class BaseFrag extends Fragment implements IPage {
         if (getActivity() != null) {
             if (mIsDoneStart && mIsVisibleToUser) {
                 addPage(null);
-                onNotifyVisible();
+                dispatchFirstVisible();
+                onVisible();
             }
             List<Fragment> childs = getChildFragmentManager().getFragments();
             boolean hasChild = (childs != null && childs.size() > 0);
@@ -120,7 +121,8 @@ public abstract class BaseFrag extends Fragment implements IPage {
         if (mIsDoneSetUserVisibleHint) {
             if (mIsVisibleToUser) {
                 addPage(null);
-                onNotifyVisible();
+                dispatchFirstVisible();
+                onVisible();
             }
         } else {
             addPage(null);
@@ -150,23 +152,6 @@ public abstract class BaseFrag extends Fragment implements IPage {
         mBaseFrag = null;
     }
 
-    private Page createPage() {
-        mPage = new Page(pageId());
-        return mPage;
-    }
-
-    public Page getPage() {
-        return mPage;
-    }
-
-    private void addPage(Page backPage) {
-        if (mBaseFrag != null) {
-            PageProvider.getInstance().addPage(mBaseFrag.getPage(), backPage != null ? backPage : createPage());
-        } else {
-            PageProvider.getInstance().addPage(mBaseAct.getPage(), backPage != null ? backPage : createPage());
-        }
-    }
-
     protected void handleIntent(@NonNull Intent intent, @Nullable Bundle bundle) {
 
     }
@@ -181,8 +166,22 @@ public abstract class BaseFrag extends Fragment implements IPage {
      * When the fragment is visible, the method is called.
      * Order: setUserVisibleHint->onAttachFragment->onStart
      */
-    protected void onNotifyVisible() {
-        SLog.d(TAG, "class = " + getClass().getSimpleName() + "   " + "onNotifyVisible");
+    protected void onVisible() {
+
+    }
+
+    private void dispatchFirstVisible() {
+        if (mIsFirstVisible) {
+            onFirstVisible();
+            mIsFirstVisible = false;
+        }
+    }
+
+    /**
+     * This method is called when fragment is first visible
+     */
+    protected void onFirstVisible() {
+
     }
 
     /**
@@ -210,6 +209,23 @@ public abstract class BaseFrag extends Fragment implements IPage {
             return getView().findViewById(viewId);
         }
         return null;
+    }
+
+    private Page createPage() {
+        mPage = new Page(pageId());
+        return mPage;
+    }
+
+    public Page getPage() {
+        return mPage;
+    }
+
+    private void addPage(Page backPage) {
+        if (mBaseFrag != null) {
+            PageProvider.getInstance().addPage(mBaseFrag.getPage(), backPage != null ? backPage : createPage());
+        } else {
+            PageProvider.getInstance().addPage(mBaseAct.getPage(), backPage != null ? backPage : createPage());
+        }
     }
 
     @Override

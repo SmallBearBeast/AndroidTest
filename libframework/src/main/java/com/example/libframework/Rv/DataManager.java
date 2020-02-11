@@ -26,6 +26,10 @@ public class DataManager {
     }
 
     public void setData(List dataList) {
+        if (dataList == null) {
+            SLog.w(TAG, "setData: dataList is null");
+            return;
+        }
         if (dataList.isEmpty()) {
             SLog.w(TAG, "setData: dataList is empty");
             return;
@@ -154,8 +158,8 @@ public class DataManager {
         }
         if (obj != null) {
             mProviderDataList.set(index, obj);
-            mAdapter.notifyItemChanged(index, notify);
         }
+        mAdapter.notifyItemChanged(index, notify);
     }
 
     public void update(Object obj) {
@@ -172,6 +176,10 @@ public class DataManager {
 
     public void update(int index, Object obj) {
         update(index, obj, null);
+    }
+
+    public void update(int index) {
+        update(index, null, null);
     }
 
     // TODO: 2019-07-16 move notifyItemMoved有问题，先使用notifyItemRangeChanged
