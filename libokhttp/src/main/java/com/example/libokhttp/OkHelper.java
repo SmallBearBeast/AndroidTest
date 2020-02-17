@@ -11,85 +11,52 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
-import java.util.Collections;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListSet;
-import java.util.concurrent.TimeUnit;
 
 public class OkHelper {
-
     private static final String TAG = OkConstant.OK_LOG_TAG;
-    private static final int TIME_OUT = 3;
     private static final int DOWNLOAD_BUFFER_COUNT = 1024 / 2;
     private OkHttpClient mOkClient;
-    private OkRequsetProvider mOkRequestProvider;
+    private OkRequestProvider mOkRequestProvider;
     private Map<String, Call> mRunningCallMap;
     private Map<String, Set<OkCallback>> mRunningCallbackMap;
 
-    private interface OkHttpClientInitListener {
-        OkHttpClient init();
-    }
-
-    public void setOkHttpClientInitListener(OkHttpClientInitListener okHttpClientInitListener) {
-        if (okHttpClientInitListener != null && okHttpClientInitListener.init() != null) {
-            mOkClient = okHttpClientInitListener.init();
-        }
-    }
-
-    // TODO: 2019/4/14 超时参数理解
-    private static OkHttpClient defaultOkHttpClient() {
-        OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .writeTimeout(TIME_OUT, TimeUnit.SECONDS)
-                .readTimeout(TIME_OUT, TimeUnit.SECONDS);
-        //拦截器
-        builder.addInterceptor(new OkLogInterceptor());
-        builder.addInterceptor(new OkRetryInterceptor());
-        //HttpDns
-        builder.dns(new HttpDns());
-        //监听器
-        builder.eventListener(new OkEventListener());
-        builder.cookieJar(new CookieJar() {
-            @Override
-            public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
-
-            }
-
-            @Override
-            public List<Cookie> loadForRequest(HttpUrl url) {
-                return Collections.emptyList();
-            }
-        });
-        //支持https
-
-        //缓存配置
-//        builder.cache(new Cache());
-        builder.retryOnConnectionFailure(true);
-        return builder.build();
-    }
-
-    public static void init(Application application) {
+    public static void init(Application application, OkHttpClient.Builder builder) {
         InternalUtil.init(application);
+        getInstance().init(builder);
+    }
+
+    private static class SingleTon {
+        static OkHelper sInstance = new OkHelper();
     }
 
     public static OkHelper getInstance() {
         return SingleTon.sInstance;
     }
 
-    private OkHelper() {
-        mOkRequestProvider = new OkRequsetProvider();
-        mOkClient = defaultOkHttpClient();
+    private void init(OkHttpClient.Builder builder) {
+        mOkRequestProvider = new OkRequestProvider();
         mRunningCallMap = new ConcurrentHashMap<>();
         mRunningCallbackMap = new ConcurrentHashMap<>();
+        mOkClient = builder == null ? defaultOkHttpClient() : builder.build();
     }
 
-    private static class SingleTon {
-        static OkHelper sInstance = new OkHelper();
+    private OkHttpClient defaultOkHttpClient() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        // 拦截器
+        builder.addInterceptor(new OkLogInterceptor());
+        // HttpDns
+        // builder.dns(new HttpDns());
+        // 监听器
+        // builder.eventListener(new OkEventListener());
+        // 支持https
+        // 缓存配置
+        // builder.cache(new Cache());
+        builder.retryOnConnectionFailure(true);
+        return builder.build();
     }
 
     /**

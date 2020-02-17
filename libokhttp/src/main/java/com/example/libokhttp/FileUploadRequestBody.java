@@ -10,22 +10,22 @@ import okio.Source;
 import java.io.File;
 import java.io.IOException;
 
-public class FileUploadRequestBody extends RequestBody {
+class FileUploadRequestBody extends RequestBody {
     private static final int SEGMENT_SIZE = 1024;
     private String mContentType;
     private File mFile;
     private float mWeight;
     private OkUploadCallback mCallback;
 
-    public FileUploadRequestBody(String contentType, File file) {
+    FileUploadRequestBody(String contentType, File file) {
         this(contentType, file, 1, null);
     }
 
-    public FileUploadRequestBody(String contentType, File file, OkUploadCallback callback) {
+    FileUploadRequestBody(String contentType, File file, OkUploadCallback callback) {
         this(contentType, file, 1, callback);
     }
 
-    public FileUploadRequestBody(String contentType, File file, float weight, OkUploadCallback callback) {
+    FileUploadRequestBody(String contentType, File file, float weight, OkUploadCallback callback) {
         mContentType = contentType;
         mFile = file;
         mCallback = callback;
