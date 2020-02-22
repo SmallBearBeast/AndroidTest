@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
+import com.example.libmmf.AppVal.AppIntVal;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
@@ -28,6 +29,7 @@ public class App extends Application {
         AppInitUtil.init(this);
         FrescoUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
+        AppIntVal.init(this);
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not doOnCreate your app in this process.
