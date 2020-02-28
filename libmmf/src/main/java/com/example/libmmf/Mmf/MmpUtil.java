@@ -8,10 +8,14 @@ import java.io.RandomAccessFile;
 import java.lang.reflect.Array;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class MmfUtil {
+public class MmpUtil {
 
     public static int MODE_READ = 0;
     public static int MODE_WRITE = 1;
