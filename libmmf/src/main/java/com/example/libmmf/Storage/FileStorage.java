@@ -1,4 +1,4 @@
-package com.example.libmmf.Mmf;
+package com.example.libmmf.Storage;
 
 import com.google.gson.reflect.TypeToken;
 

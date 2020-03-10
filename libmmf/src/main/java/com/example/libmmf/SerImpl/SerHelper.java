@@ -2,7 +2,7 @@ package com.example.libmmf.SerImpl;
 
 
 
-import com.example.libmmf.Mmf.WrapUtil;
+import com.example.libmmf.Storage.WrapUtil;
 
 import java.lang.reflect.Array;
 import java.nio.ByteBuffer;

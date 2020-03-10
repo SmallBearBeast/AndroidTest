@@ -73,6 +73,8 @@ dependencies {
     implementation 'androidx.room:room-runtime:2.2.3'
     annotationProcessor 'androidx.room:room-compiler:2.2.3'
 
+    implementation 'com.tencent:mmkv:1.0.24'
+
     implementation project(":libbase")
     implementation project(":libfresco")
     implementation project(":libokhttp")
@@ -125,3 +127,8 @@ dependencies {
 //        }
 //    }
 //}
+
+//显示依赖包的存储路径
+task showMeCache << {
+    configurations.compile.each { println it + "213" }
+}

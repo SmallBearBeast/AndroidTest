@@ -1,4 +1,4 @@
-package com.example.libmmf.Mmf;
+package com.example.libmmf.Storage;
 
 
 import com.example.libmmf.SerImpl.SerInterface;
@@ -8,11 +8,7 @@ import java.io.RandomAccessFile;
 import java.lang.reflect.Array;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MmpUtil {

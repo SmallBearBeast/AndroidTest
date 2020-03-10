@@ -34,11 +34,11 @@ public class AppValTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_2:
-                appIntVals[0].decrement();
+                appIntVals[0].dec();
                 break;
 
             case R.id.bt_3:
-                appIntVals[0].increment();
+                appIntVals[0].inc();
                 break;
 
             case R.id.bt_4:

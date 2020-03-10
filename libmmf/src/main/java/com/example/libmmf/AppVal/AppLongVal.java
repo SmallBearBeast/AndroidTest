@@ -63,11 +63,11 @@ public class AppLongVal extends AppVal {
         }
     }
 
-    public void increment() {
+    public void inc() {
         set(mVal + 1);
     }
 
-    public void decrement() {
+    public void dec() {
         set(mVal - 1);
     }
 }

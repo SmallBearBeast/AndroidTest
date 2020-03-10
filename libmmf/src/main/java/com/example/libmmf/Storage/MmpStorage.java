@@ -1,9 +1,6 @@
-package com.example.libmmf.Mmf;
+package com.example.libmmf.Storage;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Method;
@@ -13,19 +10,19 @@ import java.nio.channels.FileChannel;
 public class MmpStorage {
     private static final int BUFFER_SIZE = 4096;
     public static void main(String[] args) {
-        if (!InternalUtil.createFile("/Users/wuyisong/mmp/text_mmp.txt")) {
-            return;
-        }
-        File file = new File("/Users/wuyisong/mmp/text_mmp.txt");
-        try {
-//            FileStorage.writeStream("/Users/wuyisong/mmp/text_mmp_copy.txt", new FileInputStream(file));
-            writeStream("/Users/wuyisong/mmp/text_mmp_copy.txt", new FileInputStream(file));
-//            if (file.delete()) {
-//                System.out.println("delete success");
-//            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        if (!InternalUtil.createFile("/Users/wuyisong/mmp/text_mmp.txt")) {
+//            return;
+//        }
+//        File file = new File("/Users/wuyisong/mmp/text_mmp.txt");
+//        try {
+////            FileStorage.writeStream("/Users/wuyisong/mmp/text_mmp_copy.txt", new FileInputStream(file));
+//            writeStream("/Users/wuyisong/mmp/text_mmp_copy.txt", new FileInputStream(file));
+////            if (file.delete()) {
+////                System.out.println("delete success");
+////            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static boolean writeStream(String path, InputStream inputStream) {
@@ -35,8 +32,9 @@ public class MmpStorage {
         RandomAccessFile raf = null;
         FileChannel fc = null;
         MappedByteBuffer mbb = null;
+        File file = new File(path);
         try {
-            raf = new RandomAccessFile(path, "rw");
+            raf = new RandomAccessFile(file, "rw");
             fc = raf.getChannel();
             byte[] buffer = new byte[BUFFER_SIZE];
             int read = 0;
@@ -46,9 +44,11 @@ public class MmpStorage {
                 mbb.put(buffer, 0, read);
                 hasRead = hasRead + read;
             }
-
         } catch (Exception e) {
             e.printStackTrace();
+            if (file.delete()) {
+
+            }
         } finally {
             InternalUtil.close(fc, raf);
             unmap(mbb);
