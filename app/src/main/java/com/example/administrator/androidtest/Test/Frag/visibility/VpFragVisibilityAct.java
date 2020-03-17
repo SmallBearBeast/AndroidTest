@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
 import com.example.libframework.CoreUI.ComponentAct;
+import com.example.libframework.Dialog.BaseDialogFragment;
 import com.example.libframework.Page.IPage;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class VpFragVisibilityAct extends ComponentAct {
         mTvPage = findViewById(R.id.tv_page);
         myAdapter = new MyAdapter(getSupportFragmentManager());
         vpContainer.setAdapter(myAdapter);
-        vpContainer.setCurrentItem(1);
+        vpContainer.setCurrentItem(2);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
     }
 
@@ -50,8 +52,20 @@ public class VpFragVisibilityAct extends ComponentAct {
                 break;
 
             case R.id.bt_checkout_3:
-                vpContainer.setCurrentItem(2, false);
+//                vpContainer.setCurrentItem(2, false);
+                new TestDialog(this).show();
                 break;
+        }
+    }
+
+    public static class TestDialog extends BaseDialogFragment {
+        public TestDialog(FragmentActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        protected int layoutId() {
+            return R.layout.dialog_permission;
         }
     }
 
@@ -89,7 +103,6 @@ public class VpFragVisibilityAct extends ComponentAct {
 //        tvFragVisibility.setText(builder.toString());
 //    }
 
-    @Override
     public int pageId() {
         return IPage.VpFragVisibilityAct;
     }
@@ -99,7 +112,7 @@ public class VpFragVisibilityAct extends ComponentAct {
         private List<Fragment> fragmentList = new ArrayList<>();
 
         public MyAdapter(FragmentManager fm) {
-            super(fm);
+            super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
             fragmentList.add(new FragmentOneVp());
             fragmentList.add(new FragmentSeven());
             fragmentList.add(new FragmentThreeVp());
@@ -114,5 +127,11 @@ public class VpFragVisibilityAct extends ComponentAct {
         public int getCount() {
             return fragmentList.size();
         }
+    }
+
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

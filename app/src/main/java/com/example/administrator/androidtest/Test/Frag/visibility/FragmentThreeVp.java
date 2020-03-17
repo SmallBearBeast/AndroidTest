@@ -15,6 +15,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.CoreUI.ComponentFrag;
 import com.example.libframework.Page.IPage;
+import com.example.liblog.SLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,6 @@ public class FragmentThreeVp extends ComponentFrag {
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
     }
 
-    @Override
     public int pageId() {
         return IPage.FragmentThreeVp;
     }
@@ -48,7 +48,7 @@ public class FragmentThreeVp extends ComponentFrag {
 
         private List<Fragment> fragmentList = new ArrayList<>();
         public MyAdapter(FragmentManager fm) {
-            super(fm);
+            super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
             fragmentList.add(new FragmentFour());
             fragmentList.add(new FragmentFive());
             fragmentList.add(new FragmentSix());
@@ -63,5 +63,11 @@ public class FragmentThreeVp extends ComponentFrag {
         public int getCount() {
             return fragmentList.size();
         }
+    }
+
+    @Override
+    protected void onFirstVisible() {
+        super.onFirstVisible();
+        SLog.d(TAG, "onFirstVisible");
     }
 }

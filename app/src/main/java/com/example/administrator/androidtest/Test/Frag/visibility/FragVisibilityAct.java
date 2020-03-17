@@ -45,7 +45,6 @@ public class FragVisibilityAct extends ComponentAct {
         }
     }
 
-    @Override
     public int pageId() {
         return IPage.FragVisibilityAct;
     }

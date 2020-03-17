@@ -12,17 +12,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.libframework.BuildConfig;
-import com.example.libframework.Page.IPage;
-import com.example.libframework.Page.Page;
-import com.example.libframework.Page.PageProvider;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BaseAct extends AppCompatActivity implements IPage {
+public abstract class BaseAct extends AppCompatActivity {
     protected final String TAG = getClass().getSimpleName();
     private static final int Permission_Request_Code = 1;
-    private Page mPage;
     private PermissionListener mPermissionListener;
     private ActResultListener mActResultListener;
 
@@ -39,17 +35,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
         setContentView(layoutId());
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        PageProvider.getInstance().addPage(createPage());
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPage = null;
-    }
 
     public void goAct(Class clz) {
         goAct(clz, null, null);
@@ -147,27 +132,6 @@ public abstract class BaseAct extends AppCompatActivity implements IPage {
             }
         }
     }
-
-    /**
-     * 页面处理相关方法
-     */
-    private Page createPage() {
-        mPage = new Page(pageId());
-        return mPage;
-    }
-
-    public Page getPage() {
-        return mPage;
-    }
-
-    @Override
-    public int pageId() {
-        return IPage.VpFragVisibilityAct;
-    }
-
-    /**
-     * 页面处理相关方法
-     **/
 
     protected abstract int layoutId();
 

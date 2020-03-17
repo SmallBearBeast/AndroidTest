@@ -35,7 +35,6 @@ public class FragmentSeven extends ComponentFrag {
         return super.onCreateView(inflater, container, savedInstanceState);
     }
 
-    @Override
     public int pageId() {
         return IPage.FragmentSeven;
     }
@@ -68,5 +67,11 @@ public class FragmentSeven extends ComponentFrag {
             SLog.d(TAG, "onDestroy: ");
             super.onDestroy();
         }
+    }
+
+    @Override
+    protected void onFirstVisible() {
+        super.onFirstVisible();
+        SLog.d(TAG, "onFirstVisible");
     }
 }

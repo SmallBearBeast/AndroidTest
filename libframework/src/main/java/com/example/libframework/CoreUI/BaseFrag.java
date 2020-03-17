@@ -15,21 +15,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.libframework.BuildConfig;
-import com.example.libframework.Page.IPage;
-import com.example.libframework.Page.Page;
-import com.example.libframework.Page.PageProvider;
 
-import java.util.List;
-
-public abstract class BaseFrag extends Fragment implements IPage {
+public abstract class BaseFrag extends Fragment {
     protected String TAG = getClass().getSimpleName();
-    //Preserve the position of the last visible sub fragment.
-    private int mLastVisibleFragPos = 0;
-    private boolean mIsDoneSetUserVisibleHint;
-    private boolean mIsVisibleToUser;
-    private boolean mIsDoneStart;
     private boolean mIsFirstVisible = true;
-    private Page mPage;
     protected BaseAct mBaseAct;
     protected BaseFrag mBaseFrag;
 
@@ -70,79 +59,51 @@ public abstract class BaseFrag extends Fragment implements IPage {
     }
 
     @Override
-    @CallSuper
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        mIsDoneSetUserVisibleHint = true;
-        mIsVisibleToUser = isVisibleToUser;
-        if (getActivity() != null) {
-            if (mIsDoneStart && mIsVisibleToUser) {
-                addPage(null);
-                dispatchFirstVisible();
-                onVisible();
-            }
-            List<Fragment> childs = getChildFragmentManager().getFragments();
-            boolean hasChild = (childs != null && childs.size() > 0);
-            if (hasChild) {
-                for (int i = 0; i < childs.size(); i++) {
-                    Fragment f = childs.get(i);
-                    if (f.getUserVisibleHint()) {
-                        mLastVisibleFragPos = i;
-                    }
-                    if (mLastVisibleFragPos == i) {
-                        f.setUserVisibleHint(isVisibleToUser);
-                    }
-                }
-            }
-        }
+    public void onResume() {
+        super.onResume();
+        dispatchFirstVisible();
     }
 
-    /**
-     * The method will only be called if there are nested fragments in the fragment.
-     * Solve the problem which the visibility of multiple child fragments is true during initialization.
-     * The basis is that as long as the visibility of the parent fragment is false, the visibility of the child fragment is also false
-     */
-    @Override
-    @CallSuper
-    public void onAttachFragment(Fragment childFragment) {
-        boolean isVisibleToUser = getUserVisibleHint();
-        if (!isVisibleToUser) {
-            if (childFragment.getUserVisibleHint()) {
-                childFragment.setUserVisibleHint(false);
-            }
-        }
-    }
+//    private boolean mIsVisibleToUser;
+//    private boolean mIsCallResume;
 
-    @Override
-    @CallSuper
-    public void onStart() {
-        super.onStart();
-        mIsDoneStart = true;
-        if (mIsDoneSetUserVisibleHint) {
-            if (mIsVisibleToUser) {
-                addPage(null);
-                dispatchFirstVisible();
-                onVisible();
-            }
-        } else {
-            addPage(null);
-        }
-    }
-
-    @Override
-    @CallSuper
-    public void onHiddenChanged(boolean hidden) {
-        if (!hidden) {
-            PageProvider.getInstance().addPage(mBaseAct.getPage(), createPage());
-        }
-    }
-
-    @Override
-    @CallSuper
-    public void onDestroy() {
-        super.onDestroy();
-        mPage = null;
-    }
+//    @Override
+//    public void onResume() {
+//        super.onResume();
+//        mIsCallResume = true;
+//        if (mIsVisibleToUser) {
+//            dispatchFirstVisible();
+//        }
+//        dispatchFirstVisible();
+//    }
+//
+//    @Override
+//    @CallSuper
+//    public void setUserVisibleHint(boolean isVisibleToUser) {
+//        super.setUserVisibleHint(isVisibleToUser);
+//        mIsVisibleToUser = isVisibleToUser;
+//        if (getActivity() != null) {
+//            if (mIsCallResume && mIsVisibleToUser) {
+//                dispatchFirstVisible();
+//            }
+//        }
+//    }
+//
+//    /**
+//     * The method will only be called if there are nested fragments in the fragment.
+//     * Solve the problem which the visibility of multiple child fragments is true during initialization.
+//     * The basis is that as long as the visibility of the parent fragment is false, the visibility of the child fragment is also false
+//     */
+//    @Override
+//    @CallSuper
+//    public void onAttachFragment(Fragment childFragment) {
+//        boolean isVisibleToUser = getUserVisibleHint();
+//        if (!isVisibleToUser) {
+//            if (childFragment.getUserVisibleHint()) {
+//                childFragment.setUserVisibleHint(false);
+//            }
+//        }
+//    }
 
     @Override
     @CallSuper
@@ -161,14 +122,6 @@ public abstract class BaseFrag extends Fragment implements IPage {
     }
 
     protected abstract int layoutId();
-
-    /**
-     * When the fragment is visible, the method is called.
-     * Order: setUserVisibleHint->onAttachFragment->onStart
-     */
-    protected void onVisible() {
-
-    }
 
     private void dispatchFirstVisible() {
         if (mIsFirstVisible) {
@@ -209,27 +162,5 @@ public abstract class BaseFrag extends Fragment implements IPage {
             return getView().findViewById(viewId);
         }
         return null;
-    }
-
-    private Page createPage() {
-        mPage = new Page(pageId());
-        return mPage;
-    }
-
-    public Page getPage() {
-        return mPage;
-    }
-
-    private void addPage(Page backPage) {
-        if (mBaseFrag != null) {
-            PageProvider.getInstance().addPage(mBaseFrag.getPage(), backPage != null ? backPage : createPage());
-        } else {
-            PageProvider.getInstance().addPage(mBaseAct.getPage(), backPage != null ? backPage : createPage());
-        }
-    }
-
-    @Override
-    public int pageId() {
-        return 0;
     }
 }

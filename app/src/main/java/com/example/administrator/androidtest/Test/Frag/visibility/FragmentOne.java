@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.Test.Frag.visibility;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.CoreUI.ComponentFrag;
 import com.example.libframework.Page.IPage;
+import com.example.liblog.SLog;
 
 public class FragmentOne extends ComponentFrag {
 
@@ -28,9 +29,13 @@ public class FragmentOne extends ComponentFrag {
         return R.layout.frag_text_1;
     }
 
-
-    @Override
     public int pageId() {
         return IPage.FragmentOne;
+    }
+
+    @Override
+    protected void onFirstVisible() {
+        super.onFirstVisible();
+        SLog.d(TAG, "onFirstVisible");
     }
 }

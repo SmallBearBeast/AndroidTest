@@ -1,7 +1,5 @@
 package com.example.libframework.CoreUI;
 
-import android.view.View;
-
 public abstract class FragComponent extends BaseComponent<ComponentFrag> {
     protected ComponentAct mComActivity;
 
@@ -9,15 +7,11 @@ public abstract class FragComponent extends BaseComponent<ComponentFrag> {
         mComActivity = activity;
     }
 
-    protected void onCreateView(View contentView) {
+    protected void onCreateView() {
 
     }
 
-    protected void onDestroyView(View contentView) {
-
-    }
-
-    protected void onVisible() {
+    protected void onDestroyView() {
 
     }
 
