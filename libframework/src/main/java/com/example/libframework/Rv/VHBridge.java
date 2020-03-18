@@ -34,6 +34,10 @@ public abstract class VHBridge<VH extends VHolder> {
         return 1;
     }
 
+    protected boolean isSupportLifecycle() {
+        return false;
+    }
+
     protected boolean isFullSpan() {
         return false;
     }

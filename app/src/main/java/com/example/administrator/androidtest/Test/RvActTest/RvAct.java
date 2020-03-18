@@ -49,7 +49,7 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
 //        mRvTest.setHasFixedSize(true);
 
 //        mRvTest.addItemDecoration(new RvDivider(gridLayoutManager, 20, Color.RED));
-        mAdapter = new VHAdapter();
+        mAdapter = new VHAdapter(getLifecycle());
         mAdapter.register(new ImageVHBinder(), Image.class);
         mAdapter.register(new InfoVHBinder(), Info.class);
         mAdapter.register(msgVHBinder, Msg.class);

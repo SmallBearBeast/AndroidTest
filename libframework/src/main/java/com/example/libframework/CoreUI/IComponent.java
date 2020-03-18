@@ -1,7 +1,7 @@
 package com.example.libframework.CoreUI;
 
-import androidx.lifecycle.GenericLifecycleObserver;
+import androidx.lifecycle.LifecycleEventObserver;
 
-public interface IComponent extends GenericLifecycleObserver {
+public interface IComponent extends LifecycleEventObserver {
 
 }

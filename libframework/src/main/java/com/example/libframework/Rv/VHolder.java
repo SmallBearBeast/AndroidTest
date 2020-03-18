@@ -1,6 +1,5 @@
 package com.example.libframework.Rv;
 
-import androidx.lifecycle.GenericLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
@@ -15,7 +14,7 @@ import android.view.View;
 
 import com.example.libframework.CoreUI.IComponent;
 
-public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent, View.OnClickListener, GenericLifecycleObserver {
+public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent, View.OnClickListener {
     protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
     protected DATA mData;
     protected int mPos;
@@ -110,6 +109,7 @@ public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent
             onStop();
         } else if (event == Lifecycle.Event.ON_DESTROY) {
             onDestroy();
+            source.getLifecycle().removeObserver(this);
         }
     }
 }

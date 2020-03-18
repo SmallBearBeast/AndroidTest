@@ -46,7 +46,7 @@ public class MediaTestAct extends ComponentAct {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         rvMedia.setLayoutManager(gridLayoutManager);
         rvMedia.addItemDecoration(new RvDivider(gridLayoutManager, divider));
-        VHAdapter adapter = new VHAdapter();
+        VHAdapter adapter = new VHAdapter(getLifecycle());
 //        adapter.register(new ImageVideoBridge(divider), Cursor.class);
         TextBridge textBridge = new TextBridge();
         adapter.register(textBridge, String.class);

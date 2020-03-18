@@ -37,7 +37,7 @@ public class RvVpRvTestAct extends ComponentAct {
         super.onCreate(savedInstanceState);
         mRvTest = findViewById(R.id.rv_test);
         mRvTest.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new VHAdapter();
+        mAdapter = new VHAdapter(getLifecycle());
         mAdapter.register(new TextVHBridge(), String.class);
         mAdapter.register(new VpVHBridge(), Integer.class);
         mAdapter.getDataManager().addLast(CollectionUtil.asListNotNull(
@@ -69,7 +69,7 @@ public class RvVpRvTestAct extends ComponentAct {
         }
     }
 
-    private static class VpVHBridge extends VHBridge {
+    private class VpVHBridge extends VHBridge {
         @NonNull
         @Override
         protected VHolder onCreateViewHolder(@NonNull View itemView) {
@@ -91,7 +91,7 @@ public class RvVpRvTestAct extends ComponentAct {
             return view;
         }
 
-        private static class VpAdapter extends PagerAdapter {
+        private class VpAdapter extends PagerAdapter {
 
             private List<RecyclerView> mRvList = new ArrayList<>();
 
@@ -101,7 +101,7 @@ public class RvVpRvTestAct extends ComponentAct {
                     ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
                     rv.setLayoutParams(lp);
                     rv.setLayoutManager(new LinearLayoutManager(context));
-                    VHAdapter adapter = new VHAdapter();
+                    VHAdapter adapter = new VHAdapter(getLifecycle());
                     adapter.register(new TextVHBridge(), String.class);
                     adapter.getDataManager().addLast(CollectionUtil.asListNotNull(
                             "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"

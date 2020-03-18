@@ -1,8 +1,8 @@
 package com.example.libframework.Rv;
 
 import android.annotation.SuppressLint;
-import androidx.lifecycle.GenericLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,20 +22,24 @@ import java.util.Map;
 
 @SuppressLint({"RestrictedApi"})
 @SuppressWarnings("unchecked")
-public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements GenericLifecycleObserver {
+public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements LifecycleEventObserver {
     protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
     private static final int DATA_TYPE_LIMIT = 100;
     private LayoutInflater mInflater;
     private RecyclerView mRecyclerView;
     private DataManager mDataManager;
-    private Map<Integer, Integer> mClzMap = new HashMap<>();
-    private SparseArray<VHBridge> mBridgeMap = new SparseArray<>();
+    private Map<Integer, Integer> mClzMap;
+    private SparseArray<VHBridge> mBridgeMap;
     private int mIncrease = DATA_TYPE_LIMIT;
     private Context mContext; //通过外部传入好还是onAttachedToRecyclerView拿去
+    private Lifecycle mLifecycle;
 
-    public VHAdapter() {
+    public VHAdapter(Lifecycle lifecycle) {
         mDataManager = new DataManager();
         mDataManager.setAdapter(this);
+        mLifecycle = lifecycle;
+        mClzMap = new HashMap<>();
+        mBridgeMap = new SparseArray<>();
     }
 
     @Override
@@ -43,13 +47,13 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
         return mDataManager.size();
     }
 
-
     @NonNull
     @Override
     public VH onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (mInflater == null) {
             mInflater = LayoutInflater.from(parent.getContext());
         }
+        VHolder vh = null;
         VHBridge bridge = mBridgeMap.get(viewType);
         if (bridge != null) {
             View view = bridge.itemView();
@@ -61,14 +65,15 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
             }
             if (view != null) {
                 setUpStaggerFullSpan(view, bridge);
-                return (VH) bridge.onCreateViewHolder(view);
+                vh = bridge.onCreateViewHolder(view);
+            } else {
+                vh = bridge.onCreateViewHolder(parent, viewType);
             }
-            VHolder vh = bridge.onCreateViewHolder(parent, viewType);
-            if (vh != null) {
-                return (VH) vh;
+            if (mLifecycle != null && bridge.isSupportLifecycle()) {
+                mLifecycle.addObserver(vh);
             }
         }
-        return null;
+        return (VH) vh;
     }
 
     private void setUpStaggerFullSpan(View itemView, VHBridge bridge) {
@@ -186,9 +191,8 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         mRecyclerView = recyclerView;
         mContext = recyclerView.getContext();
-        if (mContext instanceof LifecycleOwner) {
-            LifecycleOwner owner = (LifecycleOwner) mContext;
-            owner.getLifecycle().addObserver(this);
+        if (mLifecycle != null) {
+            mLifecycle.addObserver(this);
         }
         for (int i = 0, size = mBridgeMap.size(); i < size; i++) {
             VHBridge bridge = mBridgeMap.valueAt(i);
@@ -216,18 +220,18 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
 
     @Override
     public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
-        if (mRecyclerView != null) {
-            int count = mRecyclerView.getChildCount();
-            for (int i = 0; i < count; i++) {
-                RecyclerView.ViewHolder viewHolder = mRecyclerView.getChildViewHolder(mRecyclerView.getChildAt(i));
-                if (viewHolder instanceof GenericLifecycleObserver) {
-                    ((GenericLifecycleObserver) viewHolder).onStateChanged(source, event);
-                }
-            }
-        }
         if (event == Lifecycle.Event.ON_DESTROY) {
-            mDataManager.clear();
             source.getLifecycle().removeObserver(this);
+            mInflater = null;
+            mRecyclerView = null;
+            mDataManager.clear();
+            mDataManager = null;
+            mClzMap.clear();
+            mClzMap = null;
+            mBridgeMap.clear();
+            mBridgeMap = null;
+            mContext = null;
+            mLifecycle = null;
         }
     }
 
