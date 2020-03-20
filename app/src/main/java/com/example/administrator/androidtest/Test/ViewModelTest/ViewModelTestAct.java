@@ -1,11 +1,14 @@
 package com.example.administrator.androidtest.Test.ViewModelTest;
 
+import androidx.core.content.ContextCompat;
 import androidx.lifecycle.GenericLifecycleObserver;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -83,7 +86,7 @@ public class ViewModelTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_test_4:
-                goAct(ViewModelTestAct.class);
+                ViewModelTestAct.go(this);
                 break;
 
             case R.id.bt_test_5:
@@ -101,5 +104,9 @@ public class ViewModelTestAct extends ComponentAct {
             }
         });
         getLifecycle().addObserver(new LifeCycleTestObserver());
+    }
+
+    public static void go(Context context) {
+        ContextCompat.startActivity(context, new Intent(context, ViewModelTestAct.class), null);
     }
 }

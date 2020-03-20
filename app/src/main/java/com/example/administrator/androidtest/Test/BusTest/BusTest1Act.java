@@ -1,13 +1,17 @@
 package com.example.administrator.androidtest.Test.BusTest;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import android.view.View;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.ViewModelTest.ViewModelTestAct;
 import com.example.libframework.Bus.Event;
 import com.example.libframework.Bus.EventCallback;
 import com.example.libframework.CoreUI.ComponentAct;
@@ -39,7 +43,7 @@ public class BusTest1Act extends ComponentAct {
         switch (view.getId()) {
             case R.id.bt_1:
                 Bus.get().postStick(new Event("stick_event", "hello stick"));
-                goAct(BusTest2Act.class);
+                BusTest2Act.go(this);
                 break;
         }
     }

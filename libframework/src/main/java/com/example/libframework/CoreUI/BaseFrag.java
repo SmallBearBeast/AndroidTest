@@ -43,7 +43,7 @@ public abstract class BaseFrag extends Fragment {
         }
         Intent intent = mBaseAct.getIntent();
         if (intent != null) {
-            handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
+            handleIntent(intent);
         }
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -113,7 +113,7 @@ public abstract class BaseFrag extends Fragment {
         mBaseFrag = null;
     }
 
-    protected void handleIntent(@NonNull Intent intent, @Nullable Bundle bundle) {
+    protected void handleIntent(@NonNull Intent intent) {
 
     }
 
@@ -143,7 +143,7 @@ public abstract class BaseFrag extends Fragment {
      * @param key   The name of shared data.
      * @param value The value of shared data.
      */
-    protected void put(String key, Object value) {
+    protected void put(@NonNull String key, @NonNull Object value) {
         ViewModelProviders.of(mBaseAct).get(ShareDataVM.class).put(key, value);
     }
 
@@ -153,7 +153,7 @@ public abstract class BaseFrag extends Fragment {
      * @param key The name of shared data.
      * @return The value of shared data.
      */
-    protected <V> V get(String key) {
+    protected @NonNull <V> V get(@NonNull String key) {
         return ViewModelProviders.of(mBaseAct).get(ShareDataVM.class).get(key);
     }
 

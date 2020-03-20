@@ -15,7 +15,7 @@ public final class ToastUtil extends AppInitUtil{
     }
 
     public static void showToast(final ToastConfig config){
-        MainThreadUtil.run(new Runnable() {
+        ThreadUtil.postOnMain(new Runnable() {
             @Override
             public void run() {
                 if (sToast != null) {

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
@@ -27,38 +26,12 @@ public abstract class BaseAct extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         Intent intent = getIntent();
         if (intent != null) {
-            handleIntent(intent, intent.getBundleExtra(IContext.BUNDLE));
+            handleIntent(intent);
         }
         if (BuildConfig.DEBUG) {
             getLifecycle().addObserver(new ActLifeDebug(TAG));
         }
         setContentView(layoutId());
-    }
-
-
-    public void goAct(Class clz) {
-        goAct(clz, null, null);
-    }
-
-    public void goAct(Class clz, Bundle bundle) {
-        goAct(clz, bundle, null);
-    }
-
-    public void goAct(Class clz, Bundle bundle, Bundle options) {
-        Intent intent = new Intent(this, clz);
-        intent.putExtra(IContext.BUNDLE, bundle);
-        ContextCompat.startActivity(this, intent, options);
-    }
-
-    public void goActForResult(Class clz, int requestCode, Bundle bundle, ActResultListener listener) {
-        goActForResult(clz, requestCode, bundle, null, listener);
-    }
-
-    public void goActForResult(Class clz, int requestCode, Bundle bundle, Bundle options, ActResultListener listener) {
-        mActResultListener = listener;
-        Intent intent = new Intent(this, clz);
-        intent.putExtra(IContext.BUNDLE, bundle);
-        ActivityCompat.startActivityForResult(this, intent, requestCode, options);
     }
 
     public interface ActResultListener {
@@ -135,7 +108,7 @@ public abstract class BaseAct extends AppCompatActivity {
 
     protected abstract int layoutId();
 
-    protected void handleIntent(Intent intent, Bundle bundle) {
+    protected void handleIntent(@NonNull Intent intent) {
 
     }
 
@@ -145,7 +118,7 @@ public abstract class BaseAct extends AppCompatActivity {
      * @param key   The name of shared data.
      * @param value The value of shared data.
      */
-    protected void put(String key, Object value) {
+    public void put(@NonNull String key, @NonNull Object value) {
         ViewModelProviders.of(this).get(ShareDataVM.class).put(key, value);
     }
 
@@ -155,11 +128,15 @@ public abstract class BaseAct extends AppCompatActivity {
      * @param key The name of shared data.
      * @return The value of shared data.
      */
-    protected <V> V get(String key) {
+    public @NonNull <V> V get(@NonNull String key) {
         return ViewModelProviders.of(this).get(ShareDataVM.class).get(key);
     }
 
     protected View getDecorView() {
         return getWindow().getDecorView();
+    }
+
+    protected void setActResultListener(ActResultListener actResultListener) {
+        mActResultListener = actResultListener;
     }
 }

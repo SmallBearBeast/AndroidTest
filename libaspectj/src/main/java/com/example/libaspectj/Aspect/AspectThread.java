@@ -3,7 +3,6 @@ package com.example.libaspectj.Aspect;
 import android.util.Log;
 import com.example.libaspectj.Annotation.Thread.AsThread;
 import com.example.libaspectj.Annotation.Thread.ThreadMode;
-import com.example.libbase.Util.MainThreadUtil;
 import com.example.libbase.Util.ThreadUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -27,7 +26,7 @@ public class AspectThread {
         if(ann != null){
             int mode = ann.mode();
             if(mode == ThreadMode.UI){
-                MainThreadUtil.run(new Runnable() {
+                ThreadUtil.postOnMain(new Runnable() {
                     @Override
                     public void run() {
                         try {

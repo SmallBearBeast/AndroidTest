@@ -1,12 +1,16 @@
 package com.example.administrator.androidtest.Test.BusTest;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MemoryLeakTest.FirstAct;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libframework.Bus.EventCallback;
 import com.example.libframework.CoreUI.ComponentAct;
@@ -56,4 +60,8 @@ public class BusTest2Act extends ComponentAct {
             return CollectionUtil.asSet("stick_event");
         }
     };
+
+    public static void go(Context context) {
+        ContextCompat.startActivity(context, new Intent(context, BusTest2Act.class), null);
+    }
 }

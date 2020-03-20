@@ -15,6 +15,9 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class OtherUtil extends AppInitUtil {
     public boolean isRtl() {
         return TextUtilsCompat.getLayoutDirectionFromLocale(
@@ -37,7 +40,7 @@ public class OtherUtil extends AppInitUtil {
         iv.setImageBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false));
     }
 
-    public static void copyToClipboard(final String label, final String text) {
+    public static void copyToClipboard(String label, String text) {
         ClipboardManager manager = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData data = ClipData.newPlainText(label, text);
         if(manager != null) {
@@ -49,15 +52,50 @@ public class OtherUtil extends AppInitUtil {
         }
     }
 
-    public static void showSoftKeyboard(final Context context, final View view) {
+    public static void showSoftInput(Context context, View view) {
         try {
-            view.requestFocus();
             final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             if(imm != null) {
+                view.requestFocus();
                 imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
             }
-        } catch (NullPointerException e) {
+        } catch (Exception e) {
 
         }
     }
+
+    public static void hideSoftInput(Context context, View view) {
+        try {
+            final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if(imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    /**
+     * obj转为T类型
+     */
+    public static <T> T toT(Object obj, Class<T> clz){
+        if(obj.getClass().isAssignableFrom(clz)){
+            return (T) obj;
+        }
+        return null;
+    }
+    /**obj转为T类型**/
+
+
+    /**
+     * list转为T范型list
+     */
+    public static <T> List<T> toListT(List list, Class<T> clz){
+        List<T> tList = new ArrayList<>();
+        for (Object obj : list) {
+            tList.add(toT(obj, clz));
+        }
+        return tList;
+    }
+    /**list转为T范型list**/
 }

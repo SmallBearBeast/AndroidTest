@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TimeUtil {
-    private static final String TAG = "TimeUtil";
     private static Map<String, Long> sStartTimeMap = new HashMap<>();
     private static Map<String, Long> sEndTimeMap = new HashMap<>();
 

@@ -5,7 +5,6 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import com.example.libbase.Util.BitmapUtil;
 import com.example.libbase.Util.FileUtil;
-import com.example.libbase.Util.MainThreadUtil;
 import com.example.libbase.Util.ThreadUtil;
 import com.example.libfresco.Listener.*;
 import com.facebook.cache.common.CacheErrorLogger;
@@ -120,7 +119,7 @@ public class FrescoUtil {
             @Override
             protected void onNewResultImpl(final Bitmap BITMAP) {
                 if(CALLBACK != null){
-                    MainThreadUtil.run(new Runnable() {
+                    ThreadUtil.postOnMain(new Runnable() {
                         @Override
                         public void run() {
                             CALLBACK.bitmap(BITMAP);
@@ -133,7 +132,7 @@ public class FrescoUtil {
             @Override
             protected void onFailureImpl(DataSource<CloseableReference<CloseableImage>> dataSource) {
                 if(CALLBACK != null){
-                    MainThreadUtil.run(new Runnable() {
+                    ThreadUtil.postOnMain(new Runnable() {
                         @Override
                         public void run() {
                             CALLBACK.bitmap(null);
@@ -198,7 +197,7 @@ public class FrescoUtil {
                             FileUtil.rename(TEMP_PATH, PATH);
                         }
                     };
-                    if(MainThreadUtil.isMainThread()){
+                    if(ThreadUtil.isMainThread()){
                         ThreadUtil.execute(run);
                     }else {
                         run.run();
