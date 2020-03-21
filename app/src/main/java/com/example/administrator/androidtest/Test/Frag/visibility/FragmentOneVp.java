@@ -35,6 +35,12 @@ public class FragmentOneVp extends ComponentFrag {
         vpContainer.setAdapter(myAdapter);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
         vpContainer.setCurrentItem(2);
+        vpContainer.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                SLog.d(TAG, "onPageSelected: position = " + position);
+            }
+        });
     }
 
     public int pageId() {

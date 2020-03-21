@@ -1,6 +1,8 @@
 package com.example.administrator.androidtest.Test.Spinner;
 
 import android.database.DataSetObserver;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -15,11 +17,19 @@ import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
+import com.example.libbase.Util.DensityUtil;
 import com.example.libframework.CoreUI.ComponentAct;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 建议使用PopupWindow替换
+ * 1.使用Adapter，用法复杂，一般Spinnner数据量比较少。
+ * 2.没有显示的show hide方法，由内部自己控制，可控性差。
+ * 3.edittext有焦点冲突问题。
+ * 4.有阴影问题。
+ */
 public class SpinnerAct extends ComponentAct {
     private static final String TAG = "SpinnerAct_TAG";
     AppCompatSpinner spinner;
@@ -34,6 +44,8 @@ public class SpinnerAct extends ComponentAct {
         super.onCreate(savedInstanceState);
         spinner = findViewById(R.id.sp_text);
         spinner.setAdapter(new MyAdapter());
+        spinner.setDropDownVerticalOffset(DensityUtil.dp2Px(50));
+        spinner.setPopupBackgroundDrawable(new ColorDrawable(Color.WHITE));
     }
 
     private class MyAdapter implements SpinnerAdapter {

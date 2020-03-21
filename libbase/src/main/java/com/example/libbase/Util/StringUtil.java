@@ -2,6 +2,8 @@ package com.example.libbase.Util;
 
 
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StringUtil {
     /**
@@ -85,5 +87,11 @@ public class StringUtil {
             }
         }
         return builder.toString();
+    }
+
+    public static boolean isValidUrl(String url) {
+        Pattern pattern = Pattern.compile("^([h][t]{2}[p][s]://)([A-Za-z0-9.])++((.)++)");
+        Matcher mat = pattern.matcher(url.trim());
+        return mat.matches();
     }
 }

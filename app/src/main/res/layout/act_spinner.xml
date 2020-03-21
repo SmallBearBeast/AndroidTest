@@ -4,8 +4,8 @@
     style="@style/match_parent">
 
     <androidx.appcompat.widget.AppCompatSpinner
-        android:background="@color/cl_oriange"
+        android:background="@color/cl_red"
         android:id="@+id/sp_text"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_30"/>
+        android:layout_height="@dimen/dp_50"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

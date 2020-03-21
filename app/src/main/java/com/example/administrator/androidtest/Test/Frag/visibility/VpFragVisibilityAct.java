@@ -15,6 +15,8 @@ import com.example.administrator.androidtest.R;
 import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Dialog.BaseDialogFragment;
 import com.example.libframework.Page.IPage;
+import com.example.libframework.Wrapper.OnPageChangeListenerWrapper;
+import com.example.liblog.SLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +41,13 @@ public class VpFragVisibilityAct extends ComponentAct {
         vpContainer.setAdapter(myAdapter);
         vpContainer.setCurrentItem(2);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
+        // Use OnPageChangeListener to notify child viewpager to switch tabs
+        vpContainer.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener(){
+            @Override
+            public void onPageSelected(int position) {
+                SLog.d(TAG, "onPageSelected: position = " + position);
+            }
+        });
     }
 
     public void onClick(View view) {
