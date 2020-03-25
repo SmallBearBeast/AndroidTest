@@ -1,7 +1,6 @@
 package com.example.libframework.CoreUI;
 
 import androidx.annotation.CallSuper;
-import androidx.annotation.IdRes;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
@@ -155,12 +154,5 @@ public abstract class BaseFrag extends Fragment {
      */
     protected @NonNull <V> V get(@NonNull String key) {
         return ViewModelProviders.of(mBaseAct).get(ShareDataVM.class).get(key);
-    }
-
-    protected <T extends View> T findViewById(@IdRes int viewId) {
-        if (getView() != null) {
-            return getView().findViewById(viewId);
-        }
-        return null;
     }
 }

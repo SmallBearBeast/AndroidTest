@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class ExtObj {
-    private Map<String, Object> otherAttr;
+    private Map<String, Object> mExtraMap;
 
     public void put(String key, Object value) {
-        if (otherAttr == null) {
-            otherAttr = new HashMap<>();
+        if (mExtraMap == null) {
+            mExtraMap = new HashMap<>();
         }
-        otherAttr.put(key, value);
+        mExtraMap.put(key, value);
     }
 
     public <V> V get(String key) {
-        if (otherAttr == null) {
+        if (mExtraMap == null) {
             return null;
         }
-        Object obj = otherAttr.get(key);
+        Object obj = mExtraMap.get(key);
         return (V) obj;
     }
 }

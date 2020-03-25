@@ -69,6 +69,7 @@ public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> impl
             } else {
                 vh = bridge.onCreateViewHolder(parent, viewType);
             }
+            vh.attachBridge(bridge);
             if (mLifecycle != null && bridge.isSupportLifecycle()) {
                 mLifecycle.addObserver(vh);
             }

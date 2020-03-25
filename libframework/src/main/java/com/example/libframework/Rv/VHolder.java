@@ -3,6 +3,7 @@ package com.example.libframework.Rv;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
+import android.content.Context;
 import android.database.Cursor;
 
 import androidx.annotation.CallSuper;
@@ -18,9 +19,30 @@ public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent
     protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
     protected DATA mData;
     protected int mPos;
+    protected VHAdapter mAdapter;
+    protected DataManager mDataManager;
+    protected Context mContext;
+    protected RecyclerView mRecyclerView;
+    protected VHBridge mBridge;
 
     public VHolder(View itemView) {
         super(itemView);
+    }
+
+    void attachBridge(VHBridge bridge) {
+        mBridge = bridge;
+        mAdapter = bridge.mAdapter;
+        mDataManager = bridge.mDataManager;
+        mContext = bridge.mContext;
+        mRecyclerView = bridge.mRecyclerView;
+    }
+
+    protected void put(@NonNull String key, @NonNull Object value) {
+        mBridge.put(key, value);
+    }
+
+    protected @NonNull <V> V get(String key) {
+        return (V) mBridge.get(key);
     }
 
     protected <T extends View> T findViewById(@IdRes int id) {
@@ -45,7 +67,7 @@ public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent
     }
 
     @CallSuper
-    public void bindFull(int pos, DATA data) {
+    protected void bindFull(int pos, DATA data) {
         mData = data;
         mPos = pos;
         if (data instanceof Cursor) {
@@ -109,6 +131,10 @@ public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent
             onStop();
         } else if (event == Lifecycle.Event.ON_DESTROY) {
             onDestroy();
+            mAdapter = null;
+            mDataManager = null;
+            mContext = null;
+            mRecyclerView = null;
             source.getLifecycle().removeObserver(this);
         }
     }

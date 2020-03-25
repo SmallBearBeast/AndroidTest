@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class VHBridge<VH extends VHolder> {
     protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
     //VHAdapter和DataManager是在register赋值。
@@ -16,6 +19,7 @@ public abstract class VHBridge<VH extends VHolder> {
     protected Context mContext;
     protected RecyclerView mRecyclerView;
     protected int mType;
+    private Map<String, Object> mExtraMap;
 
     @NonNull
     protected abstract VH onCreateViewHolder(@NonNull View itemView);
@@ -42,21 +46,28 @@ public abstract class VHBridge<VH extends VHolder> {
         return false;
     }
 
-    protected final int getPosition(@NonNull final VHolder holder) {
-        return holder.getAdapterPosition();
-    }
-
     public int getType(){
         return mType;
     }
 
-    protected void onInitRvAndContext(RecyclerView rv, Context context) {
+    void onInitRvAndContext(RecyclerView rv, Context context) {
         mRecyclerView = rv;
         mContext = context;
     }
 
-    protected void onInitAdapterAndManager(VHAdapter adapter, DataManager manager) {
+    void onInitAdapterAndManager(VHAdapter adapter, DataManager manager) {
         mAdapter = adapter;
         mDataManager = manager;
+    }
+
+    protected void put(@NonNull String key, @NonNull Object value) {
+        if (mExtraMap == null) {
+            mExtraMap = new HashMap<>();
+        }
+        mExtraMap.put(key, value);
+    }
+
+    protected @NonNull <V> V get(@NonNull String key) {
+        return (V) mExtraMap.get(key);
     }
 }

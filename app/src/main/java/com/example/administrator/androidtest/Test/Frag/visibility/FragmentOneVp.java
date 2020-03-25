@@ -1,7 +1,9 @@
 package com.example.administrator.androidtest.Test.Frag.visibility;
 
 import android.os.Bundle;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -27,10 +29,10 @@ public class FragmentOneVp extends ComponentFrag {
         return R.layout.frag_vp;
     }
 
+
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        vpContainer = findViewById(R.id.vp_container);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        vpContainer = view.findViewById(R.id.vp_container);
         myAdapter = new MyAdapter(getChildFragmentManager());
         vpContainer.setAdapter(myAdapter);
         vpContainer.setOffscreenPageLimit(myAdapter.getCount());
