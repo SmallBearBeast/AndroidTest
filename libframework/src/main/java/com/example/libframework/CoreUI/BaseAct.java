@@ -1,5 +1,6 @@
 package com.example.libframework.CoreUI;
 
+import androidx.annotation.CallSuper;
 import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -20,6 +21,16 @@ public abstract class BaseAct extends AppCompatActivity {
     private static final int Permission_Request_Code = 1;
     private PermissionListener mPermissionListener;
     private ActResultListener mActResultListener;
+    private List<BackListener> mBackListenerList = new ArrayList<>();
+
+    {
+        mBackListenerList.add(new BackListener() {
+            @Override
+            public void onBackPressed() {
+                BaseAct.super.onBackPressed();
+            }
+        });
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -138,5 +149,21 @@ public abstract class BaseAct extends AppCompatActivity {
 
     protected void setActResultListener(ActResultListener actResultListener) {
         mActResultListener = actResultListener;
+    }
+
+    public interface BackListener {
+        void onBackPressed();
+    }
+
+    public void addBackListener(@NonNull BackListener backListener) {
+        mBackListenerList.add(backListener);
+    }
+
+    @Override
+    @CallSuper
+    public void onBackPressed() {
+        for (BackListener backListener : mBackListenerList) {
+            backListener.onBackPressed();
+        }
     }
 }
