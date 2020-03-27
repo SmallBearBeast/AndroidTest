@@ -16,7 +16,7 @@ public class FirstAct extends ComponentAct {
     byte[] datas = new byte[1024 * 1024 * 10];
     @Override
     protected int layoutId() {
-        return R.layout.act_first;
+        return R.layout.act_commom_test;
     }
 
     public void onClick(View view) {

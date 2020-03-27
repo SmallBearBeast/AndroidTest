@@ -11,7 +11,7 @@ import com.example.libframework.CoreUI.ComponentAct;
 public class AspectTestAct extends ComponentAct {
     @Override
     protected int layoutId() {
-        return R.layout.act_aspect_test;
+        return R.layout.act_commom_test;
     }
 
     @AsClick(interval = 2000)

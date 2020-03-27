@@ -23,13 +23,13 @@ public class BusTest1Act extends ComponentAct {
 
     @Override
     protected int layoutId() {
-        return R.layout.act_bus_test_1;
+        return R.layout.act_commom_test;
     }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTvTest = findViewById(R.id.tv_test);
+        mTvTest = findViewById(R.id.tv_text_1);
         Bus.get().register(mCallback);
     }
 
