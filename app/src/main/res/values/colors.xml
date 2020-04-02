@@ -64,13 +64,13 @@
 
     <color name="cl_blue_9">#008bed</color>
 
-    <color name="cl_blue_5">#ab6bb7ed</color>
+    <color name="cl_blue_5">#B46BB7ED</color>
 
-    <color name="cl_red_t_6">#a3f2353f</color>
+    <color name="cl_red_t_6">#A9F2353F</color>
 
     <color name="cl_green">#00ae20</color>
 
-    <color name="cl_green_9">#00bf23</color>
+    <color name="cl_green_9">#AB00BF23</color>
 
     <color name="cl_transparent">#00ffffff</color>
 </resources>
