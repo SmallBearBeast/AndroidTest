@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="@color/colorAccent"
+    android:orientation="vertical">
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_white"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_white"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_white"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_white"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_white"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+            <TextView
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_white"
+                android:textSize="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"/>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>
