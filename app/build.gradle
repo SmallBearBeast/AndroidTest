@@ -21,6 +21,8 @@ android {
         }
 
         debug{
+//            minifyEnabled true
+//            shrinkResources true
             buildConfigField("String", "HTTP_BASE", '"https://www.baidu.com/api/debug"')
             buildConfigField("String","HAHA","\"haahahah\"")
         }

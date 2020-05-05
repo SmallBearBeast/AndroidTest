@@ -1,12 +1,14 @@
 package com.example.libbase.Util;
 
-
-import android.app.Activity;
 import android.content.res.Resources;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Build;
 import android.view.*;
 
-public class ScreenUtil extends AppInitUtil{
+import androidx.annotation.ColorRes;
+
+public class ScreenUtil extends AppInitUtil {
 
     private static int COLOR_ID_NONE = -1;
     /**
@@ -18,33 +20,25 @@ public class ScreenUtil extends AppInitUtil{
     /**
      * 正常布局：显示导航栏显示状态栏，状态栏覆盖在布局上面
      */
-    public static void normalScreen(Activity activity, int statusColorId, int navColorId, boolean statusLight, boolean navLight, View view){
-        normalScreen(activity.getWindow(), statusColorId, statusColorId, statusLight, navLight, view);
+    public static void normalScreen(Window window, @ColorRes int statusColorId, @ColorRes int navColorId, View view) {
+        normalScreen(window, statusColorId, navColorId, true, true, view);
     }
 
-    public static void normalScreen(Activity activity, int statusColorId, boolean statusLight, View view){
-        normalScreen(activity, statusColorId, COLOR_ID_NONE, statusLight, false, view);
-    }
-
-    public static void normalScreen(Window window, int statusColorId, boolean statusLight, View view){
-        normalScreen(window, statusColorId, COLOR_ID_NONE, statusLight, false, view);
-    }
-
-    public static void normalScreen(Window window, int statusColorId, int navColorId, boolean statusLight, boolean navLight, View view){
-        if(window != null){
+    public static void normalScreen(Window window, @ColorRes int statusColorId, @ColorRes int navColorId, boolean statusLight, boolean navLight, View view) {
+        if (window != null) {
             View decorView = window.getDecorView();
-            if(decorView != null){
+            if (decorView != null) {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                        | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
                 int opt = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if(statusLight){
+                    if (statusLight) {
                         opt = opt | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                     }
                 }
-
-                if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
-                    if(navLight){
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    if (navLight) {
                         opt = opt | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
                     }
                 }
@@ -54,10 +48,10 @@ public class ScreenUtil extends AppInitUtil{
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                if(statusColorId != COLOR_ID_NONE){
+                if (statusColorId != COLOR_ID_NONE) {
                     window.setStatusBarColor(getColor(statusColorId));
                 }
-                if(navColorId != COLOR_ID_NONE){
+                if (navColorId != COLOR_ID_NONE) {
                     window.setNavigationBarColor(getColor(navColorId));
                 }
             }
@@ -69,16 +63,10 @@ public class ScreenUtil extends AppInitUtil{
     /**
      * 沉浸式全屏，下拉出现状态栏和导航栏，过一段时间消失
      */
-    public static void immersiveFullScreen(Activity activity){
-        Window window = activity.getWindow();
-        immersiveFullScreen(window);
-    }
-
-
-    public static void immersiveFullScreen(Window window){
-        if(window != null){
+    public static void immersiveFullScreen(Window window) {
+        if (window != null) {
             View decorView = window.getDecorView();
-            if(decorView != null){
+            if (decorView != null) {
                 int opt = View.SYSTEM_UI_FLAG_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                         | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -89,23 +77,37 @@ public class ScreenUtil extends AppInitUtil{
             }
         }
     }
-
     /**沉浸式全屏，下拉出现状态栏和导航栏，过一段时间消失**/
 
 
     /**
      * 获取状态栏高度
      */
-    public static int getStatusBarHeight(){
+    public static int getStatusBarHeight() {
         int statusBarHeight = -1;
-        int resourceId = getResources().getIdentifier("status_bar_height","dimen", "android");
-        if(resourceId > 0){
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if (resourceId > 0) {
             statusBarHeight = getDimensionPixelSize(resourceId);
         }
         return statusBarHeight;
     }
     /**获取状态栏高度**/
 
+    /**
+     * 判断是否显示NavigationBar，只对普通模式起作用，对沉浸式不起作用
+     *
+     * @param window
+     * @return
+     */
+    public static boolean checkNavigationBarShow(Window window) {
+        Display display = window.getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getRealSize(point);
+        View decorView = window.getDecorView();
+        Rect rect = new Rect();
+        decorView.getWindowVisibleDisplayFrame(rect);
+        return rect.bottom != point.y;
+    }
 
     /**
      * 获取导航栏高度
@@ -113,7 +115,7 @@ public class ScreenUtil extends AppInitUtil{
     public static int getNavigationBarHeight() {
         int navigationBarHeight = -1;
         int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if(resourceId > 0){
+        if (resourceId > 0) {
             navigationBarHeight = getDimensionPixelSize(resourceId);
         }
         return navigationBarHeight;
@@ -123,8 +125,8 @@ public class ScreenUtil extends AppInitUtil{
     /**
      * 填充状态栏高度
      */
-    private static void fitStatusBar(final View view){
-        if(view != null) {
+    private static void fitStatusBar(final View view) {
+        if (view != null) {
             view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 @Override
                 public void onGlobalLayout() {
@@ -137,7 +139,10 @@ public class ScreenUtil extends AppInitUtil{
             });
         }
     }
-    /**填充状态栏高度**/
+
+    /**
+     * 填充状态栏高度
+     **/
 
     private static int getColor(int id) {
         return getResources().getColor(id);

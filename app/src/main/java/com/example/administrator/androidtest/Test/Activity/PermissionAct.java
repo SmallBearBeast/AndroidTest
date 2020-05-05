@@ -2,6 +2,7 @@ package com.example.administrator.androidtest.Test.Activity;
 
 import android.Manifest;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -28,6 +29,12 @@ public class PermissionAct extends ComponentAct {
         super.onCreate(savedInstanceState);
         btAskPermission = findViewById(R.id.bt_ask_permission);
         tvText = findViewById(R.id.tv_text);
+        tvText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG, "onClick: checkNavigationBarShow = " + ScreenUtil.checkNavigationBarShow(getWindow()) + ", navigationBarHeight = " + ScreenUtil.getNavigationBarHeight());
+            }
+        });
         btAskPermission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -42,12 +49,14 @@ public class PermissionAct extends ComponentAct {
                 });
             }
         });
-        ScreenUtil.normalScreen(this, R.color.cl_transparent, true, tvText);
+        ScreenUtil.normalScreen(getWindow(), R.color.cl_transparent, R.color.cl_red_t_6, tvText);
+//        ScreenUtil.immersiveFullScreen(getWindow());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ScreenUtil.normalScreen(this, R.color.cl_transparent, true, null);
+        ScreenUtil.normalScreen(getWindow(), R.color.cl_transparent, R.color.cl_red_t_6, null);
+//        ScreenUtil.immersiveFullScreen(getWindow());
     }
 }
