@@ -3,52 +3,65 @@ package com.example.libbase.Util;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
+
 import android.view.View;
 
 
 /**
- * 1.设置selectorDrawable时候，normal属性必须放在最后，因为是按照添加顺序进行过滤
- * 2.设置selectorDrawable时候，要设置view.setClickable(true)属性
- * 3.一些需要上下文context的工具类可以继承AppInitUtil，统一初始化上下文Context
- * <p>
- * 常用形状Drawable和selectorDrawable的封装
- * 用法:XmlDrawableUtil.selector(R.drawable.xxx_1, R.drawable.xxx_2).setView(mTv_2);
+ * This is the encapsulation of commonly used ShapeDrawable and SelectorDrawable.
+ * Usage:
+ * 1.XmlDrawableUtil.selector(R.drawable.xxx_1, R.drawable.xxx_2).setView(tv);
+ * 2.XmlDrawableUtil.rect(R.color.white, 5).setView(tv);
+ * Note:
+ * 1.The color must be a reference resource.
+ * 2.The unit of length must be dp.
  */
 public class XmlDrawableUtil extends AppInitUtil {
-    public static int DRAWABLE_NONE = -1;
-    public static int COLOR_NONE = -1;
+    private static int DRAWABLE_NONE = -1;
+    private static int COLOR_NONE = -1;
 
-    public static GDWrapper cornerRect(int colorId, float radius) {
-        return new GDWrapper().cornerRect(colorId, radius);
+    public static GDWrapper rect(@ColorRes int colorId, float... radii) {
+        return new GDWrapper().color(colorId).rect(radii);
     }
 
-    public static GDWrapper strokeRect(int colorId, float radius, int strokeColorId, float strokeWidth) {
-        return new GDWrapper().strokeRect(colorId, radius, strokeColorId, strokeWidth);
+    public static GDWrapper circle(@ColorRes int colorId) {
+        return new GDWrapper().color(colorId).circle();
     }
 
-    public static GDWrapper circle(int colorId) {
-        return new GDWrapper().circle(colorId);
+    public static GDWrapper strokeRect(@ColorRes int colorId, @ColorRes int strokeColorId, float strokeWidth, float... radii) {
+        return new GDWrapper().color(colorId).rect(radii).stroke(strokeColorId, strokeWidth);
     }
 
-    public static GDWrapper strokeCircle(int colorId, int strokeColorId, float strokeWidth) {
-        return new GDWrapper().strokeCircle(colorId, strokeColorId, strokeWidth);
+    public static GDWrapper strokeCircle(@ColorRes int colorId, @ColorRes int strokeColorId, float strokeWidth) {
+        return new GDWrapper().color(colorId).circle().stroke(strokeColorId, strokeWidth);
     }
 
-    public static GDWrapper gradient(int[] colorIds, GradientDrawable.Orientation orientation) {
-        return new GDWrapper().gradient(colorIds, orientation);
+    public static GDWrapper gradientRect(int[] colorIds, GradientDrawable.Orientation orientation, float... radii) {
+        return new GDWrapper().gradient(colorIds, orientation).rect(radii);
     }
 
-    public static GDWrapper alpha(float alpha, int colorId) {
-        return new GDWrapper().alpha(alpha, colorId);
+    public static GDWrapper gradientCircle(int[] colorIds, GradientDrawable.Orientation orientation) {
+        return new GDWrapper().gradient(colorIds, orientation).circle();
     }
 
-    public static SLWrapper selector(int normalResId, int pressedResId) {
+    public static GDWrapper alphaRect(float alpha, @ColorRes int colorId, float... radii) {
+        return new GDWrapper().color(colorId).alpha(alpha).rect(radii);
+    }
+
+    public static GDWrapper alphaCircle(float alpha, @ColorRes int colorId) {
+        return new GDWrapper().color(colorId).alpha(alpha).circle();
+    }
+
+    public static SLWrapper selector(@DrawableRes int normalResId, @DrawableRes int pressedResId) {
         return new SLWrapper().selector(normalResId, pressedResId, DRAWABLE_NONE);
     }
 
-    public static SLWrapper selector(int normalResId, int pressedResId, int checkedResId) {
+    public static SLWrapper selector(@DrawableRes int normalResId, @DrawableRes int pressedResId, @DrawableRes int checkedResId) {
         return new SLWrapper().selector(normalResId, pressedResId, checkedResId);
     }
 
@@ -60,69 +73,117 @@ public class XmlDrawableUtil extends AppInitUtil {
         return new SLWrapper().selector(normalDrawable, pressedDrawable, checkedDrawable);
     }
 
-    public static SLWrapper slCRect(int normalColorId, int pressedColorId, float radius) {
-        Drawable normalDrawable = cornerRect(normalColorId, radius).mDrawable;
-        Drawable pressedDrawable = cornerRect(pressedColorId, radius).mDrawable;
+    public static SLWrapper slRect(@ColorRes int normalColorId, @ColorRes int pressedColorId, float... radii) {
+        Drawable normalDrawable = rect(normalColorId, radii).getDrawable();
+        Drawable pressedDrawable = rect(pressedColorId, radii).getDrawable();
         return selector(normalDrawable, pressedDrawable);
     }
 
-    public static SLWrapper slCircle(int normalColorId, int pressedColorId) {
-        return slCircle(normalColorId, pressedColorId, COLOR_NONE);
-    }
-
-    public static SLWrapper slCircle(int normalColorId, int pressedColorId, int checkedColorId) {
-        Drawable normalDrawable = circle(normalColorId).mDrawable;
-        Drawable pressedDrawable = circle(pressedColorId).mDrawable;
-        Drawable checkedDrawable = circle(checkedColorId).mDrawable;
+    public static SLWrapper slRect(@ColorRes int normalColorId, @ColorRes int pressedColorId, @ColorRes int checkedColorId, float... radii) {
+        Drawable normalDrawable = rect(normalColorId, radii).getDrawable();
+        Drawable pressedDrawable = rect(pressedColorId, radii).getDrawable();
+        Drawable checkedDrawable = rect(checkedColorId, radii).getDrawable();
         return selector(normalDrawable, pressedDrawable, checkedDrawable);
     }
 
-    public static SLWrapper slGradient(int[] normalColorIds, int[] pressedColorIds, GradientDrawable.Orientation orientation) {
-        Drawable normalDrawable = gradient(normalColorIds, orientation).mDrawable;
-        Drawable pressedDrawable = gradient(pressedColorIds, orientation).mDrawable;
+    public static SLWrapper slCircle(@ColorRes int normalColorId, @ColorRes int pressedColorId) {
+        Drawable normalDrawable = circle(normalColorId).getDrawable();
+        Drawable pressedDrawable = circle(pressedColorId).getDrawable();
         return selector(normalDrawable, pressedDrawable);
     }
 
-    public static SLWrapper slAlpha(float normalAlpha, float pressAlpha, int colorId) {
-        Drawable normalDrawable = alpha(normalAlpha, colorId).mDrawable;
-        Drawable pressedDrawable = alpha(pressAlpha, colorId).mDrawable;
+    public static SLWrapper slCircle(@ColorRes int normalColorId, @ColorRes int pressedColorId, @ColorRes int checkedColorId) {
+        Drawable normalDrawable = circle(normalColorId).getDrawable();
+        Drawable pressedDrawable = circle(pressedColorId).getDrawable();
+        Drawable checkedDrawable = circle(checkedColorId).getDrawable();
+        return selector(normalDrawable, pressedDrawable, checkedDrawable);
+    }
+
+    public static SLWrapper slGradientRect(int[] normalColorIds, int[] pressedColorIds, GradientDrawable.Orientation orientation, float... radii) {
+        Drawable normalDrawable = gradientRect(normalColorIds, orientation, radii).getDrawable();
+        Drawable pressedDrawable = gradientRect(pressedColorIds, orientation, radii).getDrawable();
         return selector(normalDrawable, pressedDrawable);
     }
 
-    public static SLWrapper slAlphaCRect(float normalAlpha, float pressAlpha, int colorId, float radius) {
-        Drawable normalDrawable = alpha(normalAlpha, colorId).cornerRect(colorId, radius).mDrawable;
-        Drawable pressedDrawable = alpha(pressAlpha, colorId).cornerRect(colorId, radius).mDrawable;
+    public static SLWrapper slGradientCircle(int[] normalColorIds, int[] pressedColorIds, GradientDrawable.Orientation orientation) {
+        Drawable normalDrawable = gradientCircle(normalColorIds, orientation).getDrawable();
+        Drawable pressedDrawable = gradientCircle(pressedColorIds, orientation).getDrawable();
         return selector(normalDrawable, pressedDrawable);
     }
 
-    public static class SLWrapper{
-        StateListDrawable mDrawable;
+    public static SLWrapper slAlphaRect(float normalAlpha, float pressAlpha, @ColorRes int colorId, float... radii) {
+        Drawable normalDrawable = alphaRect(normalAlpha, colorId, radii).getDrawable();
+        Drawable pressedDrawable = alphaRect(pressAlpha, colorId, radii).getDrawable();
+        return selector(normalDrawable, pressedDrawable);
+    }
 
-        SLWrapper() {
+    public static SLWrapper slAlphaCircle(float normalAlpha, float pressAlpha, @ColorRes int colorId) {
+        Drawable normalDrawable = alphaCircle(normalAlpha, colorId).getDrawable();
+        Drawable pressedDrawable = alphaCircle(pressAlpha, colorId).getDrawable();
+        return selector(normalDrawable, pressedDrawable);
+    }
+
+    private static Drawable getDrawable(@DrawableRes int drawableId) {
+        return ContextCompat.getDrawable(getContext(), drawableId);
+    }
+
+    private static int getColor(@ColorRes int colorId) {
+        return ContextCompat.getColor(getContext(), colorId);
+    }
+
+    private static int getDp2Px(float dp) {
+        float scale = getContext().getResources().getDisplayMetrics().density;
+        return (int) (dp * scale + 0.5f);
+    }
+
+    private static boolean checkDrawableID(@DrawableRes int drawableId) {
+        return drawableId != DRAWABLE_NONE;
+    }
+
+    private static boolean checkDrawable(Object obj) {
+        return obj instanceof Drawable;
+    }
+
+    private static boolean checkColorId(@ColorRes int colorId) {
+        return colorId != COLOR_NONE;
+    }
+
+    /**
+     * This is the encapsulation of SelectDrawable based on StateListDrawable.
+     */
+    public static class SLWrapper {
+        private StateListDrawable mDrawable;
+
+        private SLWrapper() {
             mDrawable = new StateListDrawable();
         }
 
         public void setView(View view) {
             ViewCompat.setBackground(view, mDrawable);
+            view.setClickable(true);
         }
 
-        private SLWrapper selector(int normalResId, int pressedResId, int checkedResId) {
+        private SLWrapper selector(@DrawableRes int normalResId, @DrawableRes int pressedResId, @DrawableRes int checkedResId) {
             if (checkDrawableID(pressedResId)) {
                 mDrawable.addState(new int[]{
                         android.R.attr.state_pressed
-                }, getDrawable(pressedResId));
+                }, XmlDrawableUtil.getDrawable(pressedResId));
             }
             if (checkDrawableID(checkedResId)) {
                 mDrawable.addState(new int[]{
                         android.R.attr.state_checked
-                }, getDrawable(checkedResId));
+                }, XmlDrawableUtil.getDrawable(checkedResId));
             }
             if (checkDrawableID(normalResId)) {
-                mDrawable.addState(new int[]{}, getDrawable(normalResId));
+                mDrawable.addState(new int[]{}, XmlDrawableUtil.getDrawable(normalResId));
             }
             return this;
         }
 
+        /**
+         * When setting StateListDrawable, the normal attribute must be placed last,
+         * because it is filtered according to the order of addition.
+         */
         private SLWrapper selector(Drawable normalDrawable, Drawable pressedDrawable, Drawable checkedDrawable) {
             if (checkDrawable(pressedDrawable)) {
                 mDrawable.addState(new int[]{
@@ -139,12 +200,20 @@ public class XmlDrawableUtil extends AppInitUtil {
             }
             return this;
         }
+
+        public StateListDrawable getDrawable() {
+            return mDrawable;
+        }
     }
 
-    public static class GDWrapper{
-        GradientDrawable mDrawable;
+    /**
+     * This is the encapsulation of ShapeDrawable based on GradientDrawable
+     * which provides a way to change the shape.
+     */
+    public static class GDWrapper {
+        private GradientDrawable mDrawable;
 
-        GDWrapper() {
+        private GDWrapper() {
             mDrawable = new GradientDrawable();
         }
 
@@ -152,20 +221,44 @@ public class XmlDrawableUtil extends AppInitUtil {
             ViewCompat.setBackground(view, mDrawable);
         }
 
-        private GDWrapper circle(int colorId) {
-            mDrawable.setShape(GradientDrawable.OVAL);
+        private GDWrapper color(@ColorRes int colorId) {
             if (checkColorId(colorId)) {
                 mDrawable.setColor(getColor(colorId));
             }
             return this;
         }
 
-        private GDWrapper cornerRect(int colorId, float radius) {
-            if (checkColorId(colorId)) {
-                mDrawable.setColor(getColor(colorId));
-            }
+        private GDWrapper circle() {
+            mDrawable.setShape(GradientDrawable.OVAL);
+            return this;
+        }
+
+        private GDWrapper rect(float radius) {
             mDrawable.setShape(GradientDrawable.RECTANGLE);
             mDrawable.setCornerRadius(getDp2Px(radius));
+            return this;
+        }
+
+        private GDWrapper rect(float[] radii) {
+            mDrawable.setShape(GradientDrawable.RECTANGLE);
+            if (radii.length == 0) {
+                return this;
+            }
+            if (radii.length == 1) {
+                mDrawable.setCornerRadius(getDp2Px(radii[0]));
+            } else if (radii.length == 4) {
+                mDrawable.setCornerRadii(new float[]{
+                        getDp2Px(radii[0]), getDp2Px(radii[0]), getDp2Px(radii[1]), getDp2Px(radii[1]),
+                        getDp2Px(radii[2]), getDp2Px(radii[2]), getDp2Px(radii[3]), getDp2Px(radii[3])
+                });
+            } else if (radii.length == 8) {
+                mDrawable.setCornerRadii(new float[]{
+                        getDp2Px(radii[0]), getDp2Px(radii[1]), getDp2Px(radii[2]), getDp2Px(radii[3]),
+                        getDp2Px(radii[4]), getDp2Px(radii[5]), getDp2Px(radii[6]), getDp2Px(radii[7])
+                });
+            } else {
+                throw new RuntimeException("radii.length must be one of 1, 4 and 10");
+            }
             return this;
         }
 
@@ -183,55 +276,22 @@ public class XmlDrawableUtil extends AppInitUtil {
             return this;
         }
 
-        private GDWrapper alpha(float alpha, int colorId) {
+        private GDWrapper alpha(float alpha) {
             if (alpha >= 0 && alpha <= 1.0f) {
                 mDrawable.setAlpha((int) (alpha * 0xff));
-                if (checkColorId(colorId)) {
-                    mDrawable.setColor(getColor(colorId));
-                }
             }
             return this;
         }
 
-        private GDWrapper stroke(int strokeColorId, float strokeWidth){
+        private GDWrapper stroke(@ColorRes int strokeColorId, float strokeWidth) {
             if (checkDrawableID(strokeColorId)) {
                 mDrawable.setStroke(getDp2Px(strokeWidth), getColor(strokeColorId));
             }
             return this;
         }
 
-        private GDWrapper strokeRect(int colorId, float radius, int strokeColorId, float strokeWidth) {
-            return cornerRect(colorId, radius).stroke(strokeColorId, strokeWidth);
-        }
-
-        private GDWrapper strokeCircle(int colorId, int strokeColorId, float strokeWidth) {
-            return circle(colorId).stroke(strokeColorId, strokeWidth);
+        public GradientDrawable getDrawable() {
+            return mDrawable;
         }
     }
-
-    private static Drawable getDrawable(int drawableId) {
-        return ContextCompat.getDrawable(getContext(), drawableId);
-    }
-
-    private static int getColor(int colorId) {
-        return ContextCompat.getColor(getContext(), colorId);
-    }
-
-    private static int getDp2Px(float dp) {
-        float scale = getContext().getResources().getDisplayMetrics().density;
-        return (int) (dp * scale + 0.5f);
-    }
-
-    private static boolean checkDrawableID(int drawableId) {
-        return drawableId != DRAWABLE_NONE;
-    }
-
-    private static boolean checkDrawable(Object obj) {
-        return obj instanceof Drawable;
-    }
-
-    private static boolean checkColorId(int colorId) {
-        return colorId != COLOR_NONE;
-    }
-
 }

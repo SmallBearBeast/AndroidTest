@@ -36,7 +36,7 @@ public class IconTouchViewAct extends ComponentAct {
         mFlTest_2 = findViewById(R.id.fl_test_2);
         mTvTest_3 = findViewById(R.id.tv_test_3);
         mFlTest_3 = findViewById(R.id.fl_test_3);
-        XmlDrawableUtil.slAlphaCRect(1f, 0.5f, R.color.cl_transparent, 5).setView(mIvTest_1);
+        XmlDrawableUtil.slAlphaRect(1f, 0.5f, R.color.cl_transparent, 5).setView(mIvTest_1);
         ViewUtil.ivColorFilter(mIvTest_2, R.color.cl_black_t_4, R.color.cl_red_t_6);
         ViewUtil.tvTextColor(mTvTest_3, R.color.cl_black_t_4, R.color.cl_red_t_6);
         mIvTest_2.setOnClickListener(new View.OnClickListener() {

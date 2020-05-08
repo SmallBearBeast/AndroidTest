@@ -53,7 +53,7 @@ public class FlowLayoutTestAct extends ComponentAct {
         tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 15);
         int padding = DensityUtil.dp2Px(5);
         tv.setPadding(padding, padding, padding, padding);
-        XmlDrawableUtil.cornerRect(R.color.cl_blue_5, 3).setView(tv);
+        XmlDrawableUtil.rect(R.color.cl_blue_5, 3).setView(tv);
         return tv;
     }
 }

@@ -1,65 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    style="@style/ll_vertical">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
-    <ImageView
-        android:background="@drawable/selector_corner"
-        android:id="@+id/iv"
-        android:layout_margin="30dp"
-        android:layout_width="@dimen/dp_80"
-        android:layout_height="@dimen/dp_80" />
+    <LinearLayout style="@style/ll_vertical">
 
-    <TextView
-        android:background="@color/cl_red_t_6"
-        android:id="@+id/tv_1"
-        android:text="样式一"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:gravity="center"
-        android:layout_margin="30dp"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_50" />
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView一" />
 
-    <TextView
-        android:id="@+id/tv_2"
-        android:text="样式二"
-        android:gravity="center"
-        android:layout_margin="30dp"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_50" />
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView二" />
 
-    <TextView
-        android:id="@+id/tv_3"
-        android:text="样式三"
-        android:gravity="center"
-        android:layout_margin="30dp"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_50" />
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView三" />
 
-    <TextView
-        android:id="@+id/tv_4"
-        android:text="样式四"
-        android:gravity="center"
-        android:layout_margin="30dp"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_50" />
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView四" />
 
-    <ToggleButton
-        android:id="@+id/tb_5"
-        android:textOff="样式五"
-        android:textOn="样式五"
-        android:gravity="center"
-        android:layout_margin="30dp"
-        android:layout_width="@dimen/dp_150"
-        android:layout_height="@dimen/dp_50" />
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView五" />
 
 
-    <ToggleButton
-        android:id="@+id/tb_6"
-        android:textOff="样式五"
-        android:textOn="样式五"
-        android:gravity="center"
-        android:layout_margin="30dp"
-        android:layout_width="@dimen/dp_50"
-        android:layout_height="@dimen/dp_50" />
-</LinearLayout>
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView六" />
+
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView七" />
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="TextView八" />
+
+        <LinearLayout
+            android:id="@+id/ll_1"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+        <LinearLayout
+            android:id="@+id/fl_1"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:visibility="gone" />
+
+        <ToggleButton
+            android:id="@+id/tb_1"
+            android:layout_width="@dimen/dp_150"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:stateListAnimator="@null"
+            android:textOff="ToggleButton"
+            android:textOn="ToggleButton" />
+
+        <ToggleButton
+            android:id="@+id/tb_2"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_margin="10dp"
+            android:stateListAnimator="@null"
+            android:textOff="ToggleButton"
+            android:textOn="ToggleButton" />
+    </LinearLayout>
+
+</ScrollView>
