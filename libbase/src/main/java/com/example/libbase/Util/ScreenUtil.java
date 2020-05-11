@@ -1,5 +1,6 @@
 package com.example.libbase.Util;
 
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
 import android.graphics.Rect;
@@ -110,8 +111,23 @@ public class ScreenUtil extends AppInitUtil {
     }
 
     /**
-     * 获取导航栏高度
+     * 获取导航栏高度，通过navigation_bar_height获取的高度不准。
      */
+    public static int getNavigationBarHeight(Window window) {
+        Display display = window.getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getRealSize(point);
+        View decorView = window.getDecorView();
+        Configuration configuration = getContext().getResources().getConfiguration();
+        Rect rect = new Rect();
+        decorView.getWindowVisibleDisplayFrame(rect);
+        if (Configuration.ORIENTATION_LANDSCAPE == configuration.orientation) {
+            return point.x - rect.right;
+        } else {
+            return point.y - rect.bottom;
+        }
+    }
+
     public static int getNavigationBarHeight() {
         int navigationBarHeight = -1;
         int resourceId = getResources().getIdentifier("navigation_bar_height", "dimen", "android");

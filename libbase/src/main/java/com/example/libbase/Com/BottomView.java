@@ -5,15 +5,21 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Handler;
 import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Display;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.FrameLayout;
 
 import androidx.annotation.IdRes;
@@ -25,19 +31,18 @@ import androidx.core.view.NestedScrollingParent2;
 import androidx.core.view.ViewCompat;
 
 public class BottomView {
-    private static final String NAVIGATION_BAR = "navigationBarBackground";
-    private static final String STATUS_BAR = "navigationBarBackground";
-    private static final int SWIPE_VELOCITY_THRESHOLD = 100;
+    private static final String TAG = "BottomView";
+    private static final int SWIPE_VELOCITY_THRESHOLD = 400;
     private boolean mIsCreated;
     private boolean mIsDoingAnim;
     private boolean mIsShowed;
-    private boolean mDimEnable;
-    private boolean mDraggable = true;
-    private boolean mMaskable = true;
-    private boolean mMaskCancelable = true;
-    private float mDimAmount = 0.5f;
-    private int mBottomOffset;
-    private int mAnimDuration = 200;
+    private boolean mDimEnable; // 是否支持MaskView透明度变化
+    private boolean mDraggable = true; // 是否支持下拉消失
+    private boolean mMaskable = true; // MaskView是否可点击
+    private boolean mMaskCancelable = true; // MaskView是否可点击退出BottomView
+    private float mDimAmount = 0.5f; // MaskView最终透明度值 0.0~1.0
+    private int mBottomOffset; // BottomView与屏幕底部边距
+    private int mAnimDuration = 200; // BottomView弹出和消失动画时长
     private Activity mActivity;
     private View mMaskView;
     private View mContentView;
@@ -123,15 +128,17 @@ public class BottomView {
             initTouch();
         }
         doShowAnim();
+        onShow();
     }
 
     private void initView() {
-        mParentView = new InternalView(mActivity);
+        mParentView = new FrameLayout(mActivity);
         mMaskView = new View(mActivity);
         mMaskView.setBackgroundColor(Color.BLACK);
         mMaskView.setAlpha(0);
         FrameLayout.LayoutParams maskViewLp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mParentView.addView(mMaskView, maskViewLp);
+
         FrameLayout.LayoutParams contentViewLp = (FrameLayout.LayoutParams) mContentView.getLayoutParams();
         if (contentViewLp == null) {
             contentViewLp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -139,11 +146,14 @@ public class BottomView {
             contentViewLp.width = ViewGroup.LayoutParams.MATCH_PARENT;
         }
         contentViewLp.gravity = Gravity.BOTTOM;
-        mParentView.addView(mContentView, contentViewLp);
+        InternalView internalView = new InternalView(mActivity);
+        internalView.addView(mContentView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mParentView.addView(internalView, contentViewLp);
 
         FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-        if (isNavigationBarExist()) {
-            mBottomOffset = mBottomOffset + getNavigationBarHeight();
+        int navigationBarHeight = getNavigationBarHeight();
+        if (navigationBarHeight > 0) {
+            mBottomOffset = mBottomOffset + navigationBarHeight;
         }
         flp.setMargins(0, 0, 0, mBottomOffset);
         mParentView.setLayoutParams(flp);
@@ -177,6 +187,13 @@ public class BottomView {
         }
         mIsShowed = false;
         doHideAnim();
+        onHide();
+    }
+
+    public void reset() {
+        mIsShowed = true;
+        doResetAnim();
+        onReset();
     }
 
     private void doResetAnim() {
@@ -199,7 +216,9 @@ public class BottomView {
 
     private void doShowAnim() {
         addToDecorView();
+        // 必须设置INVISIBLE，GONE会出现获取不到height值导致动画失效，VISIBLE会出现闪现问题。
         mParentView.setVisibility(View.INVISIBLE);
+        // 必须post，保证能获取到height值。
         mMainHandler.post(new Runnable() {
             @Override
             public void run() {
@@ -282,7 +301,7 @@ public class BottomView {
         return mActivity;
     }
 
-    protected View getContentView() {
+    public View getContentView() {
         return mContentView;
     }
 
@@ -294,48 +313,34 @@ public class BottomView {
         if (mContentView.getTranslationY() >= mContentView.getHeight() / 2.0f) {
             hide();
         } else {
-            doResetAnim();
+            reset();
         }
     }
 
     private int getNavigationBarHeight() {
-        int navigationBarHeight = -1;
-        int resourceId = mActivity.getResources().getIdentifier("navigation_bar_height", "dimen", "android");
-        if(resourceId > 0){
-            navigationBarHeight = mActivity.getResources().getDimensionPixelSize(resourceId);
+        Window window = mActivity.getWindow();
+        Display display = window.getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getRealSize(point);
+        View decorView = window.getDecorView();
+        Configuration configuration = mActivity.getResources().getConfiguration();
+        Rect rect = new Rect();
+        decorView.getWindowVisibleDisplayFrame(rect);
+        if (Configuration.ORIENTATION_LANDSCAPE == configuration.orientation) {
+            return point.x - rect.right;
+        } else {
+            return point.y - rect.bottom;
         }
-        return navigationBarHeight;
-    }
-
-    private boolean isStatusBarExist(){
-        ViewGroup vp = (ViewGroup) getDecorView();
-        for (int i = 0; i < vp.getChildCount(); i++) {
-            vp.getChildAt(i).getContext().getPackageName();
-            if (vp.getChildAt(i).getId()!= View.NO_ID && STATUS_BAR.equals(mActivity.getResources().getResourceEntryName(vp.getChildAt(i).getId()))) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public int getStatusBarHeight(){
-        int statusBarHeight = -1;
-        int resourceId = mActivity.getResources().getIdentifier("status_bar_height","dimen", "android");
-        if(resourceId > 0){
-            statusBarHeight = mActivity.getResources().getDimensionPixelSize(resourceId);
-        }
-        return statusBarHeight;
     }
 
     private boolean isNavigationBarExist(){
-        ViewGroup vp = (ViewGroup) getDecorView();
-        for (int i = 0; i < vp.getChildCount(); i++) {
-            vp.getChildAt(i).getContext().getPackageName();
-            if (vp.getChildAt(i).getId()!= View.NO_ID && NAVIGATION_BAR.equals(mActivity.getResources().getResourceEntryName(vp.getChildAt(i).getId()))) {
-                return true;
-            }
-        }
-        return false;
+        Display display = mActivity.getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getRealSize(point);
+        View decorView = mActivity.getWindow().getDecorView();
+        Rect rect = new Rect();
+        decorView.getWindowVisibleDisplayFrame(rect);
+        return rect.bottom != point.y;
     }
 
     private View getDecorView() {
@@ -352,13 +357,32 @@ public class BottomView {
         viewGroup.removeView(mParentView);
     }
 
+    protected void onReset() {
+
+    }
+
+    protected void onHide() {
+
+    }
+
+    protected void onShow() {
+
+    }
+
+    protected void onTranslationY(int translationY) {
+
+    }
+
+    /**
+     * 外层View容器，包含MaskView和ContentView，处理嵌套滑动事件。
+     */
     private class InternalView extends FrameLayout implements NestedScrollingParent2 {
-        private boolean mFirstStopNestedScroll = true;
         private int mTotalTranslationY;
         private boolean mIsDoFling;
+        private boolean mIsActionUp;
 
         private InternalView(@NonNull Context context) {
-            super(context);
+            this(context, null);
         }
 
         public InternalView(@NonNull Context context, @Nullable AttributeSet attrs) {
@@ -366,8 +390,16 @@ public class BottomView {
         }
 
         @Override
+        public boolean dispatchTouchEvent(MotionEvent ev) {
+            if (ev.getAction() == MotionEvent.ACTION_UP) {
+                mIsActionUp = true;
+            }
+            return super.dispatchTouchEvent(ev);
+        }
+
+        @Override
         public boolean onStartNestedScroll(@NonNull View child, @NonNull View target, @ViewCompat.ScrollAxis int axes, @ViewCompat.NestedScrollType int type) {
-            return !mIsDoingAnim && type == ViewCompat.TYPE_TOUCH && target instanceof NestedScrollingChild;
+            return mDraggable && !mIsDoingAnim && type == ViewCompat.TYPE_TOUCH && target instanceof NestedScrollingChild;
         }
 
         @Override
@@ -377,25 +409,27 @@ public class BottomView {
 
         @Override
         public void onStopNestedScroll(@NonNull View target, @ViewCompat.NestedScrollType int type) {
-            if (mFirstStopNestedScroll) {
-                mFirstStopNestedScroll = false;
+            Log.d(TAG, "onStopNestedScroll: type = " + type + ", mIsActionUp = " + mIsActionUp + ", mIsDoFling = " + mIsDoFling);
+            if (!mIsActionUp) {
                 return;
             }
+            // fling事件优先。
             if (!mIsDoFling) {
                 checkUpAnim();
             }
             mIsDoFling = false;
+            mIsActionUp = false;
             mTotalTranslationY = 0;
-            mFirstStopNestedScroll = true;
         }
 
         @Override
         public void onNestedScroll(@NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, @ViewCompat.NestedScrollType int type) {
-
+            Log.d(TAG, "onNestedScroll() called with: target = [" + target + "], dxConsumed = [" + dxConsumed + "], dyConsumed = [" + dyConsumed + "], dxUnconsumed = [" + dxUnconsumed + "], dyUnconsumed = [" + dyUnconsumed + "], type = [" + type + "]");
         }
 
         @Override
         public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, @ViewCompat.NestedScrollType int type) {
+            Log.d(TAG, "onNestedPreScroll() called with: target = [" + target + "], dx = [" + dx + "], dy = [" + dy + "], consumed = [" + consumed + "], type = [" + type + "]");
             if (dy < 0) {
                 if (!target.canScrollVertically(-1)) {
                     consumed[0] = 0;
@@ -405,6 +439,7 @@ public class BottomView {
                         mTotalTranslationY = mContentView.getHeight();
                     }
                     mContentView.setTranslationY(mTotalTranslationY);
+                    onTranslationY(mTotalTranslationY);
                 }
             } else {
                 if (mTotalTranslationY > 0) {
@@ -416,12 +451,20 @@ public class BottomView {
                         mTotalTranslationY = mTotalTranslationY - dy;
                     }
                     mContentView.setTranslationY(mTotalTranslationY);
+                    onTranslationY(mTotalTranslationY);
                 }
             }
         }
 
         @Override
+        public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
+            Log.d(TAG, "onNestedFling: velocityY = " + velocityY + ", consumed = " + consumed + ", mIsActionUp = " + mIsActionUp + ", mIsDoFling = " + mIsDoFling);
+            return super.onNestedFling(target, velocityX, velocityY, consumed);
+        }
+
+        @Override
         public boolean onNestedPreFling(@NonNull View target, float velocityX, float velocityY) {
+            Log.d(TAG, "onNestedPreFling: velocityY = " + velocityY + ", mIsActionUp = " + mIsActionUp + ", mIsDoFling = " + mIsDoFling);
             if (velocityY < 0) {
                 velocityY = -velocityY;
                 if (velocityY > SWIPE_VELOCITY_THRESHOLD && !target.canScrollVertically(-1)) {
@@ -432,7 +475,7 @@ public class BottomView {
                 }
             } else {
                 if (velocityY > SWIPE_VELOCITY_THRESHOLD && !target.canScrollVertically(-1)) {
-                    doResetAnim();
+                    reset();
                     mTotalTranslationY = 0;
                     mIsDoFling = true;
                     return true;
@@ -442,11 +485,14 @@ public class BottomView {
         }
     }
 
+    /**
+     * 用于普通事件处理。
+     */
     private class InternalTouchListener implements View.OnTouchListener {
         private float mStartY;
         private GestureDetector mGestureDetector;
 
-        public InternalTouchListener(Context context) {
+        private InternalTouchListener(Context context) {
             mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
                 @Override
                 public boolean onDown(MotionEvent e) {
@@ -455,6 +501,7 @@ public class BottomView {
 
                 @Override
                 public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
+                    Log.d(TAG, "onFling: velocityY = " + velocityY);
                     if (velocityY > 0) {
                         if (velocityY > SWIPE_VELOCITY_THRESHOLD) {
                             hide();
@@ -463,7 +510,7 @@ public class BottomView {
                     } else {
                         velocityY = -velocityY;
                         if (velocityY > SWIPE_VELOCITY_THRESHOLD) {
-                            doResetAnim();
+                            reset();
                             return true;
                         }
                     }
@@ -486,10 +533,14 @@ public class BottomView {
                     int y = (int) (event.getRawY() - mStartY);
                     if (y < 0) {
                         y = 0;
+                    } else if (y > mContentView.getHeight()) {
+                        y = mContentView.getHeight();
                     }
                     mContentView.setTranslationY(y);
+                    onTranslationY(y);
                     break;
                 case MotionEvent.ACTION_UP:
+                    // fling事件优先。
                     if (!detect) {
                         checkUpAnim();
                     }

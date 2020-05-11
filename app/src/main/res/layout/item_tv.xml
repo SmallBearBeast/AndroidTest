@@ -7,4 +7,4 @@
     android:textSize="@dimen/sp_20"
     xmlns:tools="http://schemas.android.com/tools"
     android:textColor="@color/cl_white"
-    tools:text="星期一"/>
+    android:text="星期一"/>

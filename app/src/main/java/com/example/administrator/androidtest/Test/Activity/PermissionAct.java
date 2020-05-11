@@ -32,7 +32,7 @@ public class PermissionAct extends ComponentAct {
         tvText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: checkNavigationBarShow = " + ScreenUtil.checkNavigationBarShow(getWindow()) + ", navigationBarHeight = " + ScreenUtil.getNavigationBarHeight());
+                Log.d(TAG, "onClick: checkNavigationBarShow = " + ScreenUtil.checkNavigationBarShow(getWindow()) + ", navigationBarHeight = " + ScreenUtil.getNavigationBarHeight(getWindow()));
             }
         });
         btAskPermission.setOnClickListener(new View.OnClickListener() {
