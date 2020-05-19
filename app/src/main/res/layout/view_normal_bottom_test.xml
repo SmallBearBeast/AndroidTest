@@ -1,35 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="400dp"
-    android:background="@color/colorAccent"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/tv_1"
+    <com.example.administrator.androidtest.Widget.ShadowLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:text="Hello World"
-        android:textColor="@color/cl_white"
-        android:textSize="25dp" />
+        android:layout_height="match_parent"
+        app:hl_bottomShow="false"
+        app:hl_cornerRadius_leftTop="10dp"
+        app:hl_cornerRadius_rigthTop="10dp"
+        app:hl_dx="0dp"
+        app:hl_dy="0dp"
+        app:hl_leftShow="false"
+        app:hl_rightShow="false"
+        app:hl_shadowBackColor="#FFFFFF"
+        app:hl_shadowColor="#000000"
+        app:hl_shadowLimit="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/tv_2"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:text="Hello World"
-        android:textColor="@color/cl_white"
-        android:textSize="25dp" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/tv_3"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:text="Hello World"
-        android:textColor="@color/cl_white"
-        android:textSize="25dp" />
+            <TextView
+                android:id="@+id/tv_1"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_black"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/tv_2"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_black"
+                android:textSize="25dp" />
+
+            <TextView
+                android:id="@+id/tv_3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_black"
+                android:textSize="25dp" />
+        </LinearLayout>
+    </com.example.administrator.androidtest.Widget.ShadowLayout>
+
 </LinearLayout>

@@ -310,6 +310,7 @@ public class BottomView {
     }
 
     private void checkUpAnim() {
+        Log.d(TAG, "checkUpAnim: translationY = " + mContentView.getTranslationY() + ", hideHeight = " + mContentView.getHeight() * 0.5f);
         if (mContentView.getTranslationY() >= mContentView.getHeight() / 2.0f) {
             hide();
         } else {
@@ -331,16 +332,6 @@ public class BottomView {
         } else {
             return point.y - rect.bottom;
         }
-    }
-
-    private boolean isNavigationBarExist(){
-        Display display = mActivity.getWindowManager().getDefaultDisplay();
-        Point point = new Point();
-        display.getRealSize(point);
-        View decorView = mActivity.getWindow().getDecorView();
-        Rect rect = new Rect();
-        decorView.getWindowVisibleDisplayFrame(rect);
-        return rect.bottom != point.y;
     }
 
     private View getDecorView() {
@@ -424,12 +415,11 @@ public class BottomView {
 
         @Override
         public void onNestedScroll(@NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, @ViewCompat.NestedScrollType int type) {
-            Log.d(TAG, "onNestedScroll() called with: target = [" + target + "], dxConsumed = [" + dxConsumed + "], dyConsumed = [" + dyConsumed + "], dxUnconsumed = [" + dxUnconsumed + "], dyUnconsumed = [" + dyUnconsumed + "], type = [" + type + "]");
+
         }
 
         @Override
         public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, @ViewCompat.NestedScrollType int type) {
-            Log.d(TAG, "onNestedPreScroll() called with: target = [" + target + "], dx = [" + dx + "], dy = [" + dy + "], consumed = [" + consumed + "], type = [" + type + "]");
             if (dy < 0) {
                 if (!target.canScrollVertically(-1)) {
                     consumed[0] = 0;
@@ -454,12 +444,6 @@ public class BottomView {
                     onTranslationY(mTotalTranslationY);
                 }
             }
-        }
-
-        @Override
-        public boolean onNestedFling(View target, float velocityX, float velocityY, boolean consumed) {
-            Log.d(TAG, "onNestedFling: velocityY = " + velocityY + ", consumed = " + consumed + ", mIsActionUp = " + mIsActionUp + ", mIsDoFling = " + mIsDoFling);
-            return super.onNestedFling(target, velocityX, velocityY, consumed);
         }
 
         @Override
@@ -501,16 +485,16 @@ public class BottomView {
 
                 @Override
                 public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                    Log.d(TAG, "onFling: velocityY = " + velocityY);
+                    Log.d(TAG, "onFling: velocityX = " + velocityX + ", velocityY = " + velocityY);
                     if (velocityY > 0) {
                         if (velocityY > SWIPE_VELOCITY_THRESHOLD) {
-                            hide();
+                            reset();
                             return true;
                         }
                     } else {
                         velocityY = -velocityY;
                         if (velocityY > SWIPE_VELOCITY_THRESHOLD) {
-                            reset();
+                            hide();
                             return true;
                         }
                     }

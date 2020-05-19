@@ -1,11 +1,15 @@
 package com.example.administrator.androidtest.Test.BottomViewTest;
 
 import android.app.Activity;
+import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
+
 import com.example.libbase.Com.BottomView;
+import com.example.libbase.Util.ResourceUtil;
 import com.example.libbase.Util.ToastUtil;
+import com.example.libbase.Util.XmlDrawableUtil;
 
 public class NormalBottomView extends BottomView implements View.OnClickListener{
     public NormalBottomView(Activity activity) {

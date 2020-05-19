@@ -94,4 +94,5 @@
 
     <color name="color000000">#000000</color>
     <color name="colorFFFFFF">#FFFFFF</color>
+    <color name="color00FFFFFF">#00FFFFFF</color>
 </resources>
