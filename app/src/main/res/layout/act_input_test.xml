@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/bt_1"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"/>
+
+
+    <EditText
+        android:id="@+id/et_1"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/cl_blue_5"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        app:layout_constraintBottom_toTopOf="@+id/et_1"
+        android:layout_marginBottom="50dp"
+        android:background="@color/cl_red_t_6"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
+<!--    <ScrollView-->
+<!--        android:layout_marginBottom="50dp"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/et_1"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="100dp">-->
+
+<!--        <LinearLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:orientation="vertical">-->
+<!--            <TextView-->
+<!--                android:gravity="center"-->
+<!--                android:text="123456789"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"/>-->
+
+<!--            <TextView-->
+<!--                android:gravity="center"-->
+<!--                android:text="123456789"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"/>-->
+
+<!--            <TextView-->
+<!--                android:gravity="center"-->
+<!--                android:text="123456789"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"/>-->
+
+<!--            <TextView-->
+<!--                android:gravity="center"-->
+<!--                android:text="123456789"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"/>-->
+
+<!--            <TextView-->
+<!--                android:gravity="center"-->
+<!--                android:text="123456789"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"/>-->
+
+<!--            <TextView-->
+<!--                android:gravity="center"-->
+<!--                android:text="123456789"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="30dp"/>-->
+<!--        </LinearLayout>-->
+<!--    </ScrollView>-->
+</androidx.constraintlayout.widget.ConstraintLayout>

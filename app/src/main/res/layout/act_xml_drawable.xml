@@ -11,7 +11,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView一" />
+            android:text="样式一" />
 
         <TextView
             android:id="@+id/tv_2"
@@ -19,7 +19,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView二" />
+            android:text="样式二" />
 
         <TextView
             android:id="@+id/tv_3"
@@ -27,7 +27,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView三" />
+            android:text="样式三" />
 
         <TextView
             android:id="@+id/tv_4"
@@ -35,7 +35,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView四" />
+            android:text="样式四" />
 
         <TextView
             android:id="@+id/tv_5"
@@ -43,7 +43,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView五" />
+            android:text="样式五" />
 
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView六" />
+            android:text="样式六" />
 
         <TextView
             android:id="@+id/tv_7"
@@ -60,7 +60,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView七" />
+            android:text="样式七" />
 
         <TextView
             android:id="@+id/tv_8"
@@ -68,7 +68,7 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="TextView八" />
+            android:text="样式八" />
 
         <LinearLayout
             android:id="@+id/ll_1"
@@ -92,8 +92,8 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:stateListAnimator="@null"
-            android:textOff="ToggleButton"
-            android:textOn="ToggleButton" />
+            android:textOff="样式一"
+            android:textOn="样式一" />
 
         <ToggleButton
             android:id="@+id/tb_2"
@@ -101,8 +101,8 @@
             android:layout_height="@dimen/dp_50"
             android:layout_margin="10dp"
             android:stateListAnimator="@null"
-            android:textOff="ToggleButton"
-            android:textOn="ToggleButton" />
+            android:textOff="样式二"
+            android:textOn="样式二" />
     </LinearLayout>
 
 </ScrollView>

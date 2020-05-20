@@ -91,4 +91,7 @@
     <color name="colorFFC107">#FFC107</color>
     <color name="colorFF9800">#FF9800</color>
     <color name="colorFF5722">#FF5722</color>
+
+    <color name="color000000">#000000</color>
+    <color name="colorFFFFFF">#FFFFFF</color>
 </resources>
