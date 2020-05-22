@@ -18,7 +18,7 @@ public class BottomViewTestAct extends ComponentAct {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_1:
-                new NsBottomView(this).show();
+                new NsBottomView(this).hideVelocity(1000).show();
                 break;
 
             case R.id.bt_2:
@@ -26,7 +26,7 @@ public class BottomViewTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_3:
-                new NormalBottomView(this).show();
+                new NormalBottomView(this).hideVelocity(2000).show();
                 break;
         }
     }

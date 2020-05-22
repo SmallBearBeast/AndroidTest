@@ -13,11 +13,12 @@ import android.os.Handler;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Display;
-import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -32,25 +33,31 @@ import androidx.core.view.ViewCompat;
 
 public class BottomView {
     private static final String TAG = "BottomView";
-    private static final int SWIPE_VELOCITY_THRESHOLD = 400;
+    private final int MINIMUM_FLING_VELOCITY;
     private boolean mIsCreated;
     private boolean mIsDoingAnim;
     private boolean mIsShowed;
-    private boolean mDimEnable; // 是否支持MaskView透明度变化
+    private boolean mDimEnable = false; // 是否支持MaskView透明度变化
     private boolean mDraggable = true; // 是否支持下拉消失
     private boolean mMaskable = true; // MaskView是否可点击
     private boolean mMaskCancelable = true; // MaskView是否可点击退出BottomView
     private float mDimAmount = 0.5f; // MaskView最终透明度值 0.0~1.0
-    private int mBottomOffset; // BottomView与屏幕底部边距
+    private int mBottomOffset = 0; // BottomView与屏幕底部边距
     private int mAnimDuration = 200; // BottomView弹出和消失动画时长
+    private float mHideProportion = 0.3f; // 滑动距离与View高度比例大于该值触发下滑隐藏
+    private int mHideVelocity; // 滑动速度大于该值触发下滑隐藏，默认值是MINIMUM_FLING_VELOCITY
     private Activity mActivity;
     private View mMaskView;
     private View mContentView;
+    private InternalView mInternalView;
     private FrameLayout mParentView;
     private Handler mMainHandler = new Handler();
 
     public BottomView(Activity activity) {
         mActivity = activity;
+        ViewConfiguration configuration = ViewConfiguration.get(activity);
+        MINIMUM_FLING_VELOCITY = configuration.getScaledMinimumFlingVelocity();
+        mHideVelocity = MINIMUM_FLING_VELOCITY;
     }
 
     public BottomView contentView(@LayoutRes int layoutId) {
@@ -99,6 +106,16 @@ public class BottomView {
         return this;
     }
 
+    public BottomView hideProportion(float proportion) {
+        mHideProportion = proportion;
+        return this;
+    }
+
+    public BottomView hideVelocity(int hideVelocity) {
+        mHideVelocity = hideVelocity;
+        return this;
+    }
+
     public BottomView hideViews(View... views) {
         for (View view : views) {
             view.setOnClickListener(new View.OnClickListener() {
@@ -139,16 +156,16 @@ public class BottomView {
         FrameLayout.LayoutParams maskViewLp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         mParentView.addView(mMaskView, maskViewLp);
 
-        FrameLayout.LayoutParams contentViewLp = (FrameLayout.LayoutParams) mContentView.getLayoutParams();
-        if (contentViewLp == null) {
-            contentViewLp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        FrameLayout.LayoutParams internalViewLp = (FrameLayout.LayoutParams) mContentView.getLayoutParams();
+        if (internalViewLp == null) {
+            internalViewLp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         } else {
-            contentViewLp.width = ViewGroup.LayoutParams.MATCH_PARENT;
+            internalViewLp.width = ViewGroup.LayoutParams.MATCH_PARENT;
         }
-        contentViewLp.gravity = Gravity.BOTTOM;
-        InternalView internalView = new InternalView(mActivity);
-        internalView.addView(mContentView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-        mParentView.addView(internalView, contentViewLp);
+        internalViewLp.gravity = Gravity.BOTTOM;
+        mInternalView = new InternalView(mActivity);
+        mInternalView.addView(mContentView, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        mParentView.addView(mInternalView, internalViewLp);
 
         FrameLayout.LayoutParams flp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
         int navigationBarHeight = getNavigationBarHeight();
@@ -177,7 +194,7 @@ public class BottomView {
             }
         }
         if (mDraggable) {
-            mContentView.setOnTouchListener(new InternalTouchListener(mActivity));
+            mInternalView.setOnTouchListener(new InternalTouchListener());
         }
     }
 
@@ -310,8 +327,8 @@ public class BottomView {
     }
 
     private void checkUpAnim() {
-        Log.d(TAG, "checkUpAnim: translationY = " + mContentView.getTranslationY() + ", hideHeight = " + mContentView.getHeight() * 0.5f);
-        if (mContentView.getTranslationY() >= mContentView.getHeight() / 2.0f) {
+        Log.d(TAG, "checkUpAnim: translationY = " + mContentView.getTranslationY() + ", hideHeight = " + mContentView.getHeight() * mHideProportion);
+        if (mContentView.getTranslationY() >= mContentView.getHeight() * mHideProportion) {
             hide();
         } else {
             reset();
@@ -340,12 +357,16 @@ public class BottomView {
 
     private void addToDecorView() {
         ViewGroup viewGroup = (ViewGroup) getDecorView();
-        viewGroup.addView(mParentView);
+        if (mParentView.getParent() == null) {
+            viewGroup.addView(mParentView);
+        }
     }
 
     private void removeFromDecorView() {
         ViewGroup viewGroup = (ViewGroup) getDecorView();
-        viewGroup.removeView(mParentView);
+        if (mParentView.getParent() == viewGroup) {
+            viewGroup.removeView(mParentView);
+        }
     }
 
     protected void onReset() {
@@ -382,20 +403,25 @@ public class BottomView {
 
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {
+            // ACTION_DOWN mIsActionUp必须设置为false，否则被拦截就会出现问题
             if (ev.getAction() == MotionEvent.ACTION_UP) {
                 mIsActionUp = true;
+            } else if (ev.getAction() == MotionEvent.ACTION_DOWN) {
+                mIsActionUp = false;
             }
             return super.dispatchTouchEvent(ev);
         }
 
         @Override
         public boolean onStartNestedScroll(@NonNull View child, @NonNull View target, @ViewCompat.ScrollAxis int axes, @ViewCompat.NestedScrollType int type) {
-            return mDraggable && !mIsDoingAnim && type == ViewCompat.TYPE_TOUCH && target instanceof NestedScrollingChild;
+            boolean scroll = mDraggable && !mIsDoingAnim && type == ViewCompat.TYPE_TOUCH && target instanceof NestedScrollingChild;
+            Log.d(TAG, "onStartNestedScroll: axes = " + axes + ", type = " + type + ", scroll = " + scroll);
+            return scroll;
         }
 
         @Override
         public void onNestedScrollAccepted(@NonNull View child, @NonNull View target, @ViewCompat.ScrollAxis int axes, @ViewCompat.NestedScrollType int type) {
-
+            Log.d(TAG, "onNestedScrollAccepted: axes = " + axes + ", type = " + type);
         }
 
         @Override
@@ -420,6 +446,7 @@ public class BottomView {
 
         @Override
         public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed, @ViewCompat.NestedScrollType int type) {
+//            Log.d(TAG, "onNestedPreScroll: dx = " + dx + ", dy = " + dy + ", type = " + type + ", consumed = (" + consumed[0] + ", " +consumed[1] + ")");
             if (dy < 0) {
                 if (!target.canScrollVertically(-1)) {
                     consumed[0] = 0;
@@ -451,14 +478,14 @@ public class BottomView {
             Log.d(TAG, "onNestedPreFling: velocityY = " + velocityY + ", mIsActionUp = " + mIsActionUp + ", mIsDoFling = " + mIsDoFling);
             if (velocityY < 0) {
                 velocityY = -velocityY;
-                if (velocityY > SWIPE_VELOCITY_THRESHOLD && !target.canScrollVertically(-1)) {
+                if (velocityY > mHideVelocity && !target.canScrollVertically(-1)) {
                     hide();
                     mTotalTranslationY = 0;
                     mIsDoFling = true;
                     return true;
                 }
             } else {
-                if (velocityY > SWIPE_VELOCITY_THRESHOLD && !target.canScrollVertically(-1)) {
+                if (velocityY > mHideVelocity && !target.canScrollVertically(-1)) {
                     reset();
                     mTotalTranslationY = 0;
                     mIsDoFling = true;
@@ -474,46 +501,26 @@ public class BottomView {
      */
     private class InternalTouchListener implements View.OnTouchListener {
         private float mStartY;
-        private GestureDetector mGestureDetector;
-
-        private InternalTouchListener(Context context) {
-            mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onDown(MotionEvent e) {
-                    return true;
-                }
-
-                @Override
-                public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-                    Log.d(TAG, "onFling: velocityX = " + velocityX + ", velocityY = " + velocityY);
-                    if (velocityY > 0) {
-                        if (velocityY > SWIPE_VELOCITY_THRESHOLD) {
-                            reset();
-                            return true;
-                        }
-                    } else {
-                        velocityY = -velocityY;
-                        if (velocityY > SWIPE_VELOCITY_THRESHOLD) {
-                            hide();
-                            return true;
-                        }
-                    }
-                    return false;
-                }
-            });
-        }
-
+        private VelocityTracker mVelocityTracker;
         @Override
         public boolean onTouch(View v, MotionEvent event) {
             if (mIsDoingAnim) {
                 return true;
             }
-            boolean detect = mGestureDetector.onTouchEvent(event);
+            if (mVelocityTracker == null) {
+                mVelocityTracker = VelocityTracker.obtain();
+            }
+            MotionEvent velocityMotionEvent = MotionEvent.obtain(event);
+            velocityMotionEvent.setLocation(velocityMotionEvent.getRawX(), velocityMotionEvent.getRawY());
+            mVelocityTracker.addMovement(velocityMotionEvent);
+            velocityMotionEvent.recycle();
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     mStartY = event.getRawY();
                     break;
                 case MotionEvent.ACTION_MOVE:
+//                    Log.d(TAG, "onTouch: getX = " + event.getX() + ", getY = "+ event.getY() + ", diffY = " + Math.abs(event.getY() - mLastY));
+//                    Log.e(TAG, "onTouch: getRawX = " + event.getRawX() + ", getRawY = "+ event.getRawY() + ", diffRawY = " + Math.abs(event.getRawY() - mLastRawY));
                     int y = (int) (event.getRawY() - mStartY);
                     if (y < 0) {
                         y = 0;
@@ -524,13 +531,36 @@ public class BottomView {
                     onTranslationY(y);
                     break;
                 case MotionEvent.ACTION_UP:
+                    mVelocityTracker.computeCurrentVelocity(1000);
+                    float velocityY = mVelocityTracker.getYVelocity();
+                    Log.d(TAG, "onTouch: ACTION_UP velocityY = " + velocityY);
+                    mVelocityTracker.recycle();
+                    mVelocityTracker = null;
                     // fling事件优先。
-                    if (!detect) {
+                    if (!onFling(velocityY)) {
                         checkUpAnim();
                     }
                     break;
             }
             return true;
+        }
+
+        private boolean onFling(float velocityY) {
+            if (Math.abs(velocityY) < MINIMUM_FLING_VELOCITY) {
+                return false;
+            }
+            if (velocityY > 0) {
+                if (velocityY > mHideVelocity) {
+                    hide();
+                    return true;
+                }
+            } else {
+                if (Math.abs(velocityY) > mHideVelocity) {
+                    reset();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }
