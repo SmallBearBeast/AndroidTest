@@ -1,5 +1,6 @@
 package com.example.libbase.Util;
 
+import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -8,6 +9,14 @@ import android.os.Build;
 import android.view.*;
 
 import androidx.annotation.ColorRes;
+import androidx.lifecycle.GenericLifecycleObserver;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ScreenUtil extends AppInitUtil {
 
@@ -156,9 +165,85 @@ public class ScreenUtil extends AppInitUtil {
         }
     }
 
-    /**
-     * 填充状态栏高度
-     **/
+    private static Map<Activity, KeyBoardData> keyBoardListenerMap = new HashMap<>();
+
+    private static class KeyBoardData {
+        private List<KeyBoardListener> mKeyBoardListenerList = new ArrayList<>();
+        private int mLastVisibleHeight = 0;
+        private boolean mShowKeyBoard = false;
+
+        private void add(KeyBoardListener keyBoardListener) {
+            mKeyBoardListenerList.add(keyBoardListener);
+        }
+
+        private void onChange(boolean showKeyBoard, int keyBoardHeight) {
+            mShowKeyBoard = showKeyBoard;
+            for (KeyBoardListener listener : mKeyBoardListenerList) {
+                if (listener != null) {
+                    listener.onChange(showKeyBoard, keyBoardHeight);
+                }
+            }
+        }
+    }
+
+    public interface KeyBoardListener {
+        void onChange(boolean showKeyBoard, int keyBoardHeight);
+    }
+
+    public static boolean isShowKeyBoard(Activity activity) {
+        KeyBoardData keyBoardData = keyBoardListenerMap.get(activity);
+        return keyBoardData != null && keyBoardData.mShowKeyBoard;
+    }
+
+    public static void observeKeyBoard(final Activity activity, final KeyBoardListener keyBoardListener) {
+        KeyBoardData keyBoardData = keyBoardListenerMap.get(activity);
+        if (keyBoardData != null) {
+            if (keyBoardListener != null) {
+                keyBoardData.add(keyBoardListener);
+            }
+            return;
+        }
+        keyBoardData = new KeyBoardData();
+        keyBoardListenerMap.put(activity, keyBoardData);
+        if (keyBoardListener != null) {
+            keyBoardData.add(keyBoardListener);
+        }
+        final View decorView = activity.getWindow().getDecorView();
+        final KeyBoardData finalKeyBoardData = keyBoardData;
+        decorView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                Rect r = new Rect();
+                decorView.getWindowVisibleDisplayFrame(r);
+                int visibleHeight = r.bottom - r.top;
+                int lastVisibleHeight = finalKeyBoardData.mLastVisibleHeight;
+                if (visibleHeight != lastVisibleHeight) {
+                    if (lastVisibleHeight > 0) {
+                        int diff = lastVisibleHeight - visibleHeight;
+                        if (diff > 200) {
+                            finalKeyBoardData.onChange(true, diff);
+                        } else {
+                            finalKeyBoardData.onChange(false, 0);
+                        }
+                    }
+                    finalKeyBoardData.mLastVisibleHeight = visibleHeight;
+                }
+            }
+        });
+
+        if (activity instanceof LifecycleOwner) {
+            LifecycleOwner lifecycleOwner = (LifecycleOwner) activity;
+            lifecycleOwner.getLifecycle().addObserver(new GenericLifecycleObserver() {
+                @Override
+                public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
+                    if (Lifecycle.Event.ON_DESTROY == event) {
+                        source.getLifecycle().removeObserver(this);
+                        keyBoardListenerMap.remove(activity);
+                    }
+                }
+            });
+        }
+    }
 
     private static int getColor(int id) {
         return getResources().getColor(id);
