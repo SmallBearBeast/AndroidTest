@@ -14,6 +14,16 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 public class ShadowView extends View {
+    private int mRadius;
+    private int mLeftTopRadius;
+    private int mRightTopRadius;
+    private int mLeftBottomRadius;
+    private int mRightBottomRadius;
+    private boolean mTopShow;
+    private boolean mBottomShow;
+    private boolean mLeftShow;
+    private boolean mRightShow;
+    private int mBgColor;
     private Paint mShadowPaint;
     private Paint mBgPaint;
     private Path mPath;
@@ -27,10 +37,9 @@ public class ShadowView extends View {
         mShadowPaint.setAntiAlias(true);
         mShadowPaint.setDither(true);
         // TRANSPARENT无法绘制出阴影
-        mShadowPaint.setColor(Color.RED);
-        mShadowPaint.setStrokeWidth(3);
+        mShadowPaint.setColor(Color.WHITE);
         mShadowPaint.setStyle(Paint.Style.FILL);
-        mShadowPaint.setShadowLayer(10, 0, 0, Color.BLACK);
+        mShadowPaint.setShadowLayer(10, 0, 0, Color.parseColor("#4c000000"));
 
         mBgPaint = new Paint();
         mBgPaint.setAntiAlias(true);
@@ -38,7 +47,7 @@ public class ShadowView extends View {
         // TRANSPARENT无法绘制出阴影
         mBgPaint.setColor(Color.RED);
         mBgPaint.setStrokeWidth(3);
-        mBgPaint.setStyle(Paint.Style.FILL);
+        mBgPaint.setStyle(Paint.Style.STROKE);
 
         setLayerType(View.LAYER_TYPE_SOFTWARE, null);
         mPath = new Path();
@@ -52,7 +61,6 @@ public class ShadowView extends View {
     protected void onDraw(Canvas canvas) {
         canvas.drawColor(Color.WHITE);
 
-        mShadowPaint.setColor(Color.RED);
         canvas.drawPath(mPath, mShadowPaint);
 //        canvas.drawCircle(200, 200, 200, mShadowPaint);
 //

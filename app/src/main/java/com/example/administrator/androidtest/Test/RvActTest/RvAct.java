@@ -153,13 +153,12 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
                 break;
 
             case R.id.bt_remove_first:
-                ToastUtil.showToast("I am zhangqing");
-                mDataManager.removeFirst(1);
+//                mDataManager.removeFirst(1);
 //                RvUtil.scrollToBottom(mRvTest,  4, 0);
+                mRvTest.smoothScrollToPosition(mDataManager.size());
                 break;
 
             case R.id.bt_add_last:
-                ToastUtil.showToast("I am wuyisong");
                 mDataManager.addLast(new Msg());
                 break;
 
