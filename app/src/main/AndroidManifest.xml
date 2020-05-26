@@ -30,7 +30,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".Test.RvActTest.RvAct"
+        <activity android:name=".Test.BottomViewTest.BottomViewTestAct"
             android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|keyboard|layoutDirection|screenSize">
             <intent-filter>
