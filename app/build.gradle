@@ -79,6 +79,8 @@ dependencies {
     implementation 'com.tencent:mmkv:1.0.24'
 
     implementation "androidx.cardview:cardview:1.0.0"
+    implementation "androidx.viewpager2:viewpager2:1.0.0"
+
 
     implementation project(":libbase")
     implementation project(":libfresco")
