@@ -128,4 +128,21 @@
         <attr name="sl_left_show" format="boolean"/>
         <attr name="sl_right_show" format="boolean"/>
     </declare-styleable>
+
+    <declare-styleable name="ShapeImageView">
+        <attr name="siv_radius" format="dimension"/>
+        <attr name="siv_left_top_radius" format="dimension"/>
+        <attr name="siv_left_bottom_radius" format="dimension"/>
+        <attr name="siv_right_top_radius" format="dimension"/>
+        <attr name="siv_right_bottom_radius" format="dimension"/>
+        <attr name="siv_border_width" format="dimension"/>
+        <attr name="siv_border_color" format="color"/>
+        <attr name="siv_type" format="enum">
+            <enum name="rectangle" value="1"/>
+            <enum name="circle" value="2"/>
+            <enum name="square" value="3"/>
+            <enum name="polygon" value="4"/>
+        </attr>
+        <attr name="siv_polygon_side_num" format="integer"/>
+    </declare-styleable>
 </resources>
