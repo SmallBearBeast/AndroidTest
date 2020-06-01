@@ -30,7 +30,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".Test.WidgetTest.ShapeImageViewAct"
+        <activity android:name=".Test.CoordinatorTest.CoordinatorTestAct"
             android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|keyboard|layoutDirection|screenSize">
             <intent-filter>
