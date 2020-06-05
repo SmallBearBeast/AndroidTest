@@ -12,12 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.viewpager.widget.ViewPager;
 
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
-import com.example.libbase.Util.DensityUtil;
 import com.example.libbase.Util.ResourceUtil;
 import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Wrapper.OnPageChangeListenerWrapper;
@@ -25,13 +22,13 @@ import com.example.libframework.Wrapper.OnPageChangeListenerWrapper;
 import java.util.List;
 
 public class ViewPagerTestAct extends ComponentAct {
-    private ViewPager mViewPager;
+    private VerticalViewPager mViewPager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mViewPager = findViewById(R.id.vp_test);
-        mViewPager.addOnPageChangeListener(new OnPageChangeListenerWrapper() {
+        mViewPager.addOnPageChangeListener(new VerticalViewPager.SimpleOnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                 Log.d(TAG, "onPageScrolled: positionOffset = " + positionOffset);
@@ -73,7 +70,7 @@ public class ViewPagerTestAct extends ComponentAct {
         return R.layout.act_viewpager_test;
     }
 
-    private class MyAdapter extends PagerAdapter {
+    private class MyAdapter extends VerticalPagerAdapter {
 
         private List<String> dataList = CollectionUtil.asListNotNull("AAAAAA", "BBBBBB", "CCCCCC", "DDDDDD", "AAAAAA", "BBBBBB", "CCCCCC", "DDDDDD", "AAAAAA", "BBBBBB", "CCCCCC", "DDDDDD");
         private List<Integer> colorList = CollectionUtil.asListNotNull(

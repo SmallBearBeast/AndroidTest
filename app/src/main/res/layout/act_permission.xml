@@ -31,13 +31,73 @@
             android:background="@color/cl_blue_5"
             android:text="权限申请" />
 
-        <TextView
-            style="@style/tv_base"
-            android:layout_height="match_parent"
-            android:background="@color/cl_red_t_6"
-            android:gravity="center"
-            android:text="1234567890123456789012345678901234567890"
-            android:textSize="40sp" />
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    style="@style/tv_base"
+                    android:layout_height="120dp"
+                    android:background="@color/cl_red_t_6"
+                    android:gravity="center"
+                    android:text="1234567890123456789012345678901234567890"
+                    android:textSize="40sp" />
+
+                <TextView
+                    style="@style/tv_base"
+                    android:layout_height="120dp"
+                    android:background="@color/cl_red_t_6"
+                    android:gravity="center"
+                    android:text="1234567890123456789012345678901234567890"
+                    android:textSize="40sp" />
+
+                <TextView
+                    style="@style/tv_base"
+                    android:layout_height="120dp"
+                    android:background="@color/cl_red_t_6"
+                    android:gravity="center"
+                    android:text="1234567890123456789012345678901234567890"
+                    android:textSize="40sp" />
+
+                <TextView
+                    style="@style/tv_base"
+                    android:layout_height="120dp"
+                    android:background="@color/cl_red_t_6"
+                    android:gravity="center"
+                    android:text="1234567890123456789012345678901234567890"
+                    android:textSize="40sp" />
+
+
+                <TextView
+                    style="@style/tv_base"
+                    android:layout_height="120dp"
+                    android:background="@color/cl_red_t_6"
+                    android:gravity="center"
+                    android:text="1234567890123456789012345678901234567890"
+                    android:textSize="40sp" />
+
+                <TextView
+                    style="@style/tv_base"
+                    android:layout_height="120dp"
+                    android:background="@color/cl_red_t_6"
+                    android:gravity="center"
+                    android:text="1234567890123456789012345678901234567890"
+                    android:textSize="40sp" />
+
+                <TextView
+                    style="@style/tv_base"
+                    android:layout_height="120dp"
+                    android:background="@color/cl_red_t_6"
+                    android:gravity="center"
+                    android:text="1234567890123456789012345678901234567890"
+                    android:textSize="40sp" />
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

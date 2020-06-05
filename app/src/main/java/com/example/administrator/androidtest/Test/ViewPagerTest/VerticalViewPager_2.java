@@ -21,39 +21,39 @@ public class VerticalViewPager_2 extends ViewPager {
     public VerticalViewPager_2(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         setOverScrollMode(OVER_SCROLL_NEVER);
-        try {
-            Class cls = this.getClass().getSuperclass();
-            Field distanceField = cls.getDeclaredField("mFlingDistance");
-            distanceField.setAccessible(true);
-            distanceField.setInt(this, distanceField.getInt(this) / 40);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Class cls = this.getClass().getSuperclass();
+//            Field distanceField = cls.getDeclaredField("mFlingDistance");
+//            distanceField.setAccessible(true);
+//            distanceField.setInt(this, distanceField.getInt(this) / 40);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         try {
             Class cls = this.getClass().getSuperclass();
             Field minVelocityField = cls.getDeclaredField("mMinimumVelocity");
             minVelocityField.setAccessible(true);
-            minVelocityField.setInt(this, minVelocityField.getInt(this) / 25);
+            minVelocityField.setInt(this, minVelocityField.getInt(this) / 50);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        try {
-            Class cls = this.getClass().getSuperclass();
-            Field maxVelocityField = cls.getDeclaredField("mMaximumVelocity");
-            maxVelocityField.setAccessible(true);
-            maxVelocityField.setInt(this, maxVelocityField.getInt(this) * 10);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            Class cls = this.getClass().getSuperclass();
-            Field slopField = cls.getDeclaredField("mTouchSlop");
-            slopField.setAccessible(true);
-            slopField.setInt(this, slopField.getInt(this) / 10);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            Class cls = this.getClass().getSuperclass();
+//            Field maxVelocityField = cls.getDeclaredField("mMaximumVelocity");
+//            maxVelocityField.setAccessible(true);
+//            maxVelocityField.setInt(this, maxVelocityField.getInt(this) * 10);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        try {
+//            Class cls = this.getClass().getSuperclass();
+//            Field slopField = cls.getDeclaredField("mTouchSlop");
+//            slopField.setAccessible(true);
+//            slopField.setInt(this, slopField.getInt(this) / 10);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override

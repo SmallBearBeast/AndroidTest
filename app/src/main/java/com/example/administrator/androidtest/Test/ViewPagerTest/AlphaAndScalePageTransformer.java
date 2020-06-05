@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
-public class AlphaAndScalePageTransformer implements ViewPager.PageTransformer {
+public class AlphaAndScalePageTransformer implements VerticalViewPager.PageTransformer {
     private static final String TAG = "AlphaAndScalePageTransformer";
     private final float SCALE_MAX = 0.8f;
     private final float ALPHA_MAX = 0.5f;

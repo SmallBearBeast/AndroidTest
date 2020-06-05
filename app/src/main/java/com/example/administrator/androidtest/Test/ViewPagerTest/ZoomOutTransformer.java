@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.ViewPager;
 
-public class ZoomOutTransformer implements ViewPager.PageTransformer {
+public class ZoomOutTransformer implements VerticalViewPager.PageTransformer {
     private static final String TAG = "ZoomOutTransformer";
 
     @Override

@@ -298,7 +298,7 @@ public abstract class VerticalPagerAdapter {
     /**
      * Register an observer to receive callbacks related to the adapter's data changing.
      *
-     * @param observer The {@link DataSetObserver} which will receive callbacks.
+     * @param observer The {@link android.database.DataSetObserver} which will receive callbacks.
      */
     public void registerDataSetObserver(@NonNull DataSetObserver observer) {
         mObservable.registerObserver(observer);
@@ -307,7 +307,7 @@ public abstract class VerticalPagerAdapter {
     /**
      * Unregister an observer from callbacks related to the adapter's data changing.
      *
-     * @param observer The {@link DataSetObserver} which will be unregistered.
+     * @param observer The {@link android.database.DataSetObserver} which will be unregistered.
      */
     public void unregisterDataSetObserver(@NonNull DataSetObserver observer) {
         mObservable.unregisterObserver(observer);

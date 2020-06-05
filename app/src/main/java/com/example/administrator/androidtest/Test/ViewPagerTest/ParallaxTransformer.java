@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.viewpager.widget.ViewPager;
 
-public class ParallaxTransformer implements ViewPager.PageTransformer {
+public class ParallaxTransformer implements VerticalViewPager.PageTransformer {
     private float mConfig = 0.85f;
 
     public ParallaxTransformer(float config) {

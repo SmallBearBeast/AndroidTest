@@ -157,9 +157,10 @@ public class ScreenUtil extends AppInitUtil {
                 public void onGlobalLayout() {
                     view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
                     ViewGroup.LayoutParams lp = view.getLayoutParams();
-                    lp.height = view.getMeasuredHeight() + ScreenUtil.getStatusBarHeight();
+                    int statusBarHeight = ScreenUtil.getStatusBarHeight();
+                    lp.height = view.getMeasuredHeight() + statusBarHeight;
                     view.setLayoutParams(lp);
-                    view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + ScreenUtil.getStatusBarHeight(), view.getPaddingRight(), view.getPaddingBottom());
+                    view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + statusBarHeight, view.getPaddingRight(), view.getPaddingBottom());
                 }
             });
         }
