@@ -2,10 +2,8 @@ package com.example.administrator.androidtest.Widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -34,7 +32,6 @@ public class ShapeImageView extends AppCompatImageView {
     private int mBorderSize;
     private int mBorderColor;
     private int mPolyGonSideNum;
-    private Bitmap mBitmap;
     private Paint mShapePaint;
     private Paint mBorderPaint;
     private Path mShapePath;
@@ -74,14 +71,12 @@ public class ShapeImageView extends AppCompatImageView {
         mShapePaint.setAntiAlias(true);
         mShapePaint.setDither(true);
         mShapePaint.setStyle(Paint.Style.FILL);
-        mShapePaint.setColor(Color.WHITE);
 
         mBorderPaint = new Paint();
         mBorderPaint.setAntiAlias(true);
         mShapePaint.setDither(true);
         mBorderPaint.setStyle(Paint.Style.FILL);
         mBorderPaint.setColor(mBorderColor);
-        mBorderPaint.setStrokeWidth(mBorderSize);
     }
 
     @Override
@@ -92,8 +87,12 @@ public class ShapeImageView extends AppCompatImageView {
         mViewWidth = width;
         mViewHeight = height;
         if (mType == TYPE_CIRCLE || mType == TYPE_SQUARE || mType == TYPE_POLYGON) {
-            if (width != height) {
+            if (width != height && width != 0 && height != 0) {
                 int size = Math.min(width, height);
+                setMeasuredDimension(size, size);
+                mViewWidth = mViewHeight = size;
+            } else if (width == 0 || height == 0) {
+                int size = Math.max(width, height);
                 setMeasuredDimension(size, size);
                 mViewWidth = mViewHeight = size;
             }
@@ -103,8 +102,8 @@ public class ShapeImageView extends AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
+        // 需要限制画布范围
         canvas.saveLayer(mSaveLayerRectF, null, Canvas.ALL_SAVE_FLAG);
-        // 缩放以后绘制的长度也同比例缩放
         scaleCanvas(canvas);
         super.onDraw(canvas);
         drawShape(canvas);
@@ -112,6 +111,9 @@ public class ShapeImageView extends AppCompatImageView {
         drawBorder(canvas);
     }
 
+    /**
+     * 通过Xfermode绘制形状
+     */
     private void drawShape(Canvas canvas) {
         mShapePath.reset();
         mBorderPath.reset();
@@ -201,10 +203,12 @@ public class ShapeImageView extends AppCompatImageView {
 //        mShapePath.transform();
         int size = Math.min(mViewWidth, mViewHeight);
         if (mBorderSize > 0) {
-//            mBorderPath.addPath(createPolygonPath(mPolyGonSideNum, size));
-//            Path path = createPolygonPath(mPolyGonSideNum, size);
+            mBorderPath.addPath(createPolygonPath(mPolyGonSideNum, size / 2.0f));
+            Path path = createPolygonPath(mPolyGonSideNum, (size - 2 * mBorderSize) / 2);
+            path.offset(mBorderSize, mBorderSize);
+            mBorderPath.op(path, Path.Op.DIFFERENCE);
         }
-        mShapePath.addPath(createPolygonPath(mPolyGonSideNum, size));
+        mShapePath.addPath(createPolygonPath(mPolyGonSideNum, size / 2.0f));
         Path path = new Path();
         path.addRect(0, 0, size, size, Path.Direction.CW);
         if (path.op(mShapePath, Path.Op.DIFFERENCE)) {
@@ -212,12 +216,12 @@ public class ShapeImageView extends AppCompatImageView {
         }
     }
 
-    private Path createPolygonPath(int polygonSideNum, int size) {
+    private Path createPolygonPath(int polygonSideNum, float radius) {
         Path path = new Path();
-        float degree = 360f / polygonSideNum;
+        float degree = (float) (Math.PI * 2 / polygonSideNum);
         for (int i = 0; i <= polygonSideNum; i++) {
-            float x = (float) (size / 2f + Math.sin(i * degree) * size);
-            float y = (float) (size / 2f + Math.cos(i * degree) * size);
+            float x = (float) (radius + Math.sin(i * degree) * radius);
+            float y = (float) (radius - Math.cos(i * degree) * radius);
             if (i == 0) {
                 path.moveTo(x, y);
             } else {
@@ -234,13 +238,16 @@ public class ShapeImageView extends AppCompatImageView {
         }
     }
 
+    /**
+     * 缩小画布，使图片内容不被borders覆盖
+     * 缩放以后绘制的长度也同比例缩放
+     */
     private void scaleCanvas(Canvas canvas) {
         if (mBorderSize <= 0) {
             return;
         }
         float sx = 1.0f * (mViewWidth - 2 * mBorderSize) / mViewWidth;
         float sy = 1.0f * (mViewHeight - 2 * mBorderSize) / mViewHeight;
-        // 缩小画布，使图片内容不被borders覆盖
         canvas.scale(sx, sy, mViewWidth / 2.0f, mViewHeight / 2.0f);
     }
 
