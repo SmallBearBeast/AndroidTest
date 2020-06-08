@@ -145,4 +145,13 @@
         </attr>
         <attr name="siv_polygon_side_num" format="integer"/>
     </declare-styleable>
+
+    <declare-styleable name="MoreTextView">
+        <attr name="mtv_has_animation" format="boolean"/>
+        <attr name="mtv_close_in_newLine" format="boolean"/>
+        <attr name="mtv_open_suffix_color" format="color"/>
+        <attr name="mtv_close_suffix_color" format="color"/>
+        <attr name="mtv_open_suffix_str" format="string"/>
+        <attr name="mtv_close_suffix_str" format="string"/>
+    </declare-styleable>
 </resources>
