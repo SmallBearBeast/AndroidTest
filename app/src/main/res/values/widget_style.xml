@@ -154,4 +154,13 @@
         <attr name="mtv_open_suffix_str" format="string"/>
         <attr name="mtv_close_suffix_str" format="string"/>
     </declare-styleable>
+
+    <declare-styleable name="LikeView">
+        <attr name="lv_anim_duration" format="integer"/>
+        <attr name="lv_is_like" format="boolean"/>
+        <attr name="lv_like_src" format="reference"/>
+        <attr name="lv_un_like_src" format="reference"/>
+        <attr name="lv_like_color" format="color"/>
+        <attr name="lv_un_like_color" format="color"/>
+    </declare-styleable>
 </resources>
