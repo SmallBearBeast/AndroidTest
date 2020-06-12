@@ -1,41 +1,25 @@
 package com.example.libframework.CoreUI;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public abstract class ComponentAct extends BaseAct {
-    protected Map<ComponentKey, IComponent> mComponentMap = new HashMap<>(8);
-
     protected <C extends IComponent> void regComponent(C component, Object tag) {
-        if (component != null) {
-            if (component instanceof ActComponent) {
-                ((ActComponent) component).attachMain(this);
-                ((ActComponent) component).attachView(getDecorView());
-            }
-            mComponentMap.put(new ComponentKey(component.getClass(), tag), component);
-            getLifecycle().addObserver(component);
-        }
+        ComponentService.get().regComponent(this, component, tag);
     }
 
     protected <C extends IComponent> void regComponent(C component) {
-        regComponent(component, null);
+        ComponentService.get().regComponent(this, component);
     }
 
     public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
-        ComponentKey componentKey = new ComponentKey(clz, tag);
-        if (mComponentMap.containsKey(componentKey)) {
-            return (C) mComponentMap.get(componentKey);
-        }
-        return null;
+        return ComponentService.get().getComponent(clz, tag);
     }
 
     public <C extends IComponent> C getComponent(Class<C> clz) {
-        return getComponent(clz, null);
+        return ComponentService.get().getComponent(clz);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mComponentMap.clear();
+    public void onBackPressed() {
+        super.onBackPressed();
+        ComponentService.get().onBackPressed(this);
     }
 }

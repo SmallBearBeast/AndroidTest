@@ -190,9 +190,9 @@ public class SystemShareAct extends ComponentAct {
 //            mTvShareImage = itemView.findViewById(R.id.tv_2);
 //            mTvShareVideo = itemView.findViewById(R.id.tv_3);
 //            mTvShareName = itemView.findViewById(R.id.tv_share_name);
-//            mTvShareText.setOnClickListener(this);
-//            mTvShareImage.setOnClickListener(this);
-//            mTvShareVideo.setOnClickListener(this);
+//            mTvShareText.clickListener(this);
+//            mTvShareImage.clickListener(this);
+//            mTvShareVideo.clickListener(this);
 //        }
 //
 //        public void bind(int pos, String data){

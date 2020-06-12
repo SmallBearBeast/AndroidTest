@@ -99,7 +99,7 @@ public class CaseView extends FrameLayout {
                     }
                 });
             } else {
-//                caseViewBt.setOnClickListener(new OnClickListener() {
+//                caseViewBt.clickListener(new OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
 //                        if (type != CaseInfo.CASE_TYPE_NETWORK_ERROR) {

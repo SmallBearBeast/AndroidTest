@@ -67,7 +67,7 @@ public class IconTouchViewAct extends ComponentAct {
                 ToastUtil.showToast("fl_test_1");
             }
         });
-//        mFlTest_2.setOnClickListener(new View.OnClickListener() {
+//        mFlTest_2.clickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                ToastUtil.showToast("fl_test_2");

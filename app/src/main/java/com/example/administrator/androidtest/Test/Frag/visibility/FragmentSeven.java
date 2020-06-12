@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.administrator.androidtest.R;
+import com.example.libframework.CoreUI.ViewComponent;
 import com.example.libframework.CoreUI.ComponentFrag;
-import com.example.libframework.CoreUI.FragComponent;
 import com.example.libframework.Page.IPage;
 import com.example.liblog.SLog;
 
@@ -26,6 +26,12 @@ public class FragmentSeven extends ComponentFrag {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         regComponent(new Component_1());
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
         regComponent(new Component_2());
     }
 
@@ -39,12 +45,18 @@ public class FragmentSeven extends ComponentFrag {
         return IPage.FragmentSeven;
     }
 
-    static class Component_1 extends FragComponent {
+    static class Component_1 extends ViewComponent<FragmentSeven> {
         private static final String TAG = "Component_1";
         @Override
         public void onCreate() {
             SLog.d(TAG, "onCreate: ");
             super.onCreate();
+        }
+
+        @Override
+        protected void onStart() {
+            SLog.d(TAG, "onStart: ");
+            super.onStart();
         }
 
         @Override
@@ -54,12 +66,18 @@ public class FragmentSeven extends ComponentFrag {
         }
     }
 
-    static class Component_2 extends FragComponent {
+    static class Component_2 extends ViewComponent<FragmentSeven> {
         private static final String TAG = "Component_2";
         @Override
         public void onCreate() {
             SLog.d(TAG, "onCreate: ");
             super.onCreate();
+        }
+
+        @Override
+        protected void onStart() {
+            SLog.d(TAG, "onStart: ");
+            super.onStart();
         }
 
         @Override
