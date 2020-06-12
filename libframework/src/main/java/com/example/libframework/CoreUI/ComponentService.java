@@ -7,6 +7,14 @@ public class ComponentService {
     private Map<ComponentKey, IComponent> mActComponentMap = new HashMap<>();
     private Map<ComponentKey, IComponent> mFragComponentMap = new HashMap<>();
 
+    private static class SingleTon {
+        private static final ComponentService INSTANCE = new ComponentService();
+    }
+
+    public ComponentService get() {
+        return SingleTon.INSTANCE;
+    }
+
     public  <C extends IComponent> void regComponent(ComponentAct activity, C component, Object tag) {
         if (component != null) {
             if (component instanceof ActComponent) {

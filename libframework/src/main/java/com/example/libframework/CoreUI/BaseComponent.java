@@ -3,17 +3,18 @@ package com.example.libframework.CoreUI;
 import android.util.SparseArray;
 import android.view.View;
 
+import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.annotation.CallSuper;
 
 
 public abstract class BaseComponent<M> implements IComponent {
-    protected M mMain;
-    protected View mContentView;
-    private SparseArray<View> mViewIdArray;
     private static final byte INIT_COUNT = 16;
+    private M mDependence;
+    private View mContentView;
+    private ComponentAct mComActivity;
+    private SparseArray<View> mViewIdArray;
 
     void attachView(View contentView) {
         mContentView = contentView;
@@ -27,8 +28,8 @@ public abstract class BaseComponent<M> implements IComponent {
         }
     }
 
-    void attachMain(M main) {
-        mMain = main;
+    void attachMain(M dependence) {
+        mDependence = dependence;
     }
 
     protected void onCreate() {
@@ -39,16 +40,13 @@ public abstract class BaseComponent<M> implements IComponent {
 
     }
 
-
     protected void onResume() {
 
     }
 
-
     protected void onPause() {
 
     }
-
 
     protected void onStop() {
 
@@ -56,7 +54,7 @@ public abstract class BaseComponent<M> implements IComponent {
 
     @CallSuper
     protected void onDestroy() {
-        mMain = null;
+        mDependence = null;
         attachView(null);
     }
 
@@ -100,5 +98,33 @@ public abstract class BaseComponent<M> implements IComponent {
             mViewIdArray.put(viewId, view);
         }
         return (T) view;
+    }
+
+    void attachActivity(ComponentAct activity) {
+        mComActivity = activity;
+    }
+
+    protected void onCreateView() {
+
+    }
+
+    protected void onDestroyView() {
+
+    }
+
+    protected void onFirstVisible() {
+
+    }
+
+    public M getDependence() {
+        return mDependence;
+    }
+
+    public View getContentView() {
+        return mContentView;
+    }
+
+    public ComponentAct getComActivity() {
+        return mComActivity;
     }
 }
