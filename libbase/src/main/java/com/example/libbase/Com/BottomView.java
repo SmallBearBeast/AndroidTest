@@ -135,7 +135,7 @@ public class BottomView {
         if (mContentView == null) {
             return;
         }
-        if (mIsShowed) {
+        if (mIsShowed || mIsDoingAnim) {
             return;
         }
         mIsShowed = true;
@@ -199,7 +199,7 @@ public class BottomView {
     }
 
     public void hide() {
-        if (!mIsShowed) {
+        if (!mIsShowed || mIsDoingAnim) {
             return;
         }
         mIsShowed = false;
@@ -514,19 +514,24 @@ public class BottomView {
             velocityMotionEvent.setLocation(velocityMotionEvent.getRawX(), velocityMotionEvent.getRawY());
             mVelocityTracker.addMovement(velocityMotionEvent);
             velocityMotionEvent.recycle();
+            // 滑动过程插入可能触发不到DOWN事件，这里提前检查一下并初始化，异常case
+            if (mStartY == 0) {
+                mStartY = event.getRawY();
+            }
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     mStartY = event.getRawY();
+                    Log.d(TAG, "onTouch: ACTION_DOWN mStartY = " + mStartY);
                     break;
                 case MotionEvent.ACTION_MOVE:
-//                    Log.d(TAG, "onTouch: getX = " + event.getX() + ", getY = "+ event.getY() + ", diffY = " + Math.abs(event.getY() - mLastY));
-//                    Log.e(TAG, "onTouch: getRawX = " + event.getRawX() + ", getRawY = "+ event.getRawY() + ", diffRawY = " + Math.abs(event.getRawY() - mLastRawY));
                     int y = (int) (event.getRawY() - mStartY);
+                    //                    Log.d(TAG, "onTouch: ACTION_MOVE mStartY = " + mStartY + ", y = " + y);
                     if (y < 0) {
                         y = 0;
                     } else if (y > mContentView.getHeight()) {
                         y = mContentView.getHeight();
                     }
+                    //                    Log.d(TAG, "onTouch: ACTION_MOVE y = " + y);
                     mContentView.setTranslationY(y);
                     onTranslationY(y);
                     break;
