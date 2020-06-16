@@ -39,6 +39,7 @@ public class MoreTextView extends AppCompatTextView {
     private boolean mIsAnimating = false;
     private boolean mIsClosed = false;
 
+    private int mMaxLines;
     private int mViewWidth = 0;
     private int mOpenHeight;
     private int mCLoseHeight;
@@ -80,7 +81,7 @@ public class MoreTextView extends AppCompatTextView {
             mCloseSuffixStr = DEFAULT_CLOSE_SUFFIX;
         }
         typedArray.recycle();
-
+        mMaxLines = getMaxLines();
         setMovementMethod(OverLinkMovementMethod.getInstance());
         setIncludeFontPadding(false);
         updateOpenSuffixSpan();
@@ -96,6 +97,7 @@ public class MoreTextView extends AppCompatTextView {
     }
 
     public void setOriginalText(final CharSequence text) {
+        setMaxLines(mMaxLines);
         if (mViewWidth != 0) {
             new SetTextTask(text).run();
         } else {
@@ -187,6 +189,7 @@ public class MoreTextView extends AppCompatTextView {
      * 收起
      */
     private void close() {
+        setMaxLines(mMaxLines);
         if (mHasAnimation) {
             executeCloseAnim();
         } else {
@@ -377,10 +380,12 @@ public class MoreTextView extends AppCompatTextView {
         @Override
         public void run() {
             if (getMaxLines() == Integer.MAX_VALUE) {
+                setText(mText);
                 return;
             }
             Layout tempLayout = obtainStaticLayout(new SpannableStringBuilder(mText));
             if (tempLayout.getLineCount() <= getMaxLines()) {
+                setText(mText);
                 return;
             }
             mExpandable = false;
