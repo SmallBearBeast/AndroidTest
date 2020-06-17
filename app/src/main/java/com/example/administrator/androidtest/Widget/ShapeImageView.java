@@ -74,7 +74,7 @@ public class ShapeImageView extends AppCompatImageView {
 
         mBorderPaint = new Paint();
         mBorderPaint.setAntiAlias(true);
-        mShapePaint.setDither(true);
+        mBorderPaint.setDither(true);
         mBorderPaint.setStyle(Paint.Style.FILL);
         mBorderPaint.setColor(mBorderColor);
     }
@@ -105,18 +105,27 @@ public class ShapeImageView extends AppCompatImageView {
         // 需要限制画布范围
         canvas.saveLayer(mSaveLayerRectF, null, Canvas.ALL_SAVE_FLAG);
         scaleCanvas(canvas);
+        measurePath();
+        drawBackground(canvas);
         super.onDraw(canvas);
         drawShape(canvas);
         canvas.restore();
         drawBorder(canvas);
     }
 
+    private void drawBackground(Canvas canvas) {
+//        Paint paint = new Paint();
+//        paint.setAntiAlias(true);
+//        paint.setDither(true);
+//        paint.setStyle(Paint.Style.FILL);
+//        paint.setColor(Color.BLACK);
+//        canvas.drawPath(mShapePath, paint);
+    }
+
     /**
      * 通过Xfermode绘制形状
      */
     private void drawShape(Canvas canvas) {
-        mShapePath.reset();
-        mBorderPath.reset();
         mShapePaint.setXfermode(mXfermode);
         if (isRectangle()) {
             drawRectangle(canvas);
@@ -130,7 +139,21 @@ public class ShapeImageView extends AppCompatImageView {
         mShapePaint.setXfermode(null);
     }
 
-    private void drawRectangle(Canvas canvas) {
+    private void measurePath() {
+        mShapePath.reset();
+        mBorderPath.reset();
+        if (isRectangle()) {
+            rectanglePath();
+        } else if (isCircle()) {
+            circlePath();
+        } else if (isSquare()) {
+            squarePath();
+        } else if (isPolygon()) {
+            polygonPath();
+        }
+    }
+
+    private void rectanglePath() {
         float[] radii = new float[8];
         boolean isPartSetRadius = false;
         if (mLeftTopRadius > 0) {
@@ -163,14 +186,20 @@ public class ShapeImageView extends AppCompatImageView {
             mBorderPath.op(path, Path.Op.DIFFERENCE);
         }
         mShapePath.addRoundRect(new RectF(0, 0, width, height), radii, Path.Direction.CW);
+    }
+
+    private void drawRectangle(Canvas canvas) {
+        int width = mViewWidth;
+        int height = mViewHeight;
         Path path = new Path();
         path.addRect(0, 0, width, height, Path.Direction.CW);
         if (path.op(mShapePath, Path.Op.DIFFERENCE)) {
             canvas.drawPath(path, mShapePaint);
         }
+        mShapePaint.setXfermode(null);
     }
 
-    private void drawCircle(Canvas canvas) {
+    private void circlePath() {
         int size = Math.min(mViewWidth, mViewHeight);
         float radius = size / 2.0f;
         if (mBorderSize > 0) {
@@ -180,6 +209,10 @@ public class ShapeImageView extends AppCompatImageView {
             mBorderPath.op(path, Path.Op.DIFFERENCE);
         }
         mShapePath.addCircle(radius, radius, radius, Path.Direction.CW);
+    }
+
+    private void drawCircle(Canvas canvas) {
+        int size = Math.min(mViewWidth, mViewHeight);
         Path path = new Path();
         path.addRect(0, 0, size, size, Path.Direction.CW);
         if (path.op(mShapePath, Path.Op.DIFFERENCE)) {
@@ -187,7 +220,7 @@ public class ShapeImageView extends AppCompatImageView {
         }
     }
 
-    private void drawSquare(Canvas canvas) {
+    private void squarePath() {
         int size = Math.min(mViewWidth, mViewHeight);
         if (mBorderSize > 0) {
             mBorderPath.addRect(0, 0, size, size, Path.Direction.CW);
@@ -196,11 +229,13 @@ public class ShapeImageView extends AppCompatImageView {
             mBorderPath.op(path, Path.Op.DIFFERENCE);
         }
         mShapePath.addRect(0, size, size, size, Path.Direction.CW);
+    }
+
+    private void drawSquare(Canvas canvas) {
         canvas.drawPath(mShapePath, mShapePaint);
     }
 
-    private void drawPolygon(Canvas canvas) {
-//        mShapePath.transform();
+    private void polygonPath() {
         int size = Math.min(mViewWidth, mViewHeight);
         if (mBorderSize > 0) {
             mBorderPath.addPath(createPolygonPath(mPolyGonSideNum, size / 2.0f));
@@ -209,6 +244,11 @@ public class ShapeImageView extends AppCompatImageView {
             mBorderPath.op(path, Path.Op.DIFFERENCE);
         }
         mShapePath.addPath(createPolygonPath(mPolyGonSideNum, size / 2.0f));
+    }
+
+    private void drawPolygon(Canvas canvas) {
+//        mShapePath.transform();
+        int size = Math.min(mViewWidth, mViewHeight);
         Path path = new Path();
         path.addRect(0, 0, size, size, Path.Direction.CW);
         if (path.op(mShapePath, Path.Op.DIFFERENCE)) {
