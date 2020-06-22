@@ -6,12 +6,54 @@
     android:orientation="vertical">
 
     <com.example.administrator.androidtest.Widget.FlowLayout
-        android:padding="@dimen/dp_10"
         android:id="@+id/fl_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/cl_black"
-        app:fl_horizontal_space="@dimen/dp_10"
-        app:fl_vertical_space="@dimen/dp_10">
+        android:padding="10dp"
+        app:fl_horizontal_space="5dp"
+        app:fl_vertical_space="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorF44336"
+            android:padding="5dp"
+            android:text="Hello"
+            android:textColor="@color/cl_white" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/color009688"
+            android:padding="5dp"
+            android:text="World"
+            android:textColor="@color/cl_white" />
+
+<!--        <TextView-->
+<!--            android:layout_width="150dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/colorFF5722"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="5dp"-->
+<!--            android:text="World"-->
+<!--            android:textColor="@color/cl_white" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="100dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/color3F51B5"-->
+<!--            android:gravity="center"-->
+<!--            android:padding="5dp"-->
+<!--            android:text="World"-->
+<!--            android:textColor="@color/cl_white" />-->
+
+<!--        <TextView-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/color009688"-->
+<!--            android:padding="5dp"-->
+<!--            android:text="World"-->
+<!--            android:textColor="@color/cl_white" />-->
     </com.example.administrator.androidtest.Widget.FlowLayout>
 </LinearLayout>
