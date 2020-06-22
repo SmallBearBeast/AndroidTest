@@ -11,6 +11,9 @@ import com.example.administrator.androidtest.R;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 流式布局
+ */
 public class FlowLayout extends ViewGroup {
     private int mVerticalSpace;
     private int mHorizontalSpace;
@@ -76,12 +79,13 @@ public class FlowLayout extends ViewGroup {
                 MeasureSpec.getSize(heightMeasureSpec) : useHeight + getPaddingTop() + getPaddingBottom());
     }
 
+    // 目前还没有实现居中显示
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childCount = getChildCount();
         int L = getPaddingLeft(), T = getPaddingTop();
         int lineMaxHeight = 0;
-        int usefulWidth = getMeasuredWidth();
+        int usefulWidth = getMeasuredWidth() - getPaddingRight();
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
             if (childView.getVisibility() == View.GONE) {

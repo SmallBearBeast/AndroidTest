@@ -163,4 +163,9 @@
         <attr name="lv_like_color" format="color"/>
         <attr name="lv_un_like_color" format="color"/>
     </declare-styleable>
+
+    <declare-styleable name="FlowFakeTextView">
+        <attr name="fstv_tv_layout_id" format="reference"/>
+        <attr name="fstv_tv_max_num" format="integer"/>
+    </declare-styleable>
 </resources>

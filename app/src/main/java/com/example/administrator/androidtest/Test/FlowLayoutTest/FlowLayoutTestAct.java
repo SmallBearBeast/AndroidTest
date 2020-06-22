@@ -4,7 +4,6 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Layout;
-import android.text.SpannableStringBuilder;
 import android.text.StaticLayout;
 import android.util.TypedValue;
 import android.view.View;
@@ -14,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Widget.FlowFakeTextView;
 import com.example.administrator.androidtest.Widget.FlowLayout;
 import com.example.libbase.Util.DensityUtil;
 import com.example.libbase.Util.ToastUtil;
@@ -24,6 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FlowLayoutTestAct extends ComponentAct {
+    private FlowFakeTextView flowFakeTextView;
+    private List<Integer> splitPointList = new ArrayList<>();
     @Override
     protected int layoutId() {
         return R.layout.act_flow_layout_test;
@@ -42,6 +44,21 @@ public class FlowLayoutTestAct extends ComponentAct {
                 }
             }
         });
+        flowFakeTextView = findViewById(R.id.fstv_content);
+        flowFakeTextView.setTvInitCallback(new FlowFakeTextView.TvInitCallback() {
+            @Override
+            public TextView onGetInitTv() {
+                return createTv("");
+            }
+        });
+        flowLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                flowFakeTextView.setText("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。", flowLayout.getWidth());
+                flowLayout.addView(createTv("Hello World"));
+                splitPointList = new ArrayList<>(flowFakeTextView.getSplitPointList());
+            }
+        });
 //        String[] texts = new String[]{
 //                "Android", "Java", "PHP", "C++"
 //                "Android", "Java", "PHP", "C++", "Android", "Java", "PHP", "C++", "Android", "Java", "PHP", "C++",
@@ -50,20 +67,20 @@ public class FlowLayoutTestAct extends ComponentAct {
 //        for (int i = 0; i < texts.length; i++) {
 //            flowLayout.addView(createTv(texts[i]));
 //        }
-        flowLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                View lastView = flowLayout.getChildAt(flowLayout.getChildCount() - 1);
-                int totalWidth = DensityUtil.getScreenWidth();
-                int startWidth = totalWidth - lastView.getRight() - flowLayout.getPaddingRight() - DensityUtil.dp2Px(5);
-                int contentWidth = totalWidth - flowLayout.getPaddingLeft() - flowLayout.getPaddingRight();
-                List<TextView> textViewList = splitTextView("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。", startWidth, contentWidth);
-                for (TextView textView : textViewList) {
-                    flowLayout.addView(textView);
-                }
-                flowLayout.addView(createTv("Hello World"));
-            }
-        });
+//        flowLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                View lastView = flowLayout.getChildAt(flowLayout.getChildCount() - 1);
+//                int totalWidth = DensityUtil.getScreenWidth();
+//                int startWidth = totalWidth - lastView.getRight() - flowLayout.getPaddingRight() - DensityUtil.dp2Px(5);
+//                int contentWidth = totalWidth - flowLayout.getPaddingLeft() - flowLayout.getPaddingRight();
+//                List<TextView> textViewList = splitTextView("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。", startWidth, contentWidth);
+//                for (TextView textView : textViewList) {
+//                    flowLayout.addView(textView);
+//                }
+//                flowLayout.addView(createTv("Hello World"));
+//            }
+//        });
     }
 
     private TextView createTv(String text) {
@@ -117,6 +134,18 @@ public class FlowLayoutTestAct extends ComponentAct {
         } else {
             return new StaticLayout(charSequence, tv.getPaint(), contentWidth, Layout.Alignment.ALIGN_NORMAL,
                     tv.getLineSpacingMultiplier(), tv.getLineSpacingExtra(), tv.getIncludeFontPadding());
+        }
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.bt_1:
+                flowFakeTextView.setText("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。", splitPointList);
+                break;
+
+            case R.id.bt_2:
+                flowFakeTextView.setText("", 0);
+                break;
         }
     }
 }
