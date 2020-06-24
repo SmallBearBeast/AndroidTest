@@ -3,20 +3,24 @@ package com.example.administrator.androidtest.Widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * 流式布局
  */
 public class FlowLayout extends ViewGroup {
+    private static final String TAG = "FlowLayout";
     private int mVerticalSpace;
     private int mHorizontalSpace;
+    private List<Integer> mLineHeightList = new ArrayList<>();
     private List<View> mChildViewList = new ArrayList<>();
     private OnFlowClickListener mFlowClickListener;
 
@@ -65,12 +69,14 @@ public class FlowLayout extends ViewGroup {
                     useHeight = useHeight + mVerticalSpace;
                 }
                 useHeight = useHeight + lineMaxHeight;
+                mLineHeightList.add(lineMaxHeight);
                 lineMaxHeight = 0;
             }
             useWidth = useWidth + childView.getMeasuredWidth() + marginWidth;
             lineMaxHeight = Math.max(lineMaxHeight, childView.getMeasuredHeight() + marginHeight);
         }
         useHeight = useHeight + lineMaxHeight;
+        mLineHeightList.add(lineMaxHeight);
         int measureWidth = MeasureSpec.getSize(widthMeasureSpec);
         if (MeasureSpec.getMode(widthMeasureSpec) == MeasureSpec.AT_MOST && !moreLine) {
             measureWidth = useWidth + getPaddingLeft() + getPaddingRight();
@@ -79,11 +85,11 @@ public class FlowLayout extends ViewGroup {
                 MeasureSpec.getSize(heightMeasureSpec) : useHeight + getPaddingTop() + getPaddingBottom());
     }
 
-    // 目前还没有实现居中显示
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         int childCount = getChildCount();
         int L = getPaddingLeft(), T = getPaddingTop();
+        int lineIndex = 0;
         int lineMaxHeight = 0;
         int usefulWidth = getMeasuredWidth() - getPaddingRight();
         for (int i = 0; i < childCount; i++) {
@@ -94,29 +100,33 @@ public class FlowLayout extends ViewGroup {
             int leftMargin = 0;
             int rightMargin = 0;
             int topMargin = 0;
-            int bottomMargin = 0;
             if (childView.getLayoutParams() instanceof MarginLayoutParams) {
                 MarginLayoutParams marginLp = (MarginLayoutParams) childView.getLayoutParams();
                 leftMargin = marginLp.leftMargin;
                 rightMargin = marginLp.rightMargin;
                 topMargin = marginLp.topMargin;
-                bottomMargin = marginLp.bottomMargin;
             }
             if (L != getPaddingLeft()) {
                 L = L + mHorizontalSpace;
             }
             if (L + childView.getMeasuredWidth() + leftMargin + rightMargin > usefulWidth) {
-                if (lineMaxHeight != 0) {
+                if (lineIndex != 0) {
                     T = T + mVerticalSpace;
                 }
                 T = T + lineMaxHeight;
                 L = getPaddingLeft();
-                lineMaxHeight = 0;
+                lineIndex ++;
             }
-            childView.layout(L + leftMargin, T + topMargin, L + leftMargin + childView.getMeasuredWidth(), T + topMargin + childView.getMeasuredHeight());
+            lineMaxHeight = lineIndex < mLineHeightList.size() ? mLineHeightList.get(lineIndex) : lineMaxHeight;
+            l = L + leftMargin;
+            t = T + topMargin + (lineMaxHeight - childView.getMeasuredHeight()) / 2;
+            r = l + childView.getMeasuredWidth();
+            b = t + childView.getMeasuredHeight();
+            childView.layout(l, t, r, b);
             L = L + childView.getMeasuredWidth() + leftMargin + rightMargin;
-            lineMaxHeight = Math.max(lineMaxHeight, childView.getMeasuredHeight() + topMargin + bottomMargin);
+//            Log.d(TAG, "onLayout: lineMaxHeight = " + lineMaxHeight);
         }
+//        Log.d(TAG, "onLayout: mLineHeightList = " + Arrays.toString(mLineHeightList.toArray()));
     }
 
     @Override

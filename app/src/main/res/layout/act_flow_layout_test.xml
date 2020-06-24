@@ -22,24 +22,48 @@
 
         <TextView
             android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorF44336"
+            android:layout_height="80dp"
+            android:background="@color/colorE91E63"
             android:padding="5dp"
             android:text="Hello"
             android:textColor="@color/cl_white" />
 
         <TextView
             android:layout_width="56dp"
-            android:layout_height="wrap_content"
-            android:background="@color/colorF44336"
+            android:layout_height="50dp"
+            android:background="@color/color9C27B0"
             android:padding="5dp"
             android:text="Hello"
             android:textColor="@color/cl_white" />
 
-        <com.example.administrator.androidtest.Widget.FlowFakeTextView
-            android:id="@+id/fstv_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:background="@color/color673AB7"
+            android:padding="5dp"
+            android:text="Hello"
+            android:textColor="@color/cl_white" />
+
+        <TextView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@color/colorE91E63"
+            android:padding="5dp"
+            android:text="Hello"
+            android:textColor="@color/cl_white" />
+
+        <TextView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@color/color3F51B5"
+            android:padding="5dp"
+            android:text="Hello"
+            android:textColor="@color/cl_white" />
+
+<!--        <com.example.administrator.androidtest.Widget.FlowFakeTextView-->
+<!--            android:id="@+id/fstv_content"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"/>-->
 <!--        <TextView-->
 <!--            android:layout_width="150dp"-->
 <!--            android:layout_height="wrap_content"-->

@@ -44,21 +44,21 @@ public class FlowLayoutTestAct extends ComponentAct {
                 }
             }
         });
-        flowFakeTextView = findViewById(R.id.fstv_content);
-        flowFakeTextView.setTvInitCallback(new FlowFakeTextView.TvInitCallback() {
-            @Override
-            public TextView onGetInitTv() {
-                return createTv("");
-            }
-        });
-        flowLayout.post(new Runnable() {
-            @Override
-            public void run() {
-                flowFakeTextView.setText("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。", flowLayout.getWidth());
-                flowLayout.addView(createTv("Hello World"));
-                splitPointList = new ArrayList<>(flowFakeTextView.getSplitPointList());
-            }
-        });
+//        flowFakeTextView = findViewById(R.id.fstv_content);
+//        flowFakeTextView.setTvInitCallback(new FlowFakeTextView.TvInitCallback() {
+//            @Override
+//            public TextView onGetInitTv() {
+//                return createTv("");
+//            }
+//        });
+//        flowLayout.post(new Runnable() {
+//            @Override
+//            public void run() {
+//                flowFakeTextView.setText("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事。", flowLayout.getWidth());
+//                flowLayout.addView(createTv("Hello World"));
+//                splitPointList = new ArrayList<>(flowFakeTextView.getSplitPointList());
+//            }
+//        });
 //        String[] texts = new String[]{
 //                "Android", "Java", "PHP", "C++"
 //                "Android", "Java", "PHP", "C++", "Android", "Java", "PHP", "C++", "Android", "Java", "PHP", "C++",
