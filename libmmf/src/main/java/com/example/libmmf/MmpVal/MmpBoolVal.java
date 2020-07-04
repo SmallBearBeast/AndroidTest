@@ -13,7 +13,7 @@ public class MmpBoolVal extends MmpVal {
     }
 
     public boolean get() {
-        return MMKVStorage.getBoolean(MMKV_MMPVAL_ID, mKey, mVal);
+            return MMKVStorage.getBoolean(MMKV_MMPVAL_ID, mKey, mVal);
     }
 
     public void set(boolean val) {

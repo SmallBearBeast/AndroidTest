@@ -1,23 +1,25 @@
 package com.example.administrator.androidtest.Test.ValTest;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.example.administrator.androidtest.App;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.CoreUI.ComponentAct;
-import com.example.libmmf.AppVal.AppIntVal;
 
 public class AppValTestAct extends ComponentAct {
-    private AppIntVal[] appIntVals = new AppIntVal[1000];
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        for (int i = 0; i < appIntVals.length; i++) {
-            appIntVals[i] = new AppIntVal("AppIntVal_" + i, i);
-        }
+        AppData.test1_int1.inc();
+        AppData.test1_int2.dec();
+        AppData.test1_int3.plus(5);
+        AppData.test1_int4.plus(5);
+        AppData.test1_int5.minus(5);
     }
 
     @Override
@@ -28,20 +30,31 @@ public class AppValTestAct extends ComponentAct {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_1:
-                for (int i = 0; i < appIntVals.length; i++) {
-                    appIntVals[i].set(i);
-                }
+                Log.d(TAG, "onClick: AppData.test1_int1 = " + AppData.test1_int1.get() + ", AppData.test1_int2 = " + AppData.test1_int2.get()
+                        + ", AppData.test1_int3 = " + AppData.test1_int3.get() + ", AppData.test1_int4 = " + AppData.test1_int4.get() + ", AppData.test1_int5 = " + AppData.test1_int5.get());
                 break;
 
             case R.id.bt_2:
-                appIntVals[0].dec();
+                Log.d(TAG, "onClick: AppData.test0_float1 = " + AppData.test0_float1.get());
                 break;
 
             case R.id.bt_3:
-                appIntVals[0].inc();
+                Log.d(TAG, "onClick: AppData.test2_bool1 = " + AppData.test2_bool1.get() + ", AppData.test2_string2 = " + AppData.test2_string2.get());
                 break;
 
             case R.id.bt_4:
+                AppData.test1_int1.inc();
+                AppData.test1_int2.dec();
+                AppData.test1_int3.plus(5);
+                AppData.test1_int4.plus(5);
+                AppData.test1_int5.minus(5);
+
+                AppData.test0_float1.reset();
+
+                AppData.test2_bool1.reverse();
+                AppData.test2_string2.reset();
+                Log.d(TAG, "onClick: AppData.test1_int1 = " + AppData.test1_int1.get() + ", AppData.test1_int2 = " + AppData.test1_int2.get()
+                        + ", AppData.test1_int3 = " + AppData.test1_int3.get() + ", AppData.test1_int4 = " + AppData.test1_int4.get() + ", AppData.test1_int5 = " + AppData.test1_int5.get());
                 break;
         }
     }

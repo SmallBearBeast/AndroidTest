@@ -1,69 +1,33 @@
 package com.example.libmmf.AppVal;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-
 public class AppBoolVal extends AppVal {
     private boolean mVal;
 
     public AppBoolVal(String key, boolean val) {
-        if (sApp == null) {
-            throw new RuntimeException("should init AppVal first");
-        }
-        mKey = key;
+        super(key);
+        mVal = val;
+    }
+
+    public AppBoolVal(String spName, String key, boolean val) {
+        super(spName, key);
         mVal = val;
     }
 
     public boolean get() {
-        int index = 0;
-        if (mGroup != -1) {
-            return sApp.getSharedPreferences(sBaseFileName + mGroup, Context.MODE_PRIVATE).getBoolean(mKey, mVal);
-        }
-        while (index < sSpFileCount.get()) {
-            SharedPreferences sp = sApp.getSharedPreferences(sBaseFileName + index, Context.MODE_PRIVATE);
-            if (sp.contains(mKey)) {
-                mGroup = index;
-                return sp.getBoolean(mKey, mVal);
-            }
-            index ++;
-        }
+        mVal = getSp().getBoolean(getKey(), mVal);
         return mVal;
     }
 
     public void set(boolean val) {
         mVal = val;
-        if (mGroup != -1) {
-            sApp.getSharedPreferences(sBaseFileName + mGroup, Context.MODE_PRIVATE).edit().putBoolean(mKey, mVal).apply();
-            return;
-        }
-        int index = 0;
-        int insertIndex = -1;
-        while (index < sSpFileCount.get()) {
-            SharedPreferences sp = sApp.getSharedPreferences(sBaseFileName + index, Context.MODE_PRIVATE);
-            if (sp.contains(mKey)) {
-                sp.edit().putBoolean(mKey, mVal).apply();
-                mGroup = index;
-                return;
-            } else if (insertIndex == -1 && sp.getInt(SP_FILE_LENGTH, 0) < sSpLengthLimit) {
-                insertIndex = index;
-            }
-            index++;
-        }
-        if (insertIndex != -1) {
-            SharedPreferences sp = sApp.getSharedPreferences(sBaseFileName + insertIndex, Context.MODE_PRIVATE);
-            sp.edit().putInt(SP_FILE_LENGTH, sp.getInt(SP_FILE_LENGTH, 0) + 1).putBoolean(mKey, mVal).apply();
-            mGroup = insertIndex;
-            return;
-        }
-        if (index == sSpFileCount.get()) {
-            sSpFileCount.incrementAndGet();
-            SharedPreferences.Editor editor = sApp.getSharedPreferences(sBaseFileName + index, Context.MODE_PRIVATE).edit();
-            editor.putInt(SP_FILE_LENGTH, 1).putBoolean(mKey, mVal).apply();
-            mGroup = index;
-        }
+        getEditor().putBoolean(getKey(), mVal).apply();
     }
 
     public void reverse() {
         set(!mVal);
+    }
+
+    public void reset() {
+        set(false);
     }
 }

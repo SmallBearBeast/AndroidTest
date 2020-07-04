@@ -4,38 +4,72 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.HashSet;
 
-class AppVal {
-    private static final String SP_BASE_NAME = "sp_base_name";
-    private static final int SP_LENGTH_LIMIT = 20;
-    static final String SP_FILE_LENGTH = "sp_file_length";
-    static Application sApp;
-    static String sBaseFileName;
-    static AtomicInteger sSpFileCount = new AtomicInteger(0);
-    static int sSpLengthLimit = SP_LENGTH_LIMIT;
+public abstract class AppVal {
+    private static final String DEFAULT_NAME = "default_name";
+    private static boolean sIsInit = false;
+    private static final HashSet<String> sSpNameSet = new HashSet<>();
+    private static Application sApp;
+    private String mSpName;
+    private String mKey;
 
-    String mKey;
-    int mGroup = -1;
-
-    public static void init(Application app) {
-        init(app, SP_BASE_NAME, SP_LENGTH_LIMIT);
+    AppVal(String key) {
+        this(DEFAULT_NAME, key);
     }
 
-    private static void init(Application app, String baseAppValFileName) {
-        init(app, baseAppValFileName, SP_LENGTH_LIMIT);
+    AppVal(String spName, String key) {
+        checkInit();
+        checkSpName(spName);
+        mSpName = spName;
+        mKey = key;
     }
 
-    private static void init(Application app, String baseAppValFileName, int spLengthLimit) {
+    public static void init(Application app, String... spNames) {
+        sIsInit = true;
         sApp = app;
-        sBaseFileName = baseAppValFileName;
-        sSpLengthLimit = spLengthLimit;
-        while (true) {
-            SharedPreferences sp = sApp.getSharedPreferences(sBaseFileName + "_" + sSpFileCount, Context.MODE_PRIVATE);
-            sSpFileCount.incrementAndGet();
-            if (!sp.contains(SP_FILE_LENGTH)) {
-                break;
+        for (String spName : spNames) {
+            sApp.getSharedPreferences(spName, Context.MODE_PRIVATE);
+            sSpNameSet.add(spName);
+        }
+        sSpNameSet.add(DEFAULT_NAME);
+    }
+
+    public static void clear(String... spNames) {
+        for (String spName : spNames) {
+            if (sSpNameSet.contains(spName)) {
+                sApp.getSharedPreferences(spName, Context.MODE_PRIVATE).edit().clear().apply();
             }
         }
+    }
+
+    public static void clearAll() {
+        for (String spName : sSpNameSet) {
+            sApp.getSharedPreferences(spName, Context.MODE_PRIVATE).edit().clear().apply();
+        }
+    }
+
+    static void checkInit() {
+        if (!sIsInit) {
+            throw new RuntimeException("should init MmpVal first");
+        }
+    }
+
+    static void checkSpName(String spName) {
+        if (!sSpNameSet.contains(spName)) {
+            throw new RuntimeException("spName should be contained in sSpNameSet");
+        }
+    }
+
+    SharedPreferences getSp() {
+        return sApp.getSharedPreferences(mSpName, Context.MODE_PRIVATE);
+    }
+
+    SharedPreferences.Editor getEditor() {
+        return sApp.getSharedPreferences(mSpName, Context.MODE_PRIVATE).edit();
+    }
+
+    String getKey() {
+        return mKey;
     }
 }
