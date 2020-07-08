@@ -11,6 +11,7 @@
         android:orientation="vertical">
 
         <com.example.administrator.androidtest.Widget.ShapeImageView
+            android:id="@+id/siv_1"
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
@@ -21,13 +22,12 @@
             app:siv_type="rectangle" />
 
         <com.example.administrator.androidtest.Widget.ShapeImageView
-            android:layout_width="200dp"
+            android:id="@+id/siv_2"
+            android:layout_width="150dp"
             android:layout_height="150dp"
-            android:scaleType="centerInside"
-            android:src="@drawable/girl"
-            app:siv_border_color="@color/cl_red_t_6"
-            app:siv_border_width="15dp"
-            app:siv_radius="15dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/test_pic_1"
+            android:padding="5dp"
             app:siv_type="circle" />
 
 

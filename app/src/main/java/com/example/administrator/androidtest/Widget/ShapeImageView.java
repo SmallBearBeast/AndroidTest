@@ -11,6 +11,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Xfermode;
 import android.util.AttributeSet;
+import android.view.View;
 
 import androidx.appcompat.widget.AppCompatImageView;
 
@@ -50,6 +51,7 @@ public class ShapeImageView extends AppCompatImageView {
         mShapePath = new Path();
         mBorderPath = new Path();
         mSaveLayerRectF = new RectF();
+        setLayerType(View.LAYER_TYPE_SOFTWARE, null);
     }
 
     private void initTypeArray(Context context, AttributeSet attrs) {
