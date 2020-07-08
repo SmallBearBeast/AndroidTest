@@ -166,7 +166,7 @@ public class ScreenUtil extends AppInitUtil {
         }
     }
 
-    private static Map<Activity, KeyBoardData> keyBoardListenerMap = new HashMap<>();
+    private static Map<Activity, KeyBoardData> keyBoardDataMap = new HashMap<>();
 
     private static class KeyBoardData {
         private List<KeyBoardListener> mKeyBoardListenerList = new ArrayList<>();
@@ -188,16 +188,16 @@ public class ScreenUtil extends AppInitUtil {
     }
 
     public interface KeyBoardListener {
-        void onChange(boolean showKeyBoard, int keyBoardHeight);
+        void onChange(boolean showKeyBoard, int bottomOffset);
     }
 
     public static boolean isShowKeyBoard(Activity activity) {
-        KeyBoardData keyBoardData = keyBoardListenerMap.get(activity);
+        KeyBoardData keyBoardData = keyBoardDataMap.get(activity);
         return keyBoardData != null && keyBoardData.mShowKeyBoard;
     }
 
     public static void observeKeyBoard(final Activity activity, final KeyBoardListener keyBoardListener) {
-        KeyBoardData keyBoardData = keyBoardListenerMap.get(activity);
+        KeyBoardData keyBoardData = keyBoardDataMap.get(activity);
         if (keyBoardData != null) {
             if (keyBoardListener != null) {
                 keyBoardData.add(keyBoardListener);
@@ -205,7 +205,7 @@ public class ScreenUtil extends AppInitUtil {
             return;
         }
         keyBoardData = new KeyBoardData();
-        keyBoardListenerMap.put(activity, keyBoardData);
+        keyBoardDataMap.put(activity, keyBoardData);
         if (keyBoardListener != null) {
             keyBoardData.add(keyBoardListener);
         }
@@ -220,11 +220,14 @@ public class ScreenUtil extends AppInitUtil {
                 int lastVisibleHeight = finalKeyBoardData.mLastVisibleHeight;
                 if (visibleHeight != lastVisibleHeight) {
                     if (lastVisibleHeight > 0) {
-                        int diff = lastVisibleHeight - visibleHeight;
-                        if (diff > 200) {
-                            finalKeyBoardData.onChange(true, diff);
+                        Display display = activity.getWindowManager().getDefaultDisplay();
+                        Point point = new Point();
+                        display.getRealSize(point);
+                        int bottomOffset = point.y - r.bottom;
+                        if (bottomOffset > 200) {
+                            finalKeyBoardData.onChange(true, bottomOffset);
                         } else {
-                            finalKeyBoardData.onChange(false, 0);
+                            finalKeyBoardData.onChange(false, bottomOffset);
                         }
                     }
                     finalKeyBoardData.mLastVisibleHeight = visibleHeight;
@@ -239,7 +242,7 @@ public class ScreenUtil extends AppInitUtil {
                 public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
                     if (Lifecycle.Event.ON_DESTROY == event) {
                         source.getLifecycle().removeObserver(this);
-                        keyBoardListenerMap.remove(activity);
+                        keyBoardDataMap.remove(activity);
                     }
                 }
             });
