@@ -209,8 +209,12 @@ public class BottomView {
 
     public void reset() {
         mIsShowed = true;
-        doResetAnim();
-        onReset();
+        float fraction = mContentView.getTranslationY() / mContentView.getHeight();
+        Log.d(TAG, "reset: fraction = " + fraction);
+        if (fraction > 0f) {
+            doResetAnim();
+            onReset();
+        }
     }
 
     private void doResetAnim() {
@@ -403,6 +407,10 @@ public class BottomView {
 
         @Override
         public boolean dispatchTouchEvent(MotionEvent ev) {
+            // 动画中直接消费事件，不处理
+            if (mIsDoingAnim) {
+                return true;
+            }
             // ACTION_DOWN mIsActionUp必须设置为false，否则被拦截就会出现问题
             if (ev.getAction() == MotionEvent.ACTION_UP) {
                 mIsActionUp = true;
@@ -504,6 +512,7 @@ public class BottomView {
         private VelocityTracker mVelocityTracker;
         @Override
         public boolean onTouch(View v, MotionEvent event) {
+            // 动画中直接消费事件，不处理
             if (mIsDoingAnim) {
                 return true;
             }
