@@ -1,23 +1,30 @@
 package com.example.libmmf.MmpVal;
 
-import com.example.libmmf.Storage.MMKVStorage;
+import com.tencent.mmkv.MMKV;
 
 public class MmpStringVal extends MmpVal {
     private String mVal;
 
     public MmpStringVal(String key, String val) {
-        if (checkInit()) {
-            mKey = key;
-            mVal = val;
-        }
+        super(key);
+        mVal = val;
+    }
+
+    public MmpStringVal(String mmkvId, String key, String val) {
+        super(mmkvId, key);
+        mVal = val;
     }
 
     public String get() {
-        return MMKVStorage.getString(MMKV_MMPVAL_ID, mKey, mVal);
+        return mVal = MMKV.mmkvWithID(getMmkvID()).getString(getKey(), mVal);
     }
 
     public void set(String val) {
         mVal = val;
-        MMKVStorage.putString(MMKV_MMPVAL_ID, mKey, val);
+        MMKV.mmkvWithID(getMmkvID()).putString(getKey(), val);
+    }
+
+    public void reset() {
+        set("");
     }
 }

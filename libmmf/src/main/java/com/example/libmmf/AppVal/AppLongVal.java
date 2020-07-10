@@ -14,8 +14,7 @@ public class AppLongVal extends AppVal {
     }
 
     public long get() {
-        mVal = getSp().getLong(getKey(), mVal);
-        return mVal;
+        return mVal = getSp().getLong(getKey(), mVal);
     }
 
     public void set(long val) {

@@ -14,8 +14,7 @@ public class AppBoolVal extends AppVal {
     }
 
     public boolean get() {
-        mVal = getSp().getBoolean(getKey(), mVal);
-        return mVal;
+        return mVal = getSp().getBoolean(getKey(), mVal);
     }
 
     public void set(boolean val) {

@@ -30,7 +30,8 @@ public class App extends Application {
         AppInitUtil.init(this);
         FrescoUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
-        AppVal.init(this, AppData.TEST_1, AppData.TEST_2);
+        AppVal.init(this);
+        AppVal.preload(AppData.TEST_1, AppData.TEST_2);
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not doOnCreate your app in this process.

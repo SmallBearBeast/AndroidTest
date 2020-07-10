@@ -14,8 +14,7 @@ public class AppFloatVal extends AppVal {
     }
 
     public float get() {
-        mVal = getSp().getFloat(getKey(), mVal);
-        return mVal;
+        return mVal = getSp().getFloat(getKey(), mVal);
     }
 
     public void set(float val) {

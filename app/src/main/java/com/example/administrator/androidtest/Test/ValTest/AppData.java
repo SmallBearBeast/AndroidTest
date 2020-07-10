@@ -12,6 +12,7 @@ public class AppData {
     public static final String TEST_1 = "test_1";
     public static final String TEST_2 = "test_2";
 
+    // 会出现初始化错误，因为内部的静态变量初始化更加提前。
 //    public static void init(Application app) {
 //        AppVal.init(app, TEST_1, TEST_2);
 //    }

@@ -7,7 +7,7 @@ import android.content.SharedPreferences;
 import java.util.HashSet;
 
 public abstract class AppVal {
-    private static final String DEFAULT_NAME = "default_name";
+    private static final String DEFAULT_APPVAL_NAME = "default_appval_name";
     private static boolean sIsInit = false;
     private static final HashSet<String> sSpNameSet = new HashSet<>();
     private static Application sApp;
@@ -15,24 +15,27 @@ public abstract class AppVal {
     private String mKey;
 
     AppVal(String key) {
-        this(DEFAULT_NAME, key);
+        this(DEFAULT_APPVAL_NAME, key);
     }
 
     AppVal(String spName, String key) {
         checkInit();
-        checkSpName(spName);
         mSpName = spName;
         mKey = key;
+        sSpNameSet.add(spName);
     }
 
-    public static void init(Application app, String... spNames) {
+    public static void init(Application app) {
         sIsInit = true;
         sApp = app;
+    }
+
+    public static void preload(String... spNames) {
+        checkInit();
         for (String spName : spNames) {
             sApp.getSharedPreferences(spName, Context.MODE_PRIVATE);
             sSpNameSet.add(spName);
         }
-        sSpNameSet.add(DEFAULT_NAME);
     }
 
     public static void clear(String... spNames) {
@@ -52,12 +55,6 @@ public abstract class AppVal {
     static void checkInit() {
         if (!sIsInit) {
             throw new RuntimeException("should init MmpVal first");
-        }
-    }
-
-    static void checkSpName(String spName) {
-        if (!sSpNameSet.contains(spName)) {
-            throw new RuntimeException("spName should be contained in sSpNameSet");
         }
     }
 

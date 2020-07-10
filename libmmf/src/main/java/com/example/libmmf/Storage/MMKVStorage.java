@@ -75,6 +75,10 @@ public class MMKVStorage {
         MMKV.mmkvWithID(mmkvId).removeValuesForKeys(keys);
     }
 
+    public static void clear(String mmkvId) {
+        MMKV.mmkvWithID(mmkvId).clearAll();
+    }
+
     private static class LogMMKVHandler implements MMKVHandler {
         @Override
         public MMKVRecoverStrategic onMMKVCRCCheckFail(String s) {

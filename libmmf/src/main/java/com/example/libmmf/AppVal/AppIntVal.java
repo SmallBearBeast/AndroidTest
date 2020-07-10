@@ -15,8 +15,7 @@ public class AppIntVal extends AppVal {
     }
 
     public int get() {
-        mVal = getSp().getInt(getKey(), mVal);
-        return mVal;
+        return mVal = getSp().getInt(getKey(), mVal);
     }
 
     public void set(int val) {
