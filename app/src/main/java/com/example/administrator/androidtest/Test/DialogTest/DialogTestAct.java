@@ -7,8 +7,8 @@ import androidx.fragment.app.FragmentActivity;
 
 import android.view.View;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Dialog.BaseDialogFragment;
 
 public class DialogTestAct extends ComponentAct {

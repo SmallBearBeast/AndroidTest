@@ -4,8 +4,8 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.bear.libcomponent.ComponentFrag;
 import com.example.administrator.androidtest.App;
-import com.example.libframework.CoreUI.ComponentFrag;
 
 import java.util.List;
 import java.util.Map;

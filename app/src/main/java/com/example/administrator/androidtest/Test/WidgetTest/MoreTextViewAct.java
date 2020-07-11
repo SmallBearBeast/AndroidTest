@@ -4,10 +4,9 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.MoreTextView;
-import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class MoreTextViewAct extends ComponentAct {
 

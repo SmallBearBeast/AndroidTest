@@ -8,12 +8,12 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.FileUtil;
 import com.example.libbase.Util.NetWorkUtil;
 import com.example.libbase.Util.ToastUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libokhttp.OkCallback;
 import com.example.libokhttp.OkDownloadCallback;
 import com.example.libokhttp.OkHelper;

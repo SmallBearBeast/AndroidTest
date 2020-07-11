@@ -14,9 +14,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Wrapper.OnPageChangeListenerWrapper;
 import com.example.liblog.SLog;
 

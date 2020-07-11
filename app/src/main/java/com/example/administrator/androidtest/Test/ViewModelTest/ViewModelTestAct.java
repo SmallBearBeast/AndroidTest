@@ -16,8 +16,8 @@ import androidx.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.CoreUI.ComponentAct;
 import com.example.liblog.SLog;
 
 public class ViewModelTestAct extends ComponentAct {

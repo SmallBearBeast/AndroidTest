@@ -7,9 +7,9 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 import com.google.android.material.appbar.AppBarLayout;
 
 public class CoordinatorTestAct extends ComponentAct {

@@ -2,8 +2,8 @@ package com.example.administrator.androidtest.Test.WindowTest;
 
 import android.view.View;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class WindowTestAct extends ComponentAct {
 

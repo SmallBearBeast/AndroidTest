@@ -9,11 +9,11 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MemoryLeakTest.FirstAct;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libframework.Bus.EventCallback;
-import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Bus.Bus;
 import com.example.libframework.Bus.Event;
 import com.example.liblog.SLog;

@@ -1,8 +1,9 @@
 package com.example.administrator.androidtest.Test.MemoryLeakTest;
 
 import android.view.View;
+
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class MemoryLeakTestAct extends ComponentAct {
     @Override

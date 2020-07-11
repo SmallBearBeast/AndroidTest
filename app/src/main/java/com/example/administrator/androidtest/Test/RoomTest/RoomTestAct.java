@@ -1,6 +1,7 @@
 package com.example.administrator.androidtest.Test.RoomTest;
 
-import com.example.libframework.CoreUI.ComponentAct;
+
+import com.bear.libcomponent.ComponentAct;
 
 public class RoomTestAct extends ComponentAct {
     @Override

@@ -17,9 +17,9 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ResourceUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class ViewPager2Act extends ComponentAct {
     private static final String TAG = "ViewPager2Act";

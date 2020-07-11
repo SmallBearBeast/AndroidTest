@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 
-import com.example.libframework.CoreUI.ComponentAct;
+import com.bear.libcomponent.ComponentAct;
 
 
 public class ComponentTestAct extends ComponentAct {

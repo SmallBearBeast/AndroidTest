@@ -13,10 +13,10 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.ResourceUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 import com.example.libframework.Wrapper.OnPageChangeListenerWrapper;
 
 import java.util.List;

@@ -14,13 +14,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bear.libcomponent.ComponentAct;
 import com.bear.librv.VHAdapter;
 import com.bear.librv.VHBridge;
 import com.bear.librv.VHolder;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 import java.util.ArrayList;
 import java.util.List;

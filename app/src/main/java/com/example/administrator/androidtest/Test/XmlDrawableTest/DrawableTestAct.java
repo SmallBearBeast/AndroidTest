@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.XmlDrawableTest;
 
 
-import com.example.libframework.CoreUI.ComponentAct;
+import com.bear.libcomponent.ComponentAct;
 
 // TODO: 2019/4/24 单独调用RotateDrawable.setPivox()是否出现死循环
 public class DrawableTestAct extends ComponentAct {

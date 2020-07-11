@@ -7,10 +7,10 @@ import androidx.annotation.Nullable;
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.CircleRefreshView.CircleImageView;
 import com.example.libbase.Util.ThreadUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class CircleImageViewTestAct extends ComponentAct {
     @Override

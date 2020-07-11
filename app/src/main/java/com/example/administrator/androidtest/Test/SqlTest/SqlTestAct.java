@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.SqlTest;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class SqlTestAct extends ComponentAct {
     @Override

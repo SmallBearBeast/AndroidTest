@@ -8,11 +8,11 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libbase.Util.ViewUtil;
 import com.example.libbase.Util.XmlDrawableUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class IconTouchViewAct extends ComponentAct {
     private ImageView mIvTest_1;

@@ -6,10 +6,10 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class FullTextViewAct extends ComponentAct {
     private FullTextView mFtvText;

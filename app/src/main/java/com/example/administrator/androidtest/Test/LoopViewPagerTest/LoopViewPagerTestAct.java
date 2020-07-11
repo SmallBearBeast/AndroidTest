@@ -12,10 +12,10 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.libbase.Util.ToastUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class LoopViewPagerTestAct extends ComponentAct {
     @Override

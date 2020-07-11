@@ -10,9 +10,9 @@ import android.widget.EditText;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class InputTestAct extends ComponentAct {
 

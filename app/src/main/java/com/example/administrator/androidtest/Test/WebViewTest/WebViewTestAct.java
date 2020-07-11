@@ -10,9 +10,9 @@ import android.webkit.*;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.AppUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class WebViewTestAct extends ComponentAct {
     private static final String TAG = "WebViewTestAct";

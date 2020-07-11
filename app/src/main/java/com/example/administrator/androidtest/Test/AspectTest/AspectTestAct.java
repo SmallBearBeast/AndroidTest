@@ -1,12 +1,13 @@
 package com.example.administrator.androidtest.Test.AspectTest;
 
 import android.view.View;
+
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libaspectj.Annotation.AsClick;
 import com.example.libaspectj.Annotation.Thread.AsThread;
 import com.example.libaspectj.Annotation.AsTime;
 import com.example.libaspectj.Annotation.Thread.ThreadMode;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class AspectTestAct extends ComponentAct {
     @Override

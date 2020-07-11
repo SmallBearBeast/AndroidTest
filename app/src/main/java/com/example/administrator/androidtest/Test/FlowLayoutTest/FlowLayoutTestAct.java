@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FlowFakeTextView;
 import com.example.administrator.androidtest.Widget.FlowLayout;
 import com.example.libbase.Util.DensityUtil;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libbase.Util.XmlDrawableUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 import java.util.ArrayList;
 import java.util.List;

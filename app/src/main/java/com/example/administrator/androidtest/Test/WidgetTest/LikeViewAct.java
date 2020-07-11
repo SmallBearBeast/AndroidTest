@@ -9,9 +9,9 @@ import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.AnimatorConfig;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class LikeViewAct extends ComponentAct {
     @Override

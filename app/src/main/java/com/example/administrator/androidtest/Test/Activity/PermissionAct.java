@@ -9,9 +9,9 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ScreenUtil;
-import com.example.libframework.CoreUI.ComponentAct;
 
 import java.util.List;
 

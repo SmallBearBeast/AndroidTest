@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentFrag;
+import com.bear.libcomponent.ViewComponent;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.CoreUI.ViewComponent;
-import com.example.libframework.CoreUI.ComponentFrag;
 import com.example.libframework.Page.IPage;
 import com.example.liblog.SLog;
 

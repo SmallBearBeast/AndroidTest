@@ -5,8 +5,8 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.CoreUI.ComponentAct;
 
 public class BottomViewTestAct extends ComponentAct {
 
