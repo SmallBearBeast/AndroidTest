@@ -4,3 +4,6 @@
 [submodule "Submodule/librv"]
 	path = Submodule/librv
 	url = https://github.com/SmallBearBeast/librv.git
+[submodule "Submodule/libcomponent"]
+	path = Submodule/libcomponent
+	url = https://github.com/SmallBearBeast/libcomponent.git
