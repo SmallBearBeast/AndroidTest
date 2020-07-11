@@ -5,9 +5,10 @@ import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import com.bear.librv.VHBridge;
+import com.bear.librv.VHolder;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.Rv.VHBridge;
-import com.example.libframework.Rv.VHolder;
 import com.example.libfresco.FrescoView;
 
 public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {

@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
+
+import com.bear.librv.VHBridge;
+import com.bear.librv.VHolder;
 import com.example.administrator.androidtest.Common.Media.Info.AudioInfo;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DecimalUtil;
-import com.example.libframework.Rv.VHBridge;
-import com.example.libframework.Rv.VHolder;
 
 public class AudioBridge extends VHBridge {
     @Override

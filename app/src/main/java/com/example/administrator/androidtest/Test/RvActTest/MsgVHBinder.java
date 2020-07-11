@@ -4,9 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.view.View;
 import android.widget.TextView;
+
+import com.bear.librv.VHBridge;
+import com.bear.librv.VHolder;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.Rv.VHBridge;
-import com.example.libframework.Rv.VHolder;
 
 public class MsgVHBinder extends VHBridge<MsgVHBinder.MsgVHolder> {
     @NonNull

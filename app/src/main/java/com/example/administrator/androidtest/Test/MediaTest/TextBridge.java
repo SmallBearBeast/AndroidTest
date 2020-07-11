@@ -8,9 +8,10 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.bear.librv.VHBridge;
+import com.bear.librv.VHolder;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.Rv.VHBridge;
-import com.example.libframework.Rv.VHolder;
 
 public class TextBridge extends VHBridge {
 

@@ -9,14 +9,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.bear.librv.DataManager;
+import com.bear.librv.Notify;
+import com.bear.librv.RvListener;
+import com.bear.librv.RvUtil;
+import com.bear.librv.VHAdapter;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libframework.CoreUI.ComponentAct;
-import com.example.libframework.Rv.DataManager;
-import com.example.libframework.Rv.Notify;
-import com.example.libframework.Rv.RvListener;
-import com.example.libframework.Rv.RvUtil;
-import com.example.libframework.Rv.VHAdapter;
 import com.example.liblog.SLog;
 
 import java.util.ArrayList;

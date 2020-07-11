@@ -5,12 +5,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.bear.librv.VHBridge;
+import com.bear.librv.VHolder;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.Common.Media.Info.ImageInfo;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libframework.Rv.VHBridge;
-import com.example.libframework.Rv.VHolder;
 import com.example.libfresco.FrescoView;
 
 public class ImageVideoBridge extends VHBridge<ImageVideoBridge.ImageVideoVHolder> {
@@ -31,7 +32,7 @@ public class ImageVideoBridge extends VHBridge<ImageVideoBridge.ImageVideoVHolde
         return R.layout.item_image;
     }
 
-    class ImageVideoVHolder extends VHolder<BaseInfo>{
+    class ImageVideoVHolder extends VHolder<BaseInfo> {
         private FrescoView mFvImage;
         private int mSize;
         public ImageVideoVHolder(View itemView) {
