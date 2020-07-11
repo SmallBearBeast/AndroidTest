@@ -6,10 +6,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.bear.libkv.AppVal.AppVal;
 import com.example.administrator.androidtest.Test.ValTest.AppData;
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
-import com.example.libmmf.AppVal.AppVal;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 

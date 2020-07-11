@@ -2,11 +2,11 @@ package com.example.administrator.androidtest.Test.ValTest;
 
 import android.app.Application;
 
-import com.example.libmmf.AppVal.AppBoolVal;
-import com.example.libmmf.AppVal.AppFloatVal;
-import com.example.libmmf.AppVal.AppIntVal;
-import com.example.libmmf.AppVal.AppStringVal;
-import com.example.libmmf.AppVal.AppVal;
+import com.bear.libkv.AppVal.AppBoolVal;
+import com.bear.libkv.AppVal.AppFloatVal;
+import com.bear.libkv.AppVal.AppIntVal;
+import com.bear.libkv.AppVal.AppStringVal;
+
 
 public class AppData {
     public static final String TEST_1 = "test_1";
