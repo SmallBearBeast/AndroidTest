@@ -1,3 +1,6 @@
 [submodule "Submodule/libkv"]
 	path = Submodule/libkv
 	url = https://github.com/SmallBearBeast/libkv
+[submodule "Submodule/librv"]
+	path = Submodule/librv
+	url = https://github.com/SmallBearBeast/librv.git
