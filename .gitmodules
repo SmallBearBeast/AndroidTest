@@ -1,0 +1,3 @@
+[submodule "Submodule/libkv"]
+	path = Submodule/libkv
+	url = https://github.com/SmallBearBeast/libkv
