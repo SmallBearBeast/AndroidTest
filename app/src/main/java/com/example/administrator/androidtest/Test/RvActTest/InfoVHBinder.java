@@ -66,7 +66,7 @@ public class InfoVHBinder extends VHBridge<InfoVHBinder.InfoVHolder> {
 
         @Override
         public void onClick(View v) {
-            SLog.d(TAG, "onClick: mPos = " + mPos + " getAdapterPosition() = " + getAdapterPosition() + " getLayoutPosition() = "+ getLayoutPosition());
+            SLog.d(TAG, "onClick: mPos = " + getPos() + " getAdapterPosition() = " + getAdapterPosition() + " getLayoutPosition() = "+ getLayoutPosition());
         }
     }
 }

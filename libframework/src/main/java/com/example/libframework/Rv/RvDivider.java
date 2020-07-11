@@ -4,14 +4,14 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-import android.util.Log;
-import android.view.View;
-import android.view.ViewGroup;
 
 // 插入时候分割线不会移动，会有视觉问题，最好是分割线是透明区域，由background来决定颜色。
 // 插入删除由于每个itemview范围不一致，导致起始点动画突变，基本无解。建议不要有动画。

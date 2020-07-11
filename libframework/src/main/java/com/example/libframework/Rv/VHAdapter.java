@@ -1,20 +1,21 @@
 package com.example.libframework.Rv;
 
 import android.annotation.SuppressLint;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleEventObserver;
-import androidx.lifecycle.LifecycleOwner;
 import android.content.Context;
 import android.database.Cursor;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.Map;
 @SuppressLint({"RestrictedApi"})
 @SuppressWarnings("unchecked")
 public class VHAdapter<VH extends VHolder> extends RecyclerView.Adapter<VH> implements LifecycleEventObserver {
-    protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
+    protected String TAG = RvLog.RV_LOG_TAG + "-" + getClass().getSimpleName();
     private static final int DATA_TYPE_LIMIT = 100;
     private LayoutInflater mInflater;
     private RecyclerView mRecyclerView;

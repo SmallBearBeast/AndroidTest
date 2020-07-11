@@ -36,7 +36,7 @@ public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
 
         @Override
         public void onStop() {
-            Log.d(TAG, "onStop: mPos = " + mPos);
+            Log.d(TAG, "onStop: mPos = " + getPos());
         }
     }
 

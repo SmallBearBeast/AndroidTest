@@ -14,7 +14,7 @@ public class Notify {
 
     public Notify with(String key, Object value) {
         if (mValue == null) {
-            mValue = new HashMap<>(4);
+            mValue = new HashMap<>();
         }
         mValue.put(key, value);
         return this;

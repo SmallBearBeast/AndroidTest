@@ -36,7 +36,7 @@ public class TextBridge extends VHBridge {
 
     @Override
     protected View itemView() {
-        TextView tv = new TextView(mContext);
+        TextView tv = new TextView(getContext());
         ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2Px(100));
         tv.setLayoutParams(lp);
         tv.setGravity(Gravity.CENTER);

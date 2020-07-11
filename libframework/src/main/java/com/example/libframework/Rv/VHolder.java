@@ -1,29 +1,26 @@
 package com.example.libframework.Rv;
 
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleOwner;
-
 import android.content.Context;
 import android.database.Cursor;
+import android.view.View;
 
 import androidx.annotation.CallSuper;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.View;
-
-import com.example.libframework.CoreUI.IComponent;
-
-public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent, View.OnClickListener {
-    protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
-    protected DATA mData;
-    protected int mPos;
-    protected VHAdapter mAdapter;
-    protected DataManager mDataManager;
-    protected Context mContext;
-    protected RecyclerView mRecyclerView;
-    protected VHBridge mBridge;
+public class VHolder<DATA> extends RecyclerView.ViewHolder implements LifecycleEventObserver, View.OnClickListener {
+    protected String TAG = RvLog.RV_LOG_TAG + "-" + getClass().getSimpleName();
+    private DATA mData;
+    private int mPos;
+    private VHAdapter mAdapter;
+    private DataManager mDataManager;
+    private Context mContext;
+    private RecyclerView mRecyclerView;
+    private VHBridge mBridge;
 
     public VHolder(View itemView) {
         super(itemView);
@@ -41,7 +38,8 @@ public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent
         mBridge.put(key, value);
     }
 
-    protected @NonNull <V> V get(String key) {
+    protected @NonNull
+    <V> V get(String key) {
         return (V) mBridge.get(key);
     }
 
@@ -137,5 +135,33 @@ public class VHolder<DATA> extends RecyclerView.ViewHolder implements IComponent
             mRecyclerView = null;
             source.getLifecycle().removeObserver(this);
         }
+    }
+
+    protected DATA getData() {
+        return mData;
+    }
+
+    protected int getPos() {
+        return mPos;
+    }
+
+    protected VHAdapter getAdapter() {
+        return mAdapter;
+    }
+
+    protected DataManager getDataManager() {
+        return mDataManager;
+    }
+
+    protected Context getContext() {
+        return mContext;
+    }
+
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
+
+    protected VHBridge getBridge() {
+        return mBridge;
     }
 }

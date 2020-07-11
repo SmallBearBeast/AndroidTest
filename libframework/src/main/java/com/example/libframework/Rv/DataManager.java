@@ -1,7 +1,6 @@
 package com.example.libframework.Rv;
 
 import android.database.Cursor;
-import com.example.liblog.SLog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +14,7 @@ import java.util.Map;
  */
 @SuppressWarnings("unchecked")
 public class DataManager {
-    private static final String TAG = RvConstant.RV_LOG_TAG;
+    private static final String TAG = RvLog.RV_LOG_TAG;
 
     private List mProviderDataList = new ArrayList();
     private Map<Integer, Cursor> mIndexWithCursorMap = new HashMap<>();
@@ -27,17 +26,17 @@ public class DataManager {
 
     public void setData(List dataList) {
         if (dataList == null) {
-            SLog.w(TAG, "setData: dataList is null");
+            RvLog.w(TAG, "setData: dataList is null");
             return;
         }
         if (dataList.isEmpty()) {
-            SLog.w(TAG, "setData: dataList is empty");
+            RvLog.w(TAG, "setData: dataList is empty");
             return;
         }
         List regDataList = new ArrayList();
         for (Object data : dataList) {
             if (!mAdapter.isRegister(data)) {
-                SLog.w(TAG, "setData: " + data.getClass().getSimpleName() + " is not registered");
+                RvLog.w(TAG, "setData: " + data.getClass().getSimpleName() + " is not registered");
             } else {
                 regDataList.add(data);
             }
@@ -49,15 +48,15 @@ public class DataManager {
 
     public void addCursor(int index, Cursor cursor) {
         if (cursor != null && cursor.getCount() == 0) {
-            SLog.w(TAG, "addCursor: cursor count is 0");
+            RvLog.w(TAG, "addCursor: cursor count is 0");
             return;
         }
         if (!mAdapter.isRegister(cursor)) {
-            SLog.w(TAG, "addCursor: cursor is not registered");
+            RvLog.w(TAG, "addCursor: cursor is not registered");
             return;
         }
         if (!checkIndex(index)) {
-            SLog.w(TAG, "addCursor: index is out of range");
+            RvLog.w(TAG, "addCursor: index is out of range");
             return;
         }
         mProviderDataList.add(index, cursor);
@@ -75,19 +74,19 @@ public class DataManager {
 
     public void add(int index, List dataList) {
         if (!checkIndex(index)) {
-            SLog.w(TAG, "add: index is out of range");
+            RvLog.w(TAG, "add: index is out of range");
             return;
         }
         List regDataList = new ArrayList();
         for (Object data : dataList) {
             if (!mAdapter.isRegister(data)) {
-                SLog.w(TAG, "add: " + data.getClass().getSimpleName() + " is not registered");
+                RvLog.w(TAG, "add: " + data.getClass().getSimpleName() + " is not registered");
             } else {
                 regDataList.add(data);
             }
         }
         if (regDataList.isEmpty()) {
-            SLog.w(TAG, "add: regDataList is empty");
+            RvLog.w(TAG, "add: regDataList is empty");
             return;
         }
         mProviderDataList.addAll(index, regDataList);
@@ -153,7 +152,7 @@ public class DataManager {
 
     public void update(int index, Object obj, Notify notify) {
         if (!checkIndex(index)) {
-            SLog.w(TAG, "update: index is out of range");
+            RvLog.w(TAG, "update: index is out of range");
             return;
         }
         if (obj != null) {
@@ -185,11 +184,11 @@ public class DataManager {
     // TODO: 2019-07-16 move notifyItemMoved有问题，先使用notifyItemRangeChanged
     public void move(int fromPos, int toPos) {
         if (!checkIndex(fromPos)) {
-            SLog.w(TAG, "move: fromPos is out of range fromPos = " + fromPos);
+            RvLog.w(TAG, "move: fromPos is out of range fromPos = " + fromPos);
             return;
         }
         if (!checkIndex(toPos)) {
-            SLog.w(TAG, "move: toPos is out of range toPos = " + toPos);
+            RvLog.w(TAG, "move: toPos is out of range toPos = " + toPos);
             return;
         }
         Object fromData = mProviderDataList.get(fromPos);

@@ -37,11 +37,11 @@ public class ImageVideoBridge extends VHBridge<ImageVideoBridge.ImageVideoVHolde
         public ImageVideoVHolder(View itemView) {
             super(itemView);
             mFvImage = findViewById(R.id.fv_image);
-            if (mRecyclerView != null) {
+            if (getRecyclerView() != null) {
                 ViewGroup.LayoutParams lp = itemView.getLayoutParams();
                 if (mSize == 0) {
-                    int spanCount = ((GridLayoutManager)mRecyclerView.getLayoutManager()).getSpanCount();
-                    mSize = (mRecyclerView.getWidth() - mDivider * (spanCount - 1)) / spanCount;
+                    int spanCount = ((GridLayoutManager)getRecyclerView().getLayoutManager()).getSpanCount();
+                    mSize = (getRecyclerView().getWidth() - mDivider * (spanCount - 1)) / spanCount;
                 }
                 lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 lp.height = mSize;

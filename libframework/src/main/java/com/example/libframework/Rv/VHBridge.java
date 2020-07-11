@@ -1,25 +1,26 @@
 package com.example.libframework.Rv;
 
 import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class VHBridge<VH extends VHolder> {
-    protected String TAG = RvConstant.RV_LOG_TAG + "-" + getClass().getSimpleName();
-    //VHAdapter和DataManager是在register赋值。
-    protected VHAdapter mAdapter;
-    protected DataManager mDataManager;
-    //Context和RecyclerView在onAttachedToRecyclerView有值。
-    protected Context mContext;
-    protected RecyclerView mRecyclerView;
-    protected int mType;
+    protected String TAG = RvLog.RV_LOG_TAG + "-" + getClass().getSimpleName();
     private Map<String, Object> mExtraMap;
+    //VHAdapter和DataManager是在register赋值。
+    VHAdapter mAdapter;
+    DataManager mDataManager;
+    //Context和RecyclerView在onAttachedToRecyclerView有值。
+    Context mContext;
+    RecyclerView mRecyclerView;
+    int mType;
 
     @NonNull
     protected abstract VH onCreateViewHolder(@NonNull View itemView);
@@ -46,10 +47,6 @@ public abstract class VHBridge<VH extends VHolder> {
         return false;
     }
 
-    public int getType(){
-        return mType;
-    }
-
     void onInitRvAndContext(RecyclerView rv, Context context) {
         mRecyclerView = rv;
         mContext = context;
@@ -69,5 +66,25 @@ public abstract class VHBridge<VH extends VHolder> {
 
     protected @NonNull <V> V get(@NonNull String key) {
         return (V) mExtraMap.get(key);
+    }
+
+    protected VHAdapter getAdapter() {
+        return mAdapter;
+    }
+
+    protected DataManager getDataManager() {
+        return mDataManager;
+    }
+
+    protected Context getContext() {
+        return mContext;
+    }
+
+    protected RecyclerView getRecyclerView() {
+        return mRecyclerView;
+    }
+
+    public int getType() {
+        return mType;
     }
 }

@@ -61,7 +61,7 @@ public class RvVpRvTestAct extends ComponentAct {
 
         @Override
         protected View itemView() {
-            TextView tv = new TextView(mContext);
+            TextView tv = new TextView(getContext());
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2Px(60));
             tv.setLayoutParams(lp);
             tv.setText("TextView");
@@ -83,11 +83,11 @@ public class RvVpRvTestAct extends ComponentAct {
 
         @Override
         protected View itemView() {
-            View view = LayoutInflater.from(mContext).inflate(R.layout.item_vp_rv_1, null);
+            View view = LayoutInflater.from(getContext()).inflate(R.layout.item_vp_rv_1, null);
             ViewPager vp = view.findViewById(R.id.vp_test);
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
             view.setLayoutParams(lp);
-            vp.setAdapter(new VpAdapter(mContext));
+            vp.setAdapter(new VpAdapter(getContext()));
             return view;
         }
 

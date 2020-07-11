@@ -52,7 +52,7 @@ public class RvBottomView extends BottomView {
 
         @Override
         protected View itemView() {
-            TextView tv = new TextView(mContext);
+            TextView tv = new TextView(getContext());
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2Px(60));
             tv.setLayoutParams(lp);
             tv.setText("TextView");
