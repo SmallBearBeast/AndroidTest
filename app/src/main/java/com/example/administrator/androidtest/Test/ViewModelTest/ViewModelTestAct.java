@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.ShareVM;
 import com.example.administrator.androidtest.R;
 import com.example.liblog.SLog;
 
@@ -63,7 +64,7 @@ public class ViewModelTestAct extends ComponentAct {
         });
 
         initLifeCycle();
-        put("ViewModelTestAct", new ViewModelData("test", 123));
+        ShareVM.put(this, "ViewModelTestAct", new ViewModelData("test", 123));
     }
 
     public void onClick(View view) {
@@ -90,7 +91,7 @@ public class ViewModelTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_test_5:
-                ViewModelData data = get("ViewModelTestAct");
+                ViewModelData data = ShareVM.get(this, "ViewModelTestAct");
                 mUserVM.userData_1.setValue(data);
                 break;
         }
