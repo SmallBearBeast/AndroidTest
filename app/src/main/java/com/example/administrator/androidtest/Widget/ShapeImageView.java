@@ -17,6 +17,7 @@ import androidx.appcompat.widget.AppCompatImageView;
 
 import com.example.administrator.androidtest.R;
 
+// TODO: 2020-07-18 padding问题处理
 public class ShapeImageView extends AppCompatImageView {
     private static final int TYPE_RECTANGLE = 1;
     private static final int TYPE_CIRCLE = 2;
