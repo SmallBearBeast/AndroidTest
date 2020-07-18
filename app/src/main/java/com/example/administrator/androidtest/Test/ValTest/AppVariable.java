@@ -5,10 +5,38 @@ import android.app.Application;
 import com.bear.libkv.AppVal.AppBoolVal;
 import com.bear.libkv.AppVal.AppFloatVal;
 import com.bear.libkv.AppVal.AppIntVal;
+import com.bear.libkv.AppVal.AppLongVal;
 import com.bear.libkv.AppVal.AppStringVal;
 
 
-public class AppData {
+public class AppVariable {
+    private static final String SP_GLOBAL_CONFIG = "sp_global_config";
+    private static final String SP_USER_CONFIG = "sp_user_config_";
+    private static long UID;
+
+    // sp_global_config
+
+
+    // sp_user_config
+    public static AppIntVal manEnterRoomCount;
+    public static AppLongVal manEnterRoomCountOneDay;
+
+
+    static {
+        changeUserId(0L);
+    }
+
+    private static String getUserConfigKey() {
+        return SP_USER_CONFIG + UID;
+    }
+
+    public static void changeUserId(long uid) {
+        if (UID != uid) {
+            UID = uid;
+            manEnterRoomCount = new AppIntVal(getUserConfigKey(), "man_enter_room_count", 0);
+            manEnterRoomCountOneDay = new AppLongVal(getUserConfigKey(), "man_enter_room_count_one_day", 0L);
+        }
+    }
     public static final String TEST_1 = "test_1";
     public static final String TEST_2 = "test_2";
 
