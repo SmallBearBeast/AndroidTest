@@ -60,11 +60,11 @@ public class XmlDrawableAct extends ComponentAct {
 //        XmlDrawableUtil.slGradientCircle(new int[]{R.color.color8BC34A, R.color.color00BCD4}, new int[]{R.color.color8BC34A, R.color.colorFFEB3B}, GradientDrawable.Orientation.TOP_BOTTOM).setView(mTv_4);
 
 
-        XmlDrawableUtil.slRect(R.color.color8BC34A, R.color.color00BCD4, R.color.colorFF9800, 5f, 5f, 0f, 0f).setView(mTb_1);
+        XmlDrawableUtil.slRect(true, R.color.color8BC34A, R.color.color00BCD4, R.color.colorFF9800, 5f, 5f, 0f, 0f).setView(mTb_1);
 
-        Drawable drawable_1 = XmlDrawableUtil.gradientCircle(new int[] {R.color.color8BC34A, R.color.color00BCD4}, GradientDrawable.Orientation.TOP_BOTTOM).getDrawable();
-        Drawable drawable_2 = XmlDrawableUtil.gradientCircle(new int[] {R.color.color8BC34A, R.color.colorFFEB3B}, GradientDrawable.Orientation.TOP_BOTTOM).getDrawable();
-        Drawable drawable_3 = XmlDrawableUtil.gradientCircle(new int[] {R.color.color8BC34A, R.color.colorFF9800}, GradientDrawable.Orientation.TOP_BOTTOM).getDrawable();
+        Drawable drawable_1 = XmlDrawableUtil.gradientCircle(true, new int[] {R.color.color8BC34A, R.color.color00BCD4}, GradientDrawable.Orientation.TOP_BOTTOM).getDrawable();
+        Drawable drawable_2 = XmlDrawableUtil.gradientCircle(true, new int[] {R.color.color8BC34A, R.color.colorFFEB3B}, GradientDrawable.Orientation.TOP_BOTTOM).getDrawable();
+        Drawable drawable_3 = XmlDrawableUtil.gradientCircle(true, new int[] {R.color.color8BC34A, R.color.colorFF9800}, GradientDrawable.Orientation.TOP_BOTTOM).getDrawable();
         XmlDrawableUtil.selector(drawable_1, drawable_2, drawable_3).setView(mTb_2);
 
 //        XmlDrawableUtil.slRect(R.color.colorFF5722, R.color.colorFF9800, 5.0f).setView(mTv_1);
