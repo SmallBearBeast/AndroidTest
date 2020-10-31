@@ -11,7 +11,6 @@ import androidx.core.content.ContextCompat;
 
 import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MemoryLeakTest.FirstAct;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libframework.Bus.EventCallback;
 import com.example.libframework.Bus.Bus;
