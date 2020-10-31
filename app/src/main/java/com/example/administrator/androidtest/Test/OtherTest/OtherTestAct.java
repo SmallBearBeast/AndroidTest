@@ -13,16 +13,19 @@ import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
+import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 
 public class OtherTestAct extends ComponentAct {
     private FullTextView ftvFullText;
     private EditText editText;
+    private LikeView likeView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         editText = findViewById(R.id.et_no_show_input_keyboard);
         ftvFullText = findViewById(R.id.ftv_full_text);
+        likeView = findViewById(R.id.lv_like_heart);
     }
 
     @Override
@@ -49,6 +52,14 @@ public class OtherTestAct extends ComponentAct {
                 TextOpt bgOpt = TextOpt.bgOpt(0, 5, Color.RED);
                 TextOpt fgOpt = TextOpt.fgOpt(5, ftvFullText.length(), Color.BLUE);
                 ftvFullText.bg(bgOpt).fg(fgOpt).done();
+                break;
+
+            case R.id.lv_like_heart:
+                if (likeView.isLike()) {
+                    likeView.like();
+                } else {
+                    likeView.unLike();
+                }
                 break;
         }
     }

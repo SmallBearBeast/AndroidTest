@@ -165,8 +165,8 @@
                 android:id="@+id/bt_full_text_click"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Click"
                 android:onClick="onClick"
+                android:text="Click"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_text_mask" />
@@ -181,6 +181,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/bt_full_text_click"
                 app:layout_constraintTop_toBottomOf="@+id/tv_full_text_mask" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_like_heart_mask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Case Like Heart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.administrator.androidtest.Widget.LikeView.LikeView
+                android:id="@+id/lv_like_heart"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:onClick="onClick"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_like_heart_mask"
+                app:lv_anim_duration="1000"
+                app:lv_is_like="true"
+                app:lv_like_color="@color/cl_black_t_5"
+                app:lv_like_src="@drawable/vector_like"
+                app:lv_un_like_color="@color/cl_blue"
+                app:lv_un_like_src="@drawable/vector_like" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
