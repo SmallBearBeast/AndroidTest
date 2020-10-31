@@ -175,7 +175,6 @@
                 android:id="@+id/ftv_full_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="0123456789"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -211,6 +210,29 @@
                 app:lv_like_src="@drawable/vector_like"
                 app:lv_un_like_color="@color/cl_blue"
                 app:lv_un_like_src="@drawable/vector_like" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tv_more_text_mask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Case More Text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.administrator.androidtest.Widget.MoreTextView
+                android:id="@+id/mtv_more_text"
+                android:maxLines="2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mtv_has_animation="true"
+                android:text="Hello World最近的需求中，需要用到一个横向、竖向同时可滚动的 ViewPager，记住，是横向、竖向同时滚动，不是横竖切换。我想了想，难点在于竖向。对于竖向的 ViewPager，我似乎记得 Jake Wharton 大神写过一个叫 DirectionalViewPager 的框架Hello World最近的需求中，需要用到一个横向、竖向同时可滚动的 ViewPager，记住，是横向、竖向同时滚动，不是横竖切换。我想了想，难点在于竖向。对于竖向的 ViewPager，我似乎记得 Jake Wharton 大神写过一个叫 DirectionalViewPager 的框架"
+                app:layout_constraintTop_toBottomOf="@+id/tv_more_text_mask" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
