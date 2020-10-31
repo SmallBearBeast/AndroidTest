@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.ViewModelTest.ViewModelTestAct;
 import com.example.libframework.Bus.Event;
 import com.example.libframework.Bus.EventCallback;
 import com.example.libframework.Bus.Bus;
