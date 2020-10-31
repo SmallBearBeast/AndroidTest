@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.Test.OtherTest;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -10,14 +11,18 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
+import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 
 public class OtherTestAct extends ComponentAct {
+    private FullTextView ftvFullText;
     private EditText editText;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         editText = findViewById(R.id.et_no_show_input_keyboard);
+        ftvFullText = findViewById(R.id.ftv_full_text);
     }
 
     @Override
@@ -38,6 +43,12 @@ public class OtherTestAct extends ComponentAct {
                     editText.setShowSoftInputOnFocus(false);
                     editText.setCursorVisible(false);
                 }
+                break;
+
+            case R.id.bt_full_text_click:
+                TextOpt bgOpt = TextOpt.bgOpt(0, 5, Color.RED);
+                TextOpt fgOpt = TextOpt.fgOpt(5, ftvFullText.length(), Color.BLUE);
+                ftvFullText.bg(bgOpt).fg(fgOpt).done();
                 break;
         }
     }
