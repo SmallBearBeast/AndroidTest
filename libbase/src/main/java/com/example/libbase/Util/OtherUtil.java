@@ -52,29 +52,6 @@ public class OtherUtil extends AppInitUtil {
         }
     }
 
-    public static void showSoftInput(Context context, View view) {
-        try {
-            final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            if(imm != null) {
-                view.requestFocus();
-                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-            }
-        } catch (Exception e) {
-
-        }
-    }
-
-    public static void hideSoftInput(Context context, View view) {
-        try {
-            final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-            if(imm != null) {
-                imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-            }
-        } catch (Exception e) {
-
-        }
-    }
-
     /**
      * obj转为T类型
      */

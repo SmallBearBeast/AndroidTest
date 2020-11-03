@@ -1,12 +1,14 @@
 package com.example.libbase.Util;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Rect;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
 import android.view.ViewTreeObserver;
+import android.view.inputmethod.InputMethodManager;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
@@ -103,4 +105,26 @@ public class KeyBoardUtil {
         }
     }
 
+    public static void showSoftInput(Context context, View view) {
+        try {
+            final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if(imm != null) {
+                view.requestFocus();
+                imm.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    public static void hideSoftInput(Context context, View view) {
+        try {
+            final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            if(imm != null) {
+                imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+            }
+        } catch (Exception e) {
+
+        }
+    }
 }

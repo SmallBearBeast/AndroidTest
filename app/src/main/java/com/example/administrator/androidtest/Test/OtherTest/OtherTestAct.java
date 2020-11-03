@@ -75,7 +75,7 @@ public class OtherTestAct extends ComponentAct {
                 @Override
                 public void onClick(View v) {
                     ToastUtil.showToast("Click No Show Input Keyboard EditText");
-                    OtherUtil.hideSoftInput(OtherTestAct.this, v);
+                    KeyBoardUtil.hideSoftInput(OtherTestAct.this, v);
                 }
             });
             editText.setOnLongClickListener(null);
@@ -83,7 +83,7 @@ public class OtherTestAct extends ComponentAct {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
                     if (hasFocus) {
-                        OtherUtil.hideSoftInput(OtherTestAct.this, v);
+                        KeyBoardUtil.hideSoftInput(OtherTestAct.this, v);
                     }
                 }
             });
