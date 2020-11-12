@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.Test.OtherTest;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.libbase.Util.KeyBoardUtil;
-import com.example.libbase.Util.OtherUtil;
+import com.example.libbase.Util.ThreadUtil;
 import com.example.libbase.Util.ToastUtil;
 
 public class OtherTestAct extends ComponentAct {
@@ -63,6 +64,27 @@ public class OtherTestAct extends ComponentAct {
                 } else {
                     likeView.unLike();
                 }
+                break;
+
+            case R.id.bt_back_start_delay_service_click:
+                ThreadUtil.postOnMain(new Runnable() {
+                    @Override
+                    public void run() {
+                        BackgroundService.start(OtherTestAct.this, BackgroundService.START);
+                    }
+                }, 5 * 1000);
+                break;
+
+            case R.id.bt_back_stop_delay_service_click:
+                ThreadUtil.postOnMain(new Runnable() {
+                    @Override
+                    public void run() {
+//                        BackgroundService.stop(OtherTestAct.this, 1);
+                        BackgroundService.start(OtherTestAct.this, BackgroundService.STOP);
+//                        stopService(new Intent(OtherTestAct.this, BackgroundService.class));
+
+                    }
+                }, 100 * 1000);
                 break;
         }
     }
