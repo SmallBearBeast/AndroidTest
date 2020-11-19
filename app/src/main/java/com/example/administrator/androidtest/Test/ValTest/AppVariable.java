@@ -1,12 +1,10 @@
 package com.example.administrator.androidtest.Test.ValTest;
 
-import android.app.Application;
-
-import com.bear.libkv.AppVal.AppBoolVal;
-import com.bear.libkv.AppVal.AppFloatVal;
-import com.bear.libkv.AppVal.AppIntVal;
-import com.bear.libkv.AppVal.AppLongVal;
-import com.bear.libkv.AppVal.AppStringVal;
+import com.bear.libkv.AppVal.SpBoolVal;
+import com.bear.libkv.AppVal.SpFloatVal;
+import com.bear.libkv.AppVal.SpIntVal;
+import com.bear.libkv.AppVal.SpLongVal;
+import com.bear.libkv.AppVal.SpStringVal;
 
 
 public class AppVariable {
@@ -18,8 +16,8 @@ public class AppVariable {
 
 
     // sp_user_config
-    public static AppIntVal manEnterRoomCount;
-    public static AppLongVal manEnterRoomCountOneDay;
+    public static SpIntVal manEnterRoomCount;
+    public static SpLongVal manEnterRoomCountOneDay;
 
 
     static {
@@ -33,8 +31,8 @@ public class AppVariable {
     public static void changeUserId(long uid) {
         if (UID != uid) {
             UID = uid;
-            manEnterRoomCount = new AppIntVal(getUserConfigKey(), "man_enter_room_count", 0);
-            manEnterRoomCountOneDay = new AppLongVal(getUserConfigKey(), "man_enter_room_count_one_day", 0L);
+            manEnterRoomCount = new SpIntVal(getUserConfigKey(), "man_enter_room_count", 0);
+            manEnterRoomCountOneDay = new SpLongVal(getUserConfigKey(), "man_enter_room_count_one_day", 0L);
         }
     }
     public static final String TEST_1 = "test_1";
@@ -45,14 +43,14 @@ public class AppVariable {
 //        AppVal.init(app, TEST_1, TEST_2);
 //    }
 
-    public static final AppFloatVal test0_float1 = new AppFloatVal("test0_float1", 1.5f);
+    public static final SpFloatVal test0_float1 = new SpFloatVal("test0_float1", 1.5f);
 
-    public static final AppIntVal test1_int1 = new AppIntVal(TEST_1, "test1_int1", 1);
-    public static final AppIntVal test1_int2 = new AppIntVal(TEST_1, "test1_int2", 2);
-    public static final AppIntVal test1_int3 = new AppIntVal(TEST_1, "test1_int3", 3);
-    public static final AppIntVal test1_int4 = new AppIntVal(TEST_1, "test1_int4", 4);
-    public static final AppIntVal test1_int5 = new AppIntVal(TEST_1, "test1_int5", 5);
+    public static final SpIntVal test1_int1 = new SpIntVal(TEST_1, "test1_int1", 1);
+    public static final SpIntVal test1_int2 = new SpIntVal(TEST_1, "test1_int2", 2);
+    public static final SpIntVal test1_int3 = new SpIntVal(TEST_1, "test1_int3", 3);
+    public static final SpIntVal test1_int4 = new SpIntVal(TEST_1, "test1_int4", 4);
+    public static final SpIntVal test1_int5 = new SpIntVal(TEST_1, "test1_int5", 5);
 
-    public static final AppBoolVal test2_bool1 = new AppBoolVal(TEST_2, "test2_bool1", false);
-    public static final AppStringVal test2_string2 = new AppStringVal(TEST_2, "test2_string2", "hello");
+    public static final SpBoolVal test2_bool1 = new SpBoolVal(TEST_2, "test2_bool1", false);
+    public static final SpStringVal test2_string2 = new SpStringVal(TEST_2, "test2_string2", "hello");
 }
