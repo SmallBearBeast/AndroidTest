@@ -1,6 +1,5 @@
 package com.example.administrator.androidtest.Test.OtherTest;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,6 +21,8 @@ import com.example.libbase.Util.KeyBoardUtil;
 import com.example.libbase.Util.ThreadUtil;
 import com.example.libbase.Util.ToastUtil;
 
+import java.util.Random;
+
 public class OtherTestAct extends ComponentAct {
     private FullTextView ftvFullText;
     private EditText editText;
@@ -33,6 +34,7 @@ public class OtherTestAct extends ComponentAct {
         editText = findViewById(R.id.et_no_show_input_keyboard);
         ftvFullText = findViewById(R.id.ftv_full_text);
         likeView = findViewById(R.id.lv_like_heart);
+        showSpVal();
     }
 
     @Override
@@ -86,6 +88,14 @@ public class OtherTestAct extends ComponentAct {
                     }
                 }, 100 * 1000);
                 break;
+
+            case R.id.bt_sp_val_set_click:
+                setSpVal();
+                break;
+
+            case R.id.bt_sp_val_get_click:
+                showSpVal();
+                break;
         }
     }
 
@@ -135,5 +145,26 @@ public class OtherTestAct extends ComponentAct {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             editText.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
         }
+    }
+
+    private void setSpVal() {
+        Random random = new Random();
+        int randomInt = random.nextInt(100);
+        boolean randomBool = random.nextBoolean();
+        randomInt = randomBool ? randomInt : - randomInt;
+        SpValHelper.testBoolSp.set(randomBool);
+        SpValHelper.testIntSp.set(randomInt);
+        SpValHelper.testFloatSp.set(randomInt);
+        SpValHelper.testStringSp.set(randomInt + "" + randomBool);
+    }
+
+    private void showSpVal() {
+        TextView tvSpValTip = findViewById(R.id.tv_sp_val_tip);
+        StringBuilder builder = new StringBuilder();
+        builder.append("testBoolSp = ").append(SpValHelper.testBoolSp.get()).append("\n");
+        builder.append("testIntSp = ").append(SpValHelper.testIntSp.get()).append("\n");
+        builder.append("testFloatSp = ").append(SpValHelper.testFloatSp.get()).append("\n");
+        builder.append("testStringSp = ").append(SpValHelper.testStringSp.get());
+        tvSpValTip.setText(builder.toString());
     }
 }

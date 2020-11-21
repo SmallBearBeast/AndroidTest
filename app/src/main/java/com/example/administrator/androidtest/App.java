@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.bear.libkv.AppVal.SpVal;
-import com.example.administrator.androidtest.Test.ValTest.AppVariable;
+import com.example.administrator.androidtest.Test.OtherTest.SpValHelper;
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
 import com.squareup.leakcanary.LeakCanary;
@@ -31,7 +31,7 @@ public class App extends Application {
         FrescoUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
         SpVal.init(this);
-        SpVal.preload(AppVariable.TEST_1, AppVariable.TEST_2);
+        SpVal.preload(SpValHelper.SP_GLOBAL_CONFIG);
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not doOnCreate your app in this process.

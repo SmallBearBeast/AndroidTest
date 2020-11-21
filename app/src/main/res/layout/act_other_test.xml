@@ -263,7 +263,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
-                android:text="Click"
+                android:text="Start"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_back_service_mask" />
@@ -273,20 +273,50 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="onClick"
-                android:text="Click"
+                android:text="Stop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/bt_back_start_delay_service_click"
                 app:layout_constraintTop_toBottomOf="@+id/tv_back_service_mask" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/tv_back_service_tip"
-                android:layout_width="0dp"
+                android:id="@+id/tv_sp_val_mask"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Back Service"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:text="Case Sp Val"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/bt_back_stop_delay_service_click"
-                app:layout_constraintTop_toBottomOf="@+id/tv_back_service_mask" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <Button
+                android:id="@+id/bt_sp_val_set_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Set"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sp_val_mask" />
+
+            <Button
+                android:id="@+id/bt_sp_val_get_click"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="onClick"
+                android:text="Get"
+                app:layout_constraintStart_toEndOf="@+id/bt_sp_val_set_click"
+                app:layout_constraintTop_toBottomOf="@+id/tv_sp_val_mask" />
+
+            <TextView
+                android:id="@+id/tv_sp_val_tip"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Sp Val Tip"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bt_sp_val_set_click" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>
