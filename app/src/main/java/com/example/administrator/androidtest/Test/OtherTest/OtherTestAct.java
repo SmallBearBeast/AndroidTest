@@ -13,6 +13,8 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.ComponentAct;
+import com.bear.libkv.AppVal.SpVal;
+import com.bear.libkv.MmpVal.MmkvVal;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
@@ -96,6 +98,14 @@ public class OtherTestAct extends ComponentAct {
             case R.id.bt_sp_val_get_click:
                 showSpVal();
                 break;
+
+            case R.id.bt_move_to_mmkv_click:
+                moveToMmkv();
+                break;
+
+            case R.id.bt_move_to_mmkv_show_click:
+                showMmkv();
+                break;
         }
     }
 
@@ -167,4 +177,20 @@ public class OtherTestAct extends ComponentAct {
         builder.append("testStringSp = ").append(SpValHelper.testStringSp.get());
         tvSpValTip.setText(builder.toString());
     }
+
+    private void moveToMmkv() {
+        MmkvVal.importFromSharedPreferences(this, MmkvValHelper.MMKV_GLOBAL_CONFIG, SpValHelper.SP_GLOBAL_CONFIG);
+        MmkvVal.importFromSharedPreferences(this, MmkvVal.DEFAULT_MMPVAL_ID, SpVal.DEFAULT_APPVAL_NAME);
+    }
+
+    private void showMmkv() {
+        TextView tvMmkvValTip = findViewById(R.id.tv_move_to_mmkv_tip);
+        StringBuilder builder = new StringBuilder();
+        builder.append("testBoolSp = ").append(MmkvValHelper.testBoolSp.get()).append("\n");
+        builder.append("testIntSp = ").append(MmkvValHelper.testIntSp.get()).append("\n");
+        builder.append("testFloatSp = ").append(MmkvValHelper.testFloatSp.get()).append("\n");
+        builder.append("testStringSp = ").append(MmkvValHelper.testStringSp.get());
+        tvMmkvValTip.setText(builder.toString());
+    }
+
 }
