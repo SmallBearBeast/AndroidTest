@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.BottomViewTest;
+package com.example.administrator.androidtest.Test.OtherTest;
 
 import android.app.Activity;
 import android.view.View;

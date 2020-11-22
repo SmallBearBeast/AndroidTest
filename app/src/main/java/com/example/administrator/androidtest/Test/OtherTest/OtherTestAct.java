@@ -112,6 +112,18 @@ public class OtherTestAct extends ComponentAct {
             case R.id.bt_move_to_mmkv_show_click:
                 showMmkv();
                 break;
+
+            case R.id.bt_normal_bottom_view_click:
+                new NormalBottomView(this).hideVelocity(2000).show();
+                break;
+
+            case R.id.bt_ns_bottom_view_click:
+                new NsBottomView(this).hideVelocity(1000).show();
+                break;
+
+            case R.id.bt_rv_bottom_view_click:
+                new RvBottomView(this).show();
+                break;
         }
     }
 
