@@ -15,19 +15,11 @@ public class ThreadUtil {
     }
 
     public static void postOnMain(Runnable r) {
-        if (isMainThread()) {
-            r.run();
-        } else {
-            ThreadUtil.LazyHolder.sHandler.post(r);
-        }
+        ThreadUtil.LazyHolder.sHandler.post(r);
     }
 
     public static void postOnMainFront(Runnable r) {
-        if (isMainThread()) {
-            r.run();
-        } else {
-            ThreadUtil.LazyHolder.sHandler.postAtFrontOfQueue(r);
-        }
+        ThreadUtil.LazyHolder.sHandler.postAtFrontOfQueue(r);
     }
 
     public static void postOnMain(Runnable r, long delay) {
@@ -36,15 +28,15 @@ public class ThreadUtil {
 
     public static void postOnMain(Pair<Runnable, Long>... pairs){
         Pair<Runnable, Long> pair;
-        for (int i = 0, len = pairs.length; i < len; i++) {
-            pair = pairs[i];
-            ThreadUtil.LazyHolder.sHandler.postDelayed(pair.first, pair.second);
+        for (Pair<Runnable, Long> runnableLongPair : pairs) {
+            pair = runnableLongPair;
+            LazyHolder.sHandler.postDelayed(pair.first, pair.second);
         }
     }
 
     public static void removeCallbacks(Runnable... rs) {
-        for (int i = 0, len = rs.length; i < len; i++) {
-            ThreadUtil.LazyHolder.sHandler.removeCallbacks(rs[i]);
+        for (Runnable r : rs) {
+            LazyHolder.sHandler.removeCallbacks(r);
         }
     }
 
