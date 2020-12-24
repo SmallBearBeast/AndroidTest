@@ -25,7 +25,7 @@ import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.libbase.Util.KeyBoardUtil;
-import com.example.libbase.Util.ThreadUtil;
+import com.example.libbase.Util.MainHandlerUtil;
 import com.example.libbase.Util.ToastUtil;
 
 import java.util.Random;
@@ -77,7 +77,7 @@ public class OtherTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_back_start_delay_service_click:
-                ThreadUtil.postOnMain(new Runnable() {
+                MainHandlerUtil.postDelayed(new Runnable() {
                     @Override
                     public void run() {
                         BackgroundService.start(OtherTestAct.this, BackgroundService.START);
@@ -86,7 +86,7 @@ public class OtherTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_back_stop_delay_service_click:
-                ThreadUtil.postOnMain(new Runnable() {
+                MainHandlerUtil.postDelayed(new Runnable() {
                     @Override
                     public void run() {
 //                        BackgroundService.stop(OtherTestAct.this, 1);

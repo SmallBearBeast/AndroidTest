@@ -15,7 +15,7 @@ import android.util.Log;
 import androidx.annotation.Nullable;
 
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.ThreadUtil;
+import com.example.libbase.Util.MainHandlerUtil;
 
 import java.util.List;
 
@@ -81,7 +81,7 @@ public class BackgroundService extends Service {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
-            ThreadUtil.postOnMain(new Runnable() {
+            MainHandlerUtil.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     Log.d(TAG, "stopForeground cancel");
