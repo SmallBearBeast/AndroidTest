@@ -17,8 +17,8 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bear.libcomponent.ComponentAct;
-import com.bear.libkv.AppVal.SpVal;
-import com.bear.libkv.MmpVal.MmkvVal;
+import com.bear.libkv.SpVal.SpHelper;
+import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
@@ -182,7 +182,7 @@ public class OtherTestAct extends ComponentAct {
         randomInt = randomBool ? randomInt : - randomInt;
         SpValHelper.testBoolSp.set(randomBool);
         SpValHelper.testIntSp.set(randomInt);
-        SpValHelper.testFloatSp.set(randomInt);
+        SpValHelper.testFloatSp.set((float) randomInt);
         SpValHelper.testStringSp.set(randomInt + "" + randomBool);
     }
 
@@ -198,7 +198,7 @@ public class OtherTestAct extends ComponentAct {
 
     private void moveToMmkv() {
         MmkvVal.importFromSharedPreferences(this, MmkvValHelper.MMKV_GLOBAL_CONFIG, SpValHelper.SP_GLOBAL_CONFIG);
-        MmkvVal.importFromSharedPreferences(this, MmkvVal.DEFAULT_MMPVAL_ID, SpVal.DEFAULT_APPVAL_NAME);
+        MmkvVal.importFromSharedPreferences(this, MmkvVal.DEFAULT_MMPVAL_ID, SpHelper.DEFAULT_SPVAL_NAME);
     }
 
     private void showMmkv() {

@@ -1,10 +1,7 @@
 package com.example.administrator.androidtest.Test.OtherTest;
 
-import com.bear.libkv.AppVal.SpBoolVal;
-import com.bear.libkv.AppVal.SpFloatVal;
-import com.bear.libkv.AppVal.SpIntVal;
-import com.bear.libkv.AppVal.SpLongVal;
-import com.bear.libkv.AppVal.SpStringVal;
+import com.bear.libkv.KV;
+import com.bear.libkv.SpVal.SpHelper;
 
 
 public class SpValHelper {
@@ -13,14 +10,14 @@ public class SpValHelper {
     private static long UID;
 
     // sp_global_config
-    public static final SpFloatVal testFloatSp = new SpFloatVal("testFloatSp", 1.5f);
-    public static final SpIntVal testIntSp = new SpIntVal(SP_GLOBAL_CONFIG, "testIntSp", 1);
-    public static final SpBoolVal testBoolSp = new SpBoolVal(SP_GLOBAL_CONFIG, "testBoolSp", false);
-    public static final SpStringVal testStringSp = new SpStringVal(SP_GLOBAL_CONFIG, "testStringSp", "hello");
+    public static final KV<Float> testFloatSp = SpHelper.create("testFloatSp", 1.5f);
+    public static final KV<Integer> testIntSp = SpHelper.create(SP_GLOBAL_CONFIG, "testIntSp", 1);
+    public static final KV<Boolean> testBoolSp = SpHelper.create(SP_GLOBAL_CONFIG, "testBoolSp", false);
+    public static final KV<String> testStringSp = SpHelper.create(SP_GLOBAL_CONFIG, "testStringSp", "hello");
 
     // sp_user_config
-    public static SpIntVal userTestIntSp;
-    public static SpStringVal userTestStringSp;
+    public static KV<Integer> userTestIntSp;
+    public static KV<String> userTestStringSp;
 
     private static String getUserConfigKey() {
         return SP_USER_CONFIG + UID;
@@ -29,8 +26,8 @@ public class SpValHelper {
     public static void changeUserId(long uid) {
         if (UID != uid) {
             UID = uid;
-            userTestIntSp = new SpIntVal(getUserConfigKey(), "man_enter_room_count", 0);
-            userTestStringSp = new SpStringVal(getUserConfigKey(), "man_enter_room_count_one_day", "");
+            userTestIntSp = SpHelper.create(getUserConfigKey(), "man_enter_room_count", 0);
+            userTestStringSp = SpHelper.create(getUserConfigKey(), "man_enter_room_count_one_day", "");
         }
     }
 }

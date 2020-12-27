@@ -6,8 +6,8 @@ import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.bear.libkv.AppVal.SpVal;
-import com.bear.libkv.MmpVal.MmkvVal;
+import com.bear.libkv.SpVal.SpHelper;
+import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.Test.OtherTest.SpValHelper;
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
@@ -31,9 +31,9 @@ public class App extends Application {
         AppInitUtil.init(this);
         FrescoUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
-        SpVal.init(this);
+        SpHelper.init(this);
         MmkvVal.init(this);
-        SpVal.preload(SpValHelper.SP_GLOBAL_CONFIG);
+        SpHelper.preload(SpValHelper.SP_GLOBAL_CONFIG);
         if (LeakCanary.isInAnalyzerProcess(this)) {
             // This process is dedicated to LeakCanary for heap analysis.
             // You should not doOnCreate your app in this process.

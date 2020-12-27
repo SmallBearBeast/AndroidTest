@@ -1,13 +1,9 @@
 package com.example.administrator.androidtest.Test.OtherTest;
 
-import com.bear.libkv.AppVal.SpBoolVal;
-import com.bear.libkv.AppVal.SpFloatVal;
-import com.bear.libkv.AppVal.SpIntVal;
-import com.bear.libkv.AppVal.SpStringVal;
-import com.bear.libkv.MmpVal.MmkvBoolVal;
-import com.bear.libkv.MmpVal.MmkvFloatVal;
-import com.bear.libkv.MmpVal.MmkvIntVal;
-import com.bear.libkv.MmpVal.MmkvStringVal;
+import com.bear.libkv.MmkvVal.MmkvBoolVal;
+import com.bear.libkv.MmkvVal.MmkvFloatVal;
+import com.bear.libkv.MmkvVal.MmkvIntVal;
+import com.bear.libkv.MmkvVal.MmkvStringVal;
 
 
 public class MmkvValHelper {
