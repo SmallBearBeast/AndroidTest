@@ -59,9 +59,9 @@ public class MediaTestAct extends ComponentAct {
         adapter.register(imageVideoBridge_2, CONFIG_2);
         AudioBridge audioBridge = new AudioBridge();
         adapter.register(audioBridge, CONFIG_3);
-        adapter.setOnGetDataType(new VHAdapter.OnGetDataType() {
+        adapter.setOnDataTypeCreator(new VHAdapter.OnDataTypeCreator() {
             @Override
-            public int getType(Object obj, int pos) {
+            public int createDataType(Object obj, int pos) {
                 if (obj instanceof Cursor) {
                     Cursor cursor = (Cursor) obj;
                     if (config_1.isCursor(cursor)) {
