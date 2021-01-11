@@ -22,8 +22,7 @@
             style="@style/tv_base"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
-            android:background="@color/cl_green_9"
-            android:gravity="center_horizontal" />
+            android:background="@color/cl_green_9" />
 
         <Button
             android:id="@+id/bt_ask_permission"

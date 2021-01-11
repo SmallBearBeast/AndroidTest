@@ -168,6 +168,7 @@ public class InputView extends FrameLayout implements View.OnClickListener {
             Context context = view.getContext();
             final InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
             if(imm != null) {
+                view.clearFocus();
                 imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
             }
         } catch (Exception e) {

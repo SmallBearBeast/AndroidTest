@@ -49,14 +49,14 @@ public class PermissionAct extends ComponentAct {
                 });
             }
         });
-        ScreenUtil.normalScreen(getWindow(), -1, -1, tvText);
-//        ScreenUtil.immersiveFullScreen(getWindow());
+//        ScreenUtil.normalScreen(getWindow(), R.color.cl_transparent, -1, tvText);
+        ScreenUtil.immersiveFullScreen(getWindow());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        ScreenUtil.normalScreen(getWindow(), -1, -1, null);
-//        ScreenUtil.immersiveFullScreen(getWindow());
+//        ScreenUtil.normalScreen(getWindow(), -1, -1, null);
+        ScreenUtil.immersiveFullScreen(getWindow());
     }
 }

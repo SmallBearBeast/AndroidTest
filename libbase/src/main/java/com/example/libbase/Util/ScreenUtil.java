@@ -9,8 +9,9 @@ import android.os.Build;
 import android.view.*;
 
 import androidx.annotation.ColorRes;
-import androidx.lifecycle.GenericLifecycleObserver;
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleEventObserver;
 import androidx.lifecycle.LifecycleOwner;
 
 import java.util.ArrayList;
@@ -37,24 +38,22 @@ public class ScreenUtil extends AppInitUtil {
     public static void normalScreen(Window window, @ColorRes int statusColorId, @ColorRes int navColorId, boolean statusLight, boolean navLight, View view) {
         if (window != null) {
             View decorView = window.getDecorView();
-            if (decorView != null) {
-                window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                        | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-                int opt = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    if (statusLight) {
-                        opt = opt | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                    }
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                    | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            int opt = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if (statusLight) {
+                    opt = opt | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
                 }
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                    if (navLight) {
-                        opt = opt | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-                    }
-                }
-                decorView.setSystemUiVisibility(opt);
-                fitStatusBar(view);
             }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                if (navLight) {
+                    opt = opt | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
+                }
+            }
+            decorView.setSystemUiVisibility(opt);
+            fitStatusBar(view);
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
@@ -76,15 +75,13 @@ public class ScreenUtil extends AppInitUtil {
     public static void immersiveFullScreen(Window window) {
         if (window != null) {
             View decorView = window.getDecorView();
-            if (decorView != null) {
-                int opt = View.SYSTEM_UI_FLAG_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
-                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
-                decorView.setSystemUiVisibility(opt);
-            }
+            int opt = View.SYSTEM_UI_FLAG_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION;
+            decorView.setSystemUiVisibility(opt);
         }
     }
     /**沉浸式全屏，下拉出现状态栏和导航栏，过一段时间消失**/
@@ -237,9 +234,9 @@ public class ScreenUtil extends AppInitUtil {
 
         if (activity instanceof LifecycleOwner) {
             LifecycleOwner lifecycleOwner = (LifecycleOwner) activity;
-            lifecycleOwner.getLifecycle().addObserver(new GenericLifecycleObserver() {
+            lifecycleOwner.getLifecycle().addObserver(new LifecycleEventObserver() {
                 @Override
-                public void onStateChanged(LifecycleOwner source, Lifecycle.Event event) {
+                public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
                     if (Lifecycle.Event.ON_DESTROY == event) {
                         source.getLifecycle().removeObserver(this);
                         keyBoardDataMap.remove(activity);
