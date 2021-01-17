@@ -47,7 +47,7 @@ public class MediaTestAct extends ComponentAct {
         rvMedia.setLayoutManager(gridLayoutManager);
         rvMedia.addItemDecoration(new RvDivider(gridLayoutManager, divider));
         VHAdapter adapter = new VHAdapter(getLifecycle());
-//        adapter.register(new ImageVideoBridge(divider), Cursor.class);
+        adapter.register(new ImageVideoBridge(divider), Cursor.class);
         TextBridge textBridge = new TextBridge();
         adapter.register(textBridge, String.class);
         final MediaConfig config_1 = MediaConfig.from(MediaConfig.IMAGE).minAddTime(System.currentTimeMillis() / 1000 - 20 * 60);

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.bear.libcomponent.ComponentAct;
 import com.bear.librv.DataManager;
 import com.bear.librv.Notify;
+import com.bear.librv.RvDivider;
 import com.bear.librv.RvListener;
 import com.bear.librv.RvUtil;
 import com.bear.librv.VHAdapter;
@@ -48,24 +49,24 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
 //        mRvTest.setLayoutManager(linearLayoutManager);
 //        mRvTest.setHasFixedSize(true);
 
-//        mRvTest.addItemDecoration(new RvDivider(gridLayoutManager, 20, Color.RED));
         mAdapter = new VHAdapter(getLifecycle());
         mAdapter.register(new ImageVHBinder(), Image.class);
         mAdapter.register(new InfoVHBinder(), Info.class);
         mAdapter.register(msgVHBinder, Msg.class);
         mRvTest.setAdapter(mAdapter);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3);
-//        mRvTest.setLayoutManager(gridLayoutManager);
-        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return mAdapter.getItemViewType(position) ==  msgVHBinder.getType() ? 3 : 1;
-            }
-        });
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false);
+        mRvTest.setLayoutManager(gridLayoutManager);
+//        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+//            @Override
+//            public int getSpanSize(int position) {
+//                return mAdapter.getItemViewType(position) ==  msgVHBinder.getType() ? 3 : 1;
+//            }
+//        });
+        mRvTest.addItemDecoration(new RvDivider(gridLayoutManager, 20, 40));
 
-        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
-        mRvTest.setLayoutManager(staggeredGridLayoutManager);
+//        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
+//        mRvTest.setLayoutManager(staggeredGridLayoutManager);
 
         getLifecycle().addObserver(mAdapter);
         mRvTest.addOnItemTouchListener(new RvListener(this, mRvTest, new RvListener.OnItemClickListener() {
