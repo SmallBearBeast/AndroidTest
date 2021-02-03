@@ -9,8 +9,8 @@ import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.drawee.view.SimpleDraweeView;
-import com.facebook.fresco.animation.backend.AnimationBackendDelegate;
-import com.facebook.fresco.animation.drawable.AnimatedDrawable2;
+//import com.facebook.fresco.animation.backend.AnimationBackendDelegate;
+//import com.facebook.fresco.animation.drawable.AnimatedDrawable2;
 import com.facebook.imagepipeline.listener.RequestListener;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
@@ -88,15 +88,15 @@ public class FrescoView extends SimpleDraweeView {
 
         @Override
         public void onFinalImageSet(String id, Object imageInfo, Animatable animatable) {
-            if (animatable instanceof AnimatedDrawable2) {
-                AnimatedDrawable2 drawable = (AnimatedDrawable2) animatable;
-                drawable.setAnimationBackend(new AnimationBackendDelegate(drawable.getAnimationBackend()) {
-                    @Override
-                    public int getLoopCount() {
-                        return mLoopCount;
-                    }
-                });
-            }
+//            if (animatable instanceof AnimatedDrawable2) {
+//                AnimatedDrawable2 drawable = (AnimatedDrawable2) animatable;
+//                drawable.setAnimationBackend(new AnimationBackendDelegate(drawable.getAnimationBackend()) {
+//                    @Override
+//                    public int getLoopCount() {
+//                        return mLoopCount;
+//                    }
+//                });
+//            }
         }
     }
 }
