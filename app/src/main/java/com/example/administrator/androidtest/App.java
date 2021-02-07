@@ -3,11 +3,13 @@ package com.example.administrator.androidtest;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
+import com.example.administrator.androidtest.Test.KVCompareTest.PackMMKV;
 import com.example.administrator.androidtest.Test.OtherTest.SpValHelper;
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
@@ -89,5 +91,13 @@ public class App extends Application {
     public static RefWatcher getRefWatcher(Context context) {
         App application = (App) context.getApplicationContext();
         return application.mRefWatcher;
+    }
+
+    @Override
+    public SharedPreferences getSharedPreferences(String name, int mode) {
+        Log.d(TAG, "getSharedPreferences: name = " + name + ", mode = " + mode);
+        SharedPreferences sp = super.getSharedPreferences(name, mode);
+        return PackMMKV.getSharedPreferences(this, name, sp);
+//        return super.getSharedPreferences(name, mode);
     }
 }

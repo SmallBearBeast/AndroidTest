@@ -1,11 +1,14 @@
 package com.example.administrator.androidtest.Test.KVCompareTest
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.bear.libcomponent.ComponentAct
+import com.example.administrator.androidtest.App
 import com.example.administrator.androidtest.R
+import com.example.administrator.androidtest.Test.OtherTest.SpValHelper
 import com.example.libbase.Util.ToastUtil
 import java.lang.Exception
 
@@ -39,6 +42,10 @@ class KVCompareTestAct: ComponentAct(){
                 KvCompareHelper.clearTestSp()
             }
             R.id.bt_7 -> {
+//                SpValHelper.testBoolSp.reverse()
+//                SpValHelper.testIntSp.inc()
+//                SpValHelper.testStringSp.set("Hugo")
+                App.getContext().getSharedPreferences(SpValHelper.SP_GLOBAL_CONFIG, Context.MODE_PRIVATE).all
                 testReflect()
                 ToastUtil.showToast(TAG)
             }
@@ -47,8 +54,8 @@ class KVCompareTestAct: ComponentAct(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SpHookHelper.init()
-        KvCompareHelper.preLoadTestSp()
+//        SpHookHelper.init()
+//        KvCompareHelper.preLoadTestSp()
         Log.d(TAG, "onCreate: ")
     }
 
