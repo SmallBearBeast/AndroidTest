@@ -24,6 +24,13 @@ public class Event {
         return eventKey != null ? eventKey.hashCode() : 0;
     }
 
+    public <T> T getData(Class<T> clz) {
+        if (data != null && data.getClass() == clz) {
+            return (T) data;
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Event{" +

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -29,13 +30,13 @@ public class BusTest1Act extends ComponentAct {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTvTest = findViewById(R.id.tv_text_1);
-        Bus.get().register(mCallback);
+        Bus.get().register(this, mCallback);
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Bus.get().unRegister(mCallback);
+//        Bus.get().unRegister(mCallback);
     }
 
     public void onClick(View view) {
@@ -49,7 +50,7 @@ public class BusTest1Act extends ComponentAct {
 
     private EventCallback mCallback = new EventCallback() {
         @Override
-        protected void onEvent(Event event) {
+        protected void onEvent(@NonNull Event event) {
             SLog.d(TAG, "onEvent: event = " + event);
         }
     };
