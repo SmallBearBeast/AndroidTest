@@ -77,24 +77,35 @@ public class OtherTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_back_start_delay_service_click:
-                MainHandlerUtil.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        BackgroundService.start(OtherTestAct.this, BackgroundService.START);
-                    }
-                }, 5 * 1000);
+                BackgroundService.start(OtherTestAct.this, BackgroundService.START);
+//                MainHandlerUtil.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        BackgroundService.start(OtherTestAct.this, BackgroundService.START);
+//                        BackgroundService.start(OtherTestAct.this, BackgroundService.STOP);
+//                        BackgroundService.stopDirectly(OtherTestAct.this);
+//                        MainHandlerUtil.postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                BackgroundService.stopDirectly(OtherTestAct.this);
+//                            }
+//                        }, 100);
+//                    }
+//                }, 5 * 1000);
                 break;
 
             case R.id.bt_back_stop_delay_service_click:
-                MainHandlerUtil.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+                BackgroundService.stopByReceiver(this);
+//                BackgroundService.stop(this);
+//                MainHandlerUtil.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
 //                        BackgroundService.stop(OtherTestAct.this, 1);
-                        BackgroundService.start(OtherTestAct.this, BackgroundService.STOP);
+//                        BackgroundService.start(OtherTestAct.this, BackgroundService.STOP);
 //                        stopService(new Intent(OtherTestAct.this, BackgroundService.class));
-
-                    }
-                }, 100 * 1000);
+//
+//                    }
+//                }, 5* 1000);
                 break;
 
             case R.id.bt_sp_val_set_click:

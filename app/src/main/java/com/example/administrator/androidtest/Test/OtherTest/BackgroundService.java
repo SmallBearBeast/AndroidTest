@@ -5,17 +5,20 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.os.IBinder;
 import android.service.notification.StatusBarNotification;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LifecycleService;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.MainHandlerUtil;
 
 import java.util.List;
 
@@ -27,23 +30,29 @@ import java.util.List;
  android.app.RemoteServiceException: Context.startForegroundService() did not then call Service.startForeground()
  StopService建议通过Context#stopService去处理，通过startForegroundService去关闭ForegroundService没问题，如果ForegroundService变为普通Service,
  通过startForegroundService去关闭普通Service触发上面crash。
+ startService马上调用stopService会马上触发startForeground异常。
  */
-public class BackgroundService extends Service {
+public class BackgroundService extends LifecycleService {
     public static final String START = "START";
     public static final String STOP = "STOP";
     private static final String TAG = "BackgroundService";
     private NotificationManager notificationManager;
     private String notificationId = "channelId";
     private String notificationName = "channelName";
+    private StopServiceReceiver stopServiceReceiver = new StopServiceReceiver();
+    private boolean hasPendingStopService = false;
+    private boolean isStartForeground = false;
 
     @Override
     public void onCreate() {
         super.onCreate();
         Log.d(TAG, "onCreate: ");
+        LocalBroadcastManager.getInstance(this).registerReceiver(stopServiceReceiver, new IntentFilter(STOP));
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
         String action = intent.getAction();
         Log.d(TAG, "onStartCommand: action = " + action);
         if (STOP.equals(action)) {
@@ -52,25 +61,29 @@ public class BackgroundService extends Service {
         if (START.equals(action)) {
             showNotification();
         }
-        return super.onStartCommand(intent, flags, startId);
+        return START_NOT_STICKY;
     }
 
     @Override
     public void onDestroy() {
         Log.d(TAG, "onDestroy: ");
         super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(stopServiceReceiver);
+        isStartForeground = false;
+        hasPendingStopService = false;
     }
 
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
+        super.onBind(intent);
         return null;
     }
 
     private void stop() {
         Log.d(TAG, "stop: ");
-        stopSelf();
         stopForeground(true);
+        stopSelf();
     }
 
     private void showNotification() {
@@ -81,16 +94,25 @@ public class BackgroundService extends Service {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
-            MainHandlerUtil.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    Log.d(TAG, "stopForeground cancel");
-                    stopForeground(true);
-                }
-            }, 5 * 1000);
+//            MainHandlerUtil.postDelayed(new Runnable() {
+//                @Override
+//                public void run() {
+//                    Log.d(TAG, "stopForeground cancel");
+//                    stopForeground(true);
+//                }
+//            }, 5 * 1000);
         }
         startForeground(1,getNotification());
+        isStartForeground = true;
+        notifyStopPendingService();
     }
+
+    private void notifyStopPendingService() {
+        if (isStartForeground && hasPendingStopService) {
+            stop();
+        }
+    }
+
     private Notification getNotification() {
         Notification.Builder builder = new Notification.Builder(this)
                 .setSmallIcon(R.drawable.girl)
@@ -100,13 +122,15 @@ public class BackgroundService extends Service {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(notificationId);
         }
+        builder.setShowWhen(true);
+        builder.setWhen(System.currentTimeMillis() + 100 * 1000 * 1000);
         return builder.build();
     }
 
     public static void start(Context context, String action) {
         Intent intent = new Intent(context, BackgroundService.class);
         intent.setAction(action);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && START.equals(action)) {
             context.startForegroundService(intent);
         } else {
             context.startService(intent);
@@ -130,10 +154,18 @@ public class BackgroundService extends Service {
     }
 
     public static void stop(Context context) {
-        if (isServiceExist(context, BackgroundService.class)) {
+        long start = System.currentTimeMillis();
+        boolean exist = isServiceExist(context, BackgroundService.class);
+        Log.d(TAG, "stop: exist = " + exist + ", start = " + (System.currentTimeMillis() - start));
+        if (exist) {
             Log.d(TAG, "stop: BackgroundService exist");
             start(context, STOP);
         }
+    }
+
+    public static void stopDirectly(Context context) {
+        Intent intent = new Intent(context, BackgroundService.class);
+        context.stopService(intent);
     }
 
     private static boolean isServiceExist(Context context, Class<? extends Service> serviceClass) {
@@ -147,5 +179,22 @@ public class BackgroundService extends Service {
             }
         }
         return false;
+    }
+
+    public static void stopByReceiver(Context context) {
+        Intent intent = new Intent(context, StopServiceReceiver.class);
+        intent.setAction(STOP);
+        LocalBroadcastManager.getInstance(context).sendBroadcast(intent);
+    }
+
+    private class StopServiceReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (isStartForeground) {
+                stop();
+            } else {
+                hasPendingStopService = true;
+            }
+        }
     }
 }
