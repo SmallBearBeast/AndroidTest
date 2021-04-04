@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
@@ -32,7 +33,7 @@ public class PermissionAct extends ComponentAct {
         tvText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d(TAG, "onClick: checkNavigationBarShow = " + ScreenUtil.checkNavigationBarShow(getWindow()) + ", navigationBarHeight = " + ScreenUtil.getNavigationBarHeight(getWindow()));
+                Log.d(TAG, "onClick: checkNavigationBarShow = " + ScreenUtil.hasNavigationBar(getWindow()) + ", navigationBarHeight = " + ScreenUtil.getNavigationBarHeight(getWindow()));
             }
         });
         btAskPermission.setOnClickListener(new View.OnClickListener() {
@@ -49,14 +50,13 @@ public class PermissionAct extends ComponentAct {
                 });
             }
         });
-//        ScreenUtil.normalScreen(getWindow(), R.color.cl_transparent, -1, tvText);
-        ScreenUtil.immersiveFullScreen(getWindow());
+        ScreenUtil.normalScreen(getWindow(), ContextCompat.getColor(this, R.color.cl_transparent), -1, tvText);
+//        ScreenUtil.immersiveFullScreen(getWindow());
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-//        ScreenUtil.normalScreen(getWindow(), -1, -1, null);
-        ScreenUtil.immersiveFullScreen(getWindow());
+//        ScreenUtil.immersiveFullScreen(getWindow());
     }
 }

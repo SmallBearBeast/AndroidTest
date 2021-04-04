@@ -8,7 +8,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.view.*;
 
-import androidx.annotation.ColorRes;
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleEventObserver;
@@ -20,22 +20,20 @@ import java.util.List;
 import java.util.Map;
 
 public class ScreenUtil extends AppInitUtil {
-
-    private static int COLOR_ID_NONE = -1;
+    public static int COLOR_NONE = -1;
     /**
      * SYSTEM_UI_FLAG_IMMERSIVE_STICKY完全沉浸式，同时消失状态栏和导航栏。
      * SYSTEM_UI_FLAG_IMMERSIVE部分沉浸式，只消失状态栏。
      */
 
-
     /**
      * 正常布局：显示导航栏显示状态栏，状态栏覆盖在布局上面
      */
-    public static void normalScreen(Window window, @ColorRes int statusColorId, @ColorRes int navColorId, View view) {
-        normalScreen(window, statusColorId, navColorId, true, true, view);
+    public static void normalScreen(Window window, @ColorInt int statusColor, @ColorInt int navColor, View view) {
+        normalScreen(window, statusColor, navColor, true, true, view);
     }
 
-    public static void normalScreen(Window window, @ColorRes int statusColorId, @ColorRes int navColorId, boolean statusLight, boolean navLight, View view) {
+    public static void normalScreen(Window window, @ColorInt int statusColor, @ColorInt int navColor, boolean statusLight, boolean navLight, View view) {
         if (window != null) {
             View decorView = window.getDecorView();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
@@ -57,11 +55,11 @@ public class ScreenUtil extends AppInitUtil {
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                if (statusColorId != COLOR_ID_NONE) {
-                    window.setStatusBarColor(getColor(statusColorId));
+                if (statusColor != COLOR_NONE) {
+                    window.setStatusBarColor(statusColor);
                 }
-                if (navColorId != COLOR_ID_NONE) {
-                    window.setNavigationBarColor(getColor(navColorId));
+                if (navColor != COLOR_NONE) {
+                    window.setNavigationBarColor(navColor);
                 }
             }
         }
@@ -106,7 +104,7 @@ public class ScreenUtil extends AppInitUtil {
      * @param window
      * @return
      */
-    public static boolean checkNavigationBarShow(Window window) {
+    public static boolean hasNavigationBar(Window window) {
         Display display = window.getWindowManager().getDefaultDisplay();
         Point point = new Point();
         display.getRealSize(point);
@@ -244,10 +242,6 @@ public class ScreenUtil extends AppInitUtil {
                 }
             });
         }
-    }
-
-    private static int getColor(int id) {
-        return getResources().getColor(id);
     }
 
     private static Resources getResources() {
