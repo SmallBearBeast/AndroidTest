@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootPermissionView"
     style="@style/match_parent">
 
     <LinearLayout
         style="@style/ll_vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
         <!--<com.example.administrator.androidtest.Base.FitStatusBarLayout-->
         <!--android:orientation="vertical"-->
         <!--style="@style/ll_vertical">-->
@@ -20,10 +22,10 @@
         <TextView
             android:id="@+id/tv_text"
             style="@style/tv_base"
-            android:gravity="center_horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
-            android:background="@color/cl_green_9" />
+            android:background="@color/cl_green_9"
+            android:gravity="center_horizontal" />
 
         <Button
             android:id="@+id/bt_ask_permission"
@@ -33,11 +35,14 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+
                 <TextView
                     style="@style/tv_base"
                     android:layout_height="120dp"
@@ -98,6 +103,10 @@
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 
+        <Button
+            style="@style/match_parent_wrap_content"
+            android:background="@color/cl_blue_5"
+            android:text="我在底部" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

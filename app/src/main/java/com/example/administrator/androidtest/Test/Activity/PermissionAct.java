@@ -50,7 +50,7 @@ public class PermissionAct extends ComponentAct {
                 });
             }
         });
-        ScreenUtil.normalScreen(getWindow(), ContextCompat.getColor(this, R.color.cl_transparent), -1, tvText);
+        ScreenUtil.normalScreen(getWindow(), ContextCompat.getColor(this, R.color.cl_blue_5), 0, findViewById(R.id.rootPermissionView));
 //        ScreenUtil.immersiveFullScreen(getWindow());
     }
 

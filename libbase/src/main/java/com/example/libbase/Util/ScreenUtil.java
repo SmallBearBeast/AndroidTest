@@ -19,8 +19,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+// TODO: 2021/4/4 getDisplayCutout
 public class ScreenUtil extends AppInitUtil {
-    public static int COLOR_NONE = -1;
+    public static int COLOR_DEFAULT = 0;
     /**
      * SYSTEM_UI_FLAG_IMMERSIVE_STICKY完全沉浸式，同时消失状态栏和导航栏。
      * SYSTEM_UI_FLAG_IMMERSIVE部分沉浸式，只消失状态栏。
@@ -29,38 +30,28 @@ public class ScreenUtil extends AppInitUtil {
     /**
      * 正常布局：显示导航栏显示状态栏，状态栏覆盖在布局上面
      */
-    public static void normalScreen(Window window, @ColorInt int statusColor, @ColorInt int navColor, View view) {
-        normalScreen(window, statusColor, navColor, true, true, view);
+    public static void normalScreen(Window window, @ColorInt int statusColor, @ColorInt int navColor, View topView) {
+        normalScreen(window, statusColor, navColor, true, true, topView);
     }
 
-    public static void normalScreen(Window window, @ColorInt int statusColor, @ColorInt int navColor, boolean statusLight, boolean navLight, View view) {
+    public static void normalScreen(Window window, @ColorInt int statusColor, @ColorInt int navColor, boolean statusLight, boolean navLight, View topView) {
         if (window != null) {
             View decorView = window.getDecorView();
             window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
                     | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             int opt = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
                     | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                if (statusLight) {
-                    opt = opt | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && statusLight) {
+                opt = opt | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
             }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                if (navLight) {
-                    opt = opt | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
-                }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && navLight) {
+                opt = opt | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
             }
             decorView.setSystemUiVisibility(opt);
-            fitStatusBar(view);
-
+            topView.setPadding(0, getStatusBarHeight(), 0, topView.getPaddingBottom());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                if (statusColor != COLOR_NONE) {
-                    window.setStatusBarColor(statusColor);
-                }
-                if (navColor != COLOR_NONE) {
-                    window.setNavigationBarColor(navColor);
-                }
+                window.setStatusBarColor(statusColor);
+                window.setNavigationBarColor(navColor);
             }
         }
     }
@@ -141,25 +132,6 @@ public class ScreenUtil extends AppInitUtil {
         return navigationBarHeight;
     }
     /**获取导航栏高度**/
-
-    /**
-     * 填充状态栏高度
-     */
-    private static void fitStatusBar(final View view) {
-        if (view != null) {
-            view.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-                @Override
-                public void onGlobalLayout() {
-                    view.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-                    ViewGroup.LayoutParams lp = view.getLayoutParams();
-                    int statusBarHeight = ScreenUtil.getStatusBarHeight();
-                    lp.height = view.getMeasuredHeight() + statusBarHeight;
-                    view.setLayoutParams(lp);
-                    view.setPadding(view.getPaddingLeft(), view.getPaddingTop() + statusBarHeight, view.getPaddingRight(), view.getPaddingBottom());
-                }
-            });
-        }
-    }
 
     private static Map<Activity, KeyBoardData> keyBoardDataMap = new HashMap<>();
 
