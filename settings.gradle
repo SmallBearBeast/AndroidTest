@@ -1,2 +1,2 @@
-include ':app', ':libaspectj', ':libfresco', ':libokhttp', ':libbase', ':libmmf', ':liblog', ':libframework'
+include ':app', ':libaspectj', ':libfresco', ':libokhttp', ':libbase', ':liblog', ':libframework'
 include ':Submodule:libkv', ':Submodule:librv', ':Submodule:libcomponent'

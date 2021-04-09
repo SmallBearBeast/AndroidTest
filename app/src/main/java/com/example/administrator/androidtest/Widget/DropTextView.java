@@ -19,7 +19,6 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
-import com.example.libmmf.Storage.MmpUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,7 +69,7 @@ public class DropTextView extends androidx.appcompat.widget.AppCompatEditText im
     private void initHistory() {
         // TODO: 2018/12/20 加载历史搜索数据
 //        SPUtil.fromSetting(mContext, )
-        MmpUtil.mapFile(mContext.getFilesDir().getAbsolutePath(), "drop_text_view.txt", MmpUtil.MODE_WRITE, "123");
+//        MmpUtil.mapFile(mContext.getFilesDir().getAbsolutePath(), "drop_text_view.txt", MmpUtil.MODE_WRITE, "123");
 //        MmpUtil.read()
         Map<Long, String> map = new HashMap<>();
 

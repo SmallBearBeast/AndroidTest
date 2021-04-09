@@ -112,7 +112,6 @@ dependencies {
     implementation project(":libokhttp")
     implementation project(":liblog")
     implementation project(":libframework")
-    implementation project(":libmmf")
     implementation project(":libaspectj")
     implementation project(":Submodule:libkv")
     implementation project(":Submodule:librv")
