@@ -1,16 +1,21 @@
-package com.example.libmmf.Storage;
+package com.example.libbase.Storage;
 
 import com.google.gson.reflect.TypeToken;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
-// TODO: 2020-02-27 Conditions for the end of inputStream
 public class FileStorage {
+    private static final int BUFFER_SIZE = 4096;
+
     public static boolean writeStream(String path, InputStream inputStream) {
         if (!InternalUtil.createFile(path)) {
             return false;
@@ -18,7 +23,7 @@ public class FileStorage {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(new File(path));
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[BUFFER_SIZE];
             int read = 0;
             while ((read = inputStream.read(buffer, 0, buffer.length)) != -1) {
                 fos.write(buffer, 0, read);
@@ -33,7 +38,7 @@ public class FileStorage {
         return false;
     }
 
-    public static boolean writeJsonObj(String path, Object object) {
+    public static boolean writeObjToJson(String path, Object object) {
         if (!InternalUtil.createFile(path)) {
             return false;
         }
@@ -44,21 +49,11 @@ public class FileStorage {
         if (!InternalUtil.createFile(path)) {
             return false;
         }
-        OutputStreamWriter osw = null;
-        try {
-            osw = new OutputStreamWriter(new FileOutputStream(new File(path)));
-            osw.write(str);
-            osw.flush();
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            InternalUtil.close(osw);
-        }
-        return false;
+        byte[] buffer = str.getBytes(StandardCharsets.UTF_8);
+        return writeStream(path, new ByteArrayInputStream(buffer));
     }
 
-    public static void readStream(String path, StreamCallback<byte[]> streamCallback) {
+    public static void readStream(String path, StreamCallback streamCallback) {
         if (streamCallback == null) {
             return;
         }
@@ -68,7 +63,7 @@ public class FileStorage {
         FileInputStream fis = null;
         try {
             fis = new FileInputStream(new File(path));
-            byte[] buffer = new byte[4096];
+            byte[] buffer = new byte[BUFFER_SIZE];
             int read = 0;
             while ((read = fis.read(buffer, 0, buffer.length)) != -1) {
                 streamCallback.success(buffer, read);
@@ -81,33 +76,25 @@ public class FileStorage {
         }
     }
 
+    public static <T> T readObjFromJson(String path, TypeToken<T> token) {
+        if (!InternalUtil.createFile(path)) {
+            return null;
+        }
+        return InternalUtil.toObj(readStr(path), token);
+    }
 
     public static String readStr(String path) {
         if (!InternalUtil.createFile(path)) {
             return null;
         }
-        InputStreamReader isr = null;
-        try {
-            isr = new InputStreamReader(new FileInputStream(new File(path)));
-            char[] buffer = new char[4096];
-            int read = 0;
-            StringBuilder builder = new StringBuilder();
-            while ((read = isr.read(buffer, 0, buffer.length)) != -1) {
-                builder.append(buffer, 0, read);
+        // No need to close.
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        readStream(path, new StreamCallback() {
+            @Override
+            public void success(byte[] data, int read) {
+                baos.write(data, 0, read);
             }
-            return builder.toString();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            InternalUtil.close(isr);
-        }
-        return null;
-    }
-
-    public static <T> T readJsonObj(String path) {
-        if (!InternalUtil.createFile(path)) {
-            return null;
-        }
-        return InternalUtil.toObj(readStr(path), new TypeToken<T>() {});
+        });
+        return baos.toString();
     }
 }

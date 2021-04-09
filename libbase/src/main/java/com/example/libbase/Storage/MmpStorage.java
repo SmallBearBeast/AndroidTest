@@ -1,29 +1,24 @@
-package com.example.libmmf.Storage;
+package com.example.libbase.Storage;
 
+import com.google.gson.reflect.TypeToken;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Method;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 public class MmpStorage {
     private static final int BUFFER_SIZE = 4096;
-    public static void main(String[] args) {
-//        if (!InternalUtil.createFile("/Users/wuyisong/mmp/text_mmp.txt")) {
-//            return;
-//        }
-//        File file = new File("/Users/wuyisong/mmp/text_mmp.txt");
-//        try {
-////            FileStorage.writeStream("/Users/wuyisong/mmp/text_mmp_copy.txt", new FileInputStream(file));
-//            writeStream("/Users/wuyisong/mmp/text_mmp_copy.txt", new FileInputStream(file));
-////            if (file.delete()) {
-////                System.out.println("delete success");
-////            }
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    }
 
     public static boolean writeStream(String path, InputStream inputStream) {
         if (!InternalUtil.createFile(path)) {
@@ -46,9 +41,6 @@ public class MmpStorage {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            if (file.delete()) {
-
-            }
         } finally {
             InternalUtil.close(fc, raf);
             unmap(mbb);
@@ -56,7 +48,22 @@ public class MmpStorage {
         return false;
     }
 
-    public static void readStream(String path, StreamCallback<byte[]> streamCallback) {
+    public static boolean writeObjToJson(String path, Object object) {
+        if (!InternalUtil.createFile(path)) {
+            return false;
+        }
+        return writeStr(path, InternalUtil.toJson(object));
+    }
+
+    public static boolean writeStr(String path, String str) {
+        if (!InternalUtil.createFile(path)) {
+            return false;
+        }
+        byte[] buffer = str.getBytes(StandardCharsets.UTF_8);
+        return writeStream(path, new ByteArrayInputStream(buffer));
+    }
+
+    public static void readStream(String path, StreamCallback streamCallback) {
         if (streamCallback == null) {
             return;
         }
@@ -87,6 +94,28 @@ public class MmpStorage {
             unmap(mbb);
             InternalUtil.close(fc, raf);
         }
+    }
+
+    public static <T> T readObjFromJson(String path, TypeToken<T> token) {
+        if (!InternalUtil.createFile(path)) {
+            return null;
+        }
+        return InternalUtil.toObj(readStr(path), token);
+    }
+
+    public static String readStr(String path) {
+        if (!InternalUtil.createFile(path)) {
+            return null;
+        }
+        // No need to close.
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        readStream(path, new StreamCallback() {
+            @Override
+            public void success(byte[] data, int read) {
+                baos.write(data, 0, read);
+            }
+        });
+        return baos.toString();
     }
 
     private static void unmap(MappedByteBuffer mbb) {

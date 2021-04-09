@@ -1,4 +1,4 @@
-package com.example.libmmf.Storage;
+package com.example.libbase.Storage;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -65,7 +65,7 @@ class InternalUtil {
         return new GsonBuilder().serializeNulls().create().toJson(jsonObj);
     }
 
-    static <T> T toObj(String json, TypeToken<T> token){
+    static <T> T toObj(String json, TypeToken token){
         if(token.getType() == String.class) {
             return (T) json;
         }
