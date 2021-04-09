@@ -30,7 +30,7 @@ import java.util.List;
  android.app.RemoteServiceException: Context.startForegroundService() did not then call Service.startForeground()
  StopService建议通过Context#stopService去处理，通过startForegroundService去关闭ForegroundService没问题，如果ForegroundService变为普通Service,
  通过startForegroundService去关闭普通Service触发上面crash。
- startService马上调用stopService会马上触发startForeground异常。
+ startService马上调用stopService会马上触发startForeground异常，需要在startForeground之后调用。
  */
 public class BackgroundService extends LifecycleService {
     public static final String START = "START";
@@ -102,9 +102,10 @@ public class BackgroundService extends LifecycleService {
 //                }
 //            }, 5 * 1000);
         }
-        startForeground(1,getNotification());
+//        startForeground(1,getNotification());
         isStartForeground = true;
         notifyStopPendingService();
+        stop();
     }
 
     private void notifyStopPendingService() {
@@ -122,8 +123,6 @@ public class BackgroundService extends LifecycleService {
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(notificationId);
         }
-        builder.setShowWhen(true);
-        builder.setWhen(System.currentTimeMillis() + 100 * 1000 * 1000);
         return builder.build();
     }
 
