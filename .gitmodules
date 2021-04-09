@@ -7,3 +7,6 @@
 [submodule "Submodule/libcomponent"]
 	path = Submodule/libcomponent
 	url = https://github.com/SmallBearBeast/libcomponent.git
+[submodule "Submodule/libstorage"]
+	path = Submodule/libstorage
+	url = https://github.com/SmallBearBeast/libstorage.git
