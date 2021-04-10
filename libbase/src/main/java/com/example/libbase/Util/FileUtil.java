@@ -53,10 +53,7 @@ public class FileUtil {
         if (dirFile == null) {
             return false;
         }
-        if (!dirFile.exists() && !dirFile.mkdirs()) {
-            return false;
-        }
-        return true;
+        return dirFile.exists() || dirFile.mkdirs();
     }
     /**创建文件夹**/
 
