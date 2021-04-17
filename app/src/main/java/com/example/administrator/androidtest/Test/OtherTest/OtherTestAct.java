@@ -19,13 +19,13 @@ import androidx.viewpager.widget.ViewPager;
 import com.bear.libcomponent.ComponentAct;
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
+import com.example.administrator.androidtest.Common.Case.CaseHelper;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.libbase.Util.KeyBoardUtil;
-import com.example.libbase.Util.MainHandlerUtil;
 import com.example.libbase.Util.ToastUtil;
 
 import java.util.Random;
@@ -43,6 +43,7 @@ public class OtherTestAct extends ComponentAct {
         likeView = findViewById(R.id.lv_like_heart);
         showSpVal();
         initLoopViewPager();
+        CaseHelper.show(findViewById(R.id.case_view));
     }
 
     @Override
