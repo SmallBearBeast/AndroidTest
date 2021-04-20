@@ -1,7 +1,6 @@
-package com.example.libbase.Com;
+package com.example.administrator.androidtest.Widget;
 
 import android.content.Context;
-import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;

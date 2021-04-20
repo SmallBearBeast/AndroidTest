@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Test.WindowTest;
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Com.FloatService;
+import com.example.administrator.androidtest.Widget.FloatService;
 import com.example.libbase.Util.ToastUtil;
 
 public class TestFloatService extends FloatService {

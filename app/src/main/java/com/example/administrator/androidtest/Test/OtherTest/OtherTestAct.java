@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.Test.OtherTest;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -26,6 +27,7 @@ import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.libbase.Util.KeyBoardUtil;
+import com.example.libbase.Util.MainHandlerUtil;
 import com.example.libbase.Util.ToastUtil;
 
 import java.util.Random;
@@ -78,7 +80,17 @@ public class OtherTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_back_start_delay_service_click:
-                BackgroundService.start(OtherTestAct.this, BackgroundService.START);
+                MainHandlerUtil.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        try{
+                            startService(new Intent(OtherTestAct.this, BackgroundService.class));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, 80 * 1000);
+//                BackgroundService.start(OtherTestAct.this, BackgroundService.START);
 //                MainHandlerUtil.postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {

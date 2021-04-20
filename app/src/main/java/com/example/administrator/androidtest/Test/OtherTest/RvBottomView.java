@@ -14,12 +14,9 @@ import com.bear.librv.VHAdapter;
 import com.bear.librv.VHBridge;
 import com.bear.librv.VHolder;
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Com.BottomView;
+import com.example.administrator.androidtest.Widget.BottomView;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.DensityUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class RvBottomView extends BottomView {
     protected RvBottomView(Activity activity) {

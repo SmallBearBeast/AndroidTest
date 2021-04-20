@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Test.OtherTest;
 import android.app.Activity;
 
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Com.BottomView;
+import com.example.administrator.androidtest.Widget.BottomView;
 
 public class NsBottomView extends BottomView {
     protected NsBottomView(Activity activity) {
