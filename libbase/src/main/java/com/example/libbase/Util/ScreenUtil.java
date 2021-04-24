@@ -1,6 +1,5 @@
 package com.example.libbase.Util;
 
-import android.app.Activity;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Point;
@@ -9,15 +8,6 @@ import android.os.Build;
 import android.view.*;
 
 import androidx.annotation.ColorInt;
-import androidx.annotation.NonNull;
-import androidx.lifecycle.Lifecycle;
-import androidx.lifecycle.LifecycleEventObserver;
-import androidx.lifecycle.LifecycleOwner;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 // TODO: 2021/4/4 getDisplayCutout
 public class ScreenUtil extends AppInitUtil {
@@ -132,89 +122,6 @@ public class ScreenUtil extends AppInitUtil {
         return navigationBarHeight;
     }
     /**获取导航栏高度**/
-
-    private static Map<Activity, KeyBoardData> keyBoardDataMap = new HashMap<>();
-
-    private static class KeyBoardData {
-        private List<KeyBoardListener> mKeyBoardListenerList = new ArrayList<>();
-        private int mLastVisibleHeight = 0;
-        private boolean mShowKeyBoard = false;
-
-        private void add(KeyBoardListener keyBoardListener) {
-            mKeyBoardListenerList.add(keyBoardListener);
-        }
-
-        private void onChange(boolean showKeyBoard, int keyBoardHeight) {
-            mShowKeyBoard = showKeyBoard;
-            for (KeyBoardListener listener : mKeyBoardListenerList) {
-                if (listener != null) {
-                    listener.onChange(showKeyBoard, keyBoardHeight);
-                }
-            }
-        }
-    }
-
-    public interface KeyBoardListener {
-        void onChange(boolean showKeyBoard, int bottomOffset);
-    }
-
-    public static boolean isShowKeyBoard(Activity activity) {
-        KeyBoardData keyBoardData = keyBoardDataMap.get(activity);
-        return keyBoardData != null && keyBoardData.mShowKeyBoard;
-    }
-
-    public static void observeKeyBoard(final Activity activity, final KeyBoardListener keyBoardListener) {
-        KeyBoardData keyBoardData = keyBoardDataMap.get(activity);
-        if (keyBoardData != null) {
-            if (keyBoardListener != null) {
-                keyBoardData.add(keyBoardListener);
-            }
-            return;
-        }
-        keyBoardData = new KeyBoardData();
-        keyBoardDataMap.put(activity, keyBoardData);
-        if (keyBoardListener != null) {
-            keyBoardData.add(keyBoardListener);
-        }
-        final View decorView = activity.getWindow().getDecorView();
-        final KeyBoardData finalKeyBoardData = keyBoardData;
-        decorView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                Rect r = new Rect();
-                decorView.getWindowVisibleDisplayFrame(r);
-                int visibleHeight = r.bottom - r.top;
-                int lastVisibleHeight = finalKeyBoardData.mLastVisibleHeight;
-                if (visibleHeight != lastVisibleHeight) {
-                    if (lastVisibleHeight > 0) {
-                        Display display = activity.getWindowManager().getDefaultDisplay();
-                        Point point = new Point();
-                        display.getRealSize(point);
-                        int bottomOffset = point.y - r.bottom;
-                        if (bottomOffset > 200) {
-                            finalKeyBoardData.onChange(true, bottomOffset);
-                        } else {
-                            finalKeyBoardData.onChange(false, bottomOffset);
-                        }
-                    }
-                    finalKeyBoardData.mLastVisibleHeight = visibleHeight;
-                }
-            }
-        });
-
-        if (activity instanceof LifecycleOwner) {
-            LifecycleOwner lifecycleOwner = (LifecycleOwner) activity;
-            lifecycleOwner.getLifecycle().addObserver(new LifecycleEventObserver() {
-                @Override
-                public void onStateChanged(@NonNull LifecycleOwner source, @NonNull Lifecycle.Event event) {
-                    if (Lifecycle.Event.ON_DESTROY == event) {
-                        source.getLifecycle().removeObserver(this);
-                        keyBoardDataMap.remove(activity);
-                    }
-                }
-            });
-        }
-    }
 
     private static Resources getResources() {
         return getContext().getResources();

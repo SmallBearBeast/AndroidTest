@@ -40,18 +40,6 @@ public class OtherUtil extends AppInitUtil {
         iv.setImageBitmap(Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, false));
     }
 
-    public static void copyToClipboard(String label, String text) {
-        ClipboardManager manager = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData data = ClipData.newPlainText(label, text);
-        if(manager != null) {
-            try {
-                manager.setPrimaryClip(data);
-            } catch (Exception e){
-
-            }
-        }
-    }
-
     /**
      * obj转为T类型
      */

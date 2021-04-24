@@ -15,9 +15,9 @@ public class Animator {
     public static final String SCALE = "scale";
     public static final String ROTATION = "rotation";
     public static final String CUSTOMIZE = "customize";
-    public static final int DEFAULT_DURATION = 300;
+    public static final long DEFAULT_DURATION = 300;
     private View mView;
-    private int mDuration;
+    private long mDuration = DEFAULT_DURATION;
     private boolean mAutoCancel;
     private int mRepeatCount;
     private int mRepeatMode;
@@ -30,16 +30,12 @@ public class Animator {
     private String mProperty;
 
     public static Animator make(View view, String property, float... values) {
-        return make(view, property, DEFAULT_DURATION, values);
-    }
-
-    public static Animator make(View view, String property, int duration, float... values) {
-        Animator config = new Animator();
-        config.mView = view;
-        config.mDuration = duration;
-        config.mFloatValues = values;
-        config.mProperty = property;
-        return config;
+        Animator animator = new Animator();
+        animator.mView = view;
+        animator.mDuration = DEFAULT_DURATION;
+        animator.mFloatValues = values;
+        animator.mProperty = property;
+        return animator;
     }
 
     private void alpha() {
@@ -47,7 +43,7 @@ public class Animator {
             return;
         }
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mView, ALPHA, mFloatValues);
-        initConfig(objectAnimator);
+        initAnimator(objectAnimator);
         objectAnimator.start();
     }
 
@@ -56,7 +52,7 @@ public class Animator {
             return;
         }
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mView, TRANSLATION_X, mFloatValues);
-        initConfig(objectAnimator);
+        initAnimator(objectAnimator);
         objectAnimator.start();
     }
 
@@ -65,7 +61,7 @@ public class Animator {
             return;
         }
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mView, TRANSLATION_Y, mFloatValues);
-        initConfig(objectAnimator);
+        initAnimator(objectAnimator);
         objectAnimator.start();
     }
 
@@ -74,7 +70,7 @@ public class Animator {
             return;
         }
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mView, SCALE_X, mFloatValues);
-        initConfig(objectAnimator);
+        initAnimator(objectAnimator);
         objectAnimator.start();
     }
 
@@ -83,7 +79,7 @@ public class Animator {
             return;
         }
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mView, SCALE_Y, mFloatValues);
-        initConfig(objectAnimator);
+        initAnimator(objectAnimator);
         objectAnimator.start();
     }
 
@@ -97,7 +93,7 @@ public class Animator {
             return;
         }
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(mView, ROTATION, mFloatValues);
-        initConfig(objectAnimator);
+        initAnimator(objectAnimator);
         objectAnimator.start();
     }
 
@@ -106,11 +102,11 @@ public class Animator {
             return;
         }
         ValueAnimator valueAnimator = ValueAnimator.ofFloat(mFloatValues);
-        initConfig(valueAnimator);
+        initAnimator(valueAnimator);
         valueAnimator.start();
     }
 
-    private void initConfig(ValueAnimator animator) {
+    private void initAnimator(ValueAnimator animator) {
         if (mDuration != 0) {
             animator.setDuration(mDuration);
         }
@@ -163,6 +159,8 @@ public class Animator {
                 break;
             case CUSTOMIZE:
                 customize();
+                break;
+            default:
                 break;
         }
     }
@@ -229,15 +227,21 @@ public class Animator {
 
     public static class UpdateAdapter implements ValueAnimator.AnimatorUpdateListener {
         @Override
-        public void onAnimationUpdate(ValueAnimator animation) {}
+        public void onAnimationUpdate(ValueAnimator animation) {
+            // default implementation ignored
+        }
     }
 
     public static class PauseAdapter implements android.animation.Animator.AnimatorPauseListener {
         @Override
-        public void onAnimationPause(android.animation.Animator animation) {}
+        public void onAnimationPause(android.animation.Animator animation) {
+            // default implementation ignored
+        }
 
         @Override
-        public void onAnimationResume(android.animation.Animator animation) {}
+        public void onAnimationResume(android.animation.Animator animation) {
+            // default implementation ignored
+        }
     }
 
     public static class StatusAdapter extends AnimatorListenerAdapter {}

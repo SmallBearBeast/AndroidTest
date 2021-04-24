@@ -26,7 +26,7 @@ import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
-import com.example.libbase.Util.KeyBoardUtil;
+import com.example.libbase.Manager.KeyBoardManager;
 import com.example.libbase.Util.MainHandlerUtil;
 import com.example.libbase.Util.ToastUtil;
 
@@ -83,11 +83,7 @@ public class OtherTestAct extends ComponentAct {
                 MainHandlerUtil.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        try{
-                            startService(new Intent(OtherTestAct.this, BackgroundService.class));
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+                        startService(new Intent(OtherTestAct.this, BackgroundService.class));
                     }
                 }, 80 * 1000);
 //                BackgroundService.start(OtherTestAct.this, BackgroundService.START);
@@ -159,7 +155,7 @@ public class OtherTestAct extends ComponentAct {
                 @Override
                 public void onClick(View v) {
                     ToastUtil.showToast("Click No Show Input Keyboard EditText");
-                    KeyBoardUtil.hideSoftInput(OtherTestAct.this, v);
+                    KeyBoardManager.get().hideKeyBoard(OtherTestAct.this, v);
                 }
             });
             editText.setOnLongClickListener(null);
@@ -167,7 +163,7 @@ public class OtherTestAct extends ComponentAct {
                 @Override
                 public void onFocusChange(View v, boolean hasFocus) {
                     if (hasFocus) {
-                        KeyBoardUtil.hideSoftInput(OtherTestAct.this, v);
+                        KeyBoardManager.get().hideKeyBoard(OtherTestAct.this, v);
                     }
                 }
             });
