@@ -29,11 +29,11 @@ public class Animator {
     private StatusAdapter mStatusAdapter;
     private String mProperty;
 
-    public static Animator make(View view, String property, float[] values) {
+    public static Animator make(View view, String property, float... values) {
         return make(view, property, DEFAULT_DURATION, values);
     }
 
-    public static Animator make(View view, String property, int duration, float[] values) {
+    public static Animator make(View view, String property, int duration, float... values) {
         Animator config = new Animator();
         config.mView = view;
         config.mDuration = duration;
