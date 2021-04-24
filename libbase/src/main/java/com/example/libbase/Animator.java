@@ -1,4 +1,4 @@
-package com.example.libbase.Util;
+package com.example.libbase;
 
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
