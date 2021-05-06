@@ -5,7 +5,7 @@ import android.content.ClipboardManager;
 import android.content.Context;
 
 public class ClipboardUtil extends AppInitUtil {
-    public static boolean copyToClipboard(String text) {
+    public static boolean copy(String text) {
         ClipboardManager manager = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData data = ClipData.newPlainText("label", text);
         if(manager != null) {
@@ -17,5 +17,18 @@ public class ClipboardUtil extends AppInitUtil {
             }
         }
         return false;
+    }
+
+    public static String paste() {
+        ClipboardManager manager = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = manager.getPrimaryClip();
+        String text = "";
+        if (clipData != null) {
+            ClipData.Item item = clipData.getItemAt(0);
+            if (item != null) {
+                text = String.valueOf(item.getText());
+            }
+        }
+        return text;
     }
 }
