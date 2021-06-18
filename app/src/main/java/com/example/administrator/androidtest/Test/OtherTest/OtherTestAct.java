@@ -80,13 +80,7 @@ public class OtherTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_back_start_delay_service_click:
-                MainHandlerUtil.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        startService(new Intent(OtherTestAct.this, BackgroundService.class));
-                    }
-                }, 80 * 1000);
-//                BackgroundService.start(OtherTestAct.this, BackgroundService.START);
+                BackgroundService.start(this, BackgroundService.START);
 //                MainHandlerUtil.postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -104,8 +98,8 @@ public class OtherTestAct extends ComponentAct {
                 break;
 
             case R.id.bt_back_stop_delay_service_click:
-                BackgroundService.stopByReceiver(this);
-//                BackgroundService.stop(this);
+//                BackgroundService.stopByReceiver(this);
+                BackgroundService.stop(this, BackgroundService.getNotificationId());
 //                MainHandlerUtil.postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {

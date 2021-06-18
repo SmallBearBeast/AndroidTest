@@ -37,9 +37,8 @@ public class BackgroundService extends LifecycleService {
     public static final String STOP = "STOP";
     private static final String TAG = "BackgroundService";
     private NotificationManager notificationManager;
-    private String notificationId = "channelId";
-    private String notificationName = "channelName";
-    private StopServiceReceiver stopServiceReceiver = new StopServiceReceiver();
+    private final String notificationId = "channelId";
+    private final StopServiceReceiver stopServiceReceiver = new StopServiceReceiver();
     private boolean hasPendingStopService = false;
     private boolean isStartForeground = false;
 
@@ -92,6 +91,7 @@ public class BackgroundService extends LifecycleService {
         }
         //创建NotificationChannel
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            String notificationName = "channelName";
             NotificationChannel channel = new NotificationChannel(notificationId, notificationName, NotificationManager.IMPORTANCE_HIGH);
             notificationManager.createNotificationChannel(channel);
 //            MainHandlerUtil.postDelayed(new Runnable() {
@@ -102,10 +102,9 @@ public class BackgroundService extends LifecycleService {
 //                }
 //            }, 5 * 1000);
         }
-//        startForeground(1,getNotification());
+        startForeground(getNotificationId(), getNotification());
         isStartForeground = true;
         notifyStopPendingService();
-        stop();
     }
 
     private void notifyStopPendingService() {
@@ -129,7 +128,7 @@ public class BackgroundService extends LifecycleService {
     public static void start(Context context, String action) {
         Intent intent = new Intent(context, BackgroundService.class);
         intent.setAction(action);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && START.equals(action)) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             context.startForegroundService(intent);
         } else {
             context.startService(intent);
@@ -195,5 +194,9 @@ public class BackgroundService extends LifecycleService {
                 hasPendingStopService = true;
             }
         }
+    }
+
+    public static int getNotificationId() {
+        return 111;
     }
 }

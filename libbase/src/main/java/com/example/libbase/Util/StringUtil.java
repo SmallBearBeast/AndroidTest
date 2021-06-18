@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
 
 @SuppressWarnings({"unchecked"})
 public class StringUtil {
+    private StringUtil() {
+        throw new IllegalStateException("Utility class");
+    }
+
     /** 字符串是否含有空格 */
     public static boolean isSpace(final String S) {
         if (S == null) return true;
