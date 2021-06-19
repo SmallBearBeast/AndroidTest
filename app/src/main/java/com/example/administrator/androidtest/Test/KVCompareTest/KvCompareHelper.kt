@@ -2,18 +2,21 @@ package com.example.administrator.androidtest.Test.KVCompareTest
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.SharedPreferences
 import android.util.Log
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.preferencesKey
-import androidx.datastore.preferences.createDataStore
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.preferencesDataStore
 import com.example.administrator.androidtest.App
+import com.example.administrator.androidtest.Settings
 import com.example.libbase.Util.ExecutorUtil
 import com.tencent.mmkv.MMKV
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 object KvCompareHelper {
     private const val TAG = "KvCompareHelper"
@@ -35,12 +38,14 @@ object KvCompareHelper {
         KV_COMPARE_VERY_VERY_LONG_STRING = String(byteArray)
     }
 
+    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = KV_COMPARE_NAME)
+
     fun loadFromDataStore() {
         val startTs = System.currentTimeMillis()
-        val dataStore = App.getContext().createDataStore(KV_COMPARE_NAME)
+        val dataStore = App.getContext().dataStore
         GlobalScope.launch {
             dataStore.data.map { preferences ->
-                preferences[preferencesKey<Int>(KV_COMPARE_INT_KEY + 0)]
+                preferences[intPreferencesKey(KV_COMPARE_INT_KEY + 0)]
                 Log.d(TAG, "loadFromDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
             }.collect {
 
@@ -49,13 +54,13 @@ object KvCompareHelper {
     }
 
     fun readFromDataStore() {
-        val dataStore = App.getContext().createDataStore(KV_COMPARE_NAME)
+        val dataStore = App.getContext().dataStore
         GlobalScope.launch {
             dataStore.data.map { preferences ->
                 val startTs = System.currentTimeMillis()
                 for (index in 0 until LOOP) {
-                    preferences[preferencesKey<Int>(KV_COMPARE_INT_KEY + index)]
-                    preferences[preferencesKey<String>(KV_COMPARE_SHORT_STRING_KEY + index)]
+                    preferences[intPreferencesKey(KV_COMPARE_INT_KEY + index)]
+                    preferences[stringPreferencesKey(KV_COMPARE_SHORT_STRING_KEY + index)]
                 }
                 Log.d(TAG, "readFromDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
             }.collect {
@@ -65,14 +70,14 @@ object KvCompareHelper {
     }
 
     fun writeToDataStore() {
-        val dataStore = App.getContext().createDataStore(KV_COMPARE_NAME)
+        val dataStore = App.getContext().dataStore
         GlobalScope.launch {
             dataStore.edit { settings ->
                 val startTs = System.currentTimeMillis()
-                settings[preferencesKey<String>(KV_COMPARE_VERY_VERY_LONG_STRING_KEY)] = KV_COMPARE_VERY_VERY_LONG_STRING
+                settings[stringPreferencesKey(KV_COMPARE_VERY_VERY_LONG_STRING_KEY)] = KV_COMPARE_VERY_VERY_LONG_STRING
                 for (index in 0 until LOOP) {
-                    settings[preferencesKey<Int>(KV_COMPARE_INT_KEY + index)] = index
-                    settings[preferencesKey<String>(KV_COMPARE_SHORT_STRING_KEY + index)] = KV_COMPARE_SHORT_STRING + index
+                    settings[intPreferencesKey(KV_COMPARE_INT_KEY + index)] = index
+                    settings[stringPreferencesKey(KV_COMPARE_SHORT_STRING_KEY + index)] = KV_COMPARE_SHORT_STRING + index
                 }
                 Log.d(TAG, "writeFromDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
             }
@@ -137,10 +142,10 @@ object KvCompareHelper {
     }
 
     fun readFromDataStore(key: String, defaultValue: Int, callback: (Int) -> Unit) {
-        val dataStore = App.getContext().createDataStore(KV_COMPARE_NAME)
+        val dataStore = App.getContext().dataStore
         GlobalScope.launch {
             dataStore.data.map { preferences ->
-                preferences[preferencesKey<Int>(key)]
+                preferences[intPreferencesKey(key)]
             }.collect {
                 callback(it ?: defaultValue)
             }
@@ -148,10 +153,10 @@ object KvCompareHelper {
     }
 
     fun writeToDataStore(key: String, value: Int) {
-        val dataStore = App.getContext().createDataStore(KV_COMPARE_NAME)
+        val dataStore = App.getContext().dataStore
         GlobalScope.launch {
             dataStore.edit { preferences ->
-                preferences[preferencesKey<Int>(key)] = value
+                preferences[intPreferencesKey(key)] = value
             }
         }
     }
@@ -198,4 +203,21 @@ object KvCompareHelper {
         }
     }
 
+    fun readSettingsPb() {
+        GlobalScope.launch {
+            val settingsDataStore = App.getContext().settingsDataStore
+            settingsDataStore.data.collect {
+                Log.d(TAG, "exampleCounter = ${it.exampleCounter}, exampleAge = ${it.exampleAge}")
+            }
+        }
+    }
+
+    fun writeSettingsPb() {
+        GlobalScope.launch {
+            val settingsDataStore = App.getContext().settingsDataStore
+            settingsDataStore.updateData {
+                it.toBuilder().setExampleAge(123).setExampleCounter(123).build()
+            }
+        }
+    }
 }

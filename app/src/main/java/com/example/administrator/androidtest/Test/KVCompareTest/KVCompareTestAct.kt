@@ -49,6 +49,12 @@ class KVCompareTestAct: ComponentAct(){
                 testReflect()
                 ToastUtil.showToast(TAG)
             }
+            R.id.bt_8 -> {
+                KvCompareHelper.writeSettingsPb()
+            }
+            R.id.bt_9 -> {
+                KvCompareHelper.readSettingsPb()
+            }
         }
     }
 

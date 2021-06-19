@@ -1,0 +1,9 @@
+syntax="proto3";
+
+option java_package = "com.example.administrator.androidtest";
+option java_multiple_files = true;
+
+message Settings {
+  int32 example_counter = 1;
+  int32 example_age = 2;
+}
