@@ -8,9 +8,11 @@ import android.view.View
 import com.bear.libcomponent.ComponentAct
 import com.example.administrator.androidtest.App
 import com.example.administrator.androidtest.R
+import com.example.administrator.androidtest.Settings
 import com.example.administrator.androidtest.Test.OtherTest.SpValHelper
 import com.example.libbase.Util.ToastUtil
 import java.lang.Exception
+import kotlin.random.Random
 
 class KVCompareTestAct: ComponentAct(){
     override fun layoutId(): Int  = R.layout.act_kv_compare_test
@@ -50,10 +52,25 @@ class KVCompareTestAct: ComponentAct(){
                 ToastUtil.showToast(TAG)
             }
             R.id.bt_8 -> {
-                KvCompareHelper.writeSettingsPb()
+                val data = Random(System.currentTimeMillis()).nextInt(0, 1000)
+                DataStoreHelper.putInt(KEY_INT, data)
+                ToastUtil.showToast("Write data = $data")
             }
             R.id.bt_9 -> {
-                KvCompareHelper.readSettingsPb()
+                val data = DataStoreHelper.getInt(KEY_INT, 0)
+                ToastUtil.showToast("Read data = $data")
+            }
+            R.id.bt_10 -> {
+                val random = Random(System.currentTimeMillis())
+                val age = random.nextInt(0, 1000)
+                val counter = random.nextInt(0, 1000)
+                val settings = Settings.newBuilder().setExampleAge(age).setExampleCounter(counter).build()
+                DataStoreHelper.putSettings(settings)
+                ToastUtil.showToast("Write settings = {exampleCounter = ${settings.exampleCounter}, exampleAge = ${settings.exampleAge}}")
+            }
+            R.id.bt_11 -> {
+                val settings = DataStoreHelper.getSettings()
+                ToastUtil.showToast("Write settings = {exampleCounter = ${settings.exampleCounter}, exampleAge = ${settings.exampleAge}}")
             }
         }
     }
@@ -109,5 +126,9 @@ class KVCompareTestAct: ComponentAct(){
         } catch (e: Exception) {
             e.printStackTrace()
         }
+    }
+
+    companion object {
+        private const val KEY_INT = "KEY_INT"
     }
 }

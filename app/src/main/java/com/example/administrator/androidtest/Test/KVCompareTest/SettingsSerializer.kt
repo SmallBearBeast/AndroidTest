@@ -1,9 +1,6 @@
 package com.example.administrator.androidtest.Test.KVCompareTest
 
-import android.content.Context
-import androidx.datastore.core.DataStore
 import androidx.datastore.core.Serializer
-import androidx.datastore.dataStore
 import com.example.administrator.androidtest.Settings
 import java.io.InputStream
 import java.io.OutputStream
@@ -20,8 +17,3 @@ object SettingsSerializer: Serializer<Settings> {
         t.writeTo(output)
     }
 }
-
-val Context.settingsDataStore: DataStore<Settings> by dataStore(
-        fileName = "settings.pb",
-        serializer = SettingsSerializer
-)

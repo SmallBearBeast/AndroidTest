@@ -7,16 +7,12 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.administrator.androidtest.App
-import com.example.administrator.androidtest.Settings
 import com.example.libbase.Util.ExecutorUtil
 import com.tencent.mmkv.MMKV
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 object KvCompareHelper {
     private const val TAG = "KvCompareHelper"
@@ -199,24 +195,6 @@ object KvCompareHelper {
                 val sp = App.getContext().getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
                 val allMap = sp.all
                 Log.d(TAG, "preLoadTestSp $i cost: ${System.currentTimeMillis() - startTs}ms")
-            }
-        }
-    }
-
-    fun readSettingsPb() {
-        GlobalScope.launch {
-            val settingsDataStore = App.getContext().settingsDataStore
-            settingsDataStore.data.collect {
-                Log.d(TAG, "exampleCounter = ${it.exampleCounter}, exampleAge = ${it.exampleAge}")
-            }
-        }
-    }
-
-    fun writeSettingsPb() {
-        GlobalScope.launch {
-            val settingsDataStore = App.getContext().settingsDataStore
-            settingsDataStore.updateData {
-                it.toBuilder().setExampleAge(123).setExampleCounter(123).build()
             }
         }
     }
