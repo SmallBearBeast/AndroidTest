@@ -55,28 +55,24 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
         mAdapter.register(msgVHBinder, Msg.class);
         mRvTest.setAdapter(mAdapter);
 
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false);
-        mRvTest.setLayoutManager(gridLayoutManager);
+//        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false);
+//        mRvTest.setLayoutManager(gridLayoutManager);
 //        gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
 //            @Override
 //            public int getSpanSize(int position) {
 //                return mAdapter.getItemViewType(position) ==  msgVHBinder.getType() ? 3 : 1;
 //            }
 //        });
-        mRvTest.addItemDecoration(new RvDivider(gridLayoutManager, 20, 40));
+//        mRvTest.addItemDecoration(new RvDivider(gridLayoutManager, 20, 40));
 
-//        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
-//        mRvTest.setLayoutManager(staggeredGridLayoutManager);
-
-        getLifecycle().addObserver(mAdapter);
+        StaggeredGridLayoutManager staggeredGridLayoutManager = new StaggeredGridLayoutManager(3, RecyclerView.VERTICAL);
+        mRvTest.setLayoutManager(staggeredGridLayoutManager);
         mRvTest.addOnItemTouchListener(new RvListener(this, mRvTest, new RvListener.OnItemClickListener() {
 
             int color = Color.BLACK;
             @Override
             public boolean onItemClick(View view, int position) {
                 SLog.d(TAG, "onItemClick: view = " + view + " position = " + position);
-                String name = new String("wuyisong");
-//                ToastUtil.showToast("onItemClick position = " + position);
                 switch (view.getId()){
                     case R.id.tv_1:
                         if(color == Color.BLACK){
@@ -98,7 +94,6 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
             @Override
             public boolean onItemLongClick(View view, int position) {
                 SLog.d(TAG, "onItemLongClick: view = " + view + " position = " + position);
-//                ToastUtil.showToast("onItemClick position = " + position);
                 switch (view.getId()){
                     case R.id.tv_1:
                         SLog.d(TAG, "onItemLongClick: textview = " + view + " position = " + position);
@@ -111,11 +106,8 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
                 return true;
             }
         }));
-
         mDataManager = mAdapter.getDataManager();
         mDataManager.setData(initImage());
-//        mDataManager.addFirst(new Msg());
-//        mDataManager.addFirst(new Msg());
     }
 
     private List<Image> initImage() {

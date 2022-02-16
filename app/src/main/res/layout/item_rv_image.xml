@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="@dimen/dp_400"
     android:gravity="center"
     android:orientation="vertical">
 
     <com.example.libfresco.FrescoView
         android:id="@+id/fv_1"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_400" />
+        android:layout_height="@dimen/dp_360" />
 
     <TextView
 		android:background="@color/cl_blue"
         android:id="@+id/tv_1"
         style="@style/tv_base"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/dp_40"
         android:gravity="center" />
 </LinearLayout>

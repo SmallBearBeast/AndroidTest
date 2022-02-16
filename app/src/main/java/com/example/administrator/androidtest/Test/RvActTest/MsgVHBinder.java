@@ -26,15 +26,16 @@ public class MsgVHBinder extends VHBridge<MsgVHBinder.MsgVHolder> {
         public MsgVHolder(View itemView) {
             super(itemView);
             mTvText = findViewById(R.id.tv_text);
-            StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
-            lp.setFullSpan(true);
-            itemView.setLayoutParams(lp);
+//            StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
+//            lp.setFullSpan(true);
+//            itemView.setLayoutParams(lp);
         }
 
         @Override
         public void bindFull(int pos, Msg msg) {
             super.bindFull(pos, msg);
             mTvText.setText(msg.mText);
+            mTvText.setSelected(true);
         }
     }
 }

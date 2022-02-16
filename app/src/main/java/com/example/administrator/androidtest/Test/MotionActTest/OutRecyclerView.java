@@ -68,7 +68,7 @@ public class OutRecyclerView extends RecyclerView implements NestedScrollingPare
     @Override
     public void onNestedPreScroll(@NonNull View target, int dx, int dy, @NonNull int[] consumed,
                                   @ViewCompat.NestedScrollType int type) {
-        SLog.d(TAG, "onNestedPreScroll() called with: target = [" + target + "], dx = [" + dx + "], dy = [" + dy + "], consumed = [" + consumed + "], type = [" + type + "]");
+        SLog.d(TAG, "onNestedPreScroll() dx = " + dx + ", dy = " + dy + ", consumed = " + consumed + ", type = " + type);
         if (target instanceof InRecyclerView) {
             inRecyclerView = (InRecyclerView) target;
             target.getLocationOnScreen(childLocation);
