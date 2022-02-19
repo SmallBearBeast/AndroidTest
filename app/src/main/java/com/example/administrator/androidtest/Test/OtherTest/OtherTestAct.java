@@ -26,6 +26,7 @@ import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
+import com.example.administrator.androidtest.Widget.MarqueeTextView;
 import com.example.libbase.Manager.KeyBoardManager;
 import com.example.libbase.Util.MainHandlerUtil;
 import com.example.libbase.Util.ToastUtil;
@@ -36,6 +37,7 @@ public class OtherTestAct extends ComponentAct {
     private FullTextView ftvFullText;
     private EditText editText;
     private LikeView likeView;
+    private MarqueeTextView marqueeTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -43,6 +45,7 @@ public class OtherTestAct extends ComponentAct {
         editText = findViewById(R.id.et_no_show_input_keyboard);
         ftvFullText = findViewById(R.id.ftv_full_text);
         likeView = findViewById(R.id.lv_like_heart);
+        marqueeTextView = findViewById(R.id.marqueeTextView_1);
         showSpVal();
         initLoopViewPager();
         CaseHelper.show(findViewById(R.id.case_view));
@@ -137,6 +140,14 @@ public class OtherTestAct extends ComponentAct {
 
             case R.id.bt_rv_bottom_view_click:
                 new RvBottomView(this).show();
+                break;
+
+            case R.id.startMarqueeButton:
+                marqueeTextView.startMarquee(1000);
+                break;
+
+            case R.id.endMarqueeButton:
+                marqueeTextView.endMarquee();
                 break;
         }
     }
