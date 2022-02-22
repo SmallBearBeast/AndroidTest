@@ -1,6 +1,6 @@
 package com.example.administrator.androidtest.Test.OtherTest;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,7 +28,6 @@ import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.administrator.androidtest.Widget.MarqueeTextView;
 import com.example.libbase.Manager.KeyBoardManager;
-import com.example.libbase.Util.MainHandlerUtil;
 import com.example.libbase.Util.ToastUtil;
 
 import java.util.Random;
@@ -42,13 +41,13 @@ public class OtherTestAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        editText = findViewById(R.id.et_no_show_input_keyboard);
-        ftvFullText = findViewById(R.id.ftv_full_text);
-        likeView = findViewById(R.id.lv_like_heart);
+        editText = findViewById(R.id.noShowKeyboardEditText);
+        ftvFullText = findViewById(R.id.fullTextView);
+        likeView = findViewById(R.id.likeView);
         marqueeTextView = findViewById(R.id.marqueeTextView_1);
-        showSpVal();
+        testGetSpVal();
         initLoopViewPager();
-        CaseHelper.show(findViewById(R.id.case_view));
+        CaseHelper.show(findViewById(R.id.caseView));
     }
 
     @Override
@@ -56,34 +55,91 @@ public class OtherTestAct extends ComponentAct {
         return R.layout.act_other_test;
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onClick(final View view) {
         switch (view.getId()) {
-            case R.id.bt_format_text_click:
-                TextView textTv = findViewById(R.id.tv_format_text);
-                textTv.setText(getString(R.string.format_string_text, "hugo.wu", 22));
+            case R.id.formatTextButton:
+                testFormatText();
                 break;
 
-            case R.id.bt_no_show_input_keyboard_mask_click:
+            case R.id.noShowKeyboardButton:
                 // EditText get focus but not to show input keyboard
-                setupNoShowInput();
+                testNoShowKeyboard();
                 break;
 
-            case R.id.bt_full_text_click:
-                TextOpt bgOpt = TextOpt.bgOpt(0, 5, Color.RED);
-                TextOpt fgOpt = TextOpt.fgOpt(5, ftvFullText.length(), Color.BLUE);
-                ftvFullText.bg(bgOpt).fg(fgOpt).done();
+            case R.id.fullTextButton:
+                testFullTextView();
                 break;
 
-            case R.id.lv_like_heart:
-                if (likeView.isLike()) {
-                    likeView.like();
-                } else {
-                    likeView.unLike();
-                }
+            case R.id.likeView:
+                testLikeView();
                 break;
 
-            case R.id.bt_back_start_delay_service_click:
-                BackgroundService.start(this, BackgroundService.START);
+            case R.id.startBgServiceButton:
+                testStartBgService();
+                break;
+
+            case R.id.stopBgServiceButton:
+                testStopBgService();
+                break;
+
+            case R.id.setSpValButton:
+                testSetSpVal();
+                break;
+
+            case R.id.getSpValButton:
+                testGetSpVal();
+                break;
+
+            case R.id.spToMmkvButton:
+                testSpToMmkv();
+                break;
+
+            case R.id.showMoveToMMKVButton:
+                testShowMoveToMMKV();
+                break;
+
+            case R.id.normalBottomViewButton:
+                new NormalBottomView(this).hideVelocity(2000).show();
+                break;
+
+            case R.id.nsBottomViewButton:
+                new NsBottomView(this).hideVelocity(1000).show();
+                break;
+
+            case R.id.rvBottomViewButton:
+                new RvBottomView(this).show();
+                break;
+
+            case R.id.startMarqueeButton:
+                marqueeTextView.startMarquee(1000);
+                break;
+
+            case R.id.endMarqueeButton:
+                marqueeTextView.endMarquee();
+                break;
+
+            default:
+                break;
+        }
+    }
+
+    private void testStopBgService() {
+        //                BackgroundService.stopByReceiver(this);
+        BackgroundService.stop(this, BackgroundService.getNotificationId());
+//                MainHandlerUtil.postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        BackgroundService.stop(OtherTestAct.this, 1);
+//                        BackgroundService.start(OtherTestAct.this, BackgroundService.STOP);
+//                        stopService(new Intent(OtherTestAct.this, BackgroundService.class));
+//
+//                    }
+//                }, 5* 1000);
+    }
+
+    private void testStartBgService() {
+        BackgroundService.start(this, BackgroundService.START);
 //                MainHandlerUtil.postDelayed(new Runnable() {
 //                    @Override
 //                    public void run() {
@@ -98,61 +154,28 @@ public class OtherTestAct extends ComponentAct {
 //                        }, 100);
 //                    }
 //                }, 5 * 1000);
-                break;
+    }
 
-            case R.id.bt_back_stop_delay_service_click:
-//                BackgroundService.stopByReceiver(this);
-                BackgroundService.stop(this, BackgroundService.getNotificationId());
-//                MainHandlerUtil.postDelayed(new Runnable() {
-//                    @Override
-//                    public void run() {
-//                        BackgroundService.stop(OtherTestAct.this, 1);
-//                        BackgroundService.start(OtherTestAct.this, BackgroundService.STOP);
-//                        stopService(new Intent(OtherTestAct.this, BackgroundService.class));
-//
-//                    }
-//                }, 5* 1000);
-                break;
-
-            case R.id.bt_sp_val_set_click:
-                setSpVal();
-                break;
-
-            case R.id.bt_sp_val_get_click:
-                showSpVal();
-                break;
-
-            case R.id.bt_move_to_mmkv_click:
-                moveToMmkv();
-                break;
-
-            case R.id.bt_move_to_mmkv_show_click:
-                showMmkv();
-                break;
-
-            case R.id.bt_normal_bottom_view_click:
-                new NormalBottomView(this).hideVelocity(2000).show();
-                break;
-
-            case R.id.bt_ns_bottom_view_click:
-                new NsBottomView(this).hideVelocity(1000).show();
-                break;
-
-            case R.id.bt_rv_bottom_view_click:
-                new RvBottomView(this).show();
-                break;
-
-            case R.id.startMarqueeButton:
-                marqueeTextView.startMarquee(1000);
-                break;
-
-            case R.id.endMarqueeButton:
-                marqueeTextView.endMarquee();
-                break;
+    private void testLikeView() {
+        if (likeView.isLike()) {
+            likeView.like();
+        } else {
+            likeView.unLike();
         }
     }
 
-    private void setupNoShowInput() {
+    private void testFullTextView() {
+        TextOpt bgOpt = TextOpt.bgOpt(0, 5, Color.RED);
+        TextOpt fgOpt = TextOpt.fgOpt(5, ftvFullText.length(), Color.BLUE);
+        ftvFullText.bg(bgOpt).fg(fgOpt).done();
+    }
+
+    private void testFormatText() {
+        TextView textTv = findViewById(R.id.formatTextEditText);
+        textTv.setText(getString(R.string.format_string_text, "hugo.wu", 22));
+    }
+
+    private void testNoShowKeyboard() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             editText.setShowSoftInputOnFocus(false);
             editText.setCursorVisible(false);
@@ -200,19 +223,19 @@ public class OtherTestAct extends ComponentAct {
         }
     }
 
-    private void setSpVal() {
+    private void testSetSpVal() {
         Random random = new Random();
         int randomInt = random.nextInt(100);
         boolean randomBool = random.nextBoolean();
-        randomInt = randomBool ? randomInt : - randomInt;
+        randomInt = randomBool ? randomInt : -randomInt;
         SpValHelper.testBoolSp.set(randomBool);
         SpValHelper.testIntSp.set(randomInt);
         SpValHelper.testFloatSp.set((float) randomInt);
         SpValHelper.testStringSp.set(randomInt + "" + randomBool);
     }
 
-    private void showSpVal() {
-        TextView tvSpValTip = findViewById(R.id.tv_sp_val_tip);
+    private void testGetSpVal() {
+        TextView tvSpValTip = findViewById(R.id.spValTipTextView);
         StringBuilder builder = new StringBuilder();
         builder.append("testBoolSp = ").append(SpValHelper.testBoolSp.get()).append("\n");
         builder.append("testIntSp = ").append(SpValHelper.testIntSp.get()).append("\n");
@@ -221,12 +244,12 @@ public class OtherTestAct extends ComponentAct {
         tvSpValTip.setText(builder.toString());
     }
 
-    private void moveToMmkv() {
+    private void testSpToMmkv() {
         MmkvVal.importFromSharedPreferences(this, MmkvValHelper.MMKV_GLOBAL_CONFIG, SpValHelper.SP_GLOBAL_CONFIG);
         MmkvVal.importFromSharedPreferences(this, MmkvVal.DEFAULT_MMPVAL_ID, SpHelper.DEFAULT_SPVAL_NAME);
     }
 
-    private void showMmkv() {
+    private void testShowMoveToMMKV() {
         TextView tvMmkvValTip = findViewById(R.id.tv_move_to_mmkv_tip);
         StringBuilder builder = new StringBuilder();
         builder.append("testBoolSp = ").append(MmkvValHelper.testBoolSp.get()).append("\n");
@@ -237,14 +260,15 @@ public class OtherTestAct extends ComponentAct {
     }
 
     private void initLoopViewPager() {
-        LoopViewPager loopViewPager = findViewById(R.id.lvp_container);
+        LoopViewPager loopViewPager = findViewById(R.id.loopViewpager);
         loopViewPager.setAdapter(new PagerAdapter() {
-            private int[] mColors = new int[] {
+            private int[] mColors = new int[]{
                     Color.BLACK,
                     Color.RED,
                     Color.YELLOW,
                     Color.GRAY,
             };
+
             @Override
             public int getCount() {
                 return mColors.length;
@@ -281,5 +305,4 @@ public class OtherTestAct extends ComponentAct {
         });
         loopViewPager.startLoop();
     }
-
 }
