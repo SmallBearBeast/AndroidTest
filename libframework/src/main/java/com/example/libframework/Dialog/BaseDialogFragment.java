@@ -21,7 +21,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     protected Dialog mDialog;
     protected boolean mIsInit;
 
-    public BaseDialogFragment(FragmentActivity activity) {
+    protected BaseDialogFragment(FragmentActivity activity) {
         mActivity = activity;
     }
 
@@ -57,7 +57,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
                 lp.width = getWidthAndHeight()[0];
                 lp.height = getWidthAndHeight()[1];
             }
-            lp.dimAmount = getDim();
+            if (getDim() != -1) {
+                lp.dimAmount = getDim();
+            }
             mWindow.setAttributes(lp);
         }
     }
@@ -99,7 +101,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
     }
 
     protected float getDim() {
-        return 0f;
+        return -1F;
     }
 
     /**

@@ -16,6 +16,7 @@ import java.util.Set;
 /**
  * The Bus is used to communicate between different component.
  */
+// TODO: 2022/2/27 Use livedata bus to replace??
 public class Bus {
     private Handler mHandler = new Handler();
     private Map<String, Event> mStickEventMap = new HashMap<>();

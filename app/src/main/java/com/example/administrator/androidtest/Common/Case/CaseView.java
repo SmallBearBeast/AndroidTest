@@ -34,18 +34,14 @@ public class CaseView extends FrameLayout {
     }
 
     private void initView(@NonNull CaseInfo caseInfo) {
-        int layoutId =
-                caseInfo.layoutId() == CaseInfo.NONE_ID ? R.layout.view_case : caseInfo.layoutId();
+        int layoutId = caseInfo.layoutId() == CaseInfo.NONE_ID ? R.layout.view_case : caseInfo.layoutId();
         View contentView = LayoutInflater.from(getContext()).inflate(layoutId, this, false);
         caseCoverIv = contentView.findViewById(R.id.case_cover_iv);
         caseTitleTv = contentView.findViewById(R.id.case_title_tv);
         caseDescriptionTv = contentView.findViewById(R.id.case_description_tv);
         caseProgressBar = contentView.findViewById(R.id.case_progress_bar);
         caseClickBt = contentView.findViewById(R.id.case_click_bt);
-        addView(
-                contentView,
-                new LayoutParams(
-                        ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        addView(contentView, new LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
     }
 
     public void show(@CaseHelper.Type int type, ViewInitListener listener) {
@@ -108,7 +104,8 @@ public class CaseView extends FrameLayout {
         removeAllViews();
     }
 
-    public @CaseHelper.Type int getCaseType() {
+    public @CaseHelper.Type
+    int getCaseType() {
         return caseInfo == null ? CaseHelper.CASE_TYPE_NONE : caseInfo.type();
     }
 

@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -29,6 +30,7 @@ import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.administrator.androidtest.Widget.MarqueeTextView;
 import com.example.libbase.Manager.KeyBoardManager;
 import com.example.libbase.Util.ToastUtil;
+import com.example.libframework.Dialog.BaseDialogFragment;
 
 import java.util.Random;
 
@@ -58,6 +60,10 @@ public class OtherTestAct extends ComponentAct {
     @SuppressLint("NonConstantResourceId")
     public void onClick(final View view) {
         switch (view.getId()) {
+            case R.id.showCustomizeDialogButton:
+                new TestDialog(this).show();
+                break;
+
             case R.id.formatTextButton:
                 testFormatText();
                 break;
@@ -304,5 +310,16 @@ public class OtherTestAct extends ComponentAct {
             }
         });
         loopViewPager.startLoop();
+    }
+
+    public static class TestDialog extends BaseDialogFragment {
+        public TestDialog(FragmentActivity activity) {
+            super(activity);
+        }
+
+        @Override
+        protected int layoutId() {
+            return R.layout.dialog_permission;
+        }
     }
 }

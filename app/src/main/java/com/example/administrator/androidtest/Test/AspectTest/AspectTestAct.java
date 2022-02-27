@@ -16,34 +16,33 @@ public class AspectTestAct extends ComponentAct {
     }
 
     @AsClick(interval = 2000)
-    public void onClick(View view){
-        switch (view.getId()){
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.bt_1:
                 testUser();
                 break;
-
             case R.id.bt_2:
                 testUser();
+                break;
+            default:
                 break;
         }
     }
 
     @AsThread(mode = ThreadMode.UI)
     @AsTime
-    private void testUser(){
+    private void testUser() {
         User user = new User();
         user.name = "zhangqing";
         user.age = 22;
         try {
             Thread.sleep(10);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-
-    public static class User{
+    public static class User {
         String name;
         int age;
     }

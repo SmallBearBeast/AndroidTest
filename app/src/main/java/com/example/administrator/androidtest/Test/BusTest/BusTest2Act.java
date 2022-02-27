@@ -1,10 +1,10 @@
 package com.example.administrator.androidtest.Test.BusTest;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +21,6 @@ import com.example.liblog.SLog;
 import java.util.Set;
 
 public class BusTest2Act extends ComponentAct {
-    private TextView mTvTest;
 
     @Override
     protected int layoutId() {
@@ -31,25 +30,22 @@ public class BusTest2Act extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTvTest = findViewById(R.id.tv_text_1);
-        Bus.get().register(this, mCallback);
+        Bus.get().register(this, eventCallback);
     }
 
+    @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_1:
                 Bus.get().post(new Event("normal_event", "normal_event"));
                 break;
+
+            default:
+                break;
         }
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-//        Bus.get().unRegister(mCallback);
-    }
-
-    private EventCallback mCallback = new EventCallback() {
+    private final EventCallback eventCallback = new EventCallback() {
         @Override
         protected void onEvent(@NonNull Event event) {
             SLog.d(TAG, "onEvent: event = " + event);
