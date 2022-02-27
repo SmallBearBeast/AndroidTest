@@ -4,34 +4,27 @@
     style="@style/match_parent">
 
     <LinearLayout
-        style="@style/ll_vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <!--<com.example.administrator.androidtest.Base.FitStatusBarLayout-->
-        <!--android:orientation="vertical"-->
-        <!--style="@style/ll_vertical">-->
-        <!--<TextView-->
-        <!--android:background="@color/cl_green_9"-->
-        <!--android:id="@+id/tv_text"-->
-        <!--style="@style/tv_base"-->
-        <!--android:gravity="center_horizontal"-->
-        <!--android:layout_height="@dimen/dp_50"-->
-        <!--android:layout_width="match_parent"/>-->
-        <!--</com.example.administrator.androidtest.Base.FitStatusBarLayout>-->
 
-        <TextView
-            android:id="@+id/tv_text"
-            style="@style/tv_base"
+        <Button
+            android:id="@+id/getScreenUtilSizeButton"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_50"
             android:background="@color/cl_green_9"
-            android:gravity="center_horizontal" />
+            android:onClick="onClick"
+            android:text="Get ScreenUtil Size"
+            android:textAllCaps="false"
+            android:textColor="@color/cl_black" />
 
         <Button
-            android:id="@+id/bt_ask_permission"
+            android:id="@+id/askPermissionButton"
             style="@style/match_parent_wrap_content"
             android:background="@color/cl_blue_5"
-            android:text="权限申请" />
+            android:onClick="onClick"
+            android:text="Ask Permission"
+            android:textAllCaps="false" />
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"

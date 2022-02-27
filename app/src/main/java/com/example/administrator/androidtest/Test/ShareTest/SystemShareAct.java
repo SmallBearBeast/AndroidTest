@@ -13,10 +13,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.bear.libcomponent.ComponentAct;
-import com.example.administrator.androidtest.Test.Activity.XmlDrawableAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Share.IntentShare;
 import com.example.administrator.androidtest.Share.ShareUtil;
+import com.example.administrator.androidtest.Test.XmlDrawableTest.XmlDrawableAct;
 import com.example.libbase.Util.CollectionUtil;
 
 import java.util.ArrayList;

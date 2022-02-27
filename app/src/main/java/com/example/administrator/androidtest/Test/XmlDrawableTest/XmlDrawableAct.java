@@ -1,11 +1,8 @@
-package com.example.administrator.androidtest.Test.Activity;
+package com.example.administrator.androidtest.Test.XmlDrawableTest;
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
