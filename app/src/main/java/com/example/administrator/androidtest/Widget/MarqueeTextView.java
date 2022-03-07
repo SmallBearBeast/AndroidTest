@@ -6,12 +6,15 @@ import android.graphics.Rect;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import com.example.administrator.androidtest.R;
 
 public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     private boolean marqueeEnable;
+    private int delayMillis;
     private final Runnable delayMarqueeTask = () -> enableMarquee(true);
 
     public MarqueeTextView(Context context) {
@@ -25,8 +28,8 @@ public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView
     public MarqueeTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.MarqueeTextView);
-        marqueeEnable = typedArray.getBoolean(R.styleable.MarqueeTextView_mtv_marquee_enable, true);
-        int delayMillis = typedArray.getInt(R.styleable.MarqueeTextView_mtv_delayMillis, 0);
+        marqueeEnable = canMarquee() && typedArray.getBoolean(R.styleable.MarqueeTextView_mtv_marquee_enable, true);
+        delayMillis = typedArray.getInt(R.styleable.MarqueeTextView_mtv_delayMillis, 0);
         typedArray.recycle();
         setSingleLine();
         setEllipsize(TextUtils.TruncateAt.MARQUEE);
@@ -37,12 +40,16 @@ public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView
 
     @Override
     protected void onFocusChanged(boolean focused, int direction, Rect previouslyFocusedRect) {
-        super.onFocusChanged(marqueeEnable, direction, previouslyFocusedRect);
+        if (focused) {
+            super.onFocusChanged(marqueeEnable, direction, previouslyFocusedRect);
+        }
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasWindowFocus) {
-        super.onWindowFocusChanged(marqueeEnable);
+        if (hasWindowFocus) {
+            super.onWindowFocusChanged(marqueeEnable);
+        }
     }
 
     @Override
@@ -50,17 +57,20 @@ public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView
         return marqueeEnable;
     }
 
+    public void startMarquee() {
+        startMarquee(0L);
+    }
+
     public void startMarquee(long delayMillis) {
-        if (delayMillis == 0L && Looper.myLooper() == Looper.getMainLooper()) {
+        if (!canMarquee()) {
+            return;
+        }
+        if (delayMillis <= 0L && Looper.myLooper() == Looper.getMainLooper()) {
             delayMarqueeTask.run();
         } else {
             enableMarquee(false);
             postDelayed(delayMarqueeTask, delayMillis);
         }
-    }
-
-    public void startMarquee() {
-        startMarquee(0L);
     }
 
     public void endMarquee() {
@@ -72,13 +82,23 @@ public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView
         marqueeEnable = enable;
         setFocusable(enable);
         setFocusableInTouchMode(enable);
-        onWindowFocusChanged(enable);
+        super.onWindowFocusChanged(enable);
+    }
+
+    public void recover() {
+        if (marqueeEnable) {
+            startMarquee(delayMillis);
+        }
     }
 
     @Override
     protected void onDetachedFromWindow() {
         removeCallbacks(delayMarqueeTask);
         super.onDetachedFromWindow();
+    }
+
+    private boolean canMarquee() {
+        return getVisibility() == View.VISIBLE && getText().length() > 0;
     }
 
     private static final String TAG = "MarqueeTextView";
