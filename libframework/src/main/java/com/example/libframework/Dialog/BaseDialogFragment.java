@@ -19,16 +19,9 @@ public abstract class BaseDialogFragment extends DialogFragment {
     protected FragmentActivity mActivity;
     protected Window mWindow;
     protected Dialog mDialog;
-    protected boolean mIsInit;
 
     protected BaseDialogFragment(FragmentActivity activity) {
         mActivity = activity;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        setup();
     }
 
     @NonNull
@@ -44,6 +37,27 @@ public abstract class BaseDialogFragment extends DialogFragment {
         //在这里设置dialog属性发现UI高度有变化
         //setup(dialog);
         return mDialog;
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        if (mContentView != null) {
+            if (mContentView.getParent() instanceof ViewGroup) {
+                ViewGroup viewGroup = (ViewGroup) mContentView.getParent();
+                viewGroup.removeView(mContentView);
+            }
+        } else {
+            mContentView = inflater.inflate(layoutId(), null);
+        }
+        init(savedInstanceState);
+        return mContentView;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setup();
     }
 
     /**
@@ -64,21 +78,6 @@ public abstract class BaseDialogFragment extends DialogFragment {
         }
     }
 
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        if (mContentView != null) {
-            if (mContentView.getParent() instanceof ViewGroup) {
-                ViewGroup viewGroup = (ViewGroup) mContentView.getParent();
-                viewGroup.removeView(mContentView);
-            }
-        } else {
-            mContentView = inflater.inflate(layoutId(), null);
-        }
-        init(savedInstanceState);
-        return mContentView;
-    }
-
     protected abstract int layoutId();
     protected View layoutView(){
         return null;
@@ -93,13 +92,14 @@ public abstract class BaseDialogFragment extends DialogFragment {
 
     /**
      * 重写这个方法重新设置对话框的显示位置
-     *
-     * @return
      */
     protected int getGravity() {
         return Gravity.CENTER;
     }
 
+    /**
+     * 重写这个方法控制不透明度
+     */
     protected float getDim() {
         return -1F;
     }
@@ -108,13 +108,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
      * UI初始化和其他变量初始化和恢复数据
      */
     protected void init(Bundle savedInstanceState) {
-        if (!mIsInit) {
-            mIsInit = true;
-        }
-    }
 
-    public void show() {
-        show(mActivity.getSupportFragmentManager(), getClass().getName());
     }
 
     protected <T extends View> T findViewById(@IdRes int id) {
@@ -122,5 +116,13 @@ public abstract class BaseDialogFragment extends DialogFragment {
             return mContentView.findViewById(id);
         }
         return null;
+    }
+
+    public void show() {
+        show(mActivity.getSupportFragmentManager(), getClass().getSimpleName());
+    }
+
+    public void show(@Nullable String tag) {
+        show(mActivity.getSupportFragmentManager(), tag);
     }
 }

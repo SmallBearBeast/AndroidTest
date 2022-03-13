@@ -12,6 +12,6 @@ public class TestDialog extends BaseDialogFragment {
 
     @Override
     protected int layoutId() {
-        return R.layout.dialog_permission;
+        return R.layout.test_dialog;
     }
 }
