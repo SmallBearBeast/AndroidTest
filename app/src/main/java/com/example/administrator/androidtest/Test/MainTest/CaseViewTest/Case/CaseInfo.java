@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Case;
+package com.example.administrator.androidtest.Test.MainTest.CaseViewTest.Case;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;

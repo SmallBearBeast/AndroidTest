@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Case;
+package com.example.administrator.androidtest.Test.MainTest.CaseViewTest.Case;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -34,7 +34,7 @@ public class CaseView extends FrameLayout {
     }
 
     private void initView(@NonNull CaseInfo caseInfo) {
-        int layoutId = caseInfo.layoutId() == CaseInfo.NONE_ID ? R.layout.view_case : caseInfo.layoutId();
+        int layoutId = caseInfo.layoutId() == CaseInfo.NONE_ID ? R.layout.case_view : caseInfo.layoutId();
         View contentView = LayoutInflater.from(getContext()).inflate(layoutId, this, false);
         caseCoverIv = contentView.findViewById(R.id.case_cover_iv);
         caseTitleTv = contentView.findViewById(R.id.case_title_tv);

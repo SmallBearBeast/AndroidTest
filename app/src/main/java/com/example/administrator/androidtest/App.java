@@ -10,7 +10,7 @@ import android.util.Log;
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.Test.KVCompareTest.PackMMKV;
-import com.example.administrator.androidtest.Test.OtherTest.SpValHelper;
+import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
 

@@ -1,5 +1,6 @@
-package com.example.administrator.androidtest.Common.Case;
+package com.example.administrator.androidtest.Test.MainTest.CaseViewTest.Case;
 
+import android.view.View;
 import android.widget.ProgressBar;
 
 import androidx.annotation.IntDef;
@@ -25,7 +26,7 @@ public class CaseHelper {
 
     }
 
-    private static Map<Integer, CaseInfo> caseInfoMap = new HashMap<>();
+    private static final Map<Integer, CaseInfo> caseInfoMap = new HashMap<>();
 
     static {
         init();
@@ -46,13 +47,14 @@ public class CaseHelper {
         return caseInfoMap.get(type);
     }
 
-    public static void show(@NonNull CaseView caseView) {
-        caseView.show(CASE_TYPE_LOADING, caseView1 -> {
-            ProgressBar progressBar = caseView1.getCaseProgressBar();
+    public static void showTestCaseView(@NonNull CaseView caseView, View.OnClickListener listener) {
+        caseView.show(CASE_TYPE_LOADING, view -> {
+            ProgressBar progressBar = view.getCaseProgressBar();
             if (progressBar != null) {
                 progressBar.getLayoutParams().width = DensityUtil.dp2Px(60);
                 progressBar.getLayoutParams().height = DensityUtil.dp2Px(60);
             }
+            caseView.getCaseClickBt().setOnClickListener(listener);
         });
     }
 

@@ -30,7 +30,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-        <activity android:name=".Test.OtherTest.OtherTestAct"
+        <activity android:name=".Test.MainTest.MainAct"
             android:windowSoftInputMode="adjustResize"
             android:configChanges="orientation|keyboard|layoutDirection|screenSize">
             <intent-filter>
@@ -42,7 +42,7 @@
         
         <activity android:name=".Test.BusTest.BusTest2Act"/>
         <service android:name=".Test.WindowTest.TestFloatService"/>
-        <service android:name=".Test.OtherTest.BackgroundService"
+        <service android:name=".Test.MainTest.BackgroundService"
             android:foregroundServiceType=""/>
     </application>
 

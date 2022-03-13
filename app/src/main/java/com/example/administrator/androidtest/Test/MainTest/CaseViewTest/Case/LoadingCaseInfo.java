@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Common.Case;
+package com.example.administrator.androidtest.Test.MainTest.CaseViewTest.Case;
 
 
 import com.example.administrator.androidtest.R;

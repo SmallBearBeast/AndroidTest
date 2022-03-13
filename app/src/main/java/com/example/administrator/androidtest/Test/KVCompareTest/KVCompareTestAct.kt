@@ -9,7 +9,7 @@ import com.bear.libcomponent.ComponentAct
 import com.example.administrator.androidtest.App
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.Settings
-import com.example.administrator.androidtest.Test.OtherTest.SpValHelper
+import com.example.administrator.androidtest.Test.MainTest.SpValHelper
 import com.example.libbase.Util.ToastUtil
 import java.lang.Exception
 import kotlin.random.Random

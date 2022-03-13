@@ -1,56 +1,48 @@
-package com.example.administrator.androidtest.Test.OtherTest;
+package com.example.administrator.androidtest.Test.MainTest;
 
 import android.annotation.SuppressLint;
 import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.ActionMode;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bear.libcomponent.ComponentAct;
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
-import com.example.administrator.androidtest.Common.Case.CaseHelper;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.CaseViewTest.CaseViewComponent;
+import com.example.administrator.androidtest.Test.MainTest.DialogTest.DialogTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.EditTextTest.EditTextTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.MarqueeTest.MarqueeComponent;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
-import com.example.administrator.androidtest.Widget.MarqueeTextView;
-import com.example.libbase.Manager.KeyBoardManager;
 import com.example.libbase.Util.ToastUtil;
-import com.example.libframework.Dialog.BaseDialogFragment;
 
 import java.util.Random;
 
-public class OtherTestAct extends ComponentAct {
+public class MainAct extends ComponentAct {
     private FullTextView ftvFullText;
-    private EditText editText;
     private LikeView likeView;
-    private MarqueeTextView marqueeTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        editText = findViewById(R.id.noShowKeyboardEditText);
         ftvFullText = findViewById(R.id.fullTextView);
         likeView = findViewById(R.id.likeView);
-        marqueeTextView = findViewById(R.id.marqueeTextView_1);
         testGetSpVal();
         initLoopViewPager();
-        CaseHelper.show(findViewById(R.id.caseView));
+        regComponent(new DialogTestComponent());
+        regComponent(new MarqueeComponent());
+        regComponent(new CaseViewComponent());
+        regComponent(new EditTextTestComponent());
     }
 
     @Override
@@ -61,19 +53,6 @@ public class OtherTestAct extends ComponentAct {
     @SuppressLint("NonConstantResourceId")
     public void onClick(final View view) {
         switch (view.getId()) {
-            case R.id.showCustomizeDialogButton:
-                new TestDialog(this).show();
-                break;
-
-            case R.id.formatTextButton:
-                testFormatText();
-                break;
-
-            case R.id.noShowKeyboardButton:
-                // EditText get focus but not to show input keyboard
-                testNoShowKeyboard();
-                break;
-
             case R.id.fullTextButton:
                 testFullTextView();
                 break;
@@ -116,14 +95,6 @@ public class OtherTestAct extends ComponentAct {
 
             case R.id.rvBottomViewButton:
                 new RvBottomView(this).show();
-                break;
-
-            case R.id.startMarqueeButton:
-                marqueeTextView.startMarquee(1000);
-                break;
-
-            case R.id.endMarqueeButton:
-                marqueeTextView.endMarquee();
                 break;
 
             default:
@@ -175,59 +146,6 @@ public class OtherTestAct extends ComponentAct {
         TextOpt bgOpt = TextOpt.bgOpt(0, 5, Color.RED);
         TextOpt fgOpt = TextOpt.fgOpt(5, ftvFullText.length(), Color.BLUE);
         ftvFullText.bg(bgOpt).fg(fgOpt).done();
-    }
-
-    private void testFormatText() {
-        TextView textTv = findViewById(R.id.formatTextEditText);
-        textTv.setText(getString(R.string.format_string_text, "hugo.wu", 22));
-    }
-
-    private void testNoShowKeyboard() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            editText.setShowSoftInputOnFocus(false);
-            editText.setCursorVisible(false);
-            editText.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    ToastUtil.showToast("Click No Show Input Keyboard EditText");
-                    KeyBoardManager.get().hideKeyBoard(OtherTestAct.this, v);
-                }
-            });
-            editText.setOnLongClickListener(null);
-            editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View v, boolean hasFocus) {
-                    if (hasFocus) {
-                        KeyBoardManager.get().hideKeyBoard(OtherTestAct.this, v);
-                    }
-                }
-            });
-            editText.setCustomSelectionActionModeCallback(new ActionMode.Callback() {
-                @Override
-                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                    return false;
-                }
-
-                @Override
-                public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-                    return false;
-                }
-
-                @Override
-                public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
-                    return false;
-                }
-
-                @Override
-                public void onDestroyActionMode(ActionMode mode) {
-
-                }
-            });
-        }
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            editText.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);
-        }
     }
 
     private void testSetSpVal() {
@@ -296,12 +214,7 @@ public class OtherTestAct extends ComponentAct {
                 tv.setLayoutParams(lp);
                 tv.setBackgroundColor(mColors[position]);
                 container.addView(tv);
-                tv.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        ToastUtil.showToast("I am TextView " + position);
-                    }
-                });
+                tv.setOnClickListener(v -> ToastUtil.showToast("I am TextView " + position));
                 return tv;
             }
 
@@ -311,16 +224,5 @@ public class OtherTestAct extends ComponentAct {
             }
         });
         loopViewPager.startLoop();
-    }
-
-    public static class TestDialog extends BaseDialogFragment {
-        public TestDialog(FragmentActivity activity) {
-            super(activity);
-        }
-
-        @Override
-        protected int layoutId() {
-            return R.layout.dialog_permission;
-        }
     }
 }

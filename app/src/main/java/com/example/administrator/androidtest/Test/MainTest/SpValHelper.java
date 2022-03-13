@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.OtherTest;
+package com.example.administrator.androidtest.Test.MainTest;
 
 import com.bear.libkv.KV;
 import com.bear.libkv.SpVal.SpHelper;
