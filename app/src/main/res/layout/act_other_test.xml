@@ -12,6 +12,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/aspectjLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Aspect Test" />
+
+            <Button
+                android:id="@+id/aspectjTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Aspectj Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aspectjLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/dialogLabelTextView"
                 style="@style/TestLabelStyle"
                 android:text="Dialog Test" />

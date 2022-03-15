@@ -1,5 +1,8 @@
-package com.example.administrator.androidtest.Test.AspectTest;
+package com.example.administrator.androidtest.Test.MainTest.AspectTest;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 
 import com.bear.libcomponent.ComponentAct;
@@ -15,15 +18,14 @@ public class AspectTestAct extends ComponentAct {
         return R.layout.act_commom_test;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @AsClick(interval = 2000)
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bt_1:
                 testUser();
                 break;
-            case R.id.bt_2:
-                testUser();
-                break;
+
             default:
                 break;
         }
@@ -42,7 +44,12 @@ public class AspectTestAct extends ComponentAct {
         }
     }
 
-    public static class User {
+    public static void start(Context context) {
+        Intent intent = new Intent(context, AspectTestAct.class);
+        context.startActivity(intent);
+    }
+
+    private static class User {
         String name;
         int age;
     }
