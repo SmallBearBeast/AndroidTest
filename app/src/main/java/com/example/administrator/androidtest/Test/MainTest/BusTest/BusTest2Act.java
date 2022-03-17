@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.BusTest;
+package com.example.administrator.androidtest.Test.MainTest.BusTest;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -58,7 +58,7 @@ public class BusTest2Act extends ComponentAct {
         }
     };
 
-    public static void go(Context context) {
+    public static void start(Context context) {
         ContextCompat.startActivity(context, new Intent(context, BusTest2Act.class), null);
     }
 }

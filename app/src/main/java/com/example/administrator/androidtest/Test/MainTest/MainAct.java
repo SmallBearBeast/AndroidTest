@@ -17,6 +17,7 @@ import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.AspectTest.AspectJTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.BusTest.BusTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.CaseViewTest.CaseViewComponent;
 import com.example.administrator.androidtest.Test.MainTest.DialogTest.DialogTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.EditTextTest.EditTextTestComponent;
@@ -40,6 +41,7 @@ public class MainAct extends ComponentAct {
         likeView = findViewById(R.id.likeView);
         testGetSpVal();
         initLoopViewPager();
+        regComponent(new BusTestComponent());
         regComponent(new AspectJTestComponent());
         regComponent(new DialogTestComponent());
         regComponent(new MarqueeComponent());

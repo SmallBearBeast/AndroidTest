@@ -1,10 +1,13 @@
-package com.example.administrator.androidtest.Test.BusTest;
+package com.example.administrator.androidtest.Test.MainTest.BusTest;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import android.view.View;
 
@@ -32,7 +35,7 @@ public class BusTest1Act extends ComponentAct {
         switch (view.getId()) {
             case R.id.bt_1:
                 Bus.get().postStick(new Event("stick_event", "hello stick"));
-                BusTest2Act.go(this);
+                BusTest2Act.start(this);
                 break;
 
             default:
@@ -46,4 +49,8 @@ public class BusTest1Act extends ComponentAct {
             SLog.d(TAG, "onEvent: event = " + event);
         }
     };
+
+    public static void start(Context context) {
+        ContextCompat.startActivity(context, new Intent(context, BusTest1Act.class), null);
+    }
 }
