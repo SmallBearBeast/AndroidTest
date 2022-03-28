@@ -39,7 +39,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+        <activity android:name=".Test.MainTest.CoordinatorLayoutTest.BehaviorTestAct"/>
+        <activity android:name=".Test.MainTest.CoordinatorLayoutTest.CoordinatorLayoutTestAct"/>
         <activity android:name=".Test.MainTest.AspectTest.AspectTestAct"/>
         <activity android:name=".Test.MainTest.BusTest.BusTest1Act"/>
         <activity android:name=".Test.MainTest.BusTest.BusTest2Act"/>

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.VpAndRvBottomSheetFragment;
 import com.example.administrator.androidtest.Test.MainTest.TestComponent;
 
 public class BusTestComponent extends TestComponent {
@@ -18,7 +19,8 @@ public class BusTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.busTestButton:
-                BusTest1Act.start(getDependence());
+                VpAndRvBottomSheetFragment.show(getDependence().getSupportFragmentManager());
+//                BusTest1Act.start(getDependence());
                 break;
         }
     }

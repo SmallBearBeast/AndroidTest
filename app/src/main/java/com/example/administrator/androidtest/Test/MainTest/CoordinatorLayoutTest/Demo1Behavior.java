@@ -4,49 +4,36 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.view.ViewCompat;
 
-public class TestBehavior extends CoordinatorLayout.Behavior {
-    private static final String TAG = "TestBehavior";
+import com.example.administrator.androidtest.R;
 
-    public TestBehavior(Context context, AttributeSet attrs) {
+public class Demo1Behavior extends CoordinatorLayout.Behavior<TextView> {
+    private static final String TAG = "Demo1Behavior";
+    private int textView2Right = Integer.MAX_VALUE;
+
+    public Demo1Behavior(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
     @Override
-    public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
-        Log.d(TAG, "onDependentViewChanged: child = " + child + ", dependency = " + dependency);
+    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull TextView child, @NonNull View dependency) {
+        return dependency.getId() == R.id.textView2;
+    }
+
+    @Override
+    public boolean onDependentViewChanged(@NonNull CoordinatorLayout parent, @NonNull TextView child, @NonNull View dependency) {
+        if (textView2Right == Integer.MAX_VALUE) {
+            textView2Right = dependency.getRight();
+        }
+        int offsetTopAndBottom = dependency.getTop() - child.getTop();
+        int offsetLeftAndRight = textView2Right - dependency.getRight() - child.getLeft();
+        ViewCompat.offsetTopAndBottom(child, offsetTopAndBottom);
+        ViewCompat.offsetLeftAndRight(child, offsetLeftAndRight);
         return true;
     }
-
-    @Override
-    public void onDependentViewRemoved(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
-
-    }
-
-    @Override
-    public boolean layoutDependsOn(@NonNull CoordinatorLayout parent, @NonNull View child, @NonNull View dependency) {
-        Log.d(TAG, "layoutDependsOn: child = " + child + ", dependency = " + dependency);
-        return true;
-    }
-
-    @Override
-    public boolean onStartNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View directTargetChild, @NonNull View target, int axes, int type) {
-        Log.d(TAG, "onStartNestedScroll: child = " + child + ", directTargetChild = " + directTargetChild + ", target = " + target + ", axes = " + axes + ", type = " + type);
-        return true;
-    }
-
-    @Override
-    public void onNestedScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dxConsumed, int dyConsumed, int dxUnconsumed, int dyUnconsumed, int type, @NonNull int[] consumed) {
-        Log.d(TAG, "onNestedScroll: child = " + child + ", target = " + target + ", dxConsumed = " + dxConsumed + ", dyConsumed = " + dyConsumed + ", dxUnconsumed = " + dxUnconsumed + ", dyUnconsumed = " + dyUnconsumed + ", type = " + type);
-    }
-
-    @Override
-    public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
-        Log.d(TAG, "onNestedPreScroll: child = " + child + ", target = " + target + ", dx = " + dx + ", dy = " + dy + ", type = " + type);
-    }
-
-
 }

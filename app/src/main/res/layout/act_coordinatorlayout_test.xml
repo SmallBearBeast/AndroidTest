@@ -11,78 +11,74 @@
 
         <!--        app:layout_behavior="com.example.administrator.androidtest.Test.CoordinatorTest.AppBarLayoutBehavior"-->
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/abl_content"
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!--            <com.google.android.material.appbar.CollapsingToolbarLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="350dp"-->
-            <!--                app:layout_scrollFlags="scroll|exitUntilCollapsed">-->
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsingToolbarLayout"
+                android:layout_width="match_parent"
+                android:layout_height="350dp"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <!--                <LinearLayout-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="wrap_content"-->
-            <!--                    android:orientation="vertical"-->
-            <!--                    app:layout_collapseMode="parallax"-->
-            <!--                    app:layout_collapseParallaxMultiplier="0.9">-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0.9">
 
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="300dp"-->
-            <!--                        android:scaleType="centerCrop"-->
-            <!--                        android:src="@drawable/girl"-->
-            <!--                        tools:ignore="ContentDescription" />-->
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/girl"
+                        tools:ignore="ContentDescription" />
 
-            <!--                    <TextView-->
-            <!--                        android:layout_width="match_parent"-->
-            <!--                        android:layout_height="50dp"-->
-            <!--                        android:layout_gravity="bottom"-->
-            <!--                        android:background="@color/cl_red"-->
-            <!--                        android:gravity="center"-->
-            <!--                        android:text="This is a good girl"-->
-            <!--                        tools:ignore="HardcodedText" />-->
-            <!--                </LinearLayout>-->
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_gravity="bottom"
+                        android:background="@color/cl_red"
+                        android:gravity="center"
+                        android:text="This is a good girl"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
 
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/collapsingToolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_gravity="top"
+                    android:background="@color/cl_oriange"
+                    app:contentInsetEnd="0dp"
+                    app:contentInsetLeft="0dp"
+                    app:contentInsetRight="0dp"
+                    app:contentInsetStart="0dp"
+                    app:layout_collapseMode="pin">
 
-            <!--                <View-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="50dp"-->
-            <!--                    android:background="@color/cl_oriange"-->
-            <!--                    app:layout_collapseMode="pin" />-->
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/girl"
+                        tools:ignore="ContentDescription" />
+                </androidx.appcompat.widget.Toolbar>
 
-            <!--                <androidx.appcompat.widget.Toolbar-->
-            <!--                    android:id="@+id/tl_bar"-->
-            <!--                    android:layout_width="match_parent"-->
-            <!--                    android:layout_height="50dp"-->
-            <!--                    android:layout_gravity="top"-->
-            <!--                    android:background="@color/cl_oriange"-->
-            <!--                    app:contentInsetEnd="0dp"-->
-            <!--                    app:contentInsetLeft="0dp"-->
-            <!--                    app:contentInsetRight="0dp"-->
-            <!--                    app:contentInsetStart="0dp"-->
-            <!--                    app:layout_collapseMode="pin">-->
-
-            <!--                    <ImageView-->
-            <!--                        android:layout_width="50dp"-->
-            <!--                        android:layout_height="50dp"-->
-            <!--                        android:scaleType="centerCrop"-->
-            <!--                        android:src="@drawable/girl"-->
-            <!--                        tools:ignore="ContentDescription" />-->
-            <!--                </androidx.appcompat.widget.Toolbar>-->
-
-            <!--            </com.google.android.material.appbar.CollapsingToolbarLayout>-->
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
             <androidx.appcompat.widget.Toolbar
+                android:id="@+id/commonToolbar"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/dp_200"
                 android:layout_gravity="top"
                 android:background="@color/cl_oriange"
+                android:minHeight="?android:attr/actionBarSize"
                 app:contentInsetEnd="0dp"
                 app:contentInsetLeft="0dp"
                 app:contentInsetRight="0dp"
                 app:contentInsetStart="0dp"
-                app:layout_scrollFlags="snap|enterAlways|scroll">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|enterAlways">
 
                 <ImageView
                     android:layout_width="50dp"
@@ -99,120 +95,105 @@
                     tools:ignore="HardcodedText" />
             </androidx.appcompat.widget.Toolbar>
 
-            <TextView
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/cl_blue"
-                android:gravity="center"
-                android:text="I am fake tab layout"
-                tools:ignore="HardcodedText" />
+                android:layout_height="@dimen/dp_50" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nsv_content"
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/cl_green"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="80dp"
-                    android:gravity="center"
-                    android:text="Hello World"
-                    android:textSize="20dp" />
-            </LinearLayout>
-        </androidx.core.widget.NestedScrollView>
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.example.administrator.androidtest.Widget.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom">
+
+        <Button
+            android:id="@+id/setEnterAlwaysFlagButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set EnterAlways Flag"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setEnterAlwaysCollapsedFlagButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set EnterAlwaysCollapsed Flag"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setExitUntilCollapsedFlagButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set ExitUntilCollapsed Flag"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setExitUntilCollapsedAndEnterAlwaysFlagButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set ExitUntilCollapsed And EnterAlways Flag"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setSnapFlagButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set Snap Flag"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setPinCollapseModeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set Pin CollapseMode"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setParallaxCollapseModeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set Parallax CollapseMode"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setCollapseToolbarAlphaButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set Collapse Toolbar Alpha"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+        <Button
+            android:id="@+id/setCollapseToolbarLayoutAttrButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClick"
+            android:text="Set CollapseToolbarLayout Attr"
+            android:textAllCaps="false"
+            tools:ignore="HardcodedText" />
+
+    </com.example.administrator.androidtest.Widget.FlowLayout>
 </FrameLayout>

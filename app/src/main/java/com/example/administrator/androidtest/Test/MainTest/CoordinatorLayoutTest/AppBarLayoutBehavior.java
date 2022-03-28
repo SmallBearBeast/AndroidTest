@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.CoordinatorTest;
+package com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -12,6 +12,51 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/behaviorLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Behavior Test" />
+
+            <Button
+                android:id="@+id/behaviorTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Behavior Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/behaviorLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/coordinatorLayoutLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="CoordinatorLayout Test" />
+
+            <Button
+                android:id="@+id/coordinatorLayoutTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump CoordinatorLayout Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coordinatorLayoutLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/bottomSheetLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Bottom Sheet Test" />
+
+            <Button
+                android:id="@+id/bottomSheetTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Bottom Sheet Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bottomSheetLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/busLabelTextView"
                 style="@style/TestLabelStyle"
                 android:text="Aspect Test" />
