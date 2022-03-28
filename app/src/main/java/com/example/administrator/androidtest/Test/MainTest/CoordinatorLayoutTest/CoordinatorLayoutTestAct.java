@@ -18,7 +18,7 @@ public class CoordinatorTestAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mToolbar = findViewById(R.id.tl_bar);
+//        mToolbar = findViewById(R.id.tl_bar);
 //        mToolbar.setAlpha(0);
 //        final int height = DensityUtil.dp2Px(300);
 //        AppBarLayout appBarLayout = findViewById(R.id.abl_content);

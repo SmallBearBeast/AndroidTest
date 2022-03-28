@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.CoordinatorTest;
+package com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -47,4 +47,6 @@ public class TestBehavior extends CoordinatorLayout.Behavior {
     public void onNestedPreScroll(@NonNull CoordinatorLayout coordinatorLayout, @NonNull View child, @NonNull View target, int dx, int dy, @NonNull int[] consumed, int type) {
         Log.d(TAG, "onNestedPreScroll: child = " + child + ", target = " + target + ", dx = " + dx + ", dy = " + dy + ", type = " + type);
     }
+
+
 }

@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.CoordinatorTest;
+package com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest;
 
 import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
