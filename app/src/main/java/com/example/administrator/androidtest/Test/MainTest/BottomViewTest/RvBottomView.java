@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest;
+package com.example.administrator.androidtest.Test.MainTest.BottomViewTest;
 
 import android.app.Activity;
 import android.view.View;
@@ -19,7 +19,7 @@ import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.DensityUtil;
 
 public class RvBottomView extends BottomView {
-    protected RvBottomView(Activity activity) {
+    public RvBottomView(Activity activity) {
         super(activity);
         contentView(R.layout.view_rv_bottom_test);
         RecyclerView recyclerView = findViewById(R.id.rv_test_content);

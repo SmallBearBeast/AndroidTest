@@ -18,6 +18,7 @@ import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.AspectTest.AspectJTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.BottomSheetTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.BottomViewTest.BottomViewTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BusTest.BusTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.CaseViewTest.CaseViewComponent;
 import com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest.BehaviorTestComponent;
@@ -53,6 +54,7 @@ public class MainAct extends ComponentAct {
         regComponent(new MarqueeComponent());
         regComponent(new CaseViewComponent());
         regComponent(new EditTextTestComponent());
+        regComponent(new BottomViewTestComponent());
     }
 
     @Override
@@ -93,18 +95,6 @@ public class MainAct extends ComponentAct {
 
             case R.id.showMoveToMMKVButton:
                 testShowMoveToMMKV();
-                break;
-
-            case R.id.normalBottomViewButton:
-                new NormalBottomView(this).hideVelocity(2000).show();
-                break;
-
-            case R.id.nsBottomViewButton:
-                new NsBottomView(this).hideVelocity(1000).show();
-                break;
-
-            case R.id.rvBottomViewButton:
-                new RvBottomView(this).show();
                 break;
 
             default:
