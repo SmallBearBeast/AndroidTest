@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.FragTest;
+package com.example.administrator.androidtest.Test.MainTest.FragTest;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -19,7 +19,7 @@ import com.example.administrator.androidtest.R;
 
 import java.util.Random;
 
-public class TestFrag extends ComponentFrag {
+public class LifecycleFrag extends ComponentFrag {
     private String testTitle;
     private FragmentInteractionListener fragmentInteractionListener;
     @Override
@@ -143,12 +143,12 @@ public class TestFrag extends ComponentFrag {
         return R.layout.frag_test;
     }
 
-    public static TestFrag get(String title) {
-        TestFrag testFrag = new TestFrag();
+    public static LifecycleFrag get(String title) {
+        LifecycleFrag lifecycleFrag = new LifecycleFrag();
         Bundle argument = new Bundle();
         argument.putString("title", title);
-        testFrag.setArguments(argument);
-        return testFrag;
+        lifecycleFrag.setArguments(argument);
+        return lifecycleFrag;
     }
 
     public interface FragmentInteractionListener {

@@ -1,5 +1,8 @@
-package com.example.administrator.androidtest.Test.FragTest;
+package com.example.administrator.androidtest.Test.MainTest.FragTest;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,12 +15,12 @@ import com.bear.libcomponent.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
 
-public class FragTestAct extends ComponentAct implements TestFrag.FragmentInteractionListener {
-    private TestFrag testFrag_1 = TestFrag.get("testFrag_1");
-    private TestFrag testFrag_2 = TestFrag.get("testFrag_2");
-    private TestFrag testFrag_3 = TestFrag.get("testFrag_3");
-    private TestFrag testFrag_4 = TestFrag.get("testFrag_4");
-    private TestFrag testFrag_5 = TestFrag.get("testFrag_5");
+public class FragLifecycleTestAct extends ComponentAct implements LifecycleFrag.FragmentInteractionListener {
+    private LifecycleFrag lifecycleFrag_1 = LifecycleFrag.get("testFrag_1");
+    private LifecycleFrag lifecycleFrag_2 = LifecycleFrag.get("testFrag_2");
+    private LifecycleFrag lifecycleFrag_3 = LifecycleFrag.get("testFrag_3");
+    private LifecycleFrag lifecycleFrag_4 = LifecycleFrag.get("testFrag_4");
+    private LifecycleFrag lifecycleFrag_5 = LifecycleFrag.get("testFrag_5");
 
     private FragmentManager fragmentManager;
 
@@ -31,7 +34,7 @@ public class FragTestAct extends ComponentAct implements TestFrag.FragmentIntera
         Log.d(TAG, "onCreate: ");
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().add(R.id.fl_frag_container, testFrag_1).commit();
+        fragmentManager.beginTransaction().add(R.id.fragContainerView, lifecycleFrag_1).commit();
         //        // commit不会立马触发Fragment生命周期
         //        getSupportFragmentManager().beginTransaction().add(testFrag, "Hello").commit();
         //        // executePendingTransactions可以立即触发Fragment生命周期
@@ -106,44 +109,45 @@ public class FragTestAct extends ComponentAct implements TestFrag.FragmentIntera
     }
 
     // 每次操作时候需要beginTransaction(）,不能复用同一个FragmentTransaction，否则会抛出commit already called异常。
+    @SuppressLint("NonConstantResourceId")
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.bt_1:
+            case R.id.addTestFrag2Button:
                 // 重复add会抛出Fragment already added异常
-                fragmentManager.beginTransaction().add(R.id.fl_frag_container, testFrag_2).commit();
+                fragmentManager.beginTransaction().add(R.id.fragContainerView, lifecycleFrag_2).commit();
                 break;
 
-            case R.id.bt_2:
-                fragmentManager.beginTransaction().remove(testFrag_2).commit();
+            case R.id.removeTestFrag2Button:
+                fragmentManager.beginTransaction().remove(lifecycleFrag_2).commit();
                 break;
 
-            case R.id.bt_3:
-                fragmentManager.beginTransaction().show(testFrag_2).commit();
+            case R.id.showTestFrag2Button:
+                fragmentManager.beginTransaction().show(lifecycleFrag_2).commit();
                 break;
 
-            case R.id.bt_4:
-                fragmentManager.beginTransaction().hide(testFrag_2).commit();
+            case R.id.hideTestFrag2Button:
+                fragmentManager.beginTransaction().hide(lifecycleFrag_2).commit();
                 break;
 
-            case R.id.bt_5:
-                fragmentManager.beginTransaction().attach(testFrag_2).commit();
+            case R.id.attachTestFrag2Button:
+                fragmentManager.beginTransaction().attach(lifecycleFrag_2).commit();
                 break;
 
-            case R.id.bt_6:
-                fragmentManager.beginTransaction().detach(testFrag_2).commit();
+            case R.id.detachTestFrag2Button:
+                fragmentManager.beginTransaction().detach(lifecycleFrag_2).commit();
                 break;
 
-            case R.id.bt_7:
-                fragmentManager.beginTransaction().replace(R.id.fl_frag_container, testFrag_3).commit();
+            case R.id.replaceTestFrag3Button:
+                fragmentManager.beginTransaction().replace(R.id.fragContainerView, lifecycleFrag_3).commit();
                 break;
 
             case R.id.bt_8:
-                fragmentManager.beginTransaction().replace(R.id.fl_frag_container, testFrag_3).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragContainerView, lifecycleFrag_3).addToBackStack(null).commit();
                 break;
 
             case R.id.bt_9:
-                fragmentManager.beginTransaction().add(R.id.fl_frag_container, testFrag_2).addToBackStack(null).commit();
-                fragmentManager.beginTransaction().replace(R.id.fl_frag_container, testFrag_3).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().add(R.id.fragContainerView, lifecycleFrag_2).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.fragContainerView, lifecycleFrag_3).addToBackStack(null).commit();
                 break;
         }
     }
@@ -151,5 +155,9 @@ public class FragTestAct extends ComponentAct implements TestFrag.FragmentIntera
     @Override
     public void onInteract(String text) {
         ToastUtil.showToast("Connection text = " + text);
+    }
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, FragLifecycleTestAct.class));
     }
 }
