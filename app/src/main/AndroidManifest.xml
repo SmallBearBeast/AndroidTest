@@ -44,6 +44,7 @@
         <activity android:name=".Test.MainTest.AspectTest.AspectTestAct"/>
         <activity android:name=".Test.MainTest.BusTest.BusTest1Act"/>
         <activity android:name=".Test.MainTest.BusTest.BusTest2Act"/>
+        <activity android:name=".Test.MainTest.FragTest.FragLifecycleTestAct"/>
         <service android:name=".Test.WindowTest.TestFloatService"/>
         <service android:name=".Test.MainTest.BackgroundService"
             android:foregroundServiceType=""/>

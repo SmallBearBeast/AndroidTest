@@ -1,8 +1,6 @@
 package com.example.administrator.androidtest
 
 import android.util.Log
-import com.example.administrator.androidtest.Test.MockkTest.Car_1
-import com.example.administrator.androidtest.Test.MockkTest.Tire_1
 import io.mockk.*
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MockkTest
+package com.example.administrator.androidtest
 
 class Car_1() {
     constructor(name: String) : this()

@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MockkTest
+package com.example.administrator.androidtest
 
 import android.util.Log
 
