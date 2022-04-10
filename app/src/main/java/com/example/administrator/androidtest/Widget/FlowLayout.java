@@ -16,10 +16,9 @@ import java.util.List;
  */
 public class FlowLayout extends ViewGroup {
     private static final String TAG = "FlowLayout";
-    private int mVerticalSpace;
-    private int mHorizontalSpace;
+    private final int mVerticalSpace;
+    private final int mHorizontalSpace;
     private final List<Integer> mLineHeightList = new ArrayList<>();
-    private final List<View> mChildViewList = new ArrayList<>();
     private OnFlowClickListener mFlowClickListener;
 
     public FlowLayout(Context context) {
@@ -160,7 +159,6 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     public void onViewAdded(View child) {
-        mChildViewList.add(child);
         if (mFlowClickListener != null) {
             child.setOnClickListener(v -> mFlowClickListener.onClick(v));
         }
@@ -168,7 +166,6 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     public void onViewRemoved(View child) {
-        mChildViewList.remove(child);
         child.setOnClickListener(null);
     }
 }
