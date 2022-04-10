@@ -25,6 +25,7 @@ import com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest
 import com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest.CoordinatorLayoutTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.DialogTest.DialogTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.EditTextTest.EditTextTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.FlowLayoutTest.FlowLayoutTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.MarqueeTest.MarqueeComponent;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
@@ -45,6 +46,7 @@ public class MainAct extends ComponentAct {
         likeView = findViewById(R.id.likeView);
         testGetSpVal();
         initLoopViewPager();
+        regComponent(new FlowLayoutTestComponent());
         regComponent(new BehaviorTestComponent());
         regComponent(new CoordinatorLayoutTestComponent());
         regComponent(new BottomSheetTestComponent());
@@ -59,7 +61,7 @@ public class MainAct extends ComponentAct {
 
     @Override
     protected int layoutId() {
-        return R.layout.act_other_test;
+        return R.layout.act_main_test;
     }
 
     @SuppressLint("NonConstantResourceId")

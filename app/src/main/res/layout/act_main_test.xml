@@ -6,8 +6,40 @@
     android:layout_height="match_parent"
     tools:ignore="HardcodedText,MissingConstraints,SpUsage">
 
-    <LinearLayout
-        style="@style/ll_vertical">
+    <LinearLayout style="@style/ll_vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/flowLayoutLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="FlowLayout Test" />
+
+            <com.example.administrator.androidtest.Widget.FlowLayout
+                android:id="@+id/flowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/cl_black"
+                app:fl_horizontal_space="@dimen/dp_10"
+                app:fl_vertical_space="@dimen/dp_10"
+                app:layout_constraintTop_toBottomOf="@+id/flowLayoutLabelTextView" />
+
+            <com.example.administrator.androidtest.Widget.FlowLayout
+                android:id="@+id/flowFakeFlowLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:background="@color/cl_black"
+                app:fl_horizontal_space="@dimen/dp_10"
+                app:fl_vertical_space="@dimen/dp_10"
+                app:layout_constraintTop_toBottomOf="@+id/flowLayout">
+
+                <com.example.administrator.androidtest.Widget.FlowFakeTextView
+                    android:id="@+id/flowFakeTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </com.example.administrator.androidtest.Widget.FlowLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 

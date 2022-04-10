@@ -3,14 +3,12 @@ package com.example.administrator.androidtest.Widget;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.administrator.androidtest.R;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -20,8 +18,8 @@ public class FlowLayout extends ViewGroup {
     private static final String TAG = "FlowLayout";
     private int mVerticalSpace;
     private int mHorizontalSpace;
-    private List<Integer> mLineHeightList = new ArrayList<>();
-    private List<View> mChildViewList = new ArrayList<>();
+    private final List<Integer> mLineHeightList = new ArrayList<>();
+    private final List<View> mChildViewList = new ArrayList<>();
     private OnFlowClickListener mFlowClickListener;
 
     public FlowLayout(Context context) {
@@ -38,7 +36,9 @@ public class FlowLayout extends ViewGroup {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        mLineHeightList.clear();
         int childCount = getChildCount();
+        // When width = wrap_content, the widthSize equal match_parent.
         int widthSize = MeasureSpec.getSize(widthMeasureSpec) - getPaddingLeft() - getPaddingRight();
         int useHeight = 0;
         int useWidth = 0;
@@ -99,34 +99,30 @@ public class FlowLayout extends ViewGroup {
             }
             int leftMargin = 0;
             int rightMargin = 0;
-            int topMargin = 0;
             if (childView.getLayoutParams() instanceof MarginLayoutParams) {
                 MarginLayoutParams marginLp = (MarginLayoutParams) childView.getLayoutParams();
                 leftMargin = marginLp.leftMargin;
                 rightMargin = marginLp.rightMargin;
-                topMargin = marginLp.topMargin;
             }
             if (L != getPaddingLeft()) {
                 L = L + mHorizontalSpace;
             }
             if (L + childView.getMeasuredWidth() + leftMargin + rightMargin > usefulWidth) {
-                if (lineIndex != 0) {
+                if (lineMaxHeight != 0) {
                     T = T + mVerticalSpace;
                 }
                 T = T + lineMaxHeight;
                 L = getPaddingLeft();
-                lineIndex ++;
+                lineIndex++;
             }
             lineMaxHeight = lineIndex < mLineHeightList.size() ? mLineHeightList.get(lineIndex) : lineMaxHeight;
             l = L + leftMargin;
-            t = T + topMargin + (lineMaxHeight - childView.getMeasuredHeight()) / 2;
+            t = T + (lineMaxHeight - childView.getMeasuredHeight()) / 2;
             r = l + childView.getMeasuredWidth();
             b = t + childView.getMeasuredHeight();
             childView.layout(l, t, r, b);
             L = L + childView.getMeasuredWidth() + leftMargin + rightMargin;
-//            Log.d(TAG, "onLayout: lineMaxHeight = " + lineMaxHeight);
         }
-//        Log.d(TAG, "onLayout: mLineHeightList = " + Arrays.toString(mLineHeightList.toArray()));
     }
 
     @Override
@@ -154,12 +150,9 @@ public class FlowLayout extends ViewGroup {
         for (int i = 0; i < childCount; i++) {
             View childView = getChildAt(i);
             if (flowClickListener != null) {
-                childView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        flowClickListener.onClick(v);
-                    }
-                });
+                childView.setOnClickListener(flowClickListener::onClick);
+            } else {
+                childView.setOnClickListener(null);
             }
 
         }
@@ -169,12 +162,7 @@ public class FlowLayout extends ViewGroup {
     public void onViewAdded(View child) {
         mChildViewList.add(child);
         if (mFlowClickListener != null) {
-            child.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mFlowClickListener.onClick(v);
-                }
-            });
+            child.setOnClickListener(v -> mFlowClickListener.onClick(v));
         }
     }
 
