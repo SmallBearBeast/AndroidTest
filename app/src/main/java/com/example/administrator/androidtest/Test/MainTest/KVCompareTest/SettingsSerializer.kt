@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.KVCompareTest
+package com.example.administrator.androidtest.Test.MainTest.KVCompareTest
 
 import androidx.datastore.core.Serializer
 import com.example.administrator.androidtest.Settings

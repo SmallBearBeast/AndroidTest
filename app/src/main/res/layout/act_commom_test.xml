@@ -87,16 +87,6 @@
             tools:ignore="HardcodedText" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bt_5"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:onClick="onClick"
-            android:text="bt_5"
-            android:textAllCaps="false"
-            tools:ignore="HardcodedText" />
-
-        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bt_6"
             android:layout_width="0dp"
             android:layout_height="match_parent"

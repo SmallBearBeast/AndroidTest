@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.KVCompareTest
+package com.example.administrator.androidtest.Test.MainTest.KVCompareTest
 
 import android.content.Context
 import androidx.datastore.core.DataStore
@@ -9,7 +9,6 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.administrator.androidtest.App
 import com.example.administrator.androidtest.Settings
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
@@ -63,6 +62,17 @@ object DataStoreHelper {
         GlobalScope.launch {
             dataStore.edit { preferences ->
                 preferences[intPreferencesKey(key)] = value
+            }
+        }
+    }
+
+    fun getInt(key: String, defaultValue: Int, callback: (Int) -> Unit) {
+        val dataStore = App.getContext().dataStore
+        GlobalScope.launch {
+            dataStore.data.take(1).map { preferences ->
+                preferences[intPreferencesKey(key)]
+            }.collect {
+                callback(it ?: defaultValue)
             }
         }
     }

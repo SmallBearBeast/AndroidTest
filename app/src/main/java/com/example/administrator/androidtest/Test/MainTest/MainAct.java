@@ -27,6 +27,7 @@ import com.example.administrator.androidtest.Test.MainTest.DialogTest.DialogTest
 import com.example.administrator.androidtest.Test.MainTest.EditTextTest.EditTextTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.FlowLayoutTest.FlowLayoutTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.FragTest.FragLifecycleTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.KVCompareTest.KVCompareTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.MarqueeTest.MarqueeComponent;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
@@ -47,6 +48,7 @@ public class MainAct extends ComponentAct {
         likeView = findViewById(R.id.likeView);
         testGetSpVal();
         initLoopViewPager();
+        regComponent(new KVCompareTestComponent());
         regComponent(new FragLifecycleTestComponent());
         regComponent(new FlowLayoutTestComponent());
         regComponent(new BehaviorTestComponent());

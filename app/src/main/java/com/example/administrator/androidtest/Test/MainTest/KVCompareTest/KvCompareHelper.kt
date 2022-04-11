@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.KVCompareTest
+package com.example.administrator.androidtest.Test.MainTest.KVCompareTest
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -7,16 +7,16 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.administrator.androidtest.App
-import com.example.libbase.Util.ExecutorUtil
 import com.tencent.mmkv.MMKV
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.launch
 
 object KvCompareHelper {
     private const val TAG = "KvCompareHelper"
-    private const val LOOP = 10
+    private const val LOOP = 100000
     private const val KV_COMPARE_INT_KEY = "kv_compare_int_key_"
     private const val KV_COMPARE_SHORT_STRING_KEY = "kv_compare_short_string_key_"
     private const val KV_COMPARE_LONG_STRING_KEY = "kv_compare_long_string_key_"
@@ -40,7 +40,7 @@ object KvCompareHelper {
         val startTs = System.currentTimeMillis()
         val dataStore = App.getContext().dataStore
         GlobalScope.launch {
-            dataStore.data.map { preferences ->
+            dataStore.data.take(1).map { preferences ->
                 preferences[intPreferencesKey(KV_COMPARE_INT_KEY + 0)]
                 Log.d(TAG, "loadFromDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
             }.collect {
@@ -52,7 +52,7 @@ object KvCompareHelper {
     fun readFromDataStore() {
         val dataStore = App.getContext().dataStore
         GlobalScope.launch {
-            dataStore.data.map { preferences ->
+            dataStore.data.take(1).map { preferences ->
                 val startTs = System.currentTimeMillis()
                 for (index in 0 until LOOP) {
                     preferences[intPreferencesKey(KV_COMPARE_INT_KEY + index)]
@@ -75,9 +75,20 @@ object KvCompareHelper {
                     settings[intPreferencesKey(KV_COMPARE_INT_KEY + index)] = index
                     settings[stringPreferencesKey(KV_COMPARE_SHORT_STRING_KEY + index)] = KV_COMPARE_SHORT_STRING + index
                 }
-                Log.d(TAG, "writeFromDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
+                Log.d(TAG, "writeToDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
             }
         }
+    }
+
+    fun clearDataStore() {
+        val startTs = System.currentTimeMillis()
+        val dataStore = App.getContext().dataStore
+        GlobalScope.launch {
+            dataStore.edit { settings ->
+                settings.clear()
+            }
+        }
+        Log.d(TAG, "clearDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
     }
 
     fun loadFromMMKV() {
@@ -104,7 +115,15 @@ object KvCompareHelper {
             mmkv.putInt(KV_COMPARE_INT_KEY + index, index)
             mmkv.putString(KV_COMPARE_SHORT_STRING_KEY + index, KV_COMPARE_SHORT_STRING + index)
         }
-        Log.d(TAG, "writeFromMMKV $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
+        Log.d(TAG, "writeToMMKV $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
+    }
+
+    fun clearMMKV() {
+        val startTs = System.currentTimeMillis()
+        val mmkv = MMKV.mmkvWithID(KV_COMPARE_NAME)
+        mmkv.clearMemoryCache()
+        mmkv.clear()
+        Log.d(TAG, "clearMMKV $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
     }
 
     fun loadFromSp() {
@@ -134,68 +153,37 @@ object KvCompareHelper {
             editor.putString(KV_COMPARE_SHORT_STRING_KEY + index, KV_COMPARE_SHORT_STRING + index)
         }
         editor.apply()
-        Log.d(TAG, "writeFromSp $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
+        Log.d(TAG, "writeToSp $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
     }
 
-    fun readFromDataStore(key: String, defaultValue: Int, callback: (Int) -> Unit) {
-        val dataStore = App.getContext().dataStore
-        GlobalScope.launch {
-            dataStore.data.map { preferences ->
-                preferences[intPreferencesKey(key)]
-            }.collect {
-                callback(it ?: defaultValue)
-            }
-        }
+    fun clearSp() {
+        val startTs = System.currentTimeMillis()
+        val sp = App.getContext().getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
+        sp.edit().clear().apply()
+        Log.d(TAG, "clearSp $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
     }
 
-    fun writeToDataStore(key: String, value: Int) {
-        val dataStore = App.getContext().dataStore
-        GlobalScope.launch {
-            dataStore.edit { preferences ->
-                preferences[intPreferencesKey(key)] = value
-            }
-        }
-    }
-
-    fun readFromMMKV(key: String, defaultValue: Int): Int {
-        return MMKV.mmkvWithID(KV_COMPARE_NAME).getInt(key, defaultValue)
-    }
-
-    fun writeToMMKV(key: String, value: Int) {
-        MMKV.mmkvWithID(KV_COMPARE_NAME).putInt(key, value)
-    }
-
-    private const val TEST_SP_COUNT = 50
     @SuppressLint("ApplySharedPref")
-    fun testSpCommit() {
-        for (i in 1..TEST_SP_COUNT) {
+    fun testContinueSpApply() {
+        for (i in 1..50) {
             val startTs = System.currentTimeMillis()
             val sp = App.getContext().getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
             val editor = sp.edit()
-            for (index in 0 until LOOP) {
+            for (index in 0 until 50) {
                 editor.putString(KV_COMPARE_VERY_VERY_LONG_STRING_KEY + index, KV_COMPARE_VERY_VERY_LONG_STRING)
             }
-            Log.d(TAG, "testSpApply add $i cost: ${System.currentTimeMillis() - startTs}ms")
+            Log.d(TAG, "testContinueSpApply add $i cost: ${System.currentTimeMillis() - startTs}ms")
             editor.apply()
-            Log.d(TAG, "testSpApply write $i cost: ${System.currentTimeMillis() - startTs}ms")
+            Log.d(TAG, "testContinueSpApply write $i cost: ${System.currentTimeMillis() - startTs}ms")
         }
     }
 
-    fun clearTestSp() {
-        for (i in 1..TEST_SP_COUNT) {
+    fun clearContinueSp() {
+        for (i in 1..50) {
+            val startTs = System.currentTimeMillis()
             val sp = App.getContext().getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
             sp.edit().clear().apply()
-        }
-    }
-
-    fun preLoadTestSp() {
-        ExecutorUtil.execute {
-            for (i in 1..TEST_SP_COUNT) {
-                val startTs = System.currentTimeMillis()
-                val sp = App.getContext().getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
-                val allMap = sp.all
-                Log.d(TAG, "preLoadTestSp $i cost: ${System.currentTimeMillis() - startTs}ms")
-            }
+            Log.d(TAG, "clearContinueSp write $i cost: ${System.currentTimeMillis() - startTs}ms")
         }
     }
 }

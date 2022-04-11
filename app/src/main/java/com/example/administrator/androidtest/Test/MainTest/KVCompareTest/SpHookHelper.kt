@@ -1,10 +1,9 @@
-package com.example.administrator.androidtest.Test.KVCompareTest
+package com.example.administrator.androidtest.Test.MainTest.KVCompareTest
 
 import android.os.Build
 import android.os.Handler
 import android.os.Message
 import android.util.Log
-import com.example.libbase.Util.ExecutorUtil
 import java.util.*
 import java.util.concurrent.ConcurrentLinkedQueue
 

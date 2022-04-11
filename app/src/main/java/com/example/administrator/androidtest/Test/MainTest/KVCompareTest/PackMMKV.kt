@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.KVCompareTest
+package com.example.administrator.androidtest.Test.MainTest.KVCompareTest
 
 import android.content.Context
 import android.content.SharedPreferences
