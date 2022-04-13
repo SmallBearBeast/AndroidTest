@@ -1,10 +1,12 @@
-package com.example.administrator.androidtest.Test.MotionActTest;
+package com.example.administrator.androidtest.Test.MainTest.MotionTest;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import com.example.liblog.SLog;
+
+import com.example.administrator.androidtest.Test.OtherUtil;
 
 public class MotionView extends View {
     private static final String TAG = "MotionView";
@@ -17,18 +19,18 @@ public class MotionView extends View {
     }
 
     @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        SLog.d(TAG, "dispatchTouchEvent() called with: ev = [" + ev + "]");
-        boolean result = super.dispatchTouchEvent(ev);
-        SLog.d(TAG, "dispatchTouchEvent() called result = " + result);
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        Log.d(TAG, "dispatchTouchEvent: eventName = " + OtherUtil.toMotionEventName(event));
+        boolean result = super.dispatchTouchEvent(event);
+        Log.d(TAG, "dispatchTouchEvent: result = " + result);
         return result;
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        SLog.d(TAG, "onTouchEvent() called with: event = [" + event + "]");
+        Log.d(TAG, "onTouchEvent: eventName = " + OtherUtil.toMotionEventName(event));
         boolean result = super.onTouchEvent(event);
-        SLog.d(TAG, "onTouchEvent() called result = " + result);
+        Log.d(TAG, "onTouchEvent: result = " + result);
         return result;
     }
 }

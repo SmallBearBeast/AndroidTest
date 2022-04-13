@@ -11,6 +11,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/motionLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Motion Test" />
+
+            <Button
+                android:id="@+id/motionTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Motion Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motionLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/kvCompareLabelTextView"
                 style="@style/TestLabelStyle"
                 android:text="KVCompare Test" />

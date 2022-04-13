@@ -1,23 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-		xmlns:android="http://schemas.android.com/apk/res/android"
-		android:layout_width="match_parent"
-		android:layout_height="match_parent">
-	<com.example.administrator.androidtest.Test.MotionActTest.MotionViewGroup
-			android:layout_width="match_parent"
-			android:layout_height="match_parent">
-		
-		<TextView
-				android:background="@color/cl_oriange"
-				android:gravity="center"
-				android:textSize="@dimen/sp_28"
-				android:text="I am TextView"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/dp_100"/>
-		<com.example.administrator.androidtest.Test.MotionActTest.MotionView
-				android:layout_gravity="bottom"
-				android:background="@color/cl_green_9"
-				android:layout_width="match_parent"
-				android:layout_height="@dimen/dp_200"/>
-	</com.example.administrator.androidtest.Test.MotionActTest.MotionViewGroup>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionViewGroup
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_400"
+        android:background="@color/cl_blue"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:gravity="center"
+            android:text="I am MotionViewGroup"
+            android:textSize="@dimen/sp_28"
+            tools:ignore="HardcodedText" />
+
+        <com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:layout_gravity="bottom"
+            android:background="@color/cl_green_9" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_200"
+            android:layout_gravity="bottom"
+            android:gravity="center"
+            android:text="I am MotionView"
+            android:textSize="@dimen/sp_28"
+            tools:ignore="HardcodedText" />
+    </com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionViewGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
