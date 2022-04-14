@@ -30,6 +30,7 @@ import com.example.administrator.androidtest.Test.MainTest.FragTest.FragLifecycl
 import com.example.administrator.androidtest.Test.MainTest.KVCompareTest.KVCompareTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.MarqueeTest.MarqueeComponent;
 import com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.ViewPager2Test.Viewpager2TestComponent;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
@@ -49,6 +50,7 @@ public class MainAct extends ComponentAct {
         likeView = findViewById(R.id.likeView);
         testGetSpVal();
         initLoopViewPager();
+        regComponent(new Viewpager2TestComponent());
         regComponent(new MotionTestComponent());
         regComponent(new KVCompareTestComponent());
         regComponent(new FragLifecycleTestComponent());

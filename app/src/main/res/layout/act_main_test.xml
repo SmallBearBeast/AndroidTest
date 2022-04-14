@@ -11,6 +11,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/viewpager2LabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Viewpager2 Test" />
+
+            <Button
+                android:id="@+id/viewpager2TestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Viewpager2 Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewpager2LabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/motionLabelTextView"
                 style="@style/TestLabelStyle"
                 android:text="Motion Test" />

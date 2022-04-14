@@ -47,6 +47,7 @@
         <activity android:name=".Test.MainTest.FragTest.FragLifecycleTestAct"/>
         <activity android:name=".Test.MainTest.KVCompareTest.KVCompareTestAct"/>
         <activity android:name=".Test.MainTest.MotionTest.MotionTestAct"/>
+        <activity android:name=".Test.MainTest.ViewPager2Test.ViewPager2Act"/>
         <service android:name=".Test.WindowTest.TestFloatService"/>
         <service android:name=".Test.MainTest.BackgroundService"
             android:foregroundServiceType=""/>
