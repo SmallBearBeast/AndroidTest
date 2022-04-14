@@ -29,8 +29,14 @@ import com.example.administrator.androidtest.Test.MainTest.FlowLayoutTest.FlowLa
 import com.example.administrator.androidtest.Test.MainTest.FragTest.FragLifecycleTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.KVCompareTest.KVCompareTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.MarqueeTest.MarqueeComponent;
+import com.example.administrator.androidtest.Test.MainTest.MediaTest.MediaTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.OkHttpTest.OkHttpTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.OtherTest.OtherTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.RecyclerViewTest.RecyclerViewTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewPager2Test.Viewpager2TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.ViewPagerTest.ViewPagerTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.WidgetTest.WidgetTestComponent;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
@@ -50,6 +56,12 @@ public class MainAct extends ComponentAct {
         likeView = findViewById(R.id.likeView);
         testGetSpVal();
         initLoopViewPager();
+        regComponent(new OtherTestComponent());
+        regComponent(new MediaTestComponent());
+        regComponent(new OkHttpTestComponent());
+        regComponent(new RecyclerViewTestComponent());
+        regComponent(new ViewPagerTestComponent());
+        regComponent(new WidgetTestComponent());
         regComponent(new Viewpager2TestComponent());
         regComponent(new MotionTestComponent());
         regComponent(new KVCompareTestComponent());
