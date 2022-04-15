@@ -1,7 +1,9 @@
-package com.example.administrator.androidtest.Test.ScreenTest;
+package com.example.administrator.androidtest.Test.MainTest.ScreenTest;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -14,7 +16,6 @@ import com.example.administrator.androidtest.Test.LogUtil;
 import com.example.libbase.Util.ScreenUtil;
 
 public class ScreenAct extends ComponentAct {
-
     @Override
     protected int layoutId() {
         return R.layout.act_screen;
@@ -69,5 +70,9 @@ public class ScreenAct extends ComponentAct {
                     .of("permissionFailArray", permissionFailArray)
                     .logI();
         });
+    }
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, ScreenAct.class));
     }
 }
