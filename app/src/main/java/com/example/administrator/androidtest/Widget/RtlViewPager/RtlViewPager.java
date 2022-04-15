@@ -15,7 +15,7 @@ import java.util.HashMap;
 
 public class RtlViewPager extends ViewPager {
     private final HashMap<OnPageChangeListener, ReversingOnPageChangeListener> mPageChangeListeners = new HashMap<>();
-    private int mLayoutDirection = ViewCompat.LAYOUT_DIRECTION_LTR;
+    private int mLayoutDirection = ViewCompat.LAYOUT_DIRECTION_RTL;
 
     public RtlViewPager(Context context) {
         super(context);
