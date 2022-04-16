@@ -25,6 +25,7 @@ import com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest
 import com.example.administrator.androidtest.Test.MainTest.CoordinatorLayoutTest.CoordinatorLayoutTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.DialogTest.DialogTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.EditTextTest.EditTextTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.FloatServiceTest.FloatServiceTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.FlowLayoutTest.FlowLayoutTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.FragTest.FragLifecycleTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.KVCompareTest.KVCompareTestComponent;
@@ -63,6 +64,7 @@ public class MainAct extends ComponentAct {
         regComponent(new RecyclerViewTestComponent());
         regComponent(new ViewPagerTestComponent());
         regComponent(new WidgetTestComponent());
+        regComponent(new FloatServiceTestComponent());
         regComponent(new ScreenTestComponent());
         regComponent(new Viewpager2TestComponent());
         regComponent(new MotionTestComponent());

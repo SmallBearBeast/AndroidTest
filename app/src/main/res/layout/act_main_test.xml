@@ -11,6 +11,31 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/floatServiceLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Screen Test" />
+
+            <com.example.administrator.androidtest.Widget.FlowLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/floatServiceLabelTextView">
+
+                <Button
+                    android:id="@+id/startFloatServiceButton"
+                    style="@style/TestButtonStyle"
+                    android:text="Start Float Service" />
+
+                <Button
+                    android:id="@+id/stopFloatServiceButton"
+                    style="@style/TestButtonStyle"
+                    android:text="Stop Float Service" />
+            </com.example.administrator.androidtest.Widget.FlowLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/screenLabelTextView"
                 style="@style/TestLabelStyle"
                 android:text="Screen Test" />

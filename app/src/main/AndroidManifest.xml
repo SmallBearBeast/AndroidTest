@@ -49,7 +49,7 @@
         <activity android:name=".Test.MainTest.MotionTest.MotionTestAct"/>
         <activity android:name=".Test.MainTest.ViewPager2Test.ViewPager2Act"/>
         <activity android:name=".Test.MainTest.ScreenTest.ScreenAct"/>
-        <service android:name=".Test.WindowTest.TestFloatService"/>
+        <service android:name=".Test.MainTest.FloatServiceTest.TestFloatService"/>
         <service android:name=".Test.MainTest.BackgroundService"
             android:foregroundServiceType=""/>
     </application>

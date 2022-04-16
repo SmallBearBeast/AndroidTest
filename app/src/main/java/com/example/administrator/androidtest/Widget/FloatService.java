@@ -35,7 +35,7 @@ public abstract class FloatService extends Service {
             mFloatView = LayoutInflater.from(this).inflate(layoutId(), null);
         }
         if (mFloatView == null) {
-            throw new RuntimeException("mFloatView is null");
+            throw new RuntimeException("FloatView is null, please implement layoutId() or floatView()");
         }
         initView(mFloatView);
         mWm = (WindowManager) getSystemService(WINDOW_SERVICE);
@@ -57,12 +57,10 @@ public abstract class FloatService extends Service {
         mFloatView.setOnTouchListener(new FloatOnTouchListener());
     }
 
-
     private void removeFloatWindow() {
         mWm.removeView(mFloatView);
         mFloatView = null;
     }
-
 
     @Nullable
     @Override
@@ -78,7 +76,8 @@ public abstract class FloatService extends Service {
         mWmLp = null;
     }
 
-    protected @LayoutRes int layoutId() {
+    protected @LayoutRes
+    int layoutId() {
         return View.NO_ID;
     }
 
@@ -105,7 +104,7 @@ public abstract class FloatService extends Service {
         wmLp.flags = WindowManager.LayoutParams.FLAG_NOT_TOUCH_MODAL | WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         wmLp.width = ViewGroup.LayoutParams.WRAP_CONTENT;
         wmLp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-        wmLp.gravity = Gravity.LEFT | Gravity.TOP;
+        wmLp.gravity = Gravity.START | Gravity.TOP;
         wmLp.x = 0;
         wmLp.y = DensityUtil.getScreenHeight() / 2;
         return wmLp;

@@ -1,15 +1,24 @@
-package com.example.administrator.androidtest.Test.WindowTest;
+package com.example.administrator.androidtest.Test.MainTest.FloatServiceTest;
 
+import android.annotation.SuppressLint;
 import android.view.View;
+import android.widget.TextView;
+
+import androidx.core.content.ContextCompat;
 
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FloatService;
 import com.example.libbase.Util.ToastUtil;
 
 public class TestFloatService extends FloatService {
+    @SuppressLint("SetTextI18n")
     @Override
-    protected int layoutId() {
-        return R.layout.window_floating_test;
+    protected View floatView() {
+        TextView tv = new TextView(this);
+        tv.setText("Hello World");
+        tv.setBackgroundResource(R.color.cl_red);
+        tv.setTextColor(ContextCompat.getColor(this, R.color.cl_white));
+        return tv;
     }
 
     @Override
