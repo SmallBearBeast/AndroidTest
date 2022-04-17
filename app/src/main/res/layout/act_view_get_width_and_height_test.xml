@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/TestContainerFullStyle"
+    tools:ignore="MissingConstraints,HardcodedText">
+
+    <com.example.administrator.androidtest.Widget.FlowLayout
+        style="@style/TestContainerStyle"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/testMeasureButton"
+            style="@style/TestButtonStyle"
+            android:text="Test Measure" />
+
+        <Button
+            android:id="@+id/testOnPreDrawListenerButton"
+            style="@style/TestButtonStyle"
+            android:text="Test OnPreDrawListener" />
+
+        <Button
+            android:id="@+id/testOnGlobalLayoutListenerButton"
+            style="@style/TestButtonStyle"
+            android:text="Test OnGlobalLayoutListener" />
+
+        <Button
+            android:id="@+id/testOnLayoutChangeListenerButton"
+            style="@style/TestButtonStyle"
+            android:text="Test OnLayoutChangeListener" />
+
+        <Button
+            android:id="@+id/testPostButton"
+            style="@style/TestButtonStyle"
+            android:text="Test Post" />
+
+        <Button
+            android:id="@+id/invalidateButton"
+            style="@style/TestButtonStyle"
+            android:text="Invalidate" />
+
+        <Button
+            android:id="@+id/requestLayoutButton"
+            style="@style/TestButtonStyle"
+            android:text="RequestLayout" />
+
+        <Button
+            android:id="@+id/changeSizeButton"
+            style="@style/TestButtonStyle"
+            android:text="Change Size" />
+
+    </com.example.administrator.androidtest.Widget.FlowLayout>
+
+    <com.example.administrator.androidtest.Test.MainTest.ViewGetSizeTest.TestTestView
+        android:id="@+id/testTextView"
+        android:layout_width="@dimen/dp_200"
+        android:layout_height="wrap_content"
+        android:background="@color/cl_red"
+        android:gravity="center"
+        android:padding="@dimen/dp_10"
+        android:text="Hello World"
+        android:textColor="@color/cl_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+</androidx.constraintlayout.widget.ConstraintLayout>

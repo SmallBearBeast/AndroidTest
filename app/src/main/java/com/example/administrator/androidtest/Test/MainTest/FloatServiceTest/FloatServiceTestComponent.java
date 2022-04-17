@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.ShareTest.SystemShareAct;
 import com.example.administrator.androidtest.Test.MainTest.TestComponent;
 
 public class FloatServiceTestComponent extends TestComponent {
@@ -18,7 +19,8 @@ public class FloatServiceTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.startFloatServiceButton:
-                TestFloatService.startFloatService(getDependence(), TestFloatService.class);
+                SystemShareAct.start(getDependence());
+//                TestFloatService.startFloatService(getDependence(), TestFloatService.class);
                 break;
             case R.id.stopFloatServiceButton:
                 TestFloatService.stopFloatService(getDependence(), TestFloatService.class);

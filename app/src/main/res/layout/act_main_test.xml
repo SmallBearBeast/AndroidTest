@@ -11,6 +11,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/viewSizeLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="ViewSize Test" />
+
+            <Button
+                android:id="@+id/viewSizeTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump ViewSize Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewSizeLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/floatServiceLabelTextView"
                 style="@style/TestLabelStyle"
                 android:text="Screen Test" />

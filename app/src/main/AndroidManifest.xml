@@ -49,6 +49,8 @@
         <activity android:name=".Test.MainTest.MotionTest.MotionTestAct"/>
         <activity android:name=".Test.MainTest.ViewPager2Test.ViewPager2Act"/>
         <activity android:name=".Test.MainTest.ScreenTest.ScreenAct"/>
+        <activity android:name=".Test.MainTest.ShareTest.SystemShareAct"/>
+        <activity android:name=".Test.MainTest.ViewGetSizeTest.ViewGetSizeTestAct"/>
         <service android:name=".Test.MainTest.FloatServiceTest.TestFloatService"/>
         <service android:name=".Test.MainTest.BackgroundService"
             android:foregroundServiceType=""/>

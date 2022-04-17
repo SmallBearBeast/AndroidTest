@@ -1,5 +1,6 @@
-package com.example.administrator.androidtest.Test.ShareTest;
+package com.example.administrator.androidtest.Test.MainTest.ShareTest;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -222,4 +223,8 @@ public class SystemShareAct extends ComponentAct {
 //            }
 //        }
 //    }
+
+    public static void start(Context context) {
+        context.startActivity(new Intent(context, SystemShareAct.class));
+    }
 }
