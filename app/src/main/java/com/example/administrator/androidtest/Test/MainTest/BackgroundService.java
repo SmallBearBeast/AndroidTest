@@ -24,13 +24,16 @@ import java.util.List;
 
 /**
  后台stopService不会crash。
- 后台startService超时65s后会crash(>8.0)。
+ 后台放置超时65sP(idle状态)后去startService后会crash(>8.0，不允许后台StartService异常)。
  有notification的后台startService不会crash。
- 调用startForegroundService必须在Service里调用startForeground，否则crash。
+
+ 调用startForegroundService必须在Service里调用startForeground，否则crash。抛出下面异常
  android.app.RemoteServiceException: Context.startForegroundService() did not then call Service.startForeground()
+
  StopService建议通过Context#stopService去处理，通过startForegroundService去关闭ForegroundService没问题，如果ForegroundService变为普通Service,
  通过startForegroundService去关闭普通Service触发上面crash。
- startService马上调用stopService会马上触发startForeground异常，需要在startForeground之后调用。
+
+ startForegroundService马上调用stopService会马上触发startForeground异常，需要在startForeground之后调用。
  */
 public class BackgroundService extends LifecycleService {
     public static final String START = "START";

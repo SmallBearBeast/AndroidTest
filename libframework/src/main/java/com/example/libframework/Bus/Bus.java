@@ -17,6 +17,10 @@ import java.util.Set;
  * The Bus is used to communicate between different component.
  */
 // TODO: 2022/2/27 Use livedata bus to replace??
+// LiveDataBus的优点
+// UI和实时数据保持一致 因为LiveData采用的是观察者模式，这样一来就可以在数据发生改变时获得通知，更新UI。
+// 避免内存泄漏 观察者被绑定到组件的生命周期上，当被绑定的组件销毁（destroy）时，观察者会立刻自动清理自身的数据。
+// 不会再产生由于Activity处于stop状态而引起的崩溃
 public class Bus {
     private Handler mHandler = new Handler();
     private Map<String, Event> mStickEventMap = new HashMap<>();

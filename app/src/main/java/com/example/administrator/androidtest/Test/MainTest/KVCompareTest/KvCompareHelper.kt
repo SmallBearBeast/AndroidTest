@@ -8,7 +8,9 @@ import androidx.datastore.preferences.core.*
 import androidx.datastore.preferences.preferencesDataStore
 import com.example.administrator.androidtest.App
 import com.tencent.mmkv.MMKV
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.take
@@ -39,7 +41,7 @@ object KvCompareHelper {
     fun loadFromDataStore() {
         val startTs = System.currentTimeMillis()
         val dataStore = App.getContext().dataStore
-        GlobalScope.launch {
+        GlobalScope.launch(Dispatchers.IO) {
             dataStore.data.take(1).map { preferences ->
                 preferences[intPreferencesKey(KV_COMPARE_INT_KEY + 0)]
                 Log.d(TAG, "loadFromDataStore $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
