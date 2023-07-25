@@ -30,7 +30,7 @@ public class OkHelper {
     }
 
     private static class SingleTon {
-        static OkHelper sInstance = new OkHelper();
+        private static final OkHelper sInstance = new OkHelper();
     }
 
     public static OkHelper getInstance() {

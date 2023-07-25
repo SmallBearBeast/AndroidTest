@@ -30,7 +30,7 @@ class InternalUtil {
     }
 
     private static class LazyHolder {
-        private static Handler sHandler = new Handler(Looper.getMainLooper());
+        private static final Handler sHandler = new Handler(Looper.getMainLooper());
     }
 
     static void run(Runnable r) {

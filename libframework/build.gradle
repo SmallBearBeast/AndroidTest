@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 30
 
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0.0"
 
@@ -26,14 +26,15 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    buildToolsVersion '30.0.2'
 
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    compileOnly 'androidx.appcompat:appcompat:1.1.0'
-    compileOnly 'androidx.recyclerview:recyclerview:1.1.0'
+    compileOnly 'androidx.appcompat:appcompat:1.2.0'
+    compileOnly 'androidx.recyclerview:recyclerview:1.2.1'
     compileOnly 'androidx.legacy:legacy-support-v4:1.0.0'
     compileOnly 'androidx.lifecycle:lifecycle-extensions:2.1.0'
     testImplementation 'junit:junit:4.12'
