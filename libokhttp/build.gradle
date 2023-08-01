@@ -39,7 +39,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     //okhttp网络请求框架
-    compileOnly 'com.squareup.okhttp3:okhttp:3.12.12'
+    compileOnly 'com.squareup.okhttp3:okhttp:3.14.9'
     compileOnly 'com.google.code.gson:gson:2.8.6'
 
     compileOnly project(":liblog")
