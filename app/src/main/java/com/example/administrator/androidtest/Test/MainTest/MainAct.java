@@ -16,6 +16,7 @@ import com.bear.libcomponent.ComponentAct;
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.ARouterTest.ARouterTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.AspectTest.AspectJTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.BottomSheetTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BottomViewTest.BottomViewTestComponent;
@@ -83,6 +84,7 @@ public class MainAct extends ComponentAct {
         regComponent(new CaseViewComponent());
         regComponent(new EditTextTestComponent());
         regComponent(new BottomViewTestComponent());
+        regComponent(new ARouterTestComponent());
     }
 
     @Override

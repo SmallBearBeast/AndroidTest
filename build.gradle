@@ -17,6 +17,8 @@ buildscript {
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.16'
         //使用沪江封装好的gradle插件，能自动倒入aspectj依赖，具有一定的编译检查错误能力，能处理好kt java混合开发情况。
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
+        // ARouter自动插入注册路由配置代码插件
+        classpath "com.alibaba:arouter-register:1.0.2"
     }
 }
 

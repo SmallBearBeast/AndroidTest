@@ -5,7 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.bear.libcomponent.ComponentFrag;
-import com.example.administrator.androidtest.App;
+import com.example.administrator.androidtest.AndroidTestApplication;
 
 import java.util.List;
 import java.util.Map;
@@ -124,7 +124,7 @@ public abstract class BaseVisiableFrag extends ComponentFrag {
 //    }
 
     private void setToMap(boolean isVisibleToUser) {
-        Map<String, Boolean> map = App.FragVisibiableMap;
+        Map<String, Boolean> map = AndroidTestApplication.FragVisibiableMap;
         String name = getClass().getSimpleName();
         map.put(name, isVisibleToUser);
     }

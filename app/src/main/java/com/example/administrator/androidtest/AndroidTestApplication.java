@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
@@ -16,11 +17,12 @@ import com.example.libfresco.FrescoUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-public class App extends Application {
+public class AndroidTestApplication extends Application {
 
     private static final String TAG = "App";
     private static Context mContext;
     public static Map<String, Boolean> FragVisibiableMap = new HashMap<>();
+
 
     @Override
     public void onCreate() {
@@ -32,12 +34,21 @@ public class App extends Application {
         SpHelper.init(this);
         MmkvVal.init(this);
         SpHelper.preload(SpValHelper.SP_GLOBAL_CONFIG);
+
+        initRouter();
+    }
+
+    private void initRouter() {
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
     }
 
     public static Context getContext() {
         return mContext;
     }
-
 
 
     static class Callback implements ActivityLifecycleCallbacks {
