@@ -23,6 +23,10 @@ public class AndroidTestApplication extends Application {
     private static Context mContext;
     public static Map<String, Boolean> FragVisibiableMap = new HashMap<>();
 
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+    }
 
     @Override
     public void onCreate() {

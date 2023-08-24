@@ -49,7 +49,7 @@ public class FlowLayoutTestComponent extends TestComponent {
     }
 
     private TextView createTv(String text) {
-        TextView tv = new TextView(getDependence());
+        TextView tv = new TextView(getContext());
         ViewGroup.MarginLayoutParams lp = new ViewGroup.MarginLayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 //        lp.topMargin = DensityUtil.dp2Px(5);
 //        lp.bottomMargin = DensityUtil.dp2Px(5);

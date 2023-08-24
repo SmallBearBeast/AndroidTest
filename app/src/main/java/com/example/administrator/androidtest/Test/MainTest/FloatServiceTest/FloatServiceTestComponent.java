@@ -11,7 +11,7 @@ public class FloatServiceTestComponent extends TestComponent {
 
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.startFloatServiceButton, R.id.stopFloatServiceButton);
+        setOnClickListener(this, R.id.startFloatServiceButton, R.id.stopFloatServiceButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -19,11 +19,11 @@ public class FloatServiceTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.startFloatServiceButton:
-                SystemShareAct.start(getDependence());
-//                TestFloatService.startFloatService(getDependence(), TestFloatService.class);
+                SystemShareAct.start(getContext());
+//                TestFloatService.startFloatService(getContext(), TestFloatService.class);
                 break;
             case R.id.stopFloatServiceButton:
-                TestFloatService.stopFloatService(getDependence(), TestFloatService.class);
+                TestFloatService.stopFloatService(getActivity(), TestFloatService.class);
                 break;
         }
     }

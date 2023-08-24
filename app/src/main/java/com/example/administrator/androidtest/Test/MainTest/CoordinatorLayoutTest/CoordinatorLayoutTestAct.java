@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestListFragment;
 import com.example.libbase.Util.DensityUtil;

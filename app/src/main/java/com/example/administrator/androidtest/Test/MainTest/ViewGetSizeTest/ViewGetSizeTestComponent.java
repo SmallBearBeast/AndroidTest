@@ -11,7 +11,7 @@ public class ViewGetSizeTestComponent extends TestComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        clickListener(this, R.id.viewSizeTestButton);
+        setOnClickListener(this, R.id.viewSizeTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -19,7 +19,7 @@ public class ViewGetSizeTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.viewSizeTestButton:
-                ViewGetSizeTestAct.start(getDependence());
+                ViewGetSizeTestAct.start(getContext());
                 break;
 
             default:

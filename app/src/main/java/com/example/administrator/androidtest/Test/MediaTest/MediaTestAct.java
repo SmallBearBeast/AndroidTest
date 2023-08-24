@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.bear.librv.DataManager;
 import com.bear.librv.RvDivider;
 import com.bear.librv.VHAdapter;

@@ -52,7 +52,7 @@ public class RvBottomView extends BottomView {
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, DensityUtil.dp2Px(60));
             tv.setLayoutParams(lp);
             tv.setText("TextView");
-//            tv.clickListener(this);
+//            tv.setOnClickListener(this);
             return tv;
         }
 

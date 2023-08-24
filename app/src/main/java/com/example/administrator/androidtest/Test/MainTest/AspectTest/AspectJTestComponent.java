@@ -10,7 +10,7 @@ public class AspectJTestComponent extends TestComponent {
 
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.aspectjTestButton);
+        setOnClickListener(this, R.id.aspectjTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -18,7 +18,7 @@ public class AspectJTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.aspectjTestButton:
-                AspectTestAct.start(getDependence());
+                AspectTestAct.start(getContext());
                 break;
 
             default:

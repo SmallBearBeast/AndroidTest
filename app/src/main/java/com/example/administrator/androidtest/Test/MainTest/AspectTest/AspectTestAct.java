@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libaspectj.Annotation.AsClick;
 import com.example.libaspectj.Annotation.Thread.AsThread;

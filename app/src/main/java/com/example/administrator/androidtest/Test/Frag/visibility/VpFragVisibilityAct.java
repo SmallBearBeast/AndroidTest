@@ -11,11 +11,10 @@ import androidx.viewpager.widget.ViewPager;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.Dialog.BaseDialogFragment;
 import com.example.libframework.Page.IPage;
-import com.example.libframework.Wrapper.OnPageChangeListenerWrapper;
 import com.example.liblog.SLog;
 
 import java.util.ArrayList;

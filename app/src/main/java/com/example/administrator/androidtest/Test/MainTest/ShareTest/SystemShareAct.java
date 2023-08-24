@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Share.IntentShare;
 import com.example.administrator.androidtest.Share.ShareUtil;
@@ -191,9 +191,9 @@ public class SystemShareAct extends ComponentAct {
 //            mTvShareImage = itemView.findViewById(R.id.tv_2);
 //            mTvShareVideo = itemView.findViewById(R.id.tv_3);
 //            mTvShareName = itemView.findViewById(R.id.tv_share_name);
-//            mTvShareText.clickListener(this);
-//            mTvShareImage.clickListener(this);
-//            mTvShareVideo.clickListener(this);
+//            mTvShareText.setOnClickListener(this);
+//            mTvShareImage.setOnClickListener(this);
+//            mTvShareVideo.setOnClickListener(this);
 //        }
 //
 //        public void bind(int pos, String data){

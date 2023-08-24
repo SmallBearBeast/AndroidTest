@@ -14,7 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bear.libcomponent.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFrag;
 import com.example.administrator.androidtest.R;
 
 import java.util.Random;

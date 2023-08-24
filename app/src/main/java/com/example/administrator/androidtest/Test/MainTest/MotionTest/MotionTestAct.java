@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.OtherUtil;
 

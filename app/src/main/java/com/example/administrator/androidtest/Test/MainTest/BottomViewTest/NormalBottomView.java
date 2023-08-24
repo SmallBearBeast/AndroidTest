@@ -12,9 +12,9 @@ public class NormalBottomView extends BottomView implements View.OnClickListener
     public NormalBottomView(Activity activity) {
         super(activity);
         contentView(R.layout.view_normal_bottom_test);
-//        findViewById(R.id.tv_1).clickListener(this);
-//        findViewById(R.id.tv_2).clickListener(this);
-//        findViewById(R.id.tv_2).clickListener(this);
+//        findViewById(R.id.tv_1).setOnClickListener(this);
+//        findViewById(R.id.tv_2).setOnClickListener(this);
+//        findViewById(R.id.tv_2).setOnClickListener(this);
     }
 
     @Override

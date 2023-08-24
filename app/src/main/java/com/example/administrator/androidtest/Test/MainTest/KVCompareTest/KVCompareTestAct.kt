@@ -5,7 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import com.bear.libcomponent.ComponentAct
+import com.bear.libcomponent.component.ComponentAct
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.Settings
 import com.example.libbase.Util.ToastUtil

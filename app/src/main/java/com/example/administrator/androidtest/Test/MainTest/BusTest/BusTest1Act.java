@@ -11,7 +11,7 @@ import androidx.core.content.ContextCompat;
 
 import android.view.View;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.Bus.Event;
 import com.example.libframework.Bus.EventCallback;

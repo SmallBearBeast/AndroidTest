@@ -10,7 +10,7 @@ public class BottomViewTestComponent extends TestComponent {
 
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.normalBottomViewButton, R.id.nsBottomViewButton, R.id.rvBottomViewButton);
+        setOnClickListener(this, R.id.normalBottomViewButton, R.id.nsBottomViewButton, R.id.rvBottomViewButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -18,15 +18,15 @@ public class BottomViewTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.normalBottomViewButton:
-                new NormalBottomView(getDependence()).hideVelocity(2000).show();
+                new NormalBottomView(getActivity()).hideVelocity(2000).show();
                 break;
 
             case R.id.nsBottomViewButton:
-                new NsBottomView(getDependence()).hideVelocity(1000).show();
+                new NsBottomView(getActivity()).hideVelocity(1000).show();
                 break;
 
             case R.id.rvBottomViewButton:
-                new RvBottomView(getDependence()).show();
+                new RvBottomView(getActivity()).show();
                 break;
 
             default:

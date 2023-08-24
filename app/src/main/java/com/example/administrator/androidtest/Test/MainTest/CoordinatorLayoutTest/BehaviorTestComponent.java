@@ -10,7 +10,7 @@ public class BehaviorTestComponent extends TestComponent {
 
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.behaviorTestButton);
+        setOnClickListener(this, R.id.behaviorTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -18,7 +18,7 @@ public class BehaviorTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.behaviorTestButton:
-                BehaviorTestAct.start(getDependence());
+                BehaviorTestAct.start(getContext());
                 break;
 
             default:

@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libbase.Util.ViewUtil;
@@ -67,7 +67,7 @@ public class IconTouchViewAct extends ComponentAct {
                 ToastUtil.showToast("fl_test_1");
             }
         });
-//        mFlTest_2.clickListener(new View.OnClickListener() {
+//        mFlTest_2.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                ToastUtil.showToast("fl_test_2");

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bear.libcomponent.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFrag;
 import com.bear.librv.VHAdapter;
 import com.bear.librv.VHBridge;
 import com.bear.librv.VHolder;

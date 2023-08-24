@@ -8,8 +8,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.ComponentFrag;
-import com.bear.libcomponent.ViewComponent;
+import com.bear.libcomponent.component.ComponentFrag;
+import com.bear.libcomponent.component.FragmentComponent;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.Page.IPage;
 import com.example.liblog.SLog;
@@ -25,14 +25,14 @@ public class FragmentSeven extends ComponentFrag {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        regComponent(new Component_1());
+        regFragComponent(new Component_1());
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        regComponent(new Component_2());
+        regFragComponent(new Component_2());
     }
 
     @Nullable
@@ -45,7 +45,7 @@ public class FragmentSeven extends ComponentFrag {
         return IPage.FragmentSeven;
     }
 
-    static class Component_1 extends ViewComponent<FragmentSeven> {
+    static class Component_1 extends FragmentComponent {
         private static final String TAG = "Component_1";
         @Override
         public void onCreate() {
@@ -66,7 +66,7 @@ public class FragmentSeven extends ComponentFrag {
         }
     }
 
-    static class Component_2 extends ViewComponent<FragmentSeven> {
+    static class Component_2 extends FragmentComponent {
         private static final String TAG = "Component_2";
         @Override
         public void onCreate() {

@@ -11,7 +11,7 @@ public class ARouterTestComponent extends TestComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        clickListener(this, R.id.ARouterTestButton);
+        setOnClickListener(this, R.id.ARouterTestButton);
     }
 
     @Override
@@ -21,7 +21,7 @@ public class ARouterTestComponent extends TestComponent {
                 ARouter.getInstance().build("/ARouter/Module1Activity")
                         .withString("name", "老王")
                         .withInt("age", 18)
-                        .navigation(getComActivity());
+                        .navigation(getContext());
                 break;
 
             default:

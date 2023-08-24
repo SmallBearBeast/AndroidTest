@@ -9,7 +9,7 @@ import com.example.administrator.androidtest.Test.MainTest.TestComponent;
 public class Viewpager2TestComponent extends TestComponent {
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.viewpager2TestButton);
+        setOnClickListener(this, R.id.viewpager2TestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -17,7 +17,7 @@ public class Viewpager2TestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.viewpager2TestButton:
-                ViewPager2Act.start(getDependence());
+                ViewPager2Act.start(getContext());
                 break;
 
             default:

@@ -10,7 +10,7 @@ public class FragLifecycleTestComponent extends TestComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        clickListener(this, R.id.fragLifecycleTestButton);
+        setOnClickListener(this, R.id.fragLifecycleTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -18,7 +18,7 @@ public class FragLifecycleTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fragLifecycleTestButton:
-                FragLifecycleTestAct.start(getDependence());
+                FragLifecycleTestAct.start(getContext());
                 break;
             default:
                 break;

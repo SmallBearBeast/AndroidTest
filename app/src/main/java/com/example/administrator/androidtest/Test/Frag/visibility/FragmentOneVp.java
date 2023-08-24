@@ -11,7 +11,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bear.libcomponent.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFrag;
 import com.example.administrator.androidtest.R;
 import com.example.libframework.Page.IPage;
 import com.example.liblog.SLog;

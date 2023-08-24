@@ -9,7 +9,7 @@ import com.example.administrator.androidtest.Test.MainTest.TestComponent;
 public class DialogTestComponent extends TestComponent {
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.showCustomizeDialogButton);
+        setOnClickListener(this, R.id.showCustomizeDialogButton);
     }
 
 
@@ -18,7 +18,7 @@ public class DialogTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.showCustomizeDialogButton:
-                new TestDialog(getDependence()).show();
+                new TestDialog(getActivity()).show();
                 break;
 
             default:

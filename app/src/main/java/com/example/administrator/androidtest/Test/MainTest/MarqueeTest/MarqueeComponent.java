@@ -13,7 +13,7 @@ public class MarqueeComponent extends TestComponent {
     @Override
     protected void onCreate() {
         marqueeTextView_1 = findViewById(R.id.marqueeTextView_1);
-        clickListener(this, R.id.startMarqueeButton, R.id.endMarqueeButton);
+        setOnClickListener(this, R.id.startMarqueeButton, R.id.endMarqueeButton);
     }
 
     @SuppressLint("NonConstantResourceId")

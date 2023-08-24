@@ -12,10 +12,9 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
-import com.example.libbase.Util.ResourceUtil;
 
 import java.util.Arrays;
 

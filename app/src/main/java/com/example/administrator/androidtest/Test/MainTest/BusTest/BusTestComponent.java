@@ -11,7 +11,7 @@ public class BusTestComponent extends TestComponent {
 
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.busTestButton);
+        setOnClickListener(this, R.id.busTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -19,8 +19,8 @@ public class BusTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.busTestButton:
-                VpAndRvBottomSheetFragment.show(getDependence().getSupportFragmentManager());
-//                BusTest1Act.start(getDependence());
+                VpAndRvBottomSheetFragment.show(getActivity().getSupportFragmentManager());
+//                BusTest1Act.start(getContext());
                 break;
         }
     }

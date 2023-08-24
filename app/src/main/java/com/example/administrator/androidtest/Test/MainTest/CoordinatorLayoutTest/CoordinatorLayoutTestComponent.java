@@ -10,7 +10,7 @@ public class CoordinatorLayoutTestComponent extends TestComponent {
 
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.coordinatorLayoutTestButton);
+        setOnClickListener(this, R.id.coordinatorLayoutTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -18,7 +18,7 @@ public class CoordinatorLayoutTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.coordinatorLayoutTestButton:
-                CoordinatorLayoutTestAct.start(getDependence());
+                CoordinatorLayoutTestAct.start(getContext());
                 break;
 
             default:

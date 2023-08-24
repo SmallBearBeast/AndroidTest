@@ -1,6 +1,6 @@
 package com.example.administrator.androidtest.Test.WidgetTest;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 
 public class DropTextViewAct extends ComponentAct {

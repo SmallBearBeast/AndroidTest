@@ -9,7 +9,7 @@ import com.example.administrator.androidtest.Test.MainTest.TestComponent;
 public class MotionTestComponent extends TestComponent {
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.motionTestButton);
+        setOnClickListener(this, R.id.motionTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -17,7 +17,7 @@ public class MotionTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.motionTestButton:
-                MotionTestAct.start(getDependence());
+                MotionTestAct.start(getContext());
                 break;
 
             default:

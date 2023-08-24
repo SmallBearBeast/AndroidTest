@@ -9,14 +9,14 @@ public class BottomSheetTestComponent extends TestComponent {
 
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.bottomSheetTestButton);
+        setOnClickListener(this, R.id.bottomSheetTestButton);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bottomSheetTestButton:
-                VpAndRvBottomSheetFragment.show(getDependence().getSupportFragmentManager());
+                VpAndRvBottomSheetFragment.show(getActivity().getSupportFragmentManager());
                 break;
 
             default:break;

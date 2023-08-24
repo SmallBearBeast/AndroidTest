@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bear.libcomponent.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFrag;
 
 public class TestFragment extends ComponentFrag {
 

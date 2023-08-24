@@ -9,7 +9,7 @@ import com.example.administrator.androidtest.Test.MainTest.TestComponent;
 public class ScreenTestComponent extends TestComponent {
     @Override
     protected void onCreate() {
-        clickListener(this, R.id.screenTestButton);
+        setOnClickListener(this, R.id.screenTestButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -17,7 +17,7 @@ public class ScreenTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.screenTestButton:
-                ScreenAct.start(getDependence());
+                ScreenAct.start(getContext());
                 break;
 
             default:

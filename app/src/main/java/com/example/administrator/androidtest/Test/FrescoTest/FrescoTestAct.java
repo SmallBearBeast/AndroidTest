@@ -7,7 +7,7 @@ import android.view.View;
 
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.ComponentAct;
+import com.bear.libcomponent.component.ComponentAct;
 import com.example.libfresco.FrescoUriTransfer;
 import com.example.libfresco.FrescoUtil;
 import com.example.libfresco.FrescoView;

@@ -21,7 +21,7 @@ public class EditTextTestComponent extends TestComponent {
     @Override
     protected void onCreate() {
         noShowKeyboardEditText = findViewById(R.id.noShowKeyboardEditText);
-        clickListener(this, R.id.formatTextButton, R.id.noShowKeyboardButton);
+        setOnClickListener(this, R.id.formatTextButton, R.id.noShowKeyboardButton);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -42,7 +42,7 @@ public class EditTextTestComponent extends TestComponent {
 
     private void testFormatText() {
         TextView textTv = findViewById(R.id.formatTextEditText);
-        textTv.setText(getDependence().getString(R.string.format_string_text, "hugo.wu", 22));
+        textTv.setText(getContext().getString(R.string.format_string_text, "hugo.wu", 22));
     }
 
     private void testNoShowKeyboard() {
@@ -51,12 +51,12 @@ public class EditTextTestComponent extends TestComponent {
             noShowKeyboardEditText.setCursorVisible(false);
             noShowKeyboardEditText.setOnClickListener(v -> {
                 ToastUtil.showToast("Click No Show Input Keyboard EditText");
-                KeyBoardManager.get().hideKeyBoard(getDependence(), v);
+                KeyBoardManager.get().hideKeyBoard(getContext(), v);
             });
             noShowKeyboardEditText.setOnLongClickListener(null);
             noShowKeyboardEditText.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
-                    KeyBoardManager.get().hideKeyBoard(getDependence(), v);
+                    KeyBoardManager.get().hideKeyBoard(getContext(), v);
                 }
             });
             noShowKeyboardEditText.setCustomSelectionActionModeCallback(new ActionMode.Callback() {

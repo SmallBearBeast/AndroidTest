@@ -6,13 +6,13 @@ import com.example.administrator.androidtest.Test.MainTest.TestComponent
 
 class KVCompareTestComponent : TestComponent() {
     override fun onCreate() {
-        clickListener(this, R.id.kvCompareTestButton)
+        setOnClickListener(this, R.id.kvCompareTestButton)
     }
 
     override fun onClick(view: View) {
         when (view.id) {
             R.id.kvCompareTestButton -> {
-                KVCompareTestAct.start(dependence)
+                KVCompareTestAct.start(context)
             }
         }
     }
