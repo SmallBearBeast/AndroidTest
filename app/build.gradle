@@ -156,6 +156,9 @@ dependencies {
     // websocket
     implementation 'org.java-websocket:Java-WebSocket:1.5.4'
 
+    implementation 'com.guolindev.permissionx:permissionx:1.7.1'
+
+
     implementation project(":libbase")
     implementation project(":libfresco")
     implementation project(":libokhttp")
