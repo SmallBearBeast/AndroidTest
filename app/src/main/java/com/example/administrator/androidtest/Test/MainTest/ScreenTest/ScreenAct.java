@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -14,6 +15,10 @@ import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.LogUtil;
 import com.example.libbase.Util.ScreenUtil;
+import com.permissionx.guolindev.PermissionX;
+import com.permissionx.guolindev.callback.RequestCallback;
+
+import java.util.List;
 
 public class ScreenAct extends ComponentAct {
     @Override
@@ -61,15 +66,14 @@ public class ScreenAct extends ComponentAct {
     }
 
     private void onAskPermissionButtonClick() {
-        requestPermissions(new String[]{
+        PermissionX.init(this).permissions(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE,
-                Manifest.permission.READ_CONTACTS}, (permissionSuccessArray, permissionFailArray) -> {
-            LogUtil.getInstance(TAG, "onAskPermissionButtonClick")
-                    .of("permissionSuccessArray", permissionSuccessArray)
-                    .of("permissionFailArray", permissionFailArray)
-                    .logI();
-        });
+                Manifest.permission.READ_CONTACTS
+        ).request((allGranted, grantedList, deniedList) -> LogUtil.getInstance(TAG, "onAskPermissionButtonClick")
+                .of("grantedList", grantedList)
+                .of("deniedList", deniedList)
+                .logI());
     }
 
     public static void start(Context context) {
