@@ -1,11 +1,14 @@
 <resources>
 
     <!-- Base application theme. -->
+    <!-- 为了能够正常使用ToolBar，我们需要隐藏原来的ActionBar -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-<!--        <item name="colorPrimary">@color/cl_blue</item>-->
-<!--        <item name="colorPrimaryDark">@color/cl_blue</item>-->
-<!--        <item name="colorAccent">@color/cl_blue</item>-->
+        <item name="colorPrimary">@color/cl_blue</item>
+        <item name="colorPrimaryDark">@color/cl_blue</item>
+        <item name="colorAccent">@color/cl_blue</item>
+        <!--更改menu item间隔-->
+        <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
     </style>
 
 
@@ -23,4 +26,39 @@
     <style name="MyEditText">
         <item name="android:textCursorDrawable">@drawable/bg_input_view_cursor</item>
     </style>
+
+    <style name="MyToolBarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <!--更改toolbar上的菜单显示文字颜色-->
+        <item name="android:actionMenuTextColor">@color/cl_oriange</item>
+    </style>
+
+    <!--Toolbar主标题样式-->
+    <style name="MyToolbar.TitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+        <item name="android:textSize">14sp</item>
+        <!-- 受到titleTextColor属性覆盖 -->
+        <item name="android:textColor">@color/cl_green</item>
+    </style>
+
+    <!--Toolbar副标题样式-->
+    <style name="MyToolbar.SubTitleText" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+        <item name="android:textSize">12sp</item>
+        <!-- 受到subtitleTextColor属性覆盖 -->
+        <item name="android:textColor">@color/cl_green</item>
+    </style>
+
+    <style name="MyActionButtonStyle" parent="Widget.AppCompat.ActionButton">
+        <item name="android:minWidth">72dp</item>
+    </style>
+
+    <!-- toolbar弹出菜单样式 -->
+    <style name="MyToolbar.PopupTheme" parent="@style/ThemeOverlay.AppCompat.Light">
+        <!--更改toolbar菜单文字大小，包括溢出菜单上的，和显示上的-->
+        <item name="android:textSize">15sp</item>
+        <item name="android:colorBackground">@color/cl_oriange</item>
+        <!--把该属性改为false即可使menu位置位于toolbar之下-->
+        <item name="overlapAnchor">false</item>
+        <!-- 修改Action Menu Item 的文字颜色 -->
+        <item name="android:textColor">@color/cl_green</item>
+    </style>
+
 </resources>

@@ -53,6 +53,7 @@
         <activity android:name=".Test.MainTest.ShareTest.SystemShareAct"/>
         <activity android:name=".Test.MainTest.ViewGetSizeTest.ViewGetSizeTestAct"/>
         <activity android:name=".Test.MainTest.ARouterTest.Module1Activity"/>
+        <activity android:name=".Test.MainTest.ToolbarTest.ToolbarTestAct"/>
 
         <service android:name=".Test.MainTest.FloatServiceTest.TestFloatService"/>
         <service android:name=".Test.MainTest.BackgroundService"

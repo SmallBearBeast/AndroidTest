@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bear.libcomponent.component.ComponentService;
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
@@ -38,6 +39,7 @@ public class AndroidTestApplication extends Application {
         SpHelper.init(this);
         MmkvVal.init(this);
         SpHelper.preload(SpValHelper.SP_GLOBAL_CONFIG);
+        ComponentService.get().init(this);
 
         initRouter();
     }

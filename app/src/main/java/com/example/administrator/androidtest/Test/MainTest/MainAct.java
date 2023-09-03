@@ -37,6 +37,7 @@ import com.example.administrator.androidtest.Test.MainTest.OkHttpTest.OkHttpTest
 import com.example.administrator.androidtest.Test.MainTest.OtherTest.OtherTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.RecyclerViewTest.RecyclerViewTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ScreenTest.ScreenTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.ToolbarTest.ToolbarTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewGetSizeTest.ViewGetSizeTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewPager2Test.Viewpager2TestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewPagerTest.ViewPagerTestComponent;
@@ -85,6 +86,7 @@ public class MainAct extends ComponentAct {
         regActComponent(new EditTextTestComponent());
         regActComponent(new BottomViewTestComponent());
         regActComponent(new ARouterTestComponent());
+        regActComponent(new ToolbarTestComponent());
     }
 
     @Override

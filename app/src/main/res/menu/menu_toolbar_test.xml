@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_view_class"
+        android:title="Text"
+        app:showAsAction="always" />
+<!--    android:icon="@drawable/delete"-->
+    <!--    app:actionViewClass="android.widget.Button"-->
+
+    <item
+        android:id="@+id/action_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="action_search"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_notification"
+        android:icon="@android:drawable/ic_delete"
+        android:title="action_notification"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/action_item1"
+        android:icon="@android:drawable/ic_delete"
+        android:title="action_item1"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_item2"
+        android:icon="@android:drawable/ic_delete"
+        android:title="action_item2"
+        app:showAsAction="never" />
+</menu>

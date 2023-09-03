@@ -23,7 +23,7 @@ import java.util.Map;
 public class KeyBoardManager {
     private static final String TAG = "KeyBoardUtil";
     private static final int KEYBOARD_MIN_HEIGHT = 200;
-    private static Map<Activity, KeyBoardData> keyBoardDataMap = new HashMap<>();
+    private static final Map<Activity, KeyBoardData> keyBoardDataMap = new HashMap<>();
 
     public static KeyBoardManager get() {
         return SingleTon.INSTANCE;
