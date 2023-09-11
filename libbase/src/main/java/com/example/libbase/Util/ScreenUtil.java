@@ -11,6 +11,7 @@ import androidx.annotation.ColorInt;
 
 // TODO: 2021/4/4 getDisplayCutout
 // TODO: 2023/9/5 全面屏，刘海屏适配
+// TODO: 2023/9/6 结合UltimateBarX和ImmersionBar整改
 public class ScreenUtil extends AppInitUtil {
     public static int COLOR_DEFAULT = 0;
     /**
@@ -39,7 +40,7 @@ public class ScreenUtil extends AppInitUtil {
                 opt = opt | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR;
             }
             decorView.setSystemUiVisibility(opt);
-            topView.setPadding(0, getStatusBarHeight(), 0, topView.getPaddingBottom());
+            topView.setPadding(topView.getPaddingLeft(), getStatusBarHeight(), topView.getPaddingRight(), topView.getPaddingBottom());
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.setStatusBarColor(statusColor);
                 window.setNavigationBarColor(navColor);
