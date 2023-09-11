@@ -10,6 +10,7 @@ import android.view.*;
 import androidx.annotation.ColorInt;
 
 // TODO: 2021/4/4 getDisplayCutout
+// TODO: 2023/9/5 全面屏，刘海屏适配
 public class ScreenUtil extends AppInitUtil {
     public static int COLOR_DEFAULT = 0;
     /**
