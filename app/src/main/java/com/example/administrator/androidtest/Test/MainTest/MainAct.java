@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.Test.MainTest;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.ARouterTest.ARouterTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.AspectTest.AspectJTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTaskManager;
 import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.BottomSheetTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BottomViewTest.BottomViewTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BusTest.BusTestComponent;
@@ -56,7 +58,11 @@ public class MainAct extends ComponentAct {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        BootTaskManager.getInstance().waitCountDown();
+        BootTaskManager.getInstance().logColdEndUp();
+        BootTaskManager.getInstance().logWarmStartUp();
         super.onCreate(savedInstanceState);
+        Log.i(TAG, "onCreate: enter");
         ftvFullText = findViewById(R.id.fullTextView);
         likeView = findViewById(R.id.likeView);
         testGetSpVal();
@@ -256,5 +262,13 @@ public class MainAct extends ComponentAct {
             }
         });
         loopViewPager.startLoop();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        if (hasFocus) {
+            BootTaskManager.getInstance().logWarmEndUp();
+        }
+        super.onWindowFocusChanged(hasFocus);
     }
 }

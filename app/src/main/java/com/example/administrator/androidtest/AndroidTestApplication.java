@@ -11,6 +11,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bear.libcomponent.component.ComponentService;
 import com.bear.libkv.SpVal.SpHelper;
 import com.bear.libkv.MmkvVal.MmkvVal;
+import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTaskManager;
 import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
 import com.example.libbase.Util.AppInitUtil;
 import com.example.libfresco.FrescoUtil;
@@ -20,18 +21,20 @@ import java.util.Map;
 
 public class AndroidTestApplication extends Application {
 
-    private static final String TAG = "App";
+    private static final String TAG = "AndroidTestApplication";
     private static Context mContext;
     public static Map<String, Boolean> FragVisibiableMap = new HashMap<>();
 
     @Override
     protected void attachBaseContext(Context base) {
+        BootTaskManager.getInstance().logColdStartUp();
         super.attachBaseContext(base);
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        Log.i(TAG, "onCreate: enter");
         mContext = this;
         AppInitUtil.init(this);
         FrescoUtil.init(this);
@@ -42,6 +45,7 @@ public class AndroidTestApplication extends Application {
         ComponentService.get().init(this);
 
         initRouter();
+        BootTaskManager.getInstance().init();
     }
 
     private void initRouter() {
