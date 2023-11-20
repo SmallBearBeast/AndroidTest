@@ -21,6 +21,13 @@ public class TimeUtil {
         }
     }
 
+    public static void remove(String name){
+        synchronized (TimeUtil.class) {
+            sStartTimeMap.remove(name);
+            sEndTimeMap.remove(name);
+        }
+    }
+
     public static long getDuration(String name){
         synchronized (TimeUtil.class) {
             if (sStartTimeMap.containsKey(name) && sEndTimeMap.containsKey(name)) {

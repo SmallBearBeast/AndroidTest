@@ -128,6 +128,7 @@ public class BootTaskManager {
     public void logColdEndUp() {
         TimeUtil.markEnd("ColdStartUp");
         Log.i(TAG, "logColdEndUp: cold end, duration = " + TimeUtil.getDuration("ColdStartUp"));
+        TimeUtil.remove("ColdStartUp");
     }
 
     public void logWarmStartUp() {
@@ -138,6 +139,7 @@ public class BootTaskManager {
     public void logWarmEndUp() {
         TimeUtil.markEnd("WarmStartUp");
         Log.i(TAG, "logWarmEndUp: warm end, duration = " + TimeUtil.getDuration("WarmStartUp"));
+        TimeUtil.remove("WarmStartUp");
     }
 
     private static class SingleTon {
