@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.BootOptTest;
+package com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest;
 
 import android.app.Application;
 import android.os.Looper;

@@ -19,8 +19,8 @@ import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.ARouterTest.ARouterTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.AspectTest.AspectJTestComponent;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTaskManager;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.MonitorClassLoader;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTaskManager;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.MonitorClassLoader;
 import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.BottomSheetTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BottomViewTest.BottomViewTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BusTest.BusTestComponent;
@@ -63,6 +63,7 @@ public class MainAct extends ComponentAct {
         BootTaskManager.getInstance().waitCountDown();
         BootTaskManager.getInstance().logColdEndUp();
         BootTaskManager.getInstance().logWarmStartUp();
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
         Log.i(TAG, "onCreate: enter");
         ftvFullText = findViewById(R.id.fullTextView);

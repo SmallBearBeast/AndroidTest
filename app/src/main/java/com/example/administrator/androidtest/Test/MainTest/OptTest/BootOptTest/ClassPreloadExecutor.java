@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.BootOptTest;
+package com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest;
 
 public class ClassPreloadExecutor {
 

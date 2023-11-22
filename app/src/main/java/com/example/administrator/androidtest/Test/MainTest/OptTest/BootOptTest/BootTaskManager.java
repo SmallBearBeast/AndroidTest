@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.BootOptTest;
+package com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest;
 
 import android.util.Log;
 
@@ -7,15 +7,15 @@ import androidx.annotation.NonNull;
 import com.effective.android.anchors.AnchorsManager;
 import com.effective.android.anchors.task.Task;
 import com.effective.android.anchors.task.listener.TaskListener;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.AnchorDPOptTask;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.AnchorDPTask;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.BaseBootTask;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.BasicBgThreadTask;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.BootConstant;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.ImmediateTask;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.MainThreadTask;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.NoAnchorDPOptTask;
-import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask.NoAnchorDPTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.AnchorDPOptTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.AnchorDPTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.BaseBootTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.BasicBgThreadTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.BootConstant;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.ImmediateTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.MainThreadTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.NoAnchorDPOptTask;
+import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.NoAnchorDPTask;
 import com.example.libbase.Util.TimeUtil;
 
 import java.util.concurrent.BlockingQueue;

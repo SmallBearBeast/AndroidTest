@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTask;
+package com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask;
 
 public class BootConstant {
     public static final String TASK_TYPE_ROOT = "TASK_TYPE_ROOT";

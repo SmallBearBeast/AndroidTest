@@ -37,7 +37,7 @@
             android:name=".Test.MainTest.MainAct"
             android:configChanges="orientation|keyboard|layoutDirection|screenSize"
             android:exported="true"
-            android:theme="@style/AppTheme"
+            android:theme="@style/LaunchTheme"
             android:windowSoftInputMode="adjustResize">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
