@@ -7,14 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.alibaba.android.arouter.launcher.ARouter;
-import com.bear.libcomponent.component.ComponentService;
-import com.bear.libkv.SpVal.SpHelper;
-import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTaskManager;
-import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
-import com.example.libbase.Util.AppInitUtil;
-import com.example.libfresco.FrescoUtil;
+import com.example.administrator.androidtest.Test.MainTest.BootOptTest.MonitorClassLoader;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,26 +28,12 @@ public class AndroidTestApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        MonitorClassLoader.hook(this, true);
         Log.i(TAG, "onCreate: enter");
         mContext = this;
-        AppInitUtil.init(this);
-        FrescoUtil.init(this);
         registerActivityLifecycleCallbacks(new Callback());
-        SpHelper.init(this);
-        MmkvVal.init(this);
-        SpHelper.preload(SpValHelper.SP_GLOBAL_CONFIG);
-        ComponentService.get().init(this);
 
-        initRouter();
         BootTaskManager.getInstance().init();
-    }
-
-    private void initRouter() {
-        if (BuildConfig.DEBUG) {
-            ARouter.openLog();
-            ARouter.openDebug();
-        }
-        ARouter.init(this);
     }
 
     public static Context getContext() {

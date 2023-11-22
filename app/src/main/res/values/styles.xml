@@ -11,6 +11,11 @@
         <item name="android:actionButtonStyle">@style/MyActionButtonStyle</item>
     </style>
 
+    <style name="LaunchTheme" parent="AppTheme">
+        <item name="android:windowBackground">@mipmap/ic_launcher_round</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
 
     <style name="FullScreenDialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowContentOverlay">@null</item>

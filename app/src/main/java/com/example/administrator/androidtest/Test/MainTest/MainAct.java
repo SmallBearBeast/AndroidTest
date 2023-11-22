@@ -20,6 +20,7 @@ import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.ARouterTest.ARouterTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.AspectTest.AspectJTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BootOptTest.BootTaskManager;
+import com.example.administrator.androidtest.Test.MainTest.BootOptTest.MonitorClassLoader;
 import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.BottomSheetTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BottomViewTest.BottomViewTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.BusTest.BusTestComponent;
@@ -48,6 +49,7 @@ import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
+import com.example.libbase.Util.MainHandlerUtil;
 import com.example.libbase.Util.ToastUtil;
 
 import java.util.Random;
@@ -93,6 +95,7 @@ public class MainAct extends ComponentAct {
         regActComponent(new BottomViewTestComponent());
         regActComponent(new ARouterTestComponent());
         regActComponent(new ToolbarTestComponent());
+        MainHandlerUtil.postDelayed(MonitorClassLoader::printLoadTimeInfo, 2000);
     }
 
     @Override
