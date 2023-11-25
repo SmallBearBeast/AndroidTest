@@ -1,3 +1,5 @@
-include ':app', ':libaspectj', ':libfresco', ':libokhttp', ':libbase', ':liblog', ':libframework'
+include ':app', ':libfresco', ':libokhttp', ':libbase', ':liblog', ':libframework'
 include ':Submodule:libkv', ':Submodule:librv', ':Submodule:libcomponent', ':Submodule:libstorage'
 include ':libutil'
+include ':plugintest'
+//include ':libaspectj'

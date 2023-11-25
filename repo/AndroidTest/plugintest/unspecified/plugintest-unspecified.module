@@ -1,0 +1,87 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "AndroidTest",
+    "module": "plugintest",
+    "version": "unspecified",
+    "attributes": {
+      "org.gradle.status": "release"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "7.4"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "files": [
+        {
+          "name": "plugintest-unspecified.jar",
+          "url": "plugintest-unspecified.jar",
+          "size": 17628,
+          "sha512": "03f6f993bd35d9790bb3c58290432b7eaaa87f4e17346c3d26320e7abec638cd6642e956b7af970a7796b0d02679d0bad0fbebec54965ea324fb8d8163bb27ef",
+          "sha256": "580b31cb472bf73d10a2d3efb762a98cc8c310d779c39c0329fc3a89b024e013",
+          "sha1": "86b156abb7a930fb2a76ce36ca47abef597bc19f",
+          "md5": "f0f3691ea0e951cca13e7e6eed0a3e7b"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.environment": "standard-jvm",
+        "org.gradle.jvm.version": 8,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime",
+        "org.jetbrains.kotlin.platform.type": "jvm"
+      },
+      "dependencies": [
+        {
+          "group": "com.android.tools.build",
+          "module": "gradle",
+          "version": {
+            "requires": "7.2.0"
+          }
+        },
+        {
+          "group": "org.jetbrains.kotlin",
+          "module": "kotlin-stdlib-jdk7",
+          "version": {
+            "requires": "1.7.10"
+          }
+        },
+        {
+          "group": "com.android.tools",
+          "module": "common",
+          "version": {
+            "requires": "30.1.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "plugintest-unspecified.jar",
+          "url": "plugintest-unspecified.jar",
+          "size": 17628,
+          "sha512": "03f6f993bd35d9790bb3c58290432b7eaaa87f4e17346c3d26320e7abec638cd6642e956b7af970a7796b0d02679d0bad0fbebec54965ea324fb8d8163bb27ef",
+          "sha256": "580b31cb472bf73d10a2d3efb762a98cc8c310d779c39c0329fc3a89b024e013",
+          "sha1": "86b156abb7a930fb2a76ce36ca47abef597bc19f",
+          "md5": "f0f3691ea0e951cca13e7e6eed0a3e7b"
+        }
+      ]
+    }
+  ]
+}

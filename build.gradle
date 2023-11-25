@@ -8,9 +8,12 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
+        maven {
+            url('repo')
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0'
+        classpath 'com.android.tools.build:gradle:7.2.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
         classpath 'com.novoda:bintray-release:0.8.1'
@@ -19,6 +22,7 @@ buildscript {
         classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10'
         // ARouter自动插入注册路由配置代码插件
         classpath "com.alibaba:arouter-register:1.0.2"
+        classpath 'com.example:customtransformplugin:1.0.0'
     }
 }
 
@@ -27,6 +31,7 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        mavenLocal()
         maven { url 'https://jitpack.io' }
     }
     configurations.all {

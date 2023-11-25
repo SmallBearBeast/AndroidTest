@@ -2,8 +2,9 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.google.protobuf'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'android-aspectjx'
 apply plugin: 'com.alibaba.arouter'
+//apply plugin: 'android-aspectjx'
+apply plugin: 'CustomTransformPlugin'
 
 android {
     buildToolsVersion '30.0.2'
@@ -69,9 +70,9 @@ android {
         }
     }
 
-    aspectjx {
-        exclude 'java.*', 'com.google', 'versions.9', 'com.appsflyer', 'com.android', 'leakcanary', 'kotlinx.coroutines'
-    }
+//    aspectjx {
+//        exclude 'java.*', 'com.google', 'versions.9', 'com.appsflyer', 'com.android', 'leakcanary', 'kotlinx.coroutines'
+//    }
 }
 
 protobuf {
@@ -113,7 +114,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
-    implementation 'org.aspectj:aspectjrt:1.9.5'
+//    implementation 'org.aspectj:aspectjrt:1.9.5'
 
     // leakcanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
@@ -164,7 +165,7 @@ dependencies {
     implementation project(":libokhttp")
     implementation project(":liblog")
     implementation project(":libframework")
-    implementation project(":libaspectj")
+//    implementation project(":libaspectj")
     implementation project(":Submodule:libkv")
     implementation project(":Submodule:librv")
     implementation project(":Submodule:libcomponent")
