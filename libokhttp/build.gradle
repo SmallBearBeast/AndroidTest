@@ -1,17 +1,15 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 30
-
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 30
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     android.libraryVariants.all { variant ->
@@ -26,18 +24,10 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-    buildToolsVersion '30.0.2'
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-
-    compileOnly 'androidx.appcompat:appcompat:1.2.0'
-
-    //okhttp网络请求框架
-    compileOnly 'com.squareup.okhttp3:okhttp:3.14.9'
-    compileOnly 'com.google.code.gson:gson:2.8.6'
-
+    rootProject.ext.importDependencies(this, rootProject.ext.libokhttpDependenciesMap)
     compileOnly project(":liblog")
 }
