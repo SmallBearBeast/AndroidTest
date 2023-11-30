@@ -12,7 +12,7 @@ buildscript {
         }
     }
     dependencies {
-        pluginMap.each {key, value->
+        pluginMap.each { key, value->
             classpath value
         }
     }

@@ -5,6 +5,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.alibaba.arouter'
 //apply plugin: 'android-aspectjx'
 apply plugin: 'CustomTransformPlugin'
+apply plugin: 'BuildSrcPlugin'
 
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
