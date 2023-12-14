@@ -19,7 +19,9 @@ public class FlutterTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.flutterTestButton:
-                getContext().startActivity(FlutterActivity.createDefaultIntent(getContext()));
+                getContext().startActivity(
+                        FlutterActivity.withCachedEngine("my_engine_id").build(getContext())
+                );
                 break;
         }
     }
