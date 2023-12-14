@@ -14,7 +14,7 @@ dependencies {
     // 引入Gradle相关Api
     implementation gradleApi()
 //    implementation localGroovy()
-    implementation 'com.android.tools.build:gradle:7.2.0'
+    implementation 'com.android.tools.build:gradle:7.3.0'
     // 引入kotlin标准库
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
     // common library used by other Android tools libraries.

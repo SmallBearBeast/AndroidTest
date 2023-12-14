@@ -1,5 +1,43 @@
 include ':app', ':libfresco', ':libokhttp', ':libbase', ':liblog', ':libframework'
 include ':Submodule:libkv', ':Submodule:librv', ':Submodule:libcomponent', ':Submodule:libstorage'
-include ':libutil'
 include ':plugintest'
 //include ':libaspectj'
+
+// Include flutter module.
+// 绑定变量名gradle为Settings对象，在include_flutter可以直接访问。
+setBinding(new Binding([gradle: this]))
+// 执行include_flutter.groovy脚本
+evaluate(new File(
+        settingsDir.parentFile,
+        'lib_fluttertest/.android/include_flutter.groovy'
+))
+include ':flutter'
+// 不理解 Caused by: org.gradle.api.UnknownProjectException: Project with path ':flutter' could not be found in project ':app'.
+// project(':flutter').name = "fluttertest"
+
+project(':app').buildFileName = "app.gradle"
+renameBuildGradleFile(rootProject.children)
+
+def renameBuildGradleFile(childProjects) {
+    if (!childProjects || childProjects.empty) {
+        return
+    }
+    println("renameBuildGradleFile: childProjects = $childProjects, empty = ${childProjects.empty}")
+    childProjects.each { projectDescriptor ->
+        if (projectDescriptor.name.startsWith("lib")) {
+            projectDescriptor.buildFileName = "${projectDescriptor.name}.gradle"
+            if (new File(projectDescriptor.projectDir, "build.gradle").exists()) {
+                println("start exec command: mv build.gradle ${projectDescriptor.name}.gradle")
+                def execResult = exec {
+                    workingDir "${projectDescriptor.projectDir}"
+                    executable 'mv'
+                    args "build.gradle", "${projectDescriptor.name}.gradle"
+                }
+                println("end exec command: mv build.gradle ${projectDescriptor.name}.gradle, exitValue = ${execResult.exitValue}")
+            }
+        }
+        renameBuildGradleFile(projectDescriptor.children)
+    }
+}
+include ':lib_fluttertest'
+project(':lib_fluttertest').projectDir = new File('../lib_fluttertest')

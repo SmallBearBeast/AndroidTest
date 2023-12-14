@@ -1,8 +1,8 @@
 ext {
-    buildToolsVersion = '30.0.2'
-    compileSdkVersion = 30
+    buildToolsVersion = '30.0.3'
+    compileSdkVersion = 33
     minSdkVersion = 21
-    targetSdkVersion = 30
+    targetSdkVersion = 33
 
     recyclerview_version = '1.2.1'
     kotlin_version = '1.7.10'
@@ -10,7 +10,7 @@ ext {
     lifecycle_version = '2.3.1'
 
     pluginMap = [
-            'gradle'                        : 'com.android.tools.build:gradle:7.2.0',
+            'gradle'                        : 'com.android.tools.build:gradle:7.3.0',
             'kotlin_gradle_plugin'          : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
             'kotlin_android_extensions'     : "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version",
             'bintray_release'               : 'com.novoda:bintray-release:0.8.1',

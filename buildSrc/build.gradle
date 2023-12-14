@@ -2,7 +2,7 @@
 // 且没有添加在settings.gradle，因此需要单独引入buildscript 插件相关配置，和依赖仓库相关配置。
 buildscript {
     ext.kotlin_version = '1.7.10'
-    ext.build_version = '7.2.0'
+    ext.build_version = '7.3.0'
 
     repositories {
         google()

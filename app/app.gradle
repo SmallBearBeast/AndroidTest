@@ -84,7 +84,7 @@ protobuf {
     generateProtoTasks {
         all().each { task ->
             task.builtins {
-                java { }
+                java {}
             }
         }
     }
@@ -102,4 +102,31 @@ dependencies {
     implementation project(":Submodule:libkv")
     implementation project(":Submodule:librv")
     implementation project(":Submodule:libcomponent")
+    implementation project(':flutter')
+}
+
+// Gradle Test
+afterEvaluate {
+    //是否是 Android 插件
+    def isAppPlugin = project.plugins.hasPlugin('com.android.application')
+    println("com.android.application = ${project.plugins.findPlugin('com.android.application')}")
+    //获取变体
+    def variants
+    if (isAppPlugin) {
+        variants = project.android.applicationVariants
+    } else {
+        variants = project.android.libraryVariants
+    }
+    println("isAppPlugin = $isAppPlugin")
+    variants.each { variant ->
+        //通过变体获取对应的 merge...Resources
+        Task mergeResourcesTask = variant.mergeResources
+        println("variant.name = ${variant.name}")
+//        //定义自定义 Task 扩展前缀
+//        def prefix = variant.name
+//        //获取我们自定义的 Task
+//        Task xmlViewScanTask = project.tasks.create("${prefix}XmlViewScanTask", XmlViewScanTask,variant)
+//        //将我们自定义的 Task 挂接到 mergeResourcesTask
+//        mergeResourcesTask.finalizedBy(xmlViewScanTask)
+    }
 }

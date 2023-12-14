@@ -11,6 +11,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/flutterTextView"
+                style="@style/TestLabelStyle"
+                android:text="Flutter Test" />
+
+            <Button
+                android:id="@+id/flutterTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To FlutterTestAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/flutterTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/toolbarTextView"
                 style="@style/TestLabelStyle"
                 android:text="Toolbar Test" />

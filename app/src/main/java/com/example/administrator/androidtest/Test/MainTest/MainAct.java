@@ -19,6 +19,7 @@ import com.bear.libkv.MmkvVal.MmkvVal;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.ARouterTest.ARouterTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.AspectTest.AspectJTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.FlutterTest.FlutterTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTaskManager;
 import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.MonitorClassLoader;
 import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.BottomSheetTestComponent;
@@ -96,6 +97,7 @@ public class MainAct extends ComponentAct {
         regActComponent(new BottomViewTestComponent());
         regActComponent(new ARouterTestComponent());
         regActComponent(new ToolbarTestComponent());
+        regActComponent(new FlutterTestComponent());
         MainHandlerUtil.postDelayed(MonitorClassLoader::printLoadTimeInfo, 2000);
     }
 
