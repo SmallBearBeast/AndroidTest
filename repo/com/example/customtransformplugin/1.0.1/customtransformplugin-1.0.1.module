@@ -1,9 +1,9 @@
 {
   "formatVersion": "1.1",
   "component": {
-    "group": "AndroidTest",
-    "module": "plugintest",
-    "version": "unspecified",
+    "group": "com.example",
+    "module": "customtransformplugin",
+    "version": "1.0.1",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -27,8 +27,8 @@
       },
       "files": [
         {
-          "name": "plugintest-unspecified.jar",
-          "url": "plugintest-unspecified.jar",
+          "name": "customtransformplugin-1.0.1.jar",
+          "url": "customtransformplugin-1.0.1.jar",
           "size": 31461,
           "sha512": "7a6b51dbe1a4522ea68c6a6d6b319b2e9d9c2073eb43bc3b5c5c3962b83d7a842ff120916bb327ddfc6e5e9c4fec2f5d84070eda246fa80c9962a8743193c346",
           "sha256": "1ebf920c29bb670db448b53c1d080d205604037bedbd489c12663cb4f58b38df",
@@ -94,8 +94,8 @@
       ],
       "files": [
         {
-          "name": "plugintest-unspecified.jar",
-          "url": "plugintest-unspecified.jar",
+          "name": "customtransformplugin-1.0.1.jar",
+          "url": "customtransformplugin-1.0.1.jar",
           "size": 31461,
           "sha512": "7a6b51dbe1a4522ea68c6a6d6b319b2e9d9c2073eb43bc3b5c5c3962b83d7a842ff120916bb327ddfc6e5e9c4fec2f5d84070eda246fa80c9962a8743193c346",
           "sha256": "1ebf920c29bb670db448b53c1d080d205604037bedbd489c12663cb4f58b38df",

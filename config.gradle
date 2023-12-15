@@ -19,7 +19,7 @@ ext {
             'gradle_android_plugin_aspectjx': 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10',
             // ARouter自动插入注册路由配置代码插件
             'arouter_register'              : "com.alibaba:arouter-register:1.0.2",
-            'customtransformplugin'         : 'com.example:customtransformplugin:1.0.0',
+            'customtransformplugin'         : 'com.example:customtransformplugin:1.0.1',
     ]
 
     dependenciesMap = [
@@ -75,6 +75,10 @@ ext {
 
             'arouter_compiler'          : 'com.alibaba:arouter-compiler:1.5.2',
             'room_compiler'             : 'androidx.room:room-compiler:2.3.0',
+
+            'asm': 'org.ow2.asm:asm:9.1',
+            'asm_util': 'org.ow2.asm:asm-util:9.1',
+            'asm_common': 'org.ow2.asm:asm-commons:9.1',
     ]
 
     appDependenciesMap = [
@@ -82,8 +86,8 @@ ext {
                     "${dependenciesMap.junit}",
             ],
             "androidTestImplementation": [
-                    "${dependenciesMap.androidx_junit}",
-                    "${dependenciesMap.espresso_core}",
+//                    "${dependenciesMap.androidx_junit}",
+//                    "${dependenciesMap.espresso_core}",
                     "${dependenciesMap.mockk_android}",
             ],
             "implementation"           : [
@@ -116,6 +120,9 @@ ext {
                     "${dependenciesMap.google_webrtc}",
                     "${dependenciesMap.Java_WebSocket}",
                     "${dependenciesMap.permissionx}",
+                    "${dependenciesMap.asm}",
+                    "${dependenciesMap.asm_util}",
+                    "${dependenciesMap.asm_common}",
             ],
             "debugImplementation"      : [
                     "${dependenciesMap.leakcanary_android}",

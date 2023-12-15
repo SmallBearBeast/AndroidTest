@@ -14,11 +14,17 @@ dependencies {
     // 引入Gradle相关Api
     implementation gradleApi()
 //    implementation localGroovy()
+    // AGP自带asm
     implementation 'com.android.tools.build:gradle:7.3.0'
     // 引入kotlin标准库
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.7.10'
     // common library used by other Android tools libraries.
     implementation 'com.android.tools:common:30.1.0'
+
+    // 引入asm相关依赖
+    implementation 'org.ow2.asm:asm:9.1'
+    implementation 'org.ow2.asm:asm-util:9.1'
+    implementation 'org.ow2.asm:asm-commons:9.1'
 }
 
 // 采用Gradle配置的方式进行插件注册
@@ -41,7 +47,7 @@ publishing {
             from components.java
             groupId 'com.example'
             artifactId 'customtransformplugin'
-            version '1.0.0'
+            version '1.0.1'
         }
     }
 }

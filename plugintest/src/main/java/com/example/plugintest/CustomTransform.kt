@@ -1,7 +1,6 @@
 package com.example.plugintest
 
 import com.android.build.api.transform.QualifiedContent
-import com.android.build.api.transform.TransformInvocation
 import com.android.build.gradle.internal.pipeline.TransformManager
 import java.io.InputStream
 import java.io.OutputStream
@@ -26,25 +25,5 @@ class CustomTransform : BaseCustomTransform(true) {
 
     override fun getInputTypes(): MutableSet<QualifiedContent.ContentType> {
         return TransformManager.CONTENT_CLASS
-    }
-
-    override fun transform(transformInvocation: TransformInvocation) {
-        val transformStart = System.currentTimeMillis()
-        printLog()
-        super.transform(transformInvocation)
-        println("CustomTransform cost ${(System.currentTimeMillis() - transformStart) / 1000}ms")
-    }
-
-    /**
-     * 打印一段 log 日志
-     */
-    private fun printLog() {
-        println()
-        println("******************************************************************************")
-        println("******                                                                  ******")
-        println("******                欢迎使用 CustomTransform 编译插件                    ******")
-        println("******                                                                  ******")
-        println("******************************************************************************")
-        println()
     }
 }

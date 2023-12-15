@@ -78,8 +78,10 @@ abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform()
      * 2.处理并发逻辑
      */
     override fun transform(transformInvocation: TransformInvocation) {
-        super.transform(transformInvocation)
+        printWelcomeLog()
         log("Transform start...")
+        val transformStart = System.currentTimeMillis()
+        super.transform(transformInvocation)
         // 输入内容
         val inputs = transformInvocation.inputs
         // 输出内容
@@ -98,6 +100,7 @@ abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform()
         }
         waitableExecutor.waitForTasksWithQuickFail<Any>(true)
         log("Transform end...")
+        log("Transform cost ${(System.currentTimeMillis() - transformStart) / 1000}ms")
     }
 
     private fun handleInputJar(
@@ -279,5 +282,18 @@ abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform()
         if (enableLog) {
             println("$name - $logStr")
         }
+    }
+
+    /**
+     * 打印一段 welcome log 日志
+     */
+    private fun printWelcomeLog() {
+        println()
+        println("******************************************************************************")
+        println("******                                                                  ******")
+        println("******                欢迎使用 $name 编译插件                    ******")
+        println("******                                                                  ******")
+        println("******************************************************************************")
+        println()
     }
 }

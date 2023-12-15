@@ -13,7 +13,7 @@
     <dependency>
       <groupId>com.android.tools.build</groupId>
       <artifactId>gradle</artifactId>
-      <version>7.2.0</version>
+      <version>7.3.0</version>
       <scope>runtime</scope>
     </dependency>
     <dependency>
@@ -26,6 +26,24 @@
       <groupId>com.android.tools</groupId>
       <artifactId>common</artifactId>
       <version>30.1.0</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm</artifactId>
+      <version>9.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-util</artifactId>
+      <version>9.1</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.asm</groupId>
+      <artifactId>asm-commons</artifactId>
+      <version>9.1</version>
       <scope>runtime</scope>
     </dependency>
   </dependencies>
