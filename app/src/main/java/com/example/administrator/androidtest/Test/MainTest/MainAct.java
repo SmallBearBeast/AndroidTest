@@ -61,7 +61,6 @@ public class MainAct extends ComponentAct {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-//        TimeUtil.markStart("Asm_Hook_Execute_Time");
         BootTaskManager.getInstance().waitCountDown();
         BootTaskManager.getInstance().logColdEndUp();
         BootTaskManager.getInstance().logWarmStartUp();
@@ -100,8 +99,6 @@ public class MainAct extends ComponentAct {
         regActComponent(new ToolbarTestComponent());
         regActComponent(new FlutterTestComponent());
         MainHandlerUtil.postDelayed(MonitorClassLoader::printLoadTimeInfo, 2000);
-//        Log.i(TAG, "onCreate: Asm_Hook_Execute_Time = " + TimeUtil.getDuration("Asm_Hook_Execute_Time"));
-//        TimeUtil.remove("Asm_Hook_Execute_Time");
     }
 
     @Override

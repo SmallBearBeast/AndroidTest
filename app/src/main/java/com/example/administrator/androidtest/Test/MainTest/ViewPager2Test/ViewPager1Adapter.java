@@ -37,7 +37,8 @@ class ViewPager1Adapter extends PagerAdapter {
     @Override
     public Object instantiateItem(@NonNull ViewGroup container, int position) {
         TextView tv = new TextView(container.getContext());
-        tv.setText("ViewPager");
+        tv.setId(R.id.textview);
+        tv.setText("ViewPager: position = " + position);
         tv.setGravity(Gravity.CENTER);
         tv.setTextSize(16);
         tv.setTextColor(Color.WHITE);

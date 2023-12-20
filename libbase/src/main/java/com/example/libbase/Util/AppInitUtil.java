@@ -11,19 +11,13 @@ public abstract class AppInitUtil {
 
     public static void init(Context context){
         sContext = context;
-    }
-
-    public static void init(Application application){
-        sApplication = application;
+        if (context instanceof Application) {
+            sApplication = (Application) context;
+        }
     }
 
     // 获取上下文信息，优先返回当前Context。
     protected static Context getContext(){
         return sContext != null ? sContext : sApplication;
-    }
-
-    //单例可持有
-    protected static Application getApp(){
-        return sApplication;
     }
 }

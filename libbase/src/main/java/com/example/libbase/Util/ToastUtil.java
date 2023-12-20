@@ -22,7 +22,7 @@ public final class ToastUtil extends AppInitUtil{
                     sToast.cancel();
                     sToast = null;
                 }
-                sToast = Toast.makeText(getApp(), "", Toast.LENGTH_SHORT);
+                sToast = Toast.makeText(getContext(), "", Toast.LENGTH_SHORT);
                 if(config.mText == null && config.mStringResId != -1){
                     config.mText = getString(config.mStringResId);
                 }

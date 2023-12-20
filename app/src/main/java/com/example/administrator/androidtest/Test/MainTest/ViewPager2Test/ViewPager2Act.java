@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
@@ -13,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
+import com.example.libbase.Util.ToastUtil;
 
 /**
  * ViewPager2 scroll is most fast than ViewPager.
@@ -68,6 +70,11 @@ public class ViewPager2Act extends ComponentAct {
             case R.id.resetButton:
                 mViewPager.setCurrentItem(0, true);
                 mViewPager2.setCurrentItem(0, true);
+                break;
+
+            case R.id.findViewButton:
+                TextView textView = findViewById(R.id.textview);
+                ToastUtil.showToast(textView != null ? String.valueOf(textView.getText()) : "textView is null");
                 break;
 
             default:

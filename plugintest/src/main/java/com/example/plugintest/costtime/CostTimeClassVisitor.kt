@@ -23,7 +23,7 @@ class CostTimeClassVisitor(visitor: ClassVisitor) : ClassVisitor(Opcodes.ASM6, v
         if (name == "onCreate" || name == "testSpToMmkv" || name == "onWindowFocusChanged") {
             return CostTimeMethodVisitor(Opcodes.ASM6, visitor, access, name, descriptor)
         }
-        return visitor;
+        return visitor
     }
 
     override fun visit(
