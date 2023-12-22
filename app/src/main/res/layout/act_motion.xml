@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionViewGroup
+    <com.example.administrator.androidtest.Test.MainTest.ViewDemo.MotionTest.MotionEventViewGroup
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_400"
         android:background="@color/cl_blue"
@@ -19,7 +19,7 @@
             android:textSize="@dimen/sp_28"
             tools:ignore="HardcodedText" />
 
-        <com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionView
+        <com.example.administrator.androidtest.Test.MainTest.ViewDemo.MotionTest.MotionEventView
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_200"
             android:layout_gravity="bottom"
@@ -33,5 +33,5 @@
             android:text="I am MotionView"
             android:textSize="@dimen/sp_28"
             tools:ignore="HardcodedText" />
-    </com.example.administrator.androidtest.Test.MainTest.MotionTest.MotionViewGroup>
+    </com.example.administrator.androidtest.Test.MainTest.ViewDemo.MotionTest.MotionEventViewGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>

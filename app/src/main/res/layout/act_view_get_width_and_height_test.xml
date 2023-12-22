@@ -51,7 +51,7 @@
 
     </com.example.administrator.androidtest.Widget.FlowLayout>
 
-    <com.example.administrator.androidtest.Test.MainTest.ViewGetSizeTest.TestTestView
+    <com.example.administrator.androidtest.Test.MainTest.ViewDemo.ViewGetSizeTest.TestTestView
         android:id="@+id/testTextView"
         android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"

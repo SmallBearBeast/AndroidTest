@@ -49,28 +49,81 @@
 
         <activity
             android:name="io.flutter.embedding.android.FlutterActivity"
-            android:theme="@style/AppTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:theme="@style/AppTheme"
+            android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".Test.MainTest.CoordinatorLayoutTest.BehaviorTestAct" />
-        <activity android:name=".Test.MainTest.CoordinatorLayoutTest.CoordinatorLayoutTestAct" />
-        <activity android:name=".Test.MainTest.AspectTest.AspectTestAct" />
-        <activity android:name=".Test.MainTest.BusTest.BusTest1Act" />
-        <activity android:name=".Test.MainTest.BusTest.BusTest2Act" />
-        <activity android:name=".Test.MainTest.FragTest.FragLifecycleTestAct" />
-        <activity android:name=".Test.MainTest.KVCompareTest.KVCompareTestAct" />
-        <activity android:name=".Test.MainTest.MotionTest.MotionTestAct" />
-        <activity android:name=".Test.MainTest.ViewPager2Test.ViewPager2Act" />
-        <activity android:name=".Test.MainTest.ScreenTest.ScreenAct" />
-        <activity android:name=".Test.MainTest.ShareTest.SystemShareAct" />
-        <activity android:name=".Test.MainTest.ViewGetSizeTest.ViewGetSizeTestAct" />
-        <activity android:name=".Test.MainTest.ARouterTest.Module1Activity" />
-        <activity android:name=".Test.MainTest.ToolbarTest.ToolbarTestAct" />
+        <activity
+            android:name=".Test.MainTest.ComponentDemo.ComponentDemoAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.BehaviorTestAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.CoordinatorLayoutTestAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.AspectTest.AspectTestAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.BusTest.BusTest1Act"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.BusTest.BusTest2Act"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.FragTest.FragLifecycleTestAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.KVCompareTest.KVCompareTestAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ViewDemo.MotionTest.MotionEventDemoAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ViewDemo.ViewPager2Test.ViewPager2Act"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ScreenTest.ScreenAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ShareTest.SystemShareAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ViewDemo.ViewGetSizeTest.ViewGetSizeTestAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ARouterTest.Module1Activity"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ViewDemo.ToolbarTest.ToolbarTestAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.ViewDemo.ViewDemoAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.WidgetDemo.WidgetDemoAct"
+            android:theme="@style/AppTheme" />
 
         <service android:name=".Test.MainTest.FloatServiceTest.TestFloatService" />
+
         <service
             android:name=".Test.MainTest.BackgroundService"
             android:foregroundServiceType="" />

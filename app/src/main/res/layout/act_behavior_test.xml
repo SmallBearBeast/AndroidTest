@@ -13,7 +13,7 @@
         android:padding="@dimen/dp_10"
         android:text="TextView_1"
         android:visibility="gone"
-        app:layout_behavior=".Test.MainTest.CoordinatorLayoutTest.Demo1Behavior"
+        app:layout_behavior=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.Demo1Behavior"
         tools:ignore="HardcodedText"
         tools:visibility="visible" />
 
@@ -36,7 +36,7 @@
         android:layout_gravity="center_vertical"
         android:background="@color/cl_blue"
         android:visibility="gone"
-        app:layout_behavior=".Test.MainTest.CoordinatorLayoutTest.Demo2Behavior"
+        app:layout_behavior=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.Demo2Behavior"
         tools:visibility="visible">
 
         <LinearLayout

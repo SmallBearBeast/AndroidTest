@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText,MissingConstraints,SpUsage">
+
+    <LinearLayout style="@style/ll_vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/toolbarTextView"
+                style="@style/TestLabelStyle"
+                android:text="Toolbar Test" />
+
+            <Button
+                android:id="@+id/toolbarTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To ToolbarTestAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/viewSizeLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="ViewSize Test" />
+
+            <Button
+                android:id="@+id/viewSizeTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump ViewSize Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewSizeLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/viewpager2LabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Viewpager2 Test" />
+
+            <Button
+                android:id="@+id/viewpager2TestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Viewpager2 Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewpager2LabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/motionLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Motion Test" />
+
+            <Button
+                android:id="@+id/motionTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Motion Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/motionLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/behaviorLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Behavior Test" />
+
+            <Button
+                android:id="@+id/behaviorTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump Behavior Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/behaviorLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/coordinatorLayoutLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="CoordinatorLayout Test" />
+
+            <Button
+                android:id="@+id/coordinatorLayoutTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump CoordinatorLayout Test"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/coordinatorLayoutLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/formatLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Format Text Test" />
+
+            <Button
+                android:id="@+id/formatTextButton"
+                style="@style/TestButtonStyle"
+                android:text="Format Text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/formatLabelTextView" />
+
+            <EditText
+                android:id="@+id/formatTextEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="formatTextEditText"
+                android:imeOptions="actionNext"
+                android:inputType="none"
+                android:nextFocusForward="@id/showKeyboardEditText"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/formatTextButton"
+                app:layout_constraintTop_toBottomOf="@+id/formatLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/noShowKeyboardLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="No Show Input Keyboard Test" />
+
+            <Button
+                android:id="@+id/noShowKeyboardButton"
+                style="@style/TestButtonStyle"
+                android:text="No Show Keyboard"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noShowKeyboardLabelTextView" />
+
+
+            <EditText
+                android:id="@+id/noShowKeyboardEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="noShowKeyboardEditText"
+                android:imeOptions="actionNext"
+                android:inputType="text"
+                android:maxLines="1"
+                android:nextFocusForward="@id/formatTextEditText"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/noShowKeyboardButton"
+                app:layout_constraintTop_toBottomOf="@+id/noShowKeyboardLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/showKeyboardLabelTextView"
+                style="@style/TestLabelStyle"
+                android:text="Show Input Keyboard Test" />
+
+            <EditText
+                android:id="@+id/showKeyboardEditText"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="showKeyboardEditText"
+                android:imeOptions="actionNext"
+                android:inputType="none"
+                android:nextFocusForward="@id/noShowKeyboardEditText"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/showKeyboardLabelTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</ScrollView>
