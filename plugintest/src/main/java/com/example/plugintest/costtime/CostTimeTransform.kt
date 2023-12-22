@@ -22,7 +22,7 @@ class CostTimeTransform : BaseCustomTransform(true){
         return variant?.buildTypeName == "debug"
     }
 
-    override fun provideFunction(): ((InputStream, OutputStream) -> Unit)? {
+    override fun provideFunction(): (InputStream, OutputStream) -> Unit {
         return { inputStream, outputStream ->
             // 使用 input 输入流构建 ClassReader
             val reader = ClassReader(inputStream)

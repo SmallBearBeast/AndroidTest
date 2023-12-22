@@ -19,7 +19,7 @@ ext {
             'gradle_android_plugin_aspectjx': 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10',
             // ARouter自动插入注册路由配置代码插件
             'arouter_register'              : "com.alibaba:arouter-register:1.0.2",
-            'customtransformplugin'         : 'com.example:customtransformplugin:1.0.1',
+            'customtransformplugin'         : 'com.example:customtransformplugin:1.0.0',
     ]
 
     dependenciesMap = [

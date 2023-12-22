@@ -29,11 +29,11 @@
         {
           "name": "customtransformplugin-1.0.0.jar",
           "url": "customtransformplugin-1.0.0.jar",
-          "size": 25107,
-          "sha512": "da0941e11b69f120ab3ef5ef35b67302e4737b91546ab9531d9642703f22ea1397198303de907097eb1d241e3c2f961a52b9c638edd752aae1ff6b12ff257790",
-          "sha256": "97c4db68ab4cc8ae2e7d0887408a75b17be3a9d1e011b03d81829a865d886b64",
-          "sha1": "f56d3a4192b2eb0e37bb11d7b4ab06860fabf4d1",
-          "md5": "6e3d19492990275b1d5c3d24d09524f1"
+          "size": 31587,
+          "sha512": "9462a6fa413bbdcf5eaee8d71351c4272bed4c5d5e819efa6986b74d551d33b62747829f8091821b180d808e2c740e6f479c66108b2b875d1a63732c0ea96d01",
+          "sha256": "7ba901e90c95c9a1ed1d36d1786bae01180e6fd14f17131e72b20934b54e8878",
+          "sha1": "1899b95f9529916f9ab4fb5e054e8cd64bf70432",
+          "md5": "0f79c61f5d22d605bb58ddc58078b81e"
         }
       ]
     },
@@ -96,11 +96,11 @@
         {
           "name": "customtransformplugin-1.0.0.jar",
           "url": "customtransformplugin-1.0.0.jar",
-          "size": 25107,
-          "sha512": "da0941e11b69f120ab3ef5ef35b67302e4737b91546ab9531d9642703f22ea1397198303de907097eb1d241e3c2f961a52b9c638edd752aae1ff6b12ff257790",
-          "sha256": "97c4db68ab4cc8ae2e7d0887408a75b17be3a9d1e011b03d81829a865d886b64",
-          "sha1": "f56d3a4192b2eb0e37bb11d7b4ab06860fabf4d1",
-          "md5": "6e3d19492990275b1d5c3d24d09524f1"
+          "size": 31587,
+          "sha512": "9462a6fa413bbdcf5eaee8d71351c4272bed4c5d5e819efa6986b74d551d33b62747829f8091821b180d808e2c740e6f479c66108b2b875d1a63732c0ea96d01",
+          "sha256": "7ba901e90c95c9a1ed1d36d1786bae01180e6fd14f17131e72b20934b54e8878",
+          "sha1": "1899b95f9529916f9ab4fb5e054e8cd64bf70432",
+          "md5": "0f79c61f5d22d605bb58ddc58078b81e"
         }
       ]
     }

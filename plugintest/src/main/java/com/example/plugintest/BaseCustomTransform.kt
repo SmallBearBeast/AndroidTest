@@ -24,7 +24,7 @@ import java.util.zip.ZipOutputStream
 /**
  * 自定义 Transform 模版
  */
-abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform() {
+abstract class BaseCustomTransform(private val enableLog: Boolean = true) : Transform() {
 
     //线程池，可提升 80% 的执行速度
     private var waitableExecutor: WaitableExecutor = WaitableExecutor.useGlobalSharedThreadPool()
@@ -108,7 +108,7 @@ abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform()
         outputProvider: TransformOutputProvider,
         isIncremental: Boolean
     ) {
-        log("Transform jarInputs start.")
+        log("Transform jarInputs start. isIncremental = $isIncremental")
         val function = provideFunction()
         input.jarInputs.forEach { jarInput ->
             val jarInputFile = jarInput.file
@@ -149,7 +149,7 @@ abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform()
         outputProvider: TransformOutputProvider,
         isIncremental: Boolean
     ) {
-        log("Transform dirInput start.")
+        log("Transform dirInput start. isIncremental = $isIncremental")
         val function = provideFunction()
         input.directoryInputs.forEach { directoryInput ->
             val inputDirFile = directoryInput.file
@@ -185,13 +185,7 @@ abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform()
                 FileUtils.getAllFiles(inputDirFile).forEach { inputFile ->
                     waitableExecutor.execute {
                         val outputFile = concatOutputFilePath(outputDir, inputFile)
-                        if (classFilter(inputFile.name)) {
-                            doTransformFile(inputFile, outputFile, function)
-                        } else {
-                            // Copy.
-                            Files.createParentDirs(outputFile)
-                            FileUtils.copyFile(inputFile, outputFile)
-                        }
+                        doTransformFile(inputFile, outputFile, function)
                     }
                 }
             }
@@ -244,11 +238,16 @@ abstract class BaseCustomTransform(private val enableLog: Boolean) : Transform()
     ) {
         // Create parent directories to hold outputFile file.
         Files.createParentDirs(outputFile)
-        FileInputStream(inputFile).use { fis ->
-            FileOutputStream(outputFile).use { fos ->
-                // Apply transform function.
-                applyFunction(fis, fos, function)
+        if (classFilter(inputFile.name)) {
+            FileInputStream(inputFile).use { fis ->
+                FileOutputStream(outputFile).use { fos ->
+                    // Apply transform function.
+                    applyFunction(fis, fos, function)
+                }
             }
+        } else {
+            // Copy.
+            FileUtils.copyFile(inputFile, outputFile)
         }
     }
 
