@@ -17,7 +17,7 @@
 //}
 
 include ':app', ':libfresco', ':libokhttp', ':libbase', ':liblog', ':libframework'
-include ':Submodule:libkv', ':Submodule:librv', ':Submodule:libcomponent', ':Submodule:libstorage'
+include ':libkv', ':librv', ':libcomponent', ':libstorage'
 include ':plugintest'
 //include ':libaspectj'
 

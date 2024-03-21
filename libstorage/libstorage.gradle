@@ -1,0 +1,67 @@
+apply plugin: 'com.android.library'
+apply from: '../jitpack_publish.gradle'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    android.libraryVariants.all { variant ->
+        variant.outputs.all {
+            outputFileName = "${project.name}_${defaultConfig.versionName}.aar"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            java {
+                println(">>>>> isRelease:" + isReleaseBuildType()) //打印日志
+                if (isReleaseBuildType()) {
+                    exclude "com/bear/libstorage/Test.java"
+                    exclude "com/bear/libstorage/TestObj.java"
+                }
+            }
+        }
+    }
+}
+
+// 直接判断 BuildType 名称
+boolean isReleaseBuildType() {
+    for (String s : gradle.startParameter.taskNames) {
+        if (s.contains("Release") || s.contains("release")) {
+            return true
+        }
+    }
+    return false
+    // 根据 BuildType 判断
+//    if (project.hasProperty("android.injected.build.model.only")) {
+//        // Debug 构建
+//        println("Debug Build")
+//    } else {
+//        // Release 构建
+//        println("Release Build")
+//    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+    rootProject.ext.importDependencies(this, rootProject.ext.libstorageDependenciesMap)
+}
+
+publishToMaven('libstorage')

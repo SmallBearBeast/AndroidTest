@@ -12,6 +12,7 @@ android {
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
     }
 
     android.libraryVariants.all { variant ->
@@ -30,9 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    rootProject.ext.importDependencies(this, rootProject.ext.libframeworkDependenciesMap)
-    implementation project(":liblog")
-    implementation project(":libcomponent")
+    rootProject.ext.importDependencies(this, rootProject.ext.libcomponentDependenciesMap)
 }
 
-publishToMaven('liblog')
+publishToMaven('libcomponent')

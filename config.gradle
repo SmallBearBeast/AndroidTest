@@ -175,27 +175,27 @@ ext {
     ]
 
     libcomponentDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
             ]
     ]
 
     libkvDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.mmkv}",
             ]
     ]
 
     librvDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.recyclerview}",
             ]
     ]
 
     libstorageDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.gson}",
             ]
