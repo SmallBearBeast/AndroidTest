@@ -11,6 +11,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/okhttpTextView"
+                style="@style/TestLabelStyle"
+                android:text="OkHttpAct Demo" />
+
+            <Button
+                android:id="@+id/okhttpTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To OkHttpAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okhttpTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/componentTextView"
                 style="@style/TestLabelStyle"
                 android:text="ComponentDemoAct Demo" />

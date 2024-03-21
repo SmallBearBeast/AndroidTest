@@ -93,25 +93,25 @@ protobuf {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     rootProject.ext.importDependencies(this, rootProject.ext.appDependenciesMap)
-    implementation project(":libbase")
-    implementation project(":libfresco")
-    implementation project(":libokhttp")
-    implementation project(":liblog")
-    implementation project(":libframework")
-//    implementation project(":libaspectj")
-    implementation project(":libkv")
-    implementation project(":librv")
-    implementation project(":libcomponent")
+//    implementation project(":libbase")
+//    implementation project(":libfresco")
+//    implementation project(":libokhttp")
+//    implementation project(":liblog")
+//    implementation project(":libframework")
+////    implementation project(":libaspectj")
+//    implementation project(":libkv")
+//    implementation project(":librv")
+//    implementation project(":libcomponent")
 //    implementation project(':flutter')
 
-//    implementation 'com.github.SmallBearBeast.AndroidTest:liblog:1.0.7'
-//    implementation 'com.github.SmallBearBeast.AndroidTest:libokhttp:1.0.7'
-//    implementation 'com.github.SmallBearBeast.AndroidTest:libkv:1.0.7'
-//    implementation 'com.github.SmallBearBeast.AndroidTest:libbase:1.0.7'
-//    implementation 'com.github.SmallBearBeast.AndroidTest:libframework:1.0.7'
-//    implementation 'com.github.SmallBearBeast.AndroidTest:librv:1.0.7'
-//    implementation 'com.github.SmallBearBeast.AndroidTest:libcomponent:1.0.7'
-//    implementation 'com.github.SmallBearBeast.AndroidTest:libfresco:1.0.7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:liblog:b48a0898c7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:libokhttp:b48a0898c7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:libkv:b48a0898c7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:libbase:b48a0898c7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:libframework:b48a0898c7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:librv:b48a0898c7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:libcomponent:b48a0898c7'
+    implementation 'com.github.SmallBearBeast.AndroidTest:libfresco:b48a0898c7'
 }
 
 // Gradle Test
