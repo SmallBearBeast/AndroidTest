@@ -7,9 +7,9 @@ import androidx.annotation.NonNull;
 import com.example.administrator.androidtest.AndroidTestApplication;
 import com.example.libbase.Util.TimeUtil;
 
-import io.flutter.embedding.engine.FlutterEngine;
-import io.flutter.embedding.engine.FlutterEngineCache;
-import io.flutter.embedding.engine.dart.DartExecutor;
+//import io.flutter.embedding.engine.FlutterEngine;
+//import io.flutter.embedding.engine.FlutterEngineCache;
+//import io.flutter.embedding.engine.dart.DartExecutor;
 
 public class ImmediateTask extends BaseBootTask {
     public ImmediateTask() {
@@ -26,10 +26,10 @@ public class ImmediateTask extends BaseBootTask {
         // 需要放在主线程
         TimeUtil.markStart("InitFlutterEngine");
         // Instantiate a FlutterEngine.
-        FlutterEngine flutterEngine = new FlutterEngine(AndroidTestApplication.getContext());
-        flutterEngine.getDartExecutor().executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault());
-        // Cache the FlutterEngine to be used by FlutterActivity.
-        FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine);
+//        FlutterEngine flutterEngine = new FlutterEngine(AndroidTestApplication.getContext());
+//        flutterEngine.getDartExecutor().executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault());
+//        // Cache the FlutterEngine to be used by FlutterActivity.
+//        FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine);
         Log.i(TAG, "initFlutterEngine: cost time " + TimeUtil.getDuration("InitFlutterEngine") + " ms");
     }
 }

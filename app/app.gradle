@@ -102,7 +102,7 @@ dependencies {
     implementation project(":Submodule:libkv")
     implementation project(":Submodule:librv")
     implementation project(":Submodule:libcomponent")
-    implementation project(':flutter')
+//    implementation project(':flutter')
 }
 
 // Gradle Test

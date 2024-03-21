@@ -41,11 +41,11 @@ public class MonitorClassLoader extends PathClassLoader {
     }
 
     /*
-        核心是在application的ClassLoader与parentClassLoader之间插入MonitorClassLoader，因为不好去hook替换到原有的application的ClassLoader。
-        更全面的方法是生成一个application的ClassLoader代理的ClassLoader，在进行插入。
+        核心是在application的ClassLoader与parentClassLoader之间插入MonitorClassLoader，因为不好去hook替换到原有的application的ClassLoader和其他地方的ClassLoader。
+        更全面的方法是生成一个application的ClassLoader的代理对象，在进行插入到parent，这样不会修改原有的加载逻辑。
         步骤：
         1. 反射获取原始 pathClassLoader 的 pathList，因为需要用到DexPathList去findClass。
-        2. 创建MonitorClassLoader，并反射设置 正确的 pathList。
+        2. 创建MonitorClassLoader，并反射设置 正确的 pathList。所以这里在MonitorClassLoader这一层已经实现了类的加载与获取。
         3. 反射替换 原始pathClassLoader的 parent指向 MonitorClassLoader实例
      */
     public static void hook(Application application, boolean onlyMainThread) {

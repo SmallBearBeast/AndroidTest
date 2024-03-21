@@ -5,7 +5,7 @@ import android.view.View;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestComponent;
 
-import io.flutter.embedding.android.FlutterActivity;
+//import io.flutter.embedding.android.FlutterActivity;
 
 public class FlutterTestComponent extends TestComponent {
 
@@ -19,9 +19,9 @@ public class FlutterTestComponent extends TestComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.flutterTestButton:
-                getContext().startActivity(
-                        FlutterActivity.withCachedEngine("my_engine_id").build(getContext())
-                );
+//                getContext().startActivity(
+//                        FlutterActivity.withCachedEngine("my_engine_id").build(getContext())
+//                );
                 break;
         }
     }

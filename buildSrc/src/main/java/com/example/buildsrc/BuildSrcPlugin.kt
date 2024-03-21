@@ -21,7 +21,7 @@ class BuildSrcPlugin: Plugin<Project>{
             val mergeDebugResourcesTask = project.tasks.findByName("mergeDebugResources")
             println("mergeDebugResourcesTask is ${if (mergeDebugResourcesTask != null) "not null" else "null"}")
             mergeDebugResourcesTask?.finalizedBy(buildSrcTask)
-//                buildSrcTask?.dependsOn(buildSrcTask)
+//                buildSrcTask?.dependsOn(mergeDebugResourcesTask)
         }
     }
 }

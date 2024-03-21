@@ -1,3 +1,21 @@
+//pluginManagement {
+//    repositories {
+//        maven{ url = "https://maven.aliyun.com/repository/public" }
+//        gradlePluginPortal()
+//        google()
+//        mavenCentral()
+//    }
+//}
+//
+//dependencyResolutionManagement {
+//    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+//    repositories {
+//        maven{ url = "https://maven.aliyun.com/repository/public/" }
+//        google()
+//        mavenCentral()
+//    }
+//}
+
 include ':app', ':libfresco', ':libokhttp', ':libbase', ':liblog', ':libframework'
 include ':Submodule:libkv', ':Submodule:librv', ':Submodule:libcomponent', ':Submodule:libstorage'
 include ':plugintest'
@@ -5,13 +23,13 @@ include ':plugintest'
 
 // Include flutter module.
 // 绑定变量名gradle为Settings对象，在include_flutter可以直接访问。
-setBinding(new Binding([gradle: this]))
-// 执行include_flutter.groovy脚本
-evaluate(new File(
-        settingsDir.parentFile,
-        'lib_fluttertest/.android/include_flutter.groovy'
-))
-include ':flutter'
+//setBinding(new Binding([gradle: this]))
+//// 执行include_flutter.groovy脚本
+//evaluate(new File(
+//        settingsDir.parentFile,
+//        'lib_fluttertest/.android/include_flutter.groovy'
+//))
+//include ':flutter'
 // 不理解 Caused by: org.gradle.api.UnknownProjectException: Project with path ':flutter' could not be found in project ':app'.
 // project(':flutter').name = "fluttertest"
 
@@ -39,5 +57,5 @@ def renameBuildGradleFile(childProjects) {
         renameBuildGradleFile(projectDescriptor.children)
     }
 }
-include ':lib_fluttertest'
-project(':lib_fluttertest').projectDir = new File('../lib_fluttertest')
+//include ':lib_fluttertest'
+//project(':lib_fluttertest').projectDir = new File('../lib_fluttertest')
