@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply from: '../jitpack_publish.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -29,5 +30,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     rootProject.ext.importDependencies(this, rootProject.ext.libokhttpDependenciesMap)
-    compileOnly project(":liblog")
+    implementation project(":liblog")
 }
+
+publishToMaven('libokhttp')

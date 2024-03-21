@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply from: '../jitpack_publish.gradle'
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -31,3 +32,5 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     rootProject.ext.importDependencies(this, rootProject.ext.libbaseDependenciesMap)
 }
+
+publishToMaven('libbase')

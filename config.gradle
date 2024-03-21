@@ -137,21 +137,21 @@ ext {
     ]
 
     libbaseDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.gson}",
                     "${dependenciesMap.appcompat}",
             ]
     ]
 
     libframeworkDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.recyclerview}",
             ]
     ]
 
     libfrescoDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.fresco}",
                     "${dependenciesMap.animated_gif}",
@@ -161,13 +161,13 @@ ext {
     ]
 
     liblogDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
             ]
     ]
 
     libokhttpDependenciesMap = [
-            "compileOnly": [
+            "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.okhttp}",
                     "${dependenciesMap.gson}",

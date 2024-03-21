@@ -103,6 +103,9 @@ dependencies {
     implementation project(":Submodule:librv")
     implementation project(":Submodule:libcomponent")
 //    implementation project(':flutter')
+//    implementation 'com.github.SmallBearBeast.AndroidTest:liblog:1.0.6'
+//    implementation 'com.github.SmallBearBeast.AndroidTest:libokhttp:1.0.6'
+//    implementation 'com.github.SmallBearBeast.AndroidTest:libkv:1.0.6'
 }
 
 // Gradle Test
