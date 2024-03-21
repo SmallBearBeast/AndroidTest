@@ -66,6 +66,6 @@ def publishToMaven(artifactId) {
 }
 
 ext {
-    publish_version = '1.0.6'
+    publish_version = '1.0.7'
     publishToMaven = this.&publishToMaven
 }
