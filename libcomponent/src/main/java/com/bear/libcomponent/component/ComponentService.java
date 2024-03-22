@@ -20,8 +20,6 @@ import androidx.lifecycle.LifecycleOwner;
 import com.bear.libcomponent.provider.IBackPressedProvider;
 import com.bear.libcomponent.provider.IMenuProvider;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -29,6 +27,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 // TODO: 2023/12/19 能否统一成组件树的形式，不好实现
 public class ComponentService {
+
+    private boolean isReadyInit = false;
     private final PageComponentStack pageComponentStack = new PageComponentStack();
 
     public static ComponentService get() {
@@ -40,6 +40,7 @@ public class ComponentService {
     }
 
     public void init(Application app) {
+        isReadyInit = true;
         app.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
 
             @Override
@@ -94,6 +95,7 @@ public class ComponentService {
     }
 
     public <C extends IComponent> void regActComponent(ComponentAct activity, @NonNull C component, @Nullable Object tag) {
+        checkReadyInit();
         if (pageComponentStack.containComponent(component.getClass(), tag)) {
             throw new RuntimeException("Can not register component with same type and tag");
         }
@@ -134,6 +136,7 @@ public class ComponentService {
     }
 
     private <C extends IComponent> void regFragComponent(ComponentFrag fragment, Lifecycle lifecycle, @NonNull C component, @Nullable Object tag) {
+        checkReadyInit();
         if (pageComponentStack.containComponent(component.getClass(), tag)) {
             throw new RuntimeException("Can not register component with same type and tag");
         }
@@ -164,25 +167,31 @@ public class ComponentService {
     }
 
     public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
+        checkReadyInit();
         if (pageComponentStack.usePrevPageComponent(clz, tag)) {
             throw new RuntimeException("Can not use prev page component");
         }
         C component = pageComponentStack.getComponent(clz, tag);
         if (component == null) {
-            component = getProxyComponent(clz);
+            component = getEmptyComponent(clz);
             pageComponentStack.putComponent(component, tag);
         }
         return component;
     }
 
-    private <C extends IComponent> C getProxyComponent(Class<C> clz) {
+    private <C extends IComponent> C getEmptyComponent(Class<C> clz) {
         try {
-            InvocationHandler invocationHandler = (proxy, method, args) -> null;
-            return (C) Proxy.newProxyInstance(clz.getClassLoader(), new Class[]{clz}, invocationHandler);
+            return clz.newInstance();
         } catch (Exception e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    private void checkReadyInit() {
+        if (!isReadyInit) {
+            throw new RuntimeException("Init() should be called first");
+        }
     }
 
     void dispatchOnCreateView(ComponentFrag componentFrag, View contentView) {
@@ -388,6 +397,7 @@ public class ComponentService {
                         if (targetComponent != null) {
                             return (C) targetComponent;
                         }
+                        // Find target component from subComponent.
                         for (IComponent component : map.values()) {
                             if (component instanceof ContainerComponent) {
                                 ContainerComponent containerComponent = (ContainerComponent) component;

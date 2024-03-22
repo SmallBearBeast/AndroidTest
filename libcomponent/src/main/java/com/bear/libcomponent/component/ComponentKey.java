@@ -17,8 +17,7 @@ class ComponentKey<C extends IComponent> {
         if (this == obj) return true;
         if (obj == null) return false;
         ComponentKey that = (ComponentKey) obj;
-        return that.clz.isAssignableFrom(clz) &&
-                Objects.equals(tag, that.tag);
+        return Objects.equals(clz, that.clz) && Objects.equals(tag, that.tag);
     }
 
     @Override
