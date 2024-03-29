@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="400dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
 
     <com.example.administrator.androidtest.Widget.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:sl_bg_color="@color/cl_green"
         app:sl_corner_radius="20dp"
-        app:sl_shadow_offset="20dp"
         app:sl_shadow_color="#000000"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        app:sl_shadow_offset="20dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +38,33 @@
 
             <TextView
                 android:id="@+id/tv_3"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:gravity="center"
+                android:text="Hello World"
+                android:textColor="@color/cl_black"
+                android:textSize="25dp" />
+
+            <com.example.administrator.androidtest.Widget.NestedContainer
+                android:layout_width="match_parent"
+                android:layout_height="100dp">
+
+                <View
+                    android:id="@+id/blackView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/cl_black" />
+
+            </com.example.administrator.androidtest.Widget.NestedContainer>
+
+            <View
+                android:id="@+id/redView"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/cl_red_t_6" />
+
+            <Button
+                android:id="@+id/button"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:gravity="center"

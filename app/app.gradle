@@ -112,6 +112,9 @@ dependencies {
     implementation 'com.github.SmallBearBeast.AndroidTest:librv:b48a0898c7'
     implementation 'com.github.SmallBearBeast.AndroidTest:libcomponent:b48a0898c7'
     implementation 'com.github.SmallBearBeast.AndroidTest:libfresco:b48a0898c7'
+
+    implementation 'com.google.android.exoplayer:exoplayer-core:2.18.5'//核心库必选
+    implementation 'com.google.android.exoplayer:exoplayer-ui:2.18.5'// ui库可选
 }
 
 // Gradle Test

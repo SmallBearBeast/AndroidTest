@@ -10,6 +10,7 @@ import com.alibaba.android.arouter.launcher.ARouter;
 import com.bear.libcomponent.component.ComponentService;
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.bear.libkv.SpVal.SpHelper;
+import com.bumptech.glide.Glide;
 import com.example.administrator.androidtest.AndroidTestApplication;
 import com.example.administrator.androidtest.BuildConfig;
 import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
@@ -39,6 +40,8 @@ public class AnchorDPTask extends BaseBootTask {
             ARouter.openDebug();
         }
         ARouter.init((Application) context);
+        // 初始化图片加载库Glide，也可以使用时候在加载。
+//        Glide.get(context);
         Log.d(TAG, "run: AnchorDPTask cost " + TimeUtil.getDuration("AnchorDPTask") + "ms");
     }
 }

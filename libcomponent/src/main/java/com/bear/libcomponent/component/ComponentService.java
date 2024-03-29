@@ -26,6 +26,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 // TODO: 2023/12/19 能否统一成组件树的形式，不好实现
+// TODO: 2024/3/27 单页面模式不适用单例ComponentService来处理，集成到ComponentAct中。
 public class ComponentService {
 
     private boolean isReadyInit = false;

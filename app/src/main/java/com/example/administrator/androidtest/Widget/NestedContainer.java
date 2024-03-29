@@ -33,6 +33,13 @@ public class NestedContainer extends FrameLayout implements NestedScrollingChild
         final ViewConfiguration configuration = ViewConfiguration.get(getContext());
         mMinimumVelocity = configuration.getScaledMinimumFlingVelocity();
         mMaximumVelocity = configuration.getScaledMaximumFlingVelocity();
+        setNestedScrollingEnabled(true);
+    }
+
+
+    @Override
+    public void setNestedScrollingEnabled(boolean enabled) {
+        childHelper.setNestedScrollingEnabled(enabled);
     }
 
     @Override
@@ -74,16 +81,16 @@ public class NestedContainer extends FrameLayout implements NestedScrollingChild
     public boolean dispatchTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                mLastMotionX = (int) event.getX();
-                mLastMotionY = (int) event.getY();
+                mLastMotionX = (int) event.getRawX();
+                mLastMotionY = (int) event.getRawY();
                 initOrResetVelocityTracker();
                 mVelocityTracker.addMovement(event);
                 startNestedScroll(ViewCompat.SCROLL_AXIS_VERTICAL | ViewCompat.SCROLL_AXIS_HORIZONTAL, ViewCompat.TYPE_TOUCH);
                 break;
 
             case MotionEvent.ACTION_MOVE:
-                final int x = (int) event.getX();
-                final int y = (int) event.getY();
+                final int x = (int) event.getRawX();
+                final int y = (int) event.getRawY();
                 int deltaX = mLastMotionX - x;
                 int deltaY = mLastMotionY - y;
                 if (dispatchNestedPreScroll(0, deltaY, mScrollConsumed, mScrollOffset, ViewCompat.TYPE_TOUCH)) {

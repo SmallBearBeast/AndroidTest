@@ -9,6 +9,48 @@
     <LinearLayout style="@style/ll_vertical">
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+            <TextView
+                android:id="@+id/bizDemoTextView"
+                style="@style/TestLabelStyle"
+                android:text="BizDemoAct Demo" />
+
+            <Button
+                android:id="@+id/bizDemoButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To BizDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/bizDemoTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+            <TextView
+                android:id="@+id/libraryDemoTextView"
+                style="@style/TestLabelStyle"
+                android:text="LibraryDemoAct Demo" />
+
+            <Button
+                android:id="@+id/libraryDemoButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To LibraryDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/libraryDemoTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+            <TextView
+                android:id="@+id/anrTestTextView"
+                style="@style/TestLabelStyle"
+                android:text="AnrTestAct Demo" />
+
+            <Button
+                android:id="@+id/anrTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To AnrTestAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/anrTestTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
                 android:id="@+id/okhttpTextView"
