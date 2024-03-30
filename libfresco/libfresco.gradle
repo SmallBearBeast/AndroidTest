@@ -26,6 +26,7 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     rootProject.ext.importDependencies(this, rootProject.ext.libfrescoDependenciesMap)
     implementation project(":libbase")
+    implementation project(":liblog")
 }
 
 publishToMaven('libfresco')

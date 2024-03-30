@@ -10,45 +10,51 @@ import androidx.annotation.NonNull;
 import com.bear.libcomponent.base.BaseAct;
 
 public abstract class ComponentAct extends BaseAct {
+    private ComponentManager componentManager = new ComponentManager();
+    
     protected <C extends IComponent> void regActComponent(C component, Object tag) {
-        ComponentService.get().regActComponent(this, component, tag);
+        componentManager.regActComponent(this, component, tag);
     }
 
     protected <C extends IComponent> void regActComponent(C component) {
-        ComponentService.get().regActComponent(this, component);
+        componentManager.regActComponent(this, component);
     }
 
     public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
-        return ComponentService.get().getComponent(clz, tag);
+        return componentManager.getComponent(clz, tag);
     }
 
     public <C extends IComponent> C getComponent(Class<C> clz) {
-        return ComponentService.get().getComponent(clz);
+        return componentManager.getComponent(clz);
     }
 
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        ComponentService.get().dispatchOnBackPressed();
+        componentManager.dispatchOnBackPressed();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        return ComponentService.get().dispatchOnCreateOptionsMenu(menu, getMenuInflater());
+        return componentManager.dispatchOnCreateOptionsMenu(menu, getMenuInflater());
     }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return ComponentService.get().dispatchOnOptionsItemSelected(item);
+        return componentManager.dispatchOnOptionsItemSelected(item);
     }
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        ComponentService.get().dispatchOnCreateContextMenu(menu, v, menuInfo);
+        componentManager.dispatchOnCreateContextMenu(menu, v, menuInfo);
     }
 
     @Override
     public boolean onContextItemSelected(@NonNull MenuItem item) {
-        return ComponentService.get().dispatchOnContextItemSelected(item);
+        return componentManager.dispatchOnContextItemSelected(item);
+    }
+
+    public ComponentManager getComponentManager() {
+        return componentManager;
     }
 }

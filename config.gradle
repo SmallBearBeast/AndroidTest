@@ -8,6 +8,9 @@ ext {
     kotlin_version = '1.7.10'
     coroutines_version = '1.6.4'
     lifecycle_version = '2.3.1'
+    exoplayer_version = '2.18.5'
+
+    smallbearbeast_version = 'b48a0898c7'
 
     pluginMap = [
             'gradle'                        : 'com.android.tools.build:gradle:7.3.0',
@@ -77,9 +80,21 @@ ext {
             'arouter_compiler'          : 'com.alibaba:arouter-compiler:1.5.2',
             'room_compiler'             : 'androidx.room:room-compiler:2.3.0',
 
-            'asm': 'org.ow2.asm:asm:9.1',
-            'asm_util': 'org.ow2.asm:asm-util:9.1',
-            'asm_common': 'org.ow2.asm:asm-commons:9.1',
+            'asm'                       : 'org.ow2.asm:asm:9.1',
+            'asm_util'                  : 'org.ow2.asm:asm-util:9.1',
+            'asm_common'                : 'org.ow2.asm:asm-commons:9.1',
+
+            'exoplayer_core': "com.google.android.exoplayer:exoplayer-core:$exoplayer_version", //核心库必选
+            'exoplayer_ui': "com.google.android.exoplayer:exoplayer-ui:$exoplayer_version", // ui库可选
+
+            'liblog'                    : "com.github.SmallBearBeast.AndroidTest:liblog:$smallbearbeast_version",
+            'libokhttp'                 : "com.github.SmallBearBeast.AndroidTest:libokhttp:$smallbearbeast_version",
+            'libkv'                     : "com.github.SmallBearBeast.AndroidTest:libkv:$smallbearbeast_version",
+            'libbase'                   : "com.github.SmallBearBeast.AndroidTest:libbase:$smallbearbeast_version",
+            'libframework'              : "com.github.SmallBearBeast.AndroidTest:libframework:$smallbearbeast_version",
+            'librv'                     : "com.github.SmallBearBeast.AndroidTest:librv:$smallbearbeast_version",
+            'libcomponent'              : "com.github.SmallBearBeast.AndroidTest:libcomponent:$smallbearbeast_version",
+            'libfresco'                 : "com.github.SmallBearBeast.AndroidTest:libfresco:$smallbearbeast_version",
     ]
 
 
@@ -91,7 +106,7 @@ ext {
             "androidTestImplementation": [
 //                    "${dependenciesMap.androidx_junit}",
 //                    "${dependenciesMap.espresso_core}",
-                    "${dependenciesMap.mockk_android}",
+"${dependenciesMap.mockk_android}",
             ],
             "implementation"           : [
                     "${dependenciesMap.recyclerview}",
@@ -126,6 +141,17 @@ ext {
                     "${dependenciesMap.asm}",
                     "${dependenciesMap.asm_util}",
                     "${dependenciesMap.asm_common}",
+                    "${dependenciesMap.exoplayer_core}",
+                    "${dependenciesMap.exoplayer_ui}",
+
+//                    "${dependenciesMap.liblog}",
+//                    "${dependenciesMap.libokhttp}",
+//                    "${dependenciesMap.libkv}",
+//                    "${dependenciesMap.libbase}",
+//                    "${dependenciesMap.libframework}",
+//                    "${dependenciesMap.librv}",
+//                    "${dependenciesMap.libcomponent}",
+//                    "${dependenciesMap.libfresco}",
             ],
             "debugImplementation"      : [
                     "${dependenciesMap.leakcanary_android}",
@@ -140,6 +166,8 @@ ext {
             "implementation": [
                     "${dependenciesMap.gson}",
                     "${dependenciesMap.appcompat}",
+
+//                    "${dependenciesMap.liblog}",
             ]
     ]
 
@@ -147,6 +175,8 @@ ext {
             "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.recyclerview}",
+
+//                    "${dependenciesMap.liblog}",
             ]
     ]
 
@@ -157,6 +187,9 @@ ext {
                     "${dependenciesMap.animated_gif}",
                     "${dependenciesMap.animated_webp}",
                     "${dependenciesMap.webpsupport}",
+
+//                    "${dependenciesMap.liblog}",
+//                    "${dependenciesMap.libbase}",
             ]
     ]
 
@@ -171,12 +204,16 @@ ext {
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.okhttp}",
                     "${dependenciesMap.gson}",
+
+//                    "${dependenciesMap.liblog}",
             ]
     ]
 
     libcomponentDependenciesMap = [
             "implementation": [
                     "${dependenciesMap.appcompat}",
+
+//                    "${dependenciesMap.liblog}",
             ]
     ]
 
@@ -184,6 +221,8 @@ ext {
             "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.mmkv}",
+
+//                    "${dependenciesMap.liblog}",
             ]
     ]
 
@@ -191,6 +230,8 @@ ext {
             "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.recyclerview}",
+
+//                    "${dependenciesMap.liblog}",
             ]
     ]
 
@@ -198,6 +239,8 @@ ext {
             "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.gson}",
+
+//                    "${dependenciesMap.liblog}",
             ]
     ]
 

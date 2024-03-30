@@ -6,8 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Proxy;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -76,11 +74,11 @@ public class ContainerComponent extends BaseComponent {
             return (C) targetComponent;
         }
         // 没有过滤掉已经查询的组件
-        targetComponent = ComponentService.get().getComponent(clz, tag);
+        targetComponent = getComponentContainer().get(clz, tag);
         if (targetComponent != null) {
             return (C) targetComponent;
         }
-        return getProxyComponent(clz);
+        return null;
     }
 
     public <C extends IComponent> C travel(ComponentKey<?> targetKey, IComponent excludeComponent) {
@@ -97,16 +95,6 @@ public class ContainerComponent extends BaseComponent {
                     return (C) targetComponent;
                 }
             }
-        }
-        return null;
-    }
-
-    private <C extends IComponent> C getProxyComponent(Class<C> clz) {
-        try {
-            InvocationHandler invocationHandler = (proxy, method, args) -> null;
-            return (C) Proxy.newProxyInstance(clz.getClassLoader(), new Class[]{clz}, invocationHandler);
-        } catch (Exception e) {
-            e.printStackTrace();
         }
         return null;
     }

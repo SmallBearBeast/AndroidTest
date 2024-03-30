@@ -31,8 +31,6 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     rootProject.ext.importDependencies(this, rootProject.ext.libframeworkDependenciesMap)
-    implementation project(":liblog")
-    implementation project(":libcomponent")
 }
 
 publishToMaven('libframework')

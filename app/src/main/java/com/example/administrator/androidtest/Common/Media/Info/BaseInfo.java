@@ -6,10 +6,6 @@ import com.example.administrator.androidtest.Common.Media.Provider.MediaConstant
 import com.example.libbase.Util.TimeUtil;
 import com.example.liblog.SLog;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
-
 public class BaseInfo {
     private static final String TAG = "BaseInfo";
 

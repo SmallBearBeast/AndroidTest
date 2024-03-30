@@ -13,12 +13,12 @@ import androidx.annotation.Nullable;
 import com.bear.libcomponent.base.BaseFrag;
 
 public abstract class ComponentFrag extends BaseFrag {
-
+    
     @Override
     @CallSuper
     public void onAttach(Context context) {
         super.onAttach(context);
-        ComponentService.get().dispatchOnAttach(this, context);
+        getComponentManager().dispatchOnAttach(this, context);
     }
 
     @Nullable
@@ -26,7 +26,7 @@ public abstract class ComponentFrag extends BaseFrag {
     @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View contentView = super.onCreateView(inflater, container, savedInstanceState);
-        ComponentService.get().dispatchOnCreateView(this, contentView);
+        getComponentManager().dispatchOnCreateView(this, contentView);
         return contentView;
     }
 
@@ -34,42 +34,49 @@ public abstract class ComponentFrag extends BaseFrag {
     @CallSuper
     public void onDestroyView() {
         super.onDestroyView();
-        ComponentService.get().dispatchOnDestroyView(this);
+        getComponentManager().dispatchOnDestroyView(this);
     }
 
     @Override
     @CallSuper
     public void onDetach() {
         super.onDetach();
-        ComponentService.get().dispatchOnDetach(this);
+        getComponentManager().dispatchOnDetach(this);
     }
 
     @Override
     protected void onFirstVisible() {
-        ComponentService.get().dispatchOnFirstVisible(this);
+        getComponentManager().dispatchOnFirstVisible(this);
     }
 
     public void regFragComponent(IComponent component, Object tag) {
-        ComponentService.get().regFragComponent(this, component, tag);
+        getComponentManager().regFragComponent(this, component, tag);
     }
 
     public void regFragComponent(IComponent component) {
-        ComponentService.get().regFragComponent(this, component);
+        getComponentManager().regFragComponent(this, component);
     }
 
     public void regFragViewComponent(IComponent component, Object tag) {
-        ComponentService.get().regFragViewComponent(this, component, tag);
+        getComponentManager().regFragViewComponent(this, component, tag);
     }
 
     public void regFragViewComponent(IComponent component) {
-        ComponentService.get().regFragViewComponent(this, component);
+        getComponentManager().regFragViewComponent(this, component);
     }
 
     public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
-        return ComponentService.get().getComponent(clz, tag);
+        return getComponentManager().getComponent(clz, tag);
     }
 
     public <C extends IComponent> C getComponent(Class<C> clz) {
-        return ComponentService.get().getComponent(clz);
+        return getComponentManager().getComponent(clz);
+    }
+    
+    private ComponentManager getComponentManager() {
+        if (getActivity() instanceof ComponentAct) {
+            return ((ComponentAct) getActivity()).getComponentManager();
+        }
+        throw new RuntimeException("getComponentManager return null");
     }
 }

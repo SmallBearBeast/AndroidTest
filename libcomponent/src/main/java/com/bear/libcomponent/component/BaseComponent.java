@@ -5,6 +5,7 @@ import android.util.SparseArray;
 import android.view.View;
 
 import androidx.annotation.IdRes;
+import androidx.annotation.NonNull;
 
 import com.bear.libcomponent.provider.IContextProvider;
 
@@ -20,6 +21,12 @@ public abstract class BaseComponent extends LifeComponent implements IContextPro
     private Context context;
 
     private SparseArray<View> viewIdArray;
+
+    private ComponentContainer componentContainer;
+
+    void attachComponentContainer(@NonNull ComponentContainer container) {
+        componentContainer = container;
+    }
 
     protected void attachView(View view) {
         contentView = view;
@@ -78,5 +85,9 @@ public abstract class BaseComponent extends LifeComponent implements IContextPro
             return (ComponentAct) context;
         }
         return null;
+    }
+
+    ComponentContainer getComponentContainer() {
+        return componentContainer;
     }
 }

@@ -7,10 +7,8 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.bear.libcomponent.component.ComponentService;
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.bear.libkv.SpVal.SpHelper;
-import com.bumptech.glide.Glide;
 import com.example.administrator.androidtest.AndroidTestApplication;
 import com.example.administrator.androidtest.BuildConfig;
 import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
@@ -34,7 +32,6 @@ public class AnchorDPTask extends BaseBootTask {
         SpHelper.init(context);
         MmkvVal.init(context);
         SpHelper.preload(SpValHelper.SP_GLOBAL_CONFIG);
-        ComponentService.get().init((Application) context);
         if (BuildConfig.DEBUG) {
             ARouter.openLog();
             ARouter.openDebug();
