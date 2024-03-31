@@ -4,10 +4,10 @@ import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.administrator.androidtest.Widget.MarqueeTextView;
 
-public class MarqueeDemoComponent extends TestComponent {
+public class MarqueeDemoComponent extends TestActivityComponent {
     private MarqueeTextView marqueeTextView_1;
 
     @Override

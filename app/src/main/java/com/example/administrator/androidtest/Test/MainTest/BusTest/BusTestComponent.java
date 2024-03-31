@@ -5,9 +5,9 @@ import android.view.View;
 
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.BottomSheetTest.VpAndRvBottomSheetFragment;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class BusTestComponent extends TestComponent {
+public class BusTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {

@@ -2,9 +2,9 @@ package com.example.administrator.androidtest.Test.MainTest.KVCompareTest
 
 import android.view.View
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.Test.MainTest.TestComponent
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent
 
-class KVCompareTestComponent : TestComponent() {
+class KVCompareTestComponent : TestActivityComponent() {
     override fun onCreate() {
         setOnClickListener(this, R.id.kvCompareTestButton)
     }

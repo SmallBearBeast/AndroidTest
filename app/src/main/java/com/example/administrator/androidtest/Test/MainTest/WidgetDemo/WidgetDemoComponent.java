@@ -3,9 +3,9 @@ package com.example.administrator.androidtest.Test.MainTest.WidgetDemo;
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class WidgetDemoComponent extends TestComponent {
+public class WidgetDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {

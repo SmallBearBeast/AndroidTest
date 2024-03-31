@@ -3,9 +3,9 @@ package com.example.administrator.androidtest.Test.MainTest.ViewDemo.ToolbarTest
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class ToolbarTestComponent extends TestComponent implements View.OnClickListener{
+public class ToolbarTestComponent extends TestActivityComponent implements View.OnClickListener{
     @Override
     protected void onCreate() {
         super.onCreate();

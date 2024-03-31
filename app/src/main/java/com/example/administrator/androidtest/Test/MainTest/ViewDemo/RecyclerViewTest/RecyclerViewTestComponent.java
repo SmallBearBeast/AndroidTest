@@ -14,9 +14,9 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class RecyclerViewTestComponent extends TestComponent {
+public class RecyclerViewTestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();

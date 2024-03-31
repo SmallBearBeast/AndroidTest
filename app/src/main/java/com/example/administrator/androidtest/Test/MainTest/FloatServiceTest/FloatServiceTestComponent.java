@@ -5,9 +5,9 @@ import android.view.View;
 
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.ShareTest.SystemShareAct;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class FloatServiceTestComponent extends TestComponent {
+public class FloatServiceTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {

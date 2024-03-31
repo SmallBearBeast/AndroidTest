@@ -11,18 +11,31 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
-                android:id="@+id/toolbarTextView"
+                android:id="@+id/glideDemoTextView"
                 style="@style/TestLabelStyle"
-                android:text="TiktokDemo Test" />
+                android:text="Glide Demo" />
 
             <Button
-                android:id="@+id/toolbarTestButton"
+                android:id="@+id/glideDemoButton"
                 style="@style/TestButtonStyle"
-                android:text="Jump To TiktokDemoAct"
+                android:text="Jump To GlideDemoAct"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbarTextView" />
+                app:layout_constraintTop_toBottomOf="@+id/glideDemoTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
+            <TextView
+                android:id="@+id/okhttpDemoTextView"
+                style="@style/TestLabelStyle"
+                android:text="OkHttp Demo" />
+
+            <Button
+                android:id="@+id/okhttpDemoButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To OkHttpDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/okhttpDemoTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
 </ScrollView>

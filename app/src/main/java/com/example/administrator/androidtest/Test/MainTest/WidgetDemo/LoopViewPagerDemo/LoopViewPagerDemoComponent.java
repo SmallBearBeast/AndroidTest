@@ -10,11 +10,11 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.libbase.Util.ToastUtil;
 
-public class LoopViewPagerDemoComponent extends TestComponent {
+public class LoopViewPagerDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {

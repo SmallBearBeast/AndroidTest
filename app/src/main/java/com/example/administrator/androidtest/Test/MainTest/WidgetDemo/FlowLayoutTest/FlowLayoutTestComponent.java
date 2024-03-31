@@ -6,14 +6,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.administrator.androidtest.Widget.FlowFakeTextView;
 import com.example.administrator.androidtest.Widget.FlowLayout;
 import com.example.libbase.Util.DensityUtil;
 import com.example.libbase.Util.ToastUtil;
 import com.example.libbase.Util.XmlDrawableUtil;
 
-public class FlowLayoutTestComponent extends TestComponent {
+public class FlowLayoutTestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         initFlowLayout();

@@ -1,6 +1,6 @@
 package com.example.administrator.androidtest.Test.MainTest.OtherTest;
 
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class OtherTestComponent extends TestComponent {
+public class OtherTestComponent extends TestActivityComponent {
 }

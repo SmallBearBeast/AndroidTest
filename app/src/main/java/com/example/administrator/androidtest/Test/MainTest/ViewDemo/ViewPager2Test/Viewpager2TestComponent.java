@@ -4,9 +4,9 @@ import android.annotation.SuppressLint;
 import android.view.View;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class Viewpager2TestComponent extends TestComponent {
+public class Viewpager2TestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         setOnClickListener(this, R.id.viewpager2TestButton);

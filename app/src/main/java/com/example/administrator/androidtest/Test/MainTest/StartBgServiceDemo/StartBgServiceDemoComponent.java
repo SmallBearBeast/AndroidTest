@@ -5,9 +5,9 @@ import android.view.View;
 
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.BackgroundService;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class StartBgServiceDemoComponent extends TestComponent {
+public class StartBgServiceDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {

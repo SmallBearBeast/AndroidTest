@@ -3,10 +3,10 @@ package com.example.administrator.androidtest.Test.MainTest.WidgetDemo.CaseViewT
 
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.WidgetDemo.CaseViewTest.Case.CaseHelper;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.libbase.Util.ToastUtil;
 
-public class CaseViewComponent extends TestComponent {
+public class CaseViewComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         CaseHelper.showTestCaseView(findViewById(R.id.caseView), view -> {

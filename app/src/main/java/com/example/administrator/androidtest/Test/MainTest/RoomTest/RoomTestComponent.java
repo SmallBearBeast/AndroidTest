@@ -1,7 +1,7 @@
 package com.example.administrator.androidtest.Test.MainTest.RoomTest;
 
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class RoomTestComponent extends TestComponent {
+public class RoomTestComponent extends TestActivityComponent {
 
 }

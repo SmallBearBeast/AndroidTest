@@ -26,7 +26,7 @@
             <TextView
                 android:id="@+id/bizDemoTextView"
                 style="@style/TestLabelStyle"
-                android:text="BizDemoAct Demo" />
+                android:text="Biz Demo" />
 
             <Button
                 android:id="@+id/bizDemoButton"
@@ -40,7 +40,7 @@
             <TextView
                 android:id="@+id/libraryDemoTextView"
                 style="@style/TestLabelStyle"
-                android:text="LibraryDemoAct Demo" />
+                android:text="Library Demo" />
 
             <Button
                 android:id="@+id/libraryDemoButton"
@@ -62,21 +62,6 @@
                 android:text="Jump To AnrTestAct"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/anrTestTextView" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
-
-            <TextView
-                android:id="@+id/okhttpTextView"
-                style="@style/TestLabelStyle"
-                android:text="OkHttpAct Demo" />
-
-            <Button
-                android:id="@+id/okhttpTestButton"
-                style="@style/TestButtonStyle"
-                android:text="Jump To OkHttpAct"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/okhttpTextView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
@@ -385,7 +370,7 @@
             <TextView
                 android:id="@+id/viewDemoTextView"
                 style="@style/TestLabelStyle"
-                android:text="ViewDemoAct Demo" />
+                android:text="View Demo" />
 
             <Button
                 android:id="@+id/viewDemoButton"
@@ -400,7 +385,7 @@
             <TextView
                 android:id="@+id/widgetDemoTextView"
                 style="@style/TestLabelStyle"
-                android:text="WidgetDemoAct Demo" />
+                android:text="Widget Demo" />
 
             <Button
                 android:id="@+id/widgetDemoButton"

@@ -9,11 +9,11 @@ import com.bear.libkv.SpVal.SpHelper;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.MmkvValHelper;
 import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
-import com.example.administrator.androidtest.Test.MainTest.TestComponent;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 import java.util.Random;
 
-public class SpAndMMKVDemoComponent extends TestComponent {
+public class SpAndMMKVDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {

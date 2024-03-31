@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.OkHttpTest;
+package com.example.administrator.androidtest.Test.MainTest.LibraryDemo.OkHttpDemo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,7 +26,7 @@ import okhttp3.Headers;
 import java.io.File;
 import java.util.Map;
 
-public class OkHttpAct extends ComponentAct {
+public class OkHttpDemoAct extends ComponentAct {
 
     private static final String TAG = "OkHttpAct";
     private TextView mTvContent;
@@ -200,6 +200,6 @@ public class OkHttpAct extends ComponentAct {
     }
 
     public static void start(Context context) {
-        context.startActivity(new Intent(context, OkHttpAct.class));
+        context.startActivity(new Intent(context, OkHttpDemoAct.class));
     }
 }

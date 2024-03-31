@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.OkHttpTest;
+package com.example.administrator.androidtest.Test.MainTest.LibraryDemo.OkHttpDemo;
 
 public class QrCodeBean {
     private int code;
