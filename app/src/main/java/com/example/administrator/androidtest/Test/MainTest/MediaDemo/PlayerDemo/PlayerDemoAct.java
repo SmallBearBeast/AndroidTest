@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.BizDemo.PlayerDemo;
+package com.example.administrator.androidtest.Test.MainTest.MediaDemo.PlayerDemo;
 
 import android.content.Context;
 import android.content.Intent;

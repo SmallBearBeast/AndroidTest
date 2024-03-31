@@ -22,7 +22,7 @@ import com.example.administrator.androidtest.Test.MainTest.DialogTest.DialogTest
 import com.example.administrator.androidtest.Test.MainTest.FloatServiceTest.FloatServiceTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.FragTest.FragLifecycleTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.KVCompareTest.KVCompareTestComponent;
-import com.example.administrator.androidtest.Test.MainTest.MediaTest.MediaTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.MediaDemo.MediaDemoComponent;
 import com.example.administrator.androidtest.Test.MainTest.OkHttpTest.OkHttpTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.OtherTest.OtherTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ScreenTest.ScreenTestComponent;
@@ -46,7 +46,7 @@ public class MainAct extends ComponentAct {
         regActComponent(new LibraryDemoComponent());
         regActComponent(new AnrTestComponent());
         regActComponent(new OtherTestComponent());
-        regActComponent(new MediaTestComponent());
+        regActComponent(new MediaDemoComponent());
         regActComponent(new OkHttpTestComponent());
         regActComponent(new WidgetDemoComponent());
         regActComponent(new ViewDemoComponent());

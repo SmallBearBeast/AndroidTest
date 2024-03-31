@@ -10,6 +10,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
             <TextView
+                android:id="@+id/mediaDemoTextView"
+                style="@style/TestLabelStyle"
+                android:text="Media Demo" />
+
+            <Button
+                android:id="@+id/mediaDemoButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To MediaDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mediaDemoTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+            <TextView
                 android:id="@+id/bizDemoTextView"
                 style="@style/TestLabelStyle"
                 android:text="BizDemoAct Demo" />

@@ -9,23 +9,57 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_300"
         android:background="@color/cl_black"
+        app:layout_constraintTop_toTopOf="parent"
         app:surface_type="texture_view" />
 
-    <Button
-        android:id="@+id/playBt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/styledPlayerView" />
+    <com.example.administrator.androidtest.Widget.FlowLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/styledPlayerView">
 
-    <Button
-        android:id="@+id/pauseBt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Play"
-        app:layout_constraintStart_toEndOf="@+id/playBt"
-        app:layout_constraintTop_toBottomOf="@+id/styledPlayerView" />
+        <Button
+            android:id="@+id/playBt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Play"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/pauseBt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pause"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/loadMp4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loadMp4"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/loadMkv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loadMkv"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/load3gp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="load3gp"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/loadFlv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loadFlv"
+            android:textAllCaps="false" />
 
 
+    </com.example.administrator.androidtest.Widget.FlowLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="HardcodedText,MissingConstraints,SpUsage">
+
+    <LinearLayout style="@style/ll_vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
+                android:id="@+id/toolbarTextView"
+                style="@style/TestLabelStyle"
+                android:text="TiktokDemo Test" />
+
+            <Button
+                android:id="@+id/toolbarTestButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To TiktokDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbarTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </LinearLayout>
+</ScrollView>

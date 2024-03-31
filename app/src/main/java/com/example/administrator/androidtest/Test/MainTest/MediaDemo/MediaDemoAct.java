@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MainTest.BizDemo;
+package com.example.administrator.androidtest.Test.MainTest.MediaDemo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,23 +8,23 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TikTokDemoComponent;
+import com.example.administrator.androidtest.Test.MainTest.MediaDemo.PlayerDemo.PlayerDemoComponent;
 
-public class BizDemoAct extends ComponentAct {
+public class MediaDemoAct extends ComponentAct {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new TikTokDemoComponent());
+        regActComponent(new PlayerDemoComponent());
     }
 
     @Override
     protected int layoutId() {
-        return R.layout.act_biz_demo_list;
+        return R.layout.act_media_demo_list;
     }
 
     public static void go(Context context) {
-        Intent intent = new Intent(context, BizDemoAct.class);
+        Intent intent = new Intent(context, MediaDemoAct.class);
         context.startActivity(intent);
     }
 }

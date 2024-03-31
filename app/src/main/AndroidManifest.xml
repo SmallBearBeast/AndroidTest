@@ -127,7 +127,19 @@
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.BizDemo.PlayerDemo.PlayerDemoAct"
+            android:name=".Test.MainTest.MediaDemo.PlayerDemo.PlayerDemoAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.BizDemo.BizDemoAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.MediaDemo.MediaDemoAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.LibraryDemo.LibraryDemoAct"
             android:theme="@style/AppTheme" />
 
         <service android:name=".Test.MainTest.FloatServiceTest.TestFloatService" />
