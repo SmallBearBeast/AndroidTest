@@ -3,10 +3,16 @@ package com.example.administrator.androidtest.Test.MainTest.ViewDemo.ViewGetSize
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class ViewGetSizeTestComponent extends TestActivityComponent {
+
+    public ViewGetSizeTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.Test.MainTest.ComponentDemo.Compon
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.lifecycle.Lifecycle;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bear.libcomponent.component.ActivityComponent;
@@ -16,6 +17,10 @@ import com.google.android.material.tabs.TabLayout;
 import java.util.ArrayList;
 
 public class DemoActComponent extends ActivityComponent {
+    public DemoActComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         super.onCreate();

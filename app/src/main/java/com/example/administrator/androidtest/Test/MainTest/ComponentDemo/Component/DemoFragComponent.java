@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.bear.libcomponent.component.FragmentComponent;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.FlowLayout;
@@ -24,6 +26,10 @@ public class DemoFragComponent extends FragmentComponent implements View.OnClick
     public static final String KEY_BUTTON_TEXT_LIST = "KEY_BUTTON_TEXT_LIST";
 
     private int position = -1;
+
+    public DemoFragComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreateView() {

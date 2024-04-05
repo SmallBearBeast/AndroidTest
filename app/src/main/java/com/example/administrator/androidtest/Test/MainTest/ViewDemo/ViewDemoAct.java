@@ -24,15 +24,15 @@ public class ViewDemoAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new RecyclerViewTestComponent());
-        regActComponent(new ViewPagerTestComponent());
-        regActComponent(new ViewGetSizeTestComponent());
-        regActComponent(new Viewpager2TestComponent());
-        regActComponent(new MotionEventDemoComponent());
-        regActComponent(new BehaviorTestComponent());
-        regActComponent(new CoordinatorLayoutTestComponent());
-        regActComponent(new EditTextTestComponent());
-        regActComponent(new ToolbarTestComponent());
+        regActComponent(new RecyclerViewTestComponent(getLifecycle()));
+        regActComponent(new ViewPagerTestComponent(getLifecycle()));
+        regActComponent(new ViewGetSizeTestComponent(getLifecycle()));
+        regActComponent(new Viewpager2TestComponent(getLifecycle()));
+        regActComponent(new MotionEventDemoComponent(getLifecycle()));
+        regActComponent(new BehaviorTestComponent(getLifecycle()));
+        regActComponent(new CoordinatorLayoutTestComponent(getLifecycle()));
+        regActComponent(new EditTextTestComponent(getLifecycle()));
+        regActComponent(new ToolbarTestComponent(getLifecycle()));
     }
 
     @Override

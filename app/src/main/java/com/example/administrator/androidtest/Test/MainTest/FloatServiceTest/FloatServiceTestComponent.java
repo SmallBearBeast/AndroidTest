@@ -3,11 +3,17 @@ package com.example.administrator.androidtest.Test.MainTest.FloatServiceTest;
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.ShareTest.SystemShareAct;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class FloatServiceTestComponent extends TestActivityComponent {
+
+    public FloatServiceTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

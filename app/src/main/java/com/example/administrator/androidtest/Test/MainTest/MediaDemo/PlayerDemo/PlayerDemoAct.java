@@ -13,7 +13,7 @@ public class PlayerDemoAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new PlayerComponent());
+        regActComponent(new PlayerComponent(getLifecycle()));
     }
 
     @Override

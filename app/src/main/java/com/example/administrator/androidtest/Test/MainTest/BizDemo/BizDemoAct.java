@@ -15,7 +15,7 @@ public class BizDemoAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new TikTokDemoComponent());
+        regActComponent(new TikTokDemoComponent(getLifecycle()));
     }
 
     @Override

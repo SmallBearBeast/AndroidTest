@@ -3,10 +3,17 @@ package com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo;
 import android.annotation.SuppressLint;
 import android.view.View;
 
-import com.bear.libcomponent.component.ActivityComponent;
-import com.example.administrator.androidtest.R;
+import androidx.lifecycle.Lifecycle;
 
-public class TikTokDemoComponent extends ActivityComponent implements View.OnClickListener {
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.List.TikTokDemoAct;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
+
+public class TikTokDemoComponent extends TestActivityComponent {
+    public TikTokDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         setOnClickListener(this, R.id.tiktokDemoButton);

@@ -7,6 +7,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
@@ -20,6 +21,10 @@ import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class GlideDemoComponent extends TestActivityComponent {
+    public GlideDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         setOnClickListener(this, R.id.glideDemoButton);

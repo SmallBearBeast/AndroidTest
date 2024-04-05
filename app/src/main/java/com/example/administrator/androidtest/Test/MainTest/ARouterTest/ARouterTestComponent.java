@@ -2,11 +2,17 @@ package com.example.administrator.androidtest.Test.MainTest.ARouterTest;
 
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class ARouterTestComponent extends TestActivityComponent {
+
+    public ARouterTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

@@ -3,12 +3,18 @@ package com.example.administrator.androidtest.Test.MainTest.WidgetDemo.MarqueeDe
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.administrator.androidtest.Widget.MarqueeTextView;
 
 public class MarqueeDemoComponent extends TestActivityComponent {
     private MarqueeTextView marqueeTextView_1;
+
+    public MarqueeDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

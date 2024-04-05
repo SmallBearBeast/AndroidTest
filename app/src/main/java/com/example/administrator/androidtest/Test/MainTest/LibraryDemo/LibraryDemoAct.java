@@ -16,8 +16,8 @@ public class LibraryDemoAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new GlideDemoComponent());
-        regActComponent(new OkHttpDemoComponent());
+        regActComponent(new GlideDemoComponent(getLifecycle()));
+        regActComponent(new OkHttpDemoComponent(getLifecycle()));
     }
 
     @Override

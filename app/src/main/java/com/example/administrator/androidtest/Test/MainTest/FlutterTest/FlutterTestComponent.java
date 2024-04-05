@@ -2,12 +2,18 @@ package com.example.administrator.androidtest.Test.MainTest.FlutterTest;
 
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 //import io.flutter.embedding.android.FlutterActivity;
 
 public class FlutterTestComponent extends TestActivityComponent {
+
+    public FlutterTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

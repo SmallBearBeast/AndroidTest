@@ -22,7 +22,7 @@ public class ComponentDemoFrag extends ComponentFrag {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             int position = getArguments().getInt(DemoFragComponent.KEY_POSITION);
-            regFragComponent(new DemoFragComponent(), position);
+            regFragComponent(new DemoFragComponent(getLifecycle()), position);
         }
     }
 

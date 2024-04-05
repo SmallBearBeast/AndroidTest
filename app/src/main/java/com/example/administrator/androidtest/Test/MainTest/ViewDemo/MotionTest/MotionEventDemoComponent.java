@@ -3,10 +3,16 @@ package com.example.administrator.androidtest.Test.MainTest.ViewDemo.MotionTest;
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class MotionEventDemoComponent extends TestActivityComponent {
+    public MotionEventDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         setOnClickListener(this, R.id.motionTestButton);

@@ -2,10 +2,16 @@ package com.example.administrator.androidtest.Test.MainTest.ViewDemo.ToolbarTest
 
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
-public class ToolbarTestComponent extends TestActivityComponent implements View.OnClickListener{
+public class ToolbarTestComponent extends TestActivityComponent {
+    public ToolbarTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         super.onCreate();

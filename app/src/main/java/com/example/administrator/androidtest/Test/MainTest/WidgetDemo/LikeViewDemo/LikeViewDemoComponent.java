@@ -2,12 +2,18 @@ package com.example.administrator.androidtest.Test.MainTest.WidgetDemo.LikeViewD
 
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.administrator.androidtest.Widget.LikeView.LikeView;
 
 public class LikeViewDemoComponent extends TestActivityComponent {
     private LikeView likeView;
+
+    public LikeViewDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

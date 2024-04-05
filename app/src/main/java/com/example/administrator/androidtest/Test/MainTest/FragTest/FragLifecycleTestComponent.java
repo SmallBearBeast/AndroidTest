@@ -3,10 +3,16 @@ package com.example.administrator.androidtest.Test.MainTest.FragTest;
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class FragLifecycleTestComponent extends TestActivityComponent {
+    public FragLifecycleTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         super.onCreate();

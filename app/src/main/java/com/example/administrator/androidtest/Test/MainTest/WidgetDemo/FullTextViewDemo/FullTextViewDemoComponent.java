@@ -3,6 +3,8 @@ package com.example.administrator.androidtest.Test.MainTest.WidgetDemo.FullTextV
 import android.graphics.Color;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.administrator.androidtest.Widget.FullTextView.FullTextView;
@@ -11,6 +13,10 @@ import com.example.administrator.androidtest.Widget.FullTextView.TextOpt;
 public class FullTextViewDemoComponent extends TestActivityComponent {
 
     private FullTextView ftvFullText;
+
+    public FullTextViewDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

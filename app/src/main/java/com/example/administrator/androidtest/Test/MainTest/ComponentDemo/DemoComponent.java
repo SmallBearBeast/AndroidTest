@@ -2,10 +2,16 @@ package com.example.administrator.androidtest.Test.MainTest.ComponentDemo;
 
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class DemoComponent extends TestActivityComponent {
+
+    public DemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

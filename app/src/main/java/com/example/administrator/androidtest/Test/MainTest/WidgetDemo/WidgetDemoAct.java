@@ -22,13 +22,13 @@ public class WidgetDemoAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new FlowLayoutTestComponent());
-        regActComponent(new MarqueeDemoComponent());
-        regActComponent(new CaseViewComponent());
-        regActComponent(new BottomViewTestComponent());
-        regActComponent(new LikeViewDemoComponent());
-        regActComponent(new FullTextViewDemoComponent());
-        regActComponent(new LoopViewPagerDemoComponent());
+        regActComponent(new FlowLayoutTestComponent(getLifecycle()));
+        regActComponent(new MarqueeDemoComponent(getLifecycle()));
+        regActComponent(new CaseViewComponent(getLifecycle()));
+        regActComponent(new BottomViewTestComponent(getLifecycle()));
+        regActComponent(new LikeViewDemoComponent(getLifecycle()));
+        regActComponent(new FullTextViewDemoComponent(getLifecycle()));
+        regActComponent(new LoopViewPagerDemoComponent(getLifecycle()));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.Test.MainTest.KotlinTest
 
+import androidx.lifecycle.Lifecycle
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -8,7 +9,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class KotlinTestComponent : TestActivityComponent() {
+class KotlinTestComponent(lifecycle: Lifecycle?) : TestActivityComponent(lifecycle) {
 
     private val scope = CoroutineScope(Dispatchers.Main + SupervisorJob())
 

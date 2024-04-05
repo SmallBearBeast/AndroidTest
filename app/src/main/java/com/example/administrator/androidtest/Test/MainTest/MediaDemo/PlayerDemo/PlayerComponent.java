@@ -3,14 +3,20 @@ package com.example.administrator.androidtest.Test.MainTest.MediaDemo.PlayerDemo
 import android.annotation.SuppressLint;
 import android.view.View;
 
-import com.bear.libcomponent.component.ActivityComponent;
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 
-public class PlayerComponent extends ActivityComponent implements View.OnClickListener {
+public class PlayerComponent extends TestActivityComponent {
 
     private UniversalPlayer universalPlayer;
     private StyledPlayerView styledPlayerView;
+
+    public PlayerComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

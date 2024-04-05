@@ -17,7 +17,7 @@ public class ToolbarTestAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new ToolbarComponent());
+        regActComponent(new ToolbarComponent(getLifecycle()));
     }
 
     @Override

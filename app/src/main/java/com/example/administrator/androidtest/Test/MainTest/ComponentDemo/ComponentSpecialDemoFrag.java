@@ -19,8 +19,8 @@ public class ComponentSpecialDemoFrag extends ComponentDemoFrag {
             int position = getArguments().getInt(DemoFragComponent.KEY_POSITION);
             DemoFragComponent demoFragComponent = getComponent(DemoFragComponent.class, position);
             if (demoFragComponent != null) {
-                demoFragComponent.regComponent(new DemoMainTvComponent());
-                demoFragComponent.regComponent(new DemoMinorTvComponent());
+                demoFragComponent.regComponent(new DemoMainTvComponent(getView()));
+                demoFragComponent.regComponent(new DemoMinorTvComponent(getView()));
             }
         }
     }

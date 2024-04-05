@@ -3,11 +3,17 @@ package com.example.administrator.androidtest.Test.MainTest.StartBgServiceDemo;
 import android.annotation.SuppressLint;
 import android.view.View;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.BackgroundService;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 
 public class StartBgServiceDemoComponent extends TestActivityComponent {
+
+    public StartBgServiceDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
@@ -15,6 +16,10 @@ import com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager;
 import com.example.libbase.Util.ToastUtil;
 
 public class LoopViewPagerDemoComponent extends TestActivityComponent {
+
+    public LoopViewPagerDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

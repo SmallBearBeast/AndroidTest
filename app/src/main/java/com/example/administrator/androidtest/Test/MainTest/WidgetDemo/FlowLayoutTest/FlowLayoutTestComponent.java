@@ -5,6 +5,8 @@ import android.util.TypedValue;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.administrator.androidtest.Widget.FlowFakeTextView;
@@ -14,6 +16,10 @@ import com.example.libbase.Util.ToastUtil;
 import com.example.libbase.Util.XmlDrawableUtil;
 
 public class FlowLayoutTestComponent extends TestActivityComponent {
+    public FlowLayoutTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         initFlowLayout();

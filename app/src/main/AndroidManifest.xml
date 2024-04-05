@@ -78,8 +78,6 @@
             android:name=".Test.MainTest.KVCompareTest.KVCompareTestAct"
             android:theme="@style/AppTheme" />
 
-
-
         <activity
             android:name=".Test.MainTest.ScreenTest.ScreenAct"
             android:theme="@style/AppTheme" />

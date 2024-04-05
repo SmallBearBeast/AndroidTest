@@ -3,14 +3,18 @@ package com.example.administrator.androidtest.Test.MainTest.ComponentDemo.Compon
 import android.view.View;
 import android.widget.TextView;
 
-import com.bear.libcomponent.component.ContainerComponent;
+import com.bear.libcomponent.component.ViewComponent;
 import com.example.administrator.androidtest.R;
 
-public class DemoMinorTvComponent extends ContainerComponent {
+public class DemoMinorTvComponent extends ViewComponent {
 
     private TextView textMinorTv;
 
     private String originText;
+
+    public DemoMinorTvComponent(View view) {
+        super(view);
+    }
 
     @Override
     protected void onCreate() {
@@ -21,8 +25,8 @@ public class DemoMinorTvComponent extends ContainerComponent {
     }
 
     @Override
-    protected void attachView(View view) {
-        super.attachView(view);
+    protected void onAttachView(View view) {
+        super.onAttachView(view);
         if (view != null) {
             textMinorTv = findViewById(R.id.textMinorTv);
             originText = String.valueOf(textMinorTv.getText());

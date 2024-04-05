@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.bear.libkv.MmkvVal.MmkvVal;
 import com.bear.libkv.SpVal.SpHelper;
 import com.example.administrator.androidtest.R;
@@ -14,6 +16,10 @@ import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent
 import java.util.Random;
 
 public class SpAndMMKVDemoComponent extends TestActivityComponent {
+
+    public SpAndMMKVDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

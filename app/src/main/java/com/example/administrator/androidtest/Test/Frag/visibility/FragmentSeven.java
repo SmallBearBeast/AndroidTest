@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
 
 import com.bear.libcomponent.component.ComponentFrag;
 import com.bear.libcomponent.component.FragmentComponent;
@@ -25,14 +26,14 @@ public class FragmentSeven extends ComponentFrag {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        regFragComponent(new Component_1());
+        regFragComponent(new Component_1(getLifecycle()));
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        regFragComponent(new Component_2());
+        regFragComponent(new Component_2(getLifecycle()));
     }
 
     @Nullable
@@ -47,6 +48,11 @@ public class FragmentSeven extends ComponentFrag {
 
     static class Component_1 extends FragmentComponent {
         private static final String TAG = "Component_1";
+
+        public Component_1(Lifecycle lifecycle) {
+            super(lifecycle);
+        }
+
         @Override
         public void onCreate() {
             SLog.d(TAG, "onCreate: ");
@@ -68,6 +74,11 @@ public class FragmentSeven extends ComponentFrag {
 
     static class Component_2 extends FragmentComponent {
         private static final String TAG = "Component_2";
+
+        public Component_2(Lifecycle lifecycle) {
+            super(lifecycle);
+        }
+
         @Override
         public void onCreate() {
             SLog.d(TAG, "onCreate: ");

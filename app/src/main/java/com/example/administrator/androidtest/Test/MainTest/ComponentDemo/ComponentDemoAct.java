@@ -19,7 +19,7 @@ public class ComponentDemoAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new DemoActComponent());
+        regActComponent(new DemoActComponent(getLifecycle()));
     }
 
     public static void start(Context context) {

@@ -7,6 +7,7 @@ import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.Lifecycle;
 
 import com.bear.libcomponent.component.ActivityComponent;
 import com.bear.libcomponent.component.ComponentAct;
@@ -14,6 +15,10 @@ import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.ToastUtil;
 
 public class ToolbarComponent extends ActivityComponent {
+
+    public ToolbarComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

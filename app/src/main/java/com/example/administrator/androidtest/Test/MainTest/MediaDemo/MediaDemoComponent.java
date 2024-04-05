@@ -3,10 +3,16 @@ package com.example.administrator.androidtest.Test.MainTest.MediaDemo;
 import android.annotation.SuppressLint;
 import android.view.View;
 
-import com.bear.libcomponent.component.ActivityComponent;
-import com.example.administrator.androidtest.R;
+import androidx.lifecycle.Lifecycle;
 
-public class MediaDemoComponent extends ActivityComponent implements View.OnClickListener {
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
+
+public class MediaDemoComponent extends TestActivityComponent {
+    public MediaDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         setOnClickListener(this, R.id.mediaDemoButton);

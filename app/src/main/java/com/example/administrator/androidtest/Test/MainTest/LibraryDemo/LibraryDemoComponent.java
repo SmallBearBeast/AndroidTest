@@ -3,12 +3,18 @@ package com.example.administrator.androidtest.Test.MainTest.LibraryDemo;
 import android.annotation.SuppressLint;
 import android.view.View;
 
-import com.bear.libcomponent.component.ActivityComponent;
-import com.example.administrator.androidtest.R;
+import androidx.lifecycle.Lifecycle;
 
-public class LibraryDemoComponent extends ActivityComponent implements View.OnClickListener {
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
+
+public class LibraryDemoComponent extends TestActivityComponent {
 
     private static final String TAG = "LibraryDemoComponent";
+
+    public LibraryDemoComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

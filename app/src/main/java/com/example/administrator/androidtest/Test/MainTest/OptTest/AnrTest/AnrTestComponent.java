@@ -2,10 +2,17 @@ package com.example.administrator.androidtest.Test.MainTest.OptTest.AnrTest;
 
 import android.view.View;
 
-import com.bear.libcomponent.component.ActivityComponent;
-import com.example.administrator.androidtest.R;
+import androidx.lifecycle.Lifecycle;
 
-public class AnrTestComponent extends ActivityComponent implements View.OnClickListener {
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
+
+public class AnrTestComponent extends TestActivityComponent {
+
+    public AnrTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
+
     @Override
     protected void onCreate() {
         super.onCreate();

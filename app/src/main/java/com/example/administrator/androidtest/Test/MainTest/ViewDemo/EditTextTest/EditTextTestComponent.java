@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.libbase.Manager.KeyBoardManager;
@@ -17,6 +19,10 @@ import com.example.libbase.Util.ToastUtil;
 public class EditTextTestComponent extends TestActivityComponent {
 
     private EditText noShowKeyboardEditText;
+
+    public EditTextTestComponent(Lifecycle lifecycle) {
+        super(lifecycle);
+    }
 
     @Override
     protected void onCreate() {

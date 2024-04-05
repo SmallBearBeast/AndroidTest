@@ -102,6 +102,7 @@ dependencies {
     implementation project(":libkv")
     implementation project(":librv")
     implementation project(":libcomponent")
+    implementation project(":libstorage")
 //    implementation project(':flutter')
 }
 
