@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
 
 public class FileStorage {
@@ -29,18 +30,29 @@ public class FileStorage {
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(path);
-            byte[] buffer = new byte[BUFFER_SIZE];
-            int read = 0;
-            while ((read = inputStream.read(buffer, 0, buffer.length)) != -1) {
-                fos.write(buffer, 0, read);
-            }
-            fos.flush();
-            return true;
+            return writeStream(fos, inputStream);
         } catch (Exception e) {
             e.printStackTrace();
             InternalUtil.delete(path);
         } finally {
             InternalUtil.close(fos);
+        }
+        return false;
+    }
+
+    public static boolean writeStream(OutputStream outputStream, InputStream inputStream) {
+        try {
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int read;
+            while ((read = inputStream.read(buffer, 0, buffer.length)) != -1) {
+                outputStream.write(buffer, 0, read);
+            }
+            outputStream.flush();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            InternalUtil.close(outputStream);
         }
         return false;
     }
@@ -76,18 +88,52 @@ public class FileStorage {
         }
         FileInputStream fis = null;
         try {
-            fis = new FileInputStream(new File(path));
-            byte[] buffer = new byte[BUFFER_SIZE];
-            int read = 0;
-            while ((read = fis.read(buffer, 0, buffer.length)) != -1) {
-                streamCallback.success(buffer, read);
-            }
+            fis = new FileInputStream(path);
+            readStream(fis, streamCallback);
         } catch (Exception e) {
             e.printStackTrace();
             streamCallback.fail();
             InternalUtil.delete(path);
         } finally {
             InternalUtil.close(fis);
+        }
+    }
+
+    public static <T> T readObjFromJson(InputStream inputStream, TypeToken<T> token) {
+        try{
+            return InternalUtil.toObj(readStr(inputStream), token);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            InternalUtil.close(inputStream);
+        }
+        return null;
+    }
+
+    public static String readStr(InputStream inputStream) {
+        // No need to close.
+        final ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        readStream(inputStream, new StreamCallback() {
+            @Override
+            public void success(byte[] data, int read) {
+                baos.write(data, 0, read);
+            }
+        });
+        return baos.toString();
+    }
+
+    public static void readStream(InputStream inputStream, StreamCallback streamCallback) {
+        try {
+            byte[] buffer = new byte[BUFFER_SIZE];
+            int read;
+            while ((read = inputStream.read(buffer, 0, buffer.length)) != -1) {
+                streamCallback.success(buffer, read);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            streamCallback.fail();
+        } finally {
+            InternalUtil.close(inputStream);
         }
     }
 }
