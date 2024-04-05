@@ -1,56 +1,36 @@
 package com.bear.libcomponent.component;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class ComponentContainer {
-    private Map<ComponentKey, IComponent> componentMap = new HashMap<>();
 
-    public void put(IComponent component, Object tag) {
+    private final RootComponent rootComponent = new RootComponent();
+
+    public <C extends GroupComponent> void regComponent(C component, Object tag) {
         if (component == null) {
             return;
         }
-        componentMap.put(new ComponentKey<>(component.getClass(), tag), component);
+        rootComponent.regComponent(component, tag);
     }
 
-    public <C extends IComponent> C get(Class<C> clz, Object tag) {
-        IComponent targetComponent;
-        if (!componentMap.isEmpty()) {
-            ComponentKey componentKey = new ComponentKey<>(clz, tag);
-            targetComponent = componentMap.get(componentKey);
-            if (targetComponent != null) {
-                return (C) targetComponent;
-            }
-            // Find target component from subComponent.
-            for (IComponent component : componentMap.values()) {
-                if (component instanceof ContainerComponent) {
-                    ContainerComponent containerComponent = (ContainerComponent) component;
-                    targetComponent = containerComponent.travel(componentKey, null);
-                    if (targetComponent != null) {
-                        return (C) targetComponent;
-                    }
-                }
-            }
-        }
-        return null;
+    public <C extends GroupComponent> C getComponent(Class<C> clz, Object tag) {
+        return rootComponent.getComponent(clz, tag);
     }
 
-    public void remove(IComponent component, Object tag) {
-        if (!componentMap.isEmpty()) {
-            ComponentKey componentKey = new ComponentKey<>(component.getClass(), tag);
-            componentMap.remove(componentKey);
-        }
-    }
-
-    public Map<ComponentKey, IComponent> getComponentMap() {
-        return componentMap;
+    public Map<ComponentKey<?>, GroupComponent> getComponentMap() {
+        return rootComponent.getComponentMap();
     }
 
     public <C extends IComponent> boolean contain(Class<C> clz, Object tag) {
+        Map<ComponentKey<?>, GroupComponent> componentMap = getComponentMap();
         if (!componentMap.isEmpty()) {
-            ComponentKey componentKey = new ComponentKey<>(clz, tag);
+            ComponentKey<?> componentKey = new ComponentKey<>(clz, tag);
             return componentMap.containsKey(componentKey);
         }
         return false;
+    }
+
+    private static class RootComponent extends GroupComponent {
+
     }
 }

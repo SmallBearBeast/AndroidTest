@@ -12,19 +12,27 @@ import com.bear.libcomponent.base.BaseAct;
 public abstract class ComponentAct extends BaseAct {
     private ComponentManager componentManager = new ComponentManager();
     
-    protected <C extends IComponent> void regActComponent(C component, Object tag) {
-        componentManager.regActComponent(this, component, tag);
+    protected void regActComponent(ActivityComponent component, Object tag) {
+        componentManager.regComponent(this, component, tag);
     }
 
-    protected <C extends IComponent> void regActComponent(C component) {
-        componentManager.regActComponent(this, component);
+    protected void regActComponent(ActivityComponent component) {
+        componentManager.regComponent(this, component);
     }
 
-    public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
+    protected void regComponent(ViewComponent component, Object tag) {
+
+    }
+
+    protected void regComponent(ViewComponent component) {
+
+    }
+
+    public <C extends GroupComponent> C getComponent(Class<C> clz, Object tag) {
         return componentManager.getComponent(clz, tag);
     }
 
-    public <C extends IComponent> C getComponent(Class<C> clz) {
+    public <C extends GroupComponent> C getComponent(Class<C> clz) {
         return componentManager.getComponent(clz);
     }
 

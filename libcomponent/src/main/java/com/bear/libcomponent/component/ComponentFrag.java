@@ -49,27 +49,19 @@ public abstract class ComponentFrag extends BaseFrag {
         getComponentManager().dispatchOnFirstVisible(this);
     }
 
-    public void regFragComponent(IComponent component, Object tag) {
-        getComponentManager().regFragComponent(this, component, tag);
+    public void regFragComponent(FragmentComponent component, Object tag) {
+        getComponentManager().regComponent(this, component, tag);
     }
 
-    public void regFragComponent(IComponent component) {
-        getComponentManager().regFragComponent(this, component);
+    public void regFragComponent(FragmentComponent component) {
+        getComponentManager().regComponent(this, component);
     }
 
-    public void regFragViewComponent(IComponent component, Object tag) {
-        getComponentManager().regFragViewComponent(this, component, tag);
-    }
-
-    public void regFragViewComponent(IComponent component) {
-        getComponentManager().regFragViewComponent(this, component);
-    }
-
-    public <C extends IComponent> C getComponent(Class<C> clz, Object tag) {
+    public <C extends GroupComponent> C getComponent(Class<C> clz, Object tag) {
         return getComponentManager().getComponent(clz, tag);
     }
 
-    public <C extends IComponent> C getComponent(Class<C> clz) {
+    public <C extends GroupComponent> C getComponent(Class<C> clz) {
         return getComponentManager().getComponent(clz);
     }
     

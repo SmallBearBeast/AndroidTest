@@ -2,12 +2,18 @@ package com.bear.libcomponent.component;
 
 import android.os.Bundle;
 
+import androidx.lifecycle.Lifecycle;
+
 import com.bear.libcomponent.provider.IBackPressedProvider;
 import com.bear.libcomponent.provider.IMenuProvider;
 
-public class FragmentComponent extends ContainerComponent implements IBackPressedProvider, IMenuProvider {
+public class FragmentComponent extends ViewComponent implements IBackPressedProvider, IMenuProvider {
 
     private ComponentFrag componentFrag;
+
+    public FragmentComponent(Lifecycle lifecycle) {
+        super(null, lifecycle);
+    }
 
     void attachFragment(ComponentFrag fragment) {
         componentFrag = fragment;
