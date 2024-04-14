@@ -1,13 +1,11 @@
 package com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.List;
 
-import android.content.Context;
-
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bear.librv.DataManager;
-import com.bear.librv.VHAdapter;
+import com.bear.librv.MultiItemChanger;
+import com.bear.librv.MultiTypeAdapter;
 import com.bear.libstorage.FileStorage;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokBean;
@@ -17,18 +15,14 @@ import com.example.libbase.Executor.MainThreadExecutor;
 import com.example.libbase.Util.IOUtil;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 
 public class TiktokListComponent extends TestActivityComponent {
 
     private RecyclerView tiktokRecyclerView;
 
-    private DataManager dataManager;
+    private MultiItemChanger multiItemChanger;
 
     public TiktokListComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -39,10 +33,10 @@ public class TiktokListComponent extends TestActivityComponent {
         super.onCreate();
         tiktokRecyclerView = findViewById(R.id.tiktokRecyclerView);
         tiktokRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
-        VHAdapter vhAdapter = new VHAdapter(getActivity().getLifecycle());
-        dataManager = vhAdapter.getDataManager();
-        vhAdapter.register(new TikTokListBridge(), TiktokBean.class);
-        tiktokRecyclerView.setAdapter(vhAdapter);
+        MultiTypeAdapter adapter = new MultiTypeAdapter(getActivity().getLifecycle());
+        multiItemChanger = adapter.getChanger();
+        adapter.register(TiktokBean.class, new TikTokListDelegate());
+        tiktokRecyclerView.setAdapter(adapter);
 
         loadTikTokListData();
     }
@@ -54,7 +48,7 @@ public class TiktokListComponent extends TestActivityComponent {
                 inputStream = getContext().getAssets().open("tiktok_data.json");
                 TypeToken<List<TiktokBean>> typeToken = new TypeToken<List<TiktokBean>>() {};
                 List<TiktokBean> tiktokBeans = FileStorage.readObjFromJson(inputStream, typeToken);
-                MainThreadExecutor.post(() -> dataManager.setData(tiktokBeans));
+                MainThreadExecutor.post(() -> multiItemChanger.setItems(tiktokBeans));
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

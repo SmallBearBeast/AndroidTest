@@ -9,11 +9,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bear.libcomponent.component.ComponentAct;
-import com.bear.librv.DataManager;
-import com.bear.librv.Notify;
+import com.bear.librv.MultiItemChanger;
+import com.bear.librv.MultiTypeAdapter;
+import com.bear.librv.Payload;
 import com.bear.librv.RvListener;
 import com.bear.librv.RvUtil;
-import com.bear.librv.VHAdapter;
 import com.example.administrator.androidtest.R;
 import com.example.liblog.SLog;
 
@@ -24,10 +24,10 @@ import java.util.List;
 public class RvAct extends ComponentAct implements View.OnClickListener{
     private static final String TAG = "RvAct";
     private RecyclerView mRvTest;
-    private DataManager mDataManager;
-    private VHAdapter mAdapter;
+    private MultiItemChanger mMultiItemChanger;
+    private MultiTypeAdapter mAdapter;
 
-    private MsgVHBinder msgVHBinder = new MsgVHBinder();
+    private MsgDelegate msgDelegate = new MsgDelegate();
 
     @Override
     protected int layoutId() {
@@ -46,10 +46,10 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
 //        mRvTest.setLayoutManager(linearLayoutManager);
 //        mRvTest.setHasFixedSize(true);
 
-        mAdapter = new VHAdapter(getLifecycle());
-        mAdapter.register(new ImageVHBinder(), Image.class);
-        mAdapter.register(new InfoVHBinder(), Info.class);
-        mAdapter.register(msgVHBinder, Msg.class);
+        mAdapter = new MultiTypeAdapter(getLifecycle());
+        mAdapter.register(Image.class, new ImageDelegate());
+        mAdapter.register(Info.class, new InfoDelegate());
+        mAdapter.register(Msg.class, msgDelegate);
         mRvTest.setAdapter(mAdapter);
 
 //        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false);
@@ -103,8 +103,8 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
                 return true;
             }
         }));
-        mDataManager = mAdapter.getDataManager();
-        mDataManager.setData(initImage());
+        mMultiItemChanger = mAdapter.getChanger();
+        mMultiItemChanger.setItems(initImage());
     }
 
     private List<Image> initImage() {
@@ -145,30 +145,30 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
             case R.id.bt_remove_first:
 //                mDataManager.removeFirst(1);
 //                RvUtil.scrollToBottom(mRvTest,  4, 0);
-                mRvTest.smoothScrollToPosition(mDataManager.size());
+                mRvTest.smoothScrollToPosition(mMultiItemChanger.size());
                 break;
 
             case R.id.bt_add_last:
-                mDataManager.addLast(new Msg());
+                mMultiItemChanger.addLast(new Msg());
                 break;
 
             case R.id.bt_remove_last:
 //                RvUtil.test(mRvTest, mRvTest.getLayoutManager());
-                mDataManager.removeLast(1);
+                mMultiItemChanger.removeLast(1);
                 break;
 
             case R.id.bt_add_two:
-                mDataManager.add(1, Arrays.asList(new Image(-1), new Image(-1)));
+                mMultiItemChanger.addAll(1, Arrays.asList(new Image(-1), new Image(-1)));
                 break;
 
             case R.id.bt_remove_two:
-                mDataManager.remove(1, 2);
+                mMultiItemChanger.remove(1, 2);
                 break;
 
             case R.id.bt_update:
                 Image image = new Image(2);
                 image.mUrl_1 = "http://www.badcookie.com/ku-xlarge.gif";
-                mDataManager.update(image);
+                mMultiItemChanger.update(image);
                 break;
 
             case R.id.bt_partial_update:
@@ -176,11 +176,11 @@ public class RvAct extends ComponentAct implements View.OnClickListener{
                 partInfo.mUrl_1 = "http://www.badcookie.com/ku-xlarge.gif";
                 partInfo.mUrl_2 = "http://www.badcookie.com/ku-xlarge.gif";
                 partInfo.mUrl_3 = "http://www.badcookie.com/ku-xlarge.gif";
-                mDataManager.update(partInfo, new Notify(111));
+                mMultiItemChanger.update(partInfo, new Payload(111));
                 break;
 
             case R.id.bt_move:
-                mDataManager.move(1, mDataManager.size() - 2);
+                mMultiItemChanger.move(1, mMultiItemChanger.size() - 2);
                 break;
 
         }

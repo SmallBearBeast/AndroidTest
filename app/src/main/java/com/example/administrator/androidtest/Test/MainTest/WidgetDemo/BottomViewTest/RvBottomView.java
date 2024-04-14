@@ -10,9 +10,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bear.librv.VHAdapter;
-import com.bear.librv.VHBridge;
-import com.bear.librv.VHolder;
+import com.bear.librv.MultiTypeAdapter;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.BottomView;
 import com.example.libbase.Util.CollectionUtil;
@@ -24,21 +24,21 @@ public class RvBottomView extends BottomView {
         contentView(R.layout.view_rv_bottom_test);
         RecyclerView recyclerView = findViewById(R.id.rv_test_content);
         recyclerView.setLayoutManager(new LinearLayoutManager(activity));
-        VHAdapter vhAdapter = new VHAdapter(((AppCompatActivity)activity).getLifecycle());
-        vhAdapter.register(new RvBottomVHBridge(), String.class);
-        vhAdapter.getDataManager().addLast(CollectionUtil.asListNotNull(
+        MultiTypeAdapter adapter = new MultiTypeAdapter(((AppCompatActivity)activity).getLifecycle());
+        adapter.register(String.class, new RvBottomMultiTypeDelegate());
+        adapter.getChanger().addLast(CollectionUtil.asListNotNull(
                 "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1", "1"
         ));
-        recyclerView.setAdapter(vhAdapter);
+        recyclerView.setAdapter(adapter);
     }
 
 
-    private static class RvBottomVHBridge extends VHBridge implements View.OnClickListener {
+    private static class RvBottomMultiTypeDelegate extends MultiTypeDelegate<String, MultiTypeHolder<String>> implements View.OnClickListener {
 
         @NonNull
         @Override
-        protected VHolder onCreateViewHolder(@NonNull View itemView) {
-            return new VHolder(itemView);
+        protected MultiTypeHolder<String> onCreateViewHolder(@NonNull View itemView) {
+            return new MultiTypeHolder<>(itemView);
         }
 
         @Override

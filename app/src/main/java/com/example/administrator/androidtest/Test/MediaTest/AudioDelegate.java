@@ -7,14 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bear.librv.VHBridge;
-import com.bear.librv.VHolder;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.Common.Media.Info.AudioInfo;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DecimalUtil;
 
-public class AudioBridge extends VHBridge {
+public class AudioDelegate extends MultiTypeDelegate<Cursor, AudioDelegate.AudioHolder> {
     @Override
     protected int getSpanSize(RecyclerView rv) {
         if (rv != null && rv.getLayoutManager() instanceof GridLayoutManager) {
@@ -26,7 +26,7 @@ public class AudioBridge extends VHBridge {
 
     @NonNull
     @Override
-    protected VHolder onCreateViewHolder(@NonNull View itemView) {
+    protected AudioHolder onCreateViewHolder(@NonNull View itemView) {
         return new AudioHolder(itemView);
     }
 
@@ -35,15 +35,16 @@ public class AudioBridge extends VHBridge {
         return R.layout.item_audio;
     }
 
-    class AudioHolder extends VHolder{
-        private TextView mTvAudioName;
-        private TextView mTvAudioArtist;
-        private TextView mTvAudioDuration;
+    public static class AudioHolder extends MultiTypeHolder<Cursor> {
+        private final TextView tvAudioName;
+        private final TextView tvAudioArtist;
+        private final TextView tvAudioDuration;
+
         public AudioHolder(View itemView) {
             super(itemView);
-            mTvAudioName = (TextView) findViewById(R.id.tv_audio_name);
-            mTvAudioArtist = (TextView) findViewById(R.id.tv_audio_artist);
-            mTvAudioDuration = (TextView) findViewById(R.id.tv_audio_duration);
+            tvAudioName = (TextView) findViewById(R.id.tv_audio_name);
+            tvAudioArtist = (TextView) findViewById(R.id.tv_audio_artist);
+            tvAudioDuration = (TextView) findViewById(R.id.tv_audio_duration);
         }
 
         @Override
@@ -51,9 +52,9 @@ public class AudioBridge extends VHBridge {
             BaseInfo baseInfo = BaseInfo.from(cursor);
             if (baseInfo instanceof AudioInfo) {
                 AudioInfo audioInfo = (AudioInfo) baseInfo;
-                mTvAudioName.setText(audioInfo.mName);
-                mTvAudioArtist.setText(audioInfo.mSuffix);
-                mTvAudioDuration.setText(DecimalUtil.videoDurFormat(audioInfo.mDuration));
+                tvAudioName.setText(audioInfo.mName);
+                tvAudioArtist.setText(audioInfo.mSuffix);
+                tvAudioDuration.setText(DecimalUtil.videoDurFormat(audioInfo.mDuration));
             }
         }
     }

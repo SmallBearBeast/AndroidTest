@@ -1,19 +1,19 @@
 package com.example.administrator.androidtest.Test.RvActTest;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+
 import android.view.View;
 import android.widget.TextView;
 
-import com.bear.librv.VHBridge;
-import com.bear.librv.VHolder;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.R;
 
-public class MsgVHBinder extends VHBridge<MsgVHBinder.MsgVHolder> {
+public class MsgDelegate extends MultiTypeDelegate<Msg, MsgDelegate.MsgHolder> {
     @NonNull
     @Override
-    protected MsgVHolder onCreateViewHolder(@NonNull View itemView) {
-        return new MsgVHolder(itemView);
+    protected MsgHolder onCreateViewHolder(@NonNull View itemView) {
+        return new MsgHolder(itemView);
     }
 
     @Override
@@ -21,9 +21,9 @@ public class MsgVHBinder extends VHBridge<MsgVHBinder.MsgVHolder> {
         return R.layout.item_rv_msg;
     }
 
-    class MsgVHolder extends VHolder<Msg> {
-        private TextView mTvText;
-        public MsgVHolder(View itemView) {
+    public static class MsgHolder extends MultiTypeHolder<Msg> {
+        private final TextView mTvText;
+        public MsgHolder(View itemView) {
             super(itemView);
             mTvText = findViewById(R.id.tv_text);
 //            StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();

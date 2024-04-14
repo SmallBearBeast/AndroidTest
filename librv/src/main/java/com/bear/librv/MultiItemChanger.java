@@ -1,5 +1,6 @@
 package com.bear.librv;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 
 import java.util.ArrayList;
@@ -12,46 +13,50 @@ import java.util.Map;
  * This class is used to handle specific add, remove, and update operation.
  * Note: Cursor is read-only.
  */
-@SuppressWarnings({"unchecked", "rawtypes", "BooleanMethodIsAlwaysInverted"})
-public class DataManager {
+public class MultiItemChanger {
     private static final String TAG = RvLog.RV_LOG_TAG;
 
-    private List mProviderDataList = new ArrayList();
+    private List<Object> internalItemList = new ArrayList<>();
     private Map<Integer, Cursor> mIndexWithCursorMap = new HashMap<>();
-    private VHAdapter mAdapter;
+    private MultiTypeAdapter multiTypeAdapter;
 
-    public void setAdapter(VHAdapter adapter) {
-        mAdapter = adapter;
+    public void attachAdapter(MultiTypeAdapter adapter) {
+        multiTypeAdapter = adapter;
     }
 
-    public void setData(List dataList) {
-        if (dataList == null) {
-            RvLog.w(TAG, "setData: dataList is null");
+    @SuppressLint("NotifyDataSetChanged")
+    public void setItems(List<?> itemList) {
+        if (itemList == null) {
+            RvLog.w(TAG, "setItems: itemList is null");
             return;
         }
-        if (dataList.isEmpty()) {
-            RvLog.w(TAG, "setData: dataList is empty");
+        if (itemList.isEmpty()) {
+            RvLog.w(TAG, "setItems: itemList is empty");
             return;
         }
-        List regDataList = new ArrayList();
-        for (Object data : dataList) {
-            if (!mAdapter.isRegister(data)) {
-                RvLog.w(TAG, "setData: " + data.getClass().getSimpleName() + " is not registered");
+        List<Object> regItemList = new ArrayList<>();
+        for (Object item : itemList) {
+            if (!multiTypeAdapter.isRegister(item)) {
+                RvLog.w(TAG, "setItems: " + item.getClass().getSimpleName() + " is not registered");
             } else {
-                regDataList.add(data);
+                regItemList.add(item);
             }
         }
-        mProviderDataList.clear();
-        mProviderDataList.addAll(regDataList);
-        mAdapter.notifyDataSetChanged();
+        internalItemList.clear();
+        internalItemList.addAll(regItemList);
+        multiTypeAdapter.notifyDataSetChanged();
     }
 
     public void addCursor(int index, Cursor cursor) {
-        if (cursor != null && cursor.getCount() == 0) {
+        if (cursor == null) {
+            RvLog.w(TAG, "addCursor: cursor is null");
+            return;
+        }
+        if (cursor.getCount() == 0) {
             RvLog.w(TAG, "addCursor: cursor count is 0");
             return;
         }
-        if (!mAdapter.isRegister(cursor)) {
+        if (!multiTypeAdapter.isRegister(cursor)) {
             RvLog.w(TAG, "addCursor: cursor is not registered");
             return;
         }
@@ -59,9 +64,9 @@ public class DataManager {
             RvLog.w(TAG, "addCursor: index is out of range");
             return;
         }
-        mProviderDataList.add(index, cursor);
+        internalItemList.add(index, cursor);
         mIndexWithCursorMap.put(index, cursor);
-        mAdapter.notifyItemRangeInserted(index, cursor.getCount());
+        multiTypeAdapter.notifyItemRangeInserted(index, cursor.getCount());
     }
 
     public void addCursorFirst(Cursor cursor) {
@@ -72,68 +77,67 @@ public class DataManager {
         addCursor(size(), cursor);
     }
 
-    public void add(int index, List dataList) {
+
+    public void addFirst(Object data) {
+        addAll(0, data);
+    }
+
+    public void addFirst(List<Object> itemList) {
+        addAll(0, itemList);
+    }
+
+    public void addLast(Object data) {
+        addAll(size(), data);
+    }
+
+    public void addLast(List<Object> itemList) {
+        addAll(size(), itemList);
+    }
+
+    public void addAll(int index, Object... dataArray) {
+        addAll(index, Arrays.asList(dataArray));
+    }
+
+    public void addAll(int index, List<Object> itemList) {
         if (!checkIndex(index)) {
             RvLog.w(TAG, "add: index is out of range");
             return;
         }
-        List regDataList = new ArrayList();
-        for (Object data : dataList) {
-            if (!mAdapter.isRegister(data)) {
-                RvLog.w(TAG, "add: " + data.getClass().getSimpleName() + " is not registered");
+        List<Object> regItemList = new ArrayList<>();
+        for (Object item : itemList) {
+            if (!multiTypeAdapter.isRegister(item)) {
+                RvLog.w(TAG, "add: " + item.getClass().getSimpleName() + " is not registered");
             } else {
-                regDataList.add(data);
+                regItemList.add(item);
             }
         }
-        if (regDataList.isEmpty()) {
+        if (regItemList.isEmpty()) {
             RvLog.w(TAG, "add: regDataList is empty");
             return;
         }
-        mProviderDataList.addAll(index, regDataList);
-        mAdapter.notifyItemRangeInserted(index, regDataList.size());
+        internalItemList.addAll(index, regItemList);
+        multiTypeAdapter.notifyItemRangeInserted(index, regItemList.size());
     }
 
-    public void add(int index, Object... datas) {
-        add(index, Arrays.asList(datas));
-    }
-
-    public void addFirst(Object data) {
-        add(0, data);
-    }
-
-    public void addLast(Object data) {
-        add(size(), data);
-    }
-
-    public void addFirst(List dataList) {
-        add(0, dataList);
-    }
-
-    public void addLast(List dataList) {
-        add(size(), dataList);
-    }
-
-    // TODO: 2019-10-20 need removeCursor and upadteCursor method
-    public void remove(Object... datas) {
-        if (datas.length > 0) {
-            for (Object obj : datas) {
-                remove(findIndexInArray(obj), 1);
-            }
+    // TODO: 2019-10-20 need removeCursor and updateCursor method
+    public void remove(Object... itemArray) {
+        for (Object obj : itemArray) {
+            remove(findIndexInArray(obj), 1);
         }
     }
 
-    public void remove(List dataList) {
-        if (!dataList.isEmpty()) {
-            for (Object obj : dataList) {
-                remove(findIndexInArray(obj), 1);
+    public void remove(List<Object> itemList) {
+        if (!itemList.isEmpty()) {
+            for (Object item : itemList) {
+                remove(findIndexInArray(item), 1);
             }
         }
     }
 
     public void remove(int index, int num) {
         if (num > 0 && index >= 0 && index + num <= size()) {
-            mProviderDataList.subList(index, num + index).clear();
-            mAdapter.notifyItemRangeRemoved(index, num);
+            internalItemList.subList(index, num + index).clear();
+            multiTypeAdapter.notifyItemRangeRemoved(index, num);
         }
         resetIndexWithCursorMap();
     }
@@ -147,18 +151,18 @@ public class DataManager {
     }
 
     public void removeLast(int num) {
-        remove(mProviderDataList.size() - num, num);
+        remove(internalItemList.size() - num, num);
     }
 
-    public void update(int index, Object obj, Notify notify) {
+    public void update(int index, Object obj, Payload payload) {
         if (!checkIndex(index)) {
             RvLog.w(TAG, "update: index is out of range");
             return;
         }
         if (obj != null) {
-            mProviderDataList.set(index, obj);
+            internalItemList.set(index, obj);
         }
-        mAdapter.notifyItemChanged(index, notify);
+        multiTypeAdapter.notifyItemChanged(index, payload);
     }
 
     public void update(Object obj) {
@@ -167,9 +171,9 @@ public class DataManager {
         }
     }
 
-    public void update(Object obj, Notify notify) {
+    public void update(Object obj, Payload payload) {
         if (obj != null) {
-            update(findIndexInArray(obj), obj, notify);
+            update(findIndexInArray(obj), obj, payload);
         }
     }
 
@@ -191,19 +195,19 @@ public class DataManager {
             RvLog.w(TAG, "move: toPos is out of range toPos = " + toPos);
             return;
         }
-        Object fromData = mProviderDataList.get(fromPos);
-        Object toData = mProviderDataList.get(toPos);
-        mProviderDataList.set(toPos, fromData);
-        mProviderDataList.set(fromPos, toData);
+        Object fromData = internalItemList.get(fromPos);
+        Object toData = internalItemList.get(toPos);
+        internalItemList.set(toPos, fromData);
+        internalItemList.set(fromPos, toData);
 //        mAdapter.notifyItemMoved(fromPos, toPos);
 //        //由于move机制需要刷新move范围内的item。
 //        mAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
-        mAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
+        multiTypeAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
     }
 
-    private int findIndexInArray(Object obj) {
-        for (int i = 0, len = mProviderDataList.size(); i < len; i++) {
-            if (mProviderDataList.get(i).equals(obj)) {
+    private int findIndexInArray(Object item) {
+        for (int i = 0, len = internalItemList.size(); i < len; i++) {
+            if (internalItemList.get(i).equals(item)) {
                 return i;
             }
         }
@@ -211,7 +215,7 @@ public class DataManager {
     }
 
     public int size() {
-        int size = mProviderDataList.size();
+        int size = internalItemList.size();
         if (!mIndexWithCursorMap.isEmpty()) {
             for (HashMap.Entry<Integer, Cursor> entry : mIndexWithCursorMap.entrySet()) {
                 size = size + entry.getValue().getCount() - 1;
@@ -226,8 +230,8 @@ public class DataManager {
         }
         mIndexWithCursorMap.clear();
         Object obj;
-        for (int i = 0, size = mProviderDataList.size(); i < size; i++) {
-            obj = mProviderDataList.get(i);
+        for (int i = 0, size = internalItemList.size(); i < size; i++) {
+            obj = internalItemList.get(i);
             if (obj instanceof Cursor) {
                 mIndexWithCursorMap.put(i, (Cursor) obj);
             }
@@ -254,7 +258,7 @@ public class DataManager {
                     }
                 }
              }
-            return mProviderDataList.get(realPosition);
+            return internalItemList.get(realPosition);
         }
         return null;
     }
@@ -263,13 +267,13 @@ public class DataManager {
         return index >= 0 && index <= size();
     }
 
-    public List getData() {
-        return mProviderDataList;
+    public List<Object> getData() {
+        return internalItemList;
     }
 
     public void clear() {
-        mProviderDataList.clear();
-        mProviderDataList = null;
+        internalItemList.clear();
+        internalItemList = null;
         for (HashMap.Entry<Integer, Cursor> entry : mIndexWithCursorMap.entrySet()) {
             if (!entry.getValue().isClosed()) {
                 entry.getValue().close();

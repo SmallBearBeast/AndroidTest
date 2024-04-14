@@ -6,23 +6,23 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
-import com.bear.librv.VHBridge;
-import com.bear.librv.VHolder;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.R;
 import com.example.libfresco.FrescoView;
 
-public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
+public class ImageDelegate extends MultiTypeDelegate<Image, ImageDelegate.ImageHolder> {
     @NonNull
     @Override
-    protected ImageVHolder onCreateViewHolder(@NonNull View itemView) {
-        return new ImageVHolder(itemView);
+    protected ImageHolder onCreateViewHolder(@NonNull View itemView) {
+        return new ImageHolder(itemView);
     }
 
-    class ImageVHolder extends VHolder<Image> {
-        private TextView mTv_1;
-        private FrescoView mFv_1;
+    public static class ImageHolder extends MultiTypeHolder<Image> {
+        private final TextView mTv_1;
+        private final FrescoView mFv_1;
 
-        public ImageVHolder(View itemView) {
+        public ImageHolder(View itemView) {
             super(itemView);
             mTv_1 = itemView.findViewById(R.id.tv_1);
             mFv_1 = itemView.findViewById(R.id.fv_1);
@@ -37,7 +37,7 @@ public class ImageVHBinder extends VHBridge<ImageVHBinder.ImageVHolder> {
 
         @Override
         public void onStop() {
-            Log.d(TAG, "onStop: mPos = " + getPos());
+            Log.d(TAG, "onStop: mPos = " + getItemPosition());
         }
     }
 

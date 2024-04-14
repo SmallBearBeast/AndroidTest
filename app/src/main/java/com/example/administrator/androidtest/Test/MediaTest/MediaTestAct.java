@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bear.libcomponent.component.ComponentAct;
-import com.bear.librv.DataManager;
+import com.bear.librv.MultiItemChanger;
+import com.bear.librv.MultiTypeAdapter;
 import com.bear.librv.RvDivider;
-import com.bear.librv.VHAdapter;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.Common.Media.Info.DirInfo;
 import com.example.administrator.androidtest.Common.Media.Provider.MediaConfig;
@@ -46,42 +46,42 @@ public class MediaTestAct extends ComponentAct {
         GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 4);
         rvMedia.setLayoutManager(gridLayoutManager);
         rvMedia.addItemDecoration(new RvDivider(gridLayoutManager, divider));
-        VHAdapter adapter = new VHAdapter(getLifecycle());
-        adapter.register(new ImageVideoBridge(divider), Cursor.class);
-        TextBridge textBridge = new TextBridge();
-        adapter.register(textBridge, String.class);
+        MultiTypeAdapter adapter = new MultiTypeAdapter(getLifecycle());
+//        adapter.register(Cursor.class, new ImageVideoDelegate(divider));
+        TextDelegate textDelegate = new TextDelegate();
+        adapter.register(String.class, textDelegate);
         final MediaConfig config_1 = MediaConfig.from(MediaConfig.IMAGE).minAddTime(System.currentTimeMillis() / 1000 - 20 * 60);
         final MediaConfig config_2 = MediaConfig.from(MediaConfig.IMAGE);
         final MediaConfig config_3 = MediaConfig.from(MediaConfig.AUDIO);
-        ImageVideoBridge imageVideoBridge_1 = new ImageVideoBridge(divider);
-        adapter.register(imageVideoBridge_1, CONFIG_1);
-        ImageVideoBridge imageVideoBridge_2 = new ImageVideoBridge(divider);
-        adapter.register(imageVideoBridge_2, CONFIG_2);
-        AudioBridge audioBridge = new AudioBridge();
-        adapter.register(audioBridge, CONFIG_3);
-        adapter.setOnDataTypeCreator(new VHAdapter.OnDataTypeCreator() {
-            @Override
-            public int createDataType(Object obj, int pos) {
-                if (obj instanceof Cursor) {
-                    Cursor cursor = (Cursor) obj;
-                    if (config_1.isCursor(cursor)) {
-                        SLog.i(TAG, "getType: obj = cursor" + " pos = " + pos + " config_1");
-                        return CONFIG_1;
-                    }
-                    if (config_2.isCursor(cursor)) {
-                        SLog.i(TAG, "getType: obj = cursor" + " pos = " + pos + " config_2");
-                        return CONFIG_2;
-                    }
-                    if (config_3.isCursor(cursor)) {
-                        SLog.i(TAG, "getType: obj = cursor" + " pos = " + pos + " config_3");
-                        return CONFIG_3;
-                    }
-                }
-                return -1;
-            }
-        });
+        ImageVideoDelegate imageVideoDelegate_1 = new ImageVideoDelegate(divider);
+//        adapter.register(imageVideoDelegate_1, CONFIG_1);
+//        ImageVideoDelegate imageVideoDelegate_2 = new ImageVideoDelegate(divider);
+//        adapter.register(imageVideoDelegate_2, CONFIG_2);
+//        AudioDelegate audioDelegate = new AudioDelegate();
+//        adapter.register(audioDelegate, CONFIG_3);
+//        adapter.setOnDataTypeCreator(new VHAdapter.OnDataTypeCreator() {
+//            @Override
+//            public int createDataType(Object obj, int pos) {
+//                if (obj instanceof Cursor) {
+//                    Cursor cursor = (Cursor) obj;
+//                    if (config_1.isCursor(cursor)) {
+//                        SLog.i(TAG, "getType: obj = cursor" + " pos = " + pos + " config_1");
+//                        return CONFIG_1;
+//                    }
+//                    if (config_2.isCursor(cursor)) {
+//                        SLog.i(TAG, "getType: obj = cursor" + " pos = " + pos + " config_2");
+//                        return CONFIG_2;
+//                    }
+//                    if (config_3.isCursor(cursor)) {
+//                        SLog.i(TAG, "getType: obj = cursor" + " pos = " + pos + " config_3");
+//                        return CONFIG_3;
+//                    }
+//                }
+//                return -1;
+//            }
+//        });
         rvMedia.setAdapter(adapter);
-        final DataManager manager = adapter.getDataManager();
+        final MultiItemChanger changer = adapter.getChanger();
         MediaProvider provider = new MediaProvider(this);
         TimeUtil.markStart("fetchDirInfo");
         provider.fetchDirInfo(config_1, new MediaProvider.DirInfoCallback() {
@@ -107,8 +107,8 @@ public class MediaTestAct extends ComponentAct {
             public void onCursor(Cursor cursor) {
                 TimeUtil.markEnd("fetchCursor");
                 SLog.i(TAG, "cursor.getCount = " + cursor.getCount() + " TimeUtil.getDuration = " + TimeUtil.getDuration("fetchCursor"));
-                manager.addCursorFirst(cursor);
-                manager.addLast("123");
+                changer.addCursorFirst(cursor);
+                changer.addLast("123");
             }
         });
 
@@ -117,8 +117,8 @@ public class MediaTestAct extends ComponentAct {
             public void onCursor(Cursor cursor) {
                 TimeUtil.markEnd("fetchCursor");
                 SLog.i(TAG, "cursor.getCount = " + cursor.getCount() + " TimeUtil.getDuration = " + TimeUtil.getDuration("fetchCursor"));
-                manager.addCursorLast(cursor);
-                manager.addLast("123");
+                changer.addCursorLast(cursor);
+                changer.addLast("123");
             }
         });
 
@@ -126,8 +126,8 @@ public class MediaTestAct extends ComponentAct {
             @Override
             public void onCursor(Cursor cursor) {
                 SLog.i(TAG, "cursor.getCount = " + cursor.getCount() + " TimeUtil.getDuration = " + TimeUtil.getDuration("fetchBaseInfo"));
-                manager.addCursorLast(cursor);
-                manager.addLast("123");
+                changer.addCursorLast(cursor);
+                changer.addLast("123");
             }
         });
 

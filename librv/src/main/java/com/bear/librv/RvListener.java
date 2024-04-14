@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class RvListener extends RecyclerView.SimpleOnItemTouchListener {
     private static final byte TYPE_CLICK = 1;
     private static final byte TYPE_LONG_CLICK = 2;
-    private GestureDetector mGestureDetector;
-    private OnItemClickListener mListener;
+    private final GestureDetector mGestureDetector;
+    private final OnItemClickListener mListener;
 
     public static class OnItemClickListener {
         //处理了返回true
@@ -34,12 +34,12 @@ public class RvListener extends RecyclerView.SimpleOnItemTouchListener {
         mGestureDetector = new GestureDetector(context, new GestureDetector.SimpleOnGestureListener() {
             //多次点击反应慢是因为走了双击事件的回调
             @Override
-            public boolean onSingleTapUp(MotionEvent e) {
+            public boolean onSingleTapUp(MotionEvent event) {
                 //单击事件
-                View childView = recyclerView.findChildViewUnder(e.getX(), e.getY());
+                View childView = recyclerView.findChildViewUnder(event.getX(), event.getY());
                 if (childView != null && mListener != null) {
                     int pos = recyclerView.getChildLayoutPosition(childView);
-                    if(onClick(childView, e.getX(), e.getY(), pos, TYPE_CLICK)){
+                    if(onClick(childView, event.getX(), event.getY(), pos, TYPE_CLICK)){
                         return true;
                     }else {
                         return mListener.onItemClick(childView, pos);

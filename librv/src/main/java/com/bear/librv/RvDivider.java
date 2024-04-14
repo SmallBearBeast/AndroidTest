@@ -26,12 +26,12 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 // TODO: 2022/3/20 The width is not correct in GridLayoutManager
 public class RvDivider extends RecyclerView.ItemDecoration {
     private int mColor = Color.TRANSPARENT;
-    private int mVerticalDividerWidth;
-    private int mHorizontalDividerWidth;
-    private int mOrientation;
+    private final int mVerticalDividerWidth;
+    private final int mHorizontalDividerWidth;
+    private final int mOrientation;
     private Paint mPaint;
     private Drawable mDrawable;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private final RecyclerView.LayoutManager mLayoutManager;
 
     public RvDivider(RecyclerView.LayoutManager layoutManager, int dividerWidth) {
         this(layoutManager, dividerWidth, dividerWidth, 0, null);

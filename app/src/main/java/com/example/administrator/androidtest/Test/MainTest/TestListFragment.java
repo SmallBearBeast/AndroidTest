@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bear.libcomponent.component.ComponentFrag;
-import com.bear.librv.VHAdapter;
-import com.bear.librv.VHBridge;
-import com.bear.librv.VHolder;
+import com.bear.librv.MultiTypeAdapter;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
 import com.example.libbase.Util.CollectionUtil;
 import com.example.libbase.Util.DensityUtil;
 
@@ -43,15 +43,15 @@ public class TestListFragment extends ComponentFrag {
         testName = bundle.getString(KEY_TEST_NAME);
     }
 
-    private VHAdapter<TextVHolder> initAndGetAdapter() {
-        VHAdapter<TextVHolder> vhAdapter = new VHAdapter<>(getLifecycle());
-        vhAdapter.register(new TextVHBridge(), String.class);
+    private MultiTypeAdapter initAndGetAdapter() {
+        MultiTypeAdapter adapter = new MultiTypeAdapter(getLifecycle());
+        adapter.register(String.class, new TextMultiTypeDelegate());
         List<String> dataList = CollectionUtil.asListNotNull(
                 "AAA", "BBB", "CCC", "DDD", "EEE", "FFF", "AAA", "BBB", "CCC", "DDD", "EEE", "FFF",
                 "AAA", "BBB", "CCC", "DDD", "EEE", "FFF"
         );
-        vhAdapter.getDataManager().setData(dataList);
-        return vhAdapter;
+        adapter.getChanger().setItems(dataList);
+        return adapter;
     }
 
     public static TestListFragment get(String testName) {
@@ -62,12 +62,12 @@ public class TestListFragment extends ComponentFrag {
         return testListFragment;
     }
 
-    private static class TextVHBridge extends VHBridge<TextVHolder> {
+    private static class TextMultiTypeDelegate extends MultiTypeDelegate<String, TextMultiTypeHolder> {
 
         @NonNull
         @Override
-        protected TextVHolder onCreateViewHolder(@NonNull View itemView) {
-            return new TextVHolder(itemView);
+        protected TextMultiTypeHolder onCreateViewHolder(@NonNull View itemView) {
+            return new TextMultiTypeHolder(itemView);
         }
 
         @Override
@@ -86,9 +86,9 @@ public class TestListFragment extends ComponentFrag {
         }
     }
 
-    private static class TextVHolder extends VHolder<String> {
+    private static class TextMultiTypeHolder extends MultiTypeHolder<String> {
 
-        public TextVHolder(View itemView) {
+        public TextMultiTypeHolder(View itemView) {
             super(itemView);
         }
 

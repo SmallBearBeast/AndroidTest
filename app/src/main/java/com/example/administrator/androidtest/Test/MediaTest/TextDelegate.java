@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bear.librv.VHBridge;
-import com.bear.librv.VHolder;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
 import com.example.libbase.Util.DensityUtil;
 
-public class TextBridge extends VHBridge {
+public class TextDelegate extends MultiTypeDelegate<String, TextDelegate.TextHolder> {
 
     @Override
     protected int getSpanSize(RecyclerView rv) {
@@ -26,8 +26,8 @@ public class TextBridge extends VHBridge {
 
     @NonNull
     @Override
-    protected VHolder onCreateViewHolder(@NonNull View itemView) {
-        return new TextVHolder(itemView);
+    protected TextHolder onCreateViewHolder(@NonNull View itemView) {
+        return new TextHolder(itemView);
     }
 
     @Override
@@ -47,8 +47,8 @@ public class TextBridge extends VHBridge {
         return tv;
     }
 
-    class TextVHolder extends VHolder{
-        public TextVHolder(View itemView) {
+    public static class TextHolder extends MultiTypeHolder<String> {
+        public TextHolder(View itemView) {
             super(itemView);
         }
     }

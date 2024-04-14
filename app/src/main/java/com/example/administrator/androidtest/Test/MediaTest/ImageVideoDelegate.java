@@ -6,25 +6,25 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bear.librv.VHBridge;
-import com.bear.librv.VHolder;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.Common.Media.Info.BaseInfo;
 import com.example.administrator.androidtest.Common.Media.Info.ImageInfo;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
 import com.example.libfresco.FrescoView;
 
-public class ImageVideoBridge extends VHBridge<ImageVideoBridge.ImageVideoVHolder> {
-    private int mDivider;
+public class ImageVideoDelegate extends MultiTypeDelegate<BaseInfo, ImageVideoDelegate.ImageVideoHolder> {
+    private final int mDivider;
 
-    public ImageVideoBridge(int divider) {
+    public ImageVideoDelegate(int divider) {
         mDivider = divider;
     }
 
     @NonNull
     @Override
-    protected ImageVideoVHolder onCreateViewHolder(@NonNull View itemView) {
-        return new ImageVideoVHolder(itemView);
+    protected ImageVideoHolder onCreateViewHolder(@NonNull View itemView) {
+        return new ImageVideoHolder(itemView, mDivider);
     }
 
     @Override
@@ -32,17 +32,17 @@ public class ImageVideoBridge extends VHBridge<ImageVideoBridge.ImageVideoVHolde
         return R.layout.item_image;
     }
 
-    class ImageVideoVHolder extends VHolder<BaseInfo> {
-        private FrescoView mFvImage;
+    public static class ImageVideoHolder extends MultiTypeHolder<BaseInfo> {
+        private FrescoView fvImage;
         private int mSize;
-        public ImageVideoVHolder(View itemView) {
+        public ImageVideoHolder(View itemView, int divider) {
             super(itemView);
-            mFvImage = findViewById(R.id.fv_image);
+            fvImage = findViewById(R.id.fv_image);
             if (getRecyclerView() != null) {
                 ViewGroup.LayoutParams lp = itemView.getLayoutParams();
                 if (mSize == 0) {
                     int spanCount = ((GridLayoutManager)getRecyclerView().getLayoutManager()).getSpanCount();
-                    mSize = (getRecyclerView().getWidth() - mDivider * (spanCount - 1)) / spanCount;
+                    mSize = (getRecyclerView().getWidth() - divider * (spanCount - 1)) / spanCount;
                 }
                 lp.width = ViewGroup.LayoutParams.MATCH_PARENT;
                 lp.height = mSize;
@@ -55,7 +55,7 @@ public class ImageVideoBridge extends VHBridge<ImageVideoBridge.ImageVideoVHolde
             BaseInfo info = BaseInfo.from(cursor);
             if (info instanceof ImageInfo){
                 ImageInfo imageInfo = (ImageInfo) info;
-                mFvImage.setPath(imageInfo.mPath, DensityUtil.dp2Px(mSize / 8.0f), DensityUtil.dp2Px(mSize / 8.0f));
+                fvImage.setPath(imageInfo.mPath, DensityUtil.dp2Px(mSize / 8.0f), DensityUtil.dp2Px(mSize / 8.0f));
             }
         }
     }

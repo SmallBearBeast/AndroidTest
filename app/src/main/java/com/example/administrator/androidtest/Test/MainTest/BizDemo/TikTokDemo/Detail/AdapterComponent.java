@@ -7,7 +7,7 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.bear.librv.VHAdapter;
+import com.bear.librv.MultiTypeAdapter;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokBean;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
@@ -24,10 +24,9 @@ public class AdapterComponent extends TestActivityComponent {
     protected void onCreate() {
         tiktokDetailViewPager = findViewById(R.id.tiktokDetailViewPager);
         tiktokDetailViewPager.setOffscreenPageLimit(1);
-        VHAdapter vhAdapter = new VHAdapter(getActivity().getLifecycle());
-        vhAdapter.getDataManager();
-        vhAdapter.register(new VideoDetailBridge(this), TiktokBean.class);
-        tiktokDetailViewPager.setAdapter(vhAdapter);
+        MultiTypeAdapter adapter = new MultiTypeAdapter(getActivity().getLifecycle());
+        adapter.register(TiktokBean.class, new VideoDetailDelegate(this));
+        tiktokDetailViewPager.setAdapter(adapter);
     }
 
     private static class Sdasd extends FragmentStateAdapter {
