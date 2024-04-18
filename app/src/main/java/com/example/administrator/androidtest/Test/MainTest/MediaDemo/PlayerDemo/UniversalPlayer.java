@@ -104,6 +104,7 @@ public class UniversalPlayer {
         DefaultRenderersFactory defaultRenderersFactory = new DefaultRenderersFactory(context).setEnableDecoderFallback(true);
         exoPlayer = new ExoPlayer.Builder(context, defaultRenderersFactory).setLoadControl(loadControl).build();
         exoPlayer.addListener(listener);
+        exoPlayer.setRepeatMode(ExoPlayer.REPEAT_MODE_ONE);
     }
 
     public void attachPlayView(StyledPlayerView playerView) {
@@ -210,5 +211,23 @@ public class UniversalPlayer {
             cache.release();
             cache = null;
         }
+    }
+
+    public void toggle() {
+        if (exoPlayer == null) {
+            return;
+        }
+        if (exoPlayer.isPlaying()) {
+            exoPlayer.pause();
+        } else {
+            exoPlayer.play();
+        }
+    }
+
+    public boolean isPlaying() {
+        if (exoPlayer == null) {
+            return false;
+        }
+        return exoPlayer.isPlaying();
     }
 }

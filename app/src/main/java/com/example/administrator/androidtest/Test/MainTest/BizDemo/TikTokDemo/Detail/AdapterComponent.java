@@ -1,20 +1,27 @@
 package com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.Detail;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
+import android.content.Intent;
+import android.util.Log;
+
 import androidx.lifecycle.Lifecycle;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokBean;
+import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokVideoDetailInfo;
+import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokConstants;
+import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokDataLoader;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
+
+import java.util.List;
 
 public class AdapterComponent extends TestActivityComponent {
 
-    private ViewPager2 tiktokDetailViewPager;
+    private ViewPager2 videoDetailViewPager;
+    private VideoDetailDelegate videoDetailDelegate;
+    private MultiItemChanger changer;
+
 
     public AdapterComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -22,29 +29,65 @@ public class AdapterComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        tiktokDetailViewPager = findViewById(R.id.tiktokDetailViewPager);
-        tiktokDetailViewPager.setOffscreenPageLimit(1);
-        MultiTypeAdapter adapter = new MultiTypeAdapter(getActivity().getLifecycle());
-        adapter.register(TiktokBean.class, new VideoDetailDelegate(this));
-        tiktokDetailViewPager.setAdapter(adapter);
+        initViewpager2();
+        initData();
     }
 
-    private static class Sdasd extends FragmentStateAdapter {
+    private void initViewpager2() {
+        videoDetailViewPager = findViewById(R.id.videoDetailViewPager);
+        videoDetailViewPager.setOffscreenPageLimit(1);
+        MultiTypeAdapter adapter = new MultiTypeAdapter(getLifecycle());
+        changer = adapter.getChanger();
+        videoDetailDelegate = new VideoDetailDelegate(this);
+        adapter.register(TiktokVideoDetailInfo.class, videoDetailDelegate);
+        videoDetailViewPager.setAdapter(adapter);
 
+        videoDetailViewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                Log.d(TAG, "onPageSelected() called with: position = [" + position + "]");
+                if (position >= TiktokDataLoader.getInstance().getSourceTiktokDataList().size() - 1) {
+                    TiktokDataLoader.getInstance().loadMoreVideoDetailInfoList(tiktokVideoDetailInfoList -> changer.addLast(tiktokVideoDetailInfoList));
+                }
+                showThumb(position, false);
+                if (position > 0) {
+                    showThumb(position - 1, true);
+                }
+                if (position < adapter.getItemCount() - 1) {
+                    showThumb(position + 1, true);
+                }
+                play(TiktokDataLoader.getInstance().getSourceTiktokDataList().get(position).videoDownloadUrl);
+            }
+        });
+    }
 
-        public Sdasd(@NonNull FragmentActivity fragmentActivity) {
-            super(fragmentActivity);
+    private void initData() {
+        List<TiktokVideoDetailInfo> videoDetailList = TiktokDataLoader.getInstance().getSourceTiktokVideoDetailList();
+        changer.setItems(videoDetailList);
+        Intent intent = getActivity().getIntent();
+        int currentIndex = intent != null ? intent.getIntExtra(TiktokConstants.CURRENT_INDEX, 0) : 0;
+        if (currentIndex >= 0 && currentIndex < videoDetailList.size()) {
+            videoDetailViewPager.setCurrentItem(currentIndex, false);
+            play(TiktokDataLoader.getInstance().getSourceTiktokDataList().get(currentIndex).videoDownloadUrl);
+            TiktokDataLoader.getInstance().loadTiktokVideoDetailInfoByRange(currentIndex, tiktokVideoDetailInfoList -> changer.update(currentIndex, tiktokVideoDetailInfoList.get(0)));
+        } else {
+            TiktokDataLoader.getInstance().refreshVideoDetailInfoList(tiktokVideoDetailInfoList -> changer.setItems(tiktokVideoDetailInfoList));
         }
+    }
 
-        @NonNull
-        @Override
-        public Fragment createFragment(int position) {
-            return null;
+    private void play(String url) {
+        VideoPlayComponent videoPlayComponent = getComponent(VideoPlayComponent.class);
+        if (videoPlayComponent != null) {
+//            videoPlayComponent.playExt(url);
         }
+    }
 
-        @Override
-        public int getItemCount() {
-            return 0;
+    private void showThumb(int position, boolean show) {
+        int holdId = videoDetailDelegate.getHolderId(position);
+        VideoInfoComponent videoInfoComponent = getComponent(VideoInfoComponent.class, holdId);
+        if (videoInfoComponent != null) {
+            Log.d(TAG, "position = " + position + ", show = " + show);
+//            videoInfoComponent.showThumbExt(show);
         }
     }
 }

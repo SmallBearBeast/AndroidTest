@@ -1,13 +1,6 @@
 package com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-
-public class TiktokBean {
+public class TiktokVideoDetailInfo {
 
     /**
      * authorImgUrl : https://p3-dy.byteimg.com/aweme/100x100/1e19c00014b66991215ba.jpeg
@@ -35,6 +28,8 @@ public class TiktokBean {
      * videoWidth : 720
      */
 
+    public int id;
+    public int isDetailInfo;
     public String authorImgUrl;
     public String authorName;
     public int authorSex;
@@ -59,8 +54,32 @@ public class TiktokBean {
     public String videoPlayUrl;
     public int videoWidth;
 
-    public static List<TiktokBean> arrayTiktokBeanFromData(String str) {
-        Type listType = new TypeToken<ArrayList<TiktokBean>>() {}.getType();
-        return new Gson().fromJson(str, listType);
+    public TiktokVideoInfo toTiktokVideoInfo() {
+        TiktokVideoInfo videoInfo = new TiktokVideoInfo();
+        videoInfo.id = id;
+        videoInfo.authorImgUrl = authorImgUrl;
+        videoInfo.authorName = authorName;
+        videoInfo.authorSex = authorSex;
+        videoInfo.coverImgUrl = coverImgUrl;
+        videoInfo.createTime = createTime;
+        videoInfo.dynamicCover = dynamicCover;
+        videoInfo.filterMusicNameStr = filterMusicNameStr;
+        videoInfo.filterTitleStr = filterTitleStr;
+        videoInfo.filterUserNameStr = filterUserNameStr;
+        videoInfo.formatLikeCountStr = formatLikeCountStr;
+        videoInfo.formatPlayCountStr = formatPlayCountStr;
+        videoInfo.formatTimeStr = formatTimeStr;
+        videoInfo.likeCount = likeCount;
+        videoInfo.musicAuthorName = musicAuthorName;
+        videoInfo.musicImgUrl = musicImgUrl;
+        videoInfo.musicName = musicName;
+        videoInfo.playCount = playCount;
+        videoInfo.title = title;
+        videoInfo.type = type;
+        videoInfo.videoDownloadUrl = videoDownloadUrl;
+        videoInfo.videoHeight = videoHeight;
+        videoInfo.videoPlayUrl = videoPlayUrl;
+        videoInfo.videoWidth = videoWidth;
+        return videoInfo;
     }
 }

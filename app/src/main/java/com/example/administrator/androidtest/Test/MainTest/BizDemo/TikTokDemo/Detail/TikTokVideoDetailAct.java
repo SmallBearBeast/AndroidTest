@@ -7,18 +7,20 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
+import com.example.administrator.androidtest.R;
 
 public class TikTokVideoDetailAct extends ComponentAct {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        regActComponent(new VideoPlayComponent(getLifecycle()));
+        regActComponent(new AdapterComponent(getLifecycle()));
     }
 
     @Override
     protected int layoutId() {
-        return 0;
+        return R.layout.act_tiktok_video_detail;
     }
 
     public static void go(Context context) {

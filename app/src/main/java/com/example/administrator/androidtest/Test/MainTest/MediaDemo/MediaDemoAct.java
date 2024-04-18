@@ -17,7 +17,6 @@ public class MediaDemoAct extends ComponentAct {
         super.onCreate(savedInstanceState);
         regActComponent(new PlayerDemoComponent(getLifecycle()));
     }
-
     @Override
     protected int layoutId() {
         return R.layout.act_media_demo_list;
@@ -28,3 +27,4 @@ public class MediaDemoAct extends ComponentAct {
         context.startActivity(intent);
     }
 }
+

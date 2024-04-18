@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/thumbIv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/girl" />
+
+    <TextView
+        android:id="@+id/authorNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_10"
+        android:textColor="@color/cl_white_t_9"
+        android:textSize="@dimen/dp_20"
+        app:layout_constraintBottom_toTopOf="@+id/titleTv"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="齐江帅" />
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dp_10"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:textColor="@color/cl_white_t_7"
+        android:textSize="@dimen/dp_16"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/actionContainer"
+        app:layout_constraintHorizontal_chainStyle="spread_inside"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="#北漂 毕业6个月,辞去让我月入过万的工作回家发展,不管别人怎么看,我说放就放了.只是那也本是我曾最向往的生活" />
+
+    <LinearLayout
+        android:id="@+id/actionContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/dp_20"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="@dimen/dp_10"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/titleTv">
+
+        <ImageView
+            android:id="@+id/authorAvatarIv"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@drawable/vector_like"
+            app:tint="@color/cl_white" />
+
+        <TextView
+            android:id="@+id/likeCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cl_white_t_7"
+            tools:text="1840" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@drawable/vector_like"
+            app:tint="@color/cl_white" />
+
+        <TextView
+            android:id="@+id/commentCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cl_white_t_7"
+            tools:text="1840" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@drawable/vector_like"
+            app:tint="@color/cl_white" />
+
+        <TextView
+            android:id="@+id/collectCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cl_white_t_7"
+            tools:text="1840" />
+
+        <ImageView
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
+            android:layout_marginTop="@dimen/dp_20"
+            android:src="@drawable/vector_like"
+            app:tint="@color/cl_white" />
+
+        <TextView
+            android:id="@+id/shareCountTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/cl_white_t_7"
+            tools:text="1840" />
+
+        <ImageView
+            android:id="@+id/musicAvatarIv"
+            android:layout_width="@dimen/dp_50"
+            android:layout_height="@dimen/dp_50"
+            android:layout_marginTop="@dimen/dp_20"
+            android:scaleType="centerCrop"
+            android:src="@drawable/girl" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

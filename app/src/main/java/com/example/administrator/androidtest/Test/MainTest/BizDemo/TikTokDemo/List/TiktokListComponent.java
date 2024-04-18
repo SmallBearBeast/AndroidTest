@@ -8,7 +8,7 @@ import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.libstorage.FileStorage;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokBean;
+import com.example.administrator.androidtest.Test.MainTest.BizDemo.TikTokDemo.TiktokVideoInfo;
 import com.example.administrator.androidtest.Test.MainTest.TestActivityComponent;
 import com.example.libbase.Executor.BgThreadExecutor;
 import com.example.libbase.Executor.MainThreadExecutor;
@@ -22,7 +22,7 @@ public class TiktokListComponent extends TestActivityComponent {
 
     private RecyclerView tiktokRecyclerView;
 
-    private MultiItemChanger multiItemChanger;
+    private MultiItemChanger changer;
 
     public TiktokListComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -34,8 +34,8 @@ public class TiktokListComponent extends TestActivityComponent {
         tiktokRecyclerView = findViewById(R.id.tiktokRecyclerView);
         tiktokRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         MultiTypeAdapter adapter = new MultiTypeAdapter(getActivity().getLifecycle());
-        multiItemChanger = adapter.getChanger();
-        adapter.register(TiktokBean.class, new TikTokListDelegate());
+        changer = adapter.getChanger();
+        adapter.register(TiktokVideoInfo.class, new TikTokListDelegate());
         tiktokRecyclerView.setAdapter(adapter);
 
         loadTikTokListData();
@@ -45,10 +45,10 @@ public class TiktokListComponent extends TestActivityComponent {
         BgThreadExecutor.execute(() -> {
             InputStream inputStream = null;
             try {
-                inputStream = getContext().getAssets().open("tiktok_data.json");
-                TypeToken<List<TiktokBean>> typeToken = new TypeToken<List<TiktokBean>>() {};
-                List<TiktokBean> tiktokBeans = FileStorage.readObjFromJson(inputStream, typeToken);
-                MainThreadExecutor.post(() -> multiItemChanger.setItems(tiktokBeans));
+                inputStream = getContext().getAssets().open("tiktok_video_info.json");
+                TypeToken<List<TiktokVideoInfo>> typeToken = new TypeToken<List<TiktokVideoInfo>>() {};
+                List<TiktokVideoInfo> tiktokVideoInfos = FileStorage.readObjFromJson(inputStream, typeToken);
+                MainThreadExecutor.post(() -> changer.setItems(tiktokVideoInfos));
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
