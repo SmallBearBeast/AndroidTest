@@ -125,6 +125,9 @@
         <activity
             android:name=".Test.MainTest.WidgetDemo.WidgetDemoAct"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".Test.MainTest.WidgetDemo.PdfViewDemo.PdfViewDemoAct"
+            android:theme="@style/AppTheme" />
         <!-- Widget Demo End -->
 
         <!-- Biz Demo Start -->

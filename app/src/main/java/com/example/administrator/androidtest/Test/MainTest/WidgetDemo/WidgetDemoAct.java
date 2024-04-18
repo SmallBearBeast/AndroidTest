@@ -16,12 +16,14 @@ import com.example.administrator.androidtest.Test.MainTest.WidgetDemo.LikeViewDe
 import com.example.administrator.androidtest.Test.MainTest.WidgetDemo.LoopViewPagerDemo.LoopViewPagerDemoComponent;
 import com.example.administrator.androidtest.Test.MainTest.WidgetDemo.MarqueeDemo.MarqueeDemoComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.ToolbarTest.ToolbarTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.WidgetDemo.PdfViewDemo.PdfViewDemoComponent;
 
 public class WidgetDemoAct extends ComponentAct {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        regActComponent(new PdfViewDemoComponent(getLifecycle()));
         regActComponent(new FlowLayoutTestComponent(getLifecycle()));
         regActComponent(new MarqueeDemoComponent(getLifecycle()));
         regActComponent(new CaseViewComponent(getLifecycle()));

@@ -10,6 +10,22 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/pdfViewTextView"
+                style="@style/TestLabelStyle"
+                android:text="PdfView Demo" />
+
+            <Button
+                android:id="@+id/pdfViewButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump to PdfViewDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pdfViewTextView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/flowLayoutLabelTextView"
                 style="@style/TestLabelStyle"
                 android:text="FlowLayout Test" />
