@@ -4,22 +4,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.administrator.androidtest.Widget.pdfview.PdfView
-        android:id="@+id/pdfView"
+    <FrameLayout
+        android:id="@+id/pdfViewContainer"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dp_0"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/pdfFlowLayout"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.example.administrator.androidtest.Widget.pdfview.PdfView
+            android:id="@+id/pdfView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </FrameLayout>
 
     <com.example.administrator.androidtest.Widget.FlowLayout
         android:id="@+id/pdfFlowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pdfView">
+        app:layout_constraintTop_toBottomOf="@+id/pdfViewContainer">
 
         <Button
-            android:id="@+id/loadPdfButton"
+            android:id="@+id/loadPdfButton_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loadPdf"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/loadPdfButton_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="loadPdf"
