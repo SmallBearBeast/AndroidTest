@@ -14,7 +14,7 @@
         <com.example.administrator.androidtest.Widget.pdfview.PdfView
             android:id="@+id/pdfView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="@dimen/dp_400" />
     </FrameLayout>
 
     <com.example.administrator.androidtest.Widget.FlowLayout
@@ -36,6 +36,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="loadPdf"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/loadPdfButton_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loadLargePdf"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/loadPdfButton_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="loadMidPdf"
             android:textAllCaps="false" />
 
         <Button

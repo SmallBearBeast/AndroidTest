@@ -9,6 +9,7 @@ ext {
     coroutines_version = '1.6.4'
     lifecycle_version = '2.3.1'
     exoplayer_version = '2.18.5'
+    nav_version = ''
 
     smallbearbeast_version = 'b48a0898c7'
 

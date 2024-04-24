@@ -28,6 +28,8 @@ public class PdfViewDemoAct extends ComponentAct implements View.OnClickListener
         pdfView.setDividerHeight(100);
         findViewById(R.id.loadPdfButton_1).setOnClickListener(this);
         findViewById(R.id.loadPdfButton_2).setOnClickListener(this);
+        findViewById(R.id.loadPdfButton_3).setOnClickListener(this);
+        findViewById(R.id.loadPdfButton_4).setOnClickListener(this);
         findViewById(R.id.prePageButton).setOnClickListener(this);
         findViewById(R.id.nextPageButton).setOnClickListener(this);
     }
@@ -40,6 +42,12 @@ public class PdfViewDemoAct extends ComponentAct implements View.OnClickListener
                 break;
             case R.id. loadPdfButton_2:
                 loadPdf("git.pdf");
+                break;
+            case R.id. loadPdfButton_3:
+                loadPdf("Large_Pdf_Test.pdf");
+                break;
+            case R.id. loadPdfButton_4:
+                loadPdf("Mid_Pdf_Test.pdf");
                 break;
             case R.id. prePageButton:
                 prePage();
