@@ -34,7 +34,7 @@ public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView
         setSingleLine();
         setEllipsize(TextUtils.TruncateAt.MARQUEE);
         if (marqueeEnable) {
-            startMarquee(delayMillis);
+            beginMarquee(delayMillis);
         }
     }
 
@@ -57,11 +57,11 @@ public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView
         return marqueeEnable;
     }
 
-    public void startMarquee() {
-        startMarquee(0L);
+    public void beginMarquee() {
+        beginMarquee(0L);
     }
 
-    public void startMarquee(long delayMillis) {
+    public void beginMarquee(long delayMillis) {
         if (!canMarquee()) {
             return;
         }
@@ -87,7 +87,7 @@ public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView
 
     public void recover() {
         if (marqueeEnable) {
-            startMarquee(delayMillis);
+            beginMarquee(delayMillis);
         }
     }
 

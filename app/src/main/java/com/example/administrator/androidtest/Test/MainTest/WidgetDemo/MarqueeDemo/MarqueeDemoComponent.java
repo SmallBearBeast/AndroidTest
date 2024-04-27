@@ -27,7 +27,7 @@ public class MarqueeDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.startMarqueeButton:
-                marqueeTextView_1.startMarquee(1000);
+                marqueeTextView_1.beginMarquee(1000);
                 break;
             case R.id.endMarqueeButton:
                 marqueeTextView_1.endMarquee();
