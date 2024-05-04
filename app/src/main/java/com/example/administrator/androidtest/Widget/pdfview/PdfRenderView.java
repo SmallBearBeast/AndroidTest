@@ -23,35 +23,35 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.liblog.SLog;
 
 import java.io.File;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
-public class PdfView extends RecyclerView {
-    private static final String TAG = "PdfView";
+public class PdfRenderView extends RecyclerView {
+    private static final String TAG = "PdfRenderView";
 
     private int dividerHeight = 10;
+    private String currentPath = "";
     private PdfRenderer pdfRenderer;
-    private final PdfBitmapPool pdfBitmapPool;
-    private final PdfBitmapCache pdfBitmapCache;
-    private final Map<String, Bitmap> activeBitmapCache = new HashMap<>();
-    private final ExecutorService executor = Executors.newCachedThreadPool();
+    private final PdfBitmapPool pdfBitmapPool = new PdfBitmapPool();
+    private final PdfBitmapCache pdfBitmapCache = new PdfBitmapCache();
+    private final Map<String, Bitmap> activeBitmapCache = new ConcurrentHashMap<>();
+    private ExecutorService executor = Executors.newCachedThreadPool();
     private final Handler mainHandler = new Handler(Looper.getMainLooper());
 
-    public PdfView(Context context) {
+    public PdfRenderView(Context context) {
         this(context, null);
     }
 
-    public PdfView(Context context, @Nullable AttributeSet attrs) {
+    public PdfRenderView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        pdfBitmapPool = new PdfBitmapPool();
-        pdfBitmapCache = new PdfBitmapCache();
         pdfBitmapCache.setRecyclerCallback(pdfBitmapPool::put);
-        init();
+        initView();
     }
 
-    private void init() {
+    private void initView() {
         setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         initDecoration(dividerHeight);
     }
@@ -71,14 +71,24 @@ public class PdfView extends RecyclerView {
 
     public void load(String path) {
         try {
+            if (currentPath.equals(path)) {
+                SLog.d(TAG, "load: use same path. path = " + path);
+                return;
+            }
+            currentPath = path;
+            if (getAdapter() != null && getAdapter() instanceof PdfItemAdapter) {
+                ((PdfItemAdapter) getAdapter()).cancelJob();
+            }
+            closePdf();
             activeBitmapCache.clear();
+            File file = new File(path);
             int startIndex = path.lastIndexOf("/") + 1;
             int endIndex = path.lastIndexOf(".");
             String prefixKey = path.substring(startIndex, endIndex);
-            prefixKey = prefixKey.isEmpty() ? "pdf-" : prefixKey + "-";
-            SLog.d(TAG, "load: path = " + path + ", prefixKey = " + prefixKey);
+            prefixKey = prefixKey.isEmpty() ? "pdf-" + file.lastModified() : prefixKey + "-" + file.lastModified();
             ParcelFileDescriptor pfd = ParcelFileDescriptor.open(new File(path), ParcelFileDescriptor.MODE_READ_ONLY);
             pdfRenderer = new PdfRenderer(pfd);
+            SLog.d(TAG, "load: path = " + path + ", prefixKey = " + prefixKey + ", lastModified = " + file.lastModified() + ", pageCount = " + pdfRenderer.getPageCount());
             setAdapter(new PdfItemAdapter(prefixKey));
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,17 +96,37 @@ public class PdfView extends RecyclerView {
     }
 
     @Override
+    protected void onAttachedToWindow() {
+        super.onAttachedToWindow();
+        pdfBitmapCache.setRecyclerCallback(pdfBitmapPool::put);
+        if (executor.isShutdown()) {
+            executor = Executors.newCachedThreadPool();
+        }
+    }
+
+    @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
         SLog.d(TAG, "onDetachedFromWindow");
-        if (pdfRenderer != null) {
-            pdfRenderer.close();
-            pdfRenderer = null;
-        }
+        closePdf();
+        activeBitmapCache.clear();
         pdfBitmapCache.clear();
         pdfBitmapPool.clear();
-        activeBitmapCache.clear();
         executor.shutdown();
+        currentPath = "";
+    }
+
+    private void closePdf() {
+        try {
+            synchronized (PdfRenderer.class) {
+                if (pdfRenderer != null) {
+                    pdfRenderer.close();
+                    pdfRenderer = null;
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @SuppressLint("NotifyDataSetChanged")
@@ -117,7 +147,6 @@ public class PdfView extends RecyclerView {
             prefixKey = key;
             if (pdfRenderer != null) {
                 pdfPageCount = pdfRenderer.getPageCount();
-                SLog.d(TAG, "new PdfItemAdapter: pdfPageCount = " + pdfPageCount);
             }
         }
 
@@ -125,7 +154,7 @@ public class PdfView extends RecyclerView {
         @Override
         public PdfItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             ImageView iv = new ImageView(parent.getContext());
-            iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+            iv.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
             iv.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             return new PdfItemViewHolder(iv);
         }
@@ -133,11 +162,6 @@ public class PdfView extends RecyclerView {
         @Override
         public void onBindViewHolder(@NonNull PdfItemViewHolder holder, int position) {
             holder.bindPdfItem(position, prefixKey + position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return pdfPageCount;
         }
 
         @Override
@@ -150,11 +174,27 @@ public class PdfView extends RecyclerView {
                 pdfBitmapCache.put(cacheKey, bitmap);
             }
         }
+
+        @Override
+        public int getItemCount() {
+            return pdfPageCount;
+        }
+
+        public void cancelJob() {
+            int childCount = getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                ViewHolder viewHolder = getChildViewHolder(getChildAt(i));
+                if (viewHolder instanceof PdfItemViewHolder) {
+                    ((PdfItemViewHolder)viewHolder).cancelJob();
+                }
+            }
+        }
     }
 
     private class PdfItemViewHolder extends RecyclerView.ViewHolder {
 
         private final ImageView imageView;
+        private Future<?> futureJob;
 
         public PdfItemViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -163,17 +203,24 @@ public class PdfView extends RecyclerView {
 
         public void bindPdfItem(int position, String cacheKey) {
             imageView.setTag(position);
-            Bitmap cacheBitmap = pdfBitmapCache.remove(cacheKey);
+            Bitmap cacheBitmap = activeBitmapCache.get(cacheKey);
             if (cacheBitmap != null && !cacheBitmap.isRecycled()) {
-                SLog.d(TAG, "bindPdfItem: use cache: position = " + position + ", cacheKey = " + cacheKey);
+                SLog.d(TAG, "bindPdfItem: use active cache: position = " + position + ", cacheKey = " + cacheKey);
+                imageView.setImageBitmap(cacheBitmap);
+                return;
+            }
+            cacheBitmap = pdfBitmapCache.remove(cacheKey);
+            if (cacheBitmap != null && !cacheBitmap.isRecycled()) {
+                SLog.d(TAG, "bindPdfItem: use lru cache: position = " + position + ", cacheKey = " + cacheKey);
                 activeBitmapCache.put(cacheKey, cacheBitmap);
                 imageView.setImageBitmap(cacheBitmap);
                 return;
             }
             if (pdfRenderer != null) {
+                SLog.d(TAG, "bindPdfItem: use source: position = " + position + ", cacheKey = " + cacheKey);
                 loadPdfBitmap(position, bitmap -> {
+                    SLog.d(TAG, "bindPdfItem: load bitmap success: position = " + position + ", tag = " + imageView.getTag());
                     if (imageView.getTag().equals(position)) {
-                        SLog.d(TAG, "bindPdfItem: put into activeBitmapCache: position = " + position + ", cacheKey = " + cacheKey);
                         activeBitmapCache.put(cacheKey, bitmap);
                         mainHandler.post(() -> imageView.setImageBitmap(bitmap));
                     } else {
@@ -183,26 +230,35 @@ public class PdfView extends RecyclerView {
             }
         }
 
+        public void cancelJob() {
+            if (futureJob != null) {
+                futureJob.cancel(true);
+            }
+        }
+
         private void loadPdfBitmap(int position, LoadPdfBitmapCallback callback) {
-            executor.execute(() -> {
+            futureJob = executor.submit(() -> {
                 if (imageView.getTag().equals(position)) {
+                    // java.lang.IllegalStateException: Current page not closed
                     synchronized (PdfRenderer.class) {
-                        PdfRenderer.Page page = pdfRenderer.openPage(position);
-                        int width = getResources().getDisplayMetrics().densityDpi * page.getWidth() / 72;
-                        int height = getResources().getDisplayMetrics().densityDpi * page.getHeight() / 72;
-                        int pageWidth = page.getWidth();
-                        int pageHeight = page.getHeight();
-                        int viewWidth = getWidth();
-                        if (pageWidth > 0) {
-                            width = viewWidth;
-                            height = (int) (viewWidth * 1f / pageWidth * pageHeight);
-                        }
-                        Bitmap bitmap = pdfBitmapPool.get(width, height);
-                        page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
-                        page.close();
-                        SLog.d(TAG, "loadPdfBitmap: position = " + position + ", page.getWidth() = " + page.getWidth() + ", page.getHeight() = " + page.getHeight() + ", width = " + width + ", height = " + height + ", densityDpi = " + getResources().getDisplayMetrics().densityDpi);
-                        if (callback != null) {
-                            callback.onLoadPdfBitmap(bitmap);
+                        if (pdfRenderer != null) {
+                            PdfRenderer.Page page = pdfRenderer.openPage(position);
+                            int width = getResources().getDisplayMetrics().densityDpi * page.getWidth() / 72;
+                            int height = getResources().getDisplayMetrics().densityDpi * page.getHeight() / 72;
+                            int pageWidth = page.getWidth();
+                            int pageHeight = page.getHeight();
+                            int viewWidth = getWidth();
+                            if (pageWidth > 0) {
+                                width = viewWidth;
+                                height = (int) (viewWidth * 1f / pageWidth * pageHeight);
+                            }
+                            Bitmap bitmap = pdfBitmapPool.get(width, height);
+                            page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY);
+                            page.close();
+                            SLog.d(TAG, "loadPdfBitmap: position = " + position + ", page.getWidth() = " + page.getWidth() + ", page.getHeight() = " + page.getHeight() + ", width = " + width + ", height = " + height + ", densityDpi = " + getResources().getDisplayMetrics().densityDpi);
+                            if (callback != null) {
+                                callback.onLoadPdfBitmap(bitmap);
+                            }
                         }
                     }
                 }

@@ -11,7 +11,7 @@
         app:layout_constraintBottom_toTopOf="@+id/pdfFlowLayout"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.administrator.androidtest.Widget.pdfview.PdfView
+        <com.example.administrator.androidtest.Widget.pdfview.PdfRenderView
             android:id="@+id/pdfView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_400" />

@@ -3,19 +3,18 @@ package com.example.administrator.androidtest.Test.MainTest.WidgetDemo.PdfViewDe
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Environment;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Widget.pdfview.PdfView;
+import com.example.administrator.androidtest.Widget.pdfview.PdfRenderView;
 
 import java.io.File;
 
 public class PdfViewDemoAct extends ComponentAct implements View.OnClickListener {
-    private PdfView pdfView;
+    private PdfRenderView pdfRenderView;
     @Override
     protected int layoutId() {
         return R.layout.act_pdf_view_test;
@@ -24,8 +23,8 @@ public class PdfViewDemoAct extends ComponentAct implements View.OnClickListener
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        pdfView = findViewById(R.id.pdfView);
-        pdfView.setDividerHeight(100);
+        pdfRenderView = findViewById(R.id.pdfView);
+        pdfRenderView.setDividerHeight(100);
         findViewById(R.id.loadPdfButton_1).setOnClickListener(this);
         findViewById(R.id.loadPdfButton_2).setOnClickListener(this);
         findViewById(R.id.loadPdfButton_3).setOnClickListener(this);
@@ -65,7 +64,7 @@ public class PdfViewDemoAct extends ComponentAct implements View.OnClickListener
         }
         File file = new File(dir, pdfName);
         if (file.exists()) {
-            pdfView.load(file.getAbsolutePath());
+            pdfRenderView.load(file.getAbsolutePath());
         }
     }
 
