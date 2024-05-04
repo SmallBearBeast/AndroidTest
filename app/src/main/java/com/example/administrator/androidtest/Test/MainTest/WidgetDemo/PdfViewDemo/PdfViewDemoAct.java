@@ -8,6 +8,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
+import com.bear.librv.RvUtil;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.Widget.pdfview.PdfRenderView;
 
@@ -69,11 +70,19 @@ public class PdfViewDemoAct extends ComponentAct implements View.OnClickListener
     }
 
     private void prePage() {
-
+        int index = RvUtil.findFirstVisibleItemPosition(pdfRenderView);
+        if (index > 0) {
+            index = index - 1;
+            RvUtil.scrollToPos(pdfRenderView, index, true, 0);
+        }
     }
 
     private void nextPage() {
-
+        int index = RvUtil.findFirstVisibleItemPosition(pdfRenderView);
+        if (index < pdfRenderView.getAdapter().getItemCount() - 1) {
+            index = index + 1;
+            RvUtil.scrollToPos(pdfRenderView, index, true, 0);
+        }
     }
 
     public static void go(Context context) {
