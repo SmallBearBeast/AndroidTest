@@ -22,44 +22,62 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 public class RvUtil {
     private static final String TAG = "RvUtil";
 
-    public static void scrollToTop(final RecyclerView rv, int limitRange, int offset){
-        int first = findFirstVisibleItemPosition(rv);
-        if(first < limitRange){
-            scrollToTop(rv, true);
-        }else {
-            scrollToPos(rv, limitRange, false, offset);
-            rv.post(new Runnable() {
-                @Override
-                public void run() {
-                    scrollToTop(rv, true);
-                }
-            });
-        }
-    }
-
     public static void scrollToTop(RecyclerView rv, boolean smooth) {
         scrollToPos(rv, 0, smooth, 0);
     }
 
-    public static void scrollToBottom(final RecyclerView rv, int limitRange, int offset){
-        int last = findLastVisibleItemPosition(rv);
-        int itemCount = rv.getLayoutManager().getItemCount();
-        if(last >= itemCount - limitRange){
-            scrollToBottom(rv, true);
-        }else {
-            scrollToPos(rv, itemCount - limitRange, false, offset);
-            rv.post(new Runnable() {
-                @Override
-                public void run() {
-                    scrollToBottom(rv, true);
-                }
-            });
+    /**
+     * 先执行无动画滚动到与目标位置相差limitRange的范围内，再执行有动画的滚动。
+     * @param limitRange 与目标位置相差的距离。
+     */
+    public static void scrollToTop(final RecyclerView rv, int limitRange, int offset) {
+        int first = findFirstVisibleItemPosition(rv);
+        if (first < limitRange) {
+            scrollToTop(rv, true);
+        } else {
+            scrollToPos(rv, limitRange, false, offset);
+            rv.post(() -> scrollToTop(rv, true));
         }
     }
 
     public static void scrollToBottom(RecyclerView rv, boolean smooth) {
         RecyclerView.LayoutManager layoutManager = rv.getLayoutManager();
         scrollToPos(rv, layoutManager.getItemCount() - 1, smooth, 0);
+    }
+
+    /**
+     * 先执行无动画滚动到与目标位置相差limitRange的范围内，再执行有动画的滚动。
+     * @param limitRange 与目标位置相差的距离。
+     */
+    public static void scrollToBottom(final RecyclerView rv, int limitRange, int offset) {
+        int last = findLastVisibleItemPosition(rv);
+        int itemCount = rv.getLayoutManager().getItemCount();
+        if (last >= itemCount - limitRange) {
+            scrollToBottom(rv, true);
+        } else {
+            scrollToPos(rv, itemCount - limitRange, false, offset);
+            rv.post(() -> scrollToBottom(rv, true));
+        }
+    }
+
+    /**
+     * 先执行无动画滚动到与目标位置相差limitRange的范围内，再执行有动画的滚动。
+     * @param limitRange 与目标位置相差的距离。
+     */
+    public static void scrollToPos(final RecyclerView rv, final int pos, int limitRange, final int offset) {
+        int first = findFirstVisibleItemPosition(rv);
+        int diff = Math.abs(pos - first);
+        if (diff <= limitRange) {
+            scrollToPos(rv, pos, true, offset);
+        } else {
+            if (first > pos) {
+                scrollToPos(rv, pos + limitRange, false, offset);
+                rv.post(() -> scrollToPos(rv, pos, true, offset));
+            } else {
+                scrollToPos(rv, pos - limitRange, false, offset);
+                rv.post(() -> scrollToPos(rv, pos, true, offset));
+            }
+        }
     }
 
     /**
@@ -114,7 +132,7 @@ public class RvUtil {
             return ((LinearLayoutManager) manager).findFirstVisibleItemPosition();
         } else if (manager instanceof StaggeredGridLayoutManager) {
             int[] info = ((StaggeredGridLayoutManager) manager).findFirstVisibleItemPositions(null);
-            if (info == null || info.length <= 0) {
+            if (info == null || info.length == 0) {
                 return -1;
             }
             return min(info);
@@ -128,7 +146,7 @@ public class RvUtil {
             return ((LinearLayoutManager) manager).findLastVisibleItemPosition();
         } else if (manager instanceof StaggeredGridLayoutManager) {
             int[] into = ((StaggeredGridLayoutManager) manager).findLastVisibleItemPositions(null);
-            if (into == null || into.length <= 0) {
+            if (into == null || into.length == 0) {
                 return -1;
             }
             return max(into);
@@ -136,11 +154,11 @@ public class RvUtil {
         return -1;
     }
 
-    public static int findFirstCompletelyVisibleItemPosition(RecyclerView rv){
+    public static int findFirstCompletelyVisibleItemPosition(RecyclerView rv) {
         RecyclerView.LayoutManager manager = rv.getLayoutManager();
         if (manager instanceof StaggeredGridLayoutManager) {
             int[] info = ((StaggeredGridLayoutManager) manager).findFirstCompletelyVisibleItemPositions(null);
-            if (info == null || info.length <= 0) {
+            if (info == null || info.length == 0) {
                 return -1;
             }
             return min(info);
@@ -150,11 +168,11 @@ public class RvUtil {
         return -1;
     }
 
-    public static int findLastCompletelyVisibleItemPosition(RecyclerView rv){
+    public static int findLastCompletelyVisibleItemPosition(RecyclerView rv) {
         RecyclerView.LayoutManager manager = rv.getLayoutManager();
         if (manager instanceof StaggeredGridLayoutManager) {
             int[] info = ((StaggeredGridLayoutManager) manager).findLastCompletelyVisibleItemPositions(null);
-            if (info == null || info.length <= 0) {
+            if (info == null || info.length == 0) {
                 return -1;
             }
             return max(info);
@@ -164,46 +182,66 @@ public class RvUtil {
         return -1;
     }
 
-    public static boolean isTop(RecyclerView rv){
-        int completeFirst = findFirstCompletelyVisibleItemPosition(rv);
-        int visibleFirst = findFirstVisibleItemPosition(rv);
-        if(completeFirst == 0){
+    public static boolean isTop(RecyclerView rv) {
+        int completeVisibleIndex = findFirstCompletelyVisibleItemPosition(rv);
+        int visibleIndex = findFirstVisibleItemPosition(rv);
+        if (completeVisibleIndex == 0) {
             return true;
-        }else if(completeFirst == -1 && visibleFirst > 0){
+        } else if (completeVisibleIndex == -1 && visibleIndex > 0) {
             return false;
-        }else if(completeFirst == -1 && visibleFirst == 0){
+        } else if (completeVisibleIndex == -1 && visibleIndex == 0) {
             View view = firstView(rv);
             return view != null && view.getTop() == 0;
         }
         return false;
     }
 
-    public static boolean isBottom(RecyclerView rv){
+    public static boolean isBottom(RecyclerView rv) {
         RecyclerView.LayoutManager manager = rv.getLayoutManager();
-        int completeLast = findLastCompletelyVisibleItemPosition(rv);
-        int visibleLast = findLastVisibleItemPosition(rv);
-        if(completeLast == manager.getItemCount() - 1){
+        int completeVisibleIndex = findLastCompletelyVisibleItemPosition(rv);
+        int visibleIndex = findLastVisibleItemPosition(rv);
+        if (completeVisibleIndex == manager.getItemCount() - 1) {
             return true;
-        }else if(completeLast == -1 && visibleLast < manager.getItemCount() - 1){
+        } else if (completeVisibleIndex == -1 && visibleIndex < manager.getItemCount() - 1) {
             return false;
-        }else if(completeLast == -1 && visibleLast == manager.getItemCount() - 1){
+        } else if (completeVisibleIndex == -1 && visibleIndex == manager.getItemCount() - 1) {
             View view = lastView(rv);
             return view != null && view.getBottom() == rv.computeVerticalScrollExtent();
         }
         return false;
     }
 
-    private static View firstView(RecyclerView rv){
+    private static View firstView(RecyclerView rv) {
         int first = findFirstVisibleItemPosition(rv);
         return rv.getLayoutManager().findViewByPosition(first);
     }
 
-    private static View lastView(RecyclerView rv){
+    private static View lastView(RecyclerView rv) {
         int last = findLastVisibleItemPosition(rv);
         return rv.getLayoutManager().findViewByPosition(last);
     }
 
-    public static void test(RecyclerView rv, RecyclerView.LayoutManager manager){
+    private static int max(int... array) {
+        int max = array[0];
+        for (int i = 1; i < array.length; ++i) {
+            if (array[i] > max) {
+                max = array[i];
+            }
+        }
+        return max;
+    }
+
+    private static int min(int... array) {
+        int min = array[0];
+        for (int i = 1; i < array.length; ++i) {
+            if (array[i] < min) {
+                min = array[i];
+            }
+        }
+        return min;
+    }
+
+    public static void test(RecyclerView rv, RecyclerView.LayoutManager manager) {
         Log.d(TAG, "test: findLastCompletelyVisibleItemPosition(manager) = " + findLastCompletelyVisibleItemPosition(rv));
         Log.d(TAG, "test: findFirstCompletelyVisibleItemPosition(manager) = " + findFirstCompletelyVisibleItemPosition(rv));
         Log.d(TAG, "test: isTop() = " + isTop(rv));
@@ -213,51 +251,5 @@ public class RvUtil {
         Log.d(TAG, "test: rv.computeVerticalScrollExtent() = " + rv.computeVerticalScrollExtent());
         Log.d(TAG, "test: rv.canScrollVertically(1) = " + rv.canScrollVertically(1));
         Log.d(TAG, "test: rv.canScrollVertically(-1) = " + rv.canScrollVertically(-1));
-    }
-
-    public static void scrollToPos(final RecyclerView rv, final int pos, int limitRange, final int offset){
-        int first = findFirstVisibleItemPosition(rv);
-        int diff = Math.abs(pos - first);
-        if(diff <= limitRange){
-            scrollToPos(rv, pos, true, offset);
-        }else {
-            if(first > pos){
-                scrollToPos(rv, pos + limitRange, false, offset);
-                rv.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scrollToPos(rv, pos, true, offset);
-                    }
-                });
-            }else {
-                scrollToPos(rv, pos - limitRange, false, offset);
-                rv.post(new Runnable() {
-                    @Override
-                    public void run() {
-                        scrollToPos(rv, pos, true, offset);
-                    }
-                });
-            }
-        }
-    }
-
-    private static int max(int ... array) {
-        int max = array[0];
-        for(int i = 1; i < array.length; ++i) {
-            if (array[i] > max) {
-                max = array[i];
-            }
-        }
-        return max;
-    }
-
-    private static int min(int ... array) {
-        int min = array[0];
-        for(int i = 1; i < array.length; ++i) {
-            if (array[i] < min) {
-                min = array[i];
-            }
-        }
-        return min;
     }
 }
