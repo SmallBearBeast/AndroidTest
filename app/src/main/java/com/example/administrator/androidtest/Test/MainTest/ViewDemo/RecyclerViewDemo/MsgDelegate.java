@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.RvActTest;
+package com.example.administrator.androidtest.Test.MainTest.ViewDemo.RecyclerViewDemo;
 
 import androidx.annotation.NonNull;
 
@@ -26,9 +26,6 @@ public class MsgDelegate extends MultiTypeDelegate<Msg, MsgDelegate.MsgHolder> {
         public MsgHolder(View itemView) {
             super(itemView);
             mTvText = findViewById(R.id.tv_text);
-//            StaggeredGridLayoutManager.LayoutParams lp = (StaggeredGridLayoutManager.LayoutParams) itemView.getLayoutParams();
-//            lp.setFullSpan(true);
-//            itemView.setLayoutParams(lp);
         }
 
         @Override

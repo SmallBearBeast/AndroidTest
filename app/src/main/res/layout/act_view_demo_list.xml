@@ -11,6 +11,21 @@
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
             <TextView
+                android:id="@+id/recyclerViewDemoTextView"
+                style="@style/TestLabelStyle"
+                android:text="RecyclerView Demo" />
+
+            <Button
+                android:id="@+id/recyclerViewDemoButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To RecyclerViewDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/recyclerViewDemoTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+
+            <TextView
                 android:id="@+id/toolbarTextView"
                 style="@style/TestLabelStyle"
                 android:text="Toolbar Test" />

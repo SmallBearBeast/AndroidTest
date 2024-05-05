@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.RecyclerView;
+package com.example.administrator.androidtest.Test.MainTest.ViewDemo.RefreshViewDemo;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
@@ -8,22 +8,20 @@ import android.widget.ImageView;
 
 import com.example.administrator.androidtest.R;
 
-public class DefaultHeadView extends IView {
+public class DefaultFootView extends IView {
     private ImageView ivRotate;
-
-    public DefaultHeadView(@NonNull Context context) {
+    public DefaultFootView(@NonNull Context context) {
         this(context, null);
     }
 
-    public DefaultHeadView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public DefaultFootView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public DefaultHeadView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public DefaultFootView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         ivRotate = mContentView.findViewById(R.id.iv_rotate);
     }
-
 
     @Override
     public int height() {
@@ -34,10 +32,7 @@ public class DefaultHeadView extends IView {
     public void change(float progress) {
         super.change(progress);
         ivRotate.setRotation(progress * 360);
-        ivRotate.setScaleX(progress / 4 + 1);
-        ivRotate.setScaleY(progress / 4 + 1);
-        ivRotate.setTranslationY(progress * dp2px(50));
-        mPullLoadLayout.move(progress, IView.VIEW_HEAD);
+        mPullLoadLayout.move(progress, VIEW_FOOT);
     }
 
     @Override

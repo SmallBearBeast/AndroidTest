@@ -190,7 +190,6 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
     }
 
     public MultiItemChanger getChanger() {
-
         return multiItemChanger;
     }
 

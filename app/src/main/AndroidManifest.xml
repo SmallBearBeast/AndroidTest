@@ -119,6 +119,9 @@
         <activity
             android:name=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.CoordinatorLayoutTestAct"
             android:theme="@style/AppTheme" />
+
+        <activity android:name=".Test.MainTest.ViewDemo.RecyclerViewDemo.RecyclerViewDemoAct"
+            android:theme="@style/AppTheme"/>
         <!-- View Demo End -->
 
         <!-- Widget Demo Start -->

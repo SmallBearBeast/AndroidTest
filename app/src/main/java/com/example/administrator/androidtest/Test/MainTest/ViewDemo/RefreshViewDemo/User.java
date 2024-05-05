@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.RecyclerView;
+package com.example.administrator.androidtest.Test.MainTest.ViewDemo.RefreshViewDemo;
 
 public class User {
     private String name;

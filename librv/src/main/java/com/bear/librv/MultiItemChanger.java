@@ -185,7 +185,6 @@ public class MultiItemChanger {
         update(index, null, null);
     }
 
-    // TODO: 2019-07-16 move notifyItemMoved有问题，先使用notifyItemRangeChanged
     public void move(int fromPos, int toPos) {
         if (!checkIndex(fromPos)) {
             RvLog.w(TAG, "move: fromPos is out of range fromPos = " + fromPos);
@@ -199,9 +198,9 @@ public class MultiItemChanger {
         Object toData = internalItemList.get(toPos);
         internalItemList.set(toPos, fromData);
         internalItemList.set(fromPos, toData);
-//        mAdapter.notifyItemMoved(fromPos, toPos);
+        multiTypeAdapter.notifyItemMoved(fromPos, toPos);
 //        //由于move机制需要刷新move范围内的item。
-//        mAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
+//        multiTypeAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
         multiTypeAdapter.notifyItemRangeChanged(fromPos, toPos - fromPos + 1);
     }
 

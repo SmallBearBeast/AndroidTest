@@ -8,12 +8,11 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.Test.MainTest.FragTest.FragLifecycleTestAct;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.CoordinatorLayoutTest.BehaviorTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.CoordinatorLayoutTest.CoordinatorLayoutTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.EditTextTest.EditTextTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.MotionTest.MotionEventDemoComponent;
-import com.example.administrator.androidtest.Test.MainTest.ViewDemo.RecyclerViewTest.RecyclerViewTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.ViewDemo.RecyclerViewDemo.RecyclerViewDemoComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.ToolbarTest.ToolbarTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.ViewGetSizeTest.ViewGetSizeTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.ViewDemo.ViewPager2Test.Viewpager2TestComponent;
@@ -24,7 +23,7 @@ public class ViewDemoAct extends ComponentAct {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new RecyclerViewTestComponent(getLifecycle()));
+        regActComponent(new RecyclerViewDemoComponent(getLifecycle()));
         regActComponent(new ViewPagerTestComponent(getLifecycle()));
         regActComponent(new ViewGetSizeTestComponent(getLifecycle()));
         regActComponent(new Viewpager2TestComponent(getLifecycle()));
