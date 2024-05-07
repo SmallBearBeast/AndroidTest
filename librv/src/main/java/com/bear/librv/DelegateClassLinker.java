@@ -1,5 +1,5 @@
 package com.bear.librv;
 
 public interface DelegateClassLinker<ITEM> {
-    Class<MultiTypeDelegate<ITEM, ?>> index(int position, ITEM item);
+    Class<? extends MultiTypeDelegate<ITEM, ?>> index(int position, ITEM item);
 }

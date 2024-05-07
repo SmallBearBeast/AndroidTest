@@ -133,7 +133,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
         multiTypeContainer.register(type);
     }
 
-    public OneToManyBuilder<?> register(Class<?> clazz) {
+    public <ITEM> OneToManyBuilder<ITEM> register(Class<ITEM> clazz) {
         return new OneToManyBuilder<>(this, clazz);
     }
 
