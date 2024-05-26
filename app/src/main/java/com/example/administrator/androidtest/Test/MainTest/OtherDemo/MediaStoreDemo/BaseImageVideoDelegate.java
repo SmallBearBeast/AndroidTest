@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MediaTest;
+package com.example.administrator.androidtest.Test.MainTest.OtherDemo.MediaStoreDemo;
 
 import android.database.Cursor;
 import androidx.annotation.NonNull;
@@ -14,10 +14,10 @@ import com.example.administrator.androidtest.R;
 import com.example.libbase.Util.DensityUtil;
 import com.example.libfresco.FrescoView;
 
-public class ImageVideoDelegate extends MultiTypeDelegate<BaseInfo, ImageVideoDelegate.ImageVideoHolder> {
+public class BaseImageVideoDelegate extends MultiTypeDelegate<Cursor, BaseImageVideoDelegate.ImageVideoHolder> {
     private final int mDivider;
 
-    public ImageVideoDelegate(int divider) {
+    public BaseImageVideoDelegate(int divider) {
         mDivider = divider;
     }
 
@@ -32,7 +32,7 @@ public class ImageVideoDelegate extends MultiTypeDelegate<BaseInfo, ImageVideoDe
         return R.layout.item_image;
     }
 
-    public static class ImageVideoHolder extends MultiTypeHolder<BaseInfo> {
+    public static class ImageVideoHolder extends MultiTypeHolder<Cursor> {
         private FrescoView fvImage;
         private int mSize;
         public ImageVideoHolder(View itemView, int divider) {
@@ -48,6 +48,16 @@ public class ImageVideoDelegate extends MultiTypeDelegate<BaseInfo, ImageVideoDe
                 lp.height = mSize;
                 itemView.setLayoutParams(lp);
             }
+        }
+
+        @Override
+        protected void bindFull(int pos, Cursor cursor) {
+            super.bindFull(pos, cursor);
+//            BaseInfo info = BaseInfo.from(cursor);
+//            if (info instanceof ImageInfo){
+//                ImageInfo imageInfo = (ImageInfo) info;
+//                fvImage.setPath(imageInfo.mPath, DensityUtil.dp2Px(mSize / 8.0f), DensityUtil.dp2Px(mSize / 8.0f));
+//            }
         }
 
         @Override

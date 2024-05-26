@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.ClassPreloadExecutor;
-import com.example.libbase.Util.TimeUtil;
+import com.example.libbase.Util.TimeRecordUtil;
 
 public class AnchorDPOptTask extends BaseBootTask {
     public AnchorDPOptTask() {
@@ -16,9 +16,9 @@ public class AnchorDPOptTask extends BaseBootTask {
     @Override
     protected void run(@NonNull String s) {
         // 类预加载优化(Activity，启动相关耗时的类)
-        TimeUtil.markStart("AnchorDPOptTask");
+        TimeRecordUtil.markStart("AnchorDPOptTask");
         ClassPreloadExecutor.doPreload();
         sleep(2000);
-        Log.d(TAG, "run: AnchorDPOptTask cost " + TimeUtil.getDuration("AnchorDPOptTask") + "ms");
+        Log.d(TAG, "run: AnchorDPOptTask cost " + TimeRecordUtil.getDuration("AnchorDPOptTask") + "ms");
     }
 }

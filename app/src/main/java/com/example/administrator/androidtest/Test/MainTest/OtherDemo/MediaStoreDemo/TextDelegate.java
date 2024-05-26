@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.Test.MediaTest;
+package com.example.administrator.androidtest.Test.MainTest.OtherDemo.MediaStoreDemo;
 
 import android.graphics.Color;
 import androidx.annotation.NonNull;

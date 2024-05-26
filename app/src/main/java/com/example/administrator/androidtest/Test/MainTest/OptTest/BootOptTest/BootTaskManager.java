@@ -16,7 +16,7 @@ import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.B
 import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.MainThreadTask;
 import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.NoAnchorDPOptTask;
 import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTask.NoAnchorDPTask;
-import com.example.libbase.Util.TimeUtil;
+import com.example.libbase.Util.TimeRecordUtil;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
@@ -122,24 +122,24 @@ public class BootTaskManager {
 
     public void logColdStartUp() {
         Log.i(TAG, "logColdStartUp: cold start");
-        TimeUtil.markStart("ColdStartUp");
+        TimeRecordUtil.markStart("ColdStartUp");
     }
 
     public void logColdEndUp() {
-        TimeUtil.markEnd("ColdStartUp");
-        Log.i(TAG, "logColdEndUp: cold end, duration = " + TimeUtil.getDuration("ColdStartUp"));
-        TimeUtil.remove("ColdStartUp");
+        TimeRecordUtil.markEnd("ColdStartUp");
+        Log.i(TAG, "logColdEndUp: cold end, duration = " + TimeRecordUtil.getDuration("ColdStartUp"));
+        TimeRecordUtil.remove("ColdStartUp");
     }
 
     public void logWarmStartUp() {
         Log.i(TAG, "logWarmStartUp: warm start");
-        TimeUtil.markStart("WarmStartUp");
+        TimeRecordUtil.markStart("WarmStartUp");
     }
 
     public void logWarmEndUp() {
-        TimeUtil.markEnd("WarmStartUp");
-        Log.i(TAG, "logWarmEndUp: warm end, duration = " + TimeUtil.getDuration("WarmStartUp"));
-        TimeUtil.remove("WarmStartUp");
+        TimeRecordUtil.markEnd("WarmStartUp");
+        Log.i(TAG, "logWarmEndUp: warm end, duration = " + TimeRecordUtil.getDuration("WarmStartUp"));
+        TimeRecordUtil.remove("WarmStartUp");
     }
 
     private static class SingleTon {

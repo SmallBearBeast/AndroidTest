@@ -4,7 +4,7 @@ import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.os.Environment;
 import com.example.administrator.androidtest.Common.Media.Info.*;
-import com.example.libbase.Util.TimeUtil;
+import com.example.libbase.Util.TimeRecordUtil;
 import com.example.liblog.SLog;
 
 import java.io.File;
@@ -20,10 +20,10 @@ public class FileFinder {
 
     public void find(Set<String> suffixSet, File file, DirInfoCallback callback) {
         Map<String, DirInfo> dirInfoMap = new HashMap<>();
-        TimeUtil.markStart("find");
+        TimeRecordUtil.markStart("find");
         find(suffixSet, file, dirInfoMap);
-        TimeUtil.markEnd("find");
-        SLog.i(TAG, "find method time: " + TimeUtil.getDuration("find"));
+        TimeRecordUtil.markEnd("find");
+        SLog.i(TAG, "find method time: " + TimeRecordUtil.getDuration("find"));
         if (callback != null) {
             callback.onDirInfoSet(new HashSet<>(dirInfoMap.values()));
         }

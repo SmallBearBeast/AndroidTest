@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.Common.Media.Info;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import com.example.administrator.androidtest.Common.Media.Provider.MediaConstant;
-import com.example.libbase.Util.TimeUtil;
+import com.example.libbase.Util.TimeRecordUtil;
 import com.example.liblog.SLog;
 
 public class BaseInfo {
@@ -19,7 +19,7 @@ public class BaseInfo {
 
     public static BaseInfo from(Cursor cursor) {
         if (cursor != null && !cursor.isClosed()) {
-            TimeUtil.markStart(TAG);
+            TimeRecordUtil.markStart(TAG);
             String mime = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.MIME_TYPE));
             String path = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
             BaseInfo info = createBaseInfo(mime, path);
@@ -28,8 +28,8 @@ public class BaseInfo {
             }
             setUpBaseInfo(cursor, info);
             setUpSpInfo(cursor, info);
-            TimeUtil.markEnd(TAG);
-            SLog.i(TAG, "TimeUtil.getDuration(TAG) = " + TimeUtil.getDuration(TAG));
+            TimeRecordUtil.markEnd(TAG);
+            SLog.i(TAG, "TimeRecordUtil.getDuration(TAG) = " + TimeRecordUtil.getDuration(TAG));
             return info;
         }
         return null;

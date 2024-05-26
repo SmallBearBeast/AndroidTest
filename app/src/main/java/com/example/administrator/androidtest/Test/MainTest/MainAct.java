@@ -23,7 +23,7 @@ import com.example.administrator.androidtest.Test.MainTest.FloatServiceTest.Floa
 import com.example.administrator.androidtest.Test.MainTest.FragTest.FragLifecycleTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.KVCompareTest.KVCompareTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.MediaDemo.MediaDemoComponent;
-import com.example.administrator.androidtest.Test.MainTest.OtherTest.OtherTestComponent;
+import com.example.administrator.androidtest.Test.MainTest.OtherDemo.OtherDemoComponent;
 import com.example.administrator.androidtest.Test.MainTest.ScreenTest.ScreenTestComponent;
 import com.example.administrator.androidtest.Test.MainTest.SpAndMMKVDemo.SpAndMMKVDemoComponent;
 import com.example.administrator.androidtest.Test.MainTest.StartBgServiceDemo.StartBgServiceDemoComponent;
@@ -44,7 +44,7 @@ public class MainAct extends ComponentAct {
         regActComponent(new BizDemoComponent(getLifecycle()));
         regActComponent(new LibraryDemoComponent(getLifecycle()));
         regActComponent(new AnrTestComponent(getLifecycle()));
-        regActComponent(new OtherTestComponent(getLifecycle()));
+        regActComponent(new OtherDemoComponent(getLifecycle()));
         regActComponent(new MediaDemoComponent(getLifecycle()));
         regActComponent(new WidgetDemoComponent(getLifecycle()));
         regActComponent(new ViewDemoComponent(getLifecycle()));

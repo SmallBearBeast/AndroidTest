@@ -7,9 +7,16 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
 
     <uses-sdk tools:overrideLibrary="com.snapchat.kit.sdk.creative, com.snapchat.kit.sdk" />
     <application
@@ -18,6 +25,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:networkSecurityConfig="@xml/network_security_config"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/LaunchTheme">
@@ -120,8 +128,9 @@
             android:name=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.CoordinatorLayoutTestAct"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".Test.MainTest.ViewDemo.RecyclerViewDemo.RecyclerViewDemoAct"
-            android:theme="@style/AppTheme"/>
+        <activity
+            android:name=".Test.MainTest.ViewDemo.RecyclerViewDemo.RecyclerViewDemoAct"
+            android:theme="@style/AppTheme" />
         <!-- View Demo End -->
 
         <!-- Widget Demo Start -->
@@ -129,7 +138,8 @@
             android:name=".Test.MainTest.WidgetDemo.WidgetDemoAct"
             android:theme="@style/AppTheme" />
 
-        <activity android:name=".Test.MainTest.WidgetDemo.PdfViewDemo.PdfViewDemoAct"
+        <activity
+            android:name=".Test.MainTest.WidgetDemo.PdfViewDemo.PdfViewDemoAct"
             android:theme="@style/AppTheme" />
         <!-- Widget Demo End -->
 
@@ -172,6 +182,16 @@
             android:name=".Test.MainTest.LibraryDemo.OkHttpDemo.OkHttpDemoAct"
             android:theme="@style/AppTheme" />
         <!-- Library Demo End -->
+
+        <!-- Other Demo Start -->
+        <activity
+            android:name=".Test.MainTest.OtherDemo.OtherDemoAct"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".Test.MainTest.OtherDemo.MediaStoreDemo.MediaStoreDemoAct"
+            android:theme="@style/AppTheme" />
+        <!-- Other Demo End -->
 
         <service android:name=".Test.MainTest.FloatServiceTest.TestFloatService" />
 

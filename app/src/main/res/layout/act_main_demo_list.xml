@@ -52,6 +52,20 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
             <TextView
+                android:id="@+id/otherDemoTextView"
+                style="@style/TestLabelStyle"
+                android:text="Other Demo" />
+
+            <Button
+                android:id="@+id/otherDemoButton"
+                style="@style/TestButtonStyle"
+                android:text="Jump To OtherDemoAct"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/otherDemoTextView" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
+            <TextView
                 android:id="@+id/anrTestTextView"
                 style="@style/TestLabelStyle"
                 android:text="AnrTestAct Demo" />

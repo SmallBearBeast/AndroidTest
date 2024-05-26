@@ -3,7 +3,7 @@
   "component": {
     "group": "com.example",
     "module": "customtransformplugin",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "attributes": {
       "org.gradle.status": "release"
     }
@@ -27,13 +27,13 @@
       },
       "files": [
         {
-          "name": "customtransformplugin-1.0.0.jar",
-          "url": "customtransformplugin-1.0.0.jar",
-          "size": 31587,
-          "sha512": "9462a6fa413bbdcf5eaee8d71351c4272bed4c5d5e819efa6986b74d551d33b62747829f8091821b180d808e2c740e6f479c66108b2b875d1a63732c0ea96d01",
-          "sha256": "7ba901e90c95c9a1ed1d36d1786bae01180e6fd14f17131e72b20934b54e8878",
-          "sha1": "1899b95f9529916f9ab4fb5e054e8cd64bf70432",
-          "md5": "0f79c61f5d22d605bb58ddc58078b81e"
+          "name": "customtransformplugin-1.0.1.jar",
+          "url": "customtransformplugin-1.0.1.jar",
+          "size": 31593,
+          "sha512": "444b81f79656fb0bcd34b9490c06ef4ac983e9b520fccb0dbd72fc849eaf6694e869d35f5549762c3bc44100fd78d74cda943c98830d5e091bed2be30de5a930",
+          "sha256": "316e2aa3175d8ec9885720a9d8494fd6d71c2757b6c50b3072e90cc3539eaf6d",
+          "sha1": "54ddcbb704a66cb1f10652995a558a7a210ec31b",
+          "md5": "f7de5b874e5443197633b1304eabb12b"
         }
       ]
     },
@@ -94,13 +94,13 @@
       ],
       "files": [
         {
-          "name": "customtransformplugin-1.0.0.jar",
-          "url": "customtransformplugin-1.0.0.jar",
-          "size": 31587,
-          "sha512": "9462a6fa413bbdcf5eaee8d71351c4272bed4c5d5e819efa6986b74d551d33b62747829f8091821b180d808e2c740e6f479c66108b2b875d1a63732c0ea96d01",
-          "sha256": "7ba901e90c95c9a1ed1d36d1786bae01180e6fd14f17131e72b20934b54e8878",
-          "sha1": "1899b95f9529916f9ab4fb5e054e8cd64bf70432",
-          "md5": "0f79c61f5d22d605bb58ddc58078b81e"
+          "name": "customtransformplugin-1.0.1.jar",
+          "url": "customtransformplugin-1.0.1.jar",
+          "size": 31593,
+          "sha512": "444b81f79656fb0bcd34b9490c06ef4ac983e9b520fccb0dbd72fc849eaf6694e869d35f5549762c3bc44100fd78d74cda943c98830d5e091bed2be30de5a930",
+          "sha256": "316e2aa3175d8ec9885720a9d8494fd6d71c2757b6c50b3072e90cc3539eaf6d",
+          "sha1": "54ddcbb704a66cb1f10652995a558a7a210ec31b",
+          "md5": "f7de5b874e5443197633b1304eabb12b"
         }
       ]
     }

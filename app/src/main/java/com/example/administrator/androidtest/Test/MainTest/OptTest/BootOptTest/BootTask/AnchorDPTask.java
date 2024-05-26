@@ -13,7 +13,7 @@ import com.example.administrator.androidtest.AndroidTestApplication;
 import com.example.administrator.androidtest.BuildConfig;
 import com.example.administrator.androidtest.Test.MainTest.SpValHelper;
 import com.example.libbase.Util.AppInitUtil;
-import com.example.libbase.Util.TimeUtil;
+import com.example.libbase.Util.TimeRecordUtil;
 import com.example.libfresco.FrescoUtil;
 
 public class AnchorDPTask extends BaseBootTask {
@@ -25,7 +25,7 @@ public class AnchorDPTask extends BaseBootTask {
     @Override
     protected void run(@NonNull String s) {
         // 初始化模块，初始化Third sdk(里面可能有一些反射操作，IO等耗时操作)，配置初始化。
-        TimeUtil.markStart("AnchorDPTask");
+        TimeRecordUtil.markStart("AnchorDPTask");
         Context context = AndroidTestApplication.getContext();
         AppInitUtil.init(context);
         FrescoUtil.init(context);
@@ -39,6 +39,6 @@ public class AnchorDPTask extends BaseBootTask {
         ARouter.init((Application) context);
         // 初始化图片加载库Glide，也可以使用时候在加载。
 //        Glide.get(context);
-        Log.d(TAG, "run: AnchorDPTask cost " + TimeUtil.getDuration("AnchorDPTask") + "ms");
+        Log.d(TAG, "run: AnchorDPTask cost " + TimeRecordUtil.getDuration("AnchorDPTask") + "ms");
     }
 }

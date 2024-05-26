@@ -20,12 +20,12 @@ import java.util.*;
 /**
  * The origin date is from Cursor, do not consider other dir
  */
-public class MediaProvider {
+public class MediaStoreHelper {
     // TODO: 2019-10-22 监听更新媒体action
     protected static final Uri QUERY_URI = MediaStore.Files.getContentUri("external");
     protected Context mContext;
 
-    public MediaProvider(Context context) {
+    public MediaStoreHelper(Context context) {
         mContext = context;
     }
 
@@ -70,7 +70,7 @@ public class MediaProvider {
         String selection = pair.first;
         String[] selectionArgs = pair.second;
         String sortOrder = MediaStore.MediaColumns.DATE_ADDED + " DESC";
-        Cursor cursor = mContext.getContentResolver().query(QUERY_URI, DIR_PROJECTION.toArray(new String[DIR_PROJECTION.size()]), selection, selectionArgs, sortOrder);
+        Cursor cursor = mContext.getContentResolver().query(QUERY_URI, DIR_PROJECTION.toArray(new String[0]), selection, selectionArgs, sortOrder);
         if (cursor != null && !cursor.isClosed() && callback != null) {
             handleDirInfo(cursor, callback);
             cursor.close();
@@ -207,7 +207,7 @@ public class MediaProvider {
             selections.add(MediaStore.MediaColumns.MIME_TYPE + " in (" + TextUtils.join(",", inParams) + ")");
             selectionArgs.addAll(config.getAudioMimes());
         }
-        return new Pair<>(TextUtils.join(" and ", selections), selectionArgs.toArray(new String[selectionArgs.size()]));
+        return new Pair<>(TextUtils.join(" and ", selections), selectionArgs.toArray(new String[0]));
     }
 
     private String[] getProjection(MediaConfig config) {
@@ -222,18 +222,16 @@ public class MediaProvider {
         } else if (config.isType(MediaConfig.AUDIO)) {
             projectionSet.addAll(AUDIO_PROJECTION);
         }
-        return projectionSet.toArray(new String[projectionSet.size()]);
+        return projectionSet.toArray(new String[0]);
     }
 
     private void handleDirInfo(Cursor cursor, DirInfoCallback callback) {
-        String path;
-        String parentPath;
         DirInfo dirInfo;
         Map<String, DirInfo> map = new HashMap<>();
         cursor.moveToFirst();
         while (cursor.moveToNext()) {
-            path = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
-            parentPath = path.substring(0, path.lastIndexOf("/"));
+            String path = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
+            String parentPath = path.substring(0, path.lastIndexOf("/"));
             if (map.containsKey(parentPath)) {
                 dirInfo = map.get(parentPath);
                 dirInfo.mCount++;

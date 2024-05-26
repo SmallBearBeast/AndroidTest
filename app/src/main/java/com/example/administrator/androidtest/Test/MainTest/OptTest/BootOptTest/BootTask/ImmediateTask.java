@@ -4,8 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.administrator.androidtest.AndroidTestApplication;
-import com.example.libbase.Util.TimeUtil;
+import com.example.libbase.Util.TimeRecordUtil;
 
 //import io.flutter.embedding.engine.FlutterEngine;
 //import io.flutter.embedding.engine.FlutterEngineCache;
@@ -24,12 +23,12 @@ public class ImmediateTask extends BaseBootTask {
 
     private void initFlutterEngine() {
         // 需要放在主线程
-        TimeUtil.markStart("InitFlutterEngine");
+        TimeRecordUtil.markStart("InitFlutterEngine");
         // Instantiate a FlutterEngine.
 //        FlutterEngine flutterEngine = new FlutterEngine(AndroidTestApplication.getContext());
 //        flutterEngine.getDartExecutor().executeDartEntrypoint(DartExecutor.DartEntrypoint.createDefault());
 //        // Cache the FlutterEngine to be used by FlutterActivity.
 //        FlutterEngineCache.getInstance().put("my_engine_id", flutterEngine);
-        Log.i(TAG, "initFlutterEngine: cost time " + TimeUtil.getDuration("InitFlutterEngine") + " ms");
+        Log.i(TAG, "initFlutterEngine: cost time " + TimeRecordUtil.getDuration("InitFlutterEngine") + " ms");
     }
 }

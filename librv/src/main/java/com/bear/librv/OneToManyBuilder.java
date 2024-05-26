@@ -36,7 +36,7 @@ public class OneToManyBuilder<ITEM> {
 
         @Override
         public int index(ITEM item, int position) {
-            Class<MultiTypeDelegate<ITEM, ?>> delegateClass = delegateClassLinker.index(position, item);
+            Class<? extends MultiTypeDelegate<ITEM, ?>> delegateClass = delegateClassLinker.index(position, item);
             for (int i = 0; i < delegates.length; i++) {
                 if (delegates[i].getClass() == delegateClass) {
                     return i;

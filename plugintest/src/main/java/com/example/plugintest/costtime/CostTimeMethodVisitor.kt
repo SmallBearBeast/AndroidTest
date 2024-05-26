@@ -26,7 +26,7 @@ class CostTimeMethodVisitor(
         visitor.visitLdcInsn("Asm_Hook_Execute_Time")
         visitor.visitMethodInsn(
             INVOKESTATIC,
-            "com/example/libbase/Util/TimeUtil",
+            "com/example/libbase/Util/TimeRecordUtil",
             "markStart",
             "(Ljava/lang/String;)V",
             false
@@ -61,7 +61,7 @@ class CostTimeMethodVisitor(
         visitor.visitLdcInsn("Asm_Hook_Execute_Time")
         visitor.visitMethodInsn(
             INVOKESTATIC,
-            "com/example/libbase/Util/TimeUtil",
+            "com/example/libbase/Util/TimeRecordUtil",
             "getDuration",
             "(Ljava/lang/String;)J",
             false
@@ -91,7 +91,7 @@ class CostTimeMethodVisitor(
         visitor.visitLdcInsn("Asm_Hook_Execute_Time")
         visitor.visitMethodInsn(
             INVOKESTATIC,
-            "com/example/libbase/Util/TimeUtil",
+            "com/example/libbase/Util/TimeRecordUtil",
             "remove",
             "(Ljava/lang/String;)V",
             false
