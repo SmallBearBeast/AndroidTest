@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatTextView;
+
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -26,6 +28,7 @@ import com.example.libframework.Wrapper.TextWatcherWrapper;
 
 public class FullTextView extends AppCompatTextView {
     private SpannableString mSpannableStr;
+
     public FullTextView(Context context) {
         this(context, null);
     }
@@ -33,7 +36,7 @@ public class FullTextView extends AppCompatTextView {
     public FullTextView(Context context, AttributeSet attrs) {
         super(context, attrs);
         mSpannableStr = new SpannableString(getText());
-        addTextChangedListener(new TextWatcherWrapper(){
+        addTextChangedListener(new TextWatcherWrapper() {
             @Override
             public void afterTextChanged(Editable s) {
                 mSpannableStr = new SpannableString(s);
@@ -53,16 +56,16 @@ public class FullTextView extends AppCompatTextView {
     }
 
 
-    public FullTextView bg(TextOpt opt){
+    public FullTextView bg(TextOpt opt) {
         mSpannableStr.setSpan(new BackgroundColorSpan(opt.mBgColor), opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return this;
     }
 
-    public FullTextView click(final TextOpt opt){
+    public FullTextView click(final TextOpt opt) {
         mSpannableStr.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
-                if(opt.mRun != null){
+                if (opt.mRun != null) {
                     opt.mRun.run();
                 }
             }
@@ -71,37 +74,37 @@ public class FullTextView extends AppCompatTextView {
         return this;
     }
 
-    public FullTextView fg(TextOpt opt){
+    public FullTextView fg(TextOpt opt) {
         mSpannableStr.setSpan(new ForegroundColorSpan(opt.mFgColor), opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return this;
     }
 
-    public FullTextView deleteLine(TextOpt opt){
+    public FullTextView deleteLine(TextOpt opt) {
         mSpannableStr.setSpan(new StrikethroughSpan(), opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return this;
     }
 
-    public FullTextView underLine(TextOpt opt){
+    public FullTextView underLine(TextOpt opt) {
         mSpannableStr.setSpan(new UnderlineSpan(), opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return this;
     }
 
-    public FullTextView style(TextOpt opt){
+    public FullTextView style(TextOpt opt) {
         mSpannableStr.setSpan(new StyleSpan(opt.mStyle), opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return this;
     }
 
-    public FullTextView url(TextOpt opt){
+    public FullTextView url(TextOpt opt) {
         mSpannableStr.setSpan(new URLSpan(opt.mUrl), opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return this;
     }
 
-    public FullTextView size(TextOpt opt){
+    public FullTextView size(TextOpt opt) {
         mSpannableStr.setSpan(new AbsoluteSizeSpan(opt.mSize), opt.mStart, opt.mEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return this;
     }
 
-    public void done(){
+    public void done() {
         setText(mSpannableStr);
     }
 }
