@@ -8,3 +8,8 @@ libfresco: fresco图片框架封装
 libkv: mmkv和sp框架封装
 librv: RecyclerView框架封装
 libstorage: File操作框架封装
+
+# Commit规范
+fix: (修复什么问题)
+feat: (新增什么需求)
+misc: (代码整理)
