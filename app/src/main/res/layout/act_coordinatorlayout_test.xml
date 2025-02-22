@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--        app:layout_behavior="com.example.administrator.androidtest.Test.CoordinatorTest.AppBarLayoutBehavior"-->
+        <!--        app:layout_behavior="com.example.administrator.androidtest.other.CoordinatorTest.AppBarLayoutBehavior"-->
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
@@ -109,7 +109,7 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom">
@@ -195,5 +195,5 @@
             android:textAllCaps="false"
             tools:ignore="HardcodedText" />
 
-    </com.example.administrator.androidtest.Widget.FlowLayout>
+    </com.example.administrator.androidtest.widget.FlowLayout>
 </FrameLayout>

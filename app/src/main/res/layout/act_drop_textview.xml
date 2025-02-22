@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/match_parent">
 
-    <com.example.administrator.androidtest.Widget.DropTextView
+    <com.example.administrator.androidtest.widget.DropTextView
         android:id="@+id/dtv_text"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dp_50"

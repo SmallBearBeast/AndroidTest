@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.example.administrator.androidtest.Widget.RtlViewPager.RtlViewPager
+    <com.example.administrator.androidtest.widget.RtlViewPager.RtlViewPager
         android:id="@+id/rvp_viewpager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,5 +19,5 @@
             android:layout_height="match_parent"
             android:background="@color/cl_green_9"
             android:text="123" />
-    </com.example.administrator.androidtest.Widget.RtlViewPager.RtlViewPager>
+    </com.example.administrator.androidtest.widget.RtlViewPager.RtlViewPager>
 </androidx.constraintlayout.widget.ConstraintLayout>

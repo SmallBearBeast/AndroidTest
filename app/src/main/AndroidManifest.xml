@@ -43,7 +43,7 @@
         </provider>
 
         <activity
-            android:name=".Test.MainTest.MainAct"
+            android:name=".demo.MainAct"
             android:configChanges="orientation|keyboard|layoutDirection|screenSize"
             android:exported="true"
             android:theme="@style/LaunchTheme"
@@ -56,147 +56,147 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name="io.flutter.embedding.android.FlutterActivity"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
-            android:hardwareAccelerated="true"
-            android:theme="@style/AppTheme"
-            android:windowSoftInputMode="adjustResize" />
+<!--        <activity-->
+<!--            android:name="io.flutter.embedding.android.FlutterActivity"-->
+<!--            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"-->
+<!--            android:hardwareAccelerated="true"-->
+<!--            android:theme="@style/AppTheme"-->
+<!--            android:windowSoftInputMode="adjustResize" />-->
 
         <activity
-            android:name=".Test.MainTest.ComponentDemo.ComponentDemoAct"
+            android:name=".demo.ComponentDemo.ComponentDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.AspectTest.AspectTestAct"
+            android:name=".demo.AspectTest.AspectTestAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.BusTest.BusTest1Act"
+            android:name=".demo.BusTest.BusTest1Act"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.BusTest.BusTest2Act"
+            android:name=".demo.BusTest.BusTest2Act"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.FragTest.FragLifecycleTestAct"
+            android:name=".demo.FragTest.FragLifecycleTestAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.KVCompareTest.KVCompareTestAct"
+            android:name=".demo.KVCompareTest.KVCompareTestAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ScreenTest.ScreenAct"
+            android:name=".demo.ScreenTest.ScreenAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ShareTest.SystemShareAct"
+            android:name=".demo.ShareTest.SystemShareAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ARouterTest.Module1Activity"
+            android:name=".demo.ARouterTest.Module1Activity"
             android:theme="@style/AppTheme" />
 
         <!-- View Demo Start -->
         <activity
-            android:name=".Test.MainTest.ViewDemo.ViewDemoAct"
+            android:name=".demo.ViewDemo.ViewDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ViewDemo.ToolbarTest.ToolbarTestAct"
+            android:name=".demo.ViewDemo.ToolbarTest.ToolbarTestAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ViewDemo.MotionTest.MotionEventDemoAct"
+            android:name=".demo.ViewDemo.MotionTest.MotionEventDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ViewDemo.ViewPager2Test.ViewPager2Act"
+            android:name=".demo.ViewDemo.ViewPager2Test.ViewPager2Act"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ViewDemo.ViewGetSizeTest.ViewGetSizeTestAct"
+            android:name=".demo.ViewDemo.ViewGetSizeTest.ViewGetSizeTestAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.BehaviorTestAct"
+            android:name=".demo.ViewDemo.CoordinatorLayoutTest.BehaviorTestAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.CoordinatorLayoutTestAct"
+            android:name=".demo.ViewDemo.CoordinatorLayoutTest.CoordinatorLayoutTestAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.ViewDemo.RecyclerViewDemo.RecyclerViewDemoAct"
+            android:name=".demo.ViewDemo.RecyclerViewDemo.RecyclerViewDemoAct"
             android:theme="@style/AppTheme" />
         <!-- View Demo End -->
 
         <!-- Widget Demo Start -->
         <activity
-            android:name=".Test.MainTest.WidgetDemo.WidgetDemoAct"
+            android:name=".demo.WidgetDemo.WidgetDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.WidgetDemo.PdfViewDemo.PdfViewDemoAct"
+            android:name=".demo.WidgetDemo.PdfViewDemo.PdfViewDemoAct"
             android:theme="@style/AppTheme" />
         <!-- Widget Demo End -->
 
         <!-- Biz Demo Start -->
         <activity
-            android:name=".Test.MainTest.BizDemo.BizDemoAct"
+            android:name=".demo.BizDemo.BizDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.BizDemo.TikTokDemo.List.TikTokDemoAct"
+            android:name=".demo.BizDemo.TikTokDemo.List.TikTokDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.BizDemo.TikTokDemo.Detail.TikTokVideoDetailAct"
+            android:name=".demo.BizDemo.TikTokDemo.Detail.TikTokVideoDetailAct"
             android:theme="@style/AppTheme" />
         <!-- Biz Demo End -->
 
 
         <!-- Media Demo Start -->
         <activity
-            android:name=".Test.MainTest.MediaDemo.MediaDemoAct"
+            android:name=".demo.MediaDemo.MediaDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.MediaDemo.PlayerDemo.PlayerDemoAct"
+            android:name=".demo.MediaDemo.PlayerDemo.PlayerDemoAct"
             android:theme="@style/AppTheme" />
         <!-- Media Demo End -->
 
 
         <!-- Library Demo Start -->
         <activity
-            android:name=".Test.MainTest.LibraryDemo.LibraryDemoAct"
+            android:name=".demo.LibraryDemo.LibraryDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.LibraryDemo.GlideDemo.GlideDemoAct"
+            android:name=".demo.LibraryDemo.GlideDemo.GlideDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.LibraryDemo.OkHttpDemo.OkHttpDemoAct"
+            android:name=".demo.LibraryDemo.OkHttpDemo.OkHttpDemoAct"
             android:theme="@style/AppTheme" />
         <!-- Library Demo End -->
 
         <!-- Other Demo Start -->
         <activity
-            android:name=".Test.MainTest.OtherDemo.OtherDemoAct"
+            android:name=".demo.OtherDemo.OtherDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".Test.MainTest.OtherDemo.MediaStoreDemo.MediaStoreDemoAct"
+            android:name=".demo.OtherDemo.MediaStoreDemo.MediaStoreDemoAct"
             android:theme="@style/AppTheme" />
         <!-- Other Demo End -->
 
-        <service android:name=".Test.MainTest.FloatServiceTest.TestFloatService" />
+        <service android:name=".demo.FloatServiceTest.TestFloatService" />
 
         <service
-            android:name=".Test.MainTest.BackgroundService"
+            android:name=".demo.BackgroundService"
             android:foregroundServiceType="" />
     </application>
 

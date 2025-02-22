@@ -7,8 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.BootTaskManager;
-import com.example.administrator.androidtest.Test.MainTest.OptTest.BootOptTest.MonitorClassLoader;
+import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTaskManager;
+import com.example.administrator.androidtest.demo.OptTest.BootOptTest.MonitorClassLoader;
 
 import java.util.HashMap;
 import java.util.Map;

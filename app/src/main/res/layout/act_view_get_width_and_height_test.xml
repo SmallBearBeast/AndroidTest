@@ -5,7 +5,7 @@
     style="@style/TestContainerFullStyle"
     tools:ignore="MissingConstraints,HardcodedText">
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         style="@style/TestContainerStyle"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -49,9 +49,9 @@
             style="@style/TestButtonStyle"
             android:text="Change Size" />
 
-    </com.example.administrator.androidtest.Widget.FlowLayout>
+    </com.example.administrator.androidtest.widget.FlowLayout>
 
-    <com.example.administrator.androidtest.Test.MainTest.ViewDemo.ViewGetSizeTest.TestTestView
+    <com.example.administrator.androidtest.demo.ViewDemo.ViewGetSizeTest.TestTestView
         android:id="@+id/testTextView"
         android:layout_width="@dimen/dp_200"
         android:layout_height="wrap_content"

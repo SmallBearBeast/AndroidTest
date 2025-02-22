@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:surface_type="texture_view" />
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -61,5 +61,5 @@
             android:textAllCaps="false" />
 
 
-    </com.example.administrator.androidtest.Widget.FlowLayout>
+    </com.example.administrator.androidtest.widget.FlowLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

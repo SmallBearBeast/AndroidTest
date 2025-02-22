@@ -31,7 +31,7 @@
                 style="@style/TestLabelStyle"
                 android:text="FlowLayout Test" />
 
-            <com.example.administrator.androidtest.Widget.FlowLayout
+            <com.example.administrator.androidtest.widget.FlowLayout
                 android:id="@+id/flowLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -40,7 +40,7 @@
                 app:fl_vertical_space="@dimen/dp_10"
                 app:layout_constraintTop_toBottomOf="@+id/flowLayoutLabelTextView" />
 
-            <com.example.administrator.androidtest.Widget.FlowLayout
+            <com.example.administrator.androidtest.widget.FlowLayout
                 android:id="@+id/flowFakeFlowLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -50,11 +50,11 @@
                 app:fl_vertical_space="@dimen/dp_10"
                 app:layout_constraintTop_toBottomOf="@+id/flowLayout">
 
-                <com.example.administrator.androidtest.Widget.FlowFakeTextView
+                <com.example.administrator.androidtest.widget.FlowFakeTextView
                     android:id="@+id/flowFakeTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-            </com.example.administrator.androidtest.Widget.FlowLayout>
+            </com.example.administrator.androidtest.widget.FlowLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
@@ -64,7 +64,7 @@
                 style="@style/TestLabelStyle"
                 android:text="MarqueeTextView Test" />
 
-            <com.example.administrator.androidtest.Widget.MarqueeTextView
+            <com.example.administrator.androidtest.widget.MarqueeTextView
                 android:id="@+id/marqueeTextView_1"
                 android:layout_width="@dimen/dp_200"
                 android:layout_height="@dimen/dp_45"
@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/marqueeLabelTextView"
                 app:mtv_marquee_enable="false" />
 
-            <com.example.administrator.androidtest.Widget.MarqueeTextView
+            <com.example.administrator.androidtest.widget.MarqueeTextView
                 android:id="@+id/marqueeTextView_2"
                 android:layout_width="@dimen/dp_200"
                 android:layout_height="@dimen/dp_45"
@@ -110,7 +110,7 @@
                 style="@style/TestLabelStyle"
                 android:text="InputView Test" />
 
-            <com.example.administrator.androidtest.Widget.InputView
+            <com.example.administrator.androidtest.widget.InputView
                 android:id="@+id/inputView"
                 android:layout_width="@dimen/dp_300"
                 android:layout_height="@dimen/dp_45"
@@ -136,7 +136,7 @@
                 style="@style/TestLabelStyle"
                 android:text="CaseView Test" />
 
-            <com.example.administrator.androidtest.Test.MainTest.WidgetDemo.CaseViewTest.Case.CaseView
+            <com.example.administrator.androidtest.demo.WidgetDemo.CaseViewTest.Case.CaseView
                 android:id="@+id/caseView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -158,7 +158,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.administrator.androidtest.Widget.ShadowLayout
+            <com.example.administrator.androidtest.widget.ShadowLayout
                 android:id="@+id/shadowLayout"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
@@ -174,7 +174,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="Hello World" />
-            </com.example.administrator.androidtest.Widget.ShadowLayout>
+            </com.example.administrator.androidtest.widget.ShadowLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
@@ -204,7 +204,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/fullLabelTextView" />
 
-            <com.example.administrator.androidtest.Widget.FullTextView.FullTextView
+            <com.example.administrator.androidtest.widget.FullTextView.FullTextView
                 android:id="@+id/fullTextView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -230,7 +230,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.administrator.androidtest.Widget.LikeView.LikeView
+            <com.example.administrator.androidtest.widget.LikeView.LikeView
                 android:id="@+id/likeView"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
@@ -262,7 +262,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.administrator.androidtest.Widget.MoreTextView
+            <com.example.administrator.androidtest.widget.MoreTextView
                 android:id="@+id/moreTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -287,7 +287,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.administrator.androidtest.Widget.LoopViewPager.LoopViewPager
+            <com.example.administrator.androidtest.widget.LoopViewPager.LoopViewPager
                 android:id="@+id/loopViewpager"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"

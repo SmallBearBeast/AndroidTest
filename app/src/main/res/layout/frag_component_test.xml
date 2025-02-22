@@ -34,7 +34,7 @@
         app:layout_constraintVertical_weight="1"
         tools:ignore="HardcodedText" />
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         android:id="@+id/flowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

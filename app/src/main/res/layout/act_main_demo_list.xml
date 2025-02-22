@@ -130,7 +130,7 @@
                 style="@style/TestLabelStyle"
                 android:text="Float Service Test" />
 
-            <com.example.administrator.androidtest.Widget.FlowLayout
+            <com.example.administrator.androidtest.widget.FlowLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/floatServiceLabelTextView">
@@ -144,7 +144,7 @@
                     android:id="@+id/stopFloatServiceButton"
                     style="@style/TestButtonStyle"
                     android:text="Stop Float Service" />
-            </com.example.administrator.androidtest.Widget.FlowLayout>
+            </com.example.administrator.androidtest.widget.FlowLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

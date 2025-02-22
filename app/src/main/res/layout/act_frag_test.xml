@@ -13,7 +13,7 @@
         app:layout_constraintBottom_toTopOf="@+id/flowLayout"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         android:id="@+id/flowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -108,6 +108,6 @@
             android:text="Replace TestFrag3 2"
             android:textAllCaps="false"
             tools:ignore="HardcodedText" />
-    </com.example.administrator.androidtest.Widget.FlowLayout>
+    </com.example.administrator.androidtest.widget.FlowLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

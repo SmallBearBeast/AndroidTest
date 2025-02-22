@@ -13,7 +13,7 @@
         android:padding="@dimen/dp_10"
         android:text="TextView_1"
         android:visibility="gone"
-        app:layout_behavior=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.Demo1Behavior"
+        app:layout_behavior=".demo.ViewDemo.CoordinatorLayoutTest.Demo1Behavior"
         tools:ignore="HardcodedText"
         tools:visibility="visible" />
 
@@ -36,7 +36,7 @@
         android:layout_gravity="center_vertical"
         android:background="@color/cl_blue"
         android:visibility="gone"
-        app:layout_behavior=".Test.MainTest.ViewDemo.CoordinatorLayoutTest.Demo2Behavior"
+        app:layout_behavior=".demo.ViewDemo.CoordinatorLayoutTest.Demo2Behavior"
         tools:visibility="visible">
 
         <LinearLayout
@@ -132,7 +132,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom">
@@ -163,5 +163,5 @@
             android:text="Demo_3"
             android:textAllCaps="false"
             tools:ignore="HardcodedText" />
-    </com.example.administrator.androidtest.Widget.FlowLayout>
+    </com.example.administrator.androidtest.widget.FlowLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

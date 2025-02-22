@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.example.administrator.androidtest.Widget.ShadowLayout
+    <com.example.administrator.androidtest.widget.ShadowLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:sl_bg_color="@color/cl_green"
@@ -45,7 +45,7 @@
                 android:textColor="@color/cl_black"
                 android:textSize="25dp" />
 
-            <com.example.administrator.androidtest.Widget.NestedContainer
+            <com.example.administrator.androidtest.widget.NestedContainer
                 android:layout_width="match_parent"
                 android:layout_height="100dp">
 
@@ -55,7 +55,7 @@
                     android:layout_height="match_parent"
                     android:background="@color/cl_black" />
 
-            </com.example.administrator.androidtest.Widget.NestedContainer>
+            </com.example.administrator.androidtest.widget.NestedContainer>
 
             <View
                 android:id="@+id/redView"
@@ -72,6 +72,6 @@
                 android:textColor="@color/cl_black"
                 android:textSize="25dp" />
         </LinearLayout>
-    </com.example.administrator.androidtest.Widget.ShadowLayout>
+    </com.example.administrator.androidtest.widget.ShadowLayout>
 
 </LinearLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.example.administrator.androidtest.Widget.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.example.administrator.androidtest.widget.FlowLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -121,4 +121,4 @@
         android:textAllCaps="false"
         tools:ignore="HardcodedText" />
 
-</com.example.administrator.androidtest.Widget.FlowLayout>
+</com.example.administrator.androidtest.widget.FlowLayout>

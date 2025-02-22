@@ -37,7 +37,7 @@ class CostTimeMethodVisitor(
         visitor.visitVarInsn(ALOAD, 0)
         visitor.visitFieldInsn(
             GETFIELD,
-            "com/example/administrator/androidtest/Test/MainTest/MainAct",
+            "com/example/administrator/androidtest/demo/MainAct",
             "TAG",
             "Ljava/lang/String;"
         )

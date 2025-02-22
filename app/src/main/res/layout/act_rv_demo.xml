@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_weight="1" />
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         android:id="@+id/flowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -92,5 +92,5 @@
             android:onClick="onClick"
             android:text="Test"
             android:textAllCaps="false" />
-    </com.example.administrator.androidtest.Widget.FlowLayout>
+    </com.example.administrator.androidtest.widget.FlowLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

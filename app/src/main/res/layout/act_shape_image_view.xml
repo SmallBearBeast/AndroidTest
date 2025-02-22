@@ -17,7 +17,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/girl" />
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:id="@+id/siv_1"
             android:layout_width="200dp"
             android:layout_height="150dp"
@@ -28,7 +28,7 @@
             app:siv_radius="15dp"
             app:siv_type="rectangle" />
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:id="@+id/siv_2"
             android:layout_width="150dp"
             android:layout_height="150dp"
@@ -38,7 +38,7 @@
             app:siv_type="circle" />
 
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
@@ -47,7 +47,7 @@
             app:siv_border_width="15dp"
             app:siv_type="square" />
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
@@ -57,7 +57,7 @@
             app:siv_polygon_side_num="5"
             app:siv_type="polygon" />
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
@@ -68,7 +68,7 @@
             app:siv_type="polygon" />
 
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
@@ -79,7 +79,7 @@
             app:siv_type="polygon" />
 
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
@@ -89,7 +89,7 @@
             app:siv_polygon_side_num="8"
             app:siv_type="polygon" />
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"
@@ -99,7 +99,7 @@
             app:siv_polygon_side_num="10"
             app:siv_type="polygon" />
 
-        <com.example.administrator.androidtest.Widget.ShapeImageView
+        <com.example.administrator.androidtest.widget.ShapeImageView
             android:layout_width="200dp"
             android:layout_height="150dp"
             android:scaleType="centerInside"

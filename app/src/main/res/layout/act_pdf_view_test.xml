@@ -11,13 +11,13 @@
         app:layout_constraintBottom_toTopOf="@+id/pdfFlowLayout"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.example.administrator.androidtest.Widget.pdfview.PdfRenderView
+        <com.example.administrator.androidtest.widget.pdfview.PdfRenderView
             android:id="@+id/pdfView"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_400" />
     </FrameLayout>
 
-    <com.example.administrator.androidtest.Widget.FlowLayout
+    <com.example.administrator.androidtest.widget.FlowLayout
         android:id="@+id/pdfFlowLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -65,6 +65,6 @@
             android:layout_height="wrap_content"
             android:text="nextPage"
             android:textAllCaps="false" />
-    </com.example.administrator.androidtest.Widget.FlowLayout>
+    </com.example.administrator.androidtest.widget.FlowLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
