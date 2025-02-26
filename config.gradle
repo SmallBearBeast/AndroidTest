@@ -14,16 +14,16 @@ ext {
     smallbearbeast_version = 'b48a0898c7'
 
     pluginMap = [
-            'gradle'                        : 'com.android.tools.build:gradle:7.3.0',
-            'kotlin_gradle_plugin'          : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
-            'kotlin_android_extensions'     : "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version",
+            'gradle'                   : 'com.android.tools.build:gradle:7.3.0',
+            'kotlin_gradle_plugin'     : "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version",
+            'kotlin_android_extensions': "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version",
 //            'bintray_release'               : 'com.novoda:bintray-release:0.8.1',
-            'protobuf_gradle_plugin'        : 'com.google.protobuf:protobuf-gradle-plugin:0.8.16',
+            'protobuf_gradle_plugin'   : 'com.google.protobuf:protobuf-gradle-plugin:0.8.16',
             //使用沪江封装好的gradle插件，能自动倒入aspectj依赖，具有一定的编译检查错误能力，能处理好kt java混合开发情况。
 //            'gradle_android_plugin_aspectjx': 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10',
             // ARouter自动插入注册路由配置代码插件
-            'arouter_register'              : "com.alibaba:arouter-register:1.0.2",
-            'customtransformplugin'         : 'com.example:customtransformplugin:1.0.2',
+            'arouter_register'         : "com.alibaba:arouter-register:1.0.2",
+            'customtransformplugin'    : 'com.example:customtransformplugin:1.0.2',
     ]
 
     dependenciesMap = [
@@ -85,8 +85,11 @@ ext {
             'asm_util'                  : 'org.ow2.asm:asm-util:9.1',
             'asm_common'                : 'org.ow2.asm:asm-commons:9.1',
 
-            'exoplayer_core': "com.google.android.exoplayer:exoplayer-core:$exoplayer_version", //核心库必选
-            'exoplayer_ui': "com.google.android.exoplayer:exoplayer-ui:$exoplayer_version", // ui库可选
+            'exoplayer_core'            : "com.google.android.exoplayer:exoplayer-core:$exoplayer_version", //核心库必选
+            'exoplayer_ui'              : "com.google.android.exoplayer:exoplayer-ui:$exoplayer_version", // ui库可选
+
+            'disklrucache'              : 'com.jakewharton:disklrucache:2.0.2', // 磁盘缓存
+            'pdfium_android'            : 'com.github.barteksc:pdfium-android:1.9.0', // pdf渲染库
 
             'liblog'                    : "com.github.SmallBearBeast.AndroidTest:liblog:$smallbearbeast_version",
             'libokhttp'                 : "com.github.SmallBearBeast.AndroidTest:libokhttp:$smallbearbeast_version",
@@ -105,9 +108,9 @@ ext {
                     "${dependenciesMap.junit}",
             ],
             "androidTestImplementation": [
+                    "${dependenciesMap.mockk_android}",
 //                    "${dependenciesMap.androidx_junit}",
 //                    "${dependenciesMap.espresso_core}",
-"${dependenciesMap.mockk_android}",
             ],
             "implementation"           : [
                     "${dependenciesMap.recyclerview}",
@@ -144,6 +147,8 @@ ext {
                     "${dependenciesMap.asm_common}",
                     "${dependenciesMap.exoplayer_core}",
                     "${dependenciesMap.exoplayer_ui}",
+                    "${dependenciesMap.disklrucache}",
+                    "${dependenciesMap.pdfium_android}",
 
 //                    "${dependenciesMap.liblog}",
 //                    "${dependenciesMap.libokhttp}",

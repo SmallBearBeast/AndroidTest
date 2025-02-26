@@ -135,11 +135,11 @@
 
         <!-- Widget Demo Start -->
         <activity
-            android:name=".demo.WidgetDemo.WidgetDemoAct"
+            android:name=".demo.widgetDemo.WidgetDemoAct"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".demo.WidgetDemo.PdfViewDemo.PdfViewDemoAct"
+            android:name=".demo.widgetDemo.pdfViewDemo.PdfViewDemoAct"
             android:theme="@style/AppTheme" />
         <!-- Widget Demo End -->
 

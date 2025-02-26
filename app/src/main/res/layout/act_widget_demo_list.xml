@@ -136,7 +136,7 @@
                 style="@style/TestLabelStyle"
                 android:text="CaseView Test" />
 
-            <com.example.administrator.androidtest.demo.WidgetDemo.CaseViewTest.Case.CaseView
+            <com.example.administrator.androidtest.demo.widgetDemo.CaseViewTest.Case.CaseView
                 android:id="@+id/caseView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

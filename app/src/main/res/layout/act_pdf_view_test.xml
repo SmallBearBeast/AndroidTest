@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="HardcodedText">
 
-    <FrameLayout
-        android:id="@+id/pdfViewContainer"
+    <com.example.administrator.androidtest.widget.pdfview.PdfRenderView
+        android:id="@+id/pdfView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/pdfFlowLayout"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.example.administrator.androidtest.widget.pdfview.PdfRenderView
-            android:id="@+id/pdfView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp_400" />
-    </FrameLayout>
+        android:layout_weight="1" />
 
     <com.example.administrator.androidtest.widget.FlowLayout
         android:id="@+id/pdfFlowLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pdfViewContainer">
+        android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/loadPdfButton_1"
+            android:id="@+id/openFilePicker"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="loadPdf"
+            android:text="openFilePicker"
             android:textAllCaps="false" />
 
         <Button
@@ -67,4 +60,4 @@
             android:textAllCaps="false" />
     </com.example.administrator.androidtest.widget.FlowLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

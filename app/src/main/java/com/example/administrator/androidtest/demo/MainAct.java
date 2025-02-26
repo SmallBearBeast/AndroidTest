@@ -28,7 +28,7 @@ import com.example.administrator.androidtest.demo.ScreenTest.ScreenTestComponent
 import com.example.administrator.androidtest.demo.SpAndMMKVDemo.SpAndMMKVDemoComponent;
 import com.example.administrator.androidtest.demo.StartBgServiceDemo.StartBgServiceDemoComponent;
 import com.example.administrator.androidtest.demo.ViewDemo.ViewDemoComponent;
-import com.example.administrator.androidtest.demo.WidgetDemo.WidgetDemoComponent;
+import com.example.administrator.androidtest.demo.widgetDemo.WidgetDemoComponent;
 import com.example.libbase.Util.MainHandlerUtil;
 
 public class MainAct extends ComponentAct {
