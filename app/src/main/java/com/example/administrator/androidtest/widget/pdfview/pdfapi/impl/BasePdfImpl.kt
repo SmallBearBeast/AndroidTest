@@ -16,10 +16,6 @@ import com.example.administrator.androidtest.widget.pdfview.pdfapi.getScreenWidt
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
 import java.io.File
 
-// TODO: size不固定
-// TODO: 队列加载，加载优化
-// TODO: 放大缩小实现
-// TODO: getMetaInfo 实现
 abstract class BasePdfImpl(private val context: Context) : PdfApi {
 
     private var maxWidth = -1
