@@ -1,4 +1,4 @@
-package com.example.libframework.dialog;
+package com.example.libbase.dialog;
 
 import android.app.Dialog;
 import android.content.Context;

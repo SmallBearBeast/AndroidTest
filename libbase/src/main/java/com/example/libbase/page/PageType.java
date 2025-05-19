@@ -1,4 +1,4 @@
-package com.example.libframework.page;
+package com.example.libbase.page;
 
 import androidx.annotation.IntDef;
 

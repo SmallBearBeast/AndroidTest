@@ -30,7 +30,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    rootProject.ext.importDependencies(this, rootProject.ext.libframeworkDependenciesMap)
+    rootProject.ext.importDependencies(this, rootProject.ext.libbaseDependenciesMap)
 }
 
-publishToMaven('libframework')
+publishToMaven('libbase')

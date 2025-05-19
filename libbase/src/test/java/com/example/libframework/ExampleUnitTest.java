@@ -1,4 +1,4 @@
-package com.example.libframework;
+package com.example.libbase;
 
 import org.junit.Test;
 

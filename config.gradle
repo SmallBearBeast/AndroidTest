@@ -95,7 +95,7 @@ ext {
             'libokhttp'                 : "com.github.SmallBearBeast.AndroidTest:libokhttp:$smallbearbeast_version",
             'libkv'                     : "com.github.SmallBearBeast.AndroidTest:libkv:$smallbearbeast_version",
             'libcommon'                   : "com.github.SmallBearBeast.AndroidTest:libcommon:$smallbearbeast_version",
-            'libframework'              : "com.github.SmallBearBeast.AndroidTest:libframework:$smallbearbeast_version",
+            'libbase'              : "com.github.SmallBearBeast.AndroidTest:libbase:$smallbearbeast_version",
             'librv'                     : "com.github.SmallBearBeast.AndroidTest:librv:$smallbearbeast_version",
             'libcomponent'              : "com.github.SmallBearBeast.AndroidTest:libcomponent:$smallbearbeast_version",
             'libfresco'                 : "com.github.SmallBearBeast.AndroidTest:libfresco:$smallbearbeast_version",
@@ -154,7 +154,7 @@ ext {
 //                    "${dependenciesMap.libokhttp}",
 //                    "${dependenciesMap.libkv}",
 //                    "${dependenciesMap.libcommon}",
-//                    "${dependenciesMap.libframework}",
+//                    "${dependenciesMap.libbase}",
 //                    "${dependenciesMap.librv}",
 //                    "${dependenciesMap.libcomponent}",
 //                    "${dependenciesMap.libfresco}",
@@ -177,7 +177,7 @@ ext {
             ]
     ]
 
-    libframeworkDependenciesMap = [
+    libbaseDependenciesMap = [
             "implementation": [
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.recyclerview}",

@@ -1,4 +1,4 @@
-package com.example.libframework;
+package com.example.libbase;
 
 import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.libframework.test", appContext.getPackageName());
+        assertEquals("com.example.libbase.test", appContext.getPackageName());
     }
 }
