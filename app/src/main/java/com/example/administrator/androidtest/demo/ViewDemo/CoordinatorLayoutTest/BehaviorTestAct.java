@@ -15,7 +15,7 @@ import androidx.core.widget.NestedScrollView;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.ViewUtil;
+import com.example.libcommon.Util.ViewUtil;
 
 public class BehaviorTestAct extends ComponentAct {
 

@@ -24,8 +24,8 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':libcommon')
     rootProject.ext.importDependencies(this, rootProject.ext.libfrescoDependenciesMap)
-    implementation project(":libbase")
     implementation project(":liblog")
 }
 

@@ -29,7 +29,7 @@ import com.example.administrator.androidtest.demo.SpAndMMKVDemo.SpAndMMKVDemoCom
 import com.example.administrator.androidtest.demo.StartBgServiceDemo.StartBgServiceDemoComponent;
 import com.example.administrator.androidtest.demo.ViewDemo.ViewDemoComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.WidgetDemoComponent;
-import com.example.libbase.Util.MainHandlerUtil;
+import com.example.libcommon.Util.MainHandlerUtil;
 
 public class MainAct extends ComponentAct {
 

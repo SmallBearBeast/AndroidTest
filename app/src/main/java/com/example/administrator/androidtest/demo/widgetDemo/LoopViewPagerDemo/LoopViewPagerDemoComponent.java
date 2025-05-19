@@ -13,7 +13,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
 import com.example.administrator.androidtest.widget.LoopViewPager.LoopViewPager;
-import com.example.libbase.Util.ToastUtil;
+import com.example.libcommon.Util.ToastUtil;
 
 public class LoopViewPagerDemoComponent extends TestActivityComponent {
 

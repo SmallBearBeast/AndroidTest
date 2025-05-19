@@ -1,7 +1,7 @@
 package com.example.libfresco;
 
 import android.net.Uri;
-import com.example.libbase.Util.FileUtil;
+import com.example.libcommon.Util.FileUtil;
 
 import java.io.File;
 

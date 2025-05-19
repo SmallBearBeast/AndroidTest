@@ -8,7 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
-import com.example.libbase.Util.ToastUtil;
+import com.example.libcommon.Util.ToastUtil;
 
 import java.io.File;
 import java.util.ArrayList;

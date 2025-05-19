@@ -12,7 +12,7 @@ import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.other.fileMedia.Info.AudioInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.DecimalUtil;
+import com.example.libcommon.Util.DecimalUtil;
 
 public class AudioDelegate extends MultiTypeDelegate<Cursor, AudioDelegate.AudioHolder> {
     @Override

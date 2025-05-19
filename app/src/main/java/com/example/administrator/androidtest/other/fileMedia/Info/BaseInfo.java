@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.other.fileMedia.Info;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import com.example.administrator.androidtest.other.fileMedia.Provider.MediaConstant;
-import com.example.libbase.Util.TimeRecordUtil;
+import com.example.libcommon.Util.TimeRecordUtil;
 import com.example.liblog.SLog;
 
 public class BaseInfo {

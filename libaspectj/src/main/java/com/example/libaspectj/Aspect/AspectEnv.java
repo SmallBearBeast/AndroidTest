@@ -3,7 +3,7 @@ package com.example.libaspectj.Aspect;
 import android.util.Log;
 import com.example.libaspectj.Annotation.Env.AsEnv;
 import com.example.libaspectj.Annotation.Env.EnvMode;
-import com.example.libbase.Util.EnvUtil;
+import com.example.libcommon.Util.EnvUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

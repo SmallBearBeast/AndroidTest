@@ -92,8 +92,8 @@ protobuf {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':libcommon')
     rootProject.ext.importDependencies(this, rootProject.ext.appDependenciesMap)
-    implementation project(":libbase")
     implementation project(":libfresco")
     implementation project(":libokhttp")
     implementation project(":liblog")

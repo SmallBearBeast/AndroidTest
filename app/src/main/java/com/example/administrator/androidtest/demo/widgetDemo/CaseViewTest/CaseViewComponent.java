@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.demo.widgetDemo.CaseViewTest.Case.CaseHelper;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
-import com.example.libbase.Util.ToastUtil;
+import com.example.libcommon.Util.ToastUtil;
 
 public class CaseViewComponent extends TestActivityComponent {
     public CaseViewComponent(Lifecycle lifecycle) {

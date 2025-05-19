@@ -15,8 +15,8 @@ import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.widget.BottomView;
-import com.example.libbase.Util.CollectionUtil;
-import com.example.libbase.Util.DensityUtil;
+import com.example.libcommon.Util.CollectionUtil;
+import com.example.libcommon.Util.DensityUtil;
 
 public class RvBottomView extends BottomView {
     public RvBottomView(Activity activity) {

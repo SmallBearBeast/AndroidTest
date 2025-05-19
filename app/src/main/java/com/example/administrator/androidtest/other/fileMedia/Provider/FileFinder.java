@@ -8,7 +8,7 @@ import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.DirInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.ImageInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.VideoInfo;
-import com.example.libbase.Util.TimeRecordUtil;
+import com.example.libcommon.Util.TimeRecordUtil;
 import com.example.liblog.SLog;
 
 import java.io.File;

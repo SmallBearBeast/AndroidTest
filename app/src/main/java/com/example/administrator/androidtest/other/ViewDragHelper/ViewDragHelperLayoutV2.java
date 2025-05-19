@@ -12,7 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.ToastUtil;
+import com.example.libcommon.Util.ToastUtil;
 
 public class ViewDragHelperLayoutV2 extends FrameLayout implements View.OnClickListener {
     private static final String TAG = "ViewDragHelperLayout";

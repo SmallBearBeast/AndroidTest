@@ -19,8 +19,8 @@ import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.other.fileMedia.Provider.MediaConfig;
 import com.example.administrator.androidtest.other.fileMedia.Provider.MediaStoreHelper;
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.DensityUtil;
-import com.example.libbase.Util.TimeRecordUtil;
+import com.example.libcommon.Util.DensityUtil;
+import com.example.libcommon.Util.TimeRecordUtil;
 import com.example.liblog.SLog;
 
 import java.io.File;

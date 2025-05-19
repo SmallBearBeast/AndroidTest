@@ -11,7 +11,7 @@ import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.ImageInfo;
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.DensityUtil;
+import com.example.libcommon.Util.DensityUtil;
 import com.example.libfresco.FrescoView;
 
 public class BaseImageVideoDelegate extends MultiTypeDelegate<Cursor, BaseImageVideoDelegate.ImageVideoHolder> {

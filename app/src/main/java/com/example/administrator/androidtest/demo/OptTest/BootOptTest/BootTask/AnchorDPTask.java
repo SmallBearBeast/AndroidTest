@@ -12,8 +12,8 @@ import com.bear.libkv.SpVal.SpHelper;
 import com.example.administrator.androidtest.AndroidTestApplication;
 import com.example.administrator.androidtest.BuildConfig;
 import com.example.administrator.androidtest.demo.SpValHelper;
-import com.example.libbase.Util.AppInitUtil;
-import com.example.libbase.Util.TimeRecordUtil;
+import com.example.libcommon.Util.AppInitUtil;
+import com.example.libcommon.Util.TimeRecordUtil;
 import com.example.libfresco.FrescoUtil;
 
 public class AnchorDPTask extends BaseBootTask {

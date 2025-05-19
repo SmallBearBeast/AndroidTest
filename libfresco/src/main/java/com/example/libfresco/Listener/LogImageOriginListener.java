@@ -2,7 +2,7 @@ package com.example.libfresco.Listener;
 
 import android.net.Uri;
 import android.util.Log;
-import com.example.libbase.Util.AppUtil;
+import com.example.libcommon.Util.AppUtil;
 import com.facebook.drawee.backends.pipeline.info.ImageOrigin;
 import com.facebook.drawee.backends.pipeline.info.ImageOriginListener;
 

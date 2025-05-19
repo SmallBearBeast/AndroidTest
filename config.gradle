@@ -23,7 +23,7 @@ ext {
 //            'gradle_android_plugin_aspectjx': 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.10',
             // ARouter自动插入注册路由配置代码插件
             'arouter_register'         : "com.alibaba:arouter-register:1.0.2",
-            'customtransformplugin'    : 'com.example:customtransformplugin:1.0.2',
+            'customtransformplugin'    : 'com.example:customtransformplugin:1.0.3',
     ]
 
     dependenciesMap = [
@@ -94,7 +94,7 @@ ext {
             'liblog'                    : "com.github.SmallBearBeast.AndroidTest:liblog:$smallbearbeast_version",
             'libokhttp'                 : "com.github.SmallBearBeast.AndroidTest:libokhttp:$smallbearbeast_version",
             'libkv'                     : "com.github.SmallBearBeast.AndroidTest:libkv:$smallbearbeast_version",
-            'libbase'                   : "com.github.SmallBearBeast.AndroidTest:libbase:$smallbearbeast_version",
+            'libcommon'                   : "com.github.SmallBearBeast.AndroidTest:libcommon:$smallbearbeast_version",
             'libframework'              : "com.github.SmallBearBeast.AndroidTest:libframework:$smallbearbeast_version",
             'librv'                     : "com.github.SmallBearBeast.AndroidTest:librv:$smallbearbeast_version",
             'libcomponent'              : "com.github.SmallBearBeast.AndroidTest:libcomponent:$smallbearbeast_version",
@@ -153,7 +153,7 @@ ext {
 //                    "${dependenciesMap.liblog}",
 //                    "${dependenciesMap.libokhttp}",
 //                    "${dependenciesMap.libkv}",
-//                    "${dependenciesMap.libbase}",
+//                    "${dependenciesMap.libcommon}",
 //                    "${dependenciesMap.libframework}",
 //                    "${dependenciesMap.librv}",
 //                    "${dependenciesMap.libcomponent}",
@@ -168,7 +168,7 @@ ext {
             ]
     ]
 
-    libbaseDependenciesMap = [
+    libcommonDependenciesMap = [
             "implementation": [
                     "${dependenciesMap.gson}",
                     "${dependenciesMap.appcompat}",
@@ -195,7 +195,7 @@ ext {
                     "${dependenciesMap.webpsupport}",
 
 //                    "${dependenciesMap.liblog}",
-//                    "${dependenciesMap.libbase}",
+//                    "${dependenciesMap.libcommon}",
             ]
     ]
 

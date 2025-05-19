@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.administrator.androidtest.R;
-import com.example.libbase.Util.ResourceUtil;
+import com.example.libcommon.Util.ResourceUtil;
 
 class ViewPager1Adapter extends PagerAdapter {
     int[] colors = new int[]{

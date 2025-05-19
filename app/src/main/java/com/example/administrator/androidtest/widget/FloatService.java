@@ -18,7 +18,7 @@ import android.view.WindowManager;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 
-import com.example.libbase.Util.DensityUtil;
+import com.example.libcommon.Util.DensityUtil;
 
 public abstract class FloatService extends Service {
     private View mFloatView;

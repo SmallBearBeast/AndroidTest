@@ -14,8 +14,8 @@ import com.bear.libcomponent.component.ComponentFrag;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
-import com.example.libbase.Util.CollectionUtil;
-import com.example.libbase.Util.DensityUtil;
+import com.example.libcommon.Util.CollectionUtil;
+import com.example.libcommon.Util.DensityUtil;
 
 import java.util.List;
 

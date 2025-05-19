@@ -10,8 +10,8 @@ import com.bear.libcomponent.component.ActivityComponent;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.demo.ComponentDemo.ComponentSpecialDemoFrag;
 import com.example.administrator.androidtest.demo.ComponentDemo.ComponentDemoFrag;
-import com.example.libbase.Util.ResourceUtil;
-import com.example.libbase.Util.ToastUtil;
+import com.example.libcommon.Util.ResourceUtil;
+import com.example.libcommon.Util.ToastUtil;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

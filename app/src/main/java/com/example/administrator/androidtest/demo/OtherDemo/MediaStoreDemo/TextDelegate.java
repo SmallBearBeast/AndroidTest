@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
-import com.example.libbase.Util.DensityUtil;
+import com.example.libcommon.Util.DensityUtil;
 
 public class TextDelegate extends MultiTypeDelegate<String, TextDelegate.TextHolder> {
 
