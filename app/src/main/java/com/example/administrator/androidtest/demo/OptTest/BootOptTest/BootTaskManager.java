@@ -16,7 +16,7 @@ import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.I
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.MainThreadTask;
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.NoAnchorDPOptTask;
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.NoAnchorDPTask;
-import com.example.libcommon.Util.TimeRecordUtil;
+import com.example.libcommon.util.TimeRecordUtil;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;

@@ -1,7 +1,7 @@
 package com.example.libaspectj.Aspect;
 
 import android.os.SystemClock;
-import com.example.libcommon.Util.ToastUtil;
+import com.example.libcommon.util.ToastUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

@@ -6,7 +6,7 @@ import android.widget.ProgressBar;
 import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
 
-import com.example.libcommon.Util.DensityUtil;
+import com.example.libcommon.util.DensityUtil;
 
 import java.util.HashMap;
 import java.util.Map;

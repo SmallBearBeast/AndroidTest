@@ -12,10 +12,10 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.Util.CollectionUtil;
-import com.example.libcommon.Util.FileUtil;
-import com.example.libcommon.Util.NetWorkUtil;
-import com.example.libcommon.Util.ToastUtil;
+import com.example.libcommon.util.CollectionUtil;
+import com.example.libcommon.util.FileUtil;
+import com.example.libcommon.util.NetWorkUtil;
+import com.example.libcommon.util.ToastUtil;
 import com.example.libokhttp.OkCallback;
 import com.example.libokhttp.OkDownloadCallback;
 import com.example.libokhttp.OkHelper;

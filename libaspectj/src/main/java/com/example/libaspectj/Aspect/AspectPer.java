@@ -1,7 +1,7 @@
 package com.example.libaspectj.Aspect;
 
 import com.example.libaspectj.Annotation.AsPer;
-import com.example.libcommon.Util.PermissionUtil;
+import com.example.libcommon.util.PermissionUtil;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;

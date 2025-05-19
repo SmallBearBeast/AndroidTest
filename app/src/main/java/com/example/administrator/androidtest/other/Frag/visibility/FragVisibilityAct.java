@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.Page.IPage;
+import com.example.libframework.page.IPage;
 
 
 public class FragVisibilityAct extends ComponentAct {

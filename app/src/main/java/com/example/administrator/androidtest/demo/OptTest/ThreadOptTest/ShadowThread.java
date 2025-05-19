@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.demo.OptTest.ThreadOptTest;
 
 import android.util.Log;
 
-import com.example.libcommon.Util.ExecutorUtil;
+import com.example.libcommon.util.ExecutorUtil;
 
 import java.util.Arrays;
 

@@ -13,7 +13,7 @@ import androidx.fragment.app.FragmentManager;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.Util.ToastUtil;
+import com.example.libcommon.util.ToastUtil;
 
 public class FragLifecycleTestAct extends ComponentAct implements LifecycleFrag.FragmentInteractionListener {
     private LifecycleFrag lifecycleFrag_1 = LifecycleFrag.get("testFrag_1");

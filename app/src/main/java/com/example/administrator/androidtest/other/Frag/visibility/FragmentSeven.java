@@ -12,7 +12,7 @@ import androidx.lifecycle.Lifecycle;
 import com.bear.libcomponent.component.ComponentFrag;
 import com.bear.libcomponent.component.FragmentComponent;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.Page.IPage;
+import com.example.libframework.page.IPage;
 import com.example.liblog.SLog;
 
 public class FragmentSeven extends ComponentFrag {

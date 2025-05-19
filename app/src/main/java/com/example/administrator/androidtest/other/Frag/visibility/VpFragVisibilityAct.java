@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libframework.Dialog.BaseDialogFragment;
-import com.example.libframework.Page.IPage;
+import com.example.libframework.dialog.BaseDialogFragment;
+import com.example.libframework.page.IPage;
 import com.example.liblog.SLog;
 
 import java.util.ArrayList;

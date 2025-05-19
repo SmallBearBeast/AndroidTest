@@ -2,7 +2,7 @@ package com.example.libaspectj.Aspect;
 
 import android.util.Log;
 import com.example.libaspectj.PC;
-import com.example.libcommon.Util.CollectionUtil;
+import com.example.libcommon.util.CollectionUtil;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;

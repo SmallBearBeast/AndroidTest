@@ -12,10 +12,9 @@ import com.bear.libcomponent.component.ComponentAct
 import com.bear.librv.RvUtil
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.widget.pdfview.PdfRenderView
-import com.example.libcommon.Util.ToastUtil
+import com.example.libcommon.util.ToastUtil
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import java.io.File
 
 class PdfViewDemoAct : ComponentAct(), View.OnClickListener {
     private var pdfRenderView: PdfRenderView? = null

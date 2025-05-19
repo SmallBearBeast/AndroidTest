@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat;
 
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.widget.FloatService;
-import com.example.libcommon.Util.ToastUtil;
+import com.example.libcommon.util.ToastUtil;
 
 public class TestFloatService extends FloatService {
     @SuppressLint("SetTextI18n")

@@ -3,7 +3,7 @@ package com.example.libfresco.Listener;
 import android.graphics.drawable.Animatable;
 import android.net.Uri;
 import android.util.Log;
-import com.example.libcommon.Util.AppUtil;
+import com.example.libcommon.util.AppUtil;
 import com.facebook.drawee.controller.BaseControllerListener;
 import com.facebook.drawee.controller.ControllerListener;
 import com.facebook.imagepipeline.image.CloseableStaticBitmap;

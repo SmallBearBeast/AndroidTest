@@ -11,9 +11,9 @@ import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
 import com.example.administrator.androidtest.widget.FlowFakeTextView;
 import com.example.administrator.androidtest.widget.FlowLayout;
-import com.example.libcommon.Util.DensityUtil;
-import com.example.libcommon.Util.ToastUtil;
-import com.example.libcommon.Util.XmlDrawableUtil;
+import com.example.libcommon.util.DensityUtil;
+import com.example.libcommon.util.ToastUtil;
+import com.example.libcommon.util.XmlDrawableUtil;
 
 public class FlowLayoutTestComponent extends TestActivityComponent {
     public FlowLayoutTestComponent(Lifecycle lifecycle) {

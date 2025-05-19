@@ -6,7 +6,7 @@ import android.view.View;
 import com.example.administrator.androidtest.R;
 
 import com.example.administrator.androidtest.widget.BottomView;
-import com.example.libcommon.Util.ToastUtil;
+import com.example.libcommon.util.ToastUtil;
 
 public class NormalBottomView extends BottomView implements View.OnClickListener {
     public NormalBottomView(Activity activity) {

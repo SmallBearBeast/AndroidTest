@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.Util.DensityUtil;
+import com.example.libcommon.util.DensityUtil;
 
 import java.util.Arrays;
 

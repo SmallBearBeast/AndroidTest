@@ -6,9 +6,9 @@ import androidx.collection.LruCache;
 
 import com.bear.libstorage.FileStorage;
 import com.example.administrator.androidtest.AndroidTestApplication;
-import com.example.libcommon.Executor.BgThreadExecutor;
-import com.example.libcommon.Executor.MainThreadExecutor;
-import com.example.libcommon.Util.IOUtil;
+import com.example.libcommon.executor.BgThreadExecutor;
+import com.example.libcommon.executor.MainThreadExecutor;
+import com.example.libcommon.util.IOUtil;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;

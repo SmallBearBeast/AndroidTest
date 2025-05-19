@@ -10,9 +10,9 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.Util.ToastUtil;
-import com.example.libcommon.Util.ViewUtil;
-import com.example.libcommon.Util.XmlDrawableUtil;
+import com.example.libcommon.util.ToastUtil;
+import com.example.libcommon.util.ViewUtil;
+import com.example.libcommon.util.XmlDrawableUtil;
 
 public class IconTouchViewAct extends ComponentAct {
     private ImageView mIvTest_1;

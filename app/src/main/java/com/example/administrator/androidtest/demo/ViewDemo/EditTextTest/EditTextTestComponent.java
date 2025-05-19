@@ -13,8 +13,8 @@ import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
-import com.example.libcommon.Manager.KeyBoardManager;
-import com.example.libcommon.Util.ToastUtil;
+import com.example.libcommon.manager.KeyBoardManager;
+import com.example.libcommon.util.ToastUtil;
 
 public class EditTextTestComponent extends TestActivityComponent {
 
