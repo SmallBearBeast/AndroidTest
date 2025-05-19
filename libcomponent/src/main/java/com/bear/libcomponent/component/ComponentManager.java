@@ -21,11 +21,11 @@ public class ComponentManager {
 
     private final ComponentContainer componentContainer = new ComponentContainer();
 
-    public void regComponent(ComponentAct activity, @NonNull ActivityComponent component) {
+    public void regComponent(ComponentActivity activity, @NonNull ActivityComponent component) {
         regComponent(activity, component, null);
     }
 
-    public void regComponent(ComponentAct activity, @NonNull ActivityComponent component, @Nullable Object tag) {
+    public void regComponent(ComponentActivity activity, @NonNull ActivityComponent component, @Nullable Object tag) {
         if (componentContainer.contain(component.getClass(), tag)) {
             throw new RuntimeException("Can not register component with same type and tag");
         }
@@ -35,11 +35,11 @@ public class ComponentManager {
         componentContainer.regComponent(component, tag);
     }
 
-    public void regComponent(ComponentFrag fragment, FragmentComponent component) {
+    public void regComponent(ComponentFragment fragment, FragmentComponent component) {
         regComponent(fragment, component, null);
     }
 
-    public void regComponent(ComponentFrag fragment, @NonNull FragmentComponent component, @Nullable Object tag) {
+    public void regComponent(ComponentFragment fragment, @NonNull FragmentComponent component, @Nullable Object tag) {
         if (componentContainer.contain(component.getClass(), tag)) {
             throw new RuntimeException("Can not register component with same type and tag");
         }
@@ -59,7 +59,7 @@ public class ComponentManager {
         return componentContainer.getComponent(clz, tag);
     }
 
-    void dispatchOnCreateView(ComponentFrag componentFrag, View contentView) {
+    void dispatchOnCreateView(ComponentFragment componentFrag, View contentView) {
         Map<ComponentKey<?>, GroupComponent> componentMap = componentContainer.getComponentMap();
         if (componentMap != null) {
             for (IComponent component : componentMap.values()) {
@@ -71,7 +71,7 @@ public class ComponentManager {
         }
     }
 
-    void dispatchOnDestroyView(ComponentFrag componentFrag) {
+    void dispatchOnDestroyView(ComponentFragment componentFrag) {
         Map<ComponentKey<?>, GroupComponent> componentMap = componentContainer.getComponentMap();
         if (componentMap != null) {
             for (IComponent component : componentMap.values()) {
@@ -83,7 +83,7 @@ public class ComponentManager {
         }
     }
 
-    void dispatchOnAttach(ComponentFrag componentFrag, Context context) {
+    void dispatchOnAttach(ComponentFragment componentFrag, Context context) {
         Map<ComponentKey<?>, GroupComponent> componentMap = componentContainer.getComponentMap();
         if (componentMap != null) {
             for (IComponent component : componentMap.values()) {
@@ -94,7 +94,7 @@ public class ComponentManager {
         }
     }
 
-    void dispatchOnDetach(ComponentFrag componentFrag) {
+    void dispatchOnDetach(ComponentFragment componentFrag) {
         Map<ComponentKey<?>, GroupComponent> componentMap = componentContainer.getComponentMap();
         if (componentMap != null) {
             for (IComponent component : componentMap.values()) {
@@ -105,7 +105,7 @@ public class ComponentManager {
         }
     }
 
-    void dispatchOnFirstVisible(ComponentFrag componentFrag) {
+    void dispatchOnFirstVisible(ComponentFragment componentFrag) {
         Map<ComponentKey<?>, GroupComponent> componentMap = componentContainer.getComponentMap();
         if (componentMap != null) {
             for (IComponent component : componentMap.values()) {

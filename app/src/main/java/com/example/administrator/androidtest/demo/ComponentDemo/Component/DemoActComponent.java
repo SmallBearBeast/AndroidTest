@@ -8,8 +8,8 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bear.libcomponent.component.ActivityComponent;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.ComponentDemo.ComponentSpecialDemoFrag;
-import com.example.administrator.androidtest.demo.ComponentDemo.ComponentDemoFrag;
+import com.example.administrator.androidtest.demo.ComponentDemo.ComponentSpecialDemoFragment;
+import com.example.administrator.androidtest.demo.ComponentDemo.ComponentDemoFragment;
 import com.example.libcommon.util.ResourceUtil;
 import com.example.libcommon.util.ToastUtil;
 import com.google.android.material.tabs.TabLayout;
@@ -54,9 +54,9 @@ public class DemoActComponent extends ActivityComponent {
                 btnTextList.remove("Call DemoFragComponent " + position);
                 if (position == colors.length - 1) {
                     String text = "ComponentSpecialDemoFrag" + "-" + position;
-                    return ComponentSpecialDemoFrag.get(position, text, text, colors[position], colors[position - 1], btnTextList);
+                    return ComponentSpecialDemoFragment.get(position, text, text, colors[position], colors[position - 1], btnTextList);
                 }
-                return ComponentDemoFrag.get(position, "ComponentDemoFrag-" + position, null, colors[position], -1, btnTextList);
+                return ComponentDemoFragment.get(position, "ComponentDemoFrag-" + position, null, colors[position], -1, btnTextList);
             }
 
             @Override

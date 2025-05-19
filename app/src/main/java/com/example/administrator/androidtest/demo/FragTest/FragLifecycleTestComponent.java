@@ -24,7 +24,7 @@ public class FragLifecycleTestComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.fragLifecycleTestButton:
-                FragLifecycleTestAct.start(getContext());
+                FragLifecycleTestActivity.start(getContext());
                 break;
             default:
                 break;

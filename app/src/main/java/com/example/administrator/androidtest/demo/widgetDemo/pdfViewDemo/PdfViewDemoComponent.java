@@ -22,7 +22,7 @@ public class PdfViewDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.pdfViewButton:
-                PdfViewDemoAct.go(getContext());
+                PdfViewDemoActivity.go(getContext());
                 break;
         }
     }

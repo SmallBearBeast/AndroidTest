@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bear.libcomponent.component.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFragment;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
@@ -19,7 +19,7 @@ import com.example.libcommon.util.DensityUtil;
 
 import java.util.List;
 
-public class TestListFragment extends ComponentFrag {
+public class TestListFragment extends ComponentFragment {
 
     private static final String KEY_TEST_NAME = "KEY_TEST_NAME";
     private String testName = "";

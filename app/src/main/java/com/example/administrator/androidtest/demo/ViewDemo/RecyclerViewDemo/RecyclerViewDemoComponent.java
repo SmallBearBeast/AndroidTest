@@ -20,7 +20,7 @@ public class RecyclerViewDemoComponent extends TestActivityComponent {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.recyclerViewDemoButton) {
-            RecyclerViewDemoAct.start(getContext());
+            RecyclerViewDemoActivity.start(getContext());
         }
     }
 }

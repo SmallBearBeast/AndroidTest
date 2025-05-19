@@ -21,7 +21,7 @@ public class ToolbarTestComponent extends TestActivityComponent {
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.toolbarTestButton) {
-            ToolbarTestAct.start(getContext());
+            ToolbarTestActivity.start(getContext());
         }
     }
 }

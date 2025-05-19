@@ -23,7 +23,7 @@ public class PlayerDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.playerDemoButton:
-                PlayerDemoAct.go(getContext());
+                PlayerDemoActivity.go(getContext());
                 break;
 
             default:

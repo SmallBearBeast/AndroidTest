@@ -29,9 +29,9 @@ public abstract class BaseComponent extends LifeComponent implements IContextPro
     }
 
     @Override
-    public ComponentAct getActivity() {
-        if (context instanceof ComponentAct) {
-            return (ComponentAct) context;
+    public ComponentActivity getActivity() {
+        if (context instanceof ComponentActivity) {
+            return (ComponentActivity) context;
         }
         return null;
     }

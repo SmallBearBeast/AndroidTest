@@ -6,8 +6,7 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail.TikTokVideoDetailAct;
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.List.TikTokDemoAct;
+import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail.TikTokVideoDetailActivity;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
 
 public class TikTokDemoComponent extends TestActivityComponent {
@@ -25,7 +24,7 @@ public class TikTokDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tiktokDemoButton:
-                TikTokVideoDetailAct.go(getContext());
+                TikTokVideoDetailActivity.go(getContext());
                 break;
 
             default:

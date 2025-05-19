@@ -24,7 +24,7 @@ public class CoordinatorLayoutTestComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.coordinatorLayoutTestButton:
-                CoordinatorLayoutTestAct.start(getContext());
+                CoordinatorLayoutTestActivity.start(getContext());
                 break;
 
             default:

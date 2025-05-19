@@ -26,7 +26,7 @@ public class LibraryDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.libraryDemoButton:
-                LibraryDemoAct.go(getContext());
+                LibraryDemoActivity.go(getContext());
                 break;
 
             default:

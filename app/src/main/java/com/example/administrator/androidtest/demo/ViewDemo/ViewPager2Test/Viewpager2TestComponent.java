@@ -23,7 +23,7 @@ public class Viewpager2TestComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.viewpager2TestButton:
-                ViewPager2Act.start(getContext());
+                ViewPager2Activity.start(getContext());
                 break;
 
             default:

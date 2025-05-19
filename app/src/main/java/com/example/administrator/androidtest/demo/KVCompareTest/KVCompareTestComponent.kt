@@ -3,7 +3,6 @@ package com.example.administrator.androidtest.demo.KVCompareTest
 import android.view.View
 import androidx.lifecycle.Lifecycle
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.demo.KVCompareTest.KVCompareTestAct
 import com.example.administrator.androidtest.demo.TestActivityComponent
 
 class KVCompareTestComponent(lifecycle: Lifecycle?) : TestActivityComponent(lifecycle) {
@@ -14,7 +13,7 @@ class KVCompareTestComponent(lifecycle: Lifecycle?) : TestActivityComponent(life
     override fun onClick(view: View) {
         when (view.id) {
             R.id.kvCompareTestButton -> {
-                KVCompareTestAct.start(context)
+                KVCompareTestActivity.start(context)
             }
         }
     }

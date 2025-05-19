@@ -23,7 +23,7 @@ public class BizDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.bizDemoButton:
-                BizDemoAct.go(getContext());
+                BizDemoActivity.go(getContext());
                 break;
 
             default:

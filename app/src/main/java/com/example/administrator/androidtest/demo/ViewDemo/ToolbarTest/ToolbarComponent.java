@@ -10,7 +10,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Lifecycle;
 
 import com.bear.libcomponent.component.ActivityComponent;
-import com.bear.libcomponent.component.ComponentAct;
+import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.libcommon.util.ToastUtil;
 
@@ -26,7 +26,7 @@ public class ToolbarComponent extends ActivityComponent {
         Toolbar toolbar = getActivity().getToolbar();
         if (toolbar != null) {
             toolbar.setTitle("Toolbar Test");
-            ComponentAct activity = getActivity();
+            ComponentActivity activity = getActivity();
             if (activity != null) {
                 // 有使用setSupportActionBar()，则调用getSupportActionBar().setDisplayShowTitleEnabled(false);隐藏标题；若没设置，只要toolbar不设置title即可
                 activity.getSupportActionBar().setDisplayShowTitleEnabled(true);

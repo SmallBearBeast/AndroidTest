@@ -23,7 +23,7 @@ public class ScreenTestComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.screenTestButton:
-                ScreenAct.start(getContext());
+                ScreenActivity.start(getContext());
                 break;
 
             default:

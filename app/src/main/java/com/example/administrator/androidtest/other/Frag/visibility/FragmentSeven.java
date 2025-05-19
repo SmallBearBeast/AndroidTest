@@ -9,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFragment;
 import com.bear.libcomponent.component.FragmentComponent;
 import com.example.administrator.androidtest.R;
 import com.bear.libother.page.IPage;
 import com.example.liblog.SLog;
 
-public class FragmentSeven extends ComponentFrag {
+public class FragmentSeven extends ComponentFragment {
 
     @Override
     public int layoutId() {

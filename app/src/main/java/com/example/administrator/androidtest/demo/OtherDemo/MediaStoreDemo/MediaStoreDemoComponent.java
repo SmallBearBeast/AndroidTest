@@ -5,7 +5,6 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.OtherDemo.OtherDemoAct;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
 
 public class MediaStoreDemoComponent extends TestActivityComponent {
@@ -22,7 +21,7 @@ public class MediaStoreDemoComponent extends TestActivityComponent {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.mediaStoreDemoButton) {
-            MediaStoreDemoAct.start(getContext());
+            MediaStoreDemoActivity.start(getContext());
         }
     }
 }

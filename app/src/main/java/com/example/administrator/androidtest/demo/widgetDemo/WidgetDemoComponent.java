@@ -23,7 +23,7 @@ public class WidgetDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.widgetDemoButton:
-                WidgetDemoAct.start(getContext());
+                WidgetDemoActivity.start(getContext());
                 break;
         }
     }

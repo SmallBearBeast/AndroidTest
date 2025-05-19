@@ -1,11 +1,11 @@
 package com.example.administrator.androidtest.other.Frag.visibility;
 
-import com.bear.libcomponent.component.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFragment;
 import com.example.administrator.androidtest.R;
 import com.bear.libother.page.IPage;
 import com.example.liblog.SLog;
 
-public class FragmentThree extends ComponentFrag {
+public class FragmentThree extends ComponentFragment {
 
 
     @Override

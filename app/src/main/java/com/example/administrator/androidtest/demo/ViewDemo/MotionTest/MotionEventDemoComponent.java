@@ -23,7 +23,7 @@ public class MotionEventDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.motionTestButton:
-                MotionEventDemoAct.start(getContext());
+                MotionEventDemoActivity.start(getContext());
                 break;
 
             default:

@@ -25,7 +25,7 @@ public class ViewGetSizeTestComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.viewSizeTestButton:
-                ViewGetSizeTestAct.start(getContext());
+                ViewGetSizeTestActivity.start(getContext());
                 break;
 
             default:

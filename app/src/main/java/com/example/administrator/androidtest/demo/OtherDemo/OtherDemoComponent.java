@@ -21,7 +21,7 @@ public class OtherDemoComponent extends TestActivityComponent {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.otherDemoButton) {
-            OtherDemoAct.start(getContext());
+            OtherDemoActivity.start(getContext());
         }
     }
 }

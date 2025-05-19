@@ -31,6 +31,7 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(":libbase")
     rootProject.ext.importDependencies(this, rootProject.ext.libcomponentDependenciesMap)
 }
 

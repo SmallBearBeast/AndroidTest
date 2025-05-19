@@ -22,7 +22,7 @@ public class ViewDemoComponent extends TestActivityComponent {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.viewDemoButton) {
-            ViewDemoAct.start(getContext());
+            ViewDemoActivity.start(getContext());
         }
     }
 }

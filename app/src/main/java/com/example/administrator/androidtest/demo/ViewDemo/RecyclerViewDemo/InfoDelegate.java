@@ -1,7 +1,5 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RecyclerViewDemo;
 
-import android.net.Uri;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -66,7 +64,7 @@ public class InfoDelegate extends MultiTypeDelegate<Info, InfoDelegate.InfoHolde
         @Override
         public void bindPartial(Info info, @NonNull Payload payload) {
             switch (payload.mType) {
-                case RecyclerViewDemoAct.PARTIAL_UPDATE_TYPE:
+                case RecyclerViewDemoActivity.PARTIAL_UPDATE_TYPE:
                     Glide.with(mIv_1.getContext()).load(info.url_1).into(mIv_1);
                     Glide.with(mIv_2.getContext()).load(info.url_2).into(mIv_2);
                     Glide.with(mIv_3.getContext()).load(info.url_3).into(mIv_3);

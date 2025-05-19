@@ -24,7 +24,7 @@ public class AspectJTestComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.aspectjTestButton:
-                AspectTestAct.start(getContext());
+                AspectTestActivity.start(getContext());
                 break;
 
             default:

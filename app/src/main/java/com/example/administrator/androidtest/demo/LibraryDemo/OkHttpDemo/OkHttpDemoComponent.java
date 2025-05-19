@@ -23,7 +23,7 @@ public class OkHttpDemoComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.okhttpDemoButton:
-                OkHttpDemoAct.start(getContext());
+                OkHttpDemoActivity.start(getContext());
                 break;
         }
     }

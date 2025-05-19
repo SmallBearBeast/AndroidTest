@@ -7,9 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bear.libcomponent.component.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFragment;
 
-public class TestFragment extends ComponentFrag {
+public class TestFragment extends ComponentFragment {
 
     private static final String KEY_TEST_NAME = "KEY_TEST_NAME";
     private String testName = "";

@@ -6,7 +6,7 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.ShareTest.SystemShareAct;
+import com.example.administrator.androidtest.demo.ShareTest.SystemShareActivity;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
 
 public class FloatServiceTestComponent extends TestActivityComponent {
@@ -25,7 +25,7 @@ public class FloatServiceTestComponent extends TestActivityComponent {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.startFloatServiceButton:
-                SystemShareAct.start(getContext());
+                SystemShareActivity.start(getContext());
 //                TestFloatService.startFloatService(getContext(), TestFloatService.class);
                 break;
             case R.id.stopFloatServiceButton:

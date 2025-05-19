@@ -7,18 +7,18 @@ import com.bear.libcomponent.provider.IMenuProvider;
 
 public class ActivityComponent extends ViewComponent implements IBackPressedProvider, IMenuProvider {
 
-    private ComponentAct componentAct;
+    private ComponentActivity componentAct;
 
     public ActivityComponent(Lifecycle lifecycle) {
         super(null, lifecycle);
     }
 
-    public void attachActivity(ComponentAct activity) {
+    public void attachActivity(ComponentActivity activity) {
         componentAct = activity;
     }
 
     @Override
-    public ComponentAct getActivity() {
+    public ComponentActivity getActivity() {
         return componentAct;
     }
 }

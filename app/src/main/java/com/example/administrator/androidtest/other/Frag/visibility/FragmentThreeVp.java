@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bear.libcomponent.component.ComponentFrag;
+import com.bear.libcomponent.component.ComponentFragment;
 import com.bear.libother.page.IPage;
 import com.example.administrator.androidtest.R;
 import com.example.liblog.SLog;
@@ -18,7 +18,7 @@ import com.example.liblog.SLog;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentThreeVp extends ComponentFrag {
+public class FragmentThreeVp extends ComponentFragment {
 
     private ViewPager vpContainer;
     private MyAdapter myAdapter;
