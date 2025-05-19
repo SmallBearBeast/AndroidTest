@@ -1,4 +1,4 @@
-package com.example.libbase.page;
+package com.bear.libother.page;
 
 
 public interface IPage {

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.bear.libcomponent.component.ComponentAct;
 import com.example.administrator.androidtest.R;
 import com.example.libbase.dialog.BaseDialogFragment;
-import com.example.libbase.page.IPage;
+import com.bear.libother.page.IPage;
 import com.example.liblog.SLog;
 
 import java.util.ArrayList;

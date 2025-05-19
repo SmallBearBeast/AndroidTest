@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.other.Frag.visibility;
 
 import com.bear.libcomponent.component.ComponentFrag;
 import com.example.administrator.androidtest.R;
-import com.example.libbase.page.IPage;
+import com.bear.libother.page.IPage;
 import com.example.liblog.SLog;
 
 public class FragmentFour extends ComponentFrag {

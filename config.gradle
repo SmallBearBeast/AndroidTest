@@ -250,6 +250,14 @@ ext {
             ]
     ]
 
+    libotherDependenciesMap = [
+            "implementation": [
+                    "${dependenciesMap.appcompat}",
+
+//                    "${dependenciesMap.liblog}",
+            ]
+    ]
+
     importDependencies = { project, dependenciesMap ->
         // compileOnly 依赖
         def dependencies = dependenciesMap["compileOnly"]

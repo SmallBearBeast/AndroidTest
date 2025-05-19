@@ -103,6 +103,7 @@ dependencies {
     implementation project(":librv")
     implementation project(":libcomponent")
     implementation project(":libstorage")
+    implementation project(":libother")
 //    implementation project(':flutter')
 }
 
