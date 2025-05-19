@@ -4,7 +4,7 @@ import android.graphics.Bitmap
 import android.util.LruCache
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.size
-import com.example.liblog.SLog
+import com.bear.liblog.SLog
 
 class BitmapLruCache: IBitmapCache {
     private var isInClearing = false

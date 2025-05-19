@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.util.ResourceUtil;
+import com.bear.libcommon.util.ResourceUtil;
 
 public class IconYYAvatar extends FrameLayout {
     public static final int NONE = -1;

@@ -12,13 +12,13 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.util.CollectionUtil;
-import com.example.libcommon.util.FileUtil;
-import com.example.libcommon.util.NetWorkUtil;
-import com.example.libcommon.util.ToastUtil;
-import com.example.libokhttp.OkCallback;
-import com.example.libokhttp.OkDownloadCallback;
-import com.example.libokhttp.OkHelper;
+import com.bear.libcommon.util.CollectionUtil;
+import com.bear.libcommon.util.FileUtil;
+import com.bear.libcommon.util.NetWorkUtil;
+import com.bear.libcommon.util.ToastUtil;
+import com.bear.libokhttp.OkCallback;
+import com.bear.libokhttp.OkDownloadCallback;
+import com.bear.libokhttp.OkHelper;
 import com.google.gson.reflect.TypeToken;
 
 import okhttp3.Headers;

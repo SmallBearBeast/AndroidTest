@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.util.XmlDrawableUtil;
+import com.bear.libcommon.util.XmlDrawableUtil;
 
 public class XmlDrawableActivity extends ComponentActivity {
     private TextView mTv_1;

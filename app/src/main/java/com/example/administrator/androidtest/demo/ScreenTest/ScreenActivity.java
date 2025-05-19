@@ -13,7 +13,7 @@ import androidx.core.content.ContextCompat;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.other.LogUtil;
-import com.example.libcommon.util.ScreenUtil;
+import com.bear.libcommon.util.ScreenUtil;
 import com.permissionx.guolindev.PermissionX;
 
 public class ScreenActivity extends ComponentActivity {

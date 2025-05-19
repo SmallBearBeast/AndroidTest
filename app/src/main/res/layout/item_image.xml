@@ -3,7 +3,7 @@
              android:layout_width="match_parent"
              android:layout_height="100dp">
 	
-	<com.example.libfresco.FrescoView
+	<com.bear.libfresco.FrescoView
 			android:id="@+id/fv_image"
 			android:layout_width="match_parent"
 			android:layout_height="match_parent"/>

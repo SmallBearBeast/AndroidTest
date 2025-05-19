@@ -4,7 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.libcommon.util.TimeRecordUtil;
+import com.bear.libcommon.util.TimeRecordUtil;
 
 //import io.flutter.embedding.engine.FlutterEngine;
 //import io.flutter.embedding.engine.FlutterEngineCache;

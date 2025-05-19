@@ -12,7 +12,7 @@ import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
 import com.bumptech.glide.Glide;
 import com.example.administrator.androidtest.R;
-import com.example.liblog.SLog;
+import com.bear.liblog.SLog;
 
 public class InfoDelegate extends MultiTypeDelegate<Info, InfoDelegate.InfoHolder> {
     @NonNull

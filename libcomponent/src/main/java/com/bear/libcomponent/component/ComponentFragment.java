@@ -10,7 +10,7 @@ import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.example.libbase.fragment.BaseFragment;
+import com.bear.libbase.fragment.BaseFragment;
 
 public abstract class ComponentFragment extends BaseFragment {
     

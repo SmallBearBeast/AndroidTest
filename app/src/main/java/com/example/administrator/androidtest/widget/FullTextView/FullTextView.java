@@ -24,7 +24,7 @@ import android.view.View;
 
 
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.wrapper.TextWatcherWrapper;
+import com.bear.libcommon.wrapper.TextWatcherWrapper;
 
 public class FullTextView extends AppCompatTextView {
     private SpannableString mSpannableStr;

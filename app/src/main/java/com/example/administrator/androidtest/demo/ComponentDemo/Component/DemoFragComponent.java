@@ -11,8 +11,8 @@ import androidx.lifecycle.Lifecycle;
 import com.bear.libcomponent.component.FragmentComponent;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.widget.FlowLayout;
-import com.example.libcommon.util.StringUtil;
-import com.example.libcommon.util.ToastUtil;
+import com.bear.libcommon.util.StringUtil;
+import com.bear.libcommon.util.ToastUtil;
 
 import java.util.List;
 

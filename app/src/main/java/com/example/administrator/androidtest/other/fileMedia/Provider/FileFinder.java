@@ -8,8 +8,8 @@ import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.DirInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.ImageInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.VideoInfo;
-import com.example.libcommon.util.TimeRecordUtil;
-import com.example.liblog.SLog;
+import com.bear.libcommon.util.TimeRecordUtil;
+import com.bear.liblog.SLog;
 
 import java.io.File;
 import java.util.*;

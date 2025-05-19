@@ -13,7 +13,7 @@ import com.bear.libcomponent.component.ComponentFragment;
 import com.bear.libcomponent.component.FragmentComponent;
 import com.example.administrator.androidtest.R;
 import com.bear.libother.page.IPage;
-import com.example.liblog.SLog;
+import com.bear.liblog.SLog;
 
 public class FragmentSeven extends ComponentFragment {
 

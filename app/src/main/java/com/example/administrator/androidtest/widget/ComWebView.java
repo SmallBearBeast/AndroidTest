@@ -17,7 +17,7 @@ import android.webkit.WebViewClient;
 import androidx.annotation.NonNull;
 
 import com.example.administrator.androidtest.BuildConfig;
-import com.example.liblog.SLog;
+import com.bear.liblog.SLog;
 
 import java.util.ArrayList;
 import java.util.List;

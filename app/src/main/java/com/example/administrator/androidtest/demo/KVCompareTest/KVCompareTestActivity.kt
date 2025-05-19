@@ -8,7 +8,7 @@ import android.view.View
 import com.bear.libcomponent.component.ComponentActivity
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.Settings
-import com.example.libcommon.util.ToastUtil
+import com.bear.libcommon.util.ToastUtil
 import kotlin.random.Random
 
 class KVCompareTestActivity: ComponentActivity(){

@@ -12,11 +12,11 @@ import androidx.core.content.ContextCompat;
 
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.util.CollectionUtil;
-import com.example.libcommon.bus.EventCallback;
-import com.example.libcommon.bus.Bus;
-import com.example.libcommon.bus.Event;
-import com.example.liblog.SLog;
+import com.bear.libcommon.util.CollectionUtil;
+import com.bear.libcommon.bus.EventCallback;
+import com.bear.libcommon.bus.Bus;
+import com.bear.libcommon.bus.Event;
+import com.bear.liblog.SLog;
 
 import java.util.Set;
 

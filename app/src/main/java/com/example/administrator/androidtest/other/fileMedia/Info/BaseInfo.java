@@ -3,8 +3,8 @@ package com.example.administrator.androidtest.other.fileMedia.Info;
 import android.database.Cursor;
 import android.provider.MediaStore;
 import com.example.administrator.androidtest.other.fileMedia.Provider.MediaConstant;
-import com.example.libcommon.util.TimeRecordUtil;
-import com.example.liblog.SLog;
+import com.bear.libcommon.util.TimeRecordUtil;
+import com.bear.liblog.SLog;
 
 public class BaseInfo {
     private static final String TAG = "BaseInfo";

@@ -8,10 +8,10 @@ import android.view.View;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.libfresco.FrescoUriTransfer;
-import com.example.libfresco.FrescoUtil;
-import com.example.libfresco.FrescoView;
-import com.example.libfresco.Listener.TimeRequestListener;
+import com.bear.libfresco.FrescoUriTransfer;
+import com.bear.libfresco.FrescoUtil;
+import com.bear.libfresco.FrescoView;
+import com.bear.libfresco.Listener.TimeRequestListener;
 import com.example.administrator.androidtest.R;
 import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.imagepipeline.common.Priority;

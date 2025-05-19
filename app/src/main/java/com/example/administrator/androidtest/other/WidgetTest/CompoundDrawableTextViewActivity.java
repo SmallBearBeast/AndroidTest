@@ -7,7 +7,7 @@ import androidx.annotation.Nullable;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.widget.CompoundDrawableTextView;
-import com.example.libcommon.util.ToastUtil;
+import com.bear.libcommon.util.ToastUtil;
 
 public class CompoundDrawableTextViewActivity extends ComponentActivity {
     private CompoundDrawableTextView cdtvText;

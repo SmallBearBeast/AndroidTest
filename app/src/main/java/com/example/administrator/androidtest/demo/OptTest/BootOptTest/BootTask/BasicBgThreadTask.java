@@ -5,9 +5,7 @@ import android.app.Application;
 import androidx.annotation.NonNull;
 
 import com.example.administrator.androidtest.AndroidTestApplication;
-import com.example.libokhttp.OkHelper;
-
-import okhttp3.OkHttpClient;
+import com.bear.libokhttp.OkHelper;
 
 public class BasicBgThreadTask extends BaseBootTask {
     public BasicBgThreadTask() {

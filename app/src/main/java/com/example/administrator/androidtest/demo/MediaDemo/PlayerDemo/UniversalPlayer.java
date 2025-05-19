@@ -4,8 +4,8 @@ import android.content.Context;
 
 import androidx.annotation.Nullable;
 
-import com.example.libcommon.util.FileUtil;
-import com.example.liblog.SLog;
+import com.bear.libcommon.util.FileUtil;
+import com.bear.liblog.SLog;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayer;

@@ -6,7 +6,7 @@ import android.graphics.pdf.PdfRenderer
 import android.os.ParcelFileDescriptor
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.BitmapSize
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
-import com.example.liblog.SLog
+import com.bear.liblog.SLog
 
 class AndroidPdfImpl(context: Context) : BasePdfImpl(context) {
 

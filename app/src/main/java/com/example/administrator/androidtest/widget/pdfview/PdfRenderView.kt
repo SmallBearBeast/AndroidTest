@@ -16,7 +16,7 @@ import com.example.administrator.androidtest.widget.pdfview.pdfapi.PdfApiType
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.addDivider
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.md5
-import com.example.liblog.SLog
+import com.bear.liblog.SLog
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope

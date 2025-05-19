@@ -12,7 +12,7 @@ import androidx.lifecycle.Lifecycle;
 import com.bear.libcomponent.component.ActivityComponent;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.util.ToastUtil;
+import com.bear.libcommon.util.ToastUtil;
 
 public class ToolbarComponent extends ActivityComponent {
 

@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.util.CollectionUtil;
-import com.example.libcommon.util.ResourceUtil;
+import com.bear.libcommon.util.CollectionUtil;
+import com.bear.libcommon.util.ResourceUtil;
 
 import java.util.List;
 

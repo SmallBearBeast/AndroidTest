@@ -12,7 +12,7 @@ import com.bear.libcomponent.component.ComponentActivity
 import com.bear.librv.RvUtil
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.widget.pdfview.PdfRenderView
-import com.example.libcommon.util.ToastUtil
+import com.bear.libcommon.util.ToastUtil
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 

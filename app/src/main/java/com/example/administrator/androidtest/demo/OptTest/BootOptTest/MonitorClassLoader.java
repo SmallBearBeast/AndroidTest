@@ -5,7 +5,7 @@ import android.os.Looper;
 import android.os.SystemClock;
 import android.util.Log;
 
-import com.example.libcommon.util.ReflectUtil;
+import com.bear.libcommon.util.ReflectUtil;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;

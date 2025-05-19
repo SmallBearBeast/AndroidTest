@@ -10,9 +10,9 @@ import com.bear.libstorage.FileStorage;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo;
 import com.example.administrator.androidtest.demo.TestActivityComponent;
-import com.example.libcommon.executor.BgThreadExecutor;
-import com.example.libcommon.executor.MainThreadExecutor;
-import com.example.libcommon.util.IOUtil;
+import com.bear.libcommon.executor.BgThreadExecutor;
+import com.bear.libcommon.executor.MainThreadExecutor;
+import com.bear.libcommon.util.IOUtil;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;

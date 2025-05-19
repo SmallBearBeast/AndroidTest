@@ -2,7 +2,7 @@ package com.example.administrator.androidtest.widget.pdfview.pdfapi.cache
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import com.example.liblog.SLog
+import com.bear.liblog.SLog
 import com.jakewharton.disklrucache.DiskLruCache
 import java.io.File
 

@@ -14,7 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.util.ToastUtil;
+import com.bear.libcommon.util.ToastUtil;
 
 /**
  * ViewPager2 scroll is most fast than ViewPager.

@@ -20,7 +20,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.demo.TestListFragment;
-import com.example.libcommon.util.DensityUtil;
+import com.bear.libcommon.util.DensityUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;

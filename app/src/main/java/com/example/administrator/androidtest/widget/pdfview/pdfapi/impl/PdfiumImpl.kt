@@ -5,7 +5,7 @@ import android.graphics.Bitmap
 import android.os.ParcelFileDescriptor
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.BitmapSize
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
-import com.example.liblog.SLog
+import com.bear.liblog.SLog
 import com.shockwave.pdfium.PdfDocument
 import com.shockwave.pdfium.PdfiumCore
 

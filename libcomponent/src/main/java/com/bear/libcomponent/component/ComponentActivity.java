@@ -7,7 +7,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 
-import com.example.libbase.activity.BaseActivity;
+import com.bear.libbase.activity.BaseActivity;
 
 public abstract class ComponentActivity extends BaseActivity {
     private ComponentManager componentManager = new ComponentManager();

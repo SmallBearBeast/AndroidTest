@@ -7,7 +7,7 @@ import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
-import com.example.liblog.SLog
+import com.bear.liblog.SLog
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File

@@ -18,7 +18,7 @@ import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.other.share.IntentShare;
 import com.example.administrator.androidtest.other.share.ShareUtil;
 import com.example.administrator.androidtest.other.XmlDrawableTest.XmlDrawableActivity;
-import com.example.libcommon.util.CollectionUtil;
+import com.bear.libcommon.util.CollectionUtil;
 
 import java.util.ArrayList;
 

@@ -13,10 +13,10 @@ import android.view.View;
 
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.example.libcommon.bus.Event;
-import com.example.libcommon.bus.EventCallback;
-import com.example.libcommon.bus.Bus;
-import com.example.liblog.SLog;
+import com.bear.libcommon.bus.Event;
+import com.bear.libcommon.bus.EventCallback;
+import com.bear.libcommon.bus.Bus;
+import com.bear.liblog.SLog;
 
 public class BusTest1Activity extends ComponentActivity {
     @Override
