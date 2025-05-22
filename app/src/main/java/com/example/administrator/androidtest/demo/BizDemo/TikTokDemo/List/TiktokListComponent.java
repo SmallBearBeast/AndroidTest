@@ -4,21 +4,21 @@ import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bear.librv.MultiItemChanger;
-import com.bear.librv.MultiTypeAdapter;
-import com.bear.libstorage.FileStorage;
-import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
 import com.bear.libcommon.executor.BgThreadExecutor;
 import com.bear.libcommon.executor.MainThreadExecutor;
 import com.bear.libcommon.util.IOUtil;
+import com.bear.libcomponent.component.ActivityComponent;
+import com.bear.librv.MultiItemChanger;
+import com.bear.librv.MultiTypeAdapter;
+import com.bear.libstorage.FileStorage;
+import com.example.administrator.androidtest.databinding.ActTiktokDemoBinding;
+import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
 import java.util.List;
 
-public class TiktokListComponent extends TestActivityComponent {
+public class TiktokListComponent extends ActivityComponent<ActTiktokDemoBinding> {
 
     private RecyclerView tiktokRecyclerView;
 
@@ -31,7 +31,7 @@ public class TiktokListComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        tiktokRecyclerView = findViewById(R.id.tiktokRecyclerView);
+        tiktokRecyclerView = getBinding().tiktokRecyclerView;
         tiktokRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         MultiTypeAdapter adapter = new MultiTypeAdapter(getActivity().getLifecycle());
         changer = adapter.getChanger();

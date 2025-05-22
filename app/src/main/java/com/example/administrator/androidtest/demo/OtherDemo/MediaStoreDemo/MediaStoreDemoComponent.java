@@ -4,10 +4,11 @@ import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 
+import com.bear.libcomponent.component.ActivityComponent;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.databinding.ActOtherDemoListBinding;
 
-public class MediaStoreDemoComponent extends TestActivityComponent {
+public class MediaStoreDemoComponent extends ActivityComponent<ActOtherDemoListBinding> implements View.OnClickListener {
     public MediaStoreDemoComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
@@ -15,7 +16,7 @@ public class MediaStoreDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.mediaStoreDemoButton);
+        getBinding().mediaStoreDemoButton.setOnClickListener(this);
     }
 
     @Override

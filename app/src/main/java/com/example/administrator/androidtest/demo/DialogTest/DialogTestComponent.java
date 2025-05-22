@@ -15,7 +15,7 @@ public class DialogTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.showCustomizeDialogButton);
+        getBinding().showCustomizeDialogButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

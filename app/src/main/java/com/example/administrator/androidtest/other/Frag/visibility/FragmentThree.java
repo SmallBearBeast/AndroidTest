@@ -1,16 +1,17 @@
 package com.example.administrator.androidtest.other.Frag.visibility;
 
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+
 import com.bear.libcomponent.component.ComponentFragment;
-import com.example.administrator.androidtest.R;
-import com.bear.libother.page.IPage;
 import com.bear.liblog.SLog;
+import com.bear.libother.page.IPage;
+import com.example.administrator.androidtest.databinding.FragText3Binding;
 
-public class FragmentThree extends ComponentFragment {
-
-
+public class FragmentThree extends ComponentFragment<FragText3Binding> {
     @Override
-    public int layoutId() {
-        return R.layout.frag_text_3;
+    protected FragText3Binding inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragText3Binding.inflate(inflater, container, false);
     }
 
     public int pageId() {

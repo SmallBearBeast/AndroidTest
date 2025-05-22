@@ -2,8 +2,6 @@ package com.example.administrator.androidtest.other.ViewPagerTest;
 
 import android.view.View;
 
-import androidx.viewpager.widget.ViewPager;
-
 public class ParallaxTransformer implements VerticalViewPager.PageTransformer {
     private float mConfig = 0.85f;
 

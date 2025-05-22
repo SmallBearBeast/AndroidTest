@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.administrator.androidtest.R;
 import com.bear.libcommon.util.ResourceUtil;
+import com.example.administrator.androidtest.R;
 
 class ViewPager2Adapter extends RecyclerView.Adapter<ViewPager2Adapter.ViewPager2Holder> {
     private static final String TAG = "ViewPager2Adapter";

@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import androidx.annotation.CallSuper;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import com.bear.libbase.fragment.BaseFragment;
 
-public abstract class ComponentFragment extends BaseFragment {
+public abstract class ComponentFragment<VB extends ViewBinding> extends BaseFragment<VB> {
     
     @Override
     @CallSuper
@@ -26,7 +27,7 @@ public abstract class ComponentFragment extends BaseFragment {
     @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View contentView = super.onCreateView(inflater, container, savedInstanceState);
-        getComponentManager().dispatchOnCreateView(this, contentView);
+        getComponentManager().dispatchOnCreateView(this, getBinding());
         return contentView;
     }
 
@@ -71,4 +72,7 @@ public abstract class ComponentFragment extends BaseFragment {
         }
         throw new RuntimeException("getComponentManager return null");
     }
+
+    @Override
+    protected abstract VB inflateViewBinding(LayoutInflater inflater, ViewGroup container);
 }

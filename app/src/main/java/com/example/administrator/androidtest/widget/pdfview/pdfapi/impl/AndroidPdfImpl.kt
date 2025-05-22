@@ -4,9 +4,9 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.pdf.PdfRenderer
 import android.os.ParcelFileDescriptor
+import com.bear.liblog.SLog
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.BitmapSize
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
-import com.bear.liblog.SLog
 
 class AndroidPdfImpl(context: Context) : BasePdfImpl(context) {
 

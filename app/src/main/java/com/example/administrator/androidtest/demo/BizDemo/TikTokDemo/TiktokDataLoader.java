@@ -4,11 +4,11 @@ import android.util.Range;
 
 import androidx.collection.LruCache;
 
-import com.bear.libstorage.FileStorage;
-import com.example.administrator.androidtest.AndroidTestApplication;
 import com.bear.libcommon.executor.BgThreadExecutor;
 import com.bear.libcommon.executor.MainThreadExecutor;
 import com.bear.libcommon.util.IOUtil;
+import com.bear.libstorage.FileStorage;
+import com.example.administrator.androidtest.AndroidTestApplication;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;

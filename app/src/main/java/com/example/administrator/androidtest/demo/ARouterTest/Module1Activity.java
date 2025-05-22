@@ -1,13 +1,18 @@
 package com.example.administrator.androidtest.demo.ARouterTest;
 
+import android.view.LayoutInflater;
+
+import androidx.annotation.NonNull;
+
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActTempBinding;
 
 @Route(path = "/ARouter/Module1Activity", name = "Module1Activity")
-public class Module1Activity extends ComponentActivity {
+public class Module1Activity extends ComponentActivity<ActTempBinding> {
+
     @Override
-    protected int layoutId() {
-        return R.layout.act_temp;
+    protected ActTempBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
+        return ActTempBinding.inflate(inflater);
     }
 }

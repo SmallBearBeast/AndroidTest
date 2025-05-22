@@ -3,11 +3,12 @@ package com.bear.libcomponent.component;
 import android.os.Bundle;
 
 import androidx.lifecycle.Lifecycle;
+import androidx.viewbinding.ViewBinding;
 
 import com.bear.libcomponent.provider.IBackPressedProvider;
 import com.bear.libcomponent.provider.IMenuProvider;
 
-public class FragmentComponent extends ViewComponent implements IBackPressedProvider, IMenuProvider {
+public class FragmentComponent<VB extends ViewBinding> extends ViewComponent<VB> implements IBackPressedProvider, IMenuProvider {
 
     private ComponentFragment componentFrag;
 

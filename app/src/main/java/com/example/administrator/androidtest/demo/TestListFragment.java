@@ -2,6 +2,7 @@ package com.example.administrator.androidtest.demo;
 
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -9,13 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewbinding.ViewBinding;
 
+import com.bear.libcommon.util.CollectionUtil;
+import com.bear.libcommon.util.DensityUtil;
 import com.bear.libcomponent.component.ComponentFragment;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
-import com.bear.libcommon.util.CollectionUtil;
-import com.bear.libcommon.util.DensityUtil;
 
 import java.util.List;
 
@@ -60,6 +62,11 @@ public class TestListFragment extends ComponentFragment {
         TestListFragment testListFragment = new TestListFragment();
         testListFragment.setArguments(bundle);
         return testListFragment;
+    }
+
+    @Override
+    protected ViewBinding inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return null;
     }
 
     private static class TextMultiTypeDelegate extends MultiTypeDelegate<String, TextMultiTypeHolder> {

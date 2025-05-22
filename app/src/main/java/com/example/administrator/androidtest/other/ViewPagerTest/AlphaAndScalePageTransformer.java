@@ -4,7 +4,6 @@ import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
 
 public class AlphaAndScalePageTransformer implements VerticalViewPager.PageTransformer {
     private static final String TAG = "AlphaAndScalePageTransformer";

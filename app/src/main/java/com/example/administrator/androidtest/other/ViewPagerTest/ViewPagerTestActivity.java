@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -12,14 +13,15 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
 import com.bear.libcommon.util.CollectionUtil;
 import com.bear.libcommon.util.ResourceUtil;
+import com.bear.libcomponent.component.ComponentActivity;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActViewpagerTestBinding;
 
 import java.util.List;
 
-public class ViewPagerTestActivity extends ComponentActivity {
+public class ViewPagerTestActivity extends ComponentActivity<ActViewpagerTestBinding> {
     private VerticalViewPager mViewPager;
 
     @Override
@@ -64,8 +66,8 @@ public class ViewPagerTestActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_viewpager_test;
+    protected ActViewpagerTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActViewpagerTestBinding.inflate(inflater);
     }
 
     private class MyAdapter extends VerticalPagerAdapter {

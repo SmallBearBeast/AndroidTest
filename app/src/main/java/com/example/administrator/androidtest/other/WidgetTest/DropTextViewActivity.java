@@ -1,11 +1,15 @@
 package com.example.administrator.androidtest.other.WidgetTest;
 
-import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import android.view.LayoutInflater;
 
-public class DropTextViewActivity extends ComponentActivity {
+import androidx.annotation.NonNull;
+
+import com.bear.libcomponent.component.ComponentActivity;
+import com.example.administrator.androidtest.databinding.ActDropTextviewBinding;
+
+public class DropTextViewActivity extends ComponentActivity<ActDropTextviewBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.act_drop_textview;
+    protected ActDropTextviewBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
+        return ActDropTextviewBinding.inflate(inflater);
     }
 }

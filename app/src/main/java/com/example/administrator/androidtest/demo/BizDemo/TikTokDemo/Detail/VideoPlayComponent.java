@@ -7,12 +7,13 @@ import androidx.lifecycle.Lifecycle;
 
 import com.bear.libcomponent.component.ActivityComponent;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo;
 import com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo.UniversalPlayer;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 
-public class VideoPlayComponent extends ActivityComponent implements View.OnClickListener {
+public class VideoPlayComponent extends ActivityComponent<ActTiktokVideoDetailBinding> implements View.OnClickListener {
 
     private UniversalPlayer universalPlayer;
 
@@ -31,10 +32,10 @@ public class VideoPlayComponent extends ActivityComponent implements View.OnClic
     }
 
     private void initPlayerView() {
-        videoPlayerView = findViewById(R.id.videoPlayerView);
+        videoPlayerView = getBinding().videoPlayerView;
         videoPlayerView.setUseController(false);
         videoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
-        playButton = findViewById(R.id.playButton);
+        playButton = getBinding().playButton;
         playButton.setOnClickListener(this);
         videoPlayerView.setOnClickListener(this);
     }

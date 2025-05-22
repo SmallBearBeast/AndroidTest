@@ -2,21 +2,22 @@ package com.example.administrator.androidtest.demo.AspectTest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.LayoutInflater;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActCommomTestBinding;
 //import com.example.libaspectj.Annotation.AsClick;
 //import com.example.libaspectj.Annotation.Thread.AsThread;
 //import com.example.libaspectj.Annotation.AsTime;
 //import com.example.libaspectj.Annotation.Thread.ThreadMode;
 
-public class AspectTestActivity extends ComponentActivity {
+public class AspectTestActivity extends ComponentActivity<ActCommomTestBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.act_commom_test;
+    protected ActCommomTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActCommomTestBinding.inflate(inflater);
     }
 
-//    @SuppressLint("NonConstantResourceId")
+    //    @SuppressLint("NonConstantResourceId")
 //    @AsClick(interval = 2000)
 //    public void onClick(View view) {
 //        switch (view.getId()) {

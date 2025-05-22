@@ -3,17 +3,18 @@ package com.example.administrator.androidtest.demo.ComponentDemo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActComponentTestBinding;
 import com.example.administrator.androidtest.demo.ComponentDemo.Component.DemoActComponent;
 
-public class ComponentDemoActivity extends ComponentActivity {
+public class ComponentDemoActivity extends ComponentActivity<ActComponentTestBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.act_component_test;
+    protected ActComponentTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActComponentTestBinding.inflate(inflater);
     }
 
     @Override

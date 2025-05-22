@@ -1,13 +1,14 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RefreshViewDemo;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 public abstract class IView extends FrameLayout {
     private static final String TAG = "IView";

@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+
 import com.example.administrator.androidtest.R;
 
 public class MarqueeTextView extends androidx.appcompat.widget.AppCompatTextView {

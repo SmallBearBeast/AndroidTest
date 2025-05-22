@@ -10,13 +10,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bear.liblog.SLog
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.PdfApi
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.PdfApiFactory
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.PdfApiType
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.addDivider
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.md5
-import com.bear.liblog.SLog
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineName
 import kotlinx.coroutines.CoroutineScope

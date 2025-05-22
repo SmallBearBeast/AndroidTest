@@ -3,13 +3,14 @@ package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding;
 
-public class TikTokVideoDetailActivity extends ComponentActivity {
+public class TikTokVideoDetailActivity extends ComponentActivity<ActTiktokVideoDetailBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,8 +20,8 @@ public class TikTokVideoDetailActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_tiktok_video_detail;
+    protected ActTiktokVideoDetailBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActTiktokVideoDetailBinding.inflate(inflater);
     }
 
     public static void go(Context context) {

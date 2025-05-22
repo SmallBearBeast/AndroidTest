@@ -4,7 +4,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.Message
 import android.util.Log
-import java.util.*
+import java.util.LinkedList
 import java.util.concurrent.ConcurrentLinkedQueue
 
 object SpHookHelper {

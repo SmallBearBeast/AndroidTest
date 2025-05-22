@@ -1,9 +1,9 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RecyclerViewDemo;
 
-import androidx.annotation.NonNull;
-
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;

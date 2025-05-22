@@ -5,10 +5,10 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.widgetDemo.BaseWidgetDemoComponent;
 import com.example.administrator.androidtest.widget.LikeView.LikeView;
 
-public class LikeViewDemoComponent extends TestActivityComponent {
+public class LikeViewDemoComponent extends BaseWidgetDemoComponent {
     private LikeView likeView;
 
     public LikeViewDemoComponent(Lifecycle lifecycle) {
@@ -18,8 +18,8 @@ public class LikeViewDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        likeView = findViewById(R.id.likeView);
-        setOnClickListener(this, R.id.likeView);
+        likeView = getBinding().likeView;
+        getBinding().likeView.setOnClickListener(this);
     }
 
     @Override

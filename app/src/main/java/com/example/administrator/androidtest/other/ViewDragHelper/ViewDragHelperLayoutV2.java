@@ -1,9 +1,6 @@
 package com.example.administrator.androidtest.other.ViewDragHelper;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.customview.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -11,8 +8,12 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.example.administrator.androidtest.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.customview.widget.ViewDragHelper;
+
 import com.bear.libcommon.util.ToastUtil;
+import com.example.administrator.androidtest.R;
 
 public class ViewDragHelperLayoutV2 extends FrameLayout implements View.OnClickListener {
     private static final String TAG = "ViewDragHelperLayout";

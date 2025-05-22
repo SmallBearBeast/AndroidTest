@@ -3,17 +3,18 @@ package com.example.administrator.androidtest.other.XmlDrawableTest;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
-
 import androidx.annotation.Nullable;
 
+import com.bear.libcommon.util.XmlDrawableUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.XmlDrawableUtil;
+import com.example.administrator.androidtest.databinding.ActXmlDrawableBinding;
 
-public class XmlDrawableActivity extends ComponentActivity {
+public class XmlDrawableActivity extends ComponentActivity<ActXmlDrawableBinding> {
     private TextView mTv_1;
     private TextView mTv_2;
     private TextView mTv_3;
@@ -27,8 +28,8 @@ public class XmlDrawableActivity extends ComponentActivity {
     private ToggleButton mTb_2;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_xml_drawable;
+    protected ActXmlDrawableBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActXmlDrawableBinding.inflate(inflater);
     }
 
     @Override

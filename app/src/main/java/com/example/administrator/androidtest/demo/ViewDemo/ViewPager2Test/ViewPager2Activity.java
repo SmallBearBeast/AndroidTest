@@ -5,21 +5,24 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bear.libcommon.util.ToastUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.ToastUtil;
+import com.example.administrator.androidtest.databinding.ActViewpager2TestBinding;
 
 /**
  * ViewPager2 scroll is most fast than ViewPager.
  */
-public class ViewPager2Activity extends ComponentActivity {
+public class ViewPager2Activity extends ComponentActivity<ActViewpager2TestBinding> {
     private static final String TAG = "ViewPager2Act";
     private ViewPager2 mViewPager2;
     private ViewPager mViewPager;
@@ -60,8 +63,8 @@ public class ViewPager2Activity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_viewpager2_test;
+    protected ActViewpager2TestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
+        return ActViewpager2TestBinding.inflate(inflater);
     }
 
     @SuppressLint("NonConstantResourceId")

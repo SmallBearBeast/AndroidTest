@@ -1,16 +1,15 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RecyclerViewDemo;
 
-import androidx.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.model.GlideUrl;
-import com.bumptech.glide.load.model.LazyHeaders;
 import com.example.administrator.androidtest.R;
 
 public class ImageDelegate extends MultiTypeDelegate<Image, ImageDelegate.ImageHolder> {

@@ -2,7 +2,6 @@ package com.example.administrator.androidtest.widget.pdfview.pdfapi
 
 import android.graphics.Bitmap
 import android.net.Uri
-import com.example.administrator.androidtest.widget.pdfview.pdfapi.cache.BitmapMemCache
 import java.io.File
 
 interface PdfApi {

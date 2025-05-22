@@ -6,9 +6,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.widgetDemo.BaseWidgetDemoComponent;
 
-public class BottomViewTestComponent extends TestActivityComponent {
+public class BottomViewTestComponent extends BaseWidgetDemoComponent {
 
     public BottomViewTestComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -16,7 +16,9 @@ public class BottomViewTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.normalBottomViewButton, R.id.nsBottomViewButton, R.id.rvBottomViewButton);
+        getBinding().normalBottomViewButton.setOnClickListener(this);
+        getBinding().nsBottomViewButton.setOnClickListener(this);
+        getBinding().rvBottomViewButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

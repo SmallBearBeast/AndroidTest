@@ -2,11 +2,12 @@ package com.example.administrator.androidtest.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import androidx.annotation.Nullable;
-import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatTextView;
 
 import com.example.administrator.androidtest.R;
 

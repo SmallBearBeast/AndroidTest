@@ -1,31 +1,23 @@
 package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail;
 
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
 import com.bear.libcomponent.component.ViewComponent;
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.Request;
-import com.bumptech.glide.request.target.SizeReadyCallback;
-import com.bumptech.glide.request.target.Target;
-import com.bumptech.glide.request.transition.Transition;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ItemTiktokVideoDetailBinding;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo;
 
-public class VideoInfoComponent extends ViewComponent {
+public class VideoInfoComponent extends ViewComponent<ItemTiktokVideoDetailBinding> {
 
     private ImageView thumbIv;
     private TextView authorNameTv;
     private TextView titleTv;
 
-    public VideoInfoComponent(View view) {
-        super(view);
+    public VideoInfoComponent(ItemTiktokVideoDetailBinding binding) {
+        super(binding);
     }
 
     @Override
@@ -34,11 +26,11 @@ public class VideoInfoComponent extends ViewComponent {
     }
 
     @Override
-    protected void onAttachView(View view) {
-        super.onAttachView(view);
-        thumbIv = findViewById(R.id.thumbIv);
-        authorNameTv = findViewById(R.id.authorNameTv);
-        titleTv = findViewById(R.id.titleTv);
+    protected void onAttachViewBinding(ItemTiktokVideoDetailBinding binding) {
+        super.onAttachViewBinding(binding);
+        thumbIv = getBinding().thumbIv;
+        authorNameTv = getBinding().authorNameTv;
+        titleTv = getBinding().titleTv;
     }
 
     private void bindVideoDetailInfo(TiktokVideoDetailInfo videoDetailInfo) {

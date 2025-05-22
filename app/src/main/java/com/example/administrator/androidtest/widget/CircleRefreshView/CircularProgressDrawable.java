@@ -1,5 +1,7 @@
 package com.example.administrator.androidtest.widget.CircleRefreshView;
 
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
@@ -26,8 +28,6 @@ import androidx.interpolator.view.animation.FastOutSlowInInterpolator;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
-
-import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
 
 public class CircularProgressDrawable extends Drawable implements Animatable {
     /**

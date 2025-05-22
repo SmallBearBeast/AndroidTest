@@ -1,11 +1,13 @@
 package com.example.administrator.androidtest.demo;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.viewbinding.ViewBinding;
 
 import com.bear.libcomponent.component.ComponentFragment;
 
@@ -38,5 +40,10 @@ public class TestFragment extends ComponentFragment {
         TestFragment testFragment = new TestFragment();
         testFragment.setArguments(bundle);
         return testFragment;
+    }
+
+    @Override
+    protected ViewBinding inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return null;
     }
 }

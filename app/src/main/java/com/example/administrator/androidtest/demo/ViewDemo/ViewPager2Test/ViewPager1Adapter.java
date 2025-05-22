@@ -10,8 +10,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import com.example.administrator.androidtest.R;
 import com.bear.libcommon.util.ResourceUtil;
+import com.example.administrator.androidtest.R;
 
 class ViewPager1Adapter extends PagerAdapter {
     int[] colors = new int[]{

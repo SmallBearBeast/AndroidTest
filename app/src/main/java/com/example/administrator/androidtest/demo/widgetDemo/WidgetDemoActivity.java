@@ -3,11 +3,12 @@ package com.example.administrator.androidtest.demo.widgetDemo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActWidgetDemoListBinding;
 import com.example.administrator.androidtest.demo.widgetDemo.BottomViewTest.BottomViewTestComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.CaseViewTest.CaseViewComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.FlowLayoutTest.FlowLayoutTestComponent;
@@ -17,7 +18,7 @@ import com.example.administrator.androidtest.demo.widgetDemo.LoopViewPagerDemo.L
 import com.example.administrator.androidtest.demo.widgetDemo.MarqueeDemo.MarqueeDemoComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.pdfViewDemo.PdfViewDemoComponent;
 
-public class WidgetDemoActivity extends ComponentActivity {
+public class WidgetDemoActivity extends ComponentActivity<ActWidgetDemoListBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -33,8 +34,8 @@ public class WidgetDemoActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_widget_demo_list;
+    protected ActWidgetDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActWidgetDemoListBinding.inflate(inflater);
     }
 
     public static void start(Context context) {

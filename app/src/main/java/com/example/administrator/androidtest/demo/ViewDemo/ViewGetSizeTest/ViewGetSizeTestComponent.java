@@ -6,9 +6,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
 
-public class ViewGetSizeTestComponent extends TestActivityComponent {
+public class ViewGetSizeTestComponent extends BaseViewDemoComponent {
 
     public ViewGetSizeTestComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -17,7 +17,7 @@ public class ViewGetSizeTestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.viewSizeTestButton);
+        getBinding().viewSizeTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

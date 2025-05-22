@@ -6,9 +6,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
 
-public class CoordinatorLayoutTestComponent extends TestActivityComponent {
+public class CoordinatorLayoutTestComponent extends BaseViewDemoComponent {
 
     public CoordinatorLayoutTestComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -16,7 +16,7 @@ public class CoordinatorLayoutTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.coordinatorLayoutTestButton);
+        getBinding().coordinatorLayoutTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

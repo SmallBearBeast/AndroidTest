@@ -4,8 +4,8 @@ import android.app.Application;
 
 import androidx.annotation.NonNull;
 
-import com.example.administrator.androidtest.AndroidTestApplication;
 import com.bear.libokhttp.OkHelper;
+import com.example.administrator.androidtest.AndroidTestApplication;
 
 public class BasicBgThreadTask extends BaseBootTask {
     public BasicBgThreadTask() {

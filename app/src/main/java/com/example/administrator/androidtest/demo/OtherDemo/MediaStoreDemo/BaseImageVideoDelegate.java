@@ -1,18 +1,19 @@
 package com.example.administrator.androidtest.demo.OtherDemo.MediaStoreDemo;
 
 import android.database.Cursor;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.bear.librv.MultiTypeDelegate;
-import com.bear.librv.MultiTypeHolder;
-import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
-import com.example.administrator.androidtest.other.fileMedia.Info.ImageInfo;
-import com.example.administrator.androidtest.R;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+
 import com.bear.libcommon.util.DensityUtil;
 import com.bear.libfresco.FrescoView;
+import com.bear.librv.MultiTypeDelegate;
+import com.bear.librv.MultiTypeHolder;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
+import com.example.administrator.androidtest.other.fileMedia.Info.ImageInfo;
 
 public class BaseImageVideoDelegate extends MultiTypeDelegate<Cursor, BaseImageVideoDelegate.ImageVideoHolder> {
     private final int mDivider;

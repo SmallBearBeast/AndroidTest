@@ -11,15 +11,21 @@ import androidx.lifecycle.Lifecycle;
 
 import com.bear.libcomponent.component.ComponentFragment;
 import com.bear.libcomponent.component.FragmentComponent;
-import com.example.administrator.androidtest.R;
-import com.bear.libother.page.IPage;
 import com.bear.liblog.SLog;
+import com.bear.libother.page.IPage;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.FragText7Binding;
 
-public class FragmentSeven extends ComponentFragment {
+public class FragmentSeven extends ComponentFragment<FragText7Binding> {
 
     @Override
     public int layoutId() {
         return R.layout.frag_text_7;
+    }
+
+    @Override
+    protected FragText7Binding inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragText7Binding.inflate(inflater, container, false);
     }
 
     @Override

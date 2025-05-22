@@ -1,18 +1,19 @@
 package com.example.administrator.androidtest.demo.OtherDemo.MediaStoreDemo;
 
 import android.database.Cursor;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bear.libcommon.util.DecimalUtil;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
+import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.other.fileMedia.Info.AudioInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
-import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.DecimalUtil;
 
 public class AudioDelegate extends MultiTypeDelegate<Cursor, AudioDelegate.AudioHolder> {
     @Override

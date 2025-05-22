@@ -5,9 +5,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.widgetDemo.BaseWidgetDemoComponent;
 
-public class PdfViewDemoComponent extends TestActivityComponent {
+public class PdfViewDemoComponent extends BaseWidgetDemoComponent {
     public PdfViewDemoComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
@@ -15,7 +15,7 @@ public class PdfViewDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.pdfViewButton);
+        getBinding().pdfViewButton.setOnClickListener(this);
     }
 
     @Override

@@ -3,16 +3,18 @@ package com.example.administrator.androidtest.demo.ViewDemo.ToolbarTest;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActToolbarTestBinding;
 
 import java.lang.reflect.Method;
 
-public class ToolbarTestActivity extends ComponentActivity {
+public class ToolbarTestActivity extends ComponentActivity<ActToolbarTestBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,8 +23,8 @@ public class ToolbarTestActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_toolbar_test;
+    protected ActToolbarTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
+        return ActToolbarTestBinding.inflate(inflater);
     }
 
     // 只对setSupportActionBar起作用，让菜单同时显示图标和文字。

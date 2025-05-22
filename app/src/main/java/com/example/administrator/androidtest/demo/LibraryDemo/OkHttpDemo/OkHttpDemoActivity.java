@@ -5,35 +5,38 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
 import com.bear.libcommon.util.CollectionUtil;
 import com.bear.libcommon.util.FileUtil;
 import com.bear.libcommon.util.NetWorkUtil;
 import com.bear.libcommon.util.ToastUtil;
+import com.bear.libcomponent.component.ComponentActivity;
 import com.bear.libokhttp.OkCallback;
 import com.bear.libokhttp.OkDownloadCallback;
 import com.bear.libokhttp.OkHelper;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActOkhttpBinding;
 import com.google.gson.reflect.TypeToken;
-
-import okhttp3.Headers;
 
 import java.io.File;
 import java.util.Map;
 
-public class OkHttpDemoActivity extends ComponentActivity {
+import okhttp3.Headers;
+
+public class OkHttpDemoActivity extends ComponentActivity<ActOkhttpBinding> {
 
     private static final String TAG = "OkHttpAct";
     private TextView mTvContent;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_okhttp;
+    protected ActOkhttpBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
+        return ActOkhttpBinding.inflate(inflater);
     }
 
     @Override

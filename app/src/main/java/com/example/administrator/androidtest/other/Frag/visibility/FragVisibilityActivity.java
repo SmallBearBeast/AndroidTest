@@ -1,24 +1,26 @@
 package com.example.administrator.androidtest.other.Frag.visibility;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
 import com.bear.libother.page.IPage;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActFragVisibilityBinding;
 
 
-public class FragVisibilityActivity extends ComponentActivity {
+public class FragVisibilityActivity extends ComponentActivity<ActFragVisibilityBinding> {
 
     private FragmentOne fragmentOne;
     private FragmentTwo fragmentTwo;
     private FragmentThree fragmentThree;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_frag_visibility;
+    protected ActFragVisibilityBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActFragVisibilityBinding.inflate(inflater);
     }
 
     @Override

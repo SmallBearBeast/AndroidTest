@@ -2,10 +2,11 @@ package com.example.administrator.androidtest.widget.RtlViewPager;
 
 import android.database.DataSetObserver;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.PagerAdapter;
 
 public class DelegatingPagerAdapter extends PagerAdapter{
     private final PagerAdapter mDelegate;

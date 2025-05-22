@@ -3,23 +3,25 @@ package com.example.administrator.androidtest.demo.MediaDemo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActMediaDemoListBinding;
 import com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo.PlayerDemoComponent;
 
-public class MediaDemoActivity extends ComponentActivity {
+public class MediaDemoActivity extends ComponentActivity<ActMediaDemoListBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         regActComponent(new PlayerDemoComponent(getLifecycle()));
     }
+
     @Override
-    protected int layoutId() {
-        return R.layout.act_media_demo_list;
+    protected ActMediaDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActMediaDemoListBinding.inflate(inflater);
     }
 
     public static void go(Context context) {

@@ -6,16 +6,16 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
 
-public class MotionEventDemoComponent extends TestActivityComponent {
+public class MotionEventDemoComponent extends BaseViewDemoComponent {
     public MotionEventDemoComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.motionTestButton);
+        getBinding().motionTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

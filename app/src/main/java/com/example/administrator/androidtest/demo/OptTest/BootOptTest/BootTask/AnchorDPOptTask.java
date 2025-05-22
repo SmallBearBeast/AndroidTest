@@ -4,8 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.ClassPreloadExecutor;
 import com.bear.libcommon.util.TimeRecordUtil;
+import com.example.administrator.androidtest.demo.OptTest.BootOptTest.ClassPreloadExecutor;
 
 public class AnchorDPOptTask extends BaseBootTask {
     public AnchorDPOptTask() {

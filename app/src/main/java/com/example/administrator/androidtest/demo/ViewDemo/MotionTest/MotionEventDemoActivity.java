@@ -3,16 +3,17 @@ package com.example.administrator.androidtest.demo.ViewDemo.MotionTest;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActMotionBinding;
 import com.example.administrator.androidtest.other.OtherUtil;
 
-public class MotionEventDemoActivity extends ComponentActivity {
+public class MotionEventDemoActivity extends ComponentActivity<ActMotionBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.act_motion;
+    protected ActMotionBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActMotionBinding.inflate(inflater);
     }
 
     @Override

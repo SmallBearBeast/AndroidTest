@@ -1,19 +1,20 @@
 package com.example.administrator.androidtest.demo.ComponentDemo.Component;
 
-import android.view.View;
 import android.widget.TextView;
 
-import com.bear.libcomponent.component.ViewComponent;
-import com.example.administrator.androidtest.R;
+import androidx.lifecycle.Lifecycle;
 
-public class DemoMinorTvComponent extends ViewComponent {
+import com.bear.libcomponent.component.FragmentComponent;
+import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
+
+public class DemoMinorTvComponent extends FragmentComponent<FragComponentTestBinding> {
 
     private TextView textMinorTv;
 
     private String originText;
 
-    public DemoMinorTvComponent(View view) {
-        super(view);
+    public DemoMinorTvComponent(Lifecycle lifecycle) {
+        super(lifecycle);
     }
 
     @Override
@@ -25,14 +26,12 @@ public class DemoMinorTvComponent extends ViewComponent {
     }
 
     @Override
-    protected void onAttachView(View view) {
-        super.onAttachView(view);
-        if (view != null) {
-            textMinorTv = findViewById(R.id.textMinorTv);
-            originText = String.valueOf(textMinorTv.getText());
-            textMinorTv.setClickable(true);
-            textMinorTv.setOnClickListener(v -> getComponent(DemoMainTvComponent.class).resetMainTv());
-        }
+    protected void onAttachViewBinding(FragComponentTestBinding binding) {
+        super.onAttachViewBinding(binding);
+        textMinorTv = getBinding().textMinorTv;
+        originText = String.valueOf(textMinorTv.getText());
+        textMinorTv.setClickable(true);
+        textMinorTv.setOnClickListener(v -> getComponent(DemoMainTvComponent.class).resetMainTv());
     }
 
     public void showMinorTv() {

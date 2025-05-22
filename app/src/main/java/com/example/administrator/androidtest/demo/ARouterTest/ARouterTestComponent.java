@@ -17,7 +17,7 @@ public class ARouterTestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.ARouterTestButton);
+        getBinding().ARouterTestButton.setOnClickListener(this);
     }
 
     @Override

@@ -5,9 +5,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.LibraryDemo.BaseLibraryDemoComponent;
 
-public class OkHttpDemoComponent extends TestActivityComponent {
+public class OkHttpDemoComponent extends BaseLibraryDemoComponent {
 
     public OkHttpDemoComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -16,7 +16,7 @@ public class OkHttpDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.okhttpDemoButton);
+        getBinding().okhttpDemoButton.setOnClickListener(this);
     }
 
     @Override

@@ -6,11 +6,11 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.widgetDemo.BaseWidgetDemoComponent;
 import com.example.administrator.androidtest.widget.FullTextView.FullTextView;
 import com.example.administrator.androidtest.widget.FullTextView.TextOpt;
 
-public class FullTextViewDemoComponent extends TestActivityComponent {
+public class FullTextViewDemoComponent extends BaseWidgetDemoComponent {
 
     private FullTextView ftvFullText;
 
@@ -21,8 +21,8 @@ public class FullTextViewDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        ftvFullText = findViewById(R.id.fullTextView);
-        setOnClickListener(this, R.id.fullTextView);
+        ftvFullText = getBinding().fullTextView;
+        getBinding().fullTextView.setOnClickListener(this);
     }
 
     @Override

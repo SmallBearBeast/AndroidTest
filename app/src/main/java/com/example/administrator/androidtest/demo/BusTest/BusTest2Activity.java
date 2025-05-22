@@ -4,27 +4,28 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.CollectionUtil;
-import com.bear.libcommon.bus.EventCallback;
 import com.bear.libcommon.bus.Bus;
 import com.bear.libcommon.bus.Event;
+import com.bear.libcommon.bus.EventCallback;
+import com.bear.libcommon.util.CollectionUtil;
+import com.bear.libcomponent.component.ComponentActivity;
 import com.bear.liblog.SLog;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActCommomTestBinding;
 
 import java.util.Set;
 
-public class BusTest2Activity extends ComponentActivity {
-
+public class BusTest2Activity extends ComponentActivity<ActCommomTestBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.act_commom_test;
+    protected ActCommomTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActCommomTestBinding.inflate(inflater);
     }
 
     @Override

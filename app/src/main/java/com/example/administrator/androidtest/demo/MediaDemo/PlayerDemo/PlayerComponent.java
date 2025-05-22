@@ -1,19 +1,17 @@
 package com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 
+import com.bear.libcomponent.component.ActivityComponent;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.databinding.ActPlayerDemoBinding;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
 import com.google.android.exoplayer2.ui.StyledPlayerView;
 
-public class PlayerComponent extends TestActivityComponent {
+public class PlayerComponent extends ActivityComponent<ActPlayerDemoBinding> implements View.OnClickListener {
 
     private UniversalPlayer universalPlayer;
     private StyledPlayerView styledPlayerView;
@@ -25,13 +23,18 @@ public class PlayerComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        styledPlayerView = findViewById(R.id.styledPlayerView);
+        styledPlayerView = getBinding().styledPlayerView;
         styledPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
         styledPlayerView.setControllerAutoShow(false);
 //        styledPlayerView.setUseController(false);
 //        styledPlayerView.setControllerHideOnTouch(true);
 //        styledPlayerView.setDefaultArtwork(new ColorDrawable(Color.RED));
-        setOnClickListener(this, R.id.playBt, R.id.pauseBt, R.id.loadMp4, R.id.loadMkv, R.id.load3gp, R.id.loadFlv);
+        getBinding().playBt.setOnClickListener(this);
+        getBinding().pauseBt.setOnClickListener(this);
+        getBinding().loadMp4.setOnClickListener(this);
+        getBinding().loadMkv.setOnClickListener(this);
+        getBinding().load3gp.setOnClickListener(this);
+        getBinding().loadFlv.setOnClickListener(this);
         initPlayer();
     }
 

@@ -1,6 +1,7 @@
 package com.example.administrator.androidtest.other.WidgetTest;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -8,13 +9,14 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
 import com.bear.libcommon.util.ToastUtil;
 import com.bear.libcommon.util.ViewUtil;
 import com.bear.libcommon.util.XmlDrawableUtil;
+import com.bear.libcomponent.component.ComponentActivity;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActIconTouchViewBinding;
 
-public class IconTouchViewActivity extends ComponentActivity {
+public class IconTouchViewActivity extends ComponentActivity<ActIconTouchViewBinding> {
     private ImageView mIvTest_1;
     private FrameLayout mFlTest_1;
     private ImageView mIvTest_2;
@@ -23,8 +25,8 @@ public class IconTouchViewActivity extends ComponentActivity {
     private FrameLayout mFlTest_3;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_icon_touch_view;
+    protected ActIconTouchViewBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActIconTouchViewBinding.inflate(inflater);
     }
 
     @Override

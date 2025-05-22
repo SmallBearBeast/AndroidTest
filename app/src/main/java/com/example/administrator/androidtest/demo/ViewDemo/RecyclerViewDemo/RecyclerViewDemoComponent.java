@@ -5,8 +5,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
-public class RecyclerViewDemoComponent extends TestActivityComponent {
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
+
+public class RecyclerViewDemoComponent extends BaseViewDemoComponent {
     public RecyclerViewDemoComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
@@ -14,7 +15,7 @@ public class RecyclerViewDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.recyclerViewDemoButton);
+        getBinding().recyclerViewDemoButton.setOnClickListener(this);
     }
 
     @Override

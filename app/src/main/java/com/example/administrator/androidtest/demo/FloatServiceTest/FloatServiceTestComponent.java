@@ -17,7 +17,8 @@ public class FloatServiceTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.startFloatServiceButton, R.id.stopFloatServiceButton);
+        getBinding().startFloatServiceButton.setOnClickListener(this);
+        getBinding().stopFloatServiceButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

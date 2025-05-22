@@ -5,24 +5,26 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
-import android.view.View;
-
+import com.bear.libcommon.util.CollectionUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActSystemShareBinding;
+import com.example.administrator.androidtest.other.XmlDrawableTest.XmlDrawableActivity;
 import com.example.administrator.androidtest.other.share.IntentShare;
 import com.example.administrator.androidtest.other.share.ShareUtil;
-import com.example.administrator.androidtest.other.XmlDrawableTest.XmlDrawableActivity;
-import com.bear.libcommon.util.CollectionUtil;
 
 import java.util.ArrayList;
 
-public class SystemShareActivity extends ComponentActivity {
+public class SystemShareActivity extends ComponentActivity<ActSystemShareBinding> {
     private static final String TAG = "SystemShareAct";
     private static final int REQUEST_IMAGE = 1001;
     private static final int REQUEST_VIDEO = 1002;
@@ -35,8 +37,8 @@ public class SystemShareActivity extends ComponentActivity {
     RecyclerView mRvSystemShare;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_system_share;
+    protected ActSystemShareBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
+        return ActSystemShareBinding.inflate(inflater);
     }
 
     @Override

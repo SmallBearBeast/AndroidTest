@@ -1,6 +1,7 @@
 package com.example.administrator.androidtest.other.fileMedia.Info;
 
 import android.graphics.drawable.Drawable;
+
 import com.example.administrator.androidtest.other.fileMedia.Provider.MediaConstant;
 
 public class ApkInfo extends BaseInfo {

@@ -5,18 +5,19 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.ViewComponent;
-import com.example.administrator.androidtest.R;
+import com.bear.libcomponent.component.FragmentComponent;
+import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
 
-public class DemoMainTvComponent extends ViewComponent {
+public class DemoMainTvComponent extends FragmentComponent<FragComponentTestBinding> {
 
     private TextView textMainTv;
 
     private String originText;
 
-    public DemoMainTvComponent(View view) {
-        super(view);
+    public DemoMainTvComponent(Lifecycle lifecycle)  {
+        super(lifecycle);
     }
 
     @Override
@@ -29,14 +30,12 @@ public class DemoMainTvComponent extends ViewComponent {
     }
 
     @Override
-    protected void onAttachView(View view) {
-        super.onAttachView(view);
-        if (view != null) {
-            textMainTv = findViewById(R.id.textMainTv);
-            originText = String.valueOf(textMainTv.getText());
-            textMainTv.setClickable(true);
-            textMainTv.setOnClickListener(v -> getComponent(DemoMinorTvComponent.class).resetMinorTv());
-        }
+    protected void onAttachViewBinding(FragComponentTestBinding binding) {
+        super.onAttachViewBinding(binding);
+        textMainTv = getBinding().textMainTv;
+        originText = String.valueOf(textMainTv.getText());
+        textMainTv.setClickable(true);
+        textMainTv.setOnClickListener(v -> getComponent(DemoMinorTvComponent.class).resetMinorTv());
     }
 
     public void showMainTv() {

@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.other.FrescoTest;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.Nullable;
@@ -13,13 +14,14 @@ import com.bear.libfresco.FrescoUtil;
 import com.bear.libfresco.FrescoView;
 import com.bear.libfresco.Listener.TimeRequestListener;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActFrescoBinding;
 import com.facebook.drawee.drawable.ProgressBarDrawable;
 import com.facebook.imagepipeline.common.Priority;
 import com.facebook.imagepipeline.request.ImageRequest;
 
 import java.io.File;
 
-public class FrescoTestActivity extends ComponentActivity {
+public class FrescoTestActivity extends ComponentActivity<ActFrescoBinding> {
     private static final String TAG = "FrescoTestAct";
     private static final String TEST_URL_1 = "http://www.badcookie.com/ku-xlarge.gif";
     private static final String TEST_URL_2 = "https://images.pexels.com/photos/390658/pexels-photo-390658.jpeg";
@@ -30,8 +32,8 @@ public class FrescoTestActivity extends ComponentActivity {
     private FrescoView mFvImage;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_fresco;
+    protected ActFrescoBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActFrescoBinding.inflate(inflater);
     }
 
     private long mStartTime = 0L;

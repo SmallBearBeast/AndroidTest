@@ -1,13 +1,14 @@
 package com.example.administrator.androidtest.other.ViewDragHelper;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.customview.widget.ViewDragHelper;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.customview.widget.ViewDragHelper;
 
 public class DragLayout extends LinearLayout {
     private ViewDragHelper mViewDragHelper;

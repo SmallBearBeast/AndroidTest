@@ -3,14 +3,16 @@ package com.example.administrator.androidtest.demo.BizDemo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActBizDemoListBinding;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TikTokDemoComponent;
 
-public class BizDemoActivity extends ComponentActivity {
+public class BizDemoActivity extends ComponentActivity<ActBizDemoListBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,8 +21,8 @@ public class BizDemoActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_biz_demo_list;
+    protected ActBizDemoListBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
+        return ActBizDemoListBinding.inflate(inflater);
     }
 
     public static void go(Context context) {

@@ -10,12 +10,11 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
-import com.example.administrator.androidtest.widget.LoopViewPager.LoopViewPager;
 import com.bear.libcommon.util.ToastUtil;
+import com.example.administrator.androidtest.demo.widgetDemo.BaseWidgetDemoComponent;
+import com.example.administrator.androidtest.widget.LoopViewPager.LoopViewPager;
 
-public class LoopViewPagerDemoComponent extends TestActivityComponent {
+public class LoopViewPagerDemoComponent extends BaseWidgetDemoComponent {
 
     public LoopViewPagerDemoComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -28,7 +27,7 @@ public class LoopViewPagerDemoComponent extends TestActivityComponent {
     }
 
     private void initLoopViewPager() {
-        LoopViewPager loopViewPager = findViewById(R.id.loopViewpager);
+        LoopViewPager loopViewPager = getBinding().loopViewpager;
         loopViewPager.setAdapter(new PagerAdapter() {
             private final int[] mColors = new int[]{
                     Color.BLACK,

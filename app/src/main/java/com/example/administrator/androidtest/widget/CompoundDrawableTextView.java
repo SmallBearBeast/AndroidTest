@@ -5,10 +5,11 @@ import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
 import com.example.administrator.androidtest.R;
 

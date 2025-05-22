@@ -1,11 +1,13 @@
 package com.example.administrator.androidtest.other.ViewDragHelper;
 
-import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import android.view.LayoutInflater;
 
-public class ViewDragHelperActivity extends ComponentActivity {
+import com.bear.libcomponent.component.ComponentActivity;
+import com.example.administrator.androidtest.databinding.ActViewDragHelperBinding;
+
+public class ViewDragHelperActivity extends ComponentActivity<ActViewDragHelperBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.act_view_drag_helper;
+    protected ActViewDragHelperBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActViewDragHelperBinding.inflate(inflater);
     }
 }

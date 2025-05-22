@@ -3,11 +3,7 @@ package com.bear.libbase.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -16,45 +12,39 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.viewbinding.ViewBinding;
 
 import com.bear.libbase.BackPressedHelper;
 import com.example.libbase.R;
 import com.bear.libbase.activity.BaseActivity;
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
     protected String TAG = getClass().getSimpleName();
     private boolean firstVisible = true;
-    private BaseActivity baseActivity;
-    private BaseFragment baseFragment;
+    private BaseActivity baseAct;
+    private BaseFragment baseFrag;
 
     private Toolbar toolbar;
+    private VB viewBinding;
 
     @Override
     @CallSuper
     public void onAttach(Context context) {
         super.onAttach(context);
         if (getContext() instanceof BaseActivity) {
-            baseActivity = (BaseActivity) getContext();
-            Intent intent = baseActivity.getIntent();
+            baseAct = (BaseActivity) getContext();
+            Intent intent = baseAct.getIntent();
             if (intent != null) {
                 handleIntent(intent);
             }
         }
         if (getParentFragment() instanceof BaseFragment) {
-            baseFragment = (BaseFragment) getParentFragment();
+            baseFrag = (BaseFragment) getParentFragment();
         }
         Bundle bundle = getArguments();
         if (bundle != null) {
             handleArgument(bundle);
         }
-    }
-
-    protected void handleIntent(@NonNull Intent intent) {
-
-    }
-
-    protected void handleArgument(@NonNull Bundle bundle) {
-
     }
 
     @Nullable
@@ -64,6 +54,12 @@ public abstract class BaseFragment extends Fragment {
         View view = layoutView();
         if (view == null && layoutId() != 0) {
             view = inflater.inflate(layoutId(), container, false);
+        }
+        if (view == null) {
+            viewBinding = inflateViewBinding(inflater, container);
+            if (viewBinding != null) {
+                view = viewBinding.getRoot();
+            }
         }
         if (view != null) {
             toolbar = view.findViewById(R.id.lib_base_toolbar_id);
@@ -95,8 +91,8 @@ public abstract class BaseFragment extends Fragment {
     @CallSuper
     public void onDetach() {
         super.onDetach();
-        baseActivity = null;
-        baseFragment = null;
+        baseAct = null;
+        baseFrag = null;
     }
 
     /**
@@ -106,6 +102,15 @@ public abstract class BaseFragment extends Fragment {
         BackPressedHelper.addBackPressedListener(this, listener);
     }
 
+
+    protected void handleIntent(@NonNull Intent intent) {
+
+    }
+
+    protected void handleArgument(@NonNull Bundle bundle) {
+
+    }
+
     /**
      * This method is called when fragment is first visible
      */
@@ -113,37 +118,27 @@ public abstract class BaseFragment extends Fragment {
 
     }
 
-    protected abstract int layoutId();
+    public BaseActivity getBaseAct() {
+        return baseAct;
+    }
+
+    public BaseFragment getBaseFrag() {
+        return baseFrag;
+    }
+
+    public @NonNull VB getBinding() {
+        return viewBinding;
+    }
+
+    protected int layoutId() {
+        return -1;
+    }
 
     protected View layoutView() {
         return null;
     }
 
-    public BaseActivity getBaseAct() {
-        return baseActivity;
-    }
-
-    public BaseFragment getBaseFrag() {
-        return baseFragment;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-    }
-
-    @Override
-    public void onCreateContextMenu(@NonNull ContextMenu menu, @NonNull View v, @Nullable ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-    }
-
-    @Override
-    public boolean onContextItemSelected(@NonNull MenuItem item) {
-        return super.onContextItemSelected(item);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return super.onOptionsItemSelected(item);
+    protected VB inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return null;
     }
 }

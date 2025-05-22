@@ -16,7 +16,7 @@ public class FragLifecycleTestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.fragLifecycleTestButton);
+        getBinding().fragLifecycleTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

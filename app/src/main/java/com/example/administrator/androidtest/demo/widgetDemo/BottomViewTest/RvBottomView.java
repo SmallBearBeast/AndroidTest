@@ -10,13 +10,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bear.libcommon.util.CollectionUtil;
+import com.bear.libcommon.util.DensityUtil;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.widget.BottomView;
-import com.bear.libcommon.util.CollectionUtil;
-import com.bear.libcommon.util.DensityUtil;
 
 public class RvBottomView extends BottomView {
     public RvBottomView(Activity activity) {

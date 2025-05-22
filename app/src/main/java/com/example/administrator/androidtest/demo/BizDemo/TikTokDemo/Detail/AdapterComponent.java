@@ -6,17 +6,17 @@ import android.util.Log;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bear.libcomponent.component.ActivityComponent;
 import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
-import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo;
+import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokConstants;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokDataLoader;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo;
 
 import java.util.List;
 
-public class AdapterComponent extends TestActivityComponent {
+public class AdapterComponent extends ActivityComponent<ActTiktokVideoDetailBinding> {
 
     private ViewPager2 videoDetailViewPager;
     private VideoDetailDelegate videoDetailDelegate;
@@ -34,7 +34,7 @@ public class AdapterComponent extends TestActivityComponent {
     }
 
     private void initViewpager2() {
-        videoDetailViewPager = findViewById(R.id.videoDetailViewPager);
+        videoDetailViewPager = getBinding().videoDetailViewPager;
         videoDetailViewPager.setOffscreenPageLimit(1);
         MultiTypeAdapter adapter = new MultiTypeAdapter(getLifecycle());
         changer = adapter.getChanger();

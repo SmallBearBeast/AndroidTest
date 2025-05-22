@@ -1,9 +1,9 @@
 package com.example.administrator.androidtest.widget.pdfview.pdfapi.pool
 
 import android.graphics.Bitmap
+import com.bear.liblog.SLog
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool
 import com.bumptech.glide.load.engine.bitmap_recycle.LruBitmapPool
-import com.bear.liblog.SLog
 
 class PdfBitmapPool {
 

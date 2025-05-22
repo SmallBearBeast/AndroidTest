@@ -6,16 +6,17 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.RectF;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.example.administrator.androidtest.R;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.bear.libcommon.util.ResourceUtil;
+import com.example.administrator.androidtest.R;
 
 public class IconYYAvatar extends FrameLayout {
     public static final int NONE = -1;

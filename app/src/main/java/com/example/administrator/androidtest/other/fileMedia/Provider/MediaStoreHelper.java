@@ -10,12 +10,19 @@ import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
 import android.util.Pair;
+
 import com.example.administrator.androidtest.other.fileMedia.Info.ApkInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.DirInfo;
 
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * The origin date is from Cursor, do not consider other dir

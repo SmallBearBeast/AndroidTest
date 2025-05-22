@@ -15,7 +15,7 @@ public class MediaDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.mediaDemoButton);
+        getBinding().mediaDemoButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

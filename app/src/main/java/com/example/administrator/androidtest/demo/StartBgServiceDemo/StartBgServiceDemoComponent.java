@@ -18,7 +18,8 @@ public class StartBgServiceDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.startBgServiceButton, R.id.stopBgServiceButton);
+        getBinding().startBgServiceButton.setOnClickListener(this);
+        getBinding().stopBgServiceButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

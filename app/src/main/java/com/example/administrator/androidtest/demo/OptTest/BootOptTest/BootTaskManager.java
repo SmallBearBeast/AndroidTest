@@ -4,6 +4,7 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.bear.libcommon.util.TimeRecordUtil;
 import com.effective.android.anchors.AnchorsManager;
 import com.effective.android.anchors.task.Task;
 import com.effective.android.anchors.task.listener.TaskListener;
@@ -16,7 +17,6 @@ import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.I
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.MainThreadTask;
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.NoAnchorDPOptTask;
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.NoAnchorDPTask;
-import com.bear.libcommon.util.TimeRecordUtil;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;

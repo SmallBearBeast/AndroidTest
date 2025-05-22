@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
-
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,10 +17,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bear.libcommon.util.DensityUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActConstraintTestBinding;
 import com.example.administrator.androidtest.demo.TestListFragment;
-import com.bear.libcommon.util.DensityUtil;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -28,7 +29,7 @@ import com.google.android.material.tabs.TabLayout;
 /**
  * Add CollapsingToolbarLayout and Toolbar in AppBarLayout, the Toolbar will have no effect.
  */
-public class CoordinatorLayoutTestActivity extends ComponentActivity implements AppBarLayout.OnOffsetChangedListener {
+public class CoordinatorLayoutTestActivity extends ComponentActivity<ActConstraintTestBinding> implements AppBarLayout.OnOffsetChangedListener {
     private Toolbar mCommonToolbar;
     private Toolbar mCollapsingToolbar;
     private AppBarLayout mAppBarLayout;
@@ -42,8 +43,8 @@ public class CoordinatorLayoutTestActivity extends ComponentActivity implements 
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_coordinatorlayout_test;
+    protected ActConstraintTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActConstraintTestBinding.inflate(inflater);
     }
 
     private void initToolbar() {

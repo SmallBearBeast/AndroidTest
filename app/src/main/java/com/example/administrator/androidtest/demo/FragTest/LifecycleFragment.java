@@ -16,10 +16,11 @@ import androidx.fragment.app.Fragment;
 
 import com.bear.libcomponent.component.ComponentFragment;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.FragTestBinding;
 
 import java.util.Random;
 
-public class LifecycleFragment extends ComponentFragment {
+public class LifecycleFragment extends ComponentFragment<FragTestBinding> {
     private String testTitle;
     private FragmentInteractionListener fragmentInteractionListener;
     @Override
@@ -139,8 +140,8 @@ public class LifecycleFragment extends ComponentFragment {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.frag_test;
+    protected FragTestBinding inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragTestBinding.inflate(inflater, container, false);
     }
 
     public static LifecycleFragment get(String title) {

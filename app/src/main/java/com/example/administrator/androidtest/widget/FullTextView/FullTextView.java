@@ -4,10 +4,6 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Typeface;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.widget.AppCompatTextView;
-
 import android.text.Editable;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -22,9 +18,11 @@ import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 
-import com.example.administrator.androidtest.R;
 import com.bear.libcommon.wrapper.TextWatcherWrapper;
+import com.example.administrator.androidtest.R;
 
 public class FullTextView extends AppCompatTextView {
     private SpannableString mSpannableStr;

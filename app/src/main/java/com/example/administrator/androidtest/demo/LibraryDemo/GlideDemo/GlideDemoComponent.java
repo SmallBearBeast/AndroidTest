@@ -18,16 +18,16 @@ import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.bumptech.glide.request.transition.Transition;
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.LibraryDemo.BaseLibraryDemoComponent;
 
-public class GlideDemoComponent extends TestActivityComponent {
+public class GlideDemoComponent extends BaseLibraryDemoComponent {
     public GlideDemoComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.glideDemoButton);
+        getBinding().glideDemoButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

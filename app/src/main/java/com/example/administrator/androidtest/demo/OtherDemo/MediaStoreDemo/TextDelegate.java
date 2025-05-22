@@ -1,17 +1,18 @@
 package com.example.administrator.androidtest.demo.OtherDemo.MediaStoreDemo;
 
 import android.graphics.Color;
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bear.libcommon.util.DensityUtil;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
-import com.bear.libcommon.util.DensityUtil;
 
 public class TextDelegate extends MultiTypeDelegate<String, TextDelegate.TextHolder> {
 

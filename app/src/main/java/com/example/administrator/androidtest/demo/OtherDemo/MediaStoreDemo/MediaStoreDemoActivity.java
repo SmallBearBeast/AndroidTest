@@ -4,28 +4,29 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
-
 import android.os.Environment;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bear.libcommon.util.DensityUtil;
+import com.bear.libcommon.util.TimeRecordUtil;
 import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.liblog.SLog;
 import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.librv.RvDivider;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActMediaProviderBinding;
 import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.other.fileMedia.Provider.MediaConfig;
 import com.example.administrator.androidtest.other.fileMedia.Provider.MediaStoreHelper;
-import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.DensityUtil;
-import com.bear.libcommon.util.TimeRecordUtil;
-import com.bear.liblog.SLog;
 
 import java.io.File;
 
-public class MediaStoreDemoActivity extends ComponentActivity {
+public class MediaStoreDemoActivity extends ComponentActivity<ActMediaProviderBinding> {
 
     private final MediaConfig config_1 = MediaConfig.from(MediaConfig.IMAGE).minAddTime(System.currentTimeMillis() / 1000 - 20 * 60);
     private final MediaConfig config_2 = MediaConfig.from(MediaConfig.IMAGE);
@@ -34,8 +35,8 @@ public class MediaStoreDemoActivity extends ComponentActivity {
     private MultiItemChanger itemChanger;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_media_provider;
+    protected ActMediaProviderBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActMediaProviderBinding.inflate(inflater);
     }
 
     @Override

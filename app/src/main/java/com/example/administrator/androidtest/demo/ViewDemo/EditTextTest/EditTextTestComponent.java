@@ -11,12 +11,12 @@ import android.widget.TextView;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
 import com.bear.libcommon.manager.KeyBoardManager;
 import com.bear.libcommon.util.ToastUtil;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
 
-public class EditTextTestComponent extends TestActivityComponent {
+public class EditTextTestComponent extends BaseViewDemoComponent {
 
     private EditText noShowKeyboardEditText;
 
@@ -26,8 +26,9 @@ public class EditTextTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        noShowKeyboardEditText = findViewById(R.id.noShowKeyboardEditText);
-        setOnClickListener(this, R.id.formatTextButton, R.id.noShowKeyboardButton);
+        getBinding().formatTextButton.setOnClickListener(this);
+        getBinding().noShowKeyboardButton.setOnClickListener(this);
+        noShowKeyboardEditText = getBinding().noShowKeyboardEditText;
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -47,7 +48,7 @@ public class EditTextTestComponent extends TestActivityComponent {
     }
 
     private void testFormatText() {
-        TextView textTv = findViewById(R.id.formatTextEditText);
+        TextView textTv = getBinding().formatTextEditText;
         textTv.setText(getContext().getString(R.string.format_string_text, "hugo.wu", 22));
     }
 

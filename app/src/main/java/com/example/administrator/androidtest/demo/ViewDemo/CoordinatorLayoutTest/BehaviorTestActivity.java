@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -13,11 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
 
+import com.bear.libcommon.util.ViewUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.ViewUtil;
+import com.example.administrator.androidtest.databinding.ActBehaviorTestBinding;
 
-public class BehaviorTestActivity extends ComponentActivity {
+public class BehaviorTestActivity extends ComponentActivity<ActBehaviorTestBinding> {
 
     private TextView textView1;
     private TextView textView2;
@@ -38,8 +40,8 @@ public class BehaviorTestActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_behavior_test;
+    protected ActBehaviorTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActBehaviorTestBinding.inflate(inflater);
     }
 
     @SuppressLint("NonConstantResourceId")

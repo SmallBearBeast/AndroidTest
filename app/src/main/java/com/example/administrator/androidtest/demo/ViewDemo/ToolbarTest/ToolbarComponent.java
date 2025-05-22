@@ -9,10 +9,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Lifecycle;
 
+import com.bear.libcommon.util.ToastUtil;
 import com.bear.libcomponent.component.ActivityComponent;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.ToastUtil;
 
 public class ToolbarComponent extends ActivityComponent {
 

@@ -1,10 +1,15 @@
 package com.example.administrator.androidtest.other.XmlDrawableTest;
 
-import android.graphics.*;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.util.Log;
 
 public class TestDrawable extends Drawable {
 

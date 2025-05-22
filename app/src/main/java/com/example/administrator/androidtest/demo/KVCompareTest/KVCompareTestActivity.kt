@@ -4,15 +4,19 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import com.bear.libcommon.util.ToastUtil
 import com.bear.libcomponent.component.ComponentActivity
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.Settings
-import com.bear.libcommon.util.ToastUtil
+import com.example.administrator.androidtest.databinding.ActKvCompareTestBinding
 import kotlin.random.Random
 
-class KVCompareTestActivity: ComponentActivity(){
-    override fun layoutId(): Int  = R.layout.act_kv_compare_test
+class KVCompareTestActivity: ComponentActivity<ActKvCompareTestBinding>(){
+    override fun inflateViewBinding(inflater: LayoutInflater): ActKvCompareTestBinding {
+        return ActKvCompareTestBinding.inflate(inflater)
+    }
 
     fun onClick(view: View) {
         when(view.id) {

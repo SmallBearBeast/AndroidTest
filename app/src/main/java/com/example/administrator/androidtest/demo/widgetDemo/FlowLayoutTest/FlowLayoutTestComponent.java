@@ -7,15 +7,15 @@ import android.widget.TextView;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
-import com.example.administrator.androidtest.widget.FlowFakeTextView;
-import com.example.administrator.androidtest.widget.FlowLayout;
 import com.bear.libcommon.util.DensityUtil;
 import com.bear.libcommon.util.ToastUtil;
 import com.bear.libcommon.util.XmlDrawableUtil;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.demo.widgetDemo.BaseWidgetDemoComponent;
+import com.example.administrator.androidtest.widget.FlowFakeTextView;
+import com.example.administrator.androidtest.widget.FlowLayout;
 
-public class FlowLayoutTestComponent extends TestActivityComponent {
+public class FlowLayoutTestComponent extends BaseWidgetDemoComponent {
     public FlowLayoutTestComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
@@ -27,7 +27,7 @@ public class FlowLayoutTestComponent extends TestActivityComponent {
     }
 
     private void initFlowLayout() {
-        FlowLayout flowLayout = findViewById(R.id.flowLayout);
+        FlowLayout flowLayout = getBinding().flowLayout;
         String[] texts = new String[]{
                 "Android, Java, PHP, C++, Android, Java, PHP, C++, Android, Java, PHP, C++",
                 "Android, Java, PHP, C++, Android, Java, PHP, C++, Android, Java, PHP, C++",
@@ -46,8 +46,8 @@ public class FlowLayoutTestComponent extends TestActivityComponent {
     }
 
     private void initFlowFakeFlowLayout() {
-        FlowLayout flowFakeFlowLayout = findViewById(R.id.flowFakeFlowLayout);
-        FlowFakeTextView flowFakeTextView = findViewById(R.id.flowFakeTextView);
+        FlowLayout flowFakeFlowLayout = getBinding().flowFakeFlowLayout;
+        FlowFakeTextView flowFakeTextView = getBinding().flowFakeTextView;
         flowFakeTextView.setTvInitCallback(() -> createTv(""));
         flowFakeFlowLayout.post(() -> {
             flowFakeTextView.setText("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事", flowFakeFlowLayout.getWidth());

@@ -1,16 +1,18 @@
 package com.bear.libcomponent.component;
 
 import android.view.ContextMenu;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.viewbinding.ViewBinding;
 
 import com.bear.libbase.activity.BaseActivity;
 
-public abstract class ComponentActivity extends BaseActivity {
-    private ComponentManager componentManager = new ComponentManager();
+public abstract class ComponentActivity<VB extends ViewBinding> extends BaseActivity<VB> {
+    private final ComponentManager componentManager = new ComponentManager();
     
     protected void regActComponent(ActivityComponent component, Object tag) {
         componentManager.regComponent(this, component, tag);
@@ -65,4 +67,7 @@ public abstract class ComponentActivity extends BaseActivity {
     public ComponentManager getComponentManager() {
         return componentManager;
     }
+
+    @Override
+    protected abstract VB inflateViewBinding(@NonNull LayoutInflater inflater);
 }

@@ -1,10 +1,11 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RefreshViewDemo;
 
 import android.content.Context;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.administrator.androidtest.R;
 

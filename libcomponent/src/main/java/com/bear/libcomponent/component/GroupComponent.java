@@ -37,7 +37,9 @@ public abstract class GroupComponent extends BaseComponent {
                 componentMap.remove(componentKey);
             }
         });
-        ((GroupComponent) component).parentComponent = this;
+        if (component instanceof GroupComponent) {
+            ((GroupComponent) component).parentComponent = this;
+        }
         componentMap.put(componentKey, component);
     }
 

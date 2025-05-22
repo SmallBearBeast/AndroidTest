@@ -2,36 +2,38 @@ package com.example.administrator.androidtest.demo;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcommon.util.MainHandlerUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActMainDemoListBinding;
 import com.example.administrator.androidtest.demo.ARouterTest.ARouterTestComponent;
 import com.example.administrator.androidtest.demo.AspectTest.AspectJTestComponent;
 import com.example.administrator.androidtest.demo.BizDemo.BizDemoComponent;
+import com.example.administrator.androidtest.demo.BottomSheetTest.BottomSheetTestComponent;
+import com.example.administrator.androidtest.demo.BusTest.BusTestComponent;
 import com.example.administrator.androidtest.demo.ComponentDemo.DemoComponent;
+import com.example.administrator.androidtest.demo.DialogTest.DialogTestComponent;
+import com.example.administrator.androidtest.demo.FloatServiceTest.FloatServiceTestComponent;
 import com.example.administrator.androidtest.demo.FlutterTest.FlutterTestComponent;
+import com.example.administrator.androidtest.demo.FragTest.FragLifecycleTestComponent;
+import com.example.administrator.androidtest.demo.KVCompareTest.KVCompareTestComponent;
 import com.example.administrator.androidtest.demo.LibraryDemo.LibraryDemoComponent;
+import com.example.administrator.androidtest.demo.MediaDemo.MediaDemoComponent;
 import com.example.administrator.androidtest.demo.OptTest.AnrTest.AnrTestComponent;
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTaskManager;
 import com.example.administrator.androidtest.demo.OptTest.BootOptTest.MonitorClassLoader;
-import com.example.administrator.androidtest.demo.BottomSheetTest.BottomSheetTestComponent;
-import com.example.administrator.androidtest.demo.BusTest.BusTestComponent;
-import com.example.administrator.androidtest.demo.DialogTest.DialogTestComponent;
-import com.example.administrator.androidtest.demo.FloatServiceTest.FloatServiceTestComponent;
-import com.example.administrator.androidtest.demo.FragTest.FragLifecycleTestComponent;
-import com.example.administrator.androidtest.demo.KVCompareTest.KVCompareTestComponent;
-import com.example.administrator.androidtest.demo.MediaDemo.MediaDemoComponent;
 import com.example.administrator.androidtest.demo.OtherDemo.OtherDemoComponent;
 import com.example.administrator.androidtest.demo.ScreenTest.ScreenTestComponent;
 import com.example.administrator.androidtest.demo.SpAndMMKVDemo.SpAndMMKVDemoComponent;
 import com.example.administrator.androidtest.demo.StartBgServiceDemo.StartBgServiceDemoComponent;
 import com.example.administrator.androidtest.demo.ViewDemo.ViewDemoComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.WidgetDemoComponent;
-import com.bear.libcommon.util.MainHandlerUtil;
 
-public class MainActivity extends ComponentActivity {
+public class MainActivity extends ComponentActivity<ActMainDemoListBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -65,8 +67,8 @@ public class MainActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_main_demo_list;
+    protected ActMainDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActMainDemoListBinding.inflate(inflater);
     }
 
     @Override

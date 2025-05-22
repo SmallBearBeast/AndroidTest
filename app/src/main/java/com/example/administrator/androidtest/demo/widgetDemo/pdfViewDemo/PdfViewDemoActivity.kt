@@ -7,25 +7,27 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.provider.OpenableColumns
+import android.view.LayoutInflater
 import android.view.View
+import com.bear.libcommon.util.ToastUtil
 import com.bear.libcomponent.component.ComponentActivity
 import com.bear.librv.RvUtil
 import com.example.administrator.androidtest.R
+import com.example.administrator.androidtest.databinding.ActPdfViewTestBinding
 import com.example.administrator.androidtest.widget.pdfview.PdfRenderView
-import com.bear.libcommon.util.ToastUtil
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 
-class PdfViewDemoActivity : ComponentActivity(), View.OnClickListener {
+class PdfViewDemoActivity : ComponentActivity<ActPdfViewTestBinding>(), View.OnClickListener {
     private var pdfRenderView: PdfRenderView? = null
 
-    override fun layoutId(): Int {
-        return R.layout.act_pdf_view_test
+    override fun inflateViewBinding(inflater: LayoutInflater): ActPdfViewTestBinding {
+        return ActPdfViewTestBinding.inflate(inflater)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        pdfRenderView = findViewById(R.id.pdfView)
+        pdfRenderView = findViewById<PdfRenderView>(R.id.pdfView) as PdfRenderView?
         pdfRenderView?.setDividerHeight(100)
         findViewById<View>(R.id.openFilePicker).setOnClickListener(this)
         findViewById<View>(R.id.loadPdfButton_2).setOnClickListener(this)

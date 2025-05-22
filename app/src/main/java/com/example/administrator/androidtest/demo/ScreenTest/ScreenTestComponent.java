@@ -15,7 +15,7 @@ public class ScreenTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.screenTestButton);
+        getBinding().screenTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

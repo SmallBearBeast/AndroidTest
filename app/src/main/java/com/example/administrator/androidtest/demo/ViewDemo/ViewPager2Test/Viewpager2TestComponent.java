@@ -6,16 +6,16 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
 
-public class Viewpager2TestComponent extends TestActivityComponent {
+public class Viewpager2TestComponent extends BaseViewDemoComponent {
     public Viewpager2TestComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.viewpager2TestButton);
+        getBinding().viewpager2TestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -3,14 +3,15 @@ package com.example.administrator.androidtest.demo.OtherDemo;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActOtherDemoListBinding;
 import com.example.administrator.androidtest.demo.OtherDemo.MediaStoreDemo.MediaStoreDemoComponent;
 
-public class OtherDemoActivity extends ComponentActivity {
+public class OtherDemoActivity extends ComponentActivity<ActOtherDemoListBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -19,8 +20,8 @@ public class OtherDemoActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_other_demo_list;
+    protected ActOtherDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActOtherDemoListBinding.inflate(inflater);
     }
 
     public static void start(Context context) {

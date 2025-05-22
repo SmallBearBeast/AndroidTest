@@ -6,10 +6,10 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.widgetDemo.BaseWidgetDemoComponent;
 import com.example.administrator.androidtest.widget.MarqueeTextView;
 
-public class MarqueeDemoComponent extends TestActivityComponent {
+public class MarqueeDemoComponent extends BaseWidgetDemoComponent {
     private MarqueeTextView marqueeTextView_1;
 
     public MarqueeDemoComponent(Lifecycle lifecycle) {
@@ -18,8 +18,9 @@ public class MarqueeDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        marqueeTextView_1 = findViewById(R.id.marqueeTextView_1);
-        setOnClickListener(this, R.id.startMarqueeButton, R.id.endMarqueeButton);
+        marqueeTextView_1 = getBinding().marqueeTextView1;
+        getBinding().startMarqueeButton.setOnClickListener(this);
+        getBinding().endMarqueeButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

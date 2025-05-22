@@ -1,14 +1,15 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RefreshViewDemo;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.WidgetPullDropLayoutBinding;
 
-public class PullLoadLayoutActivity extends ComponentActivity {
+public class PullLoadLayoutActivity extends ComponentActivity<WidgetPullDropLayoutBinding> {
     private RecyclerView rvUser;
 
     @Override
@@ -21,7 +22,7 @@ public class PullLoadLayoutActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.widget_pull_drop_layout;
+    protected WidgetPullDropLayoutBinding inflateViewBinding(LayoutInflater inflater) {
+        return WidgetPullDropLayoutBinding.inflate(inflater);
     }
 }

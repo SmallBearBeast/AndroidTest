@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.ParcelFileDescriptor
-import com.example.administrator.androidtest.widget.pdfview.pdfapi.pool.PdfBitmapPool
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.BitmapSize
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.PdfApi
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.cache.BitmapDiskCache
@@ -14,6 +13,7 @@ import com.example.administrator.androidtest.widget.pdfview.pdfapi.cache.IBitmap
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.getScreenHeight
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.getScreenWidth
 import com.example.administrator.androidtest.widget.pdfview.pdfapi.isValid
+import com.example.administrator.androidtest.widget.pdfview.pdfapi.pool.PdfBitmapPool
 import java.io.File
 
 abstract class BasePdfImpl(private val context: Context) : PdfApi {

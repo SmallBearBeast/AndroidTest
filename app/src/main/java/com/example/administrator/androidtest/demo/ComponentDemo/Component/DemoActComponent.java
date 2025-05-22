@@ -6,17 +6,18 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bear.libcomponent.component.ActivityComponent;
-import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.ComponentDemo.ComponentSpecialDemoFragment;
-import com.example.administrator.androidtest.demo.ComponentDemo.ComponentDemoFragment;
 import com.bear.libcommon.util.ResourceUtil;
 import com.bear.libcommon.util.ToastUtil;
+import com.bear.libcomponent.component.ActivityComponent;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActComponentTestBinding;
+import com.example.administrator.androidtest.demo.ComponentDemo.ComponentDemoFragment;
+import com.example.administrator.androidtest.demo.ComponentDemo.ComponentSpecialDemoFragment;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
-public class DemoActComponent extends ActivityComponent {
+public class DemoActComponent extends ActivityComponent<ActComponentTestBinding> {
     public DemoActComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
@@ -44,8 +45,8 @@ public class DemoActComponent extends ActivityComponent {
         buttonTextList.add("Call ShowMainTv");
         buttonTextList.add("Call ShowMinorTv");
 
-        TabLayout tabLayout = findViewById(R.id.tabLayout);
-        ViewPager viewPager = findViewById(R.id.viewpager);
+        TabLayout tabLayout = getBinding().tabLayout;
+        ViewPager viewPager = getBinding().viewpager;
         viewPager.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @NonNull
             @Override

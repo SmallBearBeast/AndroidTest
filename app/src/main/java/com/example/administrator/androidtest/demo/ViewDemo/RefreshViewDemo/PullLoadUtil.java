@@ -1,8 +1,9 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RefreshViewDemo;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.widget.ScrollView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class PullLoadUtil {
     private static final String TAG = "PullLoadUtil";

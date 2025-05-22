@@ -4,10 +4,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.os.Build;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -17,6 +13,11 @@ import android.view.ViewTreeObserver;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.ScrollView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.administrator.androidtest.R;
 

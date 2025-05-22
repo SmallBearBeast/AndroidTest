@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
@@ -12,19 +13,20 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcommon.util.DensityUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.DensityUtil;
+import com.example.administrator.androidtest.databinding.ActViewGetWidthAndHeightTestBinding;
 
 import java.util.Arrays;
 
-public class ViewGetSizeTestActivity extends ComponentActivity {
+public class ViewGetSizeTestActivity extends ComponentActivity<ActViewGetWidthAndHeightTestBinding> {
 
     private TextView testTextView;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_view_get_width_and_height_test;
+    protected ActViewGetWidthAndHeightTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActViewGetWidthAndHeightTestBinding.inflate(inflater);
     }
 
     @Override

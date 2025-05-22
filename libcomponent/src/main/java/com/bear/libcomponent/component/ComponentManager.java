@@ -9,6 +9,7 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.viewbinding.ViewBinding;
 
 import com.bear.libcomponent.provider.IBackPressedProvider;
 import com.bear.libcomponent.provider.IMenuProvider;
@@ -31,7 +32,9 @@ public class ComponentManager {
         }
         component.attachContext(activity);
         component.attachActivity(activity);
-        component.onAttachView(activity.getDecorView());
+        if (activity.getBinding() != null) {
+            component.onAttachViewBinding(activity.getBinding());
+        }
         componentContainer.regComponent(component, tag);
     }
 
@@ -44,10 +47,10 @@ public class ComponentManager {
             throw new RuntimeException("Can not register component with same type and tag");
         }
         component.attachContext(fragment.getContext());
-        if (fragment.getView() != null) {
-            component.onAttachView(fragment.getView());
-        }
         component.attachFragment(fragment);
+        if (fragment.getBinding() != null) {
+            component.onAttachViewBinding(fragment.getBinding());
+        }
         componentContainer.regComponent(component, tag);
     }
 
@@ -59,12 +62,12 @@ public class ComponentManager {
         return componentContainer.getComponent(clz, tag);
     }
 
-    void dispatchOnCreateView(ComponentFragment componentFrag, View contentView) {
+    void dispatchOnCreateView(ComponentFragment componentFrag, ViewBinding binding) {
         Map<ComponentKey<?>, GroupComponent> componentMap = componentContainer.getComponentMap();
         if (componentMap != null) {
             for (IComponent component : componentMap.values()) {
                 if (component instanceof FragmentComponent && ((FragmentComponent) component).getFragment() == componentFrag) {
-                    ((FragmentComponent) component).onAttachView(contentView);
+                    ((FragmentComponent) component).onAttachViewBinding(binding);
                     ((FragmentComponent) component).onCreateView();
                 }
             }

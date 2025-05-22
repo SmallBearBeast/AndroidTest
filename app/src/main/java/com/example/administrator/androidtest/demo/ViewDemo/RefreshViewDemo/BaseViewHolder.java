@@ -1,7 +1,8 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RefreshViewDemo;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 public class BaseViewHolder<T> extends RecyclerView.ViewHolder{
     protected int mPosition;

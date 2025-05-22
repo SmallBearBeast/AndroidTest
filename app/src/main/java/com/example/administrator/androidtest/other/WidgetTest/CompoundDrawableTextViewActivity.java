@@ -1,20 +1,22 @@
 package com.example.administrator.androidtest.other.WidgetTest;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 
 import androidx.annotation.Nullable;
 
+import com.bear.libcommon.util.ToastUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActCompoundDrawableTvBinding;
 import com.example.administrator.androidtest.widget.CompoundDrawableTextView;
-import com.bear.libcommon.util.ToastUtil;
 
-public class CompoundDrawableTextViewActivity extends ComponentActivity {
+public class CompoundDrawableTextViewActivity extends ComponentActivity<ActCompoundDrawableTvBinding> {
     private CompoundDrawableTextView cdtvText;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_compound_drawable_tv;
+    protected ActCompoundDrawableTvBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActCompoundDrawableTvBinding.inflate(inflater);
     }
 
     @Override

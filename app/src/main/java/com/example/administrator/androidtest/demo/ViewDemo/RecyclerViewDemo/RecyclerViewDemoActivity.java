@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +16,11 @@ import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
+import com.bear.libcommon.executor.MainThreadExecutor;
+import com.bear.libcommon.util.CollectionUtil;
+import com.bear.libcommon.util.ToastUtil;
 import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.liblog.SLog;
 import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.librv.Payload;
@@ -23,15 +28,12 @@ import com.bear.librv.RvDivider;
 import com.bear.librv.RvListener;
 import com.bear.librv.RvUtil;
 import com.example.administrator.androidtest.R;
-import com.bear.libcommon.executor.MainThreadExecutor;
-import com.bear.libcommon.util.CollectionUtil;
-import com.bear.libcommon.util.ToastUtil;
-import com.bear.liblog.SLog;
+import com.example.administrator.androidtest.databinding.ActRvDemoBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecyclerViewDemoActivity extends ComponentActivity implements View.OnClickListener {
+public class RecyclerViewDemoActivity extends ComponentActivity<ActRvDemoBinding> implements View.OnClickListener {
     private static final String TAG = "RvAct";
     private static final int DEFAULT_REMOVE_DELAY_TIME = 0;
     private static final int DEFAULT_ADD_DELAY_TIME = 0;
@@ -70,8 +72,8 @@ public class RecyclerViewDemoActivity extends ComponentActivity implements View.
     };
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_rv_demo;
+    protected ActRvDemoBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActRvDemoBinding.inflate(inflater);
     }
 
     @Override

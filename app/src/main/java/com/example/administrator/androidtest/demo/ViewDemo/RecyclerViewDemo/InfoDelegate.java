@@ -1,18 +1,18 @@
 package com.example.administrator.androidtest.demo.ViewDemo.RecyclerViewDemo;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bear.librv.Payload;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.bear.liblog.SLog;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
+import com.bear.librv.Payload;
 import com.bumptech.glide.Glide;
 import com.example.administrator.androidtest.R;
-import com.bear.liblog.SLog;
 
 public class InfoDelegate extends MultiTypeDelegate<Info, InfoDelegate.InfoHolder> {
     @NonNull

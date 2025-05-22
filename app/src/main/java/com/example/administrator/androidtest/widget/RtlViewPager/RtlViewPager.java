@@ -3,13 +3,14 @@ package com.example.administrator.androidtest.widget.RtlViewPager;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
-import androidx.viewpager.widget.PagerAdapter;
-import androidx.core.view.ViewCompat;
-import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import java.util.HashMap;
 

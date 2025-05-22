@@ -1,6 +1,9 @@
 package com.example.administrator.androidtest.other.Frag.visibility;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -8,14 +11,13 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import android.view.View;
-import android.widget.TextView;
 
-import com.bear.libcomponent.component.ComponentActivity;
-import com.example.administrator.androidtest.R;
 import com.bear.libbase.dialog.BaseDialogFragment;
-import com.bear.libother.page.IPage;
+import com.bear.libcomponent.component.ComponentActivity;
 import com.bear.liblog.SLog;
+import com.bear.libother.page.IPage;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActVpFragVisibilityBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ import java.util.List;
 /**
  * Viewpager + Fragment在不嵌套的情况下切换setUserVisibleHint()逻辑是没有问题的
  */
-public class VpFragVisibilityActivity extends ComponentActivity {
+public class VpFragVisibilityActivity extends ComponentActivity<ActVpFragVisibilityBinding> {
 
     private ViewPager vpContainer;
     private MyAdapter myAdapter;
@@ -78,11 +80,11 @@ public class VpFragVisibilityActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_vp_frag_visibility;
+    protected ActVpFragVisibilityBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActVpFragVisibilityBinding.inflate(inflater);
     }
 
-//    @Override
+    //    @Override
 //    public void onVisibilityChanged() {
 //        Map<String, Boolean> map = App.FragVisibiableMap;
 //        StringBuilder builder = new StringBuilder();

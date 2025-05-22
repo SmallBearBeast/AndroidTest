@@ -3,10 +3,9 @@ package com.example.administrator.androidtest.demo.widgetDemo.BottomViewTest;
 import android.app.Activity;
 import android.view.View;
 
-import com.example.administrator.androidtest.R;
-
-import com.example.administrator.androidtest.widget.BottomView;
 import com.bear.libcommon.util.ToastUtil;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.widget.BottomView;
 
 public class NormalBottomView extends BottomView implements View.OnClickListener {
     public NormalBottomView(Activity activity) {

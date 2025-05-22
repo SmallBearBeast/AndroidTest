@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ItemTiktokVideoDetailBinding;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo;
 
 import java.util.HashMap;
@@ -36,18 +37,20 @@ public class VideoDetailDelegate extends MultiTypeDelegate<TiktokVideoDetailInfo
 
     public class VideoDetailViewHolder extends MultiTypeHolder<TiktokVideoDetailInfo> {
         private final int holderId;
+        private ItemTiktokVideoDetailBinding viewBinding;
 
         public VideoDetailViewHolder(View itemView, int id) {
             super(itemView);
             holderId = id;
+            viewBinding = ItemTiktokVideoDetailBinding.bind(itemView);
         }
 
         @Override
         protected void onCreate() {
             super.onCreate();
 //            adapterComponent.regComponent(new VideoPlayComponent(itemView));
-            adapterComponent.regComponent(new VideoActionComponent(itemView), holderId);
-            adapterComponent.regComponent(new VideoInfoComponent(itemView), holderId);
+            adapterComponent.regComponent(new VideoActionComponent(viewBinding), holderId);
+            adapterComponent.regComponent(new VideoInfoComponent(viewBinding), holderId);
         }
 
         @Override

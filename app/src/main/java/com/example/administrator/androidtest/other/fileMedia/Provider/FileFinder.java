@@ -3,16 +3,20 @@ package com.example.administrator.androidtest.other.fileMedia.Provider;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
 import android.os.Environment;
+
+import com.bear.libcommon.util.TimeRecordUtil;
+import com.bear.liblog.SLog;
 import com.example.administrator.androidtest.other.fileMedia.Info.AudioInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.BaseInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.DirInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.ImageInfo;
 import com.example.administrator.androidtest.other.fileMedia.Info.VideoInfo;
-import com.bear.libcommon.util.TimeRecordUtil;
-import com.bear.liblog.SLog;
 
 import java.io.File;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 public class FileFinder {
     private static final String TAG = "FileFinder";

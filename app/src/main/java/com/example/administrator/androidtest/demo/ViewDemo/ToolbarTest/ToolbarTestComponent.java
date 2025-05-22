@@ -5,9 +5,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
 
-public class ToolbarTestComponent extends TestActivityComponent {
+public class ToolbarTestComponent extends BaseViewDemoComponent {
     public ToolbarTestComponent(Lifecycle lifecycle) {
         super(lifecycle);
     }
@@ -15,7 +15,7 @@ public class ToolbarTestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        setOnClickListener(this, R.id.toolbarTestButton);
+        getBinding().toolbarTestButton.setOnClickListener(this);
     }
 
     @Override

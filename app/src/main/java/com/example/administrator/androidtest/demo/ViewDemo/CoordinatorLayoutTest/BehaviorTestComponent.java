@@ -6,9 +6,9 @@ import android.view.View;
 import androidx.lifecycle.Lifecycle;
 
 import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.demo.TestActivityComponent;
+import com.example.administrator.androidtest.demo.ViewDemo.BaseViewDemoComponent;
 
-public class BehaviorTestComponent extends TestActivityComponent {
+public class BehaviorTestComponent extends BaseViewDemoComponent {
 
     public BehaviorTestComponent(Lifecycle lifecycle) {
         super(lifecycle);
@@ -16,7 +16,7 @@ public class BehaviorTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        setOnClickListener(this, R.id.behaviorTestButton);
+        getBinding().behaviorTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

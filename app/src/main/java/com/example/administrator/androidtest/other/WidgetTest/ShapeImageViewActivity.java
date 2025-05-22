@@ -1,16 +1,17 @@
 package com.example.administrator.androidtest.other.WidgetTest;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActShapeImageViewBinding;
 import com.example.administrator.androidtest.widget.ShapeImageView;
 
-public class ShapeImageViewActivity extends ComponentActivity {
-
+public class ShapeImageViewActivity extends ComponentActivity<ActShapeImageViewBinding> {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,8 +25,7 @@ public class ShapeImageViewActivity extends ComponentActivity {
     }
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_shape_image_view;
+    protected ActShapeImageViewBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActShapeImageViewBinding.inflate(inflater);
     }
-
 }

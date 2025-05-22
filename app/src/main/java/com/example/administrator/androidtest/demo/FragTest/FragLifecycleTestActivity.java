@@ -5,17 +5,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.bear.libcommon.util.ToastUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
-import com.bear.libcommon.util.ToastUtil;
+import com.example.administrator.androidtest.databinding.ActFragTestBinding;
 
-public class FragLifecycleTestActivity extends ComponentActivity implements LifecycleFragment.FragmentInteractionListener {
+public class FragLifecycleTestActivity extends ComponentActivity<ActFragTestBinding> implements LifecycleFragment.FragmentInteractionListener {
     private LifecycleFragment lifecycleFrag_1 = LifecycleFragment.get("testFrag_1");
     private LifecycleFragment lifecycleFrag_2 = LifecycleFragment.get("testFrag_2");
     private LifecycleFragment lifecycleFrag_3 = LifecycleFragment.get("testFrag_3");
@@ -25,8 +28,8 @@ public class FragLifecycleTestActivity extends ComponentActivity implements Life
     private FragmentManager fragmentManager;
 
     @Override
-    protected int layoutId() {
-        return R.layout.act_frag_test;
+    protected ActFragTestBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActFragTestBinding.inflate(inflater);
     }
 
     @Override

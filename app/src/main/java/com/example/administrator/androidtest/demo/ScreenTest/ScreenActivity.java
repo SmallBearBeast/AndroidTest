@@ -5,21 +5,23 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.bear.libcommon.util.ScreenUtil;
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.ActScreenBinding;
 import com.example.administrator.androidtest.other.LogUtil;
-import com.bear.libcommon.util.ScreenUtil;
 import com.permissionx.guolindev.PermissionX;
 
-public class ScreenActivity extends ComponentActivity {
+public class ScreenActivity extends ComponentActivity<ActScreenBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.act_screen;
+    protected ActScreenBinding inflateViewBinding(LayoutInflater inflater) {
+        return ActScreenBinding.inflate(inflater);
     }
 
     @Override

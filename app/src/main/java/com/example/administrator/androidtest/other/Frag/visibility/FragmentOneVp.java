@@ -1,7 +1,9 @@
 package com.example.administrator.androidtest.other.Frag.visibility;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,23 +14,23 @@ import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bear.libcomponent.component.ComponentFragment;
-import com.example.administrator.androidtest.R;
-import com.bear.libother.page.IPage;
 import com.bear.liblog.SLog;
+import com.bear.libother.page.IPage;
+import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.FragVpBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FragmentOneVp extends ComponentFragment {
+public class FragmentOneVp extends ComponentFragment<FragVpBinding> {
 
     private ViewPager vpContainer;
     private MyAdapter myAdapter;
 
     @Override
-    public int layoutId() {
-        return R.layout.frag_vp;
+    protected FragVpBinding inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragVpBinding.inflate(inflater, container, false);
     }
-
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

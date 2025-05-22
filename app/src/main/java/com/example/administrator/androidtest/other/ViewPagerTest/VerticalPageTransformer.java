@@ -3,7 +3,6 @@ package com.example.administrator.androidtest.other.ViewPagerTest;
 import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.viewpager.widget.ViewPager;
 
 public class VerticalPageTransformer implements VerticalViewPager.PageTransformer {
     @Override

@@ -1,20 +1,21 @@
 package com.example.administrator.androidtest.demo.ComponentDemo;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentFragment;
-import com.example.administrator.androidtest.R;
+import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
 import com.example.administrator.androidtest.demo.ComponentDemo.Component.DemoFragComponent;
 
 import java.util.ArrayList;
 
-public class ComponentDemoFragment extends ComponentFragment {
-
+public class ComponentDemoFragment extends ComponentFragment<FragComponentTestBinding> {
     @Override
-    protected int layoutId() {
-        return R.layout.frag_component_test;
+    protected FragComponentTestBinding inflateViewBinding(LayoutInflater inflater, ViewGroup container) {
+        return FragComponentTestBinding.inflate(inflater, container, false);
     }
 
     @Override

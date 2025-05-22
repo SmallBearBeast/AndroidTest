@@ -8,15 +8,15 @@ import android.widget.TextView;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.FragmentComponent;
-import com.example.administrator.androidtest.R;
-import com.example.administrator.androidtest.widget.FlowLayout;
 import com.bear.libcommon.util.StringUtil;
 import com.bear.libcommon.util.ToastUtil;
+import com.bear.libcomponent.component.FragmentComponent;
+import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
+import com.example.administrator.androidtest.widget.FlowLayout;
 
 import java.util.List;
 
-public class DemoFragComponent extends FragmentComponent implements View.OnClickListener {
+public class DemoFragComponent extends FragmentComponent<FragComponentTestBinding> implements View.OnClickListener {
 
     public static final String KEY_POSITION = "KEY_POSITION";
     public static final String KEY_MAIN_TEXT = "KEY_MAIN_TEXT";
@@ -34,9 +34,9 @@ public class DemoFragComponent extends FragmentComponent implements View.OnClick
     @Override
     protected void onCreateView() {
         super.onCreateView();
-        FlowLayout flowLayout = findViewById(R.id.flowLayout);
-        TextView textMainTv = findViewById(R.id.textMainTv);
-        TextView textMinorTv = findViewById(R.id.textMinorTv);
+        FlowLayout flowLayout = getBinding().flowLayout;
+        TextView textMainTv = getBinding().textMainTv;
+        TextView textMinorTv = getBinding().textMinorTv;
         if (getArguments() != null) {
             position = getArguments().getInt(KEY_POSITION);
             String mainText = getArguments().getString(KEY_MAIN_TEXT);
