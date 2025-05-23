@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.demo.ViewDemo.RefreshViewDemo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -22,7 +23,7 @@ public class PullLoadLayoutActivity extends ComponentActivity<WidgetPullDropLayo
     }
 
     @Override
-    protected WidgetPullDropLayoutBinding inflateViewBinding(LayoutInflater inflater) {
+    protected WidgetPullDropLayoutBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return WidgetPullDropLayoutBinding.inflate(inflater);
     }
 }

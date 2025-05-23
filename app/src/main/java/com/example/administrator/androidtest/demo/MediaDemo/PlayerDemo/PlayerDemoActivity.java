@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -12,7 +13,7 @@ import com.example.administrator.androidtest.databinding.ActPlayerDemoBinding;
 
 public class PlayerDemoActivity extends ComponentActivity<ActPlayerDemoBinding> {
     @Override
-    protected ActPlayerDemoBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActPlayerDemoBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActPlayerDemoBinding.inflate(inflater);
     }
 

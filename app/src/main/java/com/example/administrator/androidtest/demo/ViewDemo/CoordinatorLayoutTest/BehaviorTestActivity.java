@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
@@ -40,7 +41,7 @@ public class BehaviorTestActivity extends ComponentActivity<ActBehaviorTestBindi
     }
 
     @Override
-    protected ActBehaviorTestBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActBehaviorTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActBehaviorTestBinding.inflate(inflater);
     }
 

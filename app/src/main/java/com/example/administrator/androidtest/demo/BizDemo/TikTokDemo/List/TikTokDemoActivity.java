@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -19,7 +20,7 @@ public class TikTokDemoActivity extends ComponentActivity<ActTiktokDemoBinding> 
     }
 
     @Override
-    protected ActTiktokDemoBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActTiktokDemoBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActTiktokDemoBinding.inflate(inflater);
     }
 

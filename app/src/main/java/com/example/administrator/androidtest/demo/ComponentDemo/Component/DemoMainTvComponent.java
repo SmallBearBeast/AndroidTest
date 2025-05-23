@@ -30,7 +30,7 @@ public class DemoMainTvComponent extends FragmentComponent<FragComponentTestBind
     }
 
     @Override
-    protected void onAttachViewBinding(FragComponentTestBinding binding) {
+    protected void onAttachViewBinding(@NonNull FragComponentTestBinding binding) {
         super.onAttachViewBinding(binding);
         textMainTv = getBinding().textMainTv;
         originText = String.valueOf(textMainTv.getText());

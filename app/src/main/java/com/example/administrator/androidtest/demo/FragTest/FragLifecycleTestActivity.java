@@ -28,7 +28,7 @@ public class FragLifecycleTestActivity extends ComponentActivity<ActFragTestBind
     private FragmentManager fragmentManager;
 
     @Override
-    protected ActFragTestBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActFragTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActFragTestBinding.inflate(inflater);
     }
 

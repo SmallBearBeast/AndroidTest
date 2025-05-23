@@ -24,7 +24,7 @@ import java.util.Set;
 
 public class BusTest2Activity extends ComponentActivity<ActCommomTestBinding> {
     @Override
-    protected ActCommomTestBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActCommomTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActCommomTestBinding.inflate(inflater);
     }
 

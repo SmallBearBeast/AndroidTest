@@ -9,5 +9,5 @@ public interface IContextProvider {
 
     Context getContext();
 
-    ComponentActivity getActivity();
+    ComponentActivity<?> getActivity();
 }

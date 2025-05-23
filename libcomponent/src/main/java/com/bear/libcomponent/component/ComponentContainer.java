@@ -17,7 +17,7 @@ public class ComponentContainer {
         return rootComponent.getComponent(clz, tag);
     }
 
-    public Map<ComponentKey<?>, GroupComponent> getComponentMap() {
+    Map<ComponentKey<?>, GroupComponent> getComponentMap() {
         return rootComponent.getComponentMap();
     }
 

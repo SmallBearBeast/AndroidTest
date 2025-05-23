@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -25,7 +26,7 @@ public class ShapeImageViewActivity extends ComponentActivity<ActShapeImageViewB
     }
 
     @Override
-    protected ActShapeImageViewBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActShapeImageViewBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActShapeImageViewBinding.inflate(inflater);
     }
 }

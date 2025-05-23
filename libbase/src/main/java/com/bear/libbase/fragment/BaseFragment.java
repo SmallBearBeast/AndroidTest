@@ -52,7 +52,7 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
     @CallSuper
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = layoutView();
-        if (view == null && layoutId() != 0) {
+        if (view == null && layoutId() != -1) {
             view = inflater.inflate(layoutId(), container, false);
         }
         if (view == null) {
@@ -118,15 +118,19 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
 
     }
 
-    public BaseActivity getBaseAct() {
+    public BaseActivity<?> getBaseAct() {
         return baseAct;
     }
 
-    public BaseFragment getBaseFrag() {
+    public BaseFragment<?> getBaseFrag() {
         return baseFrag;
     }
 
-    public @NonNull VB getBinding() {
+    public @Nullable VB getBinding() {
+        return viewBinding;
+    }
+
+    public @NonNull VB requireBinding() {
         return viewBinding;
     }
 

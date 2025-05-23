@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewbinding.ViewBinding;
 
+@SuppressWarnings("unchecked")
 public class ViewComponent<VB extends ViewBinding> extends GroupComponent implements View.OnAttachStateChangeListener {
 
     // 组件持有的根组件的View。
@@ -22,20 +23,22 @@ public class ViewComponent<VB extends ViewBinding> extends GroupComponent implem
 
     public ViewComponent(VB binding, Lifecycle lifecycle) {
         super(lifecycle);
-        onAttachViewBinding(binding);
+        if (binding != null) {
+            onAttachViewBinding(binding);
+        }
     }
 
     @CallSuper
-    protected void onAttachViewBinding(VB binding) {
-        if (binding != null && binding.getRoot() != null) {
-            viewBinding = binding;
-            binding.getRoot().addOnAttachStateChangeListener(this);
-            for (GroupComponent component : getComponentMap().values()) {
-                if (component instanceof ViewComponent) {
-                    ViewComponent viewComponent = (ViewComponent) component;
-                    if (viewComponent.getRoot() == null) {
-                        viewComponent.onAttachViewBinding(binding);
-                    }
+    protected void onAttachViewBinding(@NonNull VB binding) {
+        viewBinding = binding;
+        binding.getRoot().addOnAttachStateChangeListener(this);
+        for (GroupComponent component : getComponentMap().values()) {
+            if (component instanceof ViewComponent<?>) {
+                // 需要转成ViewBinding，而不是VB，有可能子Component的VB类型与父Component类型不一致，会类型转化错误。
+                ViewComponent<ViewBinding> viewComponent = (ViewComponent<ViewBinding>) component;
+                // 子Component没有VB对象，复用父Component的VB。
+                if (viewComponent.getRoot() == null) {
+                    viewComponent.onAttachViewBinding(binding);
                 }
             }
         }
@@ -43,12 +46,12 @@ public class ViewComponent<VB extends ViewBinding> extends GroupComponent implem
 
     @CallSuper
     protected void onDetachView() {
-        if (viewBinding != null && viewBinding.getRoot() != null) {
+        if (viewBinding != null) {
             viewBinding.getRoot().removeOnAttachStateChangeListener(this);
         }
         for (GroupComponent component : getComponentMap().values()) {
-            if (component instanceof ViewComponent) {
-                ViewComponent viewComponent = (ViewComponent) component;
+            if (component instanceof ViewComponent<?>) {
+                ViewComponent<?> viewComponent = (ViewComponent<?>) component;
                 viewComponent.onDetachView();
             }
         }
@@ -78,8 +81,10 @@ public class ViewComponent<VB extends ViewBinding> extends GroupComponent implem
             throw new RuntimeException("Only register ViewComponent as a child component");
         }
         super.regComponent(component, tag);
-        ViewComponent viewComponent = (ViewComponent) component;
-        if (viewComponent.getRoot() == null) {
+        // 需要转成ViewBinding，而不是VB，有可能子Component的VB类型与父Component类型不一致，会类型转化错误。
+        ViewComponent<ViewBinding> viewComponent = (ViewComponent<ViewBinding>) component;
+        // 子Component没有VB对象，复用父Component的VB。
+        if (viewComponent.getRoot() == null && viewBinding != null) {
             viewComponent.onAttachViewBinding(viewBinding);
         }
     }

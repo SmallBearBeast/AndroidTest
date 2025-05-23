@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -20,7 +21,7 @@ import com.permissionx.guolindev.PermissionX;
 
 public class ScreenActivity extends ComponentActivity<ActScreenBinding> {
     @Override
-    protected ActScreenBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActScreenBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActScreenBinding.inflate(inflater);
     }
 

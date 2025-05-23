@@ -75,7 +75,11 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
         return toolbar;
     }
 
-    public @NonNull VB getBinding() {
+    public @Nullable VB getBinding() {
+        return viewBinding;
+    }
+
+    public @NonNull VB requireBinding() {
         return viewBinding;
     }
 

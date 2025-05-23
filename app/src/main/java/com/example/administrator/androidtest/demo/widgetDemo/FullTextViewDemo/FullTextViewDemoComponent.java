@@ -22,7 +22,7 @@ public class FullTextViewDemoComponent extends BaseWidgetDemoComponent {
     protected void onCreate() {
         super.onCreate();
         ftvFullText = getBinding().fullTextView;
-        getBinding().fullTextView.setOnClickListener(this);
+        getBinding().fullTextButton.setOnClickListener(this);
     }
 
     @Override

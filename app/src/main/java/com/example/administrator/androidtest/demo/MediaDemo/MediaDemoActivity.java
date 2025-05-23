@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -20,7 +21,7 @@ public class MediaDemoActivity extends ComponentActivity<ActMediaDemoListBinding
     }
 
     @Override
-    protected ActMediaDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActMediaDemoListBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActMediaDemoListBinding.inflate(inflater);
     }
 

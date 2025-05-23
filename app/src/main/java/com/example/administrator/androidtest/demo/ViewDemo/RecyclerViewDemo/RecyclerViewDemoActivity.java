@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.SpinnerAdapter;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.recyclerview.widget.RecyclerView;
@@ -72,7 +73,7 @@ public class RecyclerViewDemoActivity extends ComponentActivity<ActRvDemoBinding
     };
 
     @Override
-    protected ActRvDemoBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActRvDemoBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActRvDemoBinding.inflate(inflater);
     }
 

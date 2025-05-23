@@ -66,7 +66,7 @@ public class ViewPagerTestActivity extends ComponentActivity<ActViewpagerTestBin
     }
 
     @Override
-    protected ActViewpagerTestBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActViewpagerTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActViewpagerTestBinding.inflate(inflater);
     }
 

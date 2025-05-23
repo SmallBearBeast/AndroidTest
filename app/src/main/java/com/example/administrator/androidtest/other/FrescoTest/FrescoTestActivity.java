@@ -6,6 +6,7 @@ import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -32,7 +33,7 @@ public class FrescoTestActivity extends ComponentActivity<ActFrescoBinding> {
     private FrescoView mFvImage;
 
     @Override
-    protected ActFrescoBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActFrescoBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActFrescoBinding.inflate(inflater);
     }
 

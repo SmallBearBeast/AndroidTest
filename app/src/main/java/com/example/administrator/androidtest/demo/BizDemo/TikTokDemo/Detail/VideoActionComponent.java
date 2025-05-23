@@ -3,6 +3,8 @@ package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.bear.libcomponent.component.ViewComponent;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CircleCrop;
@@ -27,7 +29,7 @@ public class VideoActionComponent extends ViewComponent<ItemTiktokVideoDetailBin
     }
 
     @Override
-    protected void onAttachViewBinding(ItemTiktokVideoDetailBinding binding) {
+    protected void onAttachViewBinding(@NonNull ItemTiktokVideoDetailBinding binding) {
         super.onAttachViewBinding(binding);
         authorAvatarIv = getBinding().authorAvatarIv;
         musicAvatarIv = getBinding().musicAvatarIv;

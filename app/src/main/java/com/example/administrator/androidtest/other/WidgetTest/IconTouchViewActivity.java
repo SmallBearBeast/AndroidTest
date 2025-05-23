@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcommon.util.ToastUtil;
@@ -25,7 +26,7 @@ public class IconTouchViewActivity extends ComponentActivity<ActIconTouchViewBin
     private FrameLayout mFlTest_3;
 
     @Override
-    protected ActIconTouchViewBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActIconTouchViewBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActIconTouchViewBinding.inflate(inflater);
     }
 

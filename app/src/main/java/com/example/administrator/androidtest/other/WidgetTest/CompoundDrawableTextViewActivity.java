@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.other.WidgetTest;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcommon.util.ToastUtil;
@@ -15,7 +16,7 @@ public class CompoundDrawableTextViewActivity extends ComponentActivity<ActCompo
     private CompoundDrawableTextView cdtvText;
 
     @Override
-    protected ActCompoundDrawableTvBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActCompoundDrawableTvBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActCompoundDrawableTvBinding.inflate(inflater);
     }
 

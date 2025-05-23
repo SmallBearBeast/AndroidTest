@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -22,7 +23,7 @@ public class LibraryDemoActivity extends ComponentActivity<ActLibraryDemoListBin
     }
 
     @Override
-    protected ActLibraryDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActLibraryDemoListBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActLibraryDemoListBinding.inflate(inflater);
     }
 

@@ -2,6 +2,7 @@ package com.example.administrator.androidtest.demo.ComponentDemo.Component;
 
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 
 import com.bear.libcomponent.component.FragmentComponent;
@@ -26,7 +27,7 @@ public class DemoMinorTvComponent extends FragmentComponent<FragComponentTestBin
     }
 
     @Override
-    protected void onAttachViewBinding(FragComponentTestBinding binding) {
+    protected void onAttachViewBinding(@NonNull FragComponentTestBinding binding) {
         super.onAttachViewBinding(binding);
         textMinorTv = getBinding().textMinorTv;
         originText = String.valueOf(textMinorTv.getText());

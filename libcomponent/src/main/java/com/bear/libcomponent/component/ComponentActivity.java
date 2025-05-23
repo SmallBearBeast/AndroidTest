@@ -14,19 +14,19 @@ import com.bear.libbase.activity.BaseActivity;
 public abstract class ComponentActivity<VB extends ViewBinding> extends BaseActivity<VB> {
     private final ComponentManager componentManager = new ComponentManager();
     
-    protected void regActComponent(ActivityComponent component, Object tag) {
+    protected void regActComponent(ActivityComponent<VB> component, Object tag) {
         componentManager.regComponent(this, component, tag);
     }
 
-    protected void regActComponent(ActivityComponent component) {
+    protected void regActComponent(ActivityComponent<VB> component) {
         componentManager.regComponent(this, component);
     }
 
-    protected void regComponent(ViewComponent component, Object tag) {
+    protected void regComponent(ViewComponent<ViewBinding> component, Object tag) {
 
     }
 
-    protected void regComponent(ViewComponent component) {
+    protected void regComponent(ViewComponent<ViewBinding> component) {
 
     }
 

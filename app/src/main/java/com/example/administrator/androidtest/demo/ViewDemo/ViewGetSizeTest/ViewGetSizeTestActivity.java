@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcommon.util.DensityUtil;
@@ -25,7 +26,7 @@ public class ViewGetSizeTestActivity extends ComponentActivity<ActViewGetWidthAn
     private TextView testTextView;
 
     @Override
-    protected ActViewGetWidthAndHeightTestBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActViewGetWidthAndHeightTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActViewGetWidthAndHeightTestBinding.inflate(inflater);
     }
 

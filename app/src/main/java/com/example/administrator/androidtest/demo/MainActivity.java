@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcommon.util.MainHandlerUtil;
@@ -67,7 +68,7 @@ public class MainActivity extends ComponentActivity<ActMainDemoListBinding> {
     }
 
     @Override
-    protected ActMainDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActMainDemoListBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActMainDemoListBinding.inflate(inflater);
     }
 

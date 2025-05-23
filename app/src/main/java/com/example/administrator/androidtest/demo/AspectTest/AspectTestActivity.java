@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
+
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActCommomTestBinding;
 //import com.example.libaspectj.Annotation.AsClick;
@@ -13,7 +15,7 @@ import com.example.administrator.androidtest.databinding.ActCommomTestBinding;
 
 public class AspectTestActivity extends ComponentActivity<ActCommomTestBinding> {
     @Override
-    protected ActCommomTestBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActCommomTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActCommomTestBinding.inflate(inflater);
     }
 

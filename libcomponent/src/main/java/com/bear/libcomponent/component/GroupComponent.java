@@ -5,6 +5,7 @@ import androidx.lifecycle.Lifecycle;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public abstract class GroupComponent extends BaseComponent {
     private GroupComponent parentComponent;
     private final Map<ComponentKey<?>, GroupComponent> componentMap = new HashMap<>();
@@ -37,9 +38,7 @@ public abstract class GroupComponent extends BaseComponent {
                 componentMap.remove(componentKey);
             }
         });
-        if (component instanceof GroupComponent) {
-            ((GroupComponent) component).parentComponent = this;
-        }
+        ((GroupComponent) component).parentComponent = this;
         componentMap.put(componentKey, component);
     }
 
@@ -75,7 +74,7 @@ public abstract class GroupComponent extends BaseComponent {
         return null;
     }
 
-    public <C extends GroupComponent> C travel(ComponentKey<?> targetKey, GroupComponent excludeComponent) {
+    <C extends GroupComponent> C travel(ComponentKey<?> targetKey, GroupComponent excludeComponent) {
         if (componentMap.containsKey(targetKey)) {
             return (C) componentMap.get(targetKey);
         }
@@ -93,7 +92,7 @@ public abstract class GroupComponent extends BaseComponent {
         return null;
     }
 
-    public void foreach(ForeachAction foreachAction) {
+    void foreach(ForeachAction foreachAction) {
         for (GroupComponent component : componentMap.values()) {
             foreachAction.foreach(component);
             if (component != null) {
@@ -102,7 +101,7 @@ public abstract class GroupComponent extends BaseComponent {
         }
     }
 
-    public Map<ComponentKey<?>, GroupComponent> getComponentMap() {
+    Map<ComponentKey<?>, GroupComponent> getComponentMap() {
         return componentMap;
     }
 

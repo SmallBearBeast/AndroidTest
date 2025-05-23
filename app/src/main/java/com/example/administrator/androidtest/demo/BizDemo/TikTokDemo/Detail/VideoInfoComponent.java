@@ -5,6 +5,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.bear.libcomponent.component.ViewComponent;
 import com.bumptech.glide.Glide;
 import com.example.administrator.androidtest.databinding.ItemTiktokVideoDetailBinding;
@@ -26,7 +28,7 @@ public class VideoInfoComponent extends ViewComponent<ItemTiktokVideoDetailBindi
     }
 
     @Override
-    protected void onAttachViewBinding(ItemTiktokVideoDetailBinding binding) {
+    protected void onAttachViewBinding(@NonNull ItemTiktokVideoDetailBinding binding) {
         super.onAttachViewBinding(binding);
         thumbIv = getBinding().thumbIv;
         authorNameTv = getBinding().authorNameTv;

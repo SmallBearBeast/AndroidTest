@@ -43,7 +43,7 @@ public class CoordinatorLayoutTestActivity extends ComponentActivity<ActConstrai
     }
 
     @Override
-    protected ActConstraintTestBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActConstraintTestBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActConstraintTestBinding.inflate(inflater);
     }
 

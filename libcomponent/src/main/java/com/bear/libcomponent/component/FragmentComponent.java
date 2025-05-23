@@ -10,17 +10,17 @@ import com.bear.libcomponent.provider.IMenuProvider;
 
 public class FragmentComponent<VB extends ViewBinding> extends ViewComponent<VB> implements IBackPressedProvider, IMenuProvider {
 
-    private ComponentFragment componentFrag;
+    private ComponentFragment<?> componentFrag;
 
     public FragmentComponent(Lifecycle lifecycle) {
         super(null, lifecycle);
     }
 
-    void attachFragment(ComponentFragment fragment) {
+    void attachFragment(ComponentFragment<?> fragment) {
         componentFrag = fragment;
     }
 
-    public ComponentFragment getFragment() {
+    public ComponentFragment<?> getFragment() {
         return componentFrag;
     }
 

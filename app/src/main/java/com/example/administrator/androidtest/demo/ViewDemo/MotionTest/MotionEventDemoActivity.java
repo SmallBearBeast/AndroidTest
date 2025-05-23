@@ -6,13 +6,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 
+import androidx.annotation.NonNull;
+
 import com.bear.libcomponent.component.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActMotionBinding;
 import com.example.administrator.androidtest.other.OtherUtil;
 
 public class MotionEventDemoActivity extends ComponentActivity<ActMotionBinding> {
     @Override
-    protected ActMotionBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActMotionBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActMotionBinding.inflate(inflater);
     }
 

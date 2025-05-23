@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcommon.util.XmlDrawableUtil;
@@ -28,7 +29,7 @@ public class XmlDrawableActivity extends ComponentActivity<ActXmlDrawableBinding
     private ToggleButton mTb_2;
 
     @Override
-    protected ActXmlDrawableBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActXmlDrawableBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActXmlDrawableBinding.inflate(inflater);
     }
 

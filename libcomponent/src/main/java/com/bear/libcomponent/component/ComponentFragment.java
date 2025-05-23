@@ -50,11 +50,11 @@ public abstract class ComponentFragment<VB extends ViewBinding> extends BaseFrag
         getComponentManager().dispatchOnFirstVisible(this);
     }
 
-    public void regFragComponent(FragmentComponent component, Object tag) {
+    public void regFragComponent(FragmentComponent<VB> component, Object tag) {
         getComponentManager().regComponent(this, component, tag);
     }
 
-    public void regFragComponent(FragmentComponent component) {
+    public void regFragComponent(FragmentComponent<VB> component) {
         getComponentManager().regComponent(this, component);
     }
 
@@ -67,8 +67,8 @@ public abstract class ComponentFragment<VB extends ViewBinding> extends BaseFrag
     }
     
     private ComponentManager getComponentManager() {
-        if (getActivity() instanceof ComponentActivity) {
-            return ((ComponentActivity) getActivity()).getComponentManager();
+        if (getActivity() instanceof ComponentActivity<?>) {
+            return ((ComponentActivity<?>) getActivity()).getComponentManager();
         }
         throw new RuntimeException("getComponentManager return null");
     }

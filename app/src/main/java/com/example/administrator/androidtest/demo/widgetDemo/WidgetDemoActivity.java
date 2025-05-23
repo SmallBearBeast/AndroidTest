@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -34,7 +35,7 @@ public class WidgetDemoActivity extends ComponentActivity<ActWidgetDemoListBindi
     }
 
     @Override
-    protected ActWidgetDemoListBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActWidgetDemoListBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActWidgetDemoListBinding.inflate(inflater);
     }
 

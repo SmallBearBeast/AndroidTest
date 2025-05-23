@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.view.LayoutInflater;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,7 @@ public class MediaStoreDemoActivity extends ComponentActivity<ActMediaProviderBi
     private MultiItemChanger itemChanger;
 
     @Override
-    protected ActMediaProviderBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActMediaProviderBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActMediaProviderBinding.inflate(inflater);
     }
 

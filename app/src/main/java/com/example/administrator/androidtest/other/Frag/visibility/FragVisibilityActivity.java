@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.component.ComponentActivity;
@@ -19,7 +20,7 @@ public class FragVisibilityActivity extends ComponentActivity<ActFragVisibilityB
     private FragmentThree fragmentThree;
 
     @Override
-    protected ActFragVisibilityBinding inflateViewBinding(LayoutInflater inflater) {
+    protected ActFragVisibilityBinding inflateViewBinding(@NonNull LayoutInflater inflater) {
         return ActFragVisibilityBinding.inflate(inflater);
     }
 
