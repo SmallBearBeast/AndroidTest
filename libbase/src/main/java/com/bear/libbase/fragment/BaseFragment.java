@@ -71,6 +71,9 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
                 setHasOptionsMenu(true);
             }
         }
+        if (view != null) {
+            initViews(view);
+        }
         return view;
     }
 
@@ -78,13 +81,6 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
     public void onResume() {
         super.onResume();
         dispatchFirstVisible();
-    }
-
-    private void dispatchFirstVisible() {
-        if (firstVisible) {
-            onFirstVisible();
-            firstVisible = false;
-        }
     }
 
     @Override
@@ -95,14 +91,6 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
         baseFrag = null;
     }
 
-    /**
-     * This method is called when clicking the back button.
-     */
-    public void addBackPressedListener(@NonNull BackPressedHelper.BackPressedListener listener) {
-        BackPressedHelper.addBackPressedListener(this, listener);
-    }
-
-
     protected void handleIntent(@NonNull Intent intent) {
 
     }
@@ -111,11 +99,29 @@ public abstract class BaseFragment<VB extends ViewBinding> extends Fragment {
 
     }
 
+    protected void initViews(@NonNull View view) {
+
+    }
+
+    private void dispatchFirstVisible() {
+        if (firstVisible) {
+            onFirstVisible();
+            firstVisible = false;
+        }
+    }
+
     /**
      * This method is called when fragment is first visible
      */
     protected void onFirstVisible() {
 
+    }
+
+    /**
+     * This method is called when clicking the back button.
+     */
+    public void addBackPressedListener(@NonNull BackPressedHelper.BackPressedListener listener) {
+        BackPressedHelper.addBackPressedListener(this, listener);
     }
 
     public BaseActivity<?> getBaseAct() {

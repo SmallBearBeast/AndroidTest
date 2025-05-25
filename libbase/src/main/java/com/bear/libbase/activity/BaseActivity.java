@@ -49,7 +49,7 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
             // 若调用setSupportActionBar，则在onCreateOptionsMenu(Menu menu)中获取menu引用，否则直接Menu menu = mToolbar.getMenu();
             setSupportActionBar(toolbar);
         }
-        initView();
+        initViews();
     }
 
     /**
@@ -63,7 +63,7 @@ public abstract class BaseActivity<VB extends ViewBinding> extends AppCompatActi
 
     }
 
-    protected void initView() {
+    protected void initViews() {
 
     }
 
