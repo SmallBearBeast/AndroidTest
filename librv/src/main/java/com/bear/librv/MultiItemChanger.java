@@ -30,10 +30,6 @@ public class MultiItemChanger {
             RvLog.w(TAG, "setItems: itemList is null");
             return;
         }
-        if (itemList.isEmpty()) {
-            RvLog.w(TAG, "setItems: itemList is empty");
-            return;
-        }
         List<Object> regItemList = new ArrayList<>();
         for (Object item : itemList) {
             if (!multiTypeAdapter.isRegister(item)) {
@@ -100,7 +96,11 @@ public class MultiItemChanger {
 
     public void addAll(int index, List<Object> itemList) {
         if (!checkIndex(index)) {
-            RvLog.w(TAG, "add: index is out of range");
+            RvLog.w(TAG, "addAll: index is out of range");
+            return;
+        }
+        if (itemList.isEmpty()) {
+            RvLog.w(TAG, "addAll: itemList is empty");
             return;
         }
         List<Object> regItemList = new ArrayList<>();
@@ -110,10 +110,6 @@ public class MultiItemChanger {
             } else {
                 regItemList.add(item);
             }
-        }
-        if (regItemList.isEmpty()) {
-            RvLog.w(TAG, "add: regDataList is empty");
-            return;
         }
         internalItemList.addAll(index, regItemList);
         multiTypeAdapter.notifyItemRangeInserted(index, regItemList.size());
@@ -256,7 +252,7 @@ public class MultiItemChanger {
                         realPosition = realPosition - cursor.getCount() + 1;
                     }
                 }
-             }
+            }
             return internalItemList.get(realPosition);
         }
         return null;
