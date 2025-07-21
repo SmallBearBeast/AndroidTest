@@ -26,7 +26,7 @@ class CostTimeMethodVisitor(
         visitor.visitLdcInsn("Asm_Hook_Execute_Time")
         visitor.visitMethodInsn(
             INVOKESTATIC,
-            "com/example/libcommon/Util/TimeRecordUtil",
+            "com/bear/libcommon/util/TimeRecordUtil",
             "markStart",
             "(Ljava/lang/String;)V",
             false
@@ -37,7 +37,7 @@ class CostTimeMethodVisitor(
         visitor.visitVarInsn(ALOAD, 0)
         visitor.visitFieldInsn(
             GETFIELD,
-            "com/example/administrator/androidtest/demo/MainAct",
+            "com/example/administrator/androidtest/demo/MainActivity",
             "TAG",
             "Ljava/lang/String;"
         )
@@ -61,7 +61,7 @@ class CostTimeMethodVisitor(
         visitor.visitLdcInsn("Asm_Hook_Execute_Time")
         visitor.visitMethodInsn(
             INVOKESTATIC,
-            "com/example/libcommon/Util/TimeRecordUtil",
+            "com/bear/libcommon/util/TimeRecordUtil",
             "getDuration",
             "(Ljava/lang/String;)J",
             false
@@ -91,7 +91,7 @@ class CostTimeMethodVisitor(
         visitor.visitLdcInsn("Asm_Hook_Execute_Time")
         visitor.visitMethodInsn(
             INVOKESTATIC,
-            "com/example/libcommon/Util/TimeRecordUtil",
+            "com/bear/libcommon/util/TimeRecordUtil",
             "remove",
             "(Ljava/lang/String;)V",
             false

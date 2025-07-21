@@ -19,11 +19,11 @@ class CostTimeClassVisitor(visitor: ClassVisitor) : ClassVisitor(Opcodes.ASM6, v
         exceptions: Array<out String>?
     ): MethodVisitor {
         println("$TAG visitMethod: access = $access, name = $name, descriptor = $descriptor, signature = $signature, exceptions = $exceptions")
-        val visitor = super.visitMethod(access, name, descriptor, signature, exceptions)
+        val methodVisitor = super.visitMethod(access, name, descriptor, signature, exceptions)
         if (name == "onCreate" || name == "testSpToMmkv" || name == "onWindowFocusChanged") {
-            return CostTimeMethodVisitor(Opcodes.ASM6, visitor, access, name, descriptor)
+            return CostTimeMethodVisitor(Opcodes.ASM6, methodVisitor, access, name, descriptor)
         }
-        return visitor
+        return methodVisitor
     }
 
     override fun visit(

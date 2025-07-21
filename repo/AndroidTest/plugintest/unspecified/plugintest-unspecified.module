@@ -29,11 +29,11 @@
         {
           "name": "plugintest-unspecified.jar",
           "url": "plugintest-unspecified.jar",
-          "size": 31590,
-          "sha512": "c9ea4c78bf9a4682fccd571d7da1df1fd8744f68676b3c8d172b72e4ced56f80b942e6c3a4582cfd4549a25ea49ab5971d64531f67ca8da4d018fd5ff3ea58eb",
-          "sha256": "8e2e4c9d96fee391c676895cb5b76a1ad0feff9d8982c375c8724057c184a10c",
-          "sha1": "76b4bca31ff908c9805300f3049ca91a7ba64dcc",
-          "md5": "46404fdb92d14d2c83ae2761d01153b7"
+          "size": 31602,
+          "sha512": "98e5f049694b709adb900896cc86e8909dde02809fbe5b90c0e8af7204b34c104bd8e7e06852049150fc663c43b7d765af0b85c5a73c5c9d9742637fe8926313",
+          "sha256": "2ccc2d7df389b99006f7604d213c161d62f8137d382586ff17d034952c329eb9",
+          "sha1": "af238acc56b9da099d1714ec366d4e1f4bfb642f",
+          "md5": "e06533d61922f55d23e02ce357b28b6f"
         }
       ]
     },
@@ -96,11 +96,11 @@
         {
           "name": "plugintest-unspecified.jar",
           "url": "plugintest-unspecified.jar",
-          "size": 31590,
-          "sha512": "c9ea4c78bf9a4682fccd571d7da1df1fd8744f68676b3c8d172b72e4ced56f80b942e6c3a4582cfd4549a25ea49ab5971d64531f67ca8da4d018fd5ff3ea58eb",
-          "sha256": "8e2e4c9d96fee391c676895cb5b76a1ad0feff9d8982c375c8724057c184a10c",
-          "sha1": "76b4bca31ff908c9805300f3049ca91a7ba64dcc",
-          "md5": "46404fdb92d14d2c83ae2761d01153b7"
+          "size": 31602,
+          "sha512": "98e5f049694b709adb900896cc86e8909dde02809fbe5b90c0e8af7204b34c104bd8e7e06852049150fc663c43b7d765af0b85c5a73c5c9d9742637fe8926313",
+          "sha256": "2ccc2d7df389b99006f7604d213c161d62f8137d382586ff17d034952c329eb9",
+          "sha1": "af238acc56b9da099d1714ec366d4e1f4bfb642f",
+          "md5": "e06533d61922f55d23e02ce357b28b6f"
         }
       ]
     }

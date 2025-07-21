@@ -14,7 +14,7 @@ class CostTimeTransform : BaseCustomTransform(true){
     }
 
     override fun classFilter(className: String): Boolean {
-        return className.endsWith("MainAct.class")
+        return className.endsWith("MainActivity.class")
     }
 
     override fun applyToVariant(variant: VariantInfo?): Boolean {
