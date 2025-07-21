@@ -25,13 +25,13 @@ object DataStoreHelper {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = DATA_STORE_NAME)
 
     private val Context.settingsDataStore: DataStore<Settings> by dataStore(
-            fileName = "settings.pb",
-            serializer = SettingsSerializer
+        fileName = "settings.pb",
+        serializer = SettingsSerializer
     )
 
     fun getSettings(): Settings {
         return runBlocking {
-            val settingsDataStore = AndroidTestApplication.getContext().settingsDataStore
+            val settingsDataStore = AndroidTestApplication.context.settingsDataStore
             settingsDataStore.data.first()
         }
     }
@@ -39,7 +39,7 @@ object DataStoreHelper {
     fun putSettings(settings: Settings) {
         val coroutineScope = CoroutineScope(Dispatchers.Main)
         GlobalScope.launch {
-            val settingsDataStore = AndroidTestApplication.getContext().settingsDataStore
+            val settingsDataStore = AndroidTestApplication.context.settingsDataStore
             settingsDataStore.updateData {
                 Settings.newBuilder(settings).build()
             }
@@ -49,7 +49,7 @@ object DataStoreHelper {
     fun getInt(key: String, defaultValue: Int = 0): Int {
         var value = defaultValue
         runBlocking {
-            val dataStore = AndroidTestApplication.getContext().dataStore
+            val dataStore = AndroidTestApplication.context.dataStore
             dataStore.data.take(1).map { preferences ->
                 preferences[intPreferencesKey(key)] ?: defaultValue
             }.collect {
@@ -60,7 +60,7 @@ object DataStoreHelper {
     }
 
     fun putInt(key: String, value: Int) {
-        val dataStore = AndroidTestApplication.getContext().dataStore
+        val dataStore = AndroidTestApplication.context.dataStore
         GlobalScope.launch {
             dataStore.edit { preferences ->
                 preferences[intPreferencesKey(key)] = value
@@ -69,7 +69,7 @@ object DataStoreHelper {
     }
 
     fun getInt(key: String, defaultValue: Int, callback: (Int) -> Unit) {
-        val dataStore = AndroidTestApplication.getContext().dataStore
+        val dataStore = AndroidTestApplication.context.dataStore
         GlobalScope.launch {
             dataStore.data.take(1).map { preferences ->
                 preferences[intPreferencesKey(key)]

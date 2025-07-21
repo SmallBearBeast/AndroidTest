@@ -53,7 +53,7 @@ public class TiktokDataLoader {
             BgThreadExecutor.execute(() -> {
                 InputStream inputStream = null;
                 try {
-                    inputStream = AndroidTestApplication.getContext().getAssets().open("tiktok_video_info.json");
+                    inputStream = AndroidTestApplication.context.getAssets().open("tiktok_video_info.json");
                     TypeToken<List<TiktokVideoInfo>> typeToken = new TypeToken<List<TiktokVideoInfo>>() {
                     };
                     List<TiktokVideoInfo> tiktokVideoInfoList = FileStorage.readObjFromJson(inputStream, typeToken);
@@ -72,7 +72,7 @@ public class TiktokDataLoader {
             BgThreadExecutor.execute(() -> {
                 InputStream inputStream = null;
                 try {
-                    inputStream = AndroidTestApplication.getContext().getAssets().open("tiktok_loadmore_video_info.json");
+                    inputStream = AndroidTestApplication.context.getAssets().open("tiktok_loadmore_video_info.json");
                     TypeToken<List<TiktokVideoInfo>> typeToken = new TypeToken<List<TiktokVideoInfo>>() {
                     };
                     List<TiktokVideoInfo> tiktokVideoInfoList = FileStorage.readObjFromJson(inputStream, typeToken);
@@ -153,7 +153,7 @@ public class TiktokDataLoader {
             BgThreadExecutor.execute(() -> {
                 InputStream inputStream = null;
                 try {
-                    inputStream = AndroidTestApplication.getContext().getAssets().open("tiktok_video_detail_info.json");
+                    inputStream = AndroidTestApplication.context.getAssets().open("tiktok_video_detail_info.json");
                     TypeToken<List<TiktokVideoDetailInfo>> typeToken = new TypeToken<List<TiktokVideoDetailInfo>>() {
                     };
                     List<TiktokVideoDetailInfo> videoDetailInfoList = FileStorage.readObjFromJson(inputStream, typeToken);
@@ -172,7 +172,7 @@ public class TiktokDataLoader {
             BgThreadExecutor.execute(() -> {
                 InputStream inputStream = null;
                 try {
-                    inputStream = AndroidTestApplication.getContext().getAssets().open("tiktok_loadmore_video_detail_info.json");
+                    inputStream = AndroidTestApplication.context.getAssets().open("tiktok_loadmore_video_detail_info.json");
                     TypeToken<List<TiktokVideoDetailInfo>> typeToken = new TypeToken<List<TiktokVideoDetailInfo>>() {
                     };
                     List<TiktokVideoDetailInfo> videoDetailInfoList = FileStorage.readObjFromJson(inputStream, typeToken);

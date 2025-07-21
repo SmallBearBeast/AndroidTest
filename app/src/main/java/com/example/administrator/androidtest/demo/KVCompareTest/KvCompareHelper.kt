@@ -25,8 +25,10 @@ object KvCompareHelper {
     private const val KV_COMPARE_LONG_STRING_KEY = "kv_compare_long_string_key_"
     private const val KV_COMPARE_VERY_VERY_LONG_STRING_KEY = "kv_compare_very_very_long_string_key_"
     private const val KV_COMPARE_NAME = "kv_compare_name"
-    private const val KV_COMPARE_SHORT_STRING = "kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_"
-    private const val KV_COMPARE_LONG_STRING = "kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_"
+    private const val KV_COMPARE_SHORT_STRING =
+        "kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_"
+    private const val KV_COMPARE_LONG_STRING =
+        "kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_kv_compare_long_string_"
     private var KV_COMPARE_VERY_VERY_LONG_STRING: String
 
     init {
@@ -41,7 +43,7 @@ object KvCompareHelper {
 
     fun loadFromDataStore() {
         val startTs = System.currentTimeMillis()
-        val dataStore = AndroidTestApplication.getContext().dataStore
+        val dataStore = AndroidTestApplication.context.dataStore
         GlobalScope.launch(Dispatchers.IO) {
             dataStore.data.take(1).map { preferences ->
                 preferences[intPreferencesKey(KV_COMPARE_INT_KEY + 0)]
@@ -53,7 +55,7 @@ object KvCompareHelper {
     }
 
     fun readFromDataStore() {
-        val dataStore = AndroidTestApplication.getContext().dataStore
+        val dataStore = AndroidTestApplication.context.dataStore
         GlobalScope.launch {
             dataStore.data.take(1).map { preferences ->
                 val startTs = System.currentTimeMillis()
@@ -69,7 +71,7 @@ object KvCompareHelper {
     }
 
     fun writeToDataStore() {
-        val dataStore = AndroidTestApplication.getContext().dataStore
+        val dataStore = AndroidTestApplication.context.dataStore
         GlobalScope.launch {
             dataStore.edit { settings ->
                 val startTs = System.currentTimeMillis()
@@ -85,7 +87,7 @@ object KvCompareHelper {
 
     fun clearDataStore() {
         val startTs = System.currentTimeMillis()
-        val dataStore = AndroidTestApplication.getContext().dataStore
+        val dataStore = AndroidTestApplication.context.dataStore
         GlobalScope.launch {
             dataStore.edit { settings ->
                 settings.clear()
@@ -131,13 +133,13 @@ object KvCompareHelper {
 
     fun loadFromSp() {
         val startTs = System.currentTimeMillis()
-        val sp = AndroidTestApplication.getContext().getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
+        val sp = AndroidTestApplication.context.getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
         sp.getInt(KV_COMPARE_INT_KEY + 0, 0)
         Log.d(TAG, "loadFromSp $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
     }
 
     fun readFromSp() {
-        val sp = AndroidTestApplication.getContext().getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
+        val sp = AndroidTestApplication.context.getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
         val startTs = System.currentTimeMillis()
         for (index in 0 until LOOP) {
             sp.getInt(KV_COMPARE_INT_KEY + index, 0)
@@ -147,7 +149,7 @@ object KvCompareHelper {
     }
 
     fun writeToSp() {
-        val sp = AndroidTestApplication.getContext().getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
+        val sp = AndroidTestApplication.context.getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
         val editor = sp.edit()
         val startTs = System.currentTimeMillis()
         editor.putString(KV_COMPARE_VERY_VERY_LONG_STRING_KEY, KV_COMPARE_VERY_VERY_LONG_STRING)
@@ -161,7 +163,7 @@ object KvCompareHelper {
 
     fun clearSp() {
         val startTs = System.currentTimeMillis()
-        val sp = AndroidTestApplication.getContext().getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
+        val sp = AndroidTestApplication.context.getSharedPreferences(KV_COMPARE_NAME, Context.MODE_PRIVATE)
         sp.edit().clear().apply()
         Log.d(TAG, "clearSp $LOOP int cost: ${System.currentTimeMillis() - startTs}ms")
     }
@@ -170,7 +172,7 @@ object KvCompareHelper {
     fun testContinueSpApply() {
         for (i in 1..50) {
             val startTs = System.currentTimeMillis()
-            val sp = AndroidTestApplication.getContext().getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
+            val sp = AndroidTestApplication.context.getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
             val editor = sp.edit()
             for (index in 0 until 50) {
                 editor.putString(KV_COMPARE_VERY_VERY_LONG_STRING_KEY + index, KV_COMPARE_VERY_VERY_LONG_STRING)
@@ -184,7 +186,7 @@ object KvCompareHelper {
     fun clearContinueSp() {
         for (i in 1..50) {
             val startTs = System.currentTimeMillis()
-            val sp = AndroidTestApplication.getContext().getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
+            val sp = AndroidTestApplication.context.getSharedPreferences(KV_COMPARE_NAME + i, Context.MODE_PRIVATE)
             sp.edit().clear().apply()
             Log.d(TAG, "clearContinueSp write $i cost: ${System.currentTimeMillis() - startTs}ms")
         }

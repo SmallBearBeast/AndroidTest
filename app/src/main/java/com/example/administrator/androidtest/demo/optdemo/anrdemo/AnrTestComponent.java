@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.OptTest.AnrTest;
+package com.example.administrator.androidtest.demo.optdemo.anrdemo;
 
 import android.view.View;
 

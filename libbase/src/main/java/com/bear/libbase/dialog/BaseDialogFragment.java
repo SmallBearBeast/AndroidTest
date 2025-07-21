@@ -34,7 +34,7 @@ public abstract class BaseDialogFragment extends DialogFragment {
             mWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
         //在onCreate()设置dialog参数发现此时dialog=null，因此放到onCreateDialog()里面执行
-        //在这里设置dialog属性发现UI高度有变化
+        //在这里设置dialog属性发现UI高度没有变化
         //setup(dialog);
         return mDialog;
     }

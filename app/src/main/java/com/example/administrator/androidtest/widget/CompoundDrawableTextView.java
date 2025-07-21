@@ -45,35 +45,35 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
         TypedArray array = mContext.obtainStyledAttributes(attrs, R.styleable.CompoundDrawableTextView);
 
         int drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_click_left_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             clickDrawables[0] = ContextCompat.getDrawable(context, drawableId);
 
         drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_click_top_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             clickDrawables[1] = ContextCompat.getDrawable(context, drawableId);
 
         drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_click_right_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             clickDrawables[2] = ContextCompat.getDrawable(context, drawableId);
 
         drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_click_bottom_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             clickDrawables[3] = ContextCompat.getDrawable(context, drawableId);
 
         drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_press_left_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             pressDrawables[0] = ContextCompat.getDrawable(context, drawableId);
 
         drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_press_top_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             pressDrawables[1] = ContextCompat.getDrawable(context, drawableId);
 
         drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_press_right_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             pressDrawables[2] = ContextCompat.getDrawable(context, drawableId);
 
         drawableId = array.getResourceId(R.styleable.CompoundDrawableTextView_cdtv_press_bottom_drawableId, DRAWABLE_NONE);
-        if(drawableId != DRAWABLE_NONE)
+        if (drawableId != DRAWABLE_NONE)
             pressDrawables[3] = ContextCompat.getDrawable(context, drawableId);
 
         initStatusDrawables(drawables, clickDrawables, pressDrawables);
@@ -98,17 +98,17 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        if(mWidth == 0 && mWidth != w){
+        if (mWidth == 0 && mWidth != w) {
             mWidth = w;
         }
-        if(mHeight == 0 && mHeight != h){
+        if (mHeight == 0 && mHeight != h) {
             mHeight = h;
         }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mTouchX = (int) event.getX();
                 mTouchY = (int) event.getY();
@@ -117,50 +117,50 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
             case MotionEvent.ACTION_MOVE:
                 mTouchX = (int) event.getX();
                 mTouchY = (int) event.getY();
-                if(mLeftStatusDrawable.isNormal()) {
+                if (mLeftStatusDrawable.isNormal()) {
                     if (isCanLeftClick(mLeftStatusDrawable.mPressDrawable)) {
                         setPressStatusDrawable(DRAWABLE_LEFT);
                     } else {
                         resetStatusDrawable(mLeftStatusDrawable);
                     }
                 }
-                if(mTopStatusDrawable.isNormal()){
-                    if(isCanTopClick(mTopStatusDrawable.mPressDrawable)){
+                if (mTopStatusDrawable.isNormal()) {
+                    if (isCanTopClick(mTopStatusDrawable.mPressDrawable)) {
                         setPressStatusDrawable(DRAWABLE_TOP);
-                    }else {
+                    } else {
                         resetStatusDrawable(mTopStatusDrawable);
                     }
                 }
-                if(mRightStatusDrawable.isNormal()){
-                    if(isCanRightClick(mRightStatusDrawable.mPressDrawable)){
+                if (mRightStatusDrawable.isNormal()) {
+                    if (isCanRightClick(mRightStatusDrawable.mPressDrawable)) {
                         setPressStatusDrawable(DRAWABLE_RIGHT);
-                    }else {
+                    } else {
                         resetStatusDrawable(mRightStatusDrawable);
                     }
                 }
-                if(mBottomStatusDrawable.isNormal()){
-                    if(isCanBottomClick(mBottomStatusDrawable.mPressDrawable)){
+                if (mBottomStatusDrawable.isNormal()) {
+                    if (isCanBottomClick(mBottomStatusDrawable.mPressDrawable)) {
                         setPressStatusDrawable(DRAWABLE_BOTTOM);
-                    }else {
+                    } else {
                         resetStatusDrawable(mBottomStatusDrawable);
                     }
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                if(mClickWrapper != null){
-                    if(!mLeftStatusDrawable.isClick() && isCanLeftClick(mLeftStatusDrawable.mDrawable)){
+                if (mClickWrapper != null) {
+                    if (!mLeftStatusDrawable.isClick() && isCanLeftClick(mLeftStatusDrawable.mDrawable)) {
                         mClickWrapper.onLeftClick();
                         setClickStatusDrawable(DRAWABLE_LEFT);
-                    }else if(!mTopStatusDrawable.isClick() && isCanTopClick(mTopStatusDrawable.mDrawable)){
+                    } else if (!mTopStatusDrawable.isClick() && isCanTopClick(mTopStatusDrawable.mDrawable)) {
                         mClickWrapper.onTopClick();
                         setClickStatusDrawable(DRAWABLE_TOP);
-                    }else if(!mRightStatusDrawable.isClick() && isCanRightClick(mRightStatusDrawable.mDrawable)){
+                    } else if (!mRightStatusDrawable.isClick() && isCanRightClick(mRightStatusDrawable.mDrawable)) {
                         mClickWrapper.onRightClick();
                         setClickStatusDrawable(DRAWABLE_RIGHT);
-                    }else if(!mBottomStatusDrawable.isClick() && isCanBottomClick(mBottomStatusDrawable.mDrawable)){
+                    } else if (!mBottomStatusDrawable.isClick() && isCanBottomClick(mBottomStatusDrawable.mDrawable)) {
                         mClickWrapper.onBottomClick();
                         setClickStatusDrawable(DRAWABLE_BOTTOM);
-                    }else {
+                    } else {
                         mClickWrapper.onClick();
                     }
                 }
@@ -171,7 +171,7 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
     }
 
     private boolean isCanBottomClick(Drawable drawable) {
-        if(drawable == null)
+        if (drawable == null)
             return false;
         Rect rect = new Rect();
         rect.left = (mWidth - drawable.getIntrinsicWidth() - getPaddingLeft() - getPaddingRight()) / 2 + getPaddingLeft();
@@ -182,7 +182,7 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
     }
 
     private boolean isCanTopClick(Drawable drawable) {
-        if(drawable == null)
+        if (drawable == null)
             return false;
         Rect rect = new Rect();
         rect.left = (mWidth - drawable.getIntrinsicWidth() - getPaddingLeft() - getPaddingRight()) / 2 + getPaddingLeft();
@@ -193,7 +193,7 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
     }
 
     private boolean isCanRightClick(Drawable drawable) {
-        if(drawable == null)
+        if (drawable == null)
             return false;
         Rect rect = new Rect();
         rect.left = mWidth - getPaddingRight() - drawable.getIntrinsicWidth();
@@ -204,7 +204,7 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
     }
 
     private boolean isCanLeftClick(Drawable drawable) {
-        if(drawable == null)
+        if (drawable == null)
             return false;
         Rect rect = new Rect();
         rect.left = getPaddingLeft();
@@ -215,15 +215,15 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
     }
 
 
-    public void setClickWrapper(ClickWrapper clickWrapper){
+    public void setClickWrapper(ClickWrapper clickWrapper) {
         mClickWrapper = clickWrapper;
     }
 
     /**
      * 生成空白相同大小的空白drawable
      */
-    private Drawable createEmptyDrawable(Drawable drawable){
-        if(drawable != null){
+    private Drawable createEmptyDrawable(Drawable drawable) {
+        if (drawable != null) {
             ColorDrawable d = new ColorDrawable();
             d.setBounds(drawable.getBounds());
             return d;
@@ -231,13 +231,13 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
         return null;
     }
 
-    private void resetStatusDrawable(StatusDrawable statusDrawable){
+    private void resetStatusDrawable(StatusDrawable statusDrawable) {
         statusDrawable.setStatus(StatusDrawable.STATE_NORMAL);
         setCompoundDrawables(statusDrawable.mDrawable, statusDrawable.mDrawable, statusDrawable.mDrawable, statusDrawable.mDrawable);
     }
 
-    private void setClickStatusDrawable(int drawableType){
-        switch (drawableType){
+    private void setClickStatusDrawable(int drawableType) {
+        switch (drawableType) {
             case DRAWABLE_LEFT:
                 mLeftStatusDrawable.setStatus(StatusDrawable.STATE_CLICK);
                 mLeftStatusDrawable.mCurDrawable = mLeftStatusDrawable.mClickDrawable;
@@ -265,8 +265,8 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
 
     }
 
-    private void setPressStatusDrawable(int drawableType){
-        switch (drawableType){
+    private void setPressStatusDrawable(int drawableType) {
+        switch (drawableType) {
             case DRAWABLE_LEFT:
                 mLeftStatusDrawable.setStatus(StatusDrawable.STATE_PRESS);
                 mLeftStatusDrawable.mCurDrawable = mLeftStatusDrawable.mPressDrawable;
@@ -295,36 +295,36 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
     }
 
 
-    public void setClickDrawable(Drawable drawable, int drawableType){
-        switch (drawableType){
+    public void setClickDrawable(Drawable drawable, int drawableType) {
+        switch (drawableType) {
             case DRAWABLE_LEFT:
                 mLeftStatusDrawable.mClickDrawable = drawable;
-                if(mLeftStatusDrawable.isClick())
+                if (mLeftStatusDrawable.isClick())
                     setCompoundDrawables(drawable, mTopStatusDrawable.mDrawable, mRightStatusDrawable.mDrawable, mBottomStatusDrawable.mDrawable);
                 break;
 
             case DRAWABLE_TOP:
                 mTopStatusDrawable.mClickDrawable = drawable;
-                if(mTopStatusDrawable.isClick())
+                if (mTopStatusDrawable.isClick())
                     setCompoundDrawables(mLeftStatusDrawable.mDrawable, drawable, mRightStatusDrawable.mDrawable, mBottomStatusDrawable.mDrawable);
                 break;
 
             case DRAWABLE_RIGHT:
                 mRightStatusDrawable.mClickDrawable = drawable;
-                if(mRightStatusDrawable.isClick())
+                if (mRightStatusDrawable.isClick())
                     setCompoundDrawables(mLeftStatusDrawable.mDrawable, mTopStatusDrawable.mDrawable, drawable, mBottomStatusDrawable.mDrawable);
                 break;
 
             case DRAWABLE_BOTTOM:
                 mBottomStatusDrawable.mClickDrawable = drawable;
-                if(mBottomStatusDrawable.isClick())
+                if (mBottomStatusDrawable.isClick())
                     setCompoundDrawables(mLeftStatusDrawable.mDrawable, mTopStatusDrawable.mDrawable, mRightStatusDrawable.mDrawable, drawable);
                 break;
         }
     }
 
-    public void setPressDrawable(Drawable drawable, int drawableType){
-        switch (drawableType){
+    public void setPressDrawable(Drawable drawable, int drawableType) {
+        switch (drawableType) {
             case DRAWABLE_LEFT:
                 mLeftStatusDrawable.mPressDrawable = drawable;
                 break;
@@ -344,16 +344,35 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
     }
 
 
-    public static class ClickWrapper{
-        protected void onLeftClick(){};
-        protected void onRightClick(){};
-        protected void onTopClick(){};
-        protected void onBottomClick(){};
-        protected void onClick(){};
+    public static class ClickWrapper {
+        protected void onLeftClick() {
+        }
+
+        ;
+
+        protected void onRightClick() {
+        }
+
+        ;
+
+        protected void onTopClick() {
+        }
+
+        ;
+
+        protected void onBottomClick() {
+        }
+
+        ;
+
+        protected void onClick() {
+        }
+
+        ;
     }
 
 
-    static class StatusDrawable{
+    static class StatusDrawable {
         static final int STATE_NORMAL = 1;
         static final int STATE_PRESS = STATE_NORMAL + 1;
         static final int STATE_CLICK = STATE_PRESS + 1;
@@ -363,19 +382,19 @@ public class CompoundDrawableTextView extends androidx.appcompat.widget.AppCompa
         Drawable mPressDrawable;
         int mStatus;
 
-        public boolean isNormal(){
+        public boolean isNormal() {
             return mStatus == STATE_NORMAL;
         }
 
-        public boolean isPress(){
+        public boolean isPress() {
             return mStatus == STATE_PRESS;
         }
 
-        public boolean isClick(){
+        public boolean isClick() {
             return mStatus == STATE_CLICK;
         }
 
-        public void setStatus(int status){
+        public void setStatus(int status) {
             mStatus = status;
         }
     }

@@ -39,7 +39,8 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
 
     @NonNull
     @Override
-    public MultiTypeHolder<Object> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MultiTypeHolder<Object> onCreateViewHolder(@NonNull
+                                                          ViewGroup parent, int viewType) {
         if (inflater == null) {
             inflater = LayoutInflater.from(parent.getContext());
         }

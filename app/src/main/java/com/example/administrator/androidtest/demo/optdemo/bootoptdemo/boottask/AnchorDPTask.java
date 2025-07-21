@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask;
+package com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask;
 
 import android.app.Application;
 import android.content.Context;
@@ -26,7 +26,7 @@ public class AnchorDPTask extends BaseBootTask {
     protected void run(@NonNull String s) {
         // 初始化模块，初始化Third sdk(里面可能有一些反射操作，IO等耗时操作)，配置初始化。
         TimeRecordUtil.markStart("AnchorDPTask");
-        Context context = AndroidTestApplication.getContext();
+        Context context = AndroidTestApplication.context;
         AppInitUtil.init(context);
         FrescoUtil.init(context);
         SpHelper.init(context);

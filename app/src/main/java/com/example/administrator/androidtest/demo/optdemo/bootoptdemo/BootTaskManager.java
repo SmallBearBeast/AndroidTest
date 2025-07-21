@@ -1,22 +1,21 @@
-package com.example.administrator.androidtest.demo.OptTest.BootOptTest;
+package com.example.administrator.androidtest.demo.optdemo.bootoptdemo;
 
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.bear.libcommon.util.TimeRecordUtil;
 import com.effective.android.anchors.AnchorsManager;
 import com.effective.android.anchors.task.Task;
 import com.effective.android.anchors.task.listener.TaskListener;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.AnchorDPOptTask;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.AnchorDPTask;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.BaseBootTask;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.BasicBgThreadTask;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.BootConstant;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.ImmediateTask;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.MainThreadTask;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.NoAnchorDPOptTask;
-import com.example.administrator.androidtest.demo.OptTest.BootOptTest.BootTask.NoAnchorDPTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.AnchorDPOptTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.AnchorDPTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.BaseBootTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.BasicBgThreadTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.BootConstant;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.ImmediateTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.MainThreadTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.NoAnchorDPOptTask;
+import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.boottask.NoAnchorDPTask;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.CountDownLatch;
@@ -120,33 +119,11 @@ public class BootTaskManager {
         }
     }
 
-    public void logColdStartUp() {
-        Log.i(TAG, "logColdStartUp: cold start");
-        TimeRecordUtil.markStart("ColdStartUp");
-    }
-
-    public void logColdEndUp() {
-        TimeRecordUtil.markEnd("ColdStartUp");
-        Log.i(TAG, "logColdEndUp: cold end, duration = " + TimeRecordUtil.getDuration("ColdStartUp"));
-        TimeRecordUtil.remove("ColdStartUp");
-    }
-
-    public void logWarmStartUp() {
-        Log.i(TAG, "logWarmStartUp: warm start");
-        TimeRecordUtil.markStart("WarmStartUp");
-    }
-
-    public void logWarmEndUp() {
-        TimeRecordUtil.markEnd("WarmStartUp");
-        Log.i(TAG, "logWarmEndUp: warm end, duration = " + TimeRecordUtil.getDuration("WarmStartUp"));
-        TimeRecordUtil.remove("WarmStartUp");
-    }
-
     private static class SingleTon {
         private static final BootTaskManager instance = new BootTaskManager();
     }
 
-    private static class TaskListenerWrapper implements TaskListener{
+    private static class TaskListenerWrapper implements TaskListener {
 
         @Override
         public void onFinish(@NonNull Task task) {
