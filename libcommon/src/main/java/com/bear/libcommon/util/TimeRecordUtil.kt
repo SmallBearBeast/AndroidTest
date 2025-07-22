@@ -7,43 +7,33 @@ object TimeRecordUtil {
     private val endTimeMap: MutableMap<String, Long> = HashMap()
 
     @JvmStatic
-    fun markStart(name: String) {
-        synchronized(this) {
-            startTimeMap[name] = SystemClock.elapsedRealtime()
-        }
+    fun markStart(tag: String) {
+        startTimeMap[tag] = SystemClock.elapsedRealtime()
     }
 
     @JvmStatic
-    fun markEnd(name: String) {
-        synchronized(this) {
-            endTimeMap[name] = SystemClock.elapsedRealtime()
-        }
+    fun markEnd(tag: String) {
+        endTimeMap[tag] = SystemClock.elapsedRealtime()
     }
 
     @JvmStatic
-    fun remove(name: String) {
-        synchronized(this) {
-            startTimeMap.remove(name)
-            endTimeMap.remove(name)
-        }
+    fun remove(tag: String) {
+        startTimeMap.remove(tag)
+        endTimeMap.remove(tag)
     }
 
     @JvmStatic
-    fun markAndGetDuration(name: String): Long {
-        synchronized(this) {
-            markEnd(name)
-            return getDuration(name)
-        }
+    fun markAndGetDuration(tag: String): Long {
+        markEnd(tag)
+        return getDuration(tag)
     }
 
     @JvmStatic
-    fun getDuration(name: String): Long {
-        synchronized(this) {
-            val startTime = startTimeMap[name]
-            val endTime = endTimeMap[name]
-            if (startTime != null && endTime != null) {
-                return endTime - startTime
-            }
+    fun getDuration(tag: String): Long {
+        val startTime = startTimeMap[tag]
+        val endTime = endTimeMap[tag]
+        if (startTime != null && endTime != null) {
+            return endTime - startTime
         }
         return 0
     }

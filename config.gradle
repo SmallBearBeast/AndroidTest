@@ -90,12 +90,13 @@ ext {
 
             'disklrucache'              : 'com.jakewharton:disklrucache:2.0.2', // 磁盘缓存
             'pdfium_android'            : 'com.github.barteksc:pdfium-android:1.9.0', // pdf渲染库
+            'splashscreen'              : 'androidx.core:core-splashscreen:1.0.1', // splashscreen
 
             'liblog'                    : "com.github.SmallBearBeast.AndroidTest:liblog:$smallbearbeast_version",
             'libokhttp'                 : "com.github.SmallBearBeast.AndroidTest:libokhttp:$smallbearbeast_version",
             'libkv'                     : "com.github.SmallBearBeast.AndroidTest:libkv:$smallbearbeast_version",
-            'libcommon'                   : "com.github.SmallBearBeast.AndroidTest:libcommon:$smallbearbeast_version",
-            'libbase'              : "com.github.SmallBearBeast.AndroidTest:libbase:$smallbearbeast_version",
+            'libcommon'                 : "com.github.SmallBearBeast.AndroidTest:libcommon:$smallbearbeast_version",
+            'libbase'                   : "com.github.SmallBearBeast.AndroidTest:libbase:$smallbearbeast_version",
             'librv'                     : "com.github.SmallBearBeast.AndroidTest:librv:$smallbearbeast_version",
             'libcomponent'              : "com.github.SmallBearBeast.AndroidTest:libcomponent:$smallbearbeast_version",
             'libfresco'                 : "com.github.SmallBearBeast.AndroidTest:libfresco:$smallbearbeast_version",
@@ -149,6 +150,7 @@ ext {
                     "${dependenciesMap.exoplayer_ui}",
                     "${dependenciesMap.disklrucache}",
                     "${dependenciesMap.pdfium_android}",
+                    "${dependenciesMap.splashscreen}",
 
 //                    "${dependenciesMap.liblog}",
 //                    "${dependenciesMap.libokhttp}",
