@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.optdemo.bootoptdemo;
+package com.example.administrator.androidtest.demo.optdemo.launchoptdemo;
 
 public class ClassPreloadExecutor {
 

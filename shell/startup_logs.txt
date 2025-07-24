@@ -1,0 +1,10 @@
+07-24 12:47:14.048 I/AppLaunchTracer( 8522): markFirstFrameDraw: coldStartTime = 551, warmStartTime = 345
+07-24 12:47:18.313 I/AppLaunchTracer( 8588): markFirstFrameDraw: coldStartTime = 537, warmStartTime = 335
+07-24 12:47:22.521 I/AppLaunchTracer( 8655): markFirstFrameDraw: coldStartTime = 583, warmStartTime = 367
+07-24 12:47:26.716 I/AppLaunchTracer( 8717): markFirstFrameDraw: coldStartTime = 571, warmStartTime = 361
+07-24 12:47:30.935 I/AppLaunchTracer( 8783): markFirstFrameDraw: coldStartTime = 545, warmStartTime = 338
+07-24 12:47:35.141 I/AppLaunchTracer( 8847): markFirstFrameDraw: coldStartTime = 572, warmStartTime = 361
+07-24 12:47:39.373 I/AppLaunchTracer( 8915): markFirstFrameDraw: coldStartTime = 536, warmStartTime = 333
+07-24 12:47:43.584 I/AppLaunchTracer( 8978): markFirstFrameDraw: coldStartTime = 545, warmStartTime = 337
+07-24 12:47:47.773 I/AppLaunchTracer( 9042): markFirstFrameDraw: coldStartTime = 570, warmStartTime = 361
+07-24 12:47:51.974 I/AppLaunchTracer( 9108): markFirstFrameDraw: coldStartTime = 535, warmStartTime = 335

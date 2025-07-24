@@ -26,15 +26,14 @@ import com.example.administrator.androidtest.demo.SpAndMMKVDemo.SpAndMMKVDemoCom
 import com.example.administrator.androidtest.demo.StartBgServiceDemo.StartBgServiceDemoComponent
 import com.example.administrator.androidtest.demo.ViewDemo.ViewDemoComponent
 import com.example.administrator.androidtest.demo.optdemo.anrdemo.AnrTestComponent
-import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.AppLaunchTracer
-import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.BootTaskManager
-import com.example.administrator.androidtest.demo.optdemo.bootoptdemo.MonitorClassLoader
+import com.example.administrator.androidtest.demo.optdemo.launchoptdemo.AppLaunchTracer
+import com.example.administrator.androidtest.demo.optdemo.launchoptdemo.MonitorClassLoader
 import com.example.administrator.androidtest.demo.widgetDemo.WidgetDemoComponent
 
 class MainActivity : ComponentActivity<ActMainDemoListBinding?>() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        BootTaskManager.getInstance().waitCountDown()
         AppLaunchTracer.markActivityCreate()
+//        AppLaunchTracer.markActivityCreate()
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate: enter")

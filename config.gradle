@@ -65,7 +65,8 @@ ext {
             // 里面也引入了core, drawerlayout, fragment
             'appcompat'                 : 'androidx.appcompat:appcompat:1.2.0',
             'protobuf_java'             : 'com.google.protobuf:protobuf-java:3.11.0',
-            'Anchors'                   : 'com.github.DSAppTeam:Anchors:v1.1.8',
+//            'Anchors'                   : 'com.github.DSAppTeam:Anchors:v1.1.8',
+            'Anchors'                   : 'com.github.SmallBearBeast:Anchors:08092b6a73',
             // ARouter路由
             'arouter_api'               : 'com.alibaba:arouter-api:1.5.2',
             // Glide图片加载库

@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.optdemo.bootoptdemo;
+package com.example.administrator.androidtest.demo.optdemo.launchoptdemo;
 
 import android.app.Application;
 import android.os.Looper;

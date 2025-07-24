@@ -1,13 +1,13 @@
-package com.example.administrator.androidtest.demo.optdemo.bootoptdemo
+package com.example.administrator.androidtest.demo.optdemo.launchoptdemo
 
 import android.util.Log
 import com.bear.libcommon.util.TimeRecordUtil
 
 object AppLaunchTracer {
     private const val TAG = "AppLaunchTracer"
-    private const val APPLICATION_INIT = "APPLICATION_INIT"
-    private const val APPLICATION_CREATE = "APPLICATION_CREATE"
-    private const val ACTIVITY_CREATE = "ACTIVITY_CREATE"
+    private const val APPLICATION_INIT = "application_init"
+    private const val APPLICATION_CREATE = "application_create"
+    private const val ACTIVITY_CREATE = "activity_create"
 
     fun markApplicationInit() {
         TimeRecordUtil.markStart(APPLICATION_INIT)
