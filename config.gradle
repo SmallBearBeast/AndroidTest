@@ -12,6 +12,7 @@ ext {
     nav_version = ''
 
     smallbearbeast_version = 'b48a0898c7'
+    anchor_version = 'd44ec8f390'
 
     pluginMap = [
             'gradle'                   : 'com.android.tools.build:gradle:7.3.0',
@@ -24,6 +25,7 @@ ext {
             // ARouter自动插入注册路由配置代码插件
             'arouter_register'         : "com.alibaba:arouter-register:1.0.2",
             'customtransformplugin'    : 'com.example:customtransformplugin:1.0.2',
+            'anchor_plugin'            : "com.github.SmallBearBeast.Anchors:plugin:$anchor_version",
     ]
 
     dependenciesMap = [
@@ -66,7 +68,9 @@ ext {
             'appcompat'                 : 'androidx.appcompat:appcompat:1.2.0',
             'protobuf_java'             : 'com.google.protobuf:protobuf-java:3.11.0',
 //            'Anchors'                   : 'com.github.DSAppTeam:Anchors:v1.1.8',
-            'Anchors'                   : 'com.github.SmallBearBeast:Anchors:08092b6a73',
+            'anchor'                    : "com.github.SmallBearBeast.Anchors:anchors:$anchor_version",
+            'anchor_annotation'         : "com.github.SmallBearBeast.Anchors:annotation:$anchor_version",
+            'anchor_compiler'           : "com.github.SmallBearBeast.Anchors:compiler:$anchor_version",
             // ARouter路由
             'arouter_api'               : 'com.alibaba:arouter-api:1.5.2',
             // Glide图片加载库
@@ -138,7 +142,8 @@ ext {
                     "${dependenciesMap.material}",
                     "${dependenciesMap.appcompat}",
                     "${dependenciesMap.protobuf_java}",
-                    "${dependenciesMap.Anchors}",
+                    "${dependenciesMap.anchor}",
+                    "${dependenciesMap.anchor_annotation}",
                     "${dependenciesMap.arouter_api}",
                     "${dependenciesMap.glide}",
 //                    "${dependenciesMap.google_webrtc}",

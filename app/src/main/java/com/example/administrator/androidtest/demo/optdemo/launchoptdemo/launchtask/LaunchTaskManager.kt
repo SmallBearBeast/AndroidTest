@@ -10,7 +10,6 @@ import com.effective.android.anchors.AnchorsManager
 import com.effective.android.anchors.anchors
 import com.effective.android.anchors.debuggable
 import com.effective.android.anchors.graphics
-import com.effective.android.anchors.sons
 import com.effective.android.anchors.startUp
 import com.effective.android.anchors.task.Task
 import com.effective.android.anchors.task.TaskCreator
@@ -42,31 +41,13 @@ object LaunchTaskManager {
         }.anchors {
             arrayOf(TASK_ANCHOR_WAIT)
         }.graphics {
-            TASK_IMMEDIATE.sons(
-                TASK_BACKGROUND_1.sons(
-                    TASK_ANCHOR_WAIT
-                ),
-                TASK_BACKGROUND_2.sons(
-                    TASK_ANCHOR_WAIT
-                ),
-                TASK_NON_BLOCKING
-            )
             arrayOf(TASK_IMMEDIATE)
 //            if (listOf(true, false).random()) {
-//                TASK_IMMEDIATE.sons(
-//                    TASK_BACKGROUND_1.sons(
-//                        TASK_ANCHOR_WAIT
-//                    ),
-//                    TASK_BACKGROUND_2.sons(
-//                        TASK_ANCHOR_WAIT
-//                    ),
-//                    TASK_NON_BLOCKING
-//                )
 //                arrayOf(TASK_IMMEDIATE)
 //            } else {
 //                arrayOf(TASK_ALL)
 //            }
-        }.startUp(false)
+        }.startUp(autoBlock = false, autoRegister = true)
     }
 
     fun waitAnchorTaskFinished() {

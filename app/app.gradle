@@ -6,6 +6,8 @@ apply plugin: 'com.alibaba.arouter'
 //apply plugin: 'android-aspectjx'
 apply plugin: 'CustomTransformPlugin'
 apply plugin: 'BuildSrcPlugin'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'com.bear.anchor.transformplugin'
 
 android {
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -23,7 +25,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [
-                        AROUTER_MODULE_NAME: project.getName(),
+                        AROUTER_MODULE_NAME : project.getName(),
                         AROUTER_GENERATE_DOC: "enable"
                 ]
             }
@@ -109,6 +111,7 @@ dependencies {
     implementation project(":libstorage")
     implementation project(":libother")
 //    implementation project(':flutter')
+    kapt "${dependenciesMap.anchor_compiler}"
 }
 
 // Gradle Test

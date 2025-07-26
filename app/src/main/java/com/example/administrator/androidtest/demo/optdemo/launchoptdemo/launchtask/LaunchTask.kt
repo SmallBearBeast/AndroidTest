@@ -3,6 +3,7 @@ package com.example.administrator.androidtest.demo.optdemo.launchoptdemo.launcht
 import android.app.Application
 import android.util.Log
 import com.alibaba.android.arouter.launcher.ARouter
+import com.bear.annotation.TaskConfig
 import com.bear.libcommon.util.AppInitUtil
 import com.bear.libcommon.util.MainHandlerUtil
 import com.bear.libcommon.util.TimeRecordUtil
@@ -36,6 +37,7 @@ abstract class BaseLaunchTask(id: String, isAsyncTask: Boolean) : Task(id, isAsy
     }
 }
 
+@TaskConfig(name = TASK_IMMEDIATE)
 class ImmediateTask : BaseLaunchTask(TASK_IMMEDIATE, false) {
 
     init {
@@ -63,7 +65,7 @@ class ImmediateTask : BaseLaunchTask(TASK_IMMEDIATE, false) {
     }
 }
 
-
+@TaskConfig(name = TASK_BACKGROUND_1, dependencies = [TASK_IMMEDIATE])
 class BackgroundTask1 : BaseLaunchTask(TASK_BACKGROUND_1, true) {
 
     init {
@@ -85,6 +87,7 @@ class BackgroundTask1 : BaseLaunchTask(TASK_BACKGROUND_1, true) {
     }
 }
 
+@TaskConfig(name = TASK_BACKGROUND_2, dependencies = [TASK_IMMEDIATE])
 class BackgroundTask2 : BaseLaunchTask(TASK_BACKGROUND_2, true) {
 
     init {
@@ -118,6 +121,7 @@ class BackgroundTask2 : BaseLaunchTask(TASK_BACKGROUND_2, true) {
     }
 }
 
+@TaskConfig(name = TASK_ANCHOR_WAIT, dependencies = [TASK_BACKGROUND_1, TASK_BACKGROUND_2])
 class AnchorWaitTask : BaseLaunchTask(TASK_ANCHOR_WAIT, true) {
 
     init {
@@ -130,6 +134,7 @@ class AnchorWaitTask : BaseLaunchTask(TASK_ANCHOR_WAIT, true) {
     }
 }
 
+@TaskConfig(name = TASK_NON_BLOCKING, dependencies = [TASK_IMMEDIATE])
 class NonBlockingTask : BaseLaunchTask(TASK_NON_BLOCKING, true) {
 
     init {

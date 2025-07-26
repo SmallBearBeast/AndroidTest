@@ -3,9 +3,9 @@ apply plugin: 'maven-publish'
 def publishToMaven(artifactId) {
     afterEvaluate {
         publishing {
-//            repositories {
-//                maven { url uri('../repo') }
-//            }
+            repositories {
+                maven { url uri("${rootProject.projectDir}/repo") }
+            }
             publications {
                 // Creates a Maven publication called "release".
                 release(MavenPublication) {

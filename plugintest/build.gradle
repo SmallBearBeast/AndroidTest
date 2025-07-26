@@ -27,24 +27,33 @@ dependencies {
     implementation 'org.ow2.asm:asm-commons:9.1'
 }
 
-// 采用Gradle配置的方式进行插件注册
+// 配置 Gradle 插件但不自动发布
 gradlePlugin {
     plugins {
-        modularPlugin {
+        customtransformplugin {
             id = 'CustomTransformPlugin'
             implementationClass = 'com.example.plugintest.CustomTransformPlugin'
         }
     }
+    // 禁用自动发布插件到 Gradle Plugin Portal
+    automatedPublishing = false
+}
+
+// 创建源码 jar 任务
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    archiveClassifier = 'sources'
 }
 
 //配置发布本地 maven
 publishing {
     repositories {
-        maven { url uri('../repo') }
+        maven { url uri("${rootProject.projectDir}/repo") }
     }
     publications {
         debug(MavenPublication) {
             from components.java
+            artifact sourcesJar
             groupId 'com.example'
             artifactId 'customtransformplugin'
             version '1.0.2'
