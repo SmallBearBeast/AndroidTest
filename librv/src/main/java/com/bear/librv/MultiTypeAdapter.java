@@ -162,6 +162,10 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
             final GridLayoutManager gridLayoutManager = (GridLayoutManager) recyclerView.getLayoutManager();
             gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
                 public int getSpanSize(int position) {
+                    if (position == -1) {
+                        RvLog.w(TAG, "getSpanSize: position = " + position);
+                        return 1;
+                    }
                     int index = getItemViewType(position);
                     Type<?> type = multiTypeContainer.getType(index);
                     MultiTypeDelegate<?, ?> delegate = type.getDelegate();
