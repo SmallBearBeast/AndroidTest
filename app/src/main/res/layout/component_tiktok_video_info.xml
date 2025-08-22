@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/videoInfoLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:showIn="@layout/item_tiktok_video_detail">
+
+    <TextView
+        android:id="@+id/authorNameTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/cl_white_t_9"
+        android:textSize="20sp"
+        tools:text="齐江帅" />
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/cl_white_t_7"
+        android:textSize="16sp"
+        tools:text="#北漂 毕业6个月,辞去让我月入过万的工作回家发展,不管别人怎么看,我说放就放了.只是那也本是我曾最向往的生活" />
+</LinearLayout>
