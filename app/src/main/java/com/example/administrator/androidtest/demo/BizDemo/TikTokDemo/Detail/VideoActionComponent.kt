@@ -1,23 +1,17 @@
 package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import com.bear.libcommon.util.ToastUtil
+import com.bear.libcomponent.component.ui.ViewComponent
+import com.bear.libcomponent.core.IComponent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoActionBinding
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.bizcompoent.BizComponent
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.bizcompoent.IBizComponentApi
 
-class VideoActionComponent : BizComponent<ComponentTiktokVideoActionBinding>(), VideoActionComponentApi {
-
-    override fun inflateViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        ComponentTiktokVideoActionBinding.inflate(inflater, container, false)
-
-    override fun initViews(view: View) {
-        super.initViews(view)
+class VideoActionComponent(binding: ComponentTiktokVideoActionBinding) : ViewComponent<ComponentTiktokVideoActionBinding>(binding),
+    IVideoActionComponent {
+    override fun onCreate() {
+        super.onCreate()
         requireBinding().apply {
             authorAvatarIv.setOnClickListener {
                 ToastUtil.showToast("点击了作者头像")
@@ -37,11 +31,11 @@ class VideoActionComponent : BizComponent<ComponentTiktokVideoActionBinding>(), 
     }
 
     override fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?) {
-        videoDetailInfo?:return
+        videoDetailInfo ?: return
         _bindVideoDetailInfo(videoDetailInfo)
     }
 }
 
-interface VideoActionComponentApi: IBizComponentApi {
+interface IVideoActionComponent : IComponent {
     fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?)
 }

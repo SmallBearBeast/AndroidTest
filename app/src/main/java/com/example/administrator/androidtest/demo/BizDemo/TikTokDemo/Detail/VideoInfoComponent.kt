@@ -1,17 +1,12 @@
 package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
 
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.ViewGroup
+import com.bear.libcomponent.component.ui.ViewComponent
+import com.bear.libcomponent.core.IComponent
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoInfoBinding
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.bizcompoent.BizComponent
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.bizcompoent.IBizComponentApi
 
-class VideoInfoComponent : BizComponent<ComponentTiktokVideoInfoBinding>(), VideoInfoComponentApi {
-
-    override fun inflateViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        ComponentTiktokVideoInfoBinding.inflate(inflater, container, false)
+class VideoInfoComponent(binding: ComponentTiktokVideoInfoBinding) : ViewComponent<ComponentTiktokVideoInfoBinding>(binding), IVideoInfoComponent {
 
     private fun _bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo) {
 //        Glide.with(getContext()).load(videoDetailInfo.coverImgUrl).into(new Target<Drawable>() {
@@ -85,6 +80,6 @@ class VideoInfoComponent : BizComponent<ComponentTiktokVideoInfoBinding>(), Vide
 }
 
 
-interface VideoInfoComponentApi : IBizComponentApi {
+interface IVideoInfoComponent : IComponent {
     fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?)
 }

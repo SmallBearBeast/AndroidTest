@@ -1,29 +1,23 @@
 package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
 
-import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import com.bear.libcomponent.component.ui.ViewComponent
+import com.bear.libcomponent.core.IComponent
 import com.bumptech.glide.Glide
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoPlayBinding
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.bizcompoent.BizComponent
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.bizcompoent.IBizComponentApi
 import com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo.UniversalPlayer
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 
-class VideoPlayComponent : BizComponent<ComponentTiktokVideoPlayBinding>(), View.OnClickListener, VideoPlayComponentApi {
-
+class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewComponent<ComponentTiktokVideoPlayBinding>(binding), View.OnClickListener,
+    IVideoPlayComponent {
     private var universalPlayer: UniversalPlayer? = null
 
-    override fun inflateViewBinding(inflater: LayoutInflater, container: ViewGroup?) =
-        ComponentTiktokVideoPlayBinding.inflate(inflater, container, false)
-
-    override fun initViews(view: View) {
-        super.initViews(view)
+    override fun onCreate() {
+        super.onCreate()
         initPlayerView()
         initPlayer()
     }
@@ -104,7 +98,7 @@ class VideoPlayComponent : BizComponent<ComponentTiktokVideoPlayBinding>(), View
             } else {
                 thumbIv.visibility = View.GONE
             }
-            Log.d(TAG, "showThumb: show = $show")
+            Log.d(TAG, "showThumb: show = $show, key = ${key?.tag}")
         }
     }
 
@@ -115,7 +109,7 @@ class VideoPlayComponent : BizComponent<ComponentTiktokVideoPlayBinding>(), View
     }
 }
 
-interface VideoPlayComponentApi : IBizComponentApi {
+interface IVideoPlayComponent : IComponent {
     fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?)
     fun play(url: String)
     fun load(url: String)
