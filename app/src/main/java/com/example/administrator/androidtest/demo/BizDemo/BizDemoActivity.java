@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActBizDemoListBinding;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TikTokDemoComponent;
 
@@ -17,7 +17,7 @@ public class BizDemoActivity extends ComponentActivity<ActBizDemoListBinding> {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new TikTokDemoComponent(getLifecycle()));
+        regComponent(new TikTokDemoComponent(getLifecycle()));
     }
 
     @Override

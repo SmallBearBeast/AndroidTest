@@ -18,7 +18,7 @@ public class LibraryDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().libraryDemoButton.setOnClickListener(this);
+        getViewBinding().libraryDemoButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

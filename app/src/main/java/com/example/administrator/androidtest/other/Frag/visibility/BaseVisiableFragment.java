@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.bear.libcomponent.component.ComponentFragment;
+import com.bear.libcomponent.host.ComponentFragment;
 import com.example.administrator.androidtest.AndroidTestApplication;
 
 import java.util.List;

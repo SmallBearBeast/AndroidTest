@@ -27,7 +27,7 @@ public class LoopViewPagerDemoComponent extends BaseWidgetDemoComponent {
     }
 
     private void initLoopViewPager() {
-        LoopViewPager loopViewPager = getBinding().loopViewpager;
+        LoopViewPager loopViewPager = getViewBinding().loopViewpager;
         loopViewPager.setAdapter(new PagerAdapter() {
             private final int[] mColors = new int[]{
                     Color.BLACK,

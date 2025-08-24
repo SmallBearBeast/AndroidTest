@@ -16,7 +16,7 @@ public class BehaviorTestComponent extends BaseViewDemoComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().behaviorTestButton.setOnClickListener(this);
+        getViewBinding().behaviorTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -8,7 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bear.libcommon.util.ResourceUtil;
 import com.bear.libcommon.util.ToastUtil;
-import com.bear.libcomponent.component.ActivityComponent;
+import com.bear.libcomponent.component.ui.ActivityComponent;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActComponentTestBinding;
 import com.example.administrator.androidtest.demo.ComponentDemo.ComponentDemoFragment;
@@ -45,8 +45,8 @@ public class DemoActComponent extends ActivityComponent<ActComponentTestBinding>
         buttonTextList.add("Call ShowMainTv");
         buttonTextList.add("Call ShowMinorTv");
 
-        TabLayout tabLayout = getBinding().tabLayout;
-        ViewPager viewPager = getBinding().viewpager;
+        TabLayout tabLayout = getViewBinding().tabLayout;
+        ViewPager viewPager = getViewBinding().viewpager;
         viewPager.setAdapter(new FragmentPagerAdapter(getActivity().getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
             @NonNull
             @Override

@@ -9,7 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.viewbinding.ViewBinding;
 
-import com.bear.libcomponent.component.ComponentFragment;
+import com.bear.libcomponent.host.ComponentFragment;
 
 public class TestFragment extends ComponentFragment {
 

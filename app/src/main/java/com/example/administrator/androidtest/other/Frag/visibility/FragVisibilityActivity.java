@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.bear.libother.page.IPage;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActFragVisibilityBinding;

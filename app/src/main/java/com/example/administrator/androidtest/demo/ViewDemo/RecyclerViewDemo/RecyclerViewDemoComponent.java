@@ -15,7 +15,7 @@ public class RecyclerViewDemoComponent extends BaseViewDemoComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().recyclerViewDemoButton.setOnClickListener(this);
+        getViewBinding().recyclerViewDemoButton.setOnClickListener(this);
     }
 
     @Override

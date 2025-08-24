@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActLibraryDemoListBinding;
 import com.example.administrator.androidtest.demo.LibraryDemo.GlideDemo.GlideDemoComponent;
 import com.example.administrator.androidtest.demo.LibraryDemo.OkHttpDemo.OkHttpDemoComponent;
@@ -18,8 +18,8 @@ public class LibraryDemoActivity extends ComponentActivity<ActLibraryDemoListBin
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new GlideDemoComponent(getLifecycle()));
-        regActComponent(new OkHttpDemoComponent(getLifecycle()));
+        regComponent(new GlideDemoComponent(getLifecycle()));
+        regComponent(new OkHttpDemoComponent(getLifecycle()));
     }
 
     @Override

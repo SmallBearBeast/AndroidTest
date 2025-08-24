@@ -17,7 +17,7 @@ public class BusTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().busTestButton.setOnClickListener(this);
+        getViewBinding().busTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

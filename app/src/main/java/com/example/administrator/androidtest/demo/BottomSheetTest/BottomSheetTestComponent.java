@@ -15,7 +15,7 @@ public class BottomSheetTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().bottomSheetTestButton.setOnClickListener(this);
+        getViewBinding().bottomSheetTestButton.setOnClickListener(this);
     }
 
     @Override

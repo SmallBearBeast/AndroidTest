@@ -25,10 +25,10 @@ public class SpAndMMKVDemoComponent extends TestActivityComponent {
     protected void onCreate() {
         super.onCreate();
         testGetSpVal();
-        getBinding().setSpValButton.setOnClickListener(this);
-        getBinding().getSpValButton.setOnClickListener(this);
-        getBinding().spToMmkvButton.setOnClickListener(this);
-        getBinding().showMoveToMMKVButton.setOnClickListener(this);
+        getViewBinding().setSpValButton.setOnClickListener(this);
+        getViewBinding().getSpValButton.setOnClickListener(this);
+        getViewBinding().spToMmkvButton.setOnClickListener(this);
+        getViewBinding().showMoveToMMKVButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -65,7 +65,7 @@ public class SpAndMMKVDemoComponent extends TestActivityComponent {
     }
 
     private void testGetSpVal() {
-        TextView tvSpValTip = getBinding().spValTipTextView;
+        TextView tvSpValTip = getViewBinding().spValTipTextView;
         StringBuilder builder = new StringBuilder();
         builder.append("testBoolSp = ").append(SpValHelper.testBoolSp.get()).append("\n");
         builder.append("testIntSp = ").append(SpValHelper.testIntSp.get()).append("\n");
@@ -80,7 +80,7 @@ public class SpAndMMKVDemoComponent extends TestActivityComponent {
     }
 
     private void testShowMoveToMMKV() {
-        TextView tvMmkvValTip = getBinding().tvMoveToMmkvTip;
+        TextView tvMmkvValTip = getViewBinding().tvMoveToMmkvTip;
         StringBuilder builder = new StringBuilder();
         builder.append("testBoolSp = ").append(MmkvValHelper.testBoolSp.get()).append("\n");
         builder.append("testIntSp = ").append(MmkvValHelper.testIntSp.get()).append("\n");

@@ -10,7 +10,7 @@ import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import com.bear.libcommon.util.ToastUtil
-import com.bear.libcomponent.component.ComponentActivity
+import com.bear.libcomponent.host.ComponentActivity
 import com.bear.librv.RvUtil
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.databinding.ActPdfViewTestBinding

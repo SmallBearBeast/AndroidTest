@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActViewDemoListBinding;
 import com.example.administrator.androidtest.demo.ViewDemo.CoordinatorLayoutTest.BehaviorTestComponent;
 import com.example.administrator.androidtest.demo.ViewDemo.CoordinatorLayoutTest.CoordinatorLayoutTestComponent;
@@ -25,15 +25,15 @@ public class ViewDemoActivity extends ComponentActivity<ActViewDemoListBinding> 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new RecyclerViewDemoComponent(getLifecycle()));
-        regActComponent(new ViewPagerTestComponent(getLifecycle()));
-        regActComponent(new ViewGetSizeTestComponent(getLifecycle()));
-        regActComponent(new Viewpager2TestComponent(getLifecycle()));
-        regActComponent(new MotionEventDemoComponent(getLifecycle()));
-        regActComponent(new BehaviorTestComponent(getLifecycle()));
-        regActComponent(new CoordinatorLayoutTestComponent(getLifecycle()));
-        regActComponent(new EditTextTestComponent(getLifecycle()));
-        regActComponent(new ToolbarTestComponent(getLifecycle()));
+        regComponent(new RecyclerViewDemoComponent(getLifecycle()));
+        regComponent(new ViewPagerTestComponent(getLifecycle()));
+        regComponent(new ViewGetSizeTestComponent(getLifecycle()));
+        regComponent(new Viewpager2TestComponent(getLifecycle()));
+        regComponent(new MotionEventDemoComponent(getLifecycle()));
+        regComponent(new BehaviorTestComponent(getLifecycle()));
+        regComponent(new CoordinatorLayoutTestComponent(getLifecycle()));
+        regComponent(new EditTextTestComponent(getLifecycle()));
+        regComponent(new ToolbarTestComponent(getLifecycle()));
     }
 
     @Override

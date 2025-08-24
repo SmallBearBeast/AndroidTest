@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bear.libcommon.util.DensityUtil;
 import com.bear.libcommon.util.TimeRecordUtil;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.bear.liblog.SLog;
 import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;

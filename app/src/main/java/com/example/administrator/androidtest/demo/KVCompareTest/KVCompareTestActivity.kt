@@ -7,7 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import com.bear.libcommon.util.ToastUtil
-import com.bear.libcomponent.component.ComponentActivity
+import com.bear.libcomponent.host.ComponentActivity
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.Settings
 import com.example.administrator.androidtest.databinding.ActKvCompareTestBinding

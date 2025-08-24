@@ -15,7 +15,7 @@ public class PdfViewDemoComponent extends BaseWidgetDemoComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().pdfViewButton.setOnClickListener(this);
+        getViewBinding().pdfViewButton.setOnClickListener(this);
     }
 
     @Override

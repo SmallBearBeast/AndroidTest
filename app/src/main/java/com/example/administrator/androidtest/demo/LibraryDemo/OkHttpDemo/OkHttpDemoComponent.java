@@ -16,7 +16,7 @@ public class OkHttpDemoComponent extends BaseLibraryDemoComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().okhttpDemoButton.setOnClickListener(this);
+        getViewBinding().okhttpDemoButton.setOnClickListener(this);
     }
 
     @Override

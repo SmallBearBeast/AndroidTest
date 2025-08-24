@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActComponentTestBinding;
 import com.example.administrator.androidtest.demo.ComponentDemo.Component.DemoActComponent;
 
@@ -21,7 +21,7 @@ public class ComponentDemoActivity extends ComponentActivity<ActComponentTestBin
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new DemoActComponent(getLifecycle()));
+        regComponent(new DemoActComponent(getLifecycle()));
     }
 
     public static void start(Context context) {

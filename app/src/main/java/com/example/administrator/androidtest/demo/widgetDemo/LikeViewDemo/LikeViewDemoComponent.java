@@ -18,8 +18,8 @@ public class LikeViewDemoComponent extends BaseWidgetDemoComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        likeView = getBinding().likeView;
-        getBinding().likeView.setOnClickListener(this);
+        likeView = getViewBinding().likeView;
+        getViewBinding().likeView.setOnClickListener(this);
     }
 
     @Override

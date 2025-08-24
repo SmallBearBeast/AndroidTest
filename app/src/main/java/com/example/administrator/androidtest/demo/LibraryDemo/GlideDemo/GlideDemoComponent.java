@@ -27,7 +27,7 @@ public class GlideDemoComponent extends BaseLibraryDemoComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().glideDemoButton.setOnClickListener(this);
+        getViewBinding().glideDemoButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

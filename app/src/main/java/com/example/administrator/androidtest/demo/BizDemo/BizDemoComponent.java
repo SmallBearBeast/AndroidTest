@@ -15,7 +15,7 @@ public class BizDemoComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().bizDemoButton.setOnClickListener(this);
+        getViewBinding().bizDemoButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -14,7 +14,7 @@ public class CaseViewComponent extends BaseWidgetDemoComponent {
 
     @Override
     protected void onCreate() {
-        CaseHelper.showTestCaseView(getBinding().caseView, view -> {
+        CaseHelper.showTestCaseView(getViewBinding().caseView, view -> {
             ToastUtil.showToast("Click the case view button");
         });
     }

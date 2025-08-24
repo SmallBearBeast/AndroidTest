@@ -15,7 +15,7 @@ public class MotionEventDemoComponent extends BaseViewDemoComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().motionTestButton.setOnClickListener(this);
+        getViewBinding().motionTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

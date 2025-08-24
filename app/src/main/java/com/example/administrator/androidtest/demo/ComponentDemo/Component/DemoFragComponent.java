@@ -10,7 +10,7 @@ import androidx.lifecycle.Lifecycle;
 
 import com.bear.libcommon.util.StringUtil;
 import com.bear.libcommon.util.ToastUtil;
-import com.bear.libcomponent.component.FragmentComponent;
+import com.bear.libcomponent.component.ui.FragmentComponent;
 import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
 import com.example.administrator.androidtest.widget.FlowLayout;
 
@@ -32,11 +32,11 @@ public class DemoFragComponent extends FragmentComponent<FragComponentTestBindin
     }
 
     @Override
-    protected void onCreateView() {
+    public void onCreateView() {
         super.onCreateView();
-        FlowLayout flowLayout = getBinding().flowLayout;
-        TextView textMainTv = getBinding().textMainTv;
-        TextView textMinorTv = getBinding().textMinorTv;
+        FlowLayout flowLayout = getViewBinding().flowLayout;
+        TextView textMainTv = getViewBinding().textMainTv;
+        TextView textMinorTv = getViewBinding().textMinorTv;
         if (getArguments() != null) {
             position = getArguments().getInt(KEY_POSITION);
             String mainText = getArguments().getString(KEY_MAIN_TEXT);

@@ -1,13 +1,11 @@
 package com.example.administrator.androidtest.demo.ComponentDemo.Component;
 
-import android.util.Log;
-import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.FragmentComponent;
+import com.bear.libcomponent.component.ui.FragmentComponent;
 import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
 
 public class DemoMainTvComponent extends FragmentComponent<FragComponentTestBinding> {
@@ -30,9 +28,9 @@ public class DemoMainTvComponent extends FragmentComponent<FragComponentTestBind
     }
 
     @Override
-    protected void onAttachViewBinding(@NonNull FragComponentTestBinding binding) {
-        super.onAttachViewBinding(binding);
-        textMainTv = getBinding().textMainTv;
+    public void attachViewBinding(@NonNull FragComponentTestBinding binding) {
+        super.attachViewBinding(binding);
+        textMainTv = getViewBinding().textMainTv;
         originText = String.valueOf(textMainTv.getText());
         textMainTv.setClickable(true);
         textMainTv.setOnClickListener(v -> getComponent(DemoMinorTvComponent.class).resetMinorTv());
@@ -44,15 +42,5 @@ public class DemoMainTvComponent extends FragmentComponent<FragComponentTestBind
 
     public void resetMainTv() {
         textMainTv.setText(originText);
-    }
-
-    @Override
-    public void onViewAttachedToWindow(@NonNull View v) {
-        Log.d(TAG, "onViewAttachedToWindow() called with: v = [" + v + "]");
-    }
-
-    @Override
-    public void onViewDetachedFromWindow(@NonNull View v) {
-        Log.d(TAG, "onViewDetachedFromWindow() called with: v = [" + v + "]");
     }
 }

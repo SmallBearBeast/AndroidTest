@@ -6,7 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentFragment;
+import com.bear.libcomponent.host.ComponentFragment;
 import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
 import com.example.administrator.androidtest.demo.ComponentDemo.Component.DemoFragComponent;
 
@@ -23,7 +23,7 @@ public class ComponentDemoFragment extends ComponentFragment<FragComponentTestBi
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             int position = getArguments().getInt(DemoFragComponent.KEY_POSITION);
-            regFragComponent(new DemoFragComponent(getLifecycle()), position);
+            regComponent(new DemoFragComponent(getLifecycle()), position);
         }
     }
 

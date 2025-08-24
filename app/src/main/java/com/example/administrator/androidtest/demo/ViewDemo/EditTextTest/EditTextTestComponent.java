@@ -26,9 +26,9 @@ public class EditTextTestComponent extends BaseViewDemoComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().formatTextButton.setOnClickListener(this);
-        getBinding().noShowKeyboardButton.setOnClickListener(this);
-        noShowKeyboardEditText = getBinding().noShowKeyboardEditText;
+        getViewBinding().formatTextButton.setOnClickListener(this);
+        getViewBinding().noShowKeyboardButton.setOnClickListener(this);
+        noShowKeyboardEditText = getViewBinding().noShowKeyboardEditText;
     }
 
     @SuppressLint("NonConstantResourceId")
@@ -48,7 +48,7 @@ public class EditTextTestComponent extends BaseViewDemoComponent {
     }
 
     private void testFormatText() {
-        TextView textTv = getBinding().formatTextEditText;
+        TextView textTv = getViewBinding().formatTextEditText;
         textTv.setText(getContext().getString(R.string.format_string_text, "hugo.wu", 22));
     }
 

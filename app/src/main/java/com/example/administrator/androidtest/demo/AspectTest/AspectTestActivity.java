@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActCommomTestBinding;
 //import com.example.libaspectj.Annotation.AsClick;
 //import com.example.libaspectj.Annotation.Thread.AsThread;

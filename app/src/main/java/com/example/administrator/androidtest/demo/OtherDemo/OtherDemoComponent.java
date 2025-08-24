@@ -15,7 +15,7 @@ public class OtherDemoComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().otherDemoButton.setOnClickListener(this);
+        getViewBinding().otherDemoButton.setOnClickListener(this);
     }
 
     @Override

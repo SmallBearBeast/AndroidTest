@@ -9,7 +9,7 @@ import android.view.Menu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActToolbarTestBinding;
 
 import java.lang.reflect.Method;
@@ -19,7 +19,7 @@ public class ToolbarTestActivity extends ComponentActivity<ActToolbarTestBinding
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new ToolbarComponent(getLifecycle()));
+        regComponent(new ToolbarComponent(getLifecycle()));
     }
 
     @Override

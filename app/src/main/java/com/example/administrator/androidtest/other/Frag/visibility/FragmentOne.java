@@ -3,7 +3,7 @@ package com.example.administrator.androidtest.other.Frag.visibility;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
-import com.bear.libcomponent.component.ComponentFragment;
+import com.bear.libcomponent.host.ComponentFragment;
 import com.bear.liblog.SLog;
 import com.bear.libother.page.IPage;
 import com.example.administrator.androidtest.databinding.FragText1Binding;

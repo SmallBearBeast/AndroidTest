@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bear.libcommon.util.CollectionUtil;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActSystemShareBinding;
 import com.example.administrator.androidtest.other.XmlDrawableTest.XmlDrawableActivity;

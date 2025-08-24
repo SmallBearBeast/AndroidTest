@@ -16,7 +16,7 @@ public class AspectJTestComponent extends TestActivityComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().aspectjTestButton.setOnClickListener(this);
+        getViewBinding().aspectjTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -16,9 +16,9 @@ public class BottomViewTestComponent extends BaseWidgetDemoComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().normalBottomViewButton.setOnClickListener(this);
-        getBinding().nsBottomViewButton.setOnClickListener(this);
-        getBinding().rvBottomViewButton.setOnClickListener(this);
+        getViewBinding().normalBottomViewButton.setOnClickListener(this);
+        getViewBinding().nsBottomViewButton.setOnClickListener(this);
+        getViewBinding().rvBottomViewButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

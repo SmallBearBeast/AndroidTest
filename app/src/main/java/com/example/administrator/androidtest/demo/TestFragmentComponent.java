@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.FragmentComponent;
+import com.bear.libcomponent.component.ui.FragmentComponent;
 
 public class TestFragmentComponent extends FragmentComponent implements View.OnClickListener {
     public TestFragmentComponent(Lifecycle lifecycle) {

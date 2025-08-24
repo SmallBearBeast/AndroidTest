@@ -18,7 +18,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bear.libcommon.util.DensityUtil;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActConstraintTestBinding;
 import com.example.administrator.androidtest.demo.TestListFragment;

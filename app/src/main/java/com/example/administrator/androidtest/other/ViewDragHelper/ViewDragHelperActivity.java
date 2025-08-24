@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 
 import androidx.annotation.NonNull;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActViewDragHelperBinding;
 
 public class ViewDragHelperActivity extends ComponentActivity<ActViewDragHelperBinding> {

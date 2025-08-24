@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import com.bear.libcommon.util.MainHandlerUtil
-import com.bear.libcomponent.component.ComponentActivity
+import com.bear.libcomponent.host.ComponentActivity
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.databinding.ActMainDemoListBinding
 import com.example.administrator.androidtest.demo.ARouterTest.ARouterTestComponent
@@ -30,33 +30,33 @@ import com.example.administrator.androidtest.demo.optdemo.launchoptdemo.AppLaunc
 import com.example.administrator.androidtest.demo.optdemo.launchoptdemo.MonitorClassLoader
 import com.example.administrator.androidtest.demo.widgetDemo.WidgetDemoComponent
 
-class MainActivity : ComponentActivity<ActMainDemoListBinding?>() {
+class MainActivity : ComponentActivity<ActMainDemoListBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         AppLaunchTracer.markActivityCreate()
 //        AppLaunchTracer.markActivityCreate()
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         Log.i(TAG, "onCreate: enter")
-        regActComponent(BizDemoComponent(lifecycle))
-        regActComponent(LibraryDemoComponent(lifecycle))
-        regActComponent(AnrTestComponent(lifecycle))
-        regActComponent(OtherDemoComponent(lifecycle))
-        regActComponent(MediaDemoComponent(lifecycle))
-        regActComponent(WidgetDemoComponent(lifecycle))
-        regActComponent(ViewDemoComponent(lifecycle))
-        regActComponent(StartBgServiceDemoComponent(lifecycle))
-        regActComponent(SpAndMMKVDemoComponent(lifecycle))
-        regActComponent(FloatServiceTestComponent(lifecycle))
-        regActComponent(ScreenTestComponent(lifecycle))
-        regActComponent(KVCompareTestComponent(lifecycle))
-        regActComponent(FragLifecycleTestComponent(lifecycle))
-        regActComponent(BottomSheetTestComponent(lifecycle))
-        regActComponent(BusTestComponent(lifecycle))
-        regActComponent(AspectJTestComponent(lifecycle))
-        regActComponent(DialogTestComponent(lifecycle))
-        regActComponent(ARouterTestComponent(lifecycle))
-        regActComponent(FlutterTestComponent(lifecycle))
-        regActComponent(DemoComponent(lifecycle))
+        regComponent(BizDemoComponent(lifecycle))
+        regComponent(LibraryDemoComponent(lifecycle))
+        regComponent(AnrTestComponent(lifecycle))
+        regComponent(OtherDemoComponent(lifecycle))
+        regComponent(MediaDemoComponent(lifecycle))
+        regComponent(WidgetDemoComponent(lifecycle))
+        regComponent(ViewDemoComponent(lifecycle))
+        regComponent(StartBgServiceDemoComponent(lifecycle))
+        regComponent(SpAndMMKVDemoComponent(lifecycle))
+        regComponent(FloatServiceTestComponent(lifecycle))
+        regComponent(ScreenTestComponent(lifecycle))
+        regComponent(KVCompareTestComponent(lifecycle))
+        regComponent(FragLifecycleTestComponent(lifecycle))
+        regComponent(BottomSheetTestComponent(lifecycle))
+        regComponent(BusTestComponent(lifecycle))
+        regComponent(AspectJTestComponent(lifecycle))
+        regComponent(DialogTestComponent(lifecycle))
+        regComponent(ARouterTestComponent(lifecycle))
+        regComponent(FlutterTestComponent(lifecycle))
+        regComponent(DemoComponent(lifecycle))
         MainHandlerUtil.postDelayed({ MonitorClassLoader.printLoadTimeInfo() }, 2000)
     }
 

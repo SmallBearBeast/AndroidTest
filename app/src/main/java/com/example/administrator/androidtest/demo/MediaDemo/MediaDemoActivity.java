@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActMediaDemoListBinding;
 import com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo.PlayerDemoComponent;
 
@@ -17,7 +17,7 @@ public class MediaDemoActivity extends ComponentActivity<ActMediaDemoListBinding
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new PlayerDemoComponent(getLifecycle()));
+        regComponent(new PlayerDemoComponent(getLifecycle()));
     }
 
     @Override

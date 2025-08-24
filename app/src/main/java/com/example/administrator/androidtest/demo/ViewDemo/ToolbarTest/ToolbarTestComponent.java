@@ -15,7 +15,7 @@ public class ToolbarTestComponent extends BaseViewDemoComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().toolbarTestButton.setOnClickListener(this);
+        getViewBinding().toolbarTestButton.setOnClickListener(this);
     }
 
     @Override

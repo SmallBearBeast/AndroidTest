@@ -5,7 +5,7 @@ import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.ActivityComponent;
+import com.bear.libcomponent.component.ui.ActivityComponent;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActBizDemoListBinding;
 import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail.TikTokVideoDetailActivity;
@@ -17,7 +17,7 @@ public class TikTokDemoComponent extends ActivityComponent<ActBizDemoListBinding
 
     @Override
     protected void onCreate() {
-        getBinding().tiktokDemoButton.setOnClickListener(this);
+        getViewBinding().tiktokDemoButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

@@ -14,7 +14,7 @@ import androidx.core.content.ContextCompat;
 import com.bear.libcommon.bus.Bus;
 import com.bear.libcommon.bus.Event;
 import com.bear.libcommon.bus.EventCallback;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.bear.liblog.SLog;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActCommomTestBinding;

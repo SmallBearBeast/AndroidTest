@@ -27,7 +27,7 @@ public class FlowLayoutTestComponent extends BaseWidgetDemoComponent {
     }
 
     private void initFlowLayout() {
-        FlowLayout flowLayout = getBinding().flowLayout;
+        FlowLayout flowLayout = getViewBinding().flowLayout;
         String[] texts = new String[]{
                 "Android, Java, PHP, C++, Android, Java, PHP, C++, Android, Java, PHP, C++",
                 "Android, Java, PHP, C++, Android, Java, PHP, C++, Android, Java, PHP, C++",
@@ -46,8 +46,8 @@ public class FlowLayoutTestComponent extends BaseWidgetDemoComponent {
     }
 
     private void initFlowFakeFlowLayout() {
-        FlowLayout flowFakeFlowLayout = getBinding().flowFakeFlowLayout;
-        FlowFakeTextView flowFakeTextView = getBinding().flowFakeTextView;
+        FlowLayout flowFakeFlowLayout = getViewBinding().flowFakeFlowLayout;
+        FlowFakeTextView flowFakeTextView = getViewBinding().flowFakeTextView;
         flowFakeTextView.setTvInitCallback(() -> createTv(""));
         flowFakeFlowLayout.post(() -> {
             flowFakeTextView.setText("我是一个好人，但是我喜欢干坏事。这真是个悲伤的故事。这真是个悲伤的故事。这真是个悲伤的故事", flowFakeFlowLayout.getWidth());

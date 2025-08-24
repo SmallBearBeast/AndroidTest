@@ -12,7 +12,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.bear.libcomponent.component.ComponentFragment;
+import com.bear.libcomponent.host.ComponentFragment;
 import com.bear.liblog.SLog;
 import com.bear.libother.page.IPage;
 import com.example.administrator.androidtest.R;

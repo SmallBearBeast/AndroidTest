@@ -5,7 +5,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActTempBinding;
 
 @Route(path = "/ARouter/Module1Activity", name = "Module1Activity")

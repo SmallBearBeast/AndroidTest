@@ -16,7 +16,7 @@ public class AnrTestComponent extends TestActivityComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().anrTestButton.setOnClickListener(this);
+        getViewBinding().anrTestButton.setOnClickListener(this);
     }
 
 

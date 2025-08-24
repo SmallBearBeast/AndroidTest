@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import com.bear.libcommon.executor.MainThreadExecutor;
 import com.bear.libcommon.util.CollectionUtil;
 import com.bear.libcommon.util.ToastUtil;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.bear.liblog.SLog;
 import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;

@@ -9,8 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.ComponentFragment;
-import com.bear.libcomponent.component.FragmentComponent;
+import com.bear.libcomponent.host.ComponentFragment;
+import com.bear.libcomponent.component.ui.FragmentComponent;
 import com.bear.liblog.SLog;
 import com.bear.libother.page.IPage;
 import com.example.administrator.androidtest.R;
@@ -32,14 +32,14 @@ public class FragmentSeven extends ComponentFragment<FragText7Binding> {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        regFragComponent(new Component_1(getLifecycle()));
+        regComponent(new Component_1(getLifecycle()));
     }
 
 
     @Override
     public void onStart() {
         super.onStart();
-        regFragComponent(new Component_2(getLifecycle()));
+        regComponent(new Component_2(getLifecycle()));
     }
 
     @Nullable

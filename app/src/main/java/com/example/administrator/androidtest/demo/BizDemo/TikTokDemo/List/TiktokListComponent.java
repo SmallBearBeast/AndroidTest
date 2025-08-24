@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bear.libcommon.executor.BgThreadExecutor;
 import com.bear.libcommon.executor.MainThreadExecutor;
 import com.bear.libcommon.util.IOUtil;
-import com.bear.libcomponent.component.ActivityComponent;
+import com.bear.libcomponent.component.ui.ActivityComponent;
 import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.libstorage.FileStorage;
@@ -31,7 +31,7 @@ public class TiktokListComponent extends ActivityComponent<ActTiktokDemoBinding>
     @Override
     protected void onCreate() {
         super.onCreate();
-        tiktokRecyclerView = getBinding().tiktokRecyclerView;
+        tiktokRecyclerView = getViewBinding().tiktokRecyclerView;
         tiktokRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         MultiTypeAdapter adapter = new MultiTypeAdapter(getActivity().getLifecycle());
         changer = adapter.getChanger();

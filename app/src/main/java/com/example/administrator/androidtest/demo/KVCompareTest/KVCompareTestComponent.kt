@@ -7,13 +7,15 @@ import com.example.administrator.androidtest.demo.TestActivityComponent
 
 class KVCompareTestComponent(lifecycle: Lifecycle?) : TestActivityComponent(lifecycle) {
     override fun onCreate() {
-        binding.kvCompareTestButton.setOnClickListener(this)
+        viewBinding?.kvCompareTestButton?.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         when (view.id) {
             R.id.kvCompareTestButton -> {
-                KVCompareTestActivity.start(context)
+                context?.let {
+                    KVCompareTestActivity.start(it)
+                }
             }
         }
     }

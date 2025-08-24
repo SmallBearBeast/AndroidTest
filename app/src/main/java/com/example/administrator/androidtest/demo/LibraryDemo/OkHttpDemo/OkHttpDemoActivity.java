@@ -16,7 +16,7 @@ import com.bear.libcommon.util.CollectionUtil;
 import com.bear.libcommon.util.FileUtil;
 import com.bear.libcommon.util.NetWorkUtil;
 import com.bear.libcommon.util.ToastUtil;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.bear.libokhttp.OkCallback;
 import com.bear.libokhttp.OkDownloadCallback;
 import com.bear.libokhttp.OkHelper;

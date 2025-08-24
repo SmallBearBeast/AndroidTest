@@ -4,7 +4,7 @@ import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.ActivityComponent;
+import com.bear.libcomponent.component.ui.ActivityComponent;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActOtherDemoListBinding;
 
@@ -16,7 +16,7 @@ public class MediaStoreDemoComponent extends ActivityComponent<ActOtherDemoListB
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().mediaStoreDemoButton.setOnClickListener(this);
+        getViewBinding().mediaStoreDemoButton.setOnClickListener(this);
     }
 
     @Override

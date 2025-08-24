@@ -5,7 +5,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.FragmentComponent;
+import com.bear.libcomponent.component.ui.FragmentComponent;
 import com.example.administrator.androidtest.databinding.FragComponentTestBinding;
 
 public class DemoMinorTvComponent extends FragmentComponent<FragComponentTestBinding> {
@@ -27,9 +27,9 @@ public class DemoMinorTvComponent extends FragmentComponent<FragComponentTestBin
     }
 
     @Override
-    protected void onAttachViewBinding(@NonNull FragComponentTestBinding binding) {
-        super.onAttachViewBinding(binding);
-        textMinorTv = getBinding().textMinorTv;
+    public void attachViewBinding(@NonNull FragComponentTestBinding binding) {
+        super.attachViewBinding(binding);
+        textMinorTv = getViewBinding().textMinorTv;
         originText = String.valueOf(textMinorTv.getText());
         textMinorTv.setClickable(true);
         textMinorTv.setOnClickListener(v -> getComponent(DemoMainTvComponent.class).resetMainTv());

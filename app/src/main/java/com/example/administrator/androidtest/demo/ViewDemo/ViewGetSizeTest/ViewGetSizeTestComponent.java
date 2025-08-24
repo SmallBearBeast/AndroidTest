@@ -17,7 +17,7 @@ public class ViewGetSizeTestComponent extends BaseViewDemoComponent {
     @Override
     protected void onCreate() {
         super.onCreate();
-        getBinding().viewSizeTestButton.setOnClickListener(this);
+        getViewBinding().viewSizeTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

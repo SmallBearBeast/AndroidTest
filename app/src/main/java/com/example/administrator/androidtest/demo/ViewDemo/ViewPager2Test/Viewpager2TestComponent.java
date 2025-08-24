@@ -15,7 +15,7 @@ public class Viewpager2TestComponent extends BaseViewDemoComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().viewpager2TestButton.setOnClickListener(this);
+        getViewBinding().viewpager2TestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

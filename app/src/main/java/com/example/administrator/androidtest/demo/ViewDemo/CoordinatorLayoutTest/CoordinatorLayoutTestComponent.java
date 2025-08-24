@@ -16,7 +16,7 @@ public class CoordinatorLayoutTestComponent extends BaseViewDemoComponent {
 
     @Override
     protected void onCreate() {
-        getBinding().coordinatorLayoutTestButton.setOnClickListener(this);
+        getViewBinding().coordinatorLayoutTestButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

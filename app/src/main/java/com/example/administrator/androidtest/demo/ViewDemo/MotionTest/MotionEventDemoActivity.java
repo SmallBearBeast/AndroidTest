@@ -8,7 +8,7 @@ import android.view.MotionEvent;
 
 import androidx.annotation.NonNull;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActMotionBinding;
 import com.example.administrator.androidtest.other.OtherUtil;
 

@@ -18,9 +18,9 @@ public class MarqueeDemoComponent extends BaseWidgetDemoComponent {
 
     @Override
     protected void onCreate() {
-        marqueeTextView_1 = getBinding().marqueeTextView1;
-        getBinding().startMarqueeButton.setOnClickListener(this);
-        getBinding().endMarqueeButton.setOnClickListener(this);
+        marqueeTextView_1 = getViewBinding().marqueeTextView1;
+        getViewBinding().startMarqueeButton.setOnClickListener(this);
+        getViewBinding().endMarqueeButton.setOnClickListener(this);
     }
 
     @SuppressLint("NonConstantResourceId")

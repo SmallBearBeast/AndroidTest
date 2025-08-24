@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.bear.libcommon.util.ScreenUtil;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActScreenBinding;
 import com.example.administrator.androidtest.other.LogUtil;

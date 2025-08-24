@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActWidgetDemoListBinding;
 import com.example.administrator.androidtest.demo.widgetDemo.BottomViewTest.BottomViewTestComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.CaseViewTest.CaseViewComponent;
@@ -24,14 +24,14 @@ public class WidgetDemoActivity extends ComponentActivity<ActWidgetDemoListBindi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        regActComponent(new PdfViewDemoComponent(getLifecycle()));
-        regActComponent(new FlowLayoutTestComponent(getLifecycle()));
-        regActComponent(new MarqueeDemoComponent(getLifecycle()));
-        regActComponent(new CaseViewComponent(getLifecycle()));
-        regActComponent(new BottomViewTestComponent(getLifecycle()));
-        regActComponent(new LikeViewDemoComponent(getLifecycle()));
-        regActComponent(new FullTextViewDemoComponent(getLifecycle()));
-        regActComponent(new LoopViewPagerDemoComponent(getLifecycle()));
+        regComponent(new PdfViewDemoComponent(getLifecycle()));
+        regComponent(new FlowLayoutTestComponent(getLifecycle()));
+        regComponent(new MarqueeDemoComponent(getLifecycle()));
+        regComponent(new CaseViewComponent(getLifecycle()));
+        regComponent(new BottomViewTestComponent(getLifecycle()));
+        regComponent(new LikeViewDemoComponent(getLifecycle()));
+        regComponent(new FullTextViewDemoComponent(getLifecycle()));
+        regComponent(new LoopViewPagerDemoComponent(getLifecycle()));
     }
 
     @Override

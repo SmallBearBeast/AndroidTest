@@ -5,7 +5,7 @@ import android.view.View;
 
 import androidx.lifecycle.Lifecycle;
 
-import com.bear.libcomponent.component.ActivityComponent;
+import com.bear.libcomponent.component.ui.ActivityComponent;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActPlayerDemoBinding;
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout;
@@ -23,18 +23,18 @@ public class PlayerComponent extends ActivityComponent<ActPlayerDemoBinding> imp
     @Override
     protected void onCreate() {
         super.onCreate();
-        styledPlayerView = getBinding().styledPlayerView;
+        styledPlayerView = getViewBinding().styledPlayerView;
         styledPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM);
         styledPlayerView.setControllerAutoShow(false);
 //        styledPlayerView.setUseController(false);
 //        styledPlayerView.setControllerHideOnTouch(true);
 //        styledPlayerView.setDefaultArtwork(new ColorDrawable(Color.RED));
-        getBinding().playBt.setOnClickListener(this);
-        getBinding().pauseBt.setOnClickListener(this);
-        getBinding().loadMp4.setOnClickListener(this);
-        getBinding().loadMkv.setOnClickListener(this);
-        getBinding().load3gp.setOnClickListener(this);
-        getBinding().loadFlv.setOnClickListener(this);
+        getViewBinding().playBt.setOnClickListener(this);
+        getViewBinding().pauseBt.setOnClickListener(this);
+        getViewBinding().loadMp4.setOnClickListener(this);
+        getViewBinding().loadMkv.setOnClickListener(this);
+        getViewBinding().load3gp.setOnClickListener(this);
+        getViewBinding().loadFlv.setOnClickListener(this);
         initPlayer();
     }
 

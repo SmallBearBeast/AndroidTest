@@ -16,7 +16,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.widget.NestedScrollView;
 
 import com.bear.libcommon.util.ViewUtil;
-import com.bear.libcomponent.component.ComponentActivity;
+import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.R;
 import com.example.administrator.androidtest.databinding.ActBehaviorTestBinding;
 
