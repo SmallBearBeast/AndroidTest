@@ -17,8 +17,10 @@ abstract class ViewBindingComponent<VB : ViewBinding> @JvmOverloads constructor(
 ) : GroupComponent(lifecycle), IViewBindingProvider<VB> {
     private var componentViewBinding: VB? = null
 
-    override val viewBinding: VB?
+    final override val viewBinding: VB?
         get() = componentViewBinding
+
+    final override fun requireBinding() = componentViewBinding!!
 
     @CallSuper
     override fun attachViewBinding(binding: VB) {
@@ -38,9 +40,7 @@ abstract class ViewBindingComponent<VB : ViewBinding> @JvmOverloads constructor(
     internal fun <C : ViewBindingComponent<VB>> regComponent(component: C, tag: Any?) {
         super.regComponent(component, tag)
         if (component.viewBinding == null) {
-            viewBinding?.let {
-                component.attachViewBinding(it)
-            }
+            viewBinding?.let { component.attachViewBinding(it) }
         }
     }
 

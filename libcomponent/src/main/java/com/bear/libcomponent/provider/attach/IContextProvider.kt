@@ -6,6 +6,8 @@ import com.bear.libcomponent.host.ComponentActivity
 interface IContextProvider {
     fun attachContext(context: Context?)
 
+    fun requireContext(): Context
+
     val context: Context?
 
     val activity: ComponentActivity<*>?

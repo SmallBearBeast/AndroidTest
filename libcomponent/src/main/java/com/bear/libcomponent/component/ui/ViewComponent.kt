@@ -12,7 +12,7 @@ import com.bear.libcomponent.component.base.ViewBindingComponent
 // 如果是Dialog组件，持有的就是Dialog的View。
 // 如果是View组件，持有的就是View本身。
 // 默认会继承Activity的View或者Fragment的View。
-class ViewComponent<VB : ViewBinding> @JvmOverloads constructor(
+open class ViewComponent<VB : ViewBinding> @JvmOverloads constructor(
     viewBinding: VB,
     lifecycle: Lifecycle? = null
 ) : ViewBindingComponent<VB>(lifecycle), View.OnAttachStateChangeListener {

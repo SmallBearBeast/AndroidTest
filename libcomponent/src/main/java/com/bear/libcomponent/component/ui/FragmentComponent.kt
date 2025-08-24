@@ -3,11 +3,11 @@ package com.bear.libcomponent.component.ui
 import android.os.Bundle
 import androidx.lifecycle.Lifecycle
 import androidx.viewbinding.ViewBinding
-import com.bear.libcomponent.host.ComponentFragment
 import com.bear.libcomponent.component.base.ViewBindingComponent
+import com.bear.libcomponent.host.ComponentFragment
 import com.bear.libcomponent.provider.IBackPressedProvider
-import com.bear.libcomponent.provider.attach.IFragmentProvider
 import com.bear.libcomponent.provider.IMenuProvider
+import com.bear.libcomponent.provider.attach.IFragmentProvider
 
 open class FragmentComponent<VB : ViewBinding> @JvmOverloads constructor(
     lifecycle: Lifecycle? = null
@@ -22,6 +22,13 @@ open class FragmentComponent<VB : ViewBinding> @JvmOverloads constructor(
 
     override fun attachFragment(fragment: ComponentFragment<*>?) {
         componentFragment = fragment
+        for (component in componentMap.values) {
+            if (component is FragmentComponent<*>) {
+                if (component.fragment == null) {
+                    component.attachFragment(fragment)
+                }
+            }
+        }
     }
 
     open fun onCreateView() {

@@ -88,7 +88,7 @@ abstract class LifeComponent @JvmOverloads constructor(
 
     }
 
-    protected fun onStop() {
+    protected open fun onStop() {
 
     }
 

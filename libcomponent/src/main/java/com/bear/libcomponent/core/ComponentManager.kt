@@ -8,14 +8,13 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import androidx.viewbinding.ViewBinding
-import com.bear.libcomponent.host.ComponentActivity
-import com.bear.libcomponent.host.ComponentFragment
-import com.bear.libcomponent.component.base.ComponentKey
 import com.bear.libcomponent.component.base.GroupComponent
 import com.bear.libcomponent.component.ui.ActivityComponent
 import com.bear.libcomponent.component.ui.FragmentComponent
 import com.bear.libcomponent.component.ui.NonUIComponent
 import com.bear.libcomponent.component.ui.ViewComponent
+import com.bear.libcomponent.host.ComponentActivity
+import com.bear.libcomponent.host.ComponentFragment
 import com.bear.libcomponent.provider.IBackPressedProvider
 import com.bear.libcomponent.provider.IMenuProvider
 
@@ -26,9 +25,44 @@ internal class ComponentManager {
         if (componentContainer.contain(component.javaClass, tag)) {
             throw RuntimeException("Can not register component with same type and tag")
         }
-        component.attachContext(activity)
-        component.attachActivity(activity)
-        activity.binding?.let { component.attachViewBinding(it) }
+        if (component.context == null) {
+            component.attachContext(activity)
+        }
+        if (component.activity == null) {
+            component.attachActivity(activity)
+        }
+        if (component.lifecycle == null) {
+            component.attachLifecycle(activity.lifecycle)
+        }
+        if (component.viewBinding == null) {
+            activity.binding?.let { component.attachViewBinding(it) }
+        }
+        componentContainer.regComponent(component, tag)
+    }
+
+    fun regComponent(activity: ComponentActivity<*>, component: ViewComponent<*>, tag: Any?) {
+        if (componentContainer.contain(component.javaClass, tag)) {
+            throw RuntimeException("Can not register component with same type and tag")
+        }
+        if (component.context == null) {
+            component.attachContext(activity)
+        }
+        if (component.lifecycle == null) {
+            component.attachLifecycle(activity.lifecycle)
+        }
+        componentContainer.regComponent(component, tag)
+    }
+
+    fun regComponent(activity: ComponentActivity<*>, component: NonUIComponent, tag: Any?) {
+        if (componentContainer.contain(component.javaClass, tag)) {
+            throw RuntimeException("Can not register component with same type and tag")
+        }
+        if (component.context == null) {
+            component.attachContext(activity)
+        }
+        if (component.lifecycle == null) {
+            component.attachLifecycle(activity.lifecycle)
+        }
         componentContainer.regComponent(component, tag)
     }
 
@@ -36,28 +70,46 @@ internal class ComponentManager {
         if (componentContainer.contain(component.javaClass, tag)) {
             throw RuntimeException("Can not register component with same type and tag")
         }
-        component.attachContext(fragment.context)
-        component.attachFragment(fragment)
-        fragment.binding?.let { component.attachViewBinding(it) }
+        if (component.context == null && fragment.context != null) {
+            component.attachContext(fragment.context)
+        }
+        if (component.fragment == null) {
+            component.attachFragment(fragment)
+        }
+        if (component.lifecycle == null) {
+            component.attachLifecycle(fragment.lifecycle)
+        }
+        if (component.viewBinding == null) {
+            fragment.binding?.let { component.attachViewBinding(it) }
+        }
         componentContainer.regComponent(component, tag)
     }
 
-    fun regComponent(context: Context, component: ViewComponent<*>, tag: Any?) {
+    fun regComponent(fragment: ComponentFragment<*>, component: ViewComponent<*>, tag: Any?) {
         if (componentContainer.contain(component.javaClass, tag)) {
             throw RuntimeException("Can not register component with same type and tag")
         }
-        component.attachContext(context)
+        if (component.context == null && fragment.context != null) {
+            component.attachContext(fragment.context)
+        }
+        if (component.lifecycle == null) {
+            component.attachLifecycle(fragment.lifecycle)
+        }
         componentContainer.regComponent(component, tag)
     }
 
-    fun regComponent(context: Context, component: NonUIComponent, tag: Any?) {
+    fun regComponent(fragment: ComponentFragment<*>, component: NonUIComponent, tag: Any?) {
         if (componentContainer.contain(component.javaClass, tag)) {
             throw RuntimeException("Can not register component with same type and tag")
         }
-        component.attachContext(context)
+        if (component.context == null && fragment.context != null) {
+            component.attachContext(fragment.context)
+        }
+        if (component.lifecycle == null) {
+            component.attachLifecycle(fragment.lifecycle)
+        }
         componentContainer.regComponent(component, tag)
     }
-
 
     fun <C : IComponent> getComponent(clz: Class<C>, tag: Any?): C? {
         return componentContainer.getComponent(clz, tag)
@@ -68,7 +120,9 @@ internal class ComponentManager {
         for (component in componentMap.values) {
             if (component is FragmentComponent<*> && component.fragment === componentFrag) {
                 binding?.let {
-                    (component as FragmentComponent<ViewBinding>).attachViewBinding(it)
+                    if (component.viewBinding == null) {
+                        (component as FragmentComponent<ViewBinding>).attachViewBinding(it)
+                    }
                 }
                 component.onCreateView()
             }
@@ -88,16 +142,9 @@ internal class ComponentManager {
         val componentMap = componentContainer.componentMap
         for (component in componentMap.values) {
             if (component is FragmentComponent<*> && component.fragment === componentFrag) {
-                component.attachContext(context)
-            }
-        }
-    }
-
-    fun dispatchOnDetach(componentFrag: ComponentFragment<*>) {
-        val componentMap = componentContainer.componentMap
-        for (component in componentMap.values) {
-            if (component is FragmentComponent<*> && component.fragment === componentFrag) {
-                component.attachContext(null)
+                if (component.context == null) {
+                    component.attachContext(context)
+                }
             }
         }
     }

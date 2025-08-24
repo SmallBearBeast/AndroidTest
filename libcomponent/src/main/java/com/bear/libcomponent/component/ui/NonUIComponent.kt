@@ -5,6 +5,4 @@ import com.bear.libcomponent.component.base.LifeComponent
 
 open class NonUIComponent @JvmOverloads constructor(
     lifecycle: Lifecycle? = null
-) : LifeComponent(lifecycle) {
-
-}
+) : LifeComponent(lifecycle)

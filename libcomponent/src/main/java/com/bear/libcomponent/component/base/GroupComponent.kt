@@ -1,5 +1,6 @@
 package com.bear.libcomponent.component.base
 
+import android.content.Context
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import com.bear.libcomponent.core.IComponent
@@ -10,6 +11,28 @@ abstract class GroupComponent @JvmOverloads constructor(
     private var parentComponent: GroupComponent? = null
 
     internal val componentMap: MutableMap<ComponentKey<*>, IComponent> = HashMap()
+
+    override fun attachContext(context: Context?) {
+        super.attachContext(context)
+        for (component in componentMap.values) {
+            if (component is ContextComponent) {
+                if (component.context == null) {
+                    component.attachContext(context)
+                }
+            }
+        }
+    }
+
+    override fun attachLifecycle(lifecycle: Lifecycle?) {
+        super.attachLifecycle(lifecycle)
+        for (component in componentMap.values) {
+            if (component is LifeComponent) {
+                if (component.lifecycle == null) {
+                    component.attachLifecycle(lifecycle)
+                }
+            }
+        }
+    }
 
     @JvmOverloads
     internal fun <C : IComponent> regComponent(component: C, tag: Any? = null) {
@@ -44,7 +67,7 @@ abstract class GroupComponent @JvmOverloads constructor(
     }
 
     @JvmOverloads
-    open fun <C : IComponent> getComponent(clz: Class<C>, tag: Any? = null): C? {
+    fun <C : IComponent> getComponent(clz: Class<C>, tag: Any? = null): C? {
         // 首先在当前组件中查找
         val targetKey = ComponentKey(clz, tag)
         var targetComponent = findInComponentTree<IComponent>(targetKey)

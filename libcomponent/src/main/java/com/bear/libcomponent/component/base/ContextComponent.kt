@@ -11,6 +11,17 @@ abstract class ContextComponent : IContextProvider, IComponentKeyProvider, IComp
 
     private var componentKey: ComponentKey<*>? = null
 
+    final override val key: ComponentKey<*>?
+        get() = componentKey
+
+    final override val context: Context?
+        get() = componentContext
+
+    override val activity: ComponentActivity<*>?
+        get() = componentContext as? ComponentActivity<*>
+
+    override fun requireContext() = componentContext!!
+
     override fun attachComponentKey(key: ComponentKey<*>?) {
         componentKey = key
     }
@@ -18,13 +29,4 @@ abstract class ContextComponent : IContextProvider, IComponentKeyProvider, IComp
     override fun attachContext(context: Context?) {
         componentContext = context
     }
-
-    override val key: ComponentKey<*>?
-        get() = componentKey
-
-    override val context: Context?
-        get() = componentContext
-
-    override val activity: ComponentActivity<*>?
-        get() = componentContext as? ComponentActivity<*>
 }

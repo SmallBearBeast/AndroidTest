@@ -42,12 +42,6 @@ abstract class ComponentFragment<VB : ViewBinding> : BaseFragment<VB>() {
         componentManager.dispatchOnDestroyView(this)
     }
 
-    @CallSuper
-    override fun onDetach() {
-        super.onDetach()
-        componentManager.dispatchOnDetach(this)
-    }
-
     override fun onFirstVisible() {
         componentManager.dispatchOnFirstVisible(this)
     }
@@ -59,12 +53,12 @@ abstract class ComponentFragment<VB : ViewBinding> : BaseFragment<VB>() {
 
     @JvmOverloads
     fun regComponent(component: ViewComponent<*>, tag: Any? = null) {
-        componentManager.regComponent(requireContext(), component, tag)
+        componentManager.regComponent(this, component, tag)
     }
 
     @JvmOverloads
     fun regComponent(component: NonUIComponent, tag: Any? = null) {
-        componentManager.regComponent(requireContext(), component, tag)
+        componentManager.regComponent(this, component, tag)
     }
 
     @JvmOverloads
