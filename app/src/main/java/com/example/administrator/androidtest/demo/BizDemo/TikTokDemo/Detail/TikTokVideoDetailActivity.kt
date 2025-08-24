@@ -20,6 +20,7 @@ class TikTokVideoDetailActivity : ComponentActivity<ActTiktokVideoDetailBinding>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        regComponent(ToolbarComponent())
         regComponent(AdapterComponent())
     }
 }
