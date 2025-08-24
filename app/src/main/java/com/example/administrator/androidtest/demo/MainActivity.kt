@@ -9,7 +9,7 @@ import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.databinding.ActMainDemoListBinding
 import com.example.administrator.androidtest.demo.ARouterTest.ARouterTestComponent
 import com.example.administrator.androidtest.demo.AspectTest.AspectJTestComponent
-import com.example.administrator.androidtest.demo.BizDemo.BizDemoComponent
+import com.example.administrator.androidtest.demo.bizdemo.BizDemoComponent
 import com.example.administrator.androidtest.demo.BottomSheetTest.BottomSheetTestComponent
 import com.example.administrator.androidtest.demo.BusTest.BusTestComponent
 import com.example.administrator.androidtest.demo.ComponentDemo.DemoComponent

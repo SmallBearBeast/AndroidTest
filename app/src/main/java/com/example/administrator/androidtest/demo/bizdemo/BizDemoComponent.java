@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo;
+package com.example.administrator.androidtest.demo.bizdemo;
 
 import android.annotation.SuppressLint;
 import android.view.View;

@@ -1,6 +1,6 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo;
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo;
 
-public class TiktokVideoInfo {
+public class TiktokVideoDetailInfo {
 
     /**
      * authorImgUrl : https://p3-dy.byteimg.com/aweme/100x100/1e19c00014b66991215ba.jpeg
@@ -29,6 +29,7 @@ public class TiktokVideoInfo {
      */
 
     public int id;
+    public int isDetailInfo;
     public String authorImgUrl;
     public String authorName;
     public int authorSex;
@@ -53,33 +54,32 @@ public class TiktokVideoInfo {
     public String videoPlayUrl;
     public int videoWidth;
 
-    public TiktokVideoDetailInfo toTiktokVideoDetailInfo() {
-        TiktokVideoDetailInfo detailInfo = new TiktokVideoDetailInfo();
-        detailInfo.id = id;
-        detailInfo.isDetailInfo = 0;
-        detailInfo.authorImgUrl = authorImgUrl;
-        detailInfo.authorName = authorName;
-        detailInfo.authorSex = authorSex;
-        detailInfo.coverImgUrl = coverImgUrl;
-        detailInfo.createTime = createTime;
-        detailInfo.dynamicCover = dynamicCover;
-        detailInfo.filterMusicNameStr = filterMusicNameStr;
-        detailInfo.filterTitleStr = filterTitleStr;
-        detailInfo.filterUserNameStr = filterUserNameStr;
-        detailInfo.formatLikeCountStr = formatLikeCountStr;
-        detailInfo.formatPlayCountStr = formatPlayCountStr;
-        detailInfo.formatTimeStr = formatTimeStr;
-        detailInfo.likeCount = likeCount;
-        detailInfo.musicAuthorName = musicAuthorName;
-        detailInfo.musicImgUrl = musicImgUrl;
-        detailInfo.musicName = musicName;
-        detailInfo.playCount = playCount;
-        detailInfo.title = title;
-        detailInfo.type = type;
-        detailInfo.videoDownloadUrl = videoDownloadUrl;
-        detailInfo.videoHeight = videoHeight;
-        detailInfo.videoPlayUrl = videoPlayUrl;
-        detailInfo.videoWidth = videoWidth;
-        return detailInfo;
+    public TiktokVideoInfo toTiktokVideoInfo() {
+        TiktokVideoInfo videoInfo = new TiktokVideoInfo();
+        videoInfo.id = id;
+        videoInfo.authorImgUrl = authorImgUrl;
+        videoInfo.authorName = authorName;
+        videoInfo.authorSex = authorSex;
+        videoInfo.coverImgUrl = coverImgUrl;
+        videoInfo.createTime = createTime;
+        videoInfo.dynamicCover = dynamicCover;
+        videoInfo.filterMusicNameStr = filterMusicNameStr;
+        videoInfo.filterTitleStr = filterTitleStr;
+        videoInfo.filterUserNameStr = filterUserNameStr;
+        videoInfo.formatLikeCountStr = formatLikeCountStr;
+        videoInfo.formatPlayCountStr = formatPlayCountStr;
+        videoInfo.formatTimeStr = formatTimeStr;
+        videoInfo.likeCount = likeCount;
+        videoInfo.musicAuthorName = musicAuthorName;
+        videoInfo.musicImgUrl = musicImgUrl;
+        videoInfo.musicName = musicName;
+        videoInfo.playCount = playCount;
+        videoInfo.title = title;
+        videoInfo.type = type;
+        videoInfo.videoDownloadUrl = videoDownloadUrl;
+        videoInfo.videoHeight = videoHeight;
+        videoInfo.videoPlayUrl = videoPlayUrl;
+        videoInfo.videoWidth = videoWidth;
+        return videoInfo;
     }
 }

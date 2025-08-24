@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo;
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo;
 
 import android.util.Range;
 

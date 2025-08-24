@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.List;
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.list;
 
 import android.content.Context;
 import android.content.Intent;

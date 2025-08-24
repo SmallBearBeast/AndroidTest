@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import android.content.Context
 import android.content.Intent

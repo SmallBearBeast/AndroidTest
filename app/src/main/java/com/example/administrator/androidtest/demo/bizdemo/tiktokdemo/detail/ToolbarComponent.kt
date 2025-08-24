@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import com.bear.libcomponent.component.ui.ActivityComponent
 import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding

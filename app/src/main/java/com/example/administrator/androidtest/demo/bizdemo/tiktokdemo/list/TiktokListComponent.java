@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.List;
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.list;
 
 import androidx.lifecycle.Lifecycle;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,7 +12,7 @@ import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.libstorage.FileStorage;
 import com.example.administrator.androidtest.databinding.ActTiktokDemoBinding;
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo;
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoInfo;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;

@@ -145,15 +145,15 @@
 
         <!-- Biz Demo Start -->
         <activity
-            android:name=".demo.BizDemo.BizDemoActivity"
+            android:name=".demo.bizdemo.BizDemoActivity"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".demo.BizDemo.TikTokDemo.List.TikTokDemoActivity"
+            android:name=".demo.bizdemo.tiktokdemo.list.TikTokDemoActivity"
             android:theme="@style/AppTheme" />
 
         <activity
-            android:name=".demo.BizDemo.TikTokDemo.Detail.TikTokVideoDetailActivity"
+            android:name=".demo.bizdemo.tiktokdemo.detail.TikTokVideoDetailActivity"
             android:theme="@style/AppTheme" />
         <!-- Biz Demo End -->
 

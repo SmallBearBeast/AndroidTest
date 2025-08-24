@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo;
+package com.example.administrator.androidtest.demo.bizdemo;
 
 import android.content.Context;
 import android.content.Intent;
@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.bear.libcomponent.host.ComponentActivity;
 import com.example.administrator.androidtest.databinding.ActBizDemoListBinding;
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TikTokDemoComponent;
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TikTokDemoComponent;
 
 public class BizDemoActivity extends ComponentActivity<ActBizDemoListBinding> {
 

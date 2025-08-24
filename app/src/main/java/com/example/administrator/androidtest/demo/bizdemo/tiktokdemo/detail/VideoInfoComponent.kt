@@ -1,10 +1,10 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import android.util.Log
 import com.bear.libcomponent.component.ui.ViewComponent
 import com.bear.libcomponent.core.IComponent
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoInfoBinding
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
 
 class VideoInfoComponent(binding: ComponentTiktokVideoInfoBinding) : ViewComponent<ComponentTiktokVideoInfoBinding>(binding), IVideoInfoComponent {
 

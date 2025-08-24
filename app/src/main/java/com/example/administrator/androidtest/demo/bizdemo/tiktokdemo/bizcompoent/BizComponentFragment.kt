@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.bizcompoent
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.bizcompoent
 
 import android.util.Log
 import androidx.viewbinding.ViewBinding

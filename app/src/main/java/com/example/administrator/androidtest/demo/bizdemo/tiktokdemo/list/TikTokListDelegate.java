@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.List;
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.list;
 
 import android.view.View;
 
@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo;
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoInfo;
 
 public class TikTokListDelegate extends MultiTypeDelegate<TiktokVideoInfo, TikTokListDelegate.TikTokListHolder> {
 

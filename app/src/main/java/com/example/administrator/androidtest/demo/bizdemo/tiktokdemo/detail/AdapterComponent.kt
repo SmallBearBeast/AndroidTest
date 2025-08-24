@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import android.util.Log
 import androidx.viewpager2.widget.ViewPager2
@@ -7,9 +7,9 @@ import com.bear.libcomponent.component.ui.ActivityComponent
 import com.bear.librv.MultiItemChanger
 import com.bear.librv.MultiTypeAdapter
 import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokConstants
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokDataLoader
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokConstants
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokDataLoader
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
 
 class AdapterComponent : ActivityComponent<ActTiktokVideoDetailBinding>() {
     private var videoDetailViewPager: ViewPager2? = null

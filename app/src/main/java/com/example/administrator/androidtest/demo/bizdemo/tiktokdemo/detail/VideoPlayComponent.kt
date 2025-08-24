@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import android.util.Log
 import android.view.View
@@ -7,8 +7,8 @@ import com.bear.libcomponent.core.IComponent
 import com.bumptech.glide.Glide
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoPlayBinding
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoInfo
 import com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo.UniversalPlayer
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 

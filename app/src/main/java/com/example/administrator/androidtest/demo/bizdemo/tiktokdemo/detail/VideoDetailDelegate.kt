@@ -1,12 +1,12 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import android.view.View
 import com.bear.librv.MultiTypeDelegate
 import com.bear.librv.MultiTypeHolder
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.databinding.ItemTiktokVideoDetailBinding
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail.VideoDetailDelegate.VideoDetailViewHolder
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail.VideoDetailDelegate.VideoDetailViewHolder
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
 import java.util.concurrent.atomic.AtomicInteger
 
 class VideoDetailDelegate(private val adapterComponent: AdapterComponent) :

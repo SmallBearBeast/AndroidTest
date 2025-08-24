@@ -1,4 +1,4 @@
-package com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.Detail
+package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import com.bear.libcommon.util.ToastUtil
 import com.bear.libcomponent.component.ui.ViewComponent
@@ -6,7 +6,7 @@ import com.bear.libcomponent.core.IComponent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoActionBinding
-import com.example.administrator.androidtest.demo.BizDemo.TikTokDemo.TiktokVideoDetailInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
 
 class VideoActionComponent(binding: ComponentTiktokVideoActionBinding) : ViewComponent<ComponentTiktokVideoActionBinding>(binding),
     IVideoActionComponent {
