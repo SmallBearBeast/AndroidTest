@@ -80,7 +80,7 @@ public class DemoFragComponent extends FragmentComponent<FragComponentTestBindin
         if (tag.startsWith("Call DemoFragComponent")) {
             String numStr = tag.substring(tag.lastIndexOf(' ') + 1);
             int num = Integer.valueOf(numStr);
-            DemoFragComponent component = getComponent(DemoFragComponent.class, num);
+            DemoFragComponent component = getComponent(DemoFragComponent.class);
             if (component != null) {
                 component.showToast();
             }

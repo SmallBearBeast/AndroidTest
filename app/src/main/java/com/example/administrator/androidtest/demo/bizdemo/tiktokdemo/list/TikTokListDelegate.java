@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 
 import com.bear.librv.MultiTypeDelegate;
 import com.bear.librv.MultiTypeHolder;
-import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoInfo;
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokItemInfo;
 
-public class TikTokListDelegate extends MultiTypeDelegate<TiktokVideoInfo, TikTokListDelegate.TikTokListHolder> {
+public class TikTokListDelegate extends MultiTypeDelegate<TiktokItemInfo, TikTokListDelegate.TikTokListHolder> {
 
     @NonNull
     @Override
@@ -21,7 +21,7 @@ public class TikTokListDelegate extends MultiTypeDelegate<TiktokVideoInfo, TikTo
         return 0;
     }
 
-    public static class TikTokListHolder extends MultiTypeHolder<TiktokVideoInfo> {
+    public static class TikTokListHolder extends MultiTypeHolder<TiktokItemInfo> {
 
         public TikTokListHolder(View itemView) {
             super(itemView);

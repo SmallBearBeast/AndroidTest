@@ -1,11 +1,11 @@
 package com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
 import com.bear.libcommon.util.FileUtil;
-import com.bear.liblog.SLog;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -50,7 +50,6 @@ public class UniversalPlayer {
     private final Player.Listener listener = new Player.Listener() {
         @Override
         public void onPlaybackStateChanged(int playbackState) {
-            SLog.d(TAG, "onPlaybackStateChanged() called with: playbackState = [" + playbackState + "]");
             String stateStr = "UNKNOWN_STATE";
             switch (playbackState) {
                 case ExoPlayer.STATE_IDLE:
@@ -66,32 +65,32 @@ public class UniversalPlayer {
                     stateStr = "ExoPlayer.STATE_ENDED";
                     break;
             }
-            SLog.d(TAG, "changed state to " + stateStr);
+            Log.d(TAG, "onPlaybackStateChanged: playbackState = " + playbackState + ", stateStr = " + stateStr);
         }
 
         @Override
         public void onIsPlayingChanged(boolean isPlaying) {
-            SLog.d(TAG, "onIsPlayingChanged() called with: isPlaying = [" + isPlaying + "]");
+            Log.d(TAG, "onIsPlayingChanged() called with: isPlaying = [" + isPlaying + "]");
         }
 
         @Override
         public void onPlayWhenReadyChanged(boolean playWhenReady, int reason) {
-            SLog.d(TAG, "onPlayWhenReadyChanged() called with: playWhenReady = [" + playWhenReady + "], reason = [" + reason + "]");
+            Log.d(TAG, "onPlayWhenReadyChanged() called with: playWhenReady = [" + playWhenReady + "], reason = [" + reason + "]");
         }
 
         @Override
         public void onRenderedFirstFrame() {
-            SLog.d(TAG, "onRenderedFirstFrame() called");
+            Log.d(TAG, "onRenderedFirstFrame() called");
         }
 
         @Override
         public void onPlayerError(PlaybackException error) {
-            SLog.d(TAG, "onPlayerError() called with: error = [" + error + "], errorCode = " + error.errorCode);
+            Log.d(TAG, "onPlayerError() called with: error = [" + error + "], errorCode = " + error.errorCode);
         }
 
         @Override
         public void onPlayerErrorChanged(@Nullable PlaybackException error) {
-            SLog.d(TAG, "onPlayerErrorChanged() called with: error = [" + error + "], errorCode = " + (error != null ? error.errorCode : -1));
+            Log.d(TAG, "onPlayerErrorChanged() called with: error = [" + error + "], errorCode = " + (error != null ? error.errorCode : -1));
         }
     };
 

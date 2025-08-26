@@ -12,7 +12,7 @@ import com.bear.librv.MultiItemChanger;
 import com.bear.librv.MultiTypeAdapter;
 import com.bear.libstorage.FileStorage;
 import com.example.administrator.androidtest.databinding.ActTiktokDemoBinding;
-import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoInfo;
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokItemInfo;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.InputStream;
@@ -35,7 +35,7 @@ public class TiktokListComponent extends ActivityComponent<ActTiktokDemoBinding>
         tiktokRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         MultiTypeAdapter adapter = new MultiTypeAdapter(getActivity().getLifecycle());
         changer = adapter.getChanger();
-        adapter.register(TiktokVideoInfo.class, new TikTokListDelegate());
+        adapter.register(TiktokItemInfo.class, new TikTokListDelegate());
         tiktokRecyclerView.setAdapter(adapter);
 
         loadTikTokListData();
@@ -45,10 +45,10 @@ public class TiktokListComponent extends ActivityComponent<ActTiktokDemoBinding>
         BgThreadExecutor.execute(() -> {
             InputStream inputStream = null;
             try {
-                inputStream = getContext().getAssets().open("tiktok_video_info.json");
-                TypeToken<List<TiktokVideoInfo>> typeToken = new TypeToken<List<TiktokVideoInfo>>() {};
-                List<TiktokVideoInfo> tiktokVideoInfos = FileStorage.readObjFromJson(inputStream, typeToken);
-                MainThreadExecutor.post(() -> changer.setItems(tiktokVideoInfos));
+                inputStream = getContext().getAssets().open("tiktok_refresh_video_item_info.json");
+                TypeToken<List<TiktokItemInfo>> typeToken = new TypeToken<List<TiktokItemInfo>>() {};
+                List<TiktokItemInfo> tiktokItemInfos = FileStorage.readObjFromJson(inputStream, typeToken);
+                MainThreadExecutor.post(() -> changer.setItems(tiktokItemInfos));
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {

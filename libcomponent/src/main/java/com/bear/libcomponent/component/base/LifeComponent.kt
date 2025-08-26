@@ -14,7 +14,7 @@ abstract class LifeComponent @JvmOverloads constructor(
     @JvmField
     protected val TAG: String = javaClass.simpleName
 
-    private var lifecycleObserver: LifecycleEventObserver? = null
+    private var lifecycleObservers = arrayListOf<LifecycleEventObserver>()
 
     override val lifecycle: Lifecycle?
         get() = componentLifecycle
@@ -35,8 +35,12 @@ abstract class LifeComponent @JvmOverloads constructor(
         componentLifecycle?.addObserver(this)
     }
 
-    fun setLifecycleObserver(observer: LifecycleEventObserver?) {
-        lifecycleObserver = observer
+    fun addLifecycleObserver(observer: LifecycleEventObserver) {
+        lifecycleObservers.add(observer)
+    }
+
+    fun removeLifecycleObserver(observer: LifecycleEventObserver) {
+        lifecycleObservers.remove(observer)
     }
 
     override fun onStateChanged(source: LifecycleOwner, event: Lifecycle.Event) {
@@ -64,12 +68,14 @@ abstract class LifeComponent @JvmOverloads constructor(
             Lifecycle.Event.ON_DESTROY -> {
                 onDestroy()
                 componentLifecycle?.removeObserver(this)
-                lifecycleObserver = null
+                lifecycleObservers.clear()
             }
 
             else -> Unit
         }
-        lifecycleObserver?.onStateChanged(source, event)
+        lifecycleObservers.forEach {
+            it.onStateChanged(source, event)
+        }
     }
 
     protected open fun onCreate() {

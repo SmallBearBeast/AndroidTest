@@ -18,8 +18,7 @@ internal class ComponentContainer {
     }
 
     fun <C : IComponent> contain(clz: Class<C>, tag: Any? = null): Boolean {
-        val componentKey = ComponentKey(clz, tag)
-        return componentMap.containsKey(componentKey)
+        return rootComponent.getComponent(clz, tag) != null
     }
 }
 

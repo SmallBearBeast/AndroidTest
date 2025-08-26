@@ -7,9 +7,9 @@ import com.bear.libcomponent.core.IComponent
 import com.bumptech.glide.Glide
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoPlayBinding
-import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
-import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokItemInfo
 import com.example.administrator.androidtest.demo.MediaDemo.PlayerDemo.UniversalPlayer
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokDetailInfo
 import com.google.android.exoplayer2.ui.AspectRatioFrameLayout
 
 class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewComponent<ComponentTiktokVideoPlayBinding>(binding), View.OnClickListener,
@@ -24,15 +24,16 @@ class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewCompone
 
     private fun initPlayerView() {
         requireBinding().apply {
-            videoPlayerView.setUseController(false)
-            videoPlayerView.setResizeMode(AspectRatioFrameLayout.RESIZE_MODE_ZOOM)
-            playButton.setOnClickListener(this@VideoPlayComponent)
+            videoPlayerView.useController = false
+            videoPlayerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_ZOOM
             videoPlayerView.setOnClickListener(this@VideoPlayComponent)
+            playButton.setOnClickListener(this@VideoPlayComponent)
         }
     }
 
     private fun initPlayer() {
         requireBinding().apply {
+            universalPlayer = UniversalPlayer(requireContext())
             universalPlayer?.attachPlayView(videoPlayerView)
         }
     }
@@ -53,8 +54,8 @@ class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewCompone
         universalPlayer = null
     }
 
-    private fun playVideo(tiktokVideoInfo: TiktokVideoInfo) {
-        universalPlayer?.load(tiktokVideoInfo.videoDownloadUrl)
+    private fun playVideo(tiktokItemInfo: TiktokItemInfo) {
+        universalPlayer?.load(tiktokItemInfo.videoDownloadUrl)
         universalPlayer?.play()
     }
 
@@ -64,10 +65,10 @@ class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewCompone
                 requireBinding().apply {
                     if (universalPlayer?.isPlaying == true) {
                         universalPlayer?.pause()
-                        playButton.setVisibility(View.VISIBLE)
+                        playButton.visibility = View.VISIBLE
                     } else {
                         universalPlayer?.play()
-                        playButton.setVisibility(View.GONE)
+                        playButton.visibility = View.GONE
                     }
                 }
             }
@@ -82,7 +83,7 @@ class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewCompone
 
     }
 
-    override fun play(url: String) {
+    override fun play(url: String?) {
         universalPlayer?.load(url)
         universalPlayer?.play()
     }
@@ -102,7 +103,7 @@ class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewCompone
         }
     }
 
-    override fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?) {
+    override fun bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo?) {
         requireBinding().apply {
             Glide.with(requireContext()).load(videoDetailInfo?.coverImgUrl).into(thumbIv)
         }
@@ -110,8 +111,8 @@ class VideoPlayComponent(binding: ComponentTiktokVideoPlayBinding) : ViewCompone
 }
 
 interface IVideoPlayComponent : IComponent {
-    fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?)
-    fun play(url: String)
+    fun bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo?)
+    fun play(url: String?)
     fun load(url: String)
     fun showThumb(show: Boolean)
 }

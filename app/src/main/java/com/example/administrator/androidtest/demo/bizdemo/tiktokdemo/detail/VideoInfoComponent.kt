@@ -4,11 +4,11 @@ import android.util.Log
 import com.bear.libcomponent.component.ui.ViewComponent
 import com.bear.libcomponent.core.IComponent
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoInfoBinding
-import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokDetailInfo
 
 class VideoInfoComponent(binding: ComponentTiktokVideoInfoBinding) : ViewComponent<ComponentTiktokVideoInfoBinding>(binding), IVideoInfoComponent {
 
-    private fun _bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo) {
+    private fun _bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo) {
 //        Glide.with(getContext()).load(videoDetailInfo.coverImgUrl).into(new Target<Drawable>() {
 //            @Override
 //            public void onLoadStarted(@Nullable Drawable placeholder) {
@@ -73,7 +73,7 @@ class VideoInfoComponent(binding: ComponentTiktokVideoInfoBinding) : ViewCompone
         }
     }
 
-    override fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?) {
+    override fun bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo?) {
         videoDetailInfo ?: return
         _bindVideoDetailInfo(videoDetailInfo)
     }
@@ -81,5 +81,5 @@ class VideoInfoComponent(binding: ComponentTiktokVideoInfoBinding) : ViewCompone
 
 
 interface IVideoInfoComponent : IComponent {
-    fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?)
+    fun bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo?)
 }

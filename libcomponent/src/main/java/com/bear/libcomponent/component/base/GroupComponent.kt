@@ -2,7 +2,6 @@ package com.bear.libcomponent.component.base
 
 import android.content.Context
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleOwner
 import com.bear.libcomponent.core.IComponent
 
 abstract class GroupComponent @JvmOverloads constructor(
@@ -11,6 +10,8 @@ abstract class GroupComponent @JvmOverloads constructor(
     private var parentComponent: GroupComponent? = null
 
     internal val componentMap: MutableMap<ComponentKey<*>, IComponent> = HashMap()
+
+    private val pendingComponentMap = hashMapOf<ComponentKey<*>, (component: IComponent) -> Unit>()
 
     override fun attachContext(context: Context?) {
         super.attachContext(context)
@@ -36,10 +37,10 @@ abstract class GroupComponent @JvmOverloads constructor(
 
     @JvmOverloads
     internal fun <C : IComponent> regComponent(component: C, tag: Any? = null) {
-        val componentKey = ComponentKey(component.javaClass, tag)
-        if (componentMap.containsKey(componentKey)) {
+        if (getComponent(component.javaClass, tag) != null) {
             throw RuntimeException("Can not register component with same type and tag")
         }
+        val componentKey = ComponentKey(component.javaClass, tag)
         if (component is ContextComponent) {
             if (component.context == null) {
                 component.attachContext(context)
@@ -50,7 +51,7 @@ abstract class GroupComponent @JvmOverloads constructor(
             if (component.lifecycle == null) {
                 component.attachLifecycle(lifecycle)
             }
-            component.setLifecycleObserver { _: LifecycleOwner, event: Lifecycle.Event ->
+            component.addLifecycleObserver { _, event ->
                 if (event == Lifecycle.Event.ON_DESTROY) {
                     componentMap.remove(componentKey)
                 }
@@ -58,12 +59,52 @@ abstract class GroupComponent @JvmOverloads constructor(
         }
         (component as? GroupComponent)?.parentComponent = this
         componentMap[componentKey] = component
+        pendingComponentMap.entries.find {
+            it.key.tag == componentKey.tag && it.key.clz.isAssignableFrom(componentKey.clz)
+        }?.let {
+            it.value.invoke(component)
+            pendingComponentMap.remove(componentKey)
+        }
+//        pendingComponentMap[componentKey]?.let { action ->
+//            if (component is LifeComponent) {
+//                component.addLifecycleObserver { _, event ->
+//                    if (event == Lifecycle.Event.ON_RESUME) {
+//                        action(component)
+//                        pendingComponentMap.remove(componentKey)
+//                        component.removeLifecycleObserver(this)
+//                    }
+//                }
+//            }
+//        }
     }
 
     @JvmOverloads
     fun <C : IComponent> unRegComponent(clz: Class<C>, tag: Any? = null) {
         val targetKey = ComponentKey(clz, tag)
         componentMap.remove(targetKey)
+    }
+
+    @JvmOverloads
+    fun <C : IComponent> getComponent(clz: Class<C>, tag: Any? = null, onComponentReady: (component: C) -> Unit) {
+        // 首先在当前组件中查找
+        val targetKey = ComponentKey(clz, tag)
+        var targetComponent = findInComponentTree<IComponent>(targetKey)
+        if (targetComponent != null) {
+            (targetComponent as? C)?.let {
+                onComponentReady(it)
+            }
+        }
+
+        targetComponent = findInParentComponentTree(targetKey)
+        if (targetComponent != null) {
+            (targetComponent as? C)?.let {
+                onComponentReady(it)
+            }
+        }
+
+        pendingComponentMap[targetKey] = { comp ->
+            (comp as? C)?.let(onComponentReady)
+        }
     }
 
     @JvmOverloads

@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.bear.libcomponent.host.ComponentActivity
 import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding
+import com.example.administrator.androidtest.demo.ext.setupNormalSystemBar
 
 class TikTokVideoDetailActivity : ComponentActivity<ActTiktokVideoDetailBinding>() {
     companion object {
@@ -20,7 +21,9 @@ class TikTokVideoDetailActivity : ComponentActivity<ActTiktokVideoDetailBinding>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setupNormalSystemBar(lightStatusBars = false, lightNavigationBars = false)
         regComponent(ToolbarComponent())
         regComponent(AdapterComponent())
+        regComponent(DataLoaderComponent())
     }
 }

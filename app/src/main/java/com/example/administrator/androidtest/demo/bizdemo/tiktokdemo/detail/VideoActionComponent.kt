@@ -6,7 +6,7 @@ import com.bear.libcomponent.core.IComponent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.example.administrator.androidtest.databinding.ComponentTiktokVideoActionBinding
-import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokVideoDetailInfo
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokDetailInfo
 
 class VideoActionComponent(binding: ComponentTiktokVideoActionBinding) : ViewComponent<ComponentTiktokVideoActionBinding>(binding),
     IVideoActionComponent {
@@ -19,7 +19,7 @@ class VideoActionComponent(binding: ComponentTiktokVideoActionBinding) : ViewCom
         }
     }
 
-    private fun _bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo) {
+    private fun _bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo) {
         requireBinding().apply {
             Glide.with(requireContext()).load(videoDetailInfo.authorImgUrl).transform(CircleCrop()).into(authorAvatarIv)
             Glide.with(requireContext()).load(videoDetailInfo.musicImgUrl).transform(CircleCrop()).into(musicAvatarIv)
@@ -30,12 +30,12 @@ class VideoActionComponent(binding: ComponentTiktokVideoActionBinding) : ViewCom
         }
     }
 
-    override fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?) {
+    override fun bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo?) {
         videoDetailInfo ?: return
         _bindVideoDetailInfo(videoDetailInfo)
     }
 }
 
 interface IVideoActionComponent : IComponent {
-    fun bindVideoDetailInfo(videoDetailInfo: TiktokVideoDetailInfo?)
+    fun bindVideoDetailInfo(videoDetailInfo: TiktokDetailInfo?)
 }
