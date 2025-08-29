@@ -62,7 +62,7 @@ public class InfoDelegate extends MultiTypeDelegate<Info, InfoDelegate.InfoHolde
         }
 
         @Override
-        public void bindPartial(Info info, @NonNull Payload payload) {
+        public void bindPartial(int pos, Info info, @NonNull Payload payload) {
             switch (payload.mType) {
                 case RecyclerViewDemoActivity.PARTIAL_UPDATE_TYPE:
                     Glide.with(mIv_1.getContext()).load(info.url_1).into(mIv_1);

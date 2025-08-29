@@ -6,13 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import com.bear.libcomponent.host.ComponentActivity
 import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding
+import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TIKTOK_BUNDLE_KEY_CURRENT_INDEX
 import com.example.administrator.androidtest.demo.ext.setupNormalSystemBar
 
 class TikTokVideoDetailActivity : ComponentActivity<ActTiktokVideoDetailBinding>() {
     companion object {
         @JvmStatic
         fun go(context: Context) {
-            val intent = Intent(context, TikTokVideoDetailActivity::class.java)
+            val intent = Intent(context, TikTokVideoDetailActivity::class.java).apply {
+                putExtra(TIKTOK_BUNDLE_KEY_CURRENT_INDEX, 2)
+            }
             context.startActivity(intent)
         }
     }

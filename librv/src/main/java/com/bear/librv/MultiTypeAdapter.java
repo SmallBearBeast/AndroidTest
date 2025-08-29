@@ -1,6 +1,7 @@
 package com.bear.librv;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +40,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
 
     @NonNull
     @Override
-    public MultiTypeHolder<Object> onCreateViewHolder(@NonNull
-                                                          ViewGroup parent, int viewType) {
+    public MultiTypeHolder<Object> onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (inflater == null) {
             inflater = LayoutInflater.from(parent.getContext());
         }
@@ -95,7 +95,7 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
         } else {
             for (Object payload : payloads) {
                 if (payload instanceof Payload) {
-                    holder.bindPartial(multiItemChanger.get(position), (Payload) payload);
+                    holder.bindPartial(position, multiItemChanger.get(position), (Payload) payload);
                 } else {
                     super.onBindViewHolder(holder, position, payloads);
                 }
@@ -192,6 +192,12 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
             context = null;
             lifecycle = null;
         }
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull MultiTypeHolder<Object> holder) {
+        super.onViewRecycled(holder);
+        Log.d(TAG, "onViewRecycled: position = " + holder.getAbsoluteAdapterPosition());
     }
 
     public MultiItemChanger getChanger() {

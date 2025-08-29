@@ -15,7 +15,7 @@ object TiktokVideoInfoLoader {
     private const val TAG = "TiktokVideoInfoLoader"
     private const val ITEM_PAGE_SIZE = 10
     private const val DETAIL_PAGE_SIZE = 5
-    private const val RANGE_SIZE = 3
+    private const val RANGE_SIZE = 5
 
     private var lastRecIndex = 0
     private val sourceItemInfos: MutableList<TiktokItemInfo> = LinkedList()

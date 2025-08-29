@@ -1,10 +1,12 @@
 package com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.detail
 
 import android.util.Log
+import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.bear.libcomponent.component.ui.ActivityComponent
 import com.bear.librv.MultiItemChanger
 import com.bear.librv.MultiTypeAdapter
+import com.bear.librv.Payload
 import com.example.administrator.androidtest.databinding.ActTiktokVideoDetailBinding
 import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TIKTOK_BUNDLE_KEY_CURRENT_INDEX
 import com.example.administrator.androidtest.demo.bizdemo.tiktokdemo.TiktokDetailInfo
@@ -21,19 +23,36 @@ class AdapterComponent : ActivityComponent<ActTiktokVideoDetailBinding>() {
 
     private val pageChangeCallback = object : OnPageChangeCallback() {
         override fun onPageSelected(position: Int) {
+            Log.d(TAG, "onPageSelected: new position = $position, last position = $lastPosition")
             if (position == lastPosition) {
                 return
             }
-            Log.d(TAG, "onPageSelected: new position = $position, last position = $lastPosition")
 
-            if (position > lastPosition) {
-                loadNextVideos(position)
-            } else {
-                loadPreviousVideos(position)
+            if (lastPosition != -1) {
+                if (position > lastPosition) {
+                    loadNextVideos(position)
+                } else {
+                    loadPreviousVideos(position)
+                }
+            }
+
+            val currentItems = changer.data
+            if (lastPosition in currentItems.indices) {
+                val item = currentItems[lastPosition] as? VideoDetailItem
+                if (item?.isPlaying == true) {
+                    item.isPlaying = false
+                    changer.update(lastPosition, item, Payload(1))
+                }
+            }
+            if (position in currentItems.indices) {
+                val item = currentItems[position] as? VideoDetailItem
+                if (item?.isPlaying == false) {
+                    item.isPlaying = true
+                    changer.update(position, item, Payload(1))
+                }
             }
 
             lastPosition = position
-            updatePlaybackState(position)
         }
     }
 
@@ -43,46 +62,52 @@ class AdapterComponent : ActivityComponent<ActTiktokVideoDetailBinding>() {
         initData()
     }
 
+    override fun onResume() {
+        super.onResume()
+        val curPosition = requireBinding().videoDetailViewPager.currentItem
+        play(curPosition)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        val curPosition = requireBinding().videoDetailViewPager.currentItem
+        pause(curPosition)
+    }
+
     private fun initViews() {
         typeAdapter = MultiTypeAdapter(lifecycle).apply {
-            register(TiktokDetailInfo::class.java, videoDetailDelegate)
+            register(VideoDetailItem::class.java, videoDetailDelegate)
         }
         changer = typeAdapter.changer
         requireBinding().videoDetailViewPager.apply {
+            setPageTransformer(null)
             offscreenPageLimit = 1
             adapter = typeAdapter
             registerOnPageChangeCallback(pageChangeCallback)
+            (getChildAt(0) as? RecyclerView)?.let { recyclerView ->
+                // 禁用RecyclerView的默认动画，减少闪烁
+                recyclerView.itemAnimator = null
+                // 设置RecyclerView缓存大小
+                recyclerView.setItemViewCacheSize(2)
+                // 启用预布局优化
+                recyclerView.setHasFixedSize(true)
+            }
         }
     }
 
     private fun initData() {
         val initialDetailInfos = TiktokVideoInfoLoader.getInitialDetailInfos()
         if (initialDetailInfos.isNotEmpty()) {
-            changer.setItems(initialDetailInfos)
-            // Consolidate logic for determining the starting index.
+            val initialDetailItems = initialDetailInfos.map { VideoDetailItem(it, false) }
             val startIndex = requireActivity().intent.getIntExtra(TIKTOK_BUNDLE_KEY_CURRENT_INDEX, 0)
-                .coerceIn(initialDetailInfos.indices) // Ensure index is within bounds.
-
+                .coerceIn(initialDetailInfos.indices)
+            initialDetailItems[startIndex].isPlaying = true
+            changer.setItems(initialDetailItems)
             requireBinding().videoDetailViewPager.setCurrentItem(startIndex, false)
-            // Manually trigger the first playback and data load since onPageSelected might not fire.
-            updatePlaybackState(startIndex)
             refreshVideoDetails(startIndex)
         } else {
-            // Load initial data if none exists.
             loadNextVideos(0)
         }
-    }
-
-    private fun updatePlaybackState(position: Int) {
-        if (position > 0) {
-            showThumb(position - 1, true)
-        }
-        if (position < typeAdapter.itemCount - 1) {
-            showThumb(position + 1, true)
-        }
-
-        showThumb(position, false)
-        play(position, TiktokVideoInfoLoader.getDetailInfo(position)?.videoDownloadUrl)
     }
 
     private fun loadNextVideos(position: Int) {
@@ -102,12 +127,12 @@ class AdapterComponent : ActivityComponent<ActTiktokVideoDetailBinding>() {
             if (detailInfos.isNullOrEmpty()) {
                 return@loadDetailInfosByRange
             }
-
             val currentItems = changer.data
             detailInfos.forEach { detail ->
-                val indexToUpdate = currentItems.indexOfFirst { (it as? TiktokDetailInfo)?.id == detail.id }
+                val indexToUpdate = currentItems.indexOfFirst { (it as? VideoDetailItem)?.info?.id == detail.id }
                 if (indexToUpdate != -1) {
-                    changer.update(indexToUpdate, detail)
+                    val item = (currentItems[indexToUpdate] as? VideoDetailItem)?.copy(info = detail)
+                    changer.update(indexToUpdate, item)
                 }
             }
         }
@@ -117,30 +142,27 @@ class AdapterComponent : ActivityComponent<ActTiktokVideoDetailBinding>() {
         if (newItems.isNullOrEmpty()) {
             return
         }
-
-        val existingIds = changer.data.mapNotNull { (it as? TiktokDetailInfo)?.id }.toSet()
+        val existingIds = changer.data.mapNotNull { (it as? VideoDetailItem)?.info?.id }.toSet()
         val uniqueNewItems = newItems.filter { it.id !in existingIds }
-
         if (uniqueNewItems.isNotEmpty()) {
             if (addToEnd) {
-                changer.addLast(uniqueNewItems)
+                changer.addLast(uniqueNewItems.map { VideoDetailItem(it, false) })
             } else {
-                changer.addFirst(uniqueNewItems)
+                changer.addFirst(uniqueNewItems.map { VideoDetailItem(it, false) })
             }
         }
     }
 
-    private fun play(position: Int, url: String?) {
-        val holdId = videoDetailDelegate.getHolderId(position) ?: return
-        getComponent(IVideoPlayComponent::class.java, holdId.toString()) {
+    private fun play(position: Int) {
+        videoDetailDelegate.getComponent(IVideoPlayComponent::class.java, position) {
+            val url = TiktokVideoInfoLoader.getDetailInfo(position)?.videoDownloadUrl
             it.play(url)
         }
     }
 
-    private fun showThumb(position: Int, show: Boolean) {
-        val holdId = videoDetailDelegate.getHolderId(position) ?: return
-        getComponent(IVideoPlayComponent::class.java, holdId.toString()) {
-            it.showThumb(show)
+    private fun pause(position: Int) {
+        videoDetailDelegate.getComponent(IVideoPlayComponent::class.java, position) {
+            it.pause()
         }
     }
 }

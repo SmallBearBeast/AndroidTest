@@ -77,7 +77,7 @@ public class MultiTypeHolder<ITEM> extends RecyclerView.ViewHolder implements Li
 
     }
 
-    protected void bindPartial(ITEM data, @NonNull Payload obj) {
+    protected void bindPartial(int pos, ITEM data, @NonNull Payload payload) {
 
     }
 
