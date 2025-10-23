@@ -162,6 +162,7 @@ class PdfRenderView @JvmOverloads constructor(
     private inner class PdfItemViewHolder(itemView: View) : ViewHolder(itemView) {
         private val imageView = itemView as ImageView
 
+        // TODO: 加载逻辑放到into方法里面
         fun bindPdfItem(position: Int) {
             imageView.tag = position
             val cacheBitmap = pdfApi.getMemoryBitmap(position)

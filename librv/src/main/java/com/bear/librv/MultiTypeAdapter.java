@@ -200,6 +200,18 @@ public class MultiTypeAdapter extends RecyclerView.Adapter<MultiTypeHolder<Objec
         Log.d(TAG, "onViewRecycled: position = " + holder.getAbsoluteAdapterPosition());
     }
 
+    @Override
+    public void onViewAttachedToWindow(@NonNull MultiTypeHolder<Object> holder) {
+        super.onViewAttachedToWindow(holder);
+        Log.d(TAG, "onViewAttachedToWindow: position = " + holder.getAbsoluteAdapterPosition());
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(@NonNull MultiTypeHolder<Object> holder) {
+        super.onViewDetachedFromWindow(holder);
+        Log.d(TAG, "onViewDetachedFromWindow: position = " + holder.getAbsoluteAdapterPosition());
+    }
+
     public MultiItemChanger getChanger() {
         return multiItemChanger;
     }

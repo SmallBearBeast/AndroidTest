@@ -88,7 +88,7 @@ class AdapterComponent : ActivityComponent<ActTiktokVideoDetailBinding>() {
                 // 禁用RecyclerView的默认动画，减少闪烁
                 recyclerView.itemAnimator = null
                 // 设置RecyclerView缓存大小
-                recyclerView.setItemViewCacheSize(2)
+                recyclerView.setItemViewCacheSize(0)
                 // 启用预布局优化
                 recyclerView.setHasFixedSize(true)
             }

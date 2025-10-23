@@ -85,7 +85,7 @@ android {
 protobuf {
     protoc {
         // The artifact spec for the Protobuf Compiler
-        artifact = 'com.google.protobuf:protoc:3.1.0'
+        artifact = 'com.google.protobuf:protoc:3.21.12'
     }
     generateProtoTasks {
         all().each { task ->

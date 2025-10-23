@@ -24,6 +24,9 @@ interface PdfApi {
     fun removeUsedBitmap(pageIndex: Int, size: BitmapSize = getBitmapSize()): Bitmap?
     fun removeCachedBitmap(pageIndex: Int, size: BitmapSize = getBitmapSize()): Bitmap?
 
+//    fun into(imageView: ImageView, pageIndex: Int, size: BitmapSize = getBitmapSize())
+//    fun cacheBitmap(pageIndex: Int, size: BitmapSize = getBitmapSize())
+
     /**
      * 预加载指定页
      */
