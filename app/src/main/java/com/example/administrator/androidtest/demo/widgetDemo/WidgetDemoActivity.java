@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +33,8 @@ public class WidgetDemoActivity extends ComponentActivity<ActWidgetDemoListBindi
         regComponent(new LikeViewDemoComponent(getLifecycle()));
         regComponent(new FullTextViewDemoComponent(getLifecycle()));
         regComponent(new LoopViewPagerDemoComponent(getLifecycle()));
+        requireBinding().statefulImgTextView.setOnClickListener(v -> requireBinding().statefulImgTextView.setSelected(!requireBinding().statefulImgTextView.isSelected()));
+        requireBinding().stateful2TextView.setOnClickListener(v -> requireBinding().stateful2TextView.setSelected(!requireBinding().stateful2TextView.isSelected()));
     }
 
     @Override

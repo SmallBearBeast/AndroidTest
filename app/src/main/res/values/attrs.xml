@@ -191,7 +191,7 @@
     </declare-styleable>
 
     <declare-styleable name="MarqueeTextView">
-        <attr name="mtv_marquee_enable" format="boolean"/>
-        <attr name="mtv_delayMillis" format="integer"/>
+        <attr name="mtv_marquee_enable" format="boolean" />
+        <attr name="mtv_delayMillis" format="integer" />
     </declare-styleable>
 </resources>

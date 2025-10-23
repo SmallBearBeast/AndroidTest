@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="StatefulView">
+        <!-- 背景相关公共属性 -->
+        <attr name="sf_solid" format="reference|color" />
+        <attr name="sf_corner_radius" format="dimension" />
+        <attr name="sf_stroke_width" format="dimension" />
+        <attr name="sf_stroke_color" format="color" />
+        <attr name="sf_stroke_dash_width" format="dimension" />
+        <attr name="sf_stroke_dash_gap" format="dimension" />
+        <attr name="sf_gra_start_color" format="color" />
+        <attr name="sf_gra_center_color" format="color" />
+        <attr name="sf_gra_end_color" format="color" />
+        <attr name="sf_gra_orientation" format="enum">
+            <enum name="top_bottom" value="0" />
+            <enum name="tr_bl" value="1" />
+            <enum name="right_left" value="2" />
+            <enum name="br_tl" value="3" />
+            <enum name="bottom_top" value="4" />
+            <enum name="bl_tr" value="5" />
+            <enum name="left_right" value="6" />
+            <enum name="tl_br" value="7" />
+        </attr>
+
+        <attr name="sf_pressed_solid" format="reference|color" />
+        <attr name="sf_pressed_corner_radius" format="dimension" />
+        <attr name="sf_pressed_stroke_width" format="dimension" />
+        <attr name="sf_pressed_stroke_color" format="color" />
+        <attr name="sf_pressed_stroke_dash_width" format="dimension" />
+        <attr name="sf_pressed_stroke_dash_gap" format="dimension" />
+        <attr name="sf_pressed_gra_start_color" format="color" />
+        <attr name="sf_pressed_gra_center_color" format="color" />
+        <attr name="sf_pressed_gra_end_color" format="color" />
+        <attr name="sf_pressed_gra_orientation" format="enum">
+            <enum name="top_bottom" value="0" />
+            <enum name="tr_bl" value="1" />
+            <enum name="right_left" value="2" />
+            <enum name="br_tl" value="3" />
+            <enum name="bottom_top" value="4" />
+            <enum name="bl_tr" value="5" />
+            <enum name="left_right" value="6" />
+            <enum name="tl_br" value="7" />
+        </attr>
+
+        <attr name="sf_selected_solid" format="reference|color" />
+        <attr name="sf_selected_corner_radius" format="dimension" />
+        <attr name="sf_selected_stroke_width" format="dimension" />
+        <attr name="sf_selected_stroke_color" format="color" />
+        <attr name="sf_selected_stroke_dash_width" format="dimension" />
+        <attr name="sf_selected_stroke_dash_gap" format="dimension" />
+        <attr name="sf_selected_gra_start_color" format="color" />
+        <attr name="sf_selected_gra_center_color" format="color" />
+        <attr name="sf_selected_gra_end_color" format="color" />
+        <attr name="sf_selected_gra_orientation" format="enum">
+            <enum name="top_bottom" value="0" />
+            <enum name="tr_bl" value="1" />
+            <enum name="right_left" value="2" />
+            <enum name="br_tl" value="3" />
+            <enum name="bottom_top" value="4" />
+            <enum name="bl_tr" value="5" />
+            <enum name="left_right" value="6" />
+            <enum name="tl_br" value="7" />
+        </attr>
+
+        <attr name="sf_selected" format="boolean" />
+        <attr name="sf_pressed" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="StatefulText">
+        <attr name="sf_text" format="string" />
+        <attr name="sf_text_size" format="dimension" />
+        <attr name="sf_text_color" format="color" />
+        <attr name="sf_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+
+        <attr name="sf_pressed_text" format="string" />
+        <attr name="sf_pressed_text_size" format="dimension" />
+        <attr name="sf_pressed_text_color" format="color" />
+        <attr name="sf_pressed_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+
+        <attr name="sf_selected_text" format="string" />
+        <attr name="sf_selected_text_size" format="dimension" />
+        <attr name="sf_selected_text_color" format="color" />
+        <attr name="sf_selected_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="StatefulSubText">
+        <attr name="sf_sub_text" format="string" />
+        <attr name="sf_sub_text_size" format="dimension" />
+        <attr name="sf_sub_text_color" format="color" />
+        <attr name="sf_sub_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+
+        <attr name="sf_pressed_sub_text" format="string" />
+        <attr name="sf_pressed_sub_text_size" format="dimension" />
+        <attr name="sf_pressed_sub_text_color" format="color" />
+        <attr name="sf_pressed_sub_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+
+        <attr name="sf_selected_sub_text" format="string" />
+        <attr name="sf_selected_sub_text_size" format="dimension" />
+        <attr name="sf_selected_sub_text_color" format="color" />
+        <attr name="sf_selected_sub_text_style" format="enum">
+            <enum name="normal" value="0" />
+            <enum name="bold" value="1" />
+            <enum name="italic" value="2" />
+            <enum name="bold_italic" value="3" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="StatefulImg">
+        <attr name="sf_img" format="reference" />
+        <attr name="sf_img_tint" format="color" />
+        <attr name="sf_img_size" format="dimension" />
+        <attr name="sf_img_width" format="dimension" />
+        <attr name="sf_img_height" format="dimension" />
+
+        <attr name="sf_pressed_img" format="reference" />
+        <attr name="sf_pressed_img_tint" format="color" />
+        <attr name="sf_pressed_img_size" format="dimension" />
+        <attr name="sf_pressed_img_width" format="dimension" />
+        <attr name="sf_pressed_img_height" format="dimension" />
+
+        <attr name="sf_selected_img" format="reference" />
+        <attr name="sf_selected_img_tint" format="color" />
+        <attr name="sf_selected_img_size" format="dimension" />
+        <attr name="sf_selected_img_width" format="dimension" />
+        <attr name="sf_selected_img_height" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="StatefulImgText">
+        <attr name="sf_img_text_spacing" format="dimension" />
+        <attr name="sf_pressed_img_text_spacing" format="dimension" />
+        <attr name="sf_selected_img_text_spacing" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="Stateful2Text">
+        <attr name="sf_text_spacing" format="dimension" />
+        <attr name="sf_pressed_text_spacing" format="dimension" />
+        <attr name="sf_selected_text_spacing" format="dimension" />
+    </declare-styleable>
+</resources>
