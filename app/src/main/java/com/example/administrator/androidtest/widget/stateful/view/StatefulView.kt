@@ -10,12 +10,15 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.widget.stateful.IStateful
+import com.example.administrator.androidtest.widget.stateful.IStateful2Img
 import com.example.administrator.androidtest.widget.stateful.IStateful2Text
 import com.example.administrator.androidtest.widget.stateful.IStatefulImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulImgText
+import com.example.administrator.androidtest.widget.stateful.IStatefulSubImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubText
 import com.example.administrator.androidtest.widget.stateful.IStatefulText
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
+import com.example.administrator.androidtest.widget.stateful.delegate.Stateful2ImgDelegate
 import com.example.administrator.androidtest.widget.stateful.delegate.Stateful2TextDelegate
 import com.example.administrator.androidtest.widget.stateful.delegate.StatefulImgDelegate
 import com.example.administrator.androidtest.widget.stateful.delegate.StatefulImgTextDelegate
@@ -144,17 +147,47 @@ class Stateful2TextView @JvmOverloads constructor(
     }
 }
 
-//class Stateful2ImageView @JvmOverloads constructor(
-//    context: Context,
-//    attrs: AttributeSet? = null,
-//    defStyleAttr: Int = 0
-//) : AppCompatTextView(context, attrs, defStyleAttr), IStatefulText by StatefulTextDelegate() {
-//    init {
-//        attachView(this)
-//        initAttributeSet(attrs)
-//    }
-//}
-//
+class Stateful2ImageView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    private val viewDelegate: Stateful2ImgDelegate = Stateful2ImgDelegate()
+) : LinearLayout(context, attrs, defStyleAttr), IStatefulView by viewDelegate, IStatefulImg by viewDelegate, IStatefulSubImg by viewDelegate,
+    IStateful2Img by viewDelegate, IStateful by viewDelegate {
+    init {
+        inflate(context, R.layout.view_stateful_2_img, this)
+        gravity = Gravity.CENTER
+        attachView(this)
+        initAttributeSet(attrs)
+    }
+
+    override fun dispatchSetPressed(pressed: Boolean) {
+        super.dispatchSetPressed(pressed)
+        onPressedChanged(pressed)
+    }
+
+    override fun dispatchSetSelected(selected: Boolean) {
+        super.dispatchSetSelected(selected)
+        onSelectedChanged(selected)
+    }
+
+    override fun setLayoutParams(params: ViewGroup.LayoutParams?) {
+        val oldParams = layoutParams
+        super.setLayoutParams(params)
+        // 触发监听（如果有 listener 且新旧参数不同）
+        if (!areLayoutParamsEqual(oldParams, params)) {
+            onLayoutParamsChanged()
+        }
+    }
+
+    private fun areLayoutParamsEqual(oldParams: ViewGroup.LayoutParams?, newParams: ViewGroup.LayoutParams?): Boolean {
+        if (oldParams == null && newParams == null) return true
+        if (oldParams == null || newParams == null) return false
+        // 这里仅判断宽高，可根据需要添加margin等其他属性的判断
+        return oldParams.width == newParams.width && oldParams.height == newParams.height
+    }
+}
+
 class StatefulImgTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,

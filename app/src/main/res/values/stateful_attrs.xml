@@ -150,6 +150,26 @@
         <attr name="sf_selected_img_height" format="dimension" />
     </declare-styleable>
 
+    <declare-styleable name="StatefulSubImg">
+        <attr name="sf_sub_img" format="reference" />
+        <attr name="sf_sub_img_tint" format="color" />
+        <attr name="sf_sub_img_size" format="dimension" />
+        <attr name="sf_sub_img_width" format="dimension" />
+        <attr name="sf_sub_img_height" format="dimension" />
+
+        <attr name="sf_pressed_sub_img" format="reference" />
+        <attr name="sf_pressed_sub_img_tint" format="color" />
+        <attr name="sf_pressed_sub_img_size" format="dimension" />
+        <attr name="sf_pressed_sub_img_width" format="dimension" />
+        <attr name="sf_pressed_sub_img_height" format="dimension" />
+
+        <attr name="sf_selected_sub_img" format="reference" />
+        <attr name="sf_selected_sub_img_tint" format="color" />
+        <attr name="sf_selected_sub_img_size" format="dimension" />
+        <attr name="sf_selected_sub_img_width" format="dimension" />
+        <attr name="sf_selected_sub_img_height" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="StatefulImgText">
         <attr name="sf_img_text_spacing" format="dimension" />
         <attr name="sf_pressed_img_text_spacing" format="dimension" />
@@ -160,5 +180,11 @@
         <attr name="sf_text_spacing" format="dimension" />
         <attr name="sf_pressed_text_spacing" format="dimension" />
         <attr name="sf_selected_text_spacing" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="Stateful2Img">
+        <attr name="sf_img_spacing" format="dimension" />
+        <attr name="sf_pressed_img_spacing" format="dimension" />
+        <attr name="sf_selected_img_spacing" format="dimension" />
     </declare-styleable>
 </resources>
