@@ -1,6 +1,8 @@
 package com.example.administrator.androidtest.widget.stateful.delegate
 
 import android.content.res.TypedArray
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +15,14 @@ import com.example.administrator.androidtest.widget.stateful.IStatefulImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulImgText
 import com.example.administrator.androidtest.widget.stateful.IStatefulText
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
+import kotlinx.android.parcel.Parcelize
 
 class StatefulImgTextDelegate(
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(),
     private val textDelegate: StatefulTextDelegate = StatefulTextDelegate(enableViewDelegate = false),
     private val imgDelegate: StatefulImgDelegate = StatefulImgDelegate(enableViewDelegate = false)
 ) : IStatefulView by viewDelegate, IStatefulText by textDelegate, IStatefulImg by imgDelegate, IStatefulImgText, IStateful {
-    private var imgTextSpacing = 0F
-    private var pressedImgTextSpacing = 0F
-    private var selectedImgTextSpacing = 0F
+    private var imgTextState = ImgTextState()
 
     private var attachedView: LinearLayout? = null
     private var imgView: ImageView? = null
@@ -57,6 +58,8 @@ class StatefulImgTextDelegate(
     private fun parseNormalAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.StatefulImgText_sf_img_text_spacing)) {
             setImgTextSpacing(typedArray.getDimension(R.styleable.StatefulImgText_sf_img_text_spacing, 0F))
+        } else {
+            setImgTextSpacing(imgTextState.imgTextSpacing)
         }
     }
 
@@ -64,7 +67,7 @@ class StatefulImgTextDelegate(
         if (typedArray.hasValue(R.styleable.StatefulImgText_sf_pressed_img_text_spacing)) {
             setPressedImgTextSpacing(typedArray.getDimension(R.styleable.StatefulImgText_sf_pressed_img_text_spacing, 0F))
         } else {
-            setPressedImgTextSpacing(imgTextSpacing)
+            setPressedImgTextSpacing(imgTextState.imgTextSpacing)
         }
     }
 
@@ -72,27 +75,27 @@ class StatefulImgTextDelegate(
         if (typedArray.hasValue(R.styleable.StatefulImgText_sf_selected_img_text_spacing)) {
             setSelectedImgTextSpacing(typedArray.getDimension(R.styleable.StatefulImgText_sf_selected_img_text_spacing, 0F))
         } else {
-            setSelectedImgTextSpacing(imgTextSpacing)
+            setSelectedImgTextSpacing(imgTextState.imgTextSpacing)
         }
     }
 
     override fun setImgTextSpacing(spacing: Float) {
-        if (imgTextSpacing != spacing) {
-            imgTextSpacing = spacing
+        if (imgTextState.imgTextSpacing != spacing) {
+            imgTextState.imgTextSpacing = spacing
             updateImgText()
         }
     }
 
     override fun setPressedImgTextSpacing(spacing: Float) {
-        if (pressedImgTextSpacing != spacing) {
-            pressedImgTextSpacing = spacing
+        if (imgTextState.pressedImgTextSpacing != spacing) {
+            imgTextState.pressedImgTextSpacing = spacing
             updateImgText()
         }
     }
 
     override fun setSelectedImgTextSpacing(spacing: Float) {
-        if (selectedImgTextSpacing != spacing) {
-            selectedImgTextSpacing = spacing
+        if (imgTextState.selectedImgTextSpacing != spacing) {
+            imgTextState.selectedImgTextSpacing = spacing
             updateImgText()
         }
     }
@@ -101,14 +104,14 @@ class StatefulImgTextDelegate(
         viewDelegate.onPressedChanged(pressed)
         textDelegate.onPressedChanged(pressed)
         imgDelegate.onPressedChanged(pressed)
-        updateImgText()
+        updateImgText(pressed = pressed)
     }
 
     override fun onSelectedChanged(selected: Boolean) {
         viewDelegate.onSelectedChanged(selected)
         textDelegate.onSelectedChanged(selected)
         imgDelegate.onSelectedChanged(selected)
-        updateImgText()
+        updateImgText(selected = selected)
     }
 
     override fun onLayoutParamsChanged() {
@@ -118,17 +121,35 @@ class StatefulImgTextDelegate(
         updateImgText()
     }
 
+    override fun onSaveInstanceState(savedBundle: Bundle) {
+        val bundle = Bundle()
+        viewDelegate.onSaveInstanceState(bundle)
+        textDelegate.onSaveInstanceState(bundle)
+        imgDelegate.onSaveInstanceState(bundle)
+        savedBundle.putBundle("child_state", bundle)
+        savedBundle.putParcelable("img_text_state", imgTextState)
+    }
+
+    override fun onRestoreInstanceState(restoredBundle: Bundle) {
+        val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
+        viewDelegate.onRestoreInstanceState(bundle)
+        textDelegate.onRestoreInstanceState(bundle)
+        imgDelegate.onRestoreInstanceState(bundle)
+        imgTextState = restoredBundle.getParcelable("img_text_state") ?: ImgTextState()
+        updateImgText()
+    }
+
     private fun updateImgText(
         pressed: Boolean = attachedView?.isPressed ?: false,
         selected: Boolean = attachedView?.isSelected ?: false
     ) {
         when {
-            pressed -> {
+            selected -> {
                 val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = pressedImgTextSpacing.toInt()
+                        marginStart = imgTextState.selectedImgTextSpacing.toInt()
                     } else {
-                        topMargin = pressedImgTextSpacing.toInt()
+                        topMargin = imgTextState.selectedImgTextSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -136,12 +157,12 @@ class StatefulImgTextDelegate(
                 }
             }
 
-            selected -> {
+            pressed -> {
                 val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = selectedImgTextSpacing.toInt()
+                        marginStart = imgTextState.pressedImgTextSpacing.toInt()
                     } else {
-                        topMargin = selectedImgTextSpacing.toInt()
+                        topMargin = imgTextState.pressedImgTextSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -152,9 +173,9 @@ class StatefulImgTextDelegate(
             else -> {
                 val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = imgTextSpacing.toInt()
+                        marginStart = imgTextState.imgTextSpacing.toInt()
                     } else {
-                        topMargin = imgTextSpacing.toInt()
+                        topMargin = imgTextState.imgTextSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -164,3 +185,10 @@ class StatefulImgTextDelegate(
         }
     }
 }
+
+@Parcelize
+private data class ImgTextState(
+    var imgTextSpacing: Float = 0F,
+    var pressedImgTextSpacing: Float = 0F,
+    var selectedImgTextSpacing: Float = 0F
+) : Parcelable

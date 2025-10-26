@@ -1,6 +1,8 @@
 package com.example.administrator.androidtest.widget.stateful.view
 
 import android.content.Context
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import android.widget.LinearLayout
@@ -19,6 +21,22 @@ class StatefulFrameLayout @JvmOverloads constructor(
         attachView(this)
         initAttributeSet(attrs)
     }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
+        }
+    }
 }
 
 class StatefulLinearLayout @JvmOverloads constructor(
@@ -31,6 +49,22 @@ class StatefulLinearLayout @JvmOverloads constructor(
         attachView(this)
         initAttributeSet(attrs)
     }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
+        }
+    }
 }
 
 class StatefulConstraintLayout @JvmOverloads constructor(
@@ -42,5 +76,21 @@ class StatefulConstraintLayout @JvmOverloads constructor(
     init {
         attachView(this)
         initAttributeSet(attrs)
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
+        }
     }
 }

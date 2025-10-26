@@ -1,6 +1,8 @@
 package com.example.administrator.androidtest.widget.stateful.delegate
 
 import android.content.res.TypedArray
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +14,14 @@ import com.example.administrator.androidtest.widget.stateful.IStateful2Text
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubText
 import com.example.administrator.androidtest.widget.stateful.IStatefulText
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
+import kotlinx.android.parcel.Parcelize
 
 class Stateful2TextDelegate(
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(),
     private val textDelegate: StatefulTextDelegate = StatefulTextDelegate(enableViewDelegate = false),
     private val subTextDelegate: StatefulSubTextDelegate = StatefulSubTextDelegate(enableViewDelegate = false)
 ) : IStatefulView by viewDelegate, IStatefulText by textDelegate, IStatefulSubText by subTextDelegate, IStateful2Text, IStateful {
-    private var textSpacing = 0F
-    private var pressedTextSpacing = 0F
-    private var selectedTextSpacing = 0F
+    private var text2State = Text2State()
 
     private var attachedView: LinearLayout? = null
     private var mainTextView: TextView? = null
@@ -56,6 +57,8 @@ class Stateful2TextDelegate(
     private fun parseNormalAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.Stateful2Text_sf_text_spacing)) {
             setTextSpacing(typedArray.getDimension(R.styleable.Stateful2Text_sf_text_spacing, 0F))
+        } else {
+            setTextSpacing(text2State.textSpacing)
         }
     }
 
@@ -63,7 +66,7 @@ class Stateful2TextDelegate(
         if (typedArray.hasValue(R.styleable.Stateful2Text_sf_pressed_text_spacing)) {
             setPressedTextSpacing(typedArray.getDimension(R.styleable.Stateful2Text_sf_pressed_text_spacing, 0F))
         } else {
-            setPressedTextSpacing(textSpacing)
+            setPressedTextSpacing(text2State.textSpacing)
         }
     }
 
@@ -71,27 +74,27 @@ class Stateful2TextDelegate(
         if (typedArray.hasValue(R.styleable.Stateful2Text_sf_selected_text_spacing)) {
             setSelectedTextSpacing(typedArray.getDimension(R.styleable.Stateful2Text_sf_selected_text_spacing, 0F))
         } else {
-            setSelectedTextSpacing(textSpacing)
+            setSelectedTextSpacing(text2State.textSpacing)
         }
     }
 
     override fun setTextSpacing(spacing: Float) {
-        if (textSpacing != spacing) {
-            textSpacing = spacing
+        if (text2State.textSpacing != spacing) {
+            text2State.textSpacing = spacing
             update2Text()
         }
     }
 
     override fun setPressedTextSpacing(spacing: Float) {
-        if (pressedTextSpacing != spacing) {
-            pressedTextSpacing = spacing
+        if (text2State.pressedTextSpacing != spacing) {
+            text2State.pressedTextSpacing = spacing
             update2Text()
         }
     }
 
     override fun setSelectedTextSpacing(spacing: Float) {
-        if (selectedTextSpacing != spacing) {
-            selectedTextSpacing = spacing
+        if (text2State.selectedTextSpacing != spacing) {
+            text2State.selectedTextSpacing = spacing
             update2Text()
         }
     }
@@ -100,14 +103,14 @@ class Stateful2TextDelegate(
         viewDelegate.onPressedChanged(pressed)
         textDelegate.onPressedChanged(pressed)
         subTextDelegate.onPressedChanged(pressed)
-        update2Text()
+        update2Text(pressed = pressed)
     }
 
     override fun onSelectedChanged(selected: Boolean) {
         viewDelegate.onSelectedChanged(selected)
         textDelegate.onSelectedChanged(selected)
         subTextDelegate.onSelectedChanged(selected)
-        update2Text()
+        update2Text(selected = selected)
     }
 
     override fun onLayoutParamsChanged() {
@@ -117,17 +120,35 @@ class Stateful2TextDelegate(
         update2Text()
     }
 
+    override fun onSaveInstanceState(savedBundle: Bundle) {
+        val bundle = Bundle()
+        viewDelegate.onSaveInstanceState(bundle)
+        textDelegate.onSaveInstanceState(bundle)
+        subTextDelegate.onSaveInstanceState(bundle)
+        savedBundle.putBundle("child_state", bundle)
+        savedBundle.putParcelable("text2_state", text2State)
+    }
+
+    override fun onRestoreInstanceState(restoredBundle: Bundle) {
+        val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
+        viewDelegate.onRestoreInstanceState(bundle)
+        textDelegate.onRestoreInstanceState(bundle)
+        subTextDelegate.onRestoreInstanceState(bundle)
+        text2State = restoredBundle.getParcelable("text2_state") ?: Text2State()
+        update2Text()
+    }
+
     private fun update2Text(
         pressed: Boolean = attachedView?.isPressed ?: false,
         selected: Boolean = attachedView?.isSelected ?: false
     ) {
         when {
-            pressed -> {
+            selected -> {
                 val lp = (subTextView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = pressedTextSpacing.toInt()
+                        marginStart = text2State.selectedTextSpacing.toInt()
                     } else {
-                        topMargin = pressedTextSpacing.toInt()
+                        topMargin = text2State.selectedTextSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -135,12 +156,12 @@ class Stateful2TextDelegate(
                 }
             }
 
-            selected -> {
+            pressed -> {
                 val lp = (subTextView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = selectedTextSpacing.toInt()
+                        marginStart = text2State.pressedTextSpacing.toInt()
                     } else {
-                        topMargin = selectedTextSpacing.toInt()
+                        topMargin = text2State.pressedTextSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -151,9 +172,9 @@ class Stateful2TextDelegate(
             else -> {
                 val lp = (subTextView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = textSpacing.toInt()
+                        marginStart = text2State.textSpacing.toInt()
                     } else {
-                        topMargin = textSpacing.toInt()
+                        topMargin = text2State.textSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -163,3 +184,10 @@ class Stateful2TextDelegate(
         }
     }
 }
+
+@Parcelize
+private data class Text2State(
+    var textSpacing: Float = 0F,
+    var pressedTextSpacing: Float = 0F,
+    var selectedTextSpacing: Float = 0F
+) : Parcelable

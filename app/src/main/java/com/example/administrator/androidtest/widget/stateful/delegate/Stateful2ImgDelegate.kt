@@ -1,6 +1,8 @@
 package com.example.administrator.androidtest.widget.stateful.delegate
 
 import android.content.res.TypedArray
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
@@ -12,15 +14,14 @@ import com.example.administrator.androidtest.widget.stateful.IStateful2Img
 import com.example.administrator.androidtest.widget.stateful.IStatefulImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
+import kotlinx.android.parcel.Parcelize
 
 class Stateful2ImgDelegate(
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(),
     private val imgDelegate: StatefulImgDelegate = StatefulImgDelegate(enableViewDelegate = false),
     private val subImgDelegate: StatefulSubImgDelegate = StatefulSubImgDelegate(enableViewDelegate = false)
 ) : IStatefulView by viewDelegate, IStatefulImg by imgDelegate, IStatefulSubImg by subImgDelegate, IStateful2Img, IStateful {
-    private var imgSpacing = 0F
-    private var pressedImgSpacing = 0F
-    private var selectedImgSpacing = 0F
+    private var img2State = Img2State()
 
     private var attachedView: LinearLayout? = null
     private var mainImgView: ImageView? = null
@@ -63,7 +64,7 @@ class Stateful2ImgDelegate(
         if (typedArray.hasValue(R.styleable.Stateful2Img_sf_pressed_img_spacing)) {
             setPressedImgSpacing(typedArray.getDimension(R.styleable.Stateful2Img_sf_pressed_img_spacing, 0F))
         } else {
-            setPressedImgSpacing(imgSpacing)
+            setPressedImgSpacing(img2State.imgSpacing)
         }
     }
 
@@ -71,28 +72,28 @@ class Stateful2ImgDelegate(
         if (typedArray.hasValue(R.styleable.Stateful2Img_sf_selected_img_spacing)) {
             setSelectedImgSpacing(typedArray.getDimension(R.styleable.Stateful2Img_sf_selected_img_spacing, 0F))
         } else {
-            setSelectedImgSpacing(imgSpacing)
+            setSelectedImgSpacing(img2State.imgSpacing)
         }
     }
 
 
     override fun setImgSpacing(spacing: Float) {
-        if (imgSpacing != spacing) {
-            imgSpacing = spacing
+        if (img2State.imgSpacing != spacing) {
+            img2State.imgSpacing = spacing
             update2Img()
         }
     }
 
     override fun setPressedImgSpacing(spacing: Float) {
-        if (pressedImgSpacing != spacing) {
-            pressedImgSpacing = spacing
+        if (img2State.pressedImgSpacing != spacing) {
+            img2State.pressedImgSpacing = spacing
             update2Img()
         }
     }
 
     override fun setSelectedImgSpacing(spacing: Float) {
-        if (selectedImgSpacing != spacing) {
-            selectedImgSpacing = spacing
+        if (img2State.selectedImgSpacing != spacing) {
+            img2State.selectedImgSpacing = spacing
             update2Img()
         }
     }
@@ -101,14 +102,14 @@ class Stateful2ImgDelegate(
         viewDelegate.onPressedChanged(pressed)
         imgDelegate.onPressedChanged(pressed)
         subImgDelegate.onPressedChanged(pressed)
-        update2Img()
+        update2Img(pressed = pressed)
     }
 
     override fun onSelectedChanged(selected: Boolean) {
         viewDelegate.onSelectedChanged(selected)
         imgDelegate.onSelectedChanged(selected)
         subImgDelegate.onSelectedChanged(selected)
-        update2Img()
+        update2Img(selected = selected)
     }
 
     override fun onLayoutParamsChanged() {
@@ -118,17 +119,35 @@ class Stateful2ImgDelegate(
         update2Img()
     }
 
+    override fun onSaveInstanceState(savedBundle: Bundle) {
+        val bundle = Bundle()
+        viewDelegate.onSaveInstanceState(bundle)
+        imgDelegate.onSaveInstanceState(bundle)
+        subImgDelegate.onSaveInstanceState(bundle)
+        savedBundle.putBundle("child_state", bundle)
+        savedBundle.putParcelable("img2_state", img2State)
+    }
+
+    override fun onRestoreInstanceState(restoredBundle: Bundle) {
+        val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
+        viewDelegate.onRestoreInstanceState(bundle)
+        imgDelegate.onRestoreInstanceState(bundle)
+        subImgDelegate.onRestoreInstanceState(bundle)
+        img2State = restoredBundle.getParcelable("img2_state") ?: Img2State()
+        update2Img()
+    }
+
     private fun update2Img(
         pressed: Boolean = attachedView?.isPressed ?: false,
         selected: Boolean = attachedView?.isSelected ?: false
     ) {
         when {
-            pressed -> {
+            selected -> {
                 val lp = (subImgView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = pressedImgSpacing.toInt()
+                        marginStart = img2State.selectedImgSpacing.toInt()
                     } else {
-                        topMargin = pressedImgSpacing.toInt()
+                        topMargin = img2State.selectedImgSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -136,12 +155,12 @@ class Stateful2ImgDelegate(
                 }
             }
 
-            selected -> {
+            pressed -> {
                 val lp = (subImgView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = selectedImgSpacing.toInt()
+                        marginStart = img2State.pressedImgSpacing.toInt()
                     } else {
-                        topMargin = selectedImgSpacing.toInt()
+                        topMargin = img2State.pressedImgSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -152,9 +171,9 @@ class Stateful2ImgDelegate(
             else -> {
                 val lp = (subImgView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = imgSpacing.toInt()
+                        marginStart = img2State.imgSpacing.toInt()
                     } else {
-                        topMargin = imgSpacing.toInt()
+                        topMargin = img2State.imgSpacing.toInt()
                     }
                 }
                 if (lp != null) {
@@ -165,3 +184,10 @@ class Stateful2ImgDelegate(
     }
 
 }
+
+@Parcelize
+private data class Img2State(
+    var imgSpacing: Float = 0F,
+    var pressedImgSpacing: Float = 0F,
+    var selectedImgSpacing: Float = 0F
+) : Parcelable

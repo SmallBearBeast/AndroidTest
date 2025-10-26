@@ -2,7 +2,8 @@ package com.example.administrator.androidtest.widget.stateful.delegate
 
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
-import android.graphics.Color
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
@@ -10,39 +11,13 @@ import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
+import kotlinx.android.parcel.Parcelize
 
 class StatefulSubImgDelegate(
     private val enableViewDelegate: Boolean = true,
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate()
 ) : IStatefulView by viewDelegate, IStatefulSubImg, IStateful {
-    companion object {
-        private const val INVALID_IMG_ID = -1
-        private const val INVALID_IMG_COLOR_TINT = -1
-        private const val INVALID_IMG_SIZE = -1F
-        private const val DEFAULT_IMG_SIZE = 64F
-    }
-
-    // Normal State
-    private var normalImg = INVALID_IMG_ID
-    private var normalImgTint = INVALID_IMG_COLOR_TINT
-    private var normalImgSize = DEFAULT_IMG_SIZE
-    private var normalImgWidth = INVALID_IMG_SIZE
-    private var normalImgHeight = INVALID_IMG_SIZE
-
-
-    // Pressed State
-    private var pressedImg = INVALID_IMG_ID
-    private var pressedImgTint = INVALID_IMG_COLOR_TINT
-    private var pressedImgSize = DEFAULT_IMG_SIZE
-    private var pressedImgWidth = INVALID_IMG_SIZE
-    private var pressedImgHeight = INVALID_IMG_SIZE
-
-    // Selected State
-    private var selectedImg = INVALID_IMG_ID
-    private var selectedImgTint = INVALID_IMG_COLOR_TINT
-    private var selectedImgSize = DEFAULT_IMG_SIZE
-    private var selectedImgWidth = INVALID_IMG_SIZE
-    private var selectedImgHeight = INVALID_IMG_SIZE
+    private var subImgState = SubImgState()
 
     private var attachedView: ImageView? = null
 
@@ -75,179 +50,179 @@ class StatefulSubImgDelegate(
 
     private fun parseNormalAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_sub_img)) {
-            setNormalSubImg(typedArray.getResourceId(R.styleable.StatefulSubImg_sf_sub_img, -1))
+            setNormalSubImg(typedArray.getResourceId(R.styleable.StatefulSubImg_sf_sub_img, SubImgState.INVALID_IMG_ID))
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_sub_img_tint)) {
-            setNormalSubImgTint(typedArray.getColor(R.styleable.StatefulSubImg_sf_sub_img_tint, Color.BLACK))
+            setNormalSubImgTint(typedArray.getColor(R.styleable.StatefulSubImg_sf_sub_img_tint, SubImgState.INVALID_IMG_COLOR_TINT))
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_sub_img_size)) {
-            setNormalSubImgSize(typedArray.getDimension(R.styleable.StatefulSubImg_sf_sub_img_size, DEFAULT_IMG_SIZE))
+            setNormalSubImgSize(typedArray.getDimension(R.styleable.StatefulSubImg_sf_sub_img_size, SubImgState.DEFAULT_IMG_SIZE))
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_sub_img_width)) {
-            setNormalSubImgWidth(typedArray.getDimension(R.styleable.StatefulSubImg_sf_sub_img_width, normalImgSize))
+            setNormalSubImgWidth(typedArray.getDimension(R.styleable.StatefulSubImg_sf_sub_img_width, SubImgState.INVALID_IMG_SIZE))
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_sub_img_height)) {
-            setNormalSubImgHeight(typedArray.getDimension(R.styleable.StatefulSubImg_sf_sub_img_height, normalImgSize))
+            setNormalSubImgHeight(typedArray.getDimension(R.styleable.StatefulSubImg_sf_sub_img_height, SubImgState.INVALID_IMG_SIZE))
         }
     }
 
     private fun parsePressedAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_pressed_sub_img)) {
-            setPressedSubImg(typedArray.getResourceId(R.styleable.StatefulSubImg_sf_pressed_sub_img, -1))
+            setPressedSubImg(typedArray.getResourceId(R.styleable.StatefulSubImg_sf_pressed_sub_img, SubImgState.INVALID_IMG_ID))
         } else {
-            setPressedSubImg(normalImg)
+            setPressedSubImg(subImgState.normalImg)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_pressed_sub_img_tint)) {
-            setPressedSubImgTint(typedArray.getColor(R.styleable.StatefulSubImg_sf_pressed_sub_img_tint, Color.BLACK))
+            setPressedSubImgTint(typedArray.getColor(R.styleable.StatefulSubImg_sf_pressed_sub_img_tint, SubImgState.INVALID_IMG_COLOR_TINT))
         } else {
-            setPressedSubImgTint(normalImgTint)
+            setPressedSubImgTint(subImgState.normalImgTint)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_pressed_sub_img_size)) {
-            setPressedSubImgSize(typedArray.getDimension(R.styleable.StatefulSubImg_sf_pressed_sub_img_size, DEFAULT_IMG_SIZE))
+            setPressedSubImgSize(typedArray.getDimension(R.styleable.StatefulSubImg_sf_pressed_sub_img_size, SubImgState.DEFAULT_IMG_SIZE))
         } else {
-            setPressedSubImgSize(normalImgSize)
+            setPressedSubImgSize(subImgState.normalImgSize)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_pressed_sub_img_width)) {
-            setPressedSubImgWidth(typedArray.getDimension(R.styleable.StatefulSubImg_sf_pressed_sub_img_width, pressedImgSize))
+            setPressedSubImgWidth(typedArray.getDimension(R.styleable.StatefulSubImg_sf_pressed_sub_img_width, SubImgState.INVALID_IMG_SIZE))
         } else {
-            setPressedSubImgWidth(normalImgWidth)
+            setPressedSubImgWidth(subImgState.normalImgWidth)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_pressed_sub_img_height)) {
-            setPressedSubImgHeight(typedArray.getDimension(R.styleable.StatefulSubImg_sf_pressed_sub_img_height, pressedImgSize))
+            setPressedSubImgHeight(typedArray.getDimension(R.styleable.StatefulSubImg_sf_pressed_sub_img_height, SubImgState.INVALID_IMG_SIZE))
         } else {
-            setPressedSubImgHeight(normalImgHeight)
+            setPressedSubImgHeight(subImgState.normalImgHeight)
         }
     }
 
     private fun parseSelectedAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_selected_sub_img)) {
-            setSelectedSubImg(typedArray.getResourceId(R.styleable.StatefulSubImg_sf_selected_sub_img, -1))
+            setSelectedSubImg(typedArray.getResourceId(R.styleable.StatefulSubImg_sf_selected_sub_img, SubImgState.INVALID_IMG_ID))
         } else {
-            setSelectedSubImg(normalImg)
+            setSelectedSubImg(subImgState.normalImg)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_selected_sub_img_tint)) {
-            setSelectedSubImgTint(typedArray.getColor(R.styleable.StatefulSubImg_sf_selected_sub_img_tint, Color.BLACK))
+            setSelectedSubImgTint(typedArray.getColor(R.styleable.StatefulSubImg_sf_selected_sub_img_tint, SubImgState.INVALID_IMG_COLOR_TINT))
         } else {
-            setSelectedSubImgTint(normalImgTint)
+            setSelectedSubImgTint(subImgState.normalImgTint)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_selected_sub_img_size)) {
-            setSelectedSubImgSize(typedArray.getDimension(R.styleable.StatefulSubImg_sf_selected_sub_img_size, DEFAULT_IMG_SIZE))
+            setSelectedSubImgSize(typedArray.getDimension(R.styleable.StatefulSubImg_sf_selected_sub_img_size, SubImgState.DEFAULT_IMG_SIZE))
         } else {
-            setSelectedSubImgSize(normalImgSize)
+            setSelectedSubImgSize(subImgState.normalImgSize)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_selected_sub_img_width)) {
-            setSelectedSubImgWidth(typedArray.getDimension(R.styleable.StatefulSubImg_sf_selected_sub_img_width, selectedImgSize))
+            setSelectedSubImgWidth(typedArray.getDimension(R.styleable.StatefulSubImg_sf_selected_sub_img_width, SubImgState.INVALID_IMG_SIZE))
         } else {
-            setSelectedSubImgWidth(normalImgWidth)
+            setSelectedSubImgWidth(subImgState.normalImgWidth)
         }
         if (typedArray.hasValue(R.styleable.StatefulSubImg_sf_selected_sub_img_height)) {
-            setSelectedSubImgHeight(typedArray.getDimension(R.styleable.StatefulSubImg_sf_selected_sub_img_height, selectedImgSize))
+            setSelectedSubImgHeight(typedArray.getDimension(R.styleable.StatefulSubImg_sf_selected_sub_img_height, SubImgState.INVALID_IMG_SIZE))
         } else {
-            setSelectedSubImgHeight(normalImgHeight)
+            setSelectedSubImgHeight(subImgState.normalImgHeight)
         }
     }
 
     override fun setNormalSubImg(imgResId: Int) {
-        if (normalImg != imgResId) {
-            normalImg = imgResId
+        if (subImgState.normalImg != imgResId) {
+            subImgState.normalImg = imgResId
             updateImg()
         }
     }
 
     override fun setNormalSubImgTint(tintColor: Int) {
-        if (normalImgTint != tintColor) {
-            normalImgTint = tintColor
+        if (subImgState.normalImgTint != tintColor) {
+            subImgState.normalImgTint = tintColor
             updateImg()
         }
     }
 
     override fun setNormalSubImgSize(imgSize: Float) {
-        if (normalImgSize != imgSize) {
-            normalImgSize = imgSize
+        if (subImgState.normalImgSize != imgSize) {
+            subImgState.normalImgSize = imgSize
             updateImg()
         }
     }
 
     override fun setNormalSubImgWidth(imgWidth: Float) {
-        if (normalImgWidth != imgWidth) {
-            normalImgWidth = imgWidth
+        if (subImgState.normalImgWidth != imgWidth) {
+            subImgState.normalImgWidth = imgWidth
             updateImg()
         }
     }
 
     override fun setNormalSubImgHeight(imgHeight: Float) {
-        if (normalImgHeight != imgHeight) {
-            normalImgHeight = imgHeight
+        if (subImgState.normalImgHeight != imgHeight) {
+            subImgState.normalImgHeight = imgHeight
             updateImg()
         }
     }
 
     override fun setPressedSubImg(imgResId: Int) {
-        if (pressedImg != imgResId) {
-            pressedImg = imgResId
+        if (subImgState.pressedImg != imgResId) {
+            subImgState.pressedImg = imgResId
             updateImg()
         }
     }
 
     override fun setPressedSubImgTint(tintColor: Int) {
-        if (pressedImgTint != tintColor) {
-            pressedImgTint = tintColor
+        if (subImgState.pressedImgTint != tintColor) {
+            subImgState.pressedImgTint = tintColor
             updateImg()
         }
     }
 
     override fun setPressedSubImgSize(imgSize: Float) {
-        if (pressedImgSize != imgSize) {
-            pressedImgSize = imgSize
+        if (subImgState.pressedImgSize != imgSize) {
+            subImgState.pressedImgSize = imgSize
             updateImg()
         }
     }
 
     override fun setPressedSubImgWidth(imgWidth: Float) {
-        if (pressedImgWidth != imgWidth) {
-            pressedImgWidth = imgWidth
+        if (subImgState.pressedImgWidth != imgWidth) {
+            subImgState.pressedImgWidth = imgWidth
             updateImg()
         }
     }
 
     override fun setPressedSubImgHeight(imgHeight: Float) {
-        if (pressedImgHeight != imgHeight) {
-            pressedImgHeight = imgHeight
+        if (subImgState.pressedImgHeight != imgHeight) {
+            subImgState.pressedImgHeight = imgHeight
             updateImg()
         }
     }
 
     override fun setSelectedSubImg(imgResId: Int) {
-        if (selectedImg != imgResId) {
-            selectedImg = imgResId
+        if (subImgState.selectedImg != imgResId) {
+            subImgState.selectedImg = imgResId
             updateImg()
         }
     }
 
     override fun setSelectedSubImgTint(tintColor: Int) {
-        if (selectedImgTint != tintColor) {
-            selectedImgTint = tintColor
+        if (subImgState.selectedImgTint != tintColor) {
+            subImgState.selectedImgTint = tintColor
             updateImg()
         }
     }
 
     override fun setSelectedSubImgSize(imgSize: Float) {
-        if (selectedImgSize != imgSize) {
-            selectedImgSize = imgSize
+        if (subImgState.selectedImgSize != imgSize) {
+            subImgState.selectedImgSize = imgSize
             updateImg()
         }
     }
 
     override fun setSelectedSubImgWidth(imgWidth: Float) {
-        if (selectedImgWidth != imgWidth) {
-            selectedImgWidth = imgWidth
+        if (subImgState.selectedImgWidth != imgWidth) {
+            subImgState.selectedImgWidth = imgWidth
             updateImg()
         }
     }
 
     override fun setSelectedSubImgHeight(imgHeight: Float) {
-        if (selectedImgHeight != imgHeight) {
-            selectedImgHeight = imgHeight
+        if (subImgState.selectedImgHeight != imgHeight) {
+            subImgState.selectedImgHeight = imgHeight
             updateImg()
         }
     }
@@ -264,37 +239,59 @@ class StatefulSubImgDelegate(
         updateImg()
     }
 
+    override fun onSaveInstanceState(savedBundle: Bundle) {
+        val bundle = Bundle()
+        if (enableViewDelegate) {
+            viewDelegate.onSaveInstanceState(savedBundle)
+        }
+        savedBundle.putBundle("child_state", bundle)
+        savedBundle.putParcelable("sub_img_state", subImgState)
+    }
+
+    override fun onRestoreInstanceState(restoredBundle: Bundle) {
+        val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
+        if (enableViewDelegate) {
+            viewDelegate.onRestoreInstanceState(bundle)
+        }
+        subImgState = restoredBundle.getParcelable("sub_img_state") ?: SubImgState()
+        updateImg()
+    }
+
     private fun updateImg(
         pressed: Boolean = attachedView?.isPressed ?: false,
         selected: Boolean = attachedView?.isSelected ?: false
     ) {
         when {
-            pressed -> {
-                if (pressedImg != INVALID_IMG_ID) {
-                    attachedView?.setImageResource(pressedImg)
+            selected -> {
+                if (subImgState.selectedImg != SubImgState.INVALID_IMG_ID) {
+                    attachedView?.setImageResource(subImgState.selectedImg)
                 }
-                if (pressedImgTint != INVALID_IMG_COLOR_TINT) {
-                    attachedView?.imageTintList = ColorStateList.valueOf(pressedImgTint)
+                if (subImgState.selectedImgTint != SubImgState.INVALID_IMG_COLOR_TINT) {
+                    attachedView?.imageTintList = ColorStateList.valueOf(subImgState.selectedImgTint)
                 }
                 val lp = attachedView?.layoutParams?.apply {
-                    width = if (pressedImgWidth != INVALID_IMG_SIZE) pressedImgWidth.toInt() else pressedImgSize.toInt()
-                    height = if (pressedImgHeight != INVALID_IMG_SIZE) pressedImgHeight.toInt() else pressedImgSize.toInt()
+                    width =
+                        if (subImgState.selectedImgWidth != SubImgState.INVALID_IMG_SIZE) subImgState.selectedImgWidth.toInt() else subImgState.selectedImgSize.toInt()
+                    height =
+                        if (subImgState.selectedImgHeight != SubImgState.INVALID_IMG_SIZE) subImgState.selectedImgHeight.toInt() else subImgState.selectedImgSize.toInt()
                 }
                 if (lp != null) {
                     attachedView?.layoutParams = lp
                 }
             }
 
-            selected -> {
-                if (selectedImg != INVALID_IMG_ID) {
-                    attachedView?.setImageResource(selectedImg)
+            pressed -> {
+                if (subImgState.pressedImg != SubImgState.INVALID_IMG_ID) {
+                    attachedView?.setImageResource(subImgState.pressedImg)
                 }
-                if (selectedImgTint != INVALID_IMG_COLOR_TINT) {
-                    attachedView?.imageTintList = ColorStateList.valueOf(selectedImgTint)
+                if (subImgState.pressedImgTint != SubImgState.INVALID_IMG_COLOR_TINT) {
+                    attachedView?.imageTintList = ColorStateList.valueOf(subImgState.pressedImgTint)
                 }
                 val lp = attachedView?.layoutParams?.apply {
-                    width = if (selectedImgWidth != INVALID_IMG_SIZE) selectedImgWidth.toInt() else selectedImgSize.toInt()
-                    height = if (selectedImgHeight != INVALID_IMG_SIZE) selectedImgHeight.toInt() else selectedImgSize.toInt()
+                    width =
+                        if (subImgState.pressedImgWidth != SubImgState.INVALID_IMG_SIZE) subImgState.pressedImgWidth.toInt() else subImgState.pressedImgSize.toInt()
+                    height =
+                        if (subImgState.pressedImgHeight != SubImgState.INVALID_IMG_SIZE) subImgState.pressedImgHeight.toInt() else subImgState.pressedImgSize.toInt()
                 }
                 if (lp != null) {
                     attachedView?.layoutParams = lp
@@ -302,20 +299,50 @@ class StatefulSubImgDelegate(
             }
 
             else -> {
-                if (normalImg != INVALID_IMG_ID) {
-                    attachedView?.setImageResource(normalImg)
+                if (subImgState.normalImg != SubImgState.INVALID_IMG_ID) {
+                    attachedView?.setImageResource(subImgState.normalImg)
                 }
-                if (normalImgTint != INVALID_IMG_COLOR_TINT) {
-                    attachedView?.imageTintList = ColorStateList.valueOf(normalImgTint)
+                if (subImgState.normalImgTint != SubImgState.INVALID_IMG_COLOR_TINT) {
+                    attachedView?.imageTintList = ColorStateList.valueOf(subImgState.normalImgTint)
                 }
                 val lp = attachedView?.layoutParams?.apply {
-                    width = if (normalImgWidth != INVALID_IMG_SIZE) normalImgWidth.toInt() else normalImgSize.toInt()
-                    height = if (normalImgHeight != INVALID_IMG_SIZE) normalImgHeight.toInt() else normalImgSize.toInt()
+                    width =
+                        if (subImgState.normalImgWidth != SubImgState.INVALID_IMG_SIZE) subImgState.normalImgWidth.toInt() else subImgState.normalImgSize.toInt()
+                    height =
+                        if (subImgState.normalImgHeight != SubImgState.INVALID_IMG_SIZE) subImgState.normalImgHeight.toInt() else subImgState.normalImgSize.toInt()
                 }
                 if (lp != null) {
                     attachedView?.layoutParams = lp
                 }
             }
         }
+    }
+}
+
+@Parcelize
+private data class SubImgState(
+    var normalImg: Int = INVALID_IMG_ID,
+    var normalImgTint: Int = INVALID_IMG_COLOR_TINT,
+    var normalImgSize: Float = DEFAULT_IMG_SIZE,
+    var normalImgWidth: Float = INVALID_IMG_SIZE,
+    var normalImgHeight: Float = INVALID_IMG_SIZE,
+
+    var pressedImg: Int = INVALID_IMG_ID,
+    var pressedImgTint: Int = INVALID_IMG_COLOR_TINT,
+    var pressedImgSize: Float = DEFAULT_IMG_SIZE,
+    var pressedImgWidth: Float = INVALID_IMG_SIZE,
+    var pressedImgHeight: Float = INVALID_IMG_SIZE,
+
+    var selectedImg: Int = INVALID_IMG_ID,
+    var selectedImgTint: Int = INVALID_IMG_COLOR_TINT,
+    var selectedImgSize: Float = DEFAULT_IMG_SIZE,
+    var selectedImgWidth: Float = INVALID_IMG_SIZE,
+    var selectedImgHeight: Float = INVALID_IMG_SIZE
+) : Parcelable {
+    companion object {
+        const val INVALID_IMG_ID = -1
+        const val INVALID_IMG_COLOR_TINT = -1
+        const val INVALID_IMG_SIZE = -1F
+        const val DEFAULT_IMG_SIZE = 64F
     }
 }

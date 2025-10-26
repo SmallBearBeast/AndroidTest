@@ -1,5 +1,6 @@
 package com.example.administrator.androidtest.widget.stateful
 
+import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
 
@@ -14,4 +15,8 @@ interface IStateful {
     fun onSelectedChanged(selected: Boolean)
 
     fun onLayoutParamsChanged()
+
+    fun onSaveInstanceState(savedBundle: Bundle)
+
+    fun onRestoreInstanceState(restoredBundle: Bundle)
 }

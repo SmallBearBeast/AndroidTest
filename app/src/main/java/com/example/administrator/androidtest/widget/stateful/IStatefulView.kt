@@ -1,42 +1,35 @@
 package com.example.administrator.androidtest.widget.stateful
 
 import android.graphics.drawable.GradientDrawable
-import android.util.AttributeSet
-import android.view.View
 
 interface IStatefulView {
+    fun setSolid(color: Int)
 
-    companion object {
-        internal const val DEFAULT_COLOR = android.graphics.Color.TRANSPARENT
-    }
+    fun setCornerRadius(radius: Float)
 
-    fun setSolid(color: Int = DEFAULT_COLOR)
+    fun setStroke(width: Float, color: Int)
 
-    fun setCornerRadius(radius: Float = 0F)
+    fun setStrokeDash(dashWidth: Float, dashGap: Float)
 
-    fun setStroke(width: Float = 0F, color: Int = DEFAULT_COLOR)
+    fun setGradient(colors: List<Int>?, orientation: GradientDrawable.Orientation)
 
-    fun setStrokeDash(dashWidth: Float = 0F, dashGap: Float = 0F)
+    fun setPressedSolid(color: Int)
 
-    fun setGradient(colors: IntArray? = null, orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM)
+    fun setPressedCornerRadius(radius: Float)
 
-    fun setPressedSolid(color: Int = DEFAULT_COLOR)
+    fun setPressedStroke(width: Float, color: Int)
 
-    fun setPressedCornerRadius(radius: Float = 0F)
+    fun setPressedStrokeDash(dashWidth: Float, dashGap: Float)
 
-    fun setPressedStroke(width: Float = 0F, color: Int = DEFAULT_COLOR)
+    fun setPressedGradient(colors: List<Int>?, orientation: GradientDrawable.Orientation)
 
-    fun setPressedStrokeDash(dashWidth: Float = 0F, dashGap: Float = 0F)
+    fun setSelectedSolid(color: Int)
 
-    fun setPressedGradient(colors: IntArray? = null, orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM)
+    fun setSelectedCornerRadius(radius: Float)
 
-    fun setSelectedSolid(color: Int = DEFAULT_COLOR)
+    fun setSelectedStroke(width: Float, color: Int)
 
-    fun setSelectedCornerRadius(radius: Float = 0F)
+    fun setSelectedStrokeDash(dashWidth: Float, dashGap: Float)
 
-    fun setSelectedStroke(width: Float = 0F, color: Int = DEFAULT_COLOR)
-
-    fun setSelectedStrokeDash(dashWidth: Float = 0F, dashGap: Float = 0F)
-
-    fun setSelectedGradient(colors: IntArray? = null, orientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM)
+    fun setSelectedGradient(colors: List<Int>?, orientation: GradientDrawable.Orientation)
 }

@@ -4,42 +4,17 @@ import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
+import kotlinx.android.parcel.Parcelize
 
 open class StatefulViewDelegate : IStatefulView, IStateful {
-    // Normal State
-    private var solidColor = IStatefulView.DEFAULT_COLOR
-    private var cornerRadius = 0F
-    private var strokeWidth = 0F
-    private var strokeColor = IStatefulView.DEFAULT_COLOR
-    private var strokeDashWidth = 0F
-    private var strokeDashGap = 0F
-    private var gradientColors: IntArray? = null
-    private var gradientOrientation = GradientDrawable.Orientation.TOP_BOTTOM
-
-    // Pressed State
-    private var solidPressedColor = IStatefulView.DEFAULT_COLOR
-    private var pressedCornerRadius = 0F
-    private var pressedStrokeWidth = 0F
-    private var pressedStrokeColor = IStatefulView.DEFAULT_COLOR
-    private var pressedStrokeDashWidth = 0F
-    private var pressedStrokeDashGap = 0F
-    private var pressedGradientColors: IntArray? = null
-    private var pressedGradientOrientation: GradientDrawable.Orientation? = null
-
-    // Selected State
-    private var solidSelectedColor = Color.TRANSPARENT
-    private var selectedCornerRadius = 0F
-    private var selectedStrokeWidth = 0F
-    private var selectedStrokeColor = Color.TRANSPARENT
-    private var selectedStrokeDashWidth = 0F
-    private var selectedStrokeDashGap = 0F
-    private var selectedGradientColors: IntArray? = null
-    private var selectedGradientOrientation = GradientDrawable.Orientation.TOP_BOTTOM
+    private var viewState = ViewState()
 
     private val normalDrawable by lazy { GradientDrawable() }
     private val pressedDrawable by lazy { GradientDrawable() }
@@ -71,21 +46,9 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
         }
     }
 
-    override fun onPressedChanged(pressed: Boolean) {
-        // Do nothing
-    }
-
-    override fun onSelectedChanged(selected: Boolean) {
-        // Do nothing
-    }
-
-    override fun onLayoutParamsChanged() {
-        // Do nothing
-    }
-
     private fun parseNormalAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.StatefulView_sf_solid)) {
-            setSolid(typedArray.getColor(R.styleable.StatefulView_sf_solid, IStatefulView.DEFAULT_COLOR))
+            setSolid(typedArray.getColor(R.styleable.StatefulView_sf_solid, ViewState.DEFAULT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_corner_radius)) {
             setCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_corner_radius, 0F))
@@ -95,7 +58,7 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
         ) {
             setStroke(
                 typedArray.getDimension(R.styleable.StatefulView_sf_stroke_width, 0F),
-                typedArray.getColor(R.styleable.StatefulView_sf_stroke_color, IStatefulView.DEFAULT_COLOR)
+                typedArray.getColor(R.styleable.StatefulView_sf_stroke_color, ViewState.DEFAULT_COLOR)
             )
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_stroke_dash_width)
@@ -108,41 +71,41 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
         }
         val colors = arrayListOf<Int>()
         if (typedArray.hasValue(R.styleable.StatefulView_sf_gra_start_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_gra_start_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_gra_start_color, ViewState.DEFAULT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_gra_center_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_gra_center_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_gra_center_color, ViewState.DEFAULT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_gra_end_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_gra_end_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_gra_end_color, ViewState.DEFAULT_COLOR))
         }
         if (colors.isNotEmpty() || typedArray.hasValue(R.styleable.StatefulView_sf_gra_orientation)) {
             val orientationIndex = typedArray.getInt(R.styleable.StatefulView_sf_gra_orientation, -1)
             val orientation = getGradientOrientation(orientationIndex)
-            setGradient(colors.toIntArray(), orientation)
+            setGradient(colors, orientation)
         }
     }
 
     private fun parsePressedAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_solid)) {
-            setPressedSolid(typedArray.getColor(R.styleable.StatefulView_sf_pressed_solid, IStatefulView.DEFAULT_COLOR))
+            setPressedSolid(typedArray.getColor(R.styleable.StatefulView_sf_pressed_solid, ViewState.DEFAULT_COLOR))
         } else {
-            setPressedSolid(solidColor)
+            setPressedSolid(viewState.solidColor)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_corner_radius)) {
             setPressedCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_pressed_corner_radius, 0F))
         } else {
-            setPressedCornerRadius(cornerRadius)
+            setPressedCornerRadius(viewState.cornerRadius)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_stroke_width)
             || typedArray.hasValue(R.styleable.StatefulView_sf_pressed_stroke_color)
         ) {
             setPressedStroke(
                 typedArray.getDimension(R.styleable.StatefulView_sf_pressed_stroke_width, 0F),
-                typedArray.getColor(R.styleable.StatefulView_sf_pressed_stroke_color, IStatefulView.DEFAULT_COLOR)
+                typedArray.getColor(R.styleable.StatefulView_sf_pressed_stroke_color, ViewState.DEFAULT_COLOR)
             )
         } else {
-            setPressedStroke(strokeWidth, strokeColor)
+            setPressedStroke(viewState.strokeWidth, viewState.strokeColor)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_stroke_dash_width)
             || typedArray.hasValue(R.styleable.StatefulView_sf_pressed_stroke_dash_gap)
@@ -152,47 +115,47 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
                 typedArray.getDimension(R.styleable.StatefulView_sf_pressed_stroke_dash_gap, 0F)
             )
         } else {
-            setPressedStrokeDash(strokeDashWidth, strokeDashGap)
+            setPressedStrokeDash(viewState.strokeDashWidth, viewState.strokeDashGap)
         }
         val colors = arrayListOf<Int>()
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_gra_start_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_pressed_gra_start_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_pressed_gra_start_color, ViewState.DEFAULT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_gra_center_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_pressed_gra_center_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_pressed_gra_center_color, ViewState.DEFAULT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_gra_end_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_pressed_gra_end_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_pressed_gra_end_color, ViewState.DEFAULT_COLOR))
         }
         if (colors.isNotEmpty() || typedArray.hasValue(R.styleable.StatefulView_sf_pressed_gra_orientation)) {
             val orientationIndex = typedArray.getInt(R.styleable.StatefulView_sf_pressed_gra_orientation, -1)
             val orientation = getGradientOrientation(orientationIndex)
-            setPressedGradient(colors.toIntArray(), orientation)
+            setPressedGradient(colors, orientation)
         } else {
-            setPressedGradient(gradientColors, gradientOrientation)
+            setPressedGradient(viewState.gradientColors, viewState.gradientOrientation)
         }
     }
 
     private fun parseSelectedAttrs(typedArray: TypedArray) {
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_solid)) {
-            setSelectedSolid(typedArray.getColor(R.styleable.StatefulView_sf_selected_solid, IStatefulView.DEFAULT_COLOR))
+            setSelectedSolid(typedArray.getColor(R.styleable.StatefulView_sf_selected_solid, ViewState.DEFAULT_COLOR))
         } else {
-            setSelectedSolid(solidColor)
+            setSelectedSolid(viewState.solidColor)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_corner_radius)) {
             setSelectedCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_selected_corner_radius, 0F))
         } else {
-            setSelectedCornerRadius(cornerRadius)
+            setSelectedCornerRadius(viewState.cornerRadius)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_stroke_width)
             || typedArray.hasValue(R.styleable.StatefulView_sf_selected_stroke_color)
         ) {
             setSelectedStroke(
                 typedArray.getDimension(R.styleable.StatefulView_sf_selected_stroke_width, 0F),
-                typedArray.getColor(R.styleable.StatefulView_sf_selected_stroke_color, IStatefulView.DEFAULT_COLOR)
+                typedArray.getColor(R.styleable.StatefulView_sf_selected_stroke_color, ViewState.DEFAULT_COLOR)
             )
         } else {
-            setSelectedStroke(strokeWidth, strokeColor)
+            setSelectedStroke(viewState.strokeWidth, viewState.strokeColor)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_stroke_dash_width)
             || typedArray.hasValue(R.styleable.StatefulView_sf_selected_stroke_dash_gap)
@@ -202,193 +165,197 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
                 typedArray.getDimension(R.styleable.StatefulView_sf_selected_stroke_dash_gap, 0F)
             )
         } else {
-            setSelectedStrokeDash(strokeDashWidth, strokeDashGap)
+            setSelectedStrokeDash(viewState.strokeDashWidth, viewState.strokeDashGap)
         }
         val colors = arrayListOf<Int>()
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_gra_start_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_selected_gra_start_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_selected_gra_start_color, ViewState.DEFAULT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_gra_center_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_selected_gra_center_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_selected_gra_center_color, ViewState.DEFAULT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_gra_end_color)) {
-            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_selected_gra_end_color, IStatefulView.DEFAULT_COLOR))
+            colors.add(typedArray.getColor(R.styleable.StatefulView_sf_selected_gra_end_color, ViewState.DEFAULT_COLOR))
         }
         if (colors.isNotEmpty() || typedArray.hasValue(R.styleable.StatefulView_sf_selected_gra_orientation)) {
             val orientationIndex = typedArray.getInt(R.styleable.StatefulView_sf_selected_gra_orientation, -1)
             val orientation = getGradientOrientation(orientationIndex)
-            setSelectedGradient(colors.toIntArray(), orientation)
+            setSelectedGradient(colors, orientation)
         } else {
-            setSelectedGradient(gradientColors, gradientOrientation)
+            setSelectedGradient(viewState.gradientColors, viewState.gradientOrientation)
         }
     }
 
     override fun setSolid(color: Int) {
-        if (solidColor != color) {
-            solidColor = color
-            normalDrawable.setColor(color)
+        if (viewState.solidColor != color) {
+            viewState.solidColor = color
             updateBackground()
         }
     }
 
     override fun setCornerRadius(radius: Float) {
-        if (cornerRadius != radius) {
-            cornerRadius = radius
-            normalDrawable.cornerRadius = radius
+        if (viewState.cornerRadius != radius) {
+            viewState.cornerRadius = radius
             updateBackground()
         }
     }
 
     override fun setStroke(width: Float, color: Int) {
-        if (strokeWidth != width || strokeColor != color) {
-            if (strokeWidth != width) {
-                strokeWidth = width
+        if (viewState.strokeWidth != width || viewState.strokeColor != color) {
+            if (viewState.strokeWidth != width) {
+                viewState.strokeWidth = width
             }
-            if (strokeColor != color) {
-                strokeColor = color
+            if (viewState.strokeColor != color) {
+                viewState.strokeColor = color
             }
-            normalDrawable.setStroke(strokeWidth.toInt(), strokeColor)
             updateBackground()
         }
     }
 
     override fun setStrokeDash(dashWidth: Float, dashGap: Float) {
-        if (strokeDashWidth != dashWidth || strokeDashGap != dashGap) {
-            if (strokeDashWidth != dashWidth) {
-                strokeDashWidth = dashWidth
+        if (viewState.strokeDashWidth != dashWidth || viewState.strokeDashGap != dashGap) {
+            if (viewState.strokeDashWidth != dashWidth) {
+                viewState.strokeDashWidth = dashWidth
             }
-            if (strokeDashGap != dashGap) {
-                strokeDashGap = dashGap
+            if (viewState.strokeDashGap != dashGap) {
+                viewState.strokeDashGap = dashGap
             }
-            normalDrawable.setStroke(strokeWidth.toInt(), strokeColor, strokeDashWidth, strokeDashGap)
             updateBackground()
         }
     }
 
-    override fun setGradient(colors: IntArray?, orientation: GradientDrawable.Orientation) {
-        if (!gradientColors.contentEquals(colors) || gradientOrientation != orientation) {
-            if (!gradientColors.contentEquals(colors)) {
-                gradientColors = colors
+    override fun setGradient(colors: List<Int>?, orientation: GradientDrawable.Orientation) {
+        if (viewState.gradientColors != colors || viewState.gradientOrientation != orientation) {
+            if (viewState.gradientColors != colors) {
+                viewState.gradientColors = colors
             }
-            if (gradientOrientation != orientation) {
-                gradientOrientation = orientation
+            if (viewState.gradientOrientation != orientation) {
+                viewState.gradientOrientation = orientation
             }
-            normalDrawable.colors = gradientColors
-            normalDrawable.orientation = gradientOrientation
             updateBackground()
         }
     }
 
     override fun setPressedSolid(color: Int) {
-        if (solidPressedColor != color) {
-            solidPressedColor = color
-            pressedDrawable.setColor(color)
+        if (viewState.pressedSolidColor != color) {
+            viewState.pressedSolidColor = color
             updateBackground()
         }
     }
 
     override fun setPressedCornerRadius(radius: Float) {
-        if (pressedCornerRadius != radius) {
-            pressedCornerRadius = radius
-            pressedDrawable.cornerRadius = radius
+        if (viewState.pressedCornerRadius != radius) {
+            viewState.pressedCornerRadius = radius
             updateBackground()
         }
     }
 
     override fun setPressedStroke(width: Float, color: Int) {
-        if (pressedStrokeWidth != width || pressedStrokeColor != color) {
-            if (pressedStrokeWidth != width) {
-                pressedStrokeWidth = width
+        if (viewState.pressedStrokeWidth != width || viewState.pressedStrokeColor != color) {
+            if (viewState.pressedStrokeWidth != width) {
+                viewState.pressedStrokeWidth = width
             }
-            if (pressedStrokeColor != color) {
-                pressedStrokeColor = color
+            if (viewState.pressedStrokeColor != color) {
+                viewState.pressedStrokeColor = color
             }
-            pressedDrawable.setStroke(pressedStrokeWidth.toInt(), pressedStrokeColor)
             updateBackground()
         }
     }
 
     override fun setPressedStrokeDash(dashWidth: Float, dashGap: Float) {
-        if (pressedStrokeDashWidth != dashWidth || pressedStrokeDashGap != dashGap) {
-            if (pressedStrokeDashWidth != dashWidth) {
-                pressedStrokeDashWidth = dashWidth
+        if (viewState.pressedStrokeDashWidth != dashWidth || viewState.pressedStrokeDashGap != dashGap) {
+            if (viewState.pressedStrokeDashWidth != dashWidth) {
+                viewState.pressedStrokeDashWidth = dashWidth
             }
-            if (pressedStrokeDashGap != dashGap) {
-                pressedStrokeDashGap = dashGap
+            if (viewState.pressedStrokeDashGap != dashGap) {
+                viewState.pressedStrokeDashGap = dashGap
             }
-            pressedDrawable.setStroke(pressedStrokeWidth.toInt(), pressedStrokeColor, pressedStrokeDashWidth, pressedStrokeDashGap)
             updateBackground()
         }
     }
 
-    override fun setPressedGradient(colors: IntArray?, orientation: GradientDrawable.Orientation) {
-        if (!pressedGradientColors.contentEquals(colors) || pressedGradientOrientation != orientation) {
-            if (!pressedGradientColors.contentEquals(colors)) {
-                pressedGradientColors = colors
+    override fun setPressedGradient(colors: List<Int>?, orientation: GradientDrawable.Orientation) {
+        if (viewState.pressedGradientColors != colors || viewState.pressedGradientOrientation != orientation) {
+            if (viewState.pressedGradientColors != colors) {
+                viewState.pressedGradientColors = colors
             }
-            if (pressedGradientOrientation != orientation) {
-                pressedGradientOrientation = orientation
+            if (viewState.pressedGradientOrientation != orientation) {
+                viewState.pressedGradientOrientation = orientation
             }
-            pressedDrawable.colors = pressedGradientColors
-            pressedDrawable.orientation = pressedGradientOrientation
             updateBackground()
         }
     }
 
     override fun setSelectedSolid(color: Int) {
-        if (solidSelectedColor != color) {
-            solidSelectedColor = color
-            selectedDrawable.setColor(color)
+        if (viewState.selectedSolidColor != color) {
+            viewState.selectedSolidColor = color
             updateBackground()
         }
     }
 
     override fun setSelectedCornerRadius(radius: Float) {
-        if (selectedCornerRadius != radius) {
-            selectedCornerRadius = radius
-            selectedDrawable.cornerRadius = radius
+        if (viewState.selectedCornerRadius != radius) {
+            viewState.selectedCornerRadius = radius
             updateBackground()
         }
     }
 
     override fun setSelectedStroke(width: Float, color: Int) {
-        if (selectedStrokeWidth != width || selectedStrokeColor != color) {
-            if (selectedStrokeWidth != width) {
-                selectedStrokeWidth = width
+        if (viewState.selectedStrokeWidth != width || viewState.selectedStrokeColor != color) {
+            if (viewState.selectedStrokeWidth != width) {
+                viewState.selectedStrokeWidth = width
             }
-            if (selectedStrokeColor != color) {
-                selectedStrokeColor = color
+            if (viewState.selectedStrokeColor != color) {
+                viewState.selectedStrokeColor = color
             }
-            selectedDrawable.setStroke(selectedStrokeWidth.toInt(), selectedStrokeColor)
             updateBackground()
         }
     }
 
     override fun setSelectedStrokeDash(dashWidth: Float, dashGap: Float) {
-        if (selectedStrokeDashWidth != dashWidth || selectedStrokeDashGap != dashGap) {
-            if (selectedStrokeDashWidth != dashWidth) {
-                selectedStrokeDashWidth = dashWidth
+        if (viewState.selectedStrokeDashWidth != dashWidth || viewState.selectedStrokeDashGap != dashGap) {
+            if (viewState.selectedStrokeDashWidth != dashWidth) {
+                viewState.selectedStrokeDashWidth = dashWidth
             }
-            if (selectedStrokeDashGap != dashGap) {
-                selectedStrokeDashGap = dashGap
+            if (viewState.selectedStrokeDashGap != dashGap) {
+                viewState.selectedStrokeDashGap = dashGap
             }
-            selectedDrawable.setStroke(selectedStrokeWidth.toInt(), selectedStrokeColor, selectedStrokeDashWidth, selectedStrokeDashGap)
             updateBackground()
         }
     }
 
-    override fun setSelectedGradient(colors: IntArray?, orientation: GradientDrawable.Orientation) {
-        if (!selectedGradientColors.contentEquals(colors) || selectedGradientOrientation != orientation) {
-            if (!selectedGradientColors.contentEquals(colors)) {
-                selectedGradientColors = colors
+    override fun setSelectedGradient(colors: List<Int>?, orientation: GradientDrawable.Orientation) {
+        if (viewState.selectedGradientColors != colors || viewState.selectedGradientOrientation != orientation) {
+            if (viewState.selectedGradientColors != colors) {
+                viewState.selectedGradientColors = colors
             }
-            if (selectedGradientOrientation != orientation) {
-                selectedGradientOrientation = orientation
+            if (viewState.selectedGradientOrientation != orientation) {
+                viewState.selectedGradientOrientation = orientation
             }
-            selectedDrawable.colors = selectedGradientColors
-            selectedDrawable.orientation = selectedGradientOrientation
             updateBackground()
         }
+    }
+
+    override fun onPressedChanged(pressed: Boolean) {
+        // Do nothing
+    }
+
+    override fun onSelectedChanged(selected: Boolean) {
+        viewState.isSelected = selected
+    }
+
+    override fun onLayoutParamsChanged() {
+        // Do nothing
+    }
+
+    override fun onSaveInstanceState(savedBundle: Bundle) {
+        savedBundle.putParcelable("view_state", viewState)
+    }
+
+    override fun onRestoreInstanceState(restoredBundle: Bundle) {
+        viewState = restoredBundle.getParcelable("view_state") ?: ViewState()
+        attachedView?.isSelected = viewState.isSelected
+        updateBackground()
     }
 
     // TODO: 优化，避免重复创建StateListDrawable
@@ -397,9 +364,51 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
 //            attachedView?.background?.invalidateSelf()
 //            return
 //        }
+        normalDrawable.apply {
+            setColor(viewState.solidColor)
+            cornerRadius = viewState.cornerRadius
+            setStroke(
+                viewState.strokeWidth.toInt(),
+                viewState.strokeColor,
+                viewState.strokeDashWidth,
+                viewState.strokeDashGap
+            )
+            if (viewState.gradientColors != null) {
+                colors = viewState.gradientColors?.toIntArray()
+                orientation = viewState.gradientOrientation
+            }
+        }
+        pressedDrawable.apply {
+            setColor(viewState.pressedSolidColor)
+            cornerRadius = viewState.pressedCornerRadius
+            setStroke(
+                viewState.pressedStrokeWidth.toInt(),
+                viewState.pressedStrokeColor,
+                viewState.pressedStrokeDashWidth,
+                viewState.pressedStrokeDashGap
+            )
+            if (viewState.pressedGradientColors != null) {
+                colors = viewState.pressedGradientColors?.toIntArray()
+                orientation = viewState.gradientOrientation
+            }
+        }
+        selectedDrawable.apply {
+            setColor(viewState.selectedSolidColor)
+            cornerRadius = viewState.selectedCornerRadius
+            setStroke(
+                viewState.selectedStrokeWidth.toInt(),
+                viewState.selectedStrokeColor,
+                viewState.selectedStrokeDashWidth,
+                viewState.selectedStrokeDashGap
+            )
+            if (viewState.selectedGradientColors != null) {
+                colors = viewState.selectedGradientColors?.toIntArray()
+                orientation = viewState.selectedGradientOrientation
+            }
+        }
         val stateListDrawable = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_pressed, android.R.attr.state_enabled), pressedDrawable)
             addState(intArrayOf(android.R.attr.state_selected), selectedDrawable)
+            addState(intArrayOf(android.R.attr.state_pressed), pressedDrawable)
             addState(intArrayOf(), normalDrawable)
         }
         attachedView?.background = stateListDrawable
@@ -417,5 +426,44 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
             7 -> return GradientDrawable.Orientation.TL_BR
             else -> GradientDrawable.Orientation.TOP_BOTTOM
         }
+    }
+}
+
+@Parcelize
+private data class ViewState(
+    // Normal State
+    var solidColor: Int = DEFAULT_COLOR,
+    var cornerRadius: Float = 0F,
+    var strokeWidth: Float = 0F,
+    var strokeColor: Int = DEFAULT_COLOR,
+    var strokeDashWidth: Float = 0F,
+    var strokeDashGap: Float = 0F,
+    var gradientColors: List<Int>? = null,
+    var gradientOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM,
+
+    // Pressed State
+    var pressedSolidColor: Int = DEFAULT_COLOR,
+    var pressedCornerRadius: Float = 0F,
+    var pressedStrokeWidth: Float = 0F,
+    var pressedStrokeColor: Int = DEFAULT_COLOR,
+    var pressedStrokeDashWidth: Float = 0F,
+    var pressedStrokeDashGap: Float = 0F,
+    var pressedGradientColors: List<Int>? = null,
+    var pressedGradientOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM,
+
+    // Selected State
+    var selectedSolidColor: Int = DEFAULT_COLOR,
+    var selectedCornerRadius: Float = 0F,
+    var selectedStrokeWidth: Float = 0F,
+    var selectedStrokeColor: Int = DEFAULT_COLOR,
+    var selectedStrokeDashWidth: Float = 0F,
+    var selectedStrokeDashGap: Float = 0F,
+    var selectedGradientColors: List<Int>? = null,
+    var selectedGradientOrientation: GradientDrawable.Orientation = GradientDrawable.Orientation.TOP_BOTTOM,
+
+    var isSelected: Boolean = false,
+) : Parcelable {
+    companion object {
+        const val DEFAULT_COLOR = Color.TRANSPARENT
     }
 }

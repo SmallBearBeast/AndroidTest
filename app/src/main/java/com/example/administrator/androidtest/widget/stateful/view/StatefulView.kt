@@ -1,6 +1,8 @@
 package com.example.administrator.androidtest.widget.stateful.view
 
 import android.content.Context
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
@@ -102,6 +104,22 @@ abstract class BaseStatefulTextView<Delegate : IStateful>(
         super.dispatchSetSelected(selected)
         onSelectedChanged(selected)
     }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
+        }
+    }
 }
 
 abstract class BaseStatefulEditText<Delegate : IStateful>(
@@ -125,6 +143,22 @@ abstract class BaseStatefulEditText<Delegate : IStateful>(
     override fun dispatchSetSelected(selected: Boolean) {
         super.dispatchSetSelected(selected)
         onSelectedChanged(selected)
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
+        }
     }
 }
 
@@ -156,6 +190,22 @@ abstract class BaseStatefulImageView<Delegate : IStateful>(
         super.setLayoutParams(params)
         if (!areLayoutParamsEqual(oldParams, params)) {
             onLayoutParamsChanged()
+        }
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
         }
     }
 }
@@ -194,6 +244,22 @@ abstract class BaseStatefulLinearLayout<Delegate : IStateful>(
         super.setLayoutParams(params)
         if (!areLayoutParamsEqual(oldParams, params)) {
             onLayoutParamsChanged()
+        }
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
         }
     }
 }

@@ -8,96 +8,104 @@
 
     <LinearLayout style="@style/ll_vertical">
 
-        <com.example.administrator.androidtest.widget.stateful.view.Stateful2TextView
-            android:id="@+id/stateful2TextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:sf_corner_radius="999dp"
-            app:sf_pressed_solid="@color/cl_red_t_6"
-            app:sf_selected_img_text_spacing="16dp"
-            app:sf_selected_solid="@color/cl_green_9"
-            app:sf_selected_text_spacing="12dp"
-            app:sf_solid="@color/cl_oriange"
-            app:sf_sub_text="111"
-            app:sf_sub_text_color="@color/cl_white"
-            app:sf_sub_text_size="12sp"
-            app:sf_text="关注"
-            app:sf_text_color="@color/cl_black"
-            app:sf_text_size="18sp"
-            app:sf_text_style="bold"
-            app:sf_text_spacing="4dp" />
+        <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 
-        <com.example.administrator.androidtest.widget.stateful.view.StatefulImgTextView
-            android:id="@+id/statefulImgTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:orientation="vertical"
-            android:padding="16dp"
-            app:sf_corner_radius="999dp"
-            app:sf_img="@drawable/ic_input_view_password_visible"
-            app:sf_img_size="32dp"
-            app:sf_img_text_spacing="8dp"
-            app:sf_img_tint="@color/cl_black"
-            app:sf_pressed_solid="@color/cl_red_t_6"
-            app:sf_selected_img_text_spacing="16dp"
-            app:sf_selected_solid="@color/cl_green_9"
-            app:sf_solid="@color/cl_oriange"
-            app:sf_text="sf_text"
-            app:sf_text_size="16sp" />
+            <TextView
+                android:id="@+id/statefulViewTitleTv"
+                style="@style/TestLabelStyle"
+                android:text="StatefulView Demo" />
 
-        <com.example.administrator.androidtest.widget.stateful.view.StatefulImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:clickable="true"
-            android:gravity="center"
-            android:padding="16dp"
-            app:sf_corner_radius="999dp"
-            app:sf_img="@drawable/ic_input_view_password_visible"
-            app:sf_img_size="120dp"
-            app:sf_img_tint="@color/cl_black"
-            app:sf_pressed_solid="@color/cl_red_t_6"
-            app:sf_selected="true"
-            app:sf_selected_img_size="100dp"
-            app:sf_selected_solid="@color/cl_green"
-            app:sf_solid="@color/cl_oriange" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/statefulViewTitleTv">
 
-        <com.example.administrator.androidtest.widget.stateful.view.StatefulTextView
-            android:layout_width="200dp"
-            android:layout_height="50dp"
-            android:clickable="true"
-            android:gravity="center"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="8dp"
-            app:sf_corner_radius="99dp"
-            app:sf_pressed_solid="@color/cl_red_t_6"
-            app:sf_pressed_text="sf_pressed_text"
-            app:sf_pressed_text_color="@color/cl_black"
-            app:sf_selected="true"
-            app:sf_selected_solid="@color/cl_green"
-            app:sf_solid="@color/cl_oriange"
-            app:sf_text="sf_text"
-            app:sf_text_color="@color/cl_white"
-            app:sf_text_size="16sp" />
+                <com.example.administrator.androidtest.widget.stateful.view.StatefulFrameLayout
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:clickable="true"
+                    app:sf_solid="@color/cl_oriange" />
 
-        <!--        <com.example.administrator.androidtest.widget.stateful.view.StatefulFrameLayout-->
-        <!--            android:layout_width="100dp"-->
-        <!--            android:layout_height="100dp"-->
-        <!--            android:clickable="true"-->
-        <!--            app:sf_corner_radius="16dp"-->
-        <!--            app:sf_pressed_icon_size="24dp"-->
-        <!--            app:sf_selected="true"-->
-        <!--            app:sf_selected_gra_center_color="@color/cl_green"-->
-        <!--            app:sf_selected_gra_end_color="@color/cl_black"-->
-        <!--            app:sf_selected_gra_start_color="@color/cl_black"-->
-        <!--            app:sf_solid="@color/cl_oriange"-->
-        <!--            app:sf_stroke_color="@color/cl_black"-->
-        <!--            app:sf_stroke_dash_gap="1dp"-->
-        <!--            app:sf_stroke_dash_width="11dp"-->
-        <!--            app:sf_stroke_width="2dp" />-->
+                <com.example.administrator.androidtest.widget.stateful.view.Stateful2TextView
+                    android:id="@+id/stateful2TextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    app:sf_corner_radius="999dp"
+                    app:sf_pressed_solid="@color/cl_red_t_6"
+                    app:sf_selected_img_text_spacing="16dp"
+                    app:sf_selected_solid="@color/cl_green_9"
+                    app:sf_selected_sub_text_color="@color/cl_black"
+                    app:sf_selected_text_color="@color/cl_white"
+                    app:sf_selected_text_spacing="12dp"
+                    app:sf_solid="@color/cl_oriange"
+                    app:sf_sub_text="111"
+                    app:sf_sub_text_color="@color/cl_white"
+                    app:sf_sub_text_size="12sp"
+                    app:sf_text="关注"
+                    app:sf_text_color="@color/cl_black"
+                    app:sf_text_size="18sp"
+                    app:sf_text_spacing="4dp"
+                    app:sf_text_style="bold" />
+
+                <com.example.administrator.androidtest.widget.stateful.view.StatefulImgTextView
+                    android:id="@+id/statefulImgTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:orientation="vertical"
+                    android:padding="16dp"
+                    app:sf_corner_radius="999dp"
+                    app:sf_img="@drawable/ic_input_view_password_visible"
+                    app:sf_img_size="32dp"
+                    app:sf_img_text_spacing="8dp"
+                    app:sf_img_tint="@color/cl_black"
+                    app:sf_pressed_solid="@color/cl_red_t_6"
+                    app:sf_selected_img_text_spacing="16dp"
+                    app:sf_selected_solid="@color/cl_green_9"
+                    app:sf_solid="@color/cl_oriange"
+                    app:sf_text="sf_text"
+                    app:sf_text_size="16sp" />
+
+                <com.example.administrator.androidtest.widget.stateful.view.StatefulImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:padding="16dp"
+                    app:sf_corner_radius="999dp"
+                    app:sf_img="@drawable/ic_input_view_password_visible"
+                    app:sf_img_size="120dp"
+                    app:sf_img_tint="@color/cl_black"
+                    app:sf_pressed_solid="@color/cl_red_t_6"
+                    app:sf_selected_img_size="100dp"
+                    app:sf_selected_solid="@color/cl_green"
+                    app:sf_solid="@color/cl_oriange" />
+
+                <com.example.administrator.androidtest.widget.stateful.view.StatefulTextView
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    app:sf_corner_radius="99dp"
+                    app:sf_pressed_solid="@color/cl_red_t_6"
+                    app:sf_pressed_text="sf_pressed_text"
+                    app:sf_pressed_text_color="@color/cl_black"
+                    app:sf_selected_solid="@color/cl_green"
+                    app:sf_solid="@color/cl_oriange"
+                    app:sf_text="sf_text"
+                    app:sf_text_color="@color/cl_white"
+                    app:sf_text_size="16sp" />
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout style="@style/TestContainerStyle">
 

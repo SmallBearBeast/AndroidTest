@@ -3,6 +3,8 @@ package com.example.administrator.androidtest.widget.stateful.delegate
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.Typeface
+import android.os.Bundle
+import android.os.Parcelable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -11,34 +13,13 @@ import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulText
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
+import kotlinx.android.parcel.Parcelize
 
 class StatefulTextDelegate(
     private val enableViewDelegate: Boolean = true,
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate()
 ) : IStatefulView by viewDelegate, IStatefulText, IStateful {
-    companion object {
-        private const val DEFAULT_TEXT_SIZE = 16F
-        private const val DEFAULT_TEXT_COLOR = Color.BLACK
-        private const val DEFAULT_TEXT_STYLE = Typeface.NORMAL
-    }
-
-    // Normal State
-    private var normalText = ""
-    private var normalTextColor = DEFAULT_TEXT_COLOR
-    private var normalTextSize = DEFAULT_TEXT_SIZE
-    private var normalTextStyle = DEFAULT_TEXT_STYLE
-
-    // Pressed State
-    private var pressedText = ""
-    private var pressedTextColor = DEFAULT_TEXT_COLOR
-    private var pressedTextSize = DEFAULT_TEXT_SIZE
-    private var pressedTextStyle = DEFAULT_TEXT_STYLE
-
-    // Selected State
-    private var selectedText = ""
-    private var selectedTextColor = DEFAULT_TEXT_COLOR
-    private var selectedTextSize = DEFAULT_TEXT_SIZE
-    private var selectedTextStyle = DEFAULT_TEXT_STYLE
+    private var textState = TextState()
 
     private var attachedView: TextView? = null
 
@@ -70,13 +51,13 @@ class StatefulTextDelegate(
             setNormalText(typedArray.getString(R.styleable.StatefulText_sf_text) ?: "")
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_text_color)) {
-            setNormalTextColor(typedArray.getColor(R.styleable.StatefulText_sf_text_color, Color.BLACK))
+            setNormalTextColor(typedArray.getColor(R.styleable.StatefulText_sf_text_color, TextState.DEFAULT_TEXT_COLOR))
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_text_size)) {
-            setNormalTextSize(typedArray.getDimension(R.styleable.StatefulText_sf_text_size, 16F))
+            setNormalTextSize(typedArray.getDimension(R.styleable.StatefulText_sf_text_size, TextState.DEFAULT_TEXT_SIZE))
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_text_style)) {
-            setNormalTextStyle(typedArray.getInt(R.styleable.StatefulText_sf_text_style, Typeface.NORMAL))
+            setNormalTextStyle(typedArray.getInt(R.styleable.StatefulText_sf_text_style, TextState.DEFAULT_TEXT_STYLE))
         }
     }
 
@@ -84,22 +65,22 @@ class StatefulTextDelegate(
         if (typedArray.hasValue(R.styleable.StatefulText_sf_pressed_text)) {
             setPressedText(typedArray.getString(R.styleable.StatefulText_sf_pressed_text) ?: "")
         } else {
-            setPressedText(normalText)
+            setPressedText(textState.normalText)
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_pressed_text_color)) {
-            setPressedTextColor(typedArray.getColor(R.styleable.StatefulText_sf_pressed_text_color, Color.BLACK))
+            setPressedTextColor(typedArray.getColor(R.styleable.StatefulText_sf_pressed_text_color, TextState.DEFAULT_TEXT_COLOR))
         } else {
-            setPressedTextColor(normalTextColor)
+            setPressedTextColor(textState.normalTextColor)
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_pressed_text_size)) {
-            setPressedTextSize(typedArray.getDimension(R.styleable.StatefulText_sf_pressed_text_size, 16F))
+            setPressedTextSize(typedArray.getDimension(R.styleable.StatefulText_sf_pressed_text_size, TextState.DEFAULT_TEXT_SIZE))
         } else {
-            setPressedTextSize(normalTextSize)
+            setPressedTextSize(textState.normalTextSize)
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_pressed_text_style)) {
-            setPressedTextStyle(typedArray.getInt(R.styleable.StatefulText_sf_pressed_text_style, Typeface.NORMAL))
+            setPressedTextStyle(typedArray.getInt(R.styleable.StatefulText_sf_pressed_text_style, TextState.DEFAULT_TEXT_STYLE))
         } else {
-            setPressedTextStyle(normalTextStyle)
+            setPressedTextStyle(textState.normalTextStyle)
         }
     }
 
@@ -107,105 +88,105 @@ class StatefulTextDelegate(
         if (typedArray.hasValue(R.styleable.StatefulText_sf_selected_text)) {
             setSelectedText(typedArray.getString(R.styleable.StatefulText_sf_selected_text) ?: "")
         } else {
-            setSelectedText(normalText)
+            setSelectedText(textState.normalText)
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_selected_text_color)) {
-            setSelectedTextColor(typedArray.getColor(R.styleable.StatefulText_sf_selected_text_color, Color.BLACK))
+            setSelectedTextColor(typedArray.getColor(R.styleable.StatefulText_sf_selected_text_color, TextState.DEFAULT_TEXT_COLOR))
         } else {
-            setSelectedTextColor(normalTextColor)
+            setSelectedTextColor(textState.normalTextColor)
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_selected_text_size)) {
-            setSelectedTextSize(typedArray.getDimension(R.styleable.StatefulText_sf_selected_text_size, 16F))
+            setSelectedTextSize(typedArray.getDimension(R.styleable.StatefulText_sf_selected_text_size, TextState.DEFAULT_TEXT_SIZE))
         } else {
-            setSelectedTextSize(normalTextSize)
+            setSelectedTextSize(textState.normalTextSize)
         }
         if (typedArray.hasValue(R.styleable.StatefulText_sf_selected_text_style)) {
-            setSelectedTextStyle(typedArray.getInt(R.styleable.StatefulText_sf_selected_text_style, Typeface.NORMAL))
+            setSelectedTextStyle(typedArray.getInt(R.styleable.StatefulText_sf_selected_text_style, TextState.DEFAULT_TEXT_STYLE))
         } else {
-            setSelectedTextStyle(normalTextStyle)
+            setSelectedTextStyle(textState.normalTextStyle)
         }
     }
 
     override fun setNormalText(text: CharSequence?) {
-        if (normalText != text.toString()) {
-            normalText = text.toString()
+        if (textState.normalText != text.toString()) {
+            textState.normalText = text.toString()
             updateText()
         }
     }
 
     override fun setNormalTextSize(textSize: Float) {
-        if (normalTextSize != textSize) {
-            normalTextSize = textSize
+        if (textState.normalTextSize != textSize) {
+            textState.normalTextSize = textSize
             updateText()
         }
     }
 
     override fun setNormalTextColor(color: Int) {
-        if (normalTextColor != color) {
-            normalTextColor = color
+        if (textState.normalTextColor != color) {
+            textState.normalTextColor = color
             updateText()
         }
     }
 
     override fun setNormalTextStyle(style: Int) {
-        if (normalTextStyle != style) {
-            normalTextStyle = style
+        if (textState.normalTextStyle != style) {
+            textState.normalTextStyle = style
             updateText()
         }
     }
 
     override fun setPressedText(text: CharSequence?) {
-        if (pressedText != text.toString()) {
-            pressedText = text.toString()
+        if (textState.pressedText != text.toString()) {
+            textState.pressedText = text.toString()
             updateText()
         }
     }
 
     override fun setPressedTextSize(textSize: Float) {
-        if (pressedTextSize != textSize) {
-            pressedTextSize = textSize
+        if (textState.pressedTextSize != textSize) {
+            textState.pressedTextSize = textSize
             updateText()
         }
     }
 
     override fun setPressedTextColor(color: Int) {
-        if (pressedTextColor != color) {
-            pressedTextColor = color
+        if (textState.pressedTextColor != color) {
+            textState.pressedTextColor = color
             updateText()
         }
     }
 
     override fun setPressedTextStyle(style: Int) {
-        if (pressedTextStyle != style) {
-            pressedTextStyle = style
+        if (textState.pressedTextStyle != style) {
+            textState.pressedTextStyle = style
             updateText()
         }
     }
 
     override fun setSelectedText(text: CharSequence?) {
-        if (selectedText != text.toString()) {
-            selectedText = text.toString()
+        if (textState.selectedText != text.toString()) {
+            textState.selectedText = text.toString()
             updateText()
         }
     }
 
     override fun setSelectedTextSize(textSize: Float) {
-        if (selectedTextSize != textSize) {
-            selectedTextSize = textSize
+        if (textState.selectedTextSize != textSize) {
+            textState.selectedTextSize = textSize
             updateText()
         }
     }
 
     override fun setSelectedTextColor(color: Int) {
-        if (selectedTextColor != color) {
-            selectedTextColor = color
+        if (textState.selectedTextColor != color) {
+            textState.selectedTextColor = color
             updateText()
         }
     }
 
     override fun setSelectedTextStyle(style: Int) {
-        if (selectedTextStyle != style) {
-            selectedTextStyle = style
+        if (textState.selectedTextStyle != style) {
+            textState.selectedTextStyle = style
             updateText()
         }
     }
@@ -222,31 +203,76 @@ class StatefulTextDelegate(
         // Do nothing
     }
 
+    override fun onSaveInstanceState(savedBundle: Bundle) {
+        val bundle = Bundle()
+        if (enableViewDelegate) {
+            viewDelegate.onSaveInstanceState(bundle)
+        }
+        savedBundle.putBundle("child_state", bundle)
+        savedBundle.putParcelable("text_state", textState)
+    }
+
+    override fun onRestoreInstanceState(restoredBundle: Bundle) {
+        val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
+        if (enableViewDelegate) {
+            viewDelegate.onRestoreInstanceState(bundle)
+        }
+        textState = restoredBundle.getParcelable("text_state") ?: TextState()
+        updateText()
+    }
+
     private fun updateText(
         pressed: Boolean = attachedView?.isPressed ?: false,
         selected: Boolean = attachedView?.isSelected ?: false
     ) {
         when {
-            pressed -> {
-                attachedView?.text = pressedText
-                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, pressedTextSize)
-                attachedView?.setTextColor(pressedTextColor)
-                attachedView?.setTypeface(null, pressedTextStyle)
+            selected -> {
+                attachedView?.text = textState.selectedText
+                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textState.selectedTextSize)
+                attachedView?.setTextColor(textState.selectedTextColor)
+                attachedView?.setTypeface(null, textState.selectedTextStyle)
             }
 
-            selected -> {
-                attachedView?.text = selectedText
-                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, selectedTextSize)
-                attachedView?.setTextColor(selectedTextColor)
-                attachedView?.setTypeface(null, selectedTextStyle)
+            pressed -> {
+                attachedView?.text = textState.pressedText
+                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textState.pressedTextSize)
+                attachedView?.setTextColor(textState.pressedTextColor)
+                attachedView?.setTypeface(null, textState.pressedTextStyle)
             }
 
             else -> {
-                attachedView?.text = normalText
-                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, normalTextSize)
-                attachedView?.setTextColor(normalTextColor)
-                attachedView?.setTypeface(null, normalTextStyle)
+                attachedView?.text = textState.normalText
+                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textState.normalTextSize)
+                attachedView?.setTextColor(textState.normalTextColor)
+                attachedView?.setTypeface(null, textState.normalTextStyle)
             }
         }
+    }
+}
+
+@Parcelize
+private data class TextState(
+    // Normal State
+    var normalText: String = "",
+    var normalTextColor: Int = DEFAULT_TEXT_COLOR,
+    var normalTextSize: Float = DEFAULT_TEXT_SIZE,
+    var normalTextStyle: Int = DEFAULT_TEXT_STYLE,
+
+    // Pressed State
+    var pressedText: String = "",
+    var pressedTextColor: Int = DEFAULT_TEXT_COLOR,
+    var pressedTextSize: Float = DEFAULT_TEXT_SIZE,
+    var pressedTextStyle: Int = DEFAULT_TEXT_STYLE,
+
+    // Selected State
+    var selectedText: String = "",
+    var selectedTextColor: Int = DEFAULT_TEXT_COLOR,
+    var selectedTextSize: Float = DEFAULT_TEXT_SIZE,
+    var selectedTextStyle: Int = DEFAULT_TEXT_STYLE,
+) : Parcelable {
+    companion object {
+        const val DEFAULT_TEXT_SIZE = 48F
+        const val DEFAULT_TEXT_COLOR = Color.BLACK
+        const val DEFAULT_TEXT_STYLE = Typeface.NORMAL
     }
 }
