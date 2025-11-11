@@ -141,6 +141,10 @@
         <activity
             android:name=".demo.widgetDemo.pdfViewDemo.PdfViewDemoActivity"
             android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".demo.widgetDemo.statefulviewdemo.StatefulViewDemoActivity"
+            android:theme="@style/AppTheme" />
         <!-- Widget Demo End -->
 
         <!-- Biz Demo Start -->

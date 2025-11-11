@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,12 +18,14 @@ import com.example.administrator.androidtest.demo.widgetDemo.LikeViewDemo.LikeVi
 import com.example.administrator.androidtest.demo.widgetDemo.LoopViewPagerDemo.LoopViewPagerDemoComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.MarqueeDemo.MarqueeDemoComponent;
 import com.example.administrator.androidtest.demo.widgetDemo.pdfViewDemo.PdfViewDemoComponent;
+import com.example.administrator.androidtest.demo.widgetDemo.statefulviewdemo.StatefulViewDemoComponent;
 
 public class WidgetDemoActivity extends ComponentActivity<ActWidgetDemoListBinding> {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        regComponent(new StatefulViewDemoComponent(getLifecycle()));
         regComponent(new PdfViewDemoComponent(getLifecycle()));
         regComponent(new FlowLayoutTestComponent(getLifecycle()));
         regComponent(new MarqueeDemoComponent(getLifecycle()));
@@ -33,8 +34,6 @@ public class WidgetDemoActivity extends ComponentActivity<ActWidgetDemoListBindi
         regComponent(new LikeViewDemoComponent(getLifecycle()));
         regComponent(new FullTextViewDemoComponent(getLifecycle()));
         regComponent(new LoopViewPagerDemoComponent(getLifecycle()));
-        requireBinding().statefulImgTextView.setOnClickListener(v -> requireBinding().statefulImgTextView.setSelected(!requireBinding().statefulImgTextView.isSelected()));
-        requireBinding().stateful2TextView.setOnClickListener(v -> requireBinding().stateful2TextView.setSelected(!requireBinding().stateful2TextView.isSelected()));
     }
 
     @Override
