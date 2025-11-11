@@ -9,26 +9,32 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
 import kotlinx.android.parcel.Parcelize
 
-open class StatefulViewDelegate : IStatefulView, IStateful {
+open class StatefulViewDelegate(
+    private val enable: Boolean = true,
+) : BaseViewDelegate<View>(), IStatefulView {
     private var viewState = ViewState()
 
     private val normalDrawable by lazy { GradientDrawable() }
     private val pressedDrawable by lazy { GradientDrawable() }
     private val selectedDrawable by lazy { GradientDrawable() }
 
-    private var attachedView: View? = null
-
     override fun attachView(view: View?) {
+        if (!enable) {
+            return
+        }
         view ?: return
-        attachedView = view
+        super.attachView(view)
         updateBackground()
     }
 
     override fun initAttributeSet(attrs: AttributeSet?) {
+        if (!enable) {
+            return
+        }
+        super.initAttributeSet(attrs)
         val context = attachedView?.context ?: return
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatefulView)
         try {
@@ -349,10 +355,16 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
     }
 
     override fun onSaveInstanceState(savedBundle: Bundle) {
+        if (!enable) {
+            return
+        }
         savedBundle.putParcelable("view_state", viewState)
     }
 
     override fun onRestoreInstanceState(restoredBundle: Bundle) {
+        if (!enable) {
+            return
+        }
         viewState = restoredBundle.getParcelable("view_state") ?: ViewState()
         attachedView?.isSelected = viewState.isSelected
         updateBackground()
@@ -364,6 +376,9 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
 //            attachedView?.background?.invalidateSelf()
 //            return
 //        }
+        if (!enable) {
+            return
+        }
         normalDrawable.apply {
             setColor(viewState.solidColor)
             cornerRadius = viewState.cornerRadius
@@ -378,37 +393,45 @@ open class StatefulViewDelegate : IStatefulView, IStateful {
                 orientation = viewState.gradientOrientation
             }
         }
-        pressedDrawable.apply {
-            setColor(viewState.pressedSolidColor)
-            cornerRadius = viewState.pressedCornerRadius
-            setStroke(
-                viewState.pressedStrokeWidth.toInt(),
-                viewState.pressedStrokeColor,
-                viewState.pressedStrokeDashWidth,
-                viewState.pressedStrokeDashGap
-            )
-            if (viewState.pressedGradientColors != null) {
-                colors = viewState.pressedGradientColors?.toIntArray()
-                orientation = viewState.gradientOrientation
+        if (isPressedEnable) {
+            pressedDrawable.apply {
+                setColor(viewState.pressedSolidColor)
+                cornerRadius = viewState.pressedCornerRadius
+                setStroke(
+                    viewState.pressedStrokeWidth.toInt(),
+                    viewState.pressedStrokeColor,
+                    viewState.pressedStrokeDashWidth,
+                    viewState.pressedStrokeDashGap
+                )
+                if (viewState.pressedGradientColors != null) {
+                    colors = viewState.pressedGradientColors?.toIntArray()
+                    orientation = viewState.gradientOrientation
+                }
             }
         }
-        selectedDrawable.apply {
-            setColor(viewState.selectedSolidColor)
-            cornerRadius = viewState.selectedCornerRadius
-            setStroke(
-                viewState.selectedStrokeWidth.toInt(),
-                viewState.selectedStrokeColor,
-                viewState.selectedStrokeDashWidth,
-                viewState.selectedStrokeDashGap
-            )
-            if (viewState.selectedGradientColors != null) {
-                colors = viewState.selectedGradientColors?.toIntArray()
-                orientation = viewState.selectedGradientOrientation
+        if (isSelectedEnable) {
+            selectedDrawable.apply {
+                setColor(viewState.selectedSolidColor)
+                cornerRadius = viewState.selectedCornerRadius
+                setStroke(
+                    viewState.selectedStrokeWidth.toInt(),
+                    viewState.selectedStrokeColor,
+                    viewState.selectedStrokeDashWidth,
+                    viewState.selectedStrokeDashGap
+                )
+                if (viewState.selectedGradientColors != null) {
+                    colors = viewState.selectedGradientColors?.toIntArray()
+                    orientation = viewState.selectedGradientOrientation
+                }
             }
         }
         val stateListDrawable = StateListDrawable().apply {
-            addState(intArrayOf(android.R.attr.state_selected), selectedDrawable)
-            addState(intArrayOf(android.R.attr.state_pressed), pressedDrawable)
+            if (isSelectedEnable) {
+                addState(intArrayOf(android.R.attr.state_selected), selectedDrawable)
+            }
+            if (isPressedEnable) {
+                addState(intArrayOf(android.R.attr.state_pressed), pressedDrawable)
+            }
             addState(intArrayOf(), normalDrawable)
         }
         attachedView?.background = stateListDrawable

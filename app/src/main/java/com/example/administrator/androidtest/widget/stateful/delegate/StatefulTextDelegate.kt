@@ -10,31 +10,25 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulText
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
 import kotlinx.android.parcel.Parcelize
 
 class StatefulTextDelegate(
-    private val enableViewDelegate: Boolean = true,
-    private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate()
-) : IStatefulView by viewDelegate, IStatefulText, IStateful {
+    enableViewDelegate: Boolean = true,
+    private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(enableViewDelegate)
+) : BaseViewDelegate<TextView>(), IStatefulView by viewDelegate, IStatefulText {
     private var textState = TextState()
-
-    private var attachedView: TextView? = null
 
     override fun attachView(view: View?) {
         view ?: return
-        if (enableViewDelegate) {
-            viewDelegate.attachView(view)
-        }
-        attachedView = view as? TextView
+        super.attachView(view)
+        viewDelegate.attachView(view)
     }
 
     override fun initAttributeSet(attrs: AttributeSet?) {
-        if (enableViewDelegate) {
-            viewDelegate.initAttributeSet(attrs)
-        }
+        super.initAttributeSet(attrs)
+        viewDelegate.initAttributeSet(attrs)
         val context = attachedView?.context ?: return
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatefulText)
         try {
@@ -205,18 +199,14 @@ class StatefulTextDelegate(
 
     override fun onSaveInstanceState(savedBundle: Bundle) {
         val bundle = Bundle()
-        if (enableViewDelegate) {
-            viewDelegate.onSaveInstanceState(bundle)
-        }
+        viewDelegate.onSaveInstanceState(bundle)
         savedBundle.putBundle("child_state", bundle)
         savedBundle.putParcelable("text_state", textState)
     }
 
     override fun onRestoreInstanceState(restoredBundle: Bundle) {
         val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
-        if (enableViewDelegate) {
-            viewDelegate.onRestoreInstanceState(bundle)
-        }
+        viewDelegate.onRestoreInstanceState(bundle)
         textState = restoredBundle.getParcelable("text_state") ?: TextState()
         updateText()
     }
@@ -227,17 +217,21 @@ class StatefulTextDelegate(
     ) {
         when {
             selected -> {
-                attachedView?.text = textState.selectedText
-                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textState.selectedTextSize)
-                attachedView?.setTextColor(textState.selectedTextColor)
-                attachedView?.setTypeface(null, textState.selectedTextStyle)
+                if (isSelectedEnable) {
+                    attachedView?.text = textState.selectedText
+                    attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textState.selectedTextSize)
+                    attachedView?.setTextColor(textState.selectedTextColor)
+                    attachedView?.setTypeface(null, textState.selectedTextStyle)
+                }
             }
 
             pressed -> {
-                attachedView?.text = textState.pressedText
-                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textState.pressedTextSize)
-                attachedView?.setTextColor(textState.pressedTextColor)
-                attachedView?.setTypeface(null, textState.pressedTextStyle)
+                if (isPressedEnable) {
+                    attachedView?.text = textState.pressedText
+                    attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, textState.pressedTextSize)
+                    attachedView?.setTextColor(textState.pressedTextColor)
+                    attachedView?.setTypeface(null, textState.pressedTextStyle)
+                }
             }
 
             else -> {

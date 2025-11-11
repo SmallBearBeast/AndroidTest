@@ -6,6 +6,7 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.appcompat.widget.AppCompatEditText
 import androidx.appcompat.widget.AppCompatImageView
@@ -25,8 +26,37 @@ import com.example.administrator.androidtest.widget.stateful.delegate.Stateful2T
 import com.example.administrator.androidtest.widget.stateful.delegate.StatefulImgDelegate
 import com.example.administrator.androidtest.widget.stateful.delegate.StatefulImgTextDelegate
 import com.example.administrator.androidtest.widget.stateful.delegate.StatefulTextDelegate
+import com.example.administrator.androidtest.widget.stateful.delegate.StatefulViewDelegate
 
-class StatefulTextView @JvmOverloads constructor(
+open class StatefulView @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0,
+    private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate()
+) : FrameLayout(context, attrs, defStyleAttr), IStatefulView by viewDelegate, IStateful by viewDelegate {
+    init {
+        attachView(this)
+        initAttributeSet(attrs)
+    }
+
+    override fun onSaveInstanceState(): Parcelable? {
+        val bundle = Bundle()
+        val superState = super.onSaveInstanceState()
+        bundle.putParcelable("super_state", superState)
+        onSaveInstanceState(bundle)
+        return bundle
+    }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is Bundle) {
+            val superState: Parcelable? = state.getParcelable("super_state")
+            super.onRestoreInstanceState(superState)
+            onRestoreInstanceState(state)
+        }
+    }
+}
+
+open class StatefulTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -35,7 +65,7 @@ class StatefulTextView @JvmOverloads constructor(
     context, attrs, defStyleAttr, viewDelegate
 ), IStatefulView by viewDelegate, IStatefulText by viewDelegate
 
-class StatefulImageView @JvmOverloads constructor(
+open class StatefulImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -44,7 +74,7 @@ class StatefulImageView @JvmOverloads constructor(
     context, attrs, defStyleAttr, viewDelegate
 ), IStatefulView by viewDelegate, IStatefulImg by viewDelegate
 
-class StatefulEditText @JvmOverloads constructor(
+open class StatefulEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -53,7 +83,7 @@ class StatefulEditText @JvmOverloads constructor(
     context, attrs, defStyleAttr, viewDelegate
 ), IStatefulView by viewDelegate, IStatefulText by viewDelegate
 
-class Stateful2TextView @JvmOverloads constructor(
+open class Stateful2TextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -62,7 +92,7 @@ class Stateful2TextView @JvmOverloads constructor(
     context, attrs, defStyleAttr, viewDelegate, R.layout.view_stateful_2_text
 ), IStatefulView by viewDelegate, IStatefulText by viewDelegate, IStatefulSubText by viewDelegate, IStateful2Text by viewDelegate
 
-class Stateful2ImageView @JvmOverloads constructor(
+open class Stateful2ImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -72,7 +102,7 @@ class Stateful2ImageView @JvmOverloads constructor(
 ), IStatefulView by viewDelegate, IStatefulImg by viewDelegate, IStatefulSubImg by viewDelegate,
     IStateful2Img by viewDelegate
 
-class StatefulImgTextView @JvmOverloads constructor(
+open class StatefulImgTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,

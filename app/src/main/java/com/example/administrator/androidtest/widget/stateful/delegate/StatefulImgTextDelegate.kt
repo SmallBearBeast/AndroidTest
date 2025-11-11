@@ -10,7 +10,6 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulImgText
 import com.example.administrator.androidtest.widget.stateful.IStatefulText
@@ -21,26 +20,26 @@ class StatefulImgTextDelegate(
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(),
     private val textDelegate: StatefulTextDelegate = StatefulTextDelegate(enableViewDelegate = false),
     private val imgDelegate: StatefulImgDelegate = StatefulImgDelegate(enableViewDelegate = false)
-) : IStatefulView by viewDelegate, IStatefulText by textDelegate, IStatefulImg by imgDelegate, IStatefulImgText, IStateful {
+) : BaseViewDelegate<LinearLayout>(), IStatefulView by viewDelegate, IStatefulText by textDelegate, IStatefulImg by imgDelegate, IStatefulImgText {
     private var imgTextState = ImgTextState()
 
-    private var attachedView: LinearLayout? = null
     private var imgView: ImageView? = null
     private var textView: TextView? = null
 
     override fun attachView(view: View?) {
         view ?: return
+        super.attachView(view)
         if (view is LinearLayout && view.childCount <= 2) {
             imgView = view.findViewById(R.id.iv_img)
             textView = view.findViewById(R.id.tv_text)
             viewDelegate.attachView(view)
             textDelegate.attachView(textView)
             imgDelegate.attachView(imgView)
-            attachedView = view
         }
     }
 
     override fun initAttributeSet(attrs: AttributeSet?) {
+        super.initAttributeSet(attrs)
         viewDelegate.initAttributeSet(attrs)
         textDelegate.initAttributeSet(attrs)
         imgDelegate.initAttributeSet(attrs)
@@ -56,6 +55,9 @@ class StatefulImgTextDelegate(
     }
 
     private fun parseNormalAttrs(typedArray: TypedArray) {
+        if (typedArray.hasValue(R.styleable.StatefulImgText_sf_reverse)) {
+            setReverse(typedArray.getBoolean(R.styleable.StatefulImgText_sf_reverse, false))
+        }
         if (typedArray.hasValue(R.styleable.StatefulImgText_sf_img_text_spacing)) {
             setImgTextSpacing(typedArray.getDimension(R.styleable.StatefulImgText_sf_img_text_spacing, 0F))
         } else {
@@ -76,6 +78,13 @@ class StatefulImgTextDelegate(
             setSelectedImgTextSpacing(typedArray.getDimension(R.styleable.StatefulImgText_sf_selected_img_text_spacing, 0F))
         } else {
             setSelectedImgTextSpacing(imgTextState.imgTextSpacing)
+        }
+    }
+
+    override fun setReverse(reverse: Boolean) {
+        if (imgTextState.reverse != reverse) {
+            imgTextState.reverse = reverse
+            updateImgText()
         }
     }
 
@@ -143,39 +152,81 @@ class StatefulImgTextDelegate(
         pressed: Boolean = attachedView?.isPressed ?: false,
         selected: Boolean = attachedView?.isSelected ?: false
     ) {
+        if ((attachedView?.childCount ?: 0) > 0) {
+            val curReverse = attachedView?.getChildAt(0) is TextView
+            if (imgTextState.reverse != curReverse) {
+                attachedView?.removeView(imgView)
+                attachedView?.removeView(textView)
+                if (imgTextState.reverse) {
+                    attachedView?.addView(textView)
+                    attachedView?.addView(imgView)
+                } else {
+                    attachedView?.addView(imgView)
+                    attachedView?.addView(textView)
+                }
+            }
+        }
         when {
             selected -> {
-                val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-                    if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = imgTextState.selectedImgTextSpacing.toInt()
-                    } else {
-                        topMargin = imgTextState.selectedImgTextSpacing.toInt()
+                if (isSelectedEnable) {
+                    val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                        if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
+                            if (imgTextState.reverse) {
+                                marginEnd = imgTextState.selectedImgTextSpacing.toInt()
+                            } else {
+                                marginStart = imgTextState.selectedImgTextSpacing.toInt()
+                            }
+                        } else {
+                            if (imgTextState.reverse) {
+                                bottomMargin = imgTextState.selectedImgTextSpacing.toInt()
+                            } else {
+                                topMargin = imgTextState.selectedImgTextSpacing.toInt()
+                            }
+                        }
                     }
-                }
-                if (lp != null) {
-                    textView?.layoutParams = lp
+                    if (lp != null) {
+                        textView?.layoutParams = lp
+                    }
                 }
             }
 
             pressed -> {
-                val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-                    if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = imgTextState.pressedImgTextSpacing.toInt()
-                    } else {
-                        topMargin = imgTextState.pressedImgTextSpacing.toInt()
+                if (isPressedEnable) {
+                    val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                        if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
+                            if (imgTextState.reverse) {
+                                marginEnd = imgTextState.pressedImgTextSpacing.toInt()
+                            } else {
+                                marginStart = imgTextState.pressedImgTextSpacing.toInt()
+                            }
+                        } else {
+                            if (imgTextState.reverse) {
+                                bottomMargin = imgTextState.pressedImgTextSpacing.toInt()
+                            } else {
+                                topMargin = imgTextState.pressedImgTextSpacing.toInt()
+                            }
+                        }
                     }
-                }
-                if (lp != null) {
-                    textView?.layoutParams = lp
+                    if (lp != null) {
+                        textView?.layoutParams = lp
+                    }
                 }
             }
 
             else -> {
                 val lp = (textView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
                     if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = imgTextState.imgTextSpacing.toInt()
+                        if (imgTextState.reverse) {
+                            marginEnd = imgTextState.imgTextSpacing.toInt()
+                        } else {
+                            marginStart = imgTextState.imgTextSpacing.toInt()
+                        }
                     } else {
-                        topMargin = imgTextState.imgTextSpacing.toInt()
+                        if (imgTextState.reverse) {
+                            bottomMargin = imgTextState.imgTextSpacing.toInt()
+                        } else {
+                            topMargin = imgTextState.imgTextSpacing.toInt()
+                        }
                     }
                 }
                 if (lp != null) {
@@ -188,6 +239,8 @@ class StatefulImgTextDelegate(
 
 @Parcelize
 private data class ImgTextState(
+    // 默认图片在上面或者左边，设置为true时，图片在右边或者下面
+    var reverse: Boolean = false,
     var imgTextSpacing: Float = 0F,
     var pressedImgTextSpacing: Float = 0F,
     var selectedImgTextSpacing: Float = 0F

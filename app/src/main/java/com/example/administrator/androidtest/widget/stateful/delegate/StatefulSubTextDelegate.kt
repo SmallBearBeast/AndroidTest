@@ -10,30 +10,26 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.TextView
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubText
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
 import kotlinx.android.parcel.Parcelize
 
 class StatefulSubTextDelegate(
-    private val enableViewDelegate: Boolean = true,
-    private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate()
-) : IStatefulView by viewDelegate, IStatefulSubText, IStateful {
+    enableViewDelegate: Boolean = true,
+    private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(enableViewDelegate)
+) : BaseViewDelegate<TextView>(), IStatefulView by viewDelegate, IStatefulSubText {
     private var subTextState = SubTextState()
-    private var attachedView: TextView? = null
 
     override fun attachView(view: View?) {
         view ?: return
-        if (enableViewDelegate) {
-            viewDelegate.attachView(view)
-        }
+        super.attachView(view)
+        viewDelegate.attachView(view)
         attachedView = view as? TextView
     }
 
     override fun initAttributeSet(attrs: AttributeSet?) {
-        if (enableViewDelegate) {
-            viewDelegate.initAttributeSet(attrs)
-        }
+        super.initAttributeSet(attrs)
+        viewDelegate.initAttributeSet(attrs)
         val context = attachedView?.context ?: return
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatefulSubText)
         try {
@@ -204,18 +200,14 @@ class StatefulSubTextDelegate(
 
     override fun onSaveInstanceState(savedBundle: Bundle) {
         val bundle = Bundle()
-        if (enableViewDelegate) {
-            viewDelegate.onSaveInstanceState(bundle)
-        }
+        viewDelegate.onSaveInstanceState(bundle)
         savedBundle.putBundle("child_state", bundle)
         savedBundle.putParcelable("sub_text_state", subTextState)
     }
 
     override fun onRestoreInstanceState(restoredBundle: Bundle) {
         val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
-        if (enableViewDelegate) {
-            viewDelegate.onRestoreInstanceState(bundle)
-        }
+        viewDelegate.onRestoreInstanceState(bundle)
         subTextState = restoredBundle.getParcelable("sub_text_state") ?: SubTextState()
         updateText()
     }
@@ -226,17 +218,21 @@ class StatefulSubTextDelegate(
     ) {
         when {
             selected -> {
-                attachedView?.text = subTextState.selectedText
-                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextState.selectedTextSize)
-                attachedView?.setTextColor(subTextState.selectedTextColor)
-                attachedView?.setTypeface(null, subTextState.selectedTextStyle)
+                if (isSelectedEnable) {
+                    attachedView?.text = subTextState.selectedText
+                    attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextState.selectedTextSize)
+                    attachedView?.setTextColor(subTextState.selectedTextColor)
+                    attachedView?.setTypeface(null, subTextState.selectedTextStyle)
+                }
             }
 
             pressed -> {
-                attachedView?.text = subTextState.pressedText
-                attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextState.pressedTextSize)
-                attachedView?.setTextColor(subTextState.pressedTextColor)
-                attachedView?.setTypeface(null, subTextState.pressedTextStyle)
+                if (isPressedEnable) {
+                    attachedView?.text = subTextState.pressedText
+                    attachedView?.setTextSize(TypedValue.COMPLEX_UNIT_PX, subTextState.pressedTextSize)
+                    attachedView?.setTextColor(subTextState.pressedTextColor)
+                    attachedView?.setTypeface(null, subTextState.pressedTextStyle)
+                }
             }
 
             else -> {

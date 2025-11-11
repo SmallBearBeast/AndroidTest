@@ -11,7 +11,7 @@ import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
 import com.example.administrator.androidtest.widget.stateful.delegate.StatefulViewDelegate
 
-class StatefulFrameLayout @JvmOverloads constructor(
+open class StatefulFrameLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -39,7 +39,7 @@ class StatefulFrameLayout @JvmOverloads constructor(
     }
 }
 
-class StatefulLinearLayout @JvmOverloads constructor(
+open class StatefulLinearLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,
@@ -67,7 +67,7 @@ class StatefulLinearLayout @JvmOverloads constructor(
     }
 }
 
-class StatefulConstraintLayout @JvmOverloads constructor(
+open class StatefulConstraintLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0,

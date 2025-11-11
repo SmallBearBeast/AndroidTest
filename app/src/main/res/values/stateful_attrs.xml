@@ -62,8 +62,10 @@
             <enum name="tl_br" value="7" />
         </attr>
 
-        <attr name="sf_selected" format="boolean" />
         <attr name="sf_pressed" format="boolean" />
+        <attr name="sf_selected" format="boolean" />
+        <attr name="sf_pressed_enable" format="boolean" />
+        <attr name="sf_selected_enable" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="StatefulText">
@@ -171,6 +173,7 @@
     </declare-styleable>
 
     <declare-styleable name="StatefulImgText">
+        <attr name="sf_reverse" format="boolean" />
         <attr name="sf_img_text_spacing" format="dimension" />
         <attr name="sf_pressed_img_text_spacing" format="dimension" />
         <attr name="sf_selected_img_text_spacing" format="dimension" />

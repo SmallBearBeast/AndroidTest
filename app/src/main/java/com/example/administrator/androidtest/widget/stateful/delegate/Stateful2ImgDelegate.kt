@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStateful2Img
 import com.example.administrator.androidtest.widget.stateful.IStatefulImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubImg
@@ -20,26 +19,26 @@ class Stateful2ImgDelegate(
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(),
     private val imgDelegate: StatefulImgDelegate = StatefulImgDelegate(enableViewDelegate = false),
     private val subImgDelegate: StatefulSubImgDelegate = StatefulSubImgDelegate(enableViewDelegate = false)
-) : IStatefulView by viewDelegate, IStatefulImg by imgDelegate, IStatefulSubImg by subImgDelegate, IStateful2Img, IStateful {
+) : BaseViewDelegate<LinearLayout>(), IStatefulView by viewDelegate, IStatefulImg by imgDelegate, IStatefulSubImg by subImgDelegate, IStateful2Img {
     private var img2State = Img2State()
 
-    private var attachedView: LinearLayout? = null
     private var mainImgView: ImageView? = null
     private var subImgView: ImageView? = null
 
     override fun attachView(view: View?) {
         view ?: return
+        super.attachView(view)
         if (view is LinearLayout && view.childCount <= 2) {
             mainImgView = view.findViewById(R.id.iv_main_img)
             subImgView = view.findViewById(R.id.iv_sub_img)
             viewDelegate.attachView(view)
             imgDelegate.attachView(mainImgView)
             subImgDelegate.attachView(subImgView)
-            attachedView = view
         }
     }
 
     override fun initAttributeSet(attrs: AttributeSet?) {
+        super.initAttributeSet(attrs)
         viewDelegate.initAttributeSet(attrs)
         imgDelegate.initAttributeSet(attrs)
         subImgDelegate.initAttributeSet(attrs)
@@ -143,28 +142,32 @@ class Stateful2ImgDelegate(
     ) {
         when {
             selected -> {
-                val lp = (subImgView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-                    if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = img2State.selectedImgSpacing.toInt()
-                    } else {
-                        topMargin = img2State.selectedImgSpacing.toInt()
+                if (isSelectedEnable) {
+                    val lp = (subImgView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                        if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
+                            marginStart = img2State.selectedImgSpacing.toInt()
+                        } else {
+                            topMargin = img2State.selectedImgSpacing.toInt()
+                        }
                     }
-                }
-                if (lp != null) {
-                    subImgView?.layoutParams = lp
+                    if (lp != null) {
+                        subImgView?.layoutParams = lp
+                    }
                 }
             }
 
             pressed -> {
-                val lp = (subImgView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-                    if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = img2State.pressedImgSpacing.toInt()
-                    } else {
-                        topMargin = img2State.pressedImgSpacing.toInt()
+                if (isPressedEnable) {
+                    val lp = (subImgView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                        if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
+                            marginStart = img2State.pressedImgSpacing.toInt()
+                        } else {
+                            topMargin = img2State.pressedImgSpacing.toInt()
+                        }
                     }
-                }
-                if (lp != null) {
-                    subImgView?.layoutParams = lp
+                    if (lp != null) {
+                        subImgView?.layoutParams = lp
+                    }
                 }
             }
 

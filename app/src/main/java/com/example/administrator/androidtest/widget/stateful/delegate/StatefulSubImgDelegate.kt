@@ -2,31 +2,28 @@ package com.example.administrator.androidtest.widget.stateful.delegate
 
 import android.content.res.ColorStateList
 import android.content.res.TypedArray
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubImg
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
 import kotlinx.android.parcel.Parcelize
 
 class StatefulSubImgDelegate(
-    private val enableViewDelegate: Boolean = true,
-    private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate()
-) : IStatefulView by viewDelegate, IStatefulSubImg, IStateful {
+    enableViewDelegate: Boolean = true,
+    private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(enableViewDelegate)
+) : BaseViewDelegate<ImageView>(), IStatefulView by viewDelegate, IStatefulSubImg {
     private var subImgState = SubImgState()
 
-    private var attachedView: ImageView? = null
 
     override fun attachView(view: View?) {
         view ?: return
-        if (enableViewDelegate) {
-            viewDelegate.attachView(view)
-        }
-        attachedView = view as? ImageView
+        super.attachView(view)
+        viewDelegate.attachView(view)
         // post 代码保证覆盖原有的size
 //        attachedView?.post {
 //            updateImg()
@@ -34,9 +31,8 @@ class StatefulSubImgDelegate(
     }
 
     override fun initAttributeSet(attrs: AttributeSet?) {
-        if (enableViewDelegate) {
-            viewDelegate.initAttributeSet(attrs)
-        }
+        super.initAttributeSet(attrs)
+        viewDelegate.initAttributeSet(attrs)
         val context = attachedView?.context ?: return
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.StatefulSubImg)
         try {
@@ -241,18 +237,14 @@ class StatefulSubImgDelegate(
 
     override fun onSaveInstanceState(savedBundle: Bundle) {
         val bundle = Bundle()
-        if (enableViewDelegate) {
-            viewDelegate.onSaveInstanceState(savedBundle)
-        }
+        viewDelegate.onSaveInstanceState(savedBundle)
         savedBundle.putBundle("child_state", bundle)
         savedBundle.putParcelable("sub_img_state", subImgState)
     }
 
     override fun onRestoreInstanceState(restoredBundle: Bundle) {
         val bundle = restoredBundle.getBundle("child_state") ?: Bundle()
-        if (enableViewDelegate) {
-            viewDelegate.onRestoreInstanceState(bundle)
-        }
+        viewDelegate.onRestoreInstanceState(bundle)
         subImgState = restoredBundle.getParcelable("sub_img_state") ?: SubImgState()
         updateImg()
     }
@@ -263,38 +255,42 @@ class StatefulSubImgDelegate(
     ) {
         when {
             selected -> {
-                if (subImgState.selectedImg != SubImgState.INVALID_IMG_ID) {
-                    attachedView?.setImageResource(subImgState.selectedImg)
-                }
-                if (subImgState.selectedImgTint != SubImgState.INVALID_IMG_COLOR_TINT) {
-                    attachedView?.imageTintList = ColorStateList.valueOf(subImgState.selectedImgTint)
-                }
-                val lp = attachedView?.layoutParams?.apply {
-                    width =
-                        if (subImgState.selectedImgWidth != SubImgState.INVALID_IMG_SIZE) subImgState.selectedImgWidth.toInt() else subImgState.selectedImgSize.toInt()
-                    height =
-                        if (subImgState.selectedImgHeight != SubImgState.INVALID_IMG_SIZE) subImgState.selectedImgHeight.toInt() else subImgState.selectedImgSize.toInt()
-                }
-                if (lp != null) {
-                    attachedView?.layoutParams = lp
+                if (isSelectedEnable) {
+                    if (subImgState.selectedImg != SubImgState.INVALID_IMG_ID) {
+                        attachedView?.setImageResource(subImgState.selectedImg)
+                    }
+                    if (subImgState.selectedImgTint != SubImgState.INVALID_IMG_COLOR_TINT) {
+                        attachedView?.imageTintList = ColorStateList.valueOf(subImgState.selectedImgTint)
+                    }
+                    val lp = attachedView?.layoutParams?.apply {
+                        width =
+                            if (subImgState.selectedImgWidth != SubImgState.INVALID_IMG_SIZE) subImgState.selectedImgWidth.toInt() else subImgState.selectedImgSize.toInt()
+                        height =
+                            if (subImgState.selectedImgHeight != SubImgState.INVALID_IMG_SIZE) subImgState.selectedImgHeight.toInt() else subImgState.selectedImgSize.toInt()
+                    }
+                    if (lp != null) {
+                        attachedView?.layoutParams = lp
+                    }
                 }
             }
 
             pressed -> {
-                if (subImgState.pressedImg != SubImgState.INVALID_IMG_ID) {
-                    attachedView?.setImageResource(subImgState.pressedImg)
-                }
-                if (subImgState.pressedImgTint != SubImgState.INVALID_IMG_COLOR_TINT) {
-                    attachedView?.imageTintList = ColorStateList.valueOf(subImgState.pressedImgTint)
-                }
-                val lp = attachedView?.layoutParams?.apply {
-                    width =
-                        if (subImgState.pressedImgWidth != SubImgState.INVALID_IMG_SIZE) subImgState.pressedImgWidth.toInt() else subImgState.pressedImgSize.toInt()
-                    height =
-                        if (subImgState.pressedImgHeight != SubImgState.INVALID_IMG_SIZE) subImgState.pressedImgHeight.toInt() else subImgState.pressedImgSize.toInt()
-                }
-                if (lp != null) {
-                    attachedView?.layoutParams = lp
+                if (isPressedEnable) {
+                    if (subImgState.pressedImg != SubImgState.INVALID_IMG_ID) {
+                        attachedView?.setImageResource(subImgState.pressedImg)
+                    }
+                    if (subImgState.pressedImgTint != SubImgState.INVALID_IMG_COLOR_TINT) {
+                        attachedView?.imageTintList = ColorStateList.valueOf(subImgState.pressedImgTint)
+                    }
+                    val lp = attachedView?.layoutParams?.apply {
+                        width =
+                            if (subImgState.pressedImgWidth != SubImgState.INVALID_IMG_SIZE) subImgState.pressedImgWidth.toInt() else subImgState.pressedImgSize.toInt()
+                        height =
+                            if (subImgState.pressedImgHeight != SubImgState.INVALID_IMG_SIZE) subImgState.pressedImgHeight.toInt() else subImgState.pressedImgSize.toInt()
+                    }
+                    if (lp != null) {
+                        attachedView?.layoutParams = lp
+                    }
                 }
             }
 
@@ -341,7 +337,7 @@ private data class SubImgState(
 ) : Parcelable {
     companion object {
         const val INVALID_IMG_ID = -1
-        const val INVALID_IMG_COLOR_TINT = -1
+        const val INVALID_IMG_COLOR_TINT = Color.TRANSPARENT
         const val INVALID_IMG_SIZE = -1F
         const val DEFAULT_IMG_SIZE = 64F
     }

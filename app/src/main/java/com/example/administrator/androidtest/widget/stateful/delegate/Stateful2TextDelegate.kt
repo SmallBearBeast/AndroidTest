@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.administrator.androidtest.R
-import com.example.administrator.androidtest.widget.stateful.IStateful
 import com.example.administrator.androidtest.widget.stateful.IStateful2Text
 import com.example.administrator.androidtest.widget.stateful.IStatefulSubText
 import com.example.administrator.androidtest.widget.stateful.IStatefulText
@@ -20,26 +19,26 @@ class Stateful2TextDelegate(
     private val viewDelegate: StatefulViewDelegate = StatefulViewDelegate(),
     private val textDelegate: StatefulTextDelegate = StatefulTextDelegate(enableViewDelegate = false),
     private val subTextDelegate: StatefulSubTextDelegate = StatefulSubTextDelegate(enableViewDelegate = false)
-) : IStatefulView by viewDelegate, IStatefulText by textDelegate, IStatefulSubText by subTextDelegate, IStateful2Text, IStateful {
+) : BaseViewDelegate<LinearLayout>(), IStatefulView by viewDelegate, IStatefulText by textDelegate, IStatefulSubText by subTextDelegate, IStateful2Text {
     private var text2State = Text2State()
 
-    private var attachedView: LinearLayout? = null
     private var mainTextView: TextView? = null
     private var subTextView: TextView? = null
 
     override fun attachView(view: View?) {
         view ?: return
+        super.attachView(view)
         if (view is LinearLayout && view.childCount <= 2) {
             mainTextView = view.findViewById(R.id.tv_main_text)
             subTextView = view.findViewById(R.id.tv_sub_text)
             viewDelegate.attachView(view)
             textDelegate.attachView(mainTextView)
             subTextDelegate.attachView(subTextView)
-            attachedView = view
         }
     }
 
     override fun initAttributeSet(attrs: AttributeSet?) {
+        super.initAttributeSet(attrs)
         viewDelegate.initAttributeSet(attrs)
         textDelegate.initAttributeSet(attrs)
         subTextDelegate.initAttributeSet(attrs)
@@ -144,28 +143,32 @@ class Stateful2TextDelegate(
     ) {
         when {
             selected -> {
-                val lp = (subTextView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-                    if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = text2State.selectedTextSpacing.toInt()
-                    } else {
-                        topMargin = text2State.selectedTextSpacing.toInt()
+                if (isSelectedEnable) {
+                    val lp = (subTextView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                        if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
+                            marginStart = text2State.selectedTextSpacing.toInt()
+                        } else {
+                            topMargin = text2State.selectedTextSpacing.toInt()
+                        }
                     }
-                }
-                if (lp != null) {
-                    subTextView?.layoutParams = lp
+                    if (lp != null) {
+                        subTextView?.layoutParams = lp
+                    }
                 }
             }
 
             pressed -> {
-                val lp = (subTextView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-                    if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
-                        marginStart = text2State.pressedTextSpacing.toInt()
-                    } else {
-                        topMargin = text2State.pressedTextSpacing.toInt()
+                if (isPressedEnable) {
+                    val lp = (subTextView?.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+                        if (attachedView?.orientation == LinearLayout.HORIZONTAL) {
+                            marginStart = text2State.pressedTextSpacing.toInt()
+                        } else {
+                            topMargin = text2State.pressedTextSpacing.toInt()
+                        }
                     }
-                }
-                if (lp != null) {
-                    subTextView?.layoutParams = lp
+                    if (lp != null) {
+                        subTextView?.layoutParams = lp
+                    }
                 }
             }
 
