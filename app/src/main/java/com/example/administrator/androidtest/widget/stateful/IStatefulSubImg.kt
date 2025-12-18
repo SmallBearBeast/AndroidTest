@@ -5,29 +5,29 @@ interface IStatefulSubImg {
 
     fun setNormalSubImgTint(tintColor: Int)
 
-    fun setNormalSubImgSize(imgSize: Float)
+    fun setNormalSubImgSize(imgSize: Int)
 
-    fun setNormalSubImgWidth(imgWidth: Float)
+    fun setNormalSubImgWidth(imgWidth: Int)
 
-    fun setNormalSubImgHeight(imgHeight: Float)
+    fun setNormalSubImgHeight(imgHeight: Int)
 
     fun setPressedSubImg(imgResId: Int)
 
     fun setPressedSubImgTint(tintColor: Int)
 
-    fun setPressedSubImgSize(imgSize: Float)
+    fun setPressedSubImgSize(imgSize: Int)
 
-    fun setPressedSubImgWidth(imgWidth: Float)
+    fun setPressedSubImgWidth(imgWidth: Int)
 
-    fun setPressedSubImgHeight(imgHeight: Float)
+    fun setPressedSubImgHeight(imgHeight: Int)
 
     fun setSelectedSubImg(imgResId: Int)
 
     fun setSelectedSubImgTint(tintColor: Int)
 
-    fun setSelectedSubImgSize(imgSize: Float)
+    fun setSelectedSubImgSize(imgSize: Int)
 
-    fun setSelectedSubImgWidth(imgWidth: Float)
+    fun setSelectedSubImgWidth(imgWidth: Int)
 
-    fun setSelectedSubImgHeight(imgHeight: Float)
+    fun setSelectedSubImgHeight(imgHeight: Int)
 }

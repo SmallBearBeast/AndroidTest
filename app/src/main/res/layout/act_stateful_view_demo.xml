@@ -52,6 +52,15 @@
             app:sf_solid="@color/cl_oriange"
             app:sf_text="sf_text"
             app:sf_text_size="16sp" />
+
+        <com.example.administrator.androidtest.widget.stateful.view.StatefulImageView
+            android:id="@+id/statefulImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sf_img="@drawable/girl"
+            app:sf_selected="true"
+            app:sf_selected_img_size="200dp"
+            app:sf_selected_img_width="match_parent" />
     </LinearLayout>
 
     <Button

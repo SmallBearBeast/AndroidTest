@@ -135,41 +135,95 @@
     <declare-styleable name="StatefulImg">
         <attr name="sf_img" format="reference" />
         <attr name="sf_img_tint" format="color" />
-        <attr name="sf_img_size" format="dimension" />
-        <attr name="sf_img_width" format="dimension" />
-        <attr name="sf_img_height" format="dimension" />
+        <attr name="sf_img_size" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_img_width" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_img_height" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
 
         <attr name="sf_pressed_img" format="reference" />
         <attr name="sf_pressed_img_tint" format="color" />
-        <attr name="sf_pressed_img_size" format="dimension" />
-        <attr name="sf_pressed_img_width" format="dimension" />
-        <attr name="sf_pressed_img_height" format="dimension" />
+        <attr name="sf_pressed_img_size" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_pressed_img_width" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_pressed_img_height" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
 
         <attr name="sf_selected_img" format="reference" />
         <attr name="sf_selected_img_tint" format="color" />
-        <attr name="sf_selected_img_size" format="dimension" />
-        <attr name="sf_selected_img_width" format="dimension" />
-        <attr name="sf_selected_img_height" format="dimension" />
+        <attr name="sf_selected_img_size" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_selected_img_width" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_selected_img_height" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="StatefulSubImg">
         <attr name="sf_sub_img" format="reference" />
         <attr name="sf_sub_img_tint" format="color" />
-        <attr name="sf_sub_img_size" format="dimension" />
-        <attr name="sf_sub_img_width" format="dimension" />
-        <attr name="sf_sub_img_height" format="dimension" />
+        <attr name="sf_sub_img_size" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_sub_img_width" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_sub_img_height" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
 
         <attr name="sf_pressed_sub_img" format="reference" />
         <attr name="sf_pressed_sub_img_tint" format="color" />
-        <attr name="sf_pressed_sub_img_size" format="dimension" />
-        <attr name="sf_pressed_sub_img_width" format="dimension" />
-        <attr name="sf_pressed_sub_img_height" format="dimension" />
+        <attr name="sf_pressed_sub_img_size" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_pressed_sub_img_width" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_pressed_sub_img_height" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
 
         <attr name="sf_selected_sub_img" format="reference" />
         <attr name="sf_selected_sub_img_tint" format="color" />
-        <attr name="sf_selected_sub_img_size" format="dimension" />
-        <attr name="sf_selected_sub_img_width" format="dimension" />
-        <attr name="sf_selected_sub_img_height" format="dimension" />
+        <attr name="sf_selected_sub_img_size" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_selected_sub_img_width" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <attr name="sf_selected_sub_img_height" format="dimension">
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
     </declare-styleable>
 
     <declare-styleable name="StatefulImgText">

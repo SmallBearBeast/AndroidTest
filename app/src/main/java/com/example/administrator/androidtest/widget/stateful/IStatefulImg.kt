@@ -5,29 +5,29 @@ interface IStatefulImg {
 
     fun setNormalImgTint(tintColor: Int)
 
-    fun setNormalImgSize(imgSize: Float)
+    fun setNormalImgSize(imgSize: Int)
 
-    fun setNormalImgWidth(imgWidth: Float)
+    fun setNormalImgWidth(imgWidth: Int)
 
-    fun setNormalImgHeight(imgHeight: Float)
+    fun setNormalImgHeight(imgHeight: Int)
 
     fun setPressedImg(imgResId: Int)
 
     fun setPressedImgTint(tintColor: Int)
 
-    fun setPressedImgSize(imgSize: Float)
+    fun setPressedImgSize(imgSize: Int)
 
-    fun setPressedImgWidth(imgWidth: Float)
+    fun setPressedImgWidth(imgWidth: Int)
 
-    fun setPressedImgHeight(imgHeight: Float)
+    fun setPressedImgHeight(imgHeight: Int)
 
     fun setSelectedImg(imgResId: Int)
 
     fun setSelectedImgTint(tintColor: Int)
 
-    fun setSelectedImgSize(imgSize: Float)
+    fun setSelectedImgSize(imgSize: Int)
 
-    fun setSelectedImgWidth(imgWidth: Float)
+    fun setSelectedImgWidth(imgWidth: Int)
 
-    fun setSelectedImgHeight(imgHeight: Float)
+    fun setSelectedImgHeight(imgHeight: Int)
 }
