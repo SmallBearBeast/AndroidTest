@@ -27,6 +27,9 @@ class StatefulViewDemoActivity : ComponentActivity<ActStatefulViewDemoBinding>()
             stateful2TextView.setOnClickListener { v ->
                 stateful2TextView.isSelected = !stateful2TextView.isSelected
             }
+            statefulView.setOnClickListener { v ->
+                statefulView.isSelected = !statefulView.isSelected
+            }
             statefulImageView.setOnClickListener { v ->
                 statefulImageView.isSelected = !statefulImageView.isSelected
             }

@@ -39,6 +39,7 @@
             android:id="@+id/statefulImgTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:padding="16dp"
             app:sf_corner_radius="999dp"
@@ -53,10 +54,28 @@
             app:sf_text="sf_text"
             app:sf_text_size="16sp" />
 
+        <com.example.administrator.androidtest.widget.stateful.view.StatefulView
+            android:id="@+id/statefulView"
+            android:layout_width="140dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="10dp"
+            app:sf_corner_radius="30dp"
+            app:sf_left_bottom_corner_radius="100dp"
+            app:sf_left_top_corner_radius="100dp"
+            app:sf_right_bottom_corner_radius="0dp"
+            app:sf_right_top_corner_radius="0dp"
+            app:sf_selected="true"
+            app:sf_selected_left_bottom_corner_radius="0dp"
+            app:sf_selected_left_top_corner_radius="0dp"
+            app:sf_selected_right_bottom_corner_radius="100dp"
+            app:sf_selected_right_top_corner_radius="100dp"
+            app:sf_solid="@color/cl_black" />
+
         <com.example.administrator.androidtest.widget.stateful.view.StatefulImageView
             android:id="@+id/statefulImageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             app:sf_img="@drawable/girl"
             app:sf_selected="true"
             app:sf_selected_img_size="200dp"

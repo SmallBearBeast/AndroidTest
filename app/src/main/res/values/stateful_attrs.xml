@@ -4,6 +4,10 @@
         <!-- 背景相关公共属性 -->
         <attr name="sf_solid" format="reference|color" />
         <attr name="sf_corner_radius" format="dimension" />
+        <attr name="sf_left_top_corner_radius" format="dimension" />
+        <attr name="sf_left_bottom_corner_radius" format="dimension" />
+        <attr name="sf_right_top_corner_radius" format="dimension" />
+        <attr name="sf_right_bottom_corner_radius" format="dimension" />
         <attr name="sf_stroke_width" format="dimension" />
         <attr name="sf_stroke_color" format="color" />
         <attr name="sf_stroke_dash_width" format="dimension" />
@@ -24,6 +28,10 @@
 
         <attr name="sf_pressed_solid" format="reference|color" />
         <attr name="sf_pressed_corner_radius" format="dimension" />
+        <attr name="sf_pressed_left_top_corner_radius" format="dimension" />
+        <attr name="sf_pressed_left_bottom_corner_radius" format="dimension" />
+        <attr name="sf_pressed_right_top_corner_radius" format="dimension" />
+        <attr name="sf_pressed_right_bottom_corner_radius" format="dimension" />
         <attr name="sf_pressed_stroke_width" format="dimension" />
         <attr name="sf_pressed_stroke_color" format="color" />
         <attr name="sf_pressed_stroke_dash_width" format="dimension" />
@@ -44,6 +52,10 @@
 
         <attr name="sf_selected_solid" format="reference|color" />
         <attr name="sf_selected_corner_radius" format="dimension" />
+        <attr name="sf_selected_left_top_corner_radius" format="dimension" />
+        <attr name="sf_selected_left_bottom_corner_radius" format="dimension" />
+        <attr name="sf_selected_right_top_corner_radius" format="dimension" />
+        <attr name="sf_selected_right_bottom_corner_radius" format="dimension" />
         <attr name="sf_selected_stroke_width" format="dimension" />
         <attr name="sf_selected_stroke_color" format="color" />
         <attr name="sf_selected_stroke_dash_width" format="dimension" />

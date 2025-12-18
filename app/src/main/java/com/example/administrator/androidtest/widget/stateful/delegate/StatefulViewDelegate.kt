@@ -11,6 +11,7 @@ import android.view.View
 import com.example.administrator.androidtest.R
 import com.example.administrator.androidtest.widget.stateful.IStatefulView
 import kotlinx.android.parcel.Parcelize
+import kotlin.math.max
 
 open class StatefulViewDelegate(
     private val enable: Boolean = true,
@@ -59,6 +60,18 @@ open class StatefulViewDelegate(
         if (typedArray.hasValue(R.styleable.StatefulView_sf_corner_radius)) {
             setCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_corner_radius, 0F))
         }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_left_top_corner_radius)) {
+            setLeftTopCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_left_top_corner_radius, 0F))
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_left_bottom_corner_radius)) {
+            setLeftBottomCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_left_bottom_corner_radius, 0F))
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_right_top_corner_radius)) {
+            setRightTopCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_right_top_corner_radius, 0F))
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_right_bottom_corner_radius)) {
+            setRightBottomCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_right_bottom_corner_radius, 0F))
+        }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_stroke_width)
             || typedArray.hasValue(R.styleable.StatefulView_sf_stroke_color)
         ) {
@@ -102,6 +115,26 @@ open class StatefulViewDelegate(
             setPressedCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_pressed_corner_radius, 0F))
         } else {
             setPressedCornerRadius(viewState.cornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_left_top_corner_radius)) {
+            setPressedLeftTopCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_pressed_left_top_corner_radius, 0F))
+        } else {
+            setPressedLeftTopCornerRadius(viewState.leftTopCornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_left_bottom_corner_radius)) {
+            setPressedLeftBottomCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_pressed_left_bottom_corner_radius, 0F))
+        } else {
+            setPressedLeftBottomCornerRadius(viewState.leftBottomCornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_right_top_corner_radius)) {
+            setPressedRightTopCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_pressed_right_top_corner_radius, 0F))
+        } else {
+            setPressedRightTopCornerRadius(viewState.rightTopCornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_right_bottom_corner_radius)) {
+            setPressedRightBottomCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_pressed_right_bottom_corner_radius, 0F))
+        } else {
+            setPressedRightBottomCornerRadius(viewState.rightBottomCornerRadius)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_pressed_stroke_width)
             || typedArray.hasValue(R.styleable.StatefulView_sf_pressed_stroke_color)
@@ -152,6 +185,26 @@ open class StatefulViewDelegate(
             setSelectedCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_selected_corner_radius, 0F))
         } else {
             setSelectedCornerRadius(viewState.cornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_left_top_corner_radius)) {
+            setSelectedLeftTopCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_selected_left_top_corner_radius, 0F))
+        } else {
+            setSelectedLeftTopCornerRadius(viewState.leftTopCornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_left_bottom_corner_radius)) {
+            setSelectedLeftBottomCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_selected_left_bottom_corner_radius, 0F))
+        } else {
+            setSelectedLeftBottomCornerRadius(viewState.leftBottomCornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_right_top_corner_radius)) {
+            setSelectedRightTopCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_selected_right_top_corner_radius, 0F))
+        } else {
+            setSelectedRightTopCornerRadius(viewState.rightTopCornerRadius)
+        }
+        if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_right_bottom_corner_radius)) {
+            setSelectedRightBottomCornerRadius(typedArray.getDimension(R.styleable.StatefulView_sf_selected_right_bottom_corner_radius, 0F))
+        } else {
+            setSelectedRightBottomCornerRadius(viewState.rightBottomCornerRadius)
         }
         if (typedArray.hasValue(R.styleable.StatefulView_sf_selected_stroke_width)
             || typedArray.hasValue(R.styleable.StatefulView_sf_selected_stroke_color)
@@ -206,6 +259,34 @@ open class StatefulViewDelegate(
         }
     }
 
+    override fun setLeftTopCornerRadius(radius: Float) {
+        if (viewState.leftTopCornerRadius != radius) {
+            viewState.leftTopCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setLeftBottomCornerRadius(radius: Float) {
+        if (viewState.leftBottomCornerRadius != radius) {
+            viewState.leftBottomCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setRightTopCornerRadius(radius: Float) {
+        if (viewState.rightTopCornerRadius != radius) {
+            viewState.rightTopCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setRightBottomCornerRadius(radius: Float) {
+        if (viewState.rightBottomCornerRadius != radius) {
+            viewState.rightBottomCornerRadius = radius
+            updateBackground()
+        }
+    }
+
     override fun setStroke(width: Float, color: Int) {
         if (viewState.strokeWidth != width || viewState.strokeColor != color) {
             if (viewState.strokeWidth != width) {
@@ -256,6 +337,34 @@ open class StatefulViewDelegate(
         }
     }
 
+    override fun setPressedLeftTopCornerRadius(radius: Float) {
+        if (viewState.pressedLeftTopCornerRadius != radius) {
+            viewState.pressedLeftTopCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setPressedLeftBottomCornerRadius(radius: Float) {
+        if (viewState.pressedLeftBottomCornerRadius != radius) {
+            viewState.pressedLeftBottomCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setPressedRightTopCornerRadius(radius: Float) {
+        if (viewState.pressedRightTopCornerRadius != radius) {
+            viewState.pressedRightTopCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setPressedRightBottomCornerRadius(radius: Float) {
+        if (viewState.pressedRightBottomCornerRadius != radius) {
+            viewState.pressedRightBottomCornerRadius = radius
+            updateBackground()
+        }
+    }
+
     override fun setPressedStroke(width: Float, color: Int) {
         if (viewState.pressedStrokeWidth != width || viewState.pressedStrokeColor != color) {
             if (viewState.pressedStrokeWidth != width) {
@@ -302,6 +411,34 @@ open class StatefulViewDelegate(
     override fun setSelectedCornerRadius(radius: Float) {
         if (viewState.selectedCornerRadius != radius) {
             viewState.selectedCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setSelectedLeftTopCornerRadius(radius: Float) {
+        if (viewState.selectedLeftTopCornerRadius != radius) {
+            viewState.selectedLeftTopCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setSelectedLeftBottomCornerRadius(radius: Float) {
+        if (viewState.selectedLeftBottomCornerRadius != radius) {
+            viewState.selectedLeftBottomCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setSelectedRightTopCornerRadius(radius: Float) {
+        if (viewState.selectedRightTopCornerRadius != radius) {
+            viewState.selectedRightTopCornerRadius = radius
+            updateBackground()
+        }
+    }
+
+    override fun setSelectedRightBottomCornerRadius(radius: Float) {
+        if (viewState.selectedRightBottomCornerRadius != radius) {
+            viewState.selectedRightBottomCornerRadius = radius
             updateBackground()
         }
     }
@@ -381,7 +518,32 @@ open class StatefulViewDelegate(
         }
         normalDrawable.apply {
             setColor(viewState.solidColor)
-            cornerRadius = viewState.cornerRadius
+            val leftTopCornerRadius = if (viewState.leftTopCornerRadius >= 0) {
+                viewState.leftTopCornerRadius
+            } else {
+                max(viewState.cornerRadius, 0F)
+            }
+            val leftBottomCornerRadius = if (viewState.leftBottomCornerRadius >= 0) {
+                viewState.leftBottomCornerRadius
+            } else {
+                max(viewState.cornerRadius, 0F)
+            }
+            val rightTopCornerRadius = if (viewState.rightTopCornerRadius >= 0) {
+                viewState.rightTopCornerRadius
+            } else {
+                max(viewState.cornerRadius, 0F)
+            }
+            val rightBottomCornerRadius = if (viewState.rightBottomCornerRadius >= 0) {
+                viewState.rightBottomCornerRadius
+            } else {
+                max(viewState.cornerRadius, 0F)
+            }
+            cornerRadii = floatArrayOf(
+                leftTopCornerRadius, leftTopCornerRadius,
+                rightTopCornerRadius, rightTopCornerRadius,
+                rightBottomCornerRadius, rightBottomCornerRadius,
+                leftBottomCornerRadius, leftBottomCornerRadius,
+            )
             setStroke(
                 viewState.strokeWidth.toInt(),
                 viewState.strokeColor,
@@ -396,7 +558,32 @@ open class StatefulViewDelegate(
         if (isPressedEnable) {
             pressedDrawable.apply {
                 setColor(viewState.pressedSolidColor)
-                cornerRadius = viewState.pressedCornerRadius
+                val pressedLeftTopCornerRadius = if (viewState.pressedLeftTopCornerRadius >= 0) {
+                    viewState.pressedLeftTopCornerRadius
+                } else {
+                    max(viewState.pressedCornerRadius, 0F)
+                }
+                val pressedLeftBottomCornerRadius = if (viewState.pressedLeftBottomCornerRadius >= 0) {
+                    viewState.pressedLeftBottomCornerRadius
+                } else {
+                    max(viewState.pressedCornerRadius, 0F)
+                }
+                val pressedRightTopCornerRadius = if (viewState.pressedRightTopCornerRadius >= 0) {
+                    viewState.pressedRightTopCornerRadius
+                } else {
+                    max(viewState.pressedCornerRadius, 0F)
+                }
+                val pressedRightBottomCornerRadius = if (viewState.pressedRightBottomCornerRadius >= 0) {
+                    viewState.pressedRightBottomCornerRadius
+                } else {
+                    max(viewState.pressedCornerRadius, 0F)
+                }
+                cornerRadii = floatArrayOf(
+                    pressedLeftTopCornerRadius, pressedLeftTopCornerRadius,
+                    pressedRightTopCornerRadius, pressedRightTopCornerRadius,
+                    pressedRightBottomCornerRadius, pressedRightBottomCornerRadius,
+                    pressedLeftBottomCornerRadius, pressedLeftBottomCornerRadius,
+                )
                 setStroke(
                     viewState.pressedStrokeWidth.toInt(),
                     viewState.pressedStrokeColor,
@@ -412,7 +599,32 @@ open class StatefulViewDelegate(
         if (isSelectedEnable) {
             selectedDrawable.apply {
                 setColor(viewState.selectedSolidColor)
-                cornerRadius = viewState.selectedCornerRadius
+                val selectedLeftTopCornerRadius = if (viewState.selectedLeftTopCornerRadius >= 0) {
+                    viewState.selectedLeftTopCornerRadius
+                } else {
+                    max(viewState.selectedCornerRadius, 0F)
+                }
+                val selectedLeftBottomCornerRadius = if (viewState.selectedLeftBottomCornerRadius >= 0) {
+                    viewState.selectedLeftBottomCornerRadius
+                } else {
+                    max(viewState.selectedCornerRadius, 0F)
+                }
+                val selectedRightTopCornerRadius = if (viewState.selectedRightTopCornerRadius >= 0) {
+                    viewState.selectedRightTopCornerRadius
+                } else {
+                    max(viewState.selectedCornerRadius, 0F)
+                }
+                val selectedRightBottomCornerRadius = if (viewState.selectedRightBottomCornerRadius >= 0) {
+                    viewState.selectedRightBottomCornerRadius
+                } else {
+                    max(viewState.selectedCornerRadius, 0F)
+                }
+                cornerRadii = floatArrayOf(
+                    selectedLeftTopCornerRadius, selectedLeftTopCornerRadius,
+                    selectedRightTopCornerRadius, selectedRightTopCornerRadius,
+                    selectedRightBottomCornerRadius, selectedRightBottomCornerRadius,
+                    selectedLeftBottomCornerRadius, selectedLeftBottomCornerRadius,
+                )
                 setStroke(
                     viewState.selectedStrokeWidth.toInt(),
                     viewState.selectedStrokeColor,
@@ -457,6 +669,10 @@ private data class ViewState(
     // Normal State
     var solidColor: Int = DEFAULT_COLOR,
     var cornerRadius: Float = 0F,
+    var leftTopCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var leftBottomCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var rightTopCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var rightBottomCornerRadius: Float = INVALID_CORNER_RADIUS,
     var strokeWidth: Float = 0F,
     var strokeColor: Int = DEFAULT_COLOR,
     var strokeDashWidth: Float = 0F,
@@ -467,6 +683,10 @@ private data class ViewState(
     // Pressed State
     var pressedSolidColor: Int = DEFAULT_COLOR,
     var pressedCornerRadius: Float = 0F,
+    var pressedLeftTopCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var pressedLeftBottomCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var pressedRightTopCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var pressedRightBottomCornerRadius: Float = INVALID_CORNER_RADIUS,
     var pressedStrokeWidth: Float = 0F,
     var pressedStrokeColor: Int = DEFAULT_COLOR,
     var pressedStrokeDashWidth: Float = 0F,
@@ -477,6 +697,10 @@ private data class ViewState(
     // Selected State
     var selectedSolidColor: Int = DEFAULT_COLOR,
     var selectedCornerRadius: Float = 0F,
+    var selectedLeftTopCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var selectedLeftBottomCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var selectedRightTopCornerRadius: Float = INVALID_CORNER_RADIUS,
+    var selectedRightBottomCornerRadius: Float = INVALID_CORNER_RADIUS,
     var selectedStrokeWidth: Float = 0F,
     var selectedStrokeColor: Int = DEFAULT_COLOR,
     var selectedStrokeDashWidth: Float = 0F,
@@ -488,5 +712,6 @@ private data class ViewState(
 ) : Parcelable {
     companion object {
         const val DEFAULT_COLOR = Color.TRANSPARENT
+        const val INVALID_CORNER_RADIUS = -1F
     }
 }
